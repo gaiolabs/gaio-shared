@@ -1,0 +1,18 @@
+{
+  "name": "@gaio/utils",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "@gaio/front": "^0.0.0",
+    "@types/mustache": "^4.2.5",
+    "eslint-plugin-import": "^2.29.1"
+  }
+}
