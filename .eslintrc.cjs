@@ -1,17 +1,27 @@
-/** @type {import('eslint').Linter.Config} */
+/**@type {import('eslint').Linter.Config} */
 module.exports = {
     root: true,
+    plugins: ['simple-import-sort'],
     rules: {
-        'prettier/prettier': 'error',
-        '@typescript-eslint/no-this-alias': 'off'
-    },
-    extends: ['@gaio/eslint-config/bun'],
-    settings: {
-        'import/resolver': {
-            typescript: {
-                alwaysTryTypes: true,
-                project: './tsconfig.json'
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        'prettier-vue/prettier': [
+            'error',
+            {
+                tailwindConfig: './tailwind.config.js'
             }
-        }
+        ],
+        'vue/no-v-html': 'off',
+        'vue/order-in-components': [
+            'error',
+            {
+                'order': ['imports', 'variables', 'functions', 'lifecycle', 'render-function']
+            }
+        ]
+    },
+    extends: ['@gaio/eslint-config/vue'],
+    'parserOptions': {
+        'sourceType': 'module',
+        'ecmaVersion': 'latest'
     }
 }

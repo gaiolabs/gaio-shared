@@ -1,71 +1,68 @@
-import { Hono } from 'hono'
-import { cors } from 'hono/cors'
-import { logger } from 'hono/logger'
-import { prettyJSON } from 'hono/pretty-json'
-import { secureHeaders } from 'hono/secure-headers'
+import './assets/styles/index.scss'
+import './naive'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
-import appRoutes from './routes/app.routes'
-import authRoutes from './routes/auth.routes'
-import builderRoutes from './routes/builder.routes'
-import commanderRoutes from './routes/commander.routes'
-import discoveryRoutes from './routes/discovery.routes'
-import flowRoutes from './routes/flow.routes'
-import repoRoutes from './routes/repo.routes'
-import tableRoutes from './routes/table.routes'
-import taskRoutes from './routes/task.routes'
-import userRoutes from './routes/user.routes'
-import settingsRoutes from './routes/settings.routes'
+import mitt from 'mitt' // Import mitt
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { createApp } from 'vue'
 
-export const app = new Hono().basePath('/api')
+import App from './App.vue'
+import router from './router'
+const emitter = mitt()
 
-// * MIDDLEWARE
-app.use(cors())
-app.use(secureHeaders())
-app.use(logger())
-app.use(prettyJSON())
+import GCard from '@/components/GCard.vue'
+import GDialog from '@/components/GDialog.vue'
+import GIcon from '@/components/GIcon.vue'
+import { mixin } from '@/mixin'
 
-// * ROUTING
-app.route('/app', appRoutes)
-app.route('/auth', authRoutes)
-app.route('/repo', repoRoutes)
-app.route('/flow', flowRoutes)
-app.route('/commander', commanderRoutes)
-app.route('/user', userRoutes)
-app.route('/discovery', discoveryRoutes)
-app.route('/task', taskRoutes)
-app.route('/table', tableRoutes)
-app.route('/builder', builderRoutes)
-app.route('/settings', settingsRoutes)
+import { i18n } from './locales/i18n'
 
-app.get('/', (c) => {
-    c.status(200)
-    return c.json({
-        errors: false,
-        message: 'hello world'
-    })
+const app = createApp(App)
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
+app.directive('height', {
+    mounted(el) {
+        el.style.height = el.parentNode.offsetHeight - 5 + 'px'
+    }
 })
 
-// * GLOBAL ERROR HANDLING
-app.notFound((c) => {
-    c.status(404)
-    return c.json({
-        errors: true,
-        message: 'Endpoint not found'
-    })
+app.directive('alpha', {
+    mounted(el, _, vnode) {
+        el.addEventListener('input', function (e) {
+            if (vnode && vnode['ctx']) {
+                vnode['ctx'].props.value = e.target.value
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-zA-Z0-9]/g, '_')
+            }
+        })
+    },
+    beforeUnmount(el, _, vnode) {
+        el.removeEventListener('input', function (e) {
+            if (vnode && vnode['ctx']) {
+                vnode['ctx'].props.value = e.target.value
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-zA-Z0-9]/g, '_')
+            }
+        })
+    }
 })
+app.provide('bus', emitter)
 
-app.onError((err, c) => {
-    console.error(`${err}`)
-    // c.status = c.status || 500
-    err.message = err.message || 'Internal Server Error'
-    return c.json({
-        errors: true,
-        message: err.message
-    })
-})
+app.component('GDialog', GDialog)
+app.component('GIcon', GIcon)
+app.component('GCard', GCard)
 
-// * START SERVER
-export default {
-    port: process.env.PORT || 3000,
-    fetch: app.fetch
-}
+app.mixin(mixin)
+
+app.use(i18n)
+app.use(pinia)
+app.use(router)
+
+app.mount('#app')

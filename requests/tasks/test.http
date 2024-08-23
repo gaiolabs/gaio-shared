@@ -1,4 +1,0 @@
-GET https://mobileapi.immunotecdev.com/auth/login
-Authorization: base64("435997:test@123")
-Content-Type: application/json
-
