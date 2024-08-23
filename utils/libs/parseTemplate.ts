@@ -1,5 +1,5 @@
 import mustache from 'mustache'
-import type { ParamType } from '@gaio/types'
+import { ParamType } from '../../types'
 
 export const parseTemplate = (str: string, params: ParamType[], extraData = {}) => {
     str = str || ' '
