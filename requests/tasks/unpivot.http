@@ -1,0 +1,59 @@
+@TOKEN = Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJ1c2VyOjEiLCJuYW1lIjoiIiwiZW1haWwiOiJjb250YWN0QGdhaW8uaW8iLCJsYW5nIjoiZW4tVVMiLCJ0b2tlbiI6IiIsInRhZ3MiOiJbXSIsIm9wdGlvbnMiOiJ7XCJhcHBWaWV3VHlwZVwiOlwiZ3JpZFwiLFwiZmF2b3JBcHBzXCI6W1wiYXBwOjE2OVwiLFwiYXBwOjEzNTlcIixcImFwcDoxMzQ4XCIsXCJhcHA6MTM1MFwiXSxcInJlY2VudEFwcHNcIjpbXCJhcHA6MTY5XCJdfSIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsInR3b0ZhY3RvcktleSI6IiIsInR3b0ZhY3RvclNpZ25lZCI6IiIsInR3b0ZhY3RvclN0YXR1cyI6IiIsInByb2ZpbGVJZCI6IiIsImNyZWF0ZWRCeSI6IiIsIm1vZGlmaWVkQnkiOiJ1c2VyOjEiLCJjcmVhdGVkQXQiOiIyMDI0LTAxLTA5IDE2OjE2OjI5IiwidXBkYXRlZEF0IjoiMjAyNC0wMi0xNSAxNToyMToyNyJ9.aNSFX7ZDoW5R37I2kOzZEOXbWrg91qNJs20QFRJTlf4
+
+POST http://localhost:3000/api/task/run-all
+Authorization: {{TOKEN}}
+Content-Type: application/json
+
+{
+  "from": "studio",
+  "meta": {
+    "appId": "app:1353",
+    "flowId": "MqmYRnQa"
+  },
+  "params": [],
+  "tasks": [
+    {
+      "id": "xhhxHbXr",
+      "type": "pivot",
+      "appId": "app:1353",
+      "label": "FlatTable",
+      "client": "clickhouse",
+      "repoId": "repo:sdor4y5q2idat9spsbij",
+      "position": {
+        "x": 619,
+        "y": 223.5
+      },
+      "columns": [
+        {
+          "id": "xbSpoU",
+          "columnName": "CA",
+          "transposeName": "CA"
+        },
+        {
+          "id": "TahIST",
+          "columnName": "NV",
+          "transposeName": "NV"
+        }
+      ],
+      "tableName": "FlatTable",
+      "sourceType": "bucket",
+      "extraFields": [],
+      "resultTable": "qwerty",
+      "databaseName": "bucket_1353",
+      "resultDatabase": "",
+      "transposeColumn": "state",
+      "dynamicTranspose": false,
+      "extraFieldsPosition": "",
+      "transposeAggregator": "SUM",
+      "transposeColumnValue": "price_each",
+      "dynamicTransposeSnakeCase": false,
+      "order": "ASC",
+      "profile": {
+        "createdAt": "2024-02-24 14:37:04",
+        "updatedAt": "2024-02-24 14:37:04",
+        "createdBy": "user:1",
+        "updatedBy": "user:1"
+      }
+    }
+  ]
+}

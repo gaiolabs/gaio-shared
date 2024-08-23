@@ -1,0 +1,156 @@
+<template>
+    <div class="repo-manager">
+        <settings-view>
+            <template #title>
+                <div class="flex items-center gap-2">
+                    <g-icon
+                        name="bucket"
+                        :height="22"
+                    />
+                    {{ $t('repository') }}
+                </div>
+            </template>
+            <div class="source-manager">
+                <template v-if="loading">
+                    <n-space vertical>
+                        <n-skeleton
+                            :height="30"
+                            class="rounded"
+                        />
+                        <n-skeleton
+                            :height="90"
+                            class="rounded"
+                        />
+                    </n-space>
+                </template>
+
+                <template v-else>
+                    <div class="source-manager">
+                        <div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
+                            <div>{{ sources.length }} {{ $t('repositories').toLowerCase() }}</div>
+                            <n-tooltip :content="$t('addSource')">
+                                <template #trigger>
+                                    <n-button
+                                        type="primary"
+                                        size="small"
+                                        @click="addSource()"
+                                    >
+                                        <template #icon>
+                                            <g-icon name="add" />
+                                        </template>
+                                        {{ $t('new') }}
+                                    </n-button>
+                                </template>
+                                {{ $t('addSource') }}
+                            </n-tooltip>
+                        </div>
+                        <div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
+                            <g-alert
+                                v-if="sources.length <= 0"
+                                :title="$t('noResult')"
+                            />
+                            <n-table
+                                v-else
+                                striped
+                                size="small"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px">ID</th>
+                                        <th>{{ $t('name') }}</th>
+                                        <th>{{ $t('client') }}</th>
+                                        <th style="width: 70px"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(item, index) in sources"
+                                        :key="index"
+                                    >
+                                        <td class="px-2">
+                                            <g-id :id="item.repoId" />
+                                        </td>
+                                        <td>
+                                            <div class="flex gap-2">
+                                                <img
+                                                    :alt="item.client"
+                                                    style="height: 18px; margin-right: 4px"
+                                                    :src="sourceIcon(item)"
+                                                />
+                                                {{ item.repoName }}
+                                            </div>
+                                        </td>
+                                        <td>{{ item.client }}</td>
+                                        <td class="el-text-left">
+                                            <n-button
+                                                quaternary
+                                                @click="selectSource(item)"
+                                            >
+                                                <template #icon>
+                                                    <g-icon name="edit" />
+                                                </template>
+                                                {{ $t('edit') }}
+                                            </n-button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </n-table>
+                        </div>
+                        <repo-control
+                            v-if="showControl"
+                            :current="current"
+                            @close="showControl = false"
+                            @save="sourceSaved()"
+                        />
+                    </div>
+                </template>
+            </div>
+        </settings-view>
+    </div>
+</template>
+<script setup lang="ts">
+import type { SourceType } from '@gaio/types'
+import { onMounted, ref } from 'vue'
+
+import useApi from '@/composables/useApi'
+import RepoControl from '@/views/settings/repo-manager/RepoControl.vue'
+import SettingsView from '@/views/settings/SettingsView.vue'
+
+const loading = ref()
+
+const sources = ref([])
+const current = ref({})
+const showControl = ref(false)
+
+const sourceSaved = () => {
+    current.value = {}
+    showControl.value = false
+    list()
+}
+
+const selectSource = (item: SourceType) => {
+    current.value = item
+    showControl.value = true
+}
+
+const addSource = () => {
+    current.value = {
+        client: 'clickhouse',
+        credentials: { port: 8123, extraPort: 9000, host: 'localhost', user: 'default' }
+    } as SourceType
+    showControl.value = true
+}
+
+const list = async () => {
+    loading.value = true
+    sources.value = await useApi().get('api/repo/list')
+    loading.value = false
+}
+
+const sourceIcon = (tb: SourceType) => {
+    const image = `../../../assets//images/flow/bg-${tb.client}.png`
+    return new URL(image, import.meta.url).href
+}
+
+onMounted(() => list())
+</script>

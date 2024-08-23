@@ -1,0 +1,9 @@
+.splitpanes__splitter, .splitpanes--vertical>.splitpanes__splitter {
+  width: 3px !important;
+}
+
+ .splitpanes__pane, .splitpanes__splitter {
+  transition: none !important;
+}
+
+

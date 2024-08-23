@@ -1,0 +1,165 @@
+@import "tailwind";
+@import "variables";
+@import "custom";
+@import "reset";
+@import "table";
+@import "splitpanes";
+
+@import 'lucide-static/font/lucide.css';
+
+//.n-base-selection-placeholder {
+//  overflow: initial !important;
+//}
+//
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* color of the scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF4C; /* color of the scroll thumb on hover*/
+}
+
+.bg-g-first {
+  background: var(--g-first);
+}
+
+.bg-g-second {
+  background: var(--g-second);
+}
+
+.bg-g-third {
+  background: var(--g-third);
+}
+
+.n-tree .n-tree-node.n-tree-node--highlight .n-tree-node-content .n-tree-node-content__text {
+  border-bottom: 0 !important;
+}
+
+.n-tree-node-content__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.bg-nav-gradient {
+  background: var(--bg-nav-dark, rgba(45, 47, 54, 0.63));
+}
+
+
+.base-one-bg {
+  background: var(--gaio-one);
+  backdrop-filter: blur(17px);
+}
+
+.base-one-color {
+  color: var(--gaio-one)
+}
+
+
+.gaio-two-color {
+  color: var(--gaio-two)
+}
+
+.base-three-bg {
+  background: var(--gaio-three);
+  backdrop-filter: blur(17px);
+}
+
+.base-three-color {
+  color: var(--gaio-three)
+}
+
+
+
+html {
+  --elevation-primary: rgb(230, 159, 105);
+  --elevation-primary-hover: rgb(230, 159, 105);
+  --elevation-primary-pressed: rgb(210, 139, 85);
+  --elevation-primary-supplementar: rgb(250, 179, 125);
+
+
+}
+
+
+html.light {
+  --elevation-0: #FFFFFF;
+  --elevation-1: #F2F2F2;
+  --elevation-2: #E6E6E6;
+  --elevation-3: #CCCCCC;
+  --elevation-4: #B3B3B3;
+  --elevation-invert: #282828;
+  --prime: #AB612B;
+  --prime-hover: #bb692c;
+  --prime-pressed: #a45d29;
+  --prime-additional: #cf7a41;
+}
+
+html.dark {
+  --elevation-0: #141414;
+  --elevation-1: #1F1F1F;
+  --elevation-2: #282828;
+  --elevation-3: #2F2F2F;
+  --elevation-4: #393939;
+  --elevation-invert: #E6E6E6;
+  --prime: rgb(230, 159, 105);
+  --prime-hover: rgb(230, 159, 105);
+  --prime-pressed: rgb(210, 139, 85);
+  --prime-additional: rgb(250, 179, 125);
+}
+
+.n-button--primary-type.border-elevation-2 {
+  border-color: var(--prime-primary-additional) !important;
+}
+
+
+@for $i from 0 through 4 {
+  .bg-elevation-#{$i} {
+    background-color: var(--elevation-#{$i}) !important;
+  }
+}
+
+@for $i from 0 through 4 {
+  .border-elevation-#{$i} {
+    border: 1px solid var(--elevation-#{$i}) !important;
+  }
+}
+
+
+.drag-table {
+  .sortable-chosen.drag-hide {
+    display: none;
+  }
+
+  .sortable-drag {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+
+    .drag-hide {
+      display: none;
+    }
+  }
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

@@ -1,0 +1,29 @@
+services:
+  redis:
+    container_name: 'gaio-redis'
+    image: redis
+    hostname: 'redis'
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    ports:
+      - 6379:6379
+    restart: always
+    networks:
+      - gaio-network
+  app:
+    container_name: 'gaio-dataos'
+    build: .
+    command: bun run backend
+    environment:
+      GAIO_REDIS_HOST: redis
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - redis
+    networks:
+      - gaio-network
+
+networks:
+  gaio-network:
+    driver: bridge

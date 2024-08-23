@@ -1,0 +1,13 @@
+{
+  "name": "@gaio/types",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@gaio/front": "^0.0.0",
+    "eslint-plugin-import": "^2.29.1"
+  }
+}

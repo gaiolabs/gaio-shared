@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  .card-shadow {
+    @apply shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)];
+  }
+
+
+  .flex-vertical-center {
+    @apply flex items-center;
+  }
+
+  .flex-horizontal-center {
+    @apply flex justify-center;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex gap-1 justify-between items-center;
+  }
+
+  .control {
+    @apply mb-5;
+  }
+
+  .control-label {
+    @apply text-neutral-600 dark:text-neutral-300 pb-2;
+  }
+
+  .control-secondary {
+    @apply bg-paper-200 dark:bg-paper-200 border border-paper-400 dark:border-carbon-400 rounded-md p-1
+  }
+
+  .g-card {
+    @apply g-bg-1 gap-2 rounded px-2 shadow;
+  }
+
+
+  .g-bg-0 {
+    @apply bg-paper-300 dark:bg-carbon-100;
+  }
+
+  .g-bg-1 {
+    @apply bg-paper-100 dark:bg-carbon-300;
+  }
+
+  .g-bg-2 {
+    @apply bg-paper-200 dark:bg-carbon-400;
+  }
+
+  .g-bg-3 {
+    @apply bg-paper-300 dark:bg-carbon-500;
+  }
+
+  .g-bg-100 {
+    @apply bg-paper-100 dark:bg-carbon-100;
+  }
+
+  .g-bg-200 {
+    @apply bg-paper-200 dark:bg-carbon-200;
+  }
+
+  .g-bg-300 {
+    @apply bg-paper-300 dark:bg-carbon-300;
+  }
+
+  .g-bg-400 {
+    @apply bg-paper-400 dark:bg-carbon-400;
+  }
+
+  .g-bg-500 {
+    @apply bg-paper-500 dark:bg-carbon-500;
+  }
+
+  .g-bg-600 {
+    @apply bg-paper-600 dark:bg-carbon-600;
+  }
+
+  .g-border-100 {
+    @apply border border-paper-100 dark:border-carbon-100;
+  }
+
+  .g-border-200 {
+    @apply border border-paper-200 dark:border-carbon-200;
+  }
+
+  .g-border-300 {
+    @apply border border-paper-300 dark:border-carbon-300;
+  }
+
+  .g-border-400 {
+    @apply border border-paper-400 dark:border-carbon-400;
+  }
+
+  .g-border-500 {
+    @apply border border-paper-500 dark:border-carbon-500;
+  }
+
+  .g-border-600 {
+    @apply border border-paper-600 dark:border-carbon-600;
+  }
+
+  .g-text-100 {
+    @apply text-paper-100 dark:text-carbon-100;
+  }
+
+  .g-text-200 {
+    @apply text-paper-200 dark:text-carbon-200;
+  }
+
+  .g-text-300 {
+    @apply text-paper-300 dark:text-carbon-300;
+  }
+
+  .g-text-400 {
+    @apply text-paper-400 dark:text-carbon-400;
+  }
+
+  .g-text-500 {
+    @apply text-paper-500 dark:text-carbon-500;
+  }
+
+  .g-text-600 {
+    @apply text-paper-600 dark:text-carbon-600;
+  }
+}
+
