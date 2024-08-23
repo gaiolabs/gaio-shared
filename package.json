@@ -52,7 +52,8 @@
     "vue-draggable-next": "^2.2.1",
     "vue-draggable-plus": "^0.3.5",
     "vue-echarts": "^6.7.3",
-    "vue-router": "^4.4.0"
+    "vue-router": "^4.4.0",
+    "dayjs": "^1.11.11"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
