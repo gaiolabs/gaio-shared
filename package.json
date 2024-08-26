@@ -13,6 +13,21 @@
 	},
 	"devDependencies": {
 		"@types/mustache": "^4.2.5",
-		"eslint-plugin-import": "^2.29.1"
+		"@typescript-eslint/eslint-plugin": "^8.2.0",
+		"@typescript-eslint/parser": "^8.2.0",
+		"@vercel/style-guide": "^6.0.0",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-import-resolver-typescript-bun": "^0.0.103",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-n": "^17.10.2",
+		"eslint-plugin-only-warn": "^1.1.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"eslint-plugin-prettier-vue": "^5.0.0",
+		"eslint-plugin-promise": "^7.1.0",
+		"prettier": "^3.3.3",
+		"prettier-plugin-tailwindcss": "^0.6.6",
+		"typescript": "^5.5.4",
+		"vue-eslint-parser": "^9.4.3"
 	}
 }
