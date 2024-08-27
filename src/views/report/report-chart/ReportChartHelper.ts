@@ -1,4 +1,4 @@
-import type { FieldType, ReportNodeType } from '@gaio/types'
+import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import { isNil } from 'lodash-es'
 import { computed } from 'vue'
 

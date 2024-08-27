@@ -1,5 +1,5 @@
 import useHelper from '@/composables/useHelper'
-import type { GenericType } from '@gaio/types'
+import type { GenericType } from '@gaio/shared/types'
 
 export const mixin = {
     methods: {

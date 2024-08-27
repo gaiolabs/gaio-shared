@@ -1,4 +1,4 @@
-import type { TaskType, UnpivotTaskType } from '@gaio/types'
+import type { TaskType, UnpivotTaskType } from '@gaio/shared/types'
 
 export const defaultUnpivot = (base: UnpivotTaskType & TaskType) => {
     return {

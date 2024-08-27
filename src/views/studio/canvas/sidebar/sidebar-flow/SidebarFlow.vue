@@ -3,24 +3,14 @@
         <div class="flex w-full items-stretch justify-between px-4">
             <div class="text-lg font-bold">{{ $t('flow') }}</div>
             <div class="flex">
-                <n-button
-                    size="tiny"
-                    quaternary
-                    @click="showScheduleBulk = true"
-                >
+                <n-button size="tiny" quaternary @click="showScheduleBulk = true">
                     <template #icon>
                         <g-icon name="cronEdit" />
                     </template>
                 </n-button>
-                <n-popover
-                    placement="bottom"
-                    trigger="click"
-                >
+                <n-popover placement="bottom" trigger="click">
                     <template #trigger>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                        >
+                        <n-button size="tiny" quaternary>
                             <template #icon>
                                 <g-icon name="createFolder" />
                             </template>
@@ -28,27 +18,16 @@
                     </template>
                     <div>
                         {{ $t('folder') }}
-                        <n-input
-                            v-model:value="newFolderName"
-                            :placeholder="$t('typeHere')"
-                        >
+                        <n-input v-model:value="newFolderName" :placeholder="$t('typeHere')">
                             <template #suffix>
-                                <n-button
-                                    size="tiny"
-                                    text
-                                    @click="addNewFolder"
-                                >
+                                <n-button size="tiny" text @click="addNewFolder">
                                     {{ $t('add') }}
                                 </n-button>
                             </template>
                         </n-input>
                     </div>
                 </n-popover>
-                <n-button
-                    size="tiny"
-                    quaternary
-                    @click="currentFlow = {}"
-                >
+                <n-button size="tiny" quaternary @click="currentFlow = {}">
                     <template #icon>
                         <g-icon name="add" />
                     </template>
@@ -56,50 +35,20 @@
             </div>
         </div>
         <div class="sidebar-flow-search px-4 pt-1">
-            <n-input
-                v-model:value="searchTerm"
-                size="small"
-                :placeholder="$t('search')"
-            />
+            <n-input v-model:value="searchTerm" size="small" :placeholder="$t('search')" />
         </div>
         <div class="my-3 flex grow flex-col items-stretch overflow-hidden">
-            <flow-control
-                v-if="currentFlow"
-                :flow="currentFlow"
-                @save="initSidebarFlow()"
-                @close="currentFlow = null"
-            />
-            <flow-control-schedule-bulk
-                v-if="showScheduleBulk"
-                @close="showScheduleBulk = false"
-            />
-            <n-dropdown
-                trigger="manual"
-                :show="showDropdown"
-                :options="optionsRef as any"
-                :x="x"
-                :y="y"
-                @select="handleSelectDelete"
-                @clickoutside="showDropdown = false"
-            />
-            <n-scrollbar
-                style="height: 100%; overflow: auto"
-                outer-class="h-full overflow-auto"
-            >
+            <flow-control v-if="currentFlow" :flow="currentFlow" @save="initSidebarFlow()"
+                @close="currentFlow = null" />
+            <flow-control-schedule-bulk v-if="showScheduleBulk" @close="showScheduleBulk = false" />
+            <n-dropdown trigger="manual" :show="showDropdown" :options="optionsRef as any" :x="x" :y="y"
+                @select="handleSelectDelete" @clickoutside="showDropdown = false" />
+            <n-scrollbar style="height: 100%; overflow: auto" outer-class="h-full overflow-auto">
                 <div class="px-2">
-                    <n-tree
-                        block-node
-                        block-line
-                        draggable
-                        expand-on-click
-                        expand-on-dragenter
-                        :get-children="baseChildren"
-                        :data="localTreeFiltered"
-                        :node-props="nodeProps"
-                        :render-switcher-icon="removeRenderSwitcherIcon"
-                        :default-expand-all="searchTerm.length > 0"
-                        @drop="handleDropThenUpdate"
-                    />
+                    <n-tree block-node block-line draggable expand-on-click expand-on-dragenter
+                        :get-children="baseChildren" :data="localTreeFiltered" :node-props="nodeProps"
+                        :render-switcher-icon="removeRenderSwitcherIcon" :default-expand-all="searchTerm.length > 0"
+                        @drop="handleDropThenUpdate" />
                 </div>
             </n-scrollbar>
         </div>
@@ -107,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AppFolderOption, FlowType } from '@gaio/types'
+import type { AppFolderOption, FlowType } from '@gaio/shared/types'
 import { type DropdownOption, NButton, type TreeOption, useMessage } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

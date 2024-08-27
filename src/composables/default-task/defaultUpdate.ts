@@ -1,4 +1,4 @@
-import type { TaskType, UpdateRowTaskType } from '@gaio/types'
+import type { TaskType, UpdateRowTaskType } from '@gaio/shared/types'
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
 
 export const defaultUpdate = (base: UpdateRowTaskType & TaskType) => {

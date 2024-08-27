@@ -3,15 +3,9 @@
         <div class="flex w-full items-stretch justify-between px-4">
             <div class="text-lg font-bold">{{ $t('parameters') }}</div>
             <div class="flex">
-                <n-popover
-                    placement="bottom"
-                    trigger="click"
-                >
+                <n-popover placement="bottom" trigger="click">
                     <template #trigger>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                        >
+                        <n-button size="tiny" quaternary>
                             <template #icon>
                                 <g-icon name="createFolder" />
                             </template>
@@ -19,36 +13,21 @@
                     </template>
                     <div>
                         {{ $t('folder') }}
-                        <n-input
-                            v-model:value="newFolderName"
-                            :placeholder="$t('typeHere')"
-                        >
+                        <n-input v-model:value="newFolderName" :placeholder="$t('typeHere')">
                             <template #suffix>
-                                <n-button
-                                    size="tiny"
-                                    text
-                                    @click="addNewFolder"
-                                >
+                                <n-button size="tiny" text @click="addNewFolder">
                                     {{ $t('add') }}
                                 </n-button>
                             </template>
                         </n-input>
                     </div>
                 </n-popover>
-                <n-button
-                    size="tiny"
-                    quaternary
-                    @click="current = {}"
-                >
+                <n-button size="tiny" quaternary @click="current = {}">
                     <template #icon>
                         <g-icon name="add" />
                     </template>
                 </n-button>
-                <n-button
-                    size="tiny"
-                    quaternary
-                    @click="useAppStore().saveAppMetadata('params')"
-                >
+                <n-button size="tiny" quaternary @click="useAppStore().saveAppMetadata('params')">
                     <template #icon>
                         <g-icon name="save" />
                     </template>
@@ -57,42 +36,23 @@
         </div>
         <div class="my-3 flex grow flex-col items-stretch overflow-hidden">
             <div class="mx-3">
-                <n-scrollbar
-                    style="height: 100%; overflow: auto"
-                    outer-class="h-full overflow-auto"
-                >
-                    <div
-                        v-if="localTreeFiltered(localTree, searchTerm).length"
-                        class="px-2"
-                    >
-                        <n-tree
-                            block-node
-                            block-line
-                            draggable
-                            expand-on-click
-                            expand-on-dragenter
-                            :get-children="baseChildren"
-                            :data="localTreeFiltered(localTree, searchTerm)"
-                            :node-props="treeNodeActions"
-                            :render-switcher-icon="removeRenderSwitcherIcon"
-                            :render-label="renderLabel"
-                            :default-expand-all="searchTerm.length > 0"
-                            @drop="handleDropThenUpdate"
-                        />
+                <n-scrollbar style="height: 100%; overflow: auto" outer-class="h-full overflow-auto">
+                    <div v-if="localTreeFiltered(localTree, searchTerm).length" class="px-2">
+                        <n-tree block-node block-line draggable expand-on-click expand-on-dragenter
+                            :get-children="baseChildren" :data="localTreeFiltered(localTree, searchTerm)"
+                            :node-props="treeNodeActions" :render-switcher-icon="removeRenderSwitcherIcon"
+                            :render-label="renderLabel" :default-expand-all="searchTerm.length > 0"
+                            @drop="handleDropThenUpdate" />
                     </div>
                 </n-scrollbar>
             </div>
         </div>
-        <sidebar-param-control
-            v-if="current"
-            :param="current"
-            @close="closeParamControl()"
-        />
+        <sidebar-param-control v-if="current" :param="current" @close="closeParamControl()" />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { AppFolderOption, ParamType } from '@gaio/types'
+import type { AppFolderOption, ParamType } from '@gaio/shared/types'
 import { NButton, type TreeOption } from 'naive-ui'
 import { computed, h, onMounted, ref } from 'vue'
 

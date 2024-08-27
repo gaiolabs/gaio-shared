@@ -1,4 +1,4 @@
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 
 const addFilter = (e) => {
     e.operator = '='

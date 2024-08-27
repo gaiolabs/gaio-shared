@@ -2,32 +2,16 @@
     <div class="table-data overflow-y-hidden">
         <div class="g-bg-1 rounded p-2 shadow">
             <div class="table-data-header mb-3 mt-2 flex justify-between">
-                <table-data-filter
-                    :columns="columns"
-                    :local-task="localTask"
-                    :total-rows="totalRows"
-                    :total-rows-filtered="pagination.total"
-                    class="flex-grow"
-                    @load-filter="applyFilter"
-                />
+                <table-data-filter :columns="columns" :local-task="localTask" :total-rows="totalRows"
+                    :total-rows-filtered="pagination.total" class="flex-grow" @load-filter="applyFilter" />
             </div>
-            <div
-                v-if="localColumns.length"
-                class="w-fit-content mb-5 overflow-x-auto"
-            >
+            <div v-if="localColumns.length" class="w-fit-content mb-5 overflow-x-auto">
                 <n-spin :show="loading">
-                    <n-table
-                        striped
-                        :single-line="false"
-                        size="small"
-                    >
+                    <n-table striped :single-line="false" size="small">
                         <thead class="sticky">
                             <tr>
-                                <th
-                                    v-for="col of localColumns"
-                                    :key="col.columnName"
-                                    @click="$emit('selectColumn', col)"
-                                >
+                                <th v-for="col of localColumns" :key="col.columnName"
+                                    @click="$emit('selectColumn', col)">
                                     <div class="flex justify-between gap-2">
                                         <n-button text>
                                             <template #icon>
@@ -40,14 +24,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="(row, index) of list"
-                                :key="index"
-                            >
-                                <td
-                                    v-for="col of localColumns"
-                                    :key="col.columnName"
-                                >
+                            <tr v-for="(row, index) of list" :key="index">
+                                <td v-for="col of localColumns" :key="col.columnName">
                                     {{ row[col.columnName] }}
                                 </td>
                             </tr>
@@ -55,32 +33,21 @@
                     </n-table>
                 </n-spin>
             </div>
-            <div
-                v-else-if="!loading && !list.length"
-                class="w-full"
-            >
+            <div v-else-if="!loading && !list.length" class="w-full">
                 <n-alert>
                     {{ $t('noData') }}
                 </n-alert>
             </div>
-            <div
-                v-if="!loading || list.length"
-                class="mt-2 flex items-center justify-center"
-            >
-                <n-pagination
-                    v-model:page="pagination.current"
-                    size="small"
-                    :item-count="pagination.total"
-                    :page-size="pagination.pageSize"
-                    @update:page="listData()"
-                />
+            <div v-if="!loading || list.length" class="mt-2 flex items-center justify-center">
+                <n-pagination v-model:page="pagination.current" size="small" :item-count="pagination.total"
+                    :page-size="pagination.pageSize" @update:page="listData()" />
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import type { BuilderTaskType, FieldType, GenericType } from '@gaio/types'
+import type { BuilderTaskType, FieldType, GenericType } from '@gaio/shared/types'
 import { computed, onMounted, ref, watch } from 'vue'
 
 import useApi from '@/composables/useApi'
@@ -185,6 +152,7 @@ onMounted(async () => {
 <style lang="scss">
 .table-data {
     table {
+
         td,
         th {
             white-space: nowrap;

@@ -12,26 +12,19 @@
                 </n-button>
             </div>
             <div v-if="report" class="command-power-report-body">
-                <command-power-report-options
-                    :report="report"
-                    @change="changeReportType"
-                />
-                <report-node
-                    :key="report.id"
-                    :task="{
-                        ...report,
-                        height: 500
-                    }"
-                />
+                <command-power-report-options :report="report" @change="changeReportType" />
+                <report-node :key="report.id" :task="{
+                    ...report,
+                    height: 500
+                }" />
             </div>
             <div class="g-bg-3 h-full">Insights</div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { usePowerStore } from '@gaio/front/src/stores'
-import type { ReportNodeType } from '@gaio/types'
-import { getBucketNameFromAppId, getId } from '@gaio/utils'
+import type { ReportNodeType } from '@gaio/shared/types'
+import { getBucketNameFromAppId, getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -41,6 +34,7 @@ import useDefaultReport from '@/composables/useDefaultReport'
 import { usePowerReport } from '@/composables/usePowerReport'
 import CommandPowerReportOptions from '@/views/commandK/command-power/CommandPowerReportOptions.vue'
 import ReportNode from '@/views/report/ReportNode.vue'
+import { usePowerStore } from '@/stores'
 
 const { t } = useI18n()
 
@@ -134,6 +128,7 @@ onMounted(() => {
 <style lang="scss">
 .command-power-report {
     .command-power-report-body {
+
         .report-chart,
         .report-table div:first-child {
             border: 0 !important;

@@ -5,28 +5,16 @@
             <div class="">
                 <div class="flex items-center gap-2 overflow-auto bg-elevation-1">
                     <div class="grow">
-                        <label
-                            class="font-semibold text-neutral-500"
-                            for="task"
-                        >
+                        <label class="font-semibold text-neutral-500" for="task">
                             {{ $t('task') }}
                         </label>
-                        <n-input
-                            v-model:value="localTask.label"
-                            :placeholder="$t('taskLabel')"
-                        />
+                        <n-input v-model:value="localTask.label" :placeholder="$t('taskLabel')" />
                     </div>
                     <div class="grow">
-                        <label
-                            class="font-semibold text-neutral-500"
-                            for="task"
-                        >
+                        <label class="font-semibold text-neutral-500" for="task">
                             {{ $t('resultTable') }}
                         </label>
-                        <n-input
-                            v-model:value="localTask.resultTable"
-                            :placeholder="$t('resultTable')"
-                        />
+                        <n-input v-model:value="localTask.resultTable" :placeholder="$t('resultTable')" />
                     </div>
                 </div>
                 <div class="mx-3 mb-3">
@@ -41,11 +29,7 @@
                                         <th>{{ $t('type') }}</th>
                                         <th>{{ $t('default') }}</th>
                                         <th class="w-[25px]">
-                                            <n-button
-                                                type="info"
-                                                size="tiny"
-                                                secondary
-                                            >
+                                            <n-button type="info" size="tiny" secondary>
                                                 <template #icon>
                                                     <g-icon name="plus" />
                                                 </template>
@@ -53,89 +37,48 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <drag
-                                    v-model="localTask.columns"
-                                    tag="tbody"
-                                    :list="localTask.columns"
-                                    item-key="id"
-                                    handle=".handle"
-                                >
-                                    <tr
-                                        v-for="col of localTask.columns"
-                                        :key="col.id"
-                                        class="tr-item border-b *:p-1 odd:bg-paper-200"
-                                    >
+                                <drag v-model="localTask.columns" tag="tbody" :list="localTask.columns" item-key="id"
+                                    handle=".handle">
+                                    <tr v-for="col of localTask.columns" :key="col.id"
+                                        class="tr-item border-b *:p-1 odd:bg-paper-200">
                                         <td class="w-[25px]">
-                                            <g-icon
-                                                name="handle"
-                                                class="handle"
-                                            />
+                                            <g-icon name="handle" class="handle" />
                                         </td>
                                         <td class="w-[25px]">
                                             <g-icon :name="dataTypeIcon(col.dataType)" />
                                         </td>
                                         <td class="grow">
-                                            <n-input
-                                                v-model:value="col.columnName"
-                                                :placeholder="$t('default')"
-                                            />
+                                            <n-input v-model:value="col.columnName" :placeholder="$t('default')" />
                                         </td>
                                         <td class="grow">
                                             <div class="flex gap-2">
                                                 <div class="grow">
-                                                    <n-select
-                                                        :key="col.id"
-                                                        v-model:value="col.dataType"
-                                                        filterable
-                                                        :options="typeOptions"
-                                                    />
+                                                    <n-select :key="col.id" v-model:value="col.dataType" filterable
+                                                        :options="typeOptions" />
                                                 </div>
-                                                <div
-                                                    v-if="col.dataType === 'Nullable(Float64)'"
-                                                    class="w-100"
-                                                >
-                                                    <n-input-number
-                                                        v-model:value="col.columnLength"
-                                                        class="w-100"
-                                                        :placeholder="$t('decimal')"
-                                                        :step="1"
-                                                        :max="6"
-                                                        :min="1"
-                                                    />
+                                                <div v-if="col.dataType === 'Nullable(Float64)'" class="w-100">
+                                                    <n-input-number v-model:value="col.columnLength" class="w-100"
+                                                        :placeholder="$t('decimal')" :step="1" :max="6" :min="1" />
                                                 </div>
-                                                <div
-                                                    v-if="col.dataType === 'Nullable(Array)'"
-                                                    class="w-100"
-                                                >
-                                                    <n-select
-                                                        v-model:value="col.arrayDataType"
-                                                        class="w-100"
-                                                        :options="[
-                                                            {
-                                                                label: $t('numeric'),
-                                                                value: 'Numeric'
-                                                            },
-                                                            {
-                                                                label: $t('string'),
-                                                                value: 'String'
-                                                            }
-                                                        ]"
-                                                    />
+                                                <div v-if="col.dataType === 'Nullable(Array)'" class="w-100">
+                                                    <n-select v-model:value="col.arrayDataType" class="w-100" :options="[
+                                                        {
+                                                            label: $t('numeric'),
+                                                            value: 'Numeric'
+                                                        },
+                                                        {
+                                                            label: $t('string'),
+                                                            value: 'String'
+                                                        }
+                                                    ]" />
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="grow">
-                                            <n-input
-                                                v-model:value="col.default"
-                                                :placeholder="$t('default')"
-                                            />
+                                            <n-input v-model:value="col.default" :placeholder="$t('default')" />
                                         </td>
                                         <td class="w-[25px]">
-                                            <n-button
-                                                type="error"
-                                                size="tiny"
-                                                secondary
-                                            >
+                                            <n-button type="error" size="tiny" secondary>
                                                 <template #icon>
                                                     <g-icon name="delete" />
                                                 </template>
@@ -150,17 +93,11 @@
             </div>
             <div class="flex-between flex bg-paper-100 px-4 py-2">
                 <div>
-                    <n-checkbox
-                        v-model:checked="localTask.dropTable"
-                        :placeholder="$t('dropTable')"
-                        :label="$t('dropTable')"
-                    />
+                    <n-checkbox v-model:checked="localTask.dropTable" :placeholder="$t('dropTable')"
+                        :label="$t('dropTable')" />
                 </div>
                 <div>
-                    <n-button
-                        type="primary"
-                        @click="save()"
-                    >
+                    <n-button type="primary" @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </div>
@@ -169,7 +106,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { CreateTableTaskType } from '@gaio/types/tasks/create-table.task.type'
+import type { CreateTableTaskType } from '@gaio/shared/types/tasks/create-table.task.type'
 import { onMounted, ref } from 'vue'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 

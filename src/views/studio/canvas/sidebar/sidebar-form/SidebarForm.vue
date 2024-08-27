@@ -3,15 +3,9 @@
         <div class="flex w-full items-stretch justify-between px-4">
             <div class="text-lg font-bold">{{ $t('forms') }}</div>
             <div class="flex">
-                <n-popover
-                    placement="bottom"
-                    trigger="click"
-                >
+                <n-popover placement="bottom" trigger="click">
                     <template #trigger>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                        >
+                        <n-button size="tiny" quaternary>
                             <template #icon>
                                 <g-icon name="createFolder" />
                             </template>
@@ -19,16 +13,9 @@
                     </template>
                     <div>
                         {{ $t('folder') }}
-                        <n-input
-                            v-model:value="newFolderName"
-                            :placeholder="$t('typeHere')"
-                        >
+                        <n-input v-model:value="newFolderName" :placeholder="$t('typeHere')">
                             <template #suffix>
-                                <n-button
-                                    size="tiny"
-                                    text
-                                    @click="addNewFolder"
-                                >
+                                <n-button size="tiny" text @click="addNewFolder">
                                     {{ $t('add') }}
                                 </n-button>
                             </template>
@@ -37,11 +24,7 @@
                 </n-popover>
                 <n-tooltip>
                     <template #trigger>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                            @click="selectForm({})"
-                        >
+                        <n-button size="tiny" quaternary @click="selectForm({})">
                             <template #icon>
                                 <g-icon name="add" />
                             </template>
@@ -53,34 +36,15 @@
         </div>
         <div class="my-3 flex grow flex-col items-stretch overflow-hidden">
             <div class="control sidebar-flow-search px-3 pt-1">
-                <n-input
-                    v-model:value="searchTerm"
-                    size="small"
-                    :placeholder="$t('search')"
-                />
+                <n-input v-model:value="searchTerm" size="small" :placeholder="$t('search')" />
             </div>
-            <n-scrollbar
-                style="calc(100% - 20px) overflow: auto"
-                outer-class="h-full overflow-auto"
-            >
-                <div
-                    v-if="localTreeFiltered(localTree, searchTerm).length"
-                    class="px-2"
-                >
-                    <n-tree
-                        block-node
-                        block-line
-                        draggable
-                        expand-on-click
-                        expand-on-dragenter
-                        :get-children="baseChildren"
-                        :data="localTreeFiltered(localTree, searchTerm)"
-                        :node-props="treeNodeActions"
-                        :render-switcher-icon="removeRenderSwitcherIcon"
-                        :render-label="renderLabel"
-                        :default-expand-all="searchTerm.length > 0"
-                        @drop="handleDropThenUpdate"
-                    />
+            <n-scrollbar style="calc(100% - 20px) overflow: auto" outer-class="h-full overflow-auto">
+                <div v-if="localTreeFiltered(localTree, searchTerm).length" class="px-2">
+                    <n-tree block-node block-line draggable expand-on-click expand-on-dragenter
+                        :get-children="baseChildren" :data="localTreeFiltered(localTree, searchTerm)"
+                        :node-props="treeNodeActions" :render-switcher-icon="removeRenderSwitcherIcon"
+                        :render-label="renderLabel" :default-expand-all="searchTerm.length > 0"
+                        @drop="handleDropThenUpdate" />
                 </div>
             </n-scrollbar>
         </div>
@@ -88,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormType, ParamType } from '@gaio/types'
+import type { FormType, ParamType } from '@gaio/shared/types'
 import { NButton, type TreeOption } from 'naive-ui'
 import { h, onMounted, ref } from 'vue'
 
@@ -167,14 +131,14 @@ const treeNodeActions = () => {
 
 onMounted(
     () =>
-        (localTree.value = constructLocalTree({
-            baseList: useAppStore().forms,
-            baseListIdReference: 'formId',
-            folderName: 'folderForm',
-            localTree: localTree.value,
-            baseTreeSchema: baseFormTreeSchema,
-            openControl
-        }))
+    (localTree.value = constructLocalTree({
+        baseList: useAppStore().forms,
+        baseListIdReference: 'formId',
+        folderName: 'folderForm',
+        localTree: localTree.value,
+        baseTreeSchema: baseFormTreeSchema,
+        openControl
+    }))
 )
 </script>
 

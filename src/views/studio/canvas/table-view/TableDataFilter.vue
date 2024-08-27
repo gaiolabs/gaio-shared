@@ -1,81 +1,38 @@
 <template>
     <div class="table-data-filter flex-grow">
         <div class="table-data-filter flex gap-3">
-            <div
-                v-for="(filter, filterIndex) of localFilter"
-                :key="filterIndex"
-                class="flex flex-grow flex-col"
-            >
-                <div
-                    v-for="(item, itemIndex) of filter.list"
-                    :key="itemIndex"
-                    class="mb-1 flex flex-grow gap-2"
-                >
-                    <div
-                        v-if="localFilter[0].list.length > 1"
-                        class="flex items-center"
-                    >
-                        <n-switch
-                            v-model:value="item.selected"
-                            :round="false"
-                        />
+            <div v-for="(filter, filterIndex) of localFilter" :key="filterIndex" class="flex flex-grow flex-col">
+                <div v-for="(item, itemIndex) of filter.list" :key="itemIndex" class="mb-1 flex flex-grow gap-2">
+                    <div v-if="localFilter[0].list.length > 1" class="flex items-center">
+                        <n-switch v-model:value="item.selected" :round="false" />
                     </div>
-                    <div
-                        v-if="localFilter[0].list.length > 1"
-                        class="flex w-[55px] items-center"
-                    >
-                        <n-button
-                            v-if="itemIndex > 0"
-                            v-model:value="item.andOr"
-                            block
-                            @click="changeLogicOperator(item)"
-                        >
+                    <div v-if="localFilter[0].list.length > 1" class="flex w-[55px] items-center">
+                        <n-button v-if="itemIndex > 0" v-model:value="item.andOr" block
+                            @click="changeLogicOperator(item)">
                             {{ item.andOr }}
                         </n-button>
                     </div>
                     <div>
-                        <n-select
-                            v-model:value="item.columnName"
-                            filterable
-                            :options="columns"
-                            value-field="columnName"
-                            label-field="columnName"
-                            @update:value="changeFilter()"
-                        />
+                        <n-select v-model:value="item.columnName" filterable :options="columns" value-field="columnName"
+                            label-field="columnName" @update:value="changeFilter()" />
                     </div>
                     <div>
-                        <n-select
-                            v-model:value="item.operator"
-                            filterable
-                            :options="operators(item)"
-                        />
+                        <n-select v-model:value="item.operator" filterable :options="operators(item)" />
                     </div>
                     <div class="flex-grow">
-                        <n-input
-                            v-model:value="item.value"
-                            @update:value="changeFilter()"
-                            @keyup.enter="applyFilter('current', itemIndex)"
-                        />
+                        <n-input v-model:value="item.value" @update:value="changeFilter()"
+                            @keyup.enter="applyFilter('current', itemIndex)" />
                     </div>
                     <div class="flex gap-2">
-                        <n-button
-                            tertiary
-                            @click="applyFilter('current', itemIndex)"
-                        >
+                        <n-button tertiary @click="applyFilter('current', itemIndex)">
                             {{ $t('apply') }}
                         </n-button>
-                        <n-button
-                            tertiary
-                            @click="removeFilter(itemIndex)"
-                        >
+                        <n-button tertiary @click="removeFilter(itemIndex)">
                             <template #icon>
                                 <g-icon name="close" />
                             </template>
                         </n-button>
-                        <n-button
-                            tertiary
-                            @click="addFilter(itemIndex)"
-                        >
+                        <n-button tertiary @click="addFilter(itemIndex)">
                             <template #icon>
                                 <g-icon name="plus" />
                             </template>
@@ -85,10 +42,8 @@
                 <div></div>
             </div>
         </div>
-        <div
-            class="g-bg-2 g-border-300 mt-2 flex items-center justify-between gap-1 rounded p-1"
-            :class="{ '': localFilter[0].list.length > 1 }"
-        >
+        <div class="g-bg-2 g-border-300 mt-2 flex items-center justify-between gap-1 rounded p-1"
+            :class="{ '': localFilter[0].list.length > 1 }">
             <div class="flex items-center justify-center gap-3 px-2">
                 <div>{{ columns.length }} {{ $t('columns') }}</div>
                 <n-divider vertical />
@@ -101,15 +56,8 @@
                     </div>
                 </template>
             </div>
-            <div
-                v-if="localFilter[0].list.length > 1"
-                class="w-[170px]"
-            >
-                <n-button
-                    block
-                    type="primary"
-                    @click="applyFilter('selected')"
-                >
+            <div v-if="localFilter[0].list.length > 1" class="w-[170px]">
+                <n-button block type="primary" @click="applyFilter('selected')">
                     {{ $t('applySelected') }}
                 </n-button>
             </div>
@@ -117,8 +65,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType, SchemaFilterType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { BuilderTaskType, FieldType, SchemaFilterType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -168,7 +116,7 @@ const localFilter = ref<SchemaFilterType[]>([
     }
 ])
 
-const changeFilter = () => {}
+const changeFilter = () => { }
 
 const changeLogicOperator = (item) => {
     item.andOr = item.andOr === 'and' ? 'or' : 'and'

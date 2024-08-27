@@ -1,16 +1,12 @@
 <template>
     <div class="report-column">
-        <div
-            ref="id"
-            class="size-full"
-            :style="{ height }"
-        />
+        <div ref="id" class="size-full" :style="{ height }" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Column, type ColumnOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
@@ -72,8 +68,8 @@ const loadChart = () => {
             ...common,
             color:
                 isGrouped.value || isMultipleMeasure.value ? themeColors.value
-                : settings.value.showLegend ? themeColors.value
-                : themeColors.value[0],
+                    : settings.value.showLegend ? themeColors.value
+                        : themeColors.value[0],
 
             ...foundation.value,
             label: chartHelper.value.linearLabel(total),
@@ -84,7 +80,7 @@ const loadChart = () => {
                             fill: 'rgba(0,0,0,0.08)'
                         }
                     }
-                :   undefined
+                    : undefined
         } as ColumnOptions
     )
     chart.value.render()

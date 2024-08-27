@@ -1,8 +1,5 @@
 <template>
-    <div
-        v-if="localCron"
-        class="cron-base mb-3"
-    >
+    <div v-if="localCron" class="cron-base mb-3">
         <!-- EVERY  -->
         <div class="mb-3">
             <div class="flex items-center gap-2">
@@ -10,142 +7,82 @@
                     {{ $t('cronEvery') }}
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.every"
-                        size="small"
-                        filterable
-                        class="w-full"
-                        :options="forEveryOptions"
-                        @update:value="onChangeBaseReset()"
-                    />
+                    <n-select v-model:value="localCron.every" size="small" filterable class="w-full"
+                        :options="forEveryOptions" @update:value="onChangeBaseReset()" />
                 </div>
             </div>
         </div>
         <!-- WEEKLY -->
-        <div
-            v-if="localCron.every == 4"
-            class="mb-3"
-        >
+        <div v-if="localCron.every == 4" class="mb-3">
             <div class="flex items-center gap-2">
                 <div class="cron-reference">
                     {{ $t('cronOnWeekDay') }}
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.dayValues"
-                        size="small"
-                        filterable
-                        class="w-full"
-                        multiple
+                    <n-select v-model:value="localCron.dayValues" size="small" filterable class="w-full" multiple
                         :options="dayValues.map((item) => ({ value: item, label: $t(cronDayName[item]) }))"
-                        @update:value="onChangeFrequency()"
-                    />
+                        @update:value="onChangeFrequency()" />
                 </div>
             </div>
         </div>
         <!-- MONTHLY -->
-        <div
-            v-if="localCron.every >= 5"
-            class="mb-3"
-        >
+        <div v-if="localCron.every >= 5" class="mb-3">
             <div class="flex items-center gap-2">
                 <div class="cron-reference">
                     {{ $t('cronOnTheDay') }}
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.dayOfMonthValues"
-                        size="small"
-                        filterable
-                        class="w-full"
-                        multiple
+                    <n-select v-model:value="localCron.dayOfMonthValues" size="small" filterable class="w-full" multiple
                         :options="dayOfMonthValues.map((item) => ({ value: item, label: cronNumeral(item) }))"
-                        @update:value="onChangeFrequency()"
-                    />
+                        @update:value="onChangeFrequency()" />
                 </div>
             </div>
         </div>
         <!-- YEARLY -->
-        <div
-            v-if="localCron.every == 6"
-            class="mb-3"
-        >
+        <div v-if="localCron.every == 6" class="mb-3">
             <div class="flex items-center gap-2">
                 <div class="cron-reference">
                     {{ $t('cronOfMonth') }}
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.monthValues"
-                        size="small"
-                        filterable
-                        class="w-full"
-                        multiple
+                    <n-select v-model:value="localCron.monthValues" size="small" filterable class="w-full" multiple
                         :options="monthValues.map((item) => ({ value: item, label: $t(cronMonthName(item)) }))"
-                        @update:value="onChangeFrequency()"
-                    />
+                        @update:value="onChangeFrequency()" />
                 </div>
             </div>
         </div>
         <!-- DAILY -->
-        <div
-            v-if="localCron.every >= 3"
-            class="mb-3"
-        >
+        <div v-if="localCron.every >= 3" class="mb-3">
             <div class="flex items-center gap-2">
                 <div class="cron-reference">
                     {{ $t('cronAtHour') }}
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.hourValues"
-                        size="small"
-                        filterable
-                        class="w-full"
-                        multiple
+                    <n-select v-model:value="localCron.hourValues" size="small" filterable class="w-full" multiple
                         :options="hourValues.map((item) => ({ value: item, label: item }))"
-                        @update:value="onChangeFrequency()"
-                    />
+                        @update:value="onChangeFrequency()" />
                 </div>
             </div>
         </div>
         <!-- HOUR AND OTHERS -->
-        <div
-            v-if="localCron.every >= 2"
-            class="mb-3"
-        >
+        <div v-if="localCron.every >= 2" class="mb-3">
             <div class="flex items-center gap-2">
                 <div class="cron-reference">
-                    <span
-                        v-if="localCron.every == 2"
-                        class="col-sm-2"
-                    >
+                    <span v-if="localCron.every == 2" class="col-sm-2">
                         {{ $t('cronAtMinute') }}
                     </span>
-                    <span
-                        v-if="localCron.every >= 3"
-                        class="col-sm-2"
-                    >
+                    <span v-if="localCron.every >= 3" class="col-sm-2">
                         {{ $t('cronAtMinute') }}
                     </span>
                 </div>
                 <div class="grow">
-                    <n-select
-                        v-model:value="localCron.minuteValues"
-                        size="small"
-                        filterable
-                        multiple
-                        class="w-full"
+                    <n-select v-model:value="localCron.minuteValues" size="small" filterable multiple class="w-full"
                         :options="minuteValues.map((item) => ({ value: item, label: item }))"
-                        @update:value="onChangeFrequency()"
-                    />
+                        @update:value="onChangeFrequency()" />
                 </div>
             </div>
         </div>
-        <div
-            v-if="localCron.every && cronBase.current"
-            class="flex items-start gap-2"
-        >
+        <div v-if="localCron.every && cronBase.current" class="flex items-start gap-2">
             <div class="cron-reference">{{ cronBase.current }}</div>
             <div class="grow rounded border-elevation-2 bg-paper-100 dark:bg-carbon-200">
                 <div class="min-h-[26px] px-2">
@@ -153,23 +90,13 @@
                 </div>
             </div>
         </div>
-        <div
-            v-if="localCron.every"
-            class="my-3 flex items-start gap-2"
-        >
+        <div v-if="localCron.every" class="my-3 flex items-start gap-2">
             <div class="cron-reference">{{ $t('status') }}</div>
             <div class="grow">
-                <n-select
-                    v-model:value="localCron.status"
-                    size="small"
-                    filterable
-                    class="w-full"
-                    :options="[
-                        { value: 'active', label: $t('active') },
-                        { value: 'inactive', label: $t('inactive') }
-                    ]"
-                    @update:value="onChangeFrequency()"
-                />
+                <n-select v-model:value="localCron.status" size="small" filterable class="w-full" :options="[
+                    { value: 'active', label: $t('active') },
+                    { value: 'inactive', label: $t('inactive') }
+                ]" @update:value="onChangeFrequency()" />
             </div>
         </div>
     </div>
@@ -195,7 +122,7 @@ import {
     monthValues as _monthValues
 } from './CronBaseHelper'
 import { cloneDeep } from 'lodash-es'
-import type { CronBaseType } from '@gaio/types'
+import type { CronBaseType } from '@gaio/shared/types'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

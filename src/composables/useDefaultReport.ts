@@ -1,5 +1,5 @@
-import type { ReportNodeType } from '@gaio/types'
-import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/utils'
+import type { ReportNodeType } from '@gaio/shared/types'
+import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 
 import { defaultReportChartArea } from '@/composables/default-reports/defaultReportChartArea'

@@ -1,6 +1,6 @@
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
-import { getBucketNameFromAppId } from '@gaio/utils'
-import type { DeleteTaskType, TaskType } from '@gaio/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
+import type { DeleteTaskType, TaskType } from '@gaio/shared/types'
 
 export const defaultDelete = (base: DeleteTaskType & TaskType) => {
     return {

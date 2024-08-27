@@ -1,4 +1,4 @@
-import { canBeANumber, getId } from '@gaio/utils'
+import { canBeANumber, getId } from '@gaio/shared/utils'
 import { cloneDeep, uniq } from 'lodash-es'
 import { useI18n } from 'vue-i18n'
 

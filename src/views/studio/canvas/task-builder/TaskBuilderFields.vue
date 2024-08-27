@@ -1,16 +1,9 @@
 <template>
     <div class="task-builder-fields overflow-hidden p-1">
         <div>
-            <n-collapse
-                class="rounded-[4px] bg-paper-100 dark:bg-carbon-200"
-                arrow-placement="right"
-            >
-                <n-collapse-item
-                    v-for="(table, tableIndex) of tableList"
-                    :key="`${table.databaseName}-${table.tableName}`"
-                    :title="table.tableName"
-                    :name="table.tableName"
-                >
+            <n-collapse class="rounded-[4px] bg-paper-100 dark:bg-carbon-200" arrow-placement="right">
+                <n-collapse-item v-for="(table, tableIndex) of tableList"
+                    :key="`${table.databaseName}-${table.tableName}`" :title="table.tableName" :name="table.tableName">
                     <template #header>
                         <div class="flex items-center gap-1">
                             <g-icon name="table" />
@@ -19,19 +12,13 @@
                     </template>
                     <div class="mx-2">
                         <div class="flex items-center justify-between">
-                            <n-button
-                                size="tiny"
-                                @click="addAllFields(tableIndex)"
-                            >
+                            <n-button size="tiny" @click="addAllFields(tableIndex)">
                                 {{ $t('addAll') }}
                             </n-button>
                             <div class="flex gap-1">
                                 <n-tooltip>
                                     <template #trigger>
-                                        <n-button
-                                            size="tiny"
-                                            @click="$emit('viewTable', table)"
-                                        >
+                                        <n-button size="tiny" @click="$emit('viewTable', table)">
                                             <template #icon>
                                                 <g-icon name="eye" />
                                             </template>
@@ -54,10 +41,7 @@
                         </div>
 
                         <div class="my-2">
-                            <n-input
-                                v-model:value="searchTerm[table.tableName]"
-                                :placeholder="$t('filter')"
-                            >
+                            <n-input v-model:value="searchTerm[table.tableName]" :placeholder="$t('filter')">
                                 <template #prefix>
                                     <g-icon name="filter" />
                                 </template>
@@ -65,24 +49,14 @@
                         </div>
 
                         <div>
-                            <drag
-                                :list="$filterBy(table.fields, 'columnName', searchTerm[table.tableName])"
-                                :group="{
-                                    name: 'items',
-                                    pull: 'clone',
-                                    put: false
-                                }"
-                                :sort="false"
-                            >
-                                <div
-                                    v-for="field of $filterBy(table.fields, 'columnName', searchTerm[table.tableName])"
-                                    :key="field.id"
-                                    class="overflow-hidden truncate border-b py-1 last:border-b-0"
-                                >
-                                    <g-icon
-                                        :name="dataTypeIcon(field.dataType)"
-                                        color="var(--elevation-primary)"
-                                    />
+                            <drag :list="$filterBy(table.fields, 'columnName', searchTerm[table.tableName])" :group="{
+                                name: 'items',
+                                pull: 'clone',
+                                put: false
+                            }" :sort="false">
+                                <div v-for="field of $filterBy(table.fields, 'columnName', searchTerm[table.tableName])"
+                                    :key="field.id" class="overflow-hidden truncate border-b py-1 last:border-b-0">
+                                    <g-icon :name="dataTypeIcon(field.dataType)" color="var(--elevation-primary)" />
                                     {{ field.columnName }}
                                 </div>
                             </drag>
@@ -98,10 +72,7 @@
                     </template>
                     <div class="mx-2">
                         <div class="mb-2">
-                            <n-input
-                                v-model:value="searchTerm['computed']"
-                                :placeholder="$t('filter')"
-                            >
+                            <n-input v-model:value="searchTerm['computed']" :placeholder="$t('filter')">
                                 <template #prefix>
                                     <g-icon name="filter" />
                                 </template>
@@ -109,35 +80,22 @@
                         </div>
 
                         <div>
-                            <drag
-                                :list="$filterBy(computedList, 'columnName', searchTerm['computed'])"
-                                :group="{
-                                    name: 'items',
-                                    pull: 'clone',
-                                    put: false
-                                }"
-                                :sort="false"
-                            >
-                                <div
-                                    v-for="field of $filterBy(computedList, 'columnName', searchTerm['computed'])"
-                                    :key="field.id"
-                                    class="overflow-hidden truncate border-b py-1 last:border-b-0"
-                                    @click="$emit('editComputed', field)"
-                                >
-                                    <g-icon
-                                        :name="dataTypeIcon(field.dataType)"
-                                        color="var(--elevation-primary)"
-                                    />
+                            <drag :list="$filterBy(computedList, 'columnName', searchTerm['computed'])" :group="{
+                                name: 'items',
+                                pull: 'clone',
+                                put: false
+                            }" :sort="false">
+                                <div v-for="field of $filterBy(computedList, 'columnName', searchTerm['computed'])"
+                                    :key="field.id" class="overflow-hidden truncate border-b py-1 last:border-b-0"
+                                    @click="$emit('editComputed', field)">
+                                    <g-icon :name="dataTypeIcon(field.dataType)" color="var(--elevation-primary)" />
                                     {{ field.columnName }}
                                 </div>
                             </drag>
                         </div>
                     </div>
                 </n-collapse-item>
-                <n-collapse-item
-                    v-if="aggregationList.length"
-                    name="aggregation"
-                >
+                <n-collapse-item v-if="aggregationList.length" name="aggregation">
                     <template #header>
                         <div class="flex items-center gap-1">
                             <g-icon name="aggregated" />
@@ -146,34 +104,21 @@
                     </template>
                     <div class="mx-2">
                         <div class="mb-2">
-                            <n-input
-                                v-model:value="searchTerm['aggregated']"
-                                :placeholder="$t('filter')"
-                            >
+                            <n-input v-model:value="searchTerm['aggregated']" :placeholder="$t('filter')">
                                 <template #prefix>
                                     <g-icon name="filter" />
                                 </template>
                             </n-input>
                         </div>
                         <div>
-                            <drag
-                                :list="$filterBy(aggregationList, 'columnName', searchTerm['aggregated'])"
-                                :group="{
-                                    name: 'items',
-                                    pull: 'clone',
-                                    put: false
-                                }"
-                                :sort="false"
-                            >
-                                <div
-                                    v-for="field of $filterBy(aggregationList, 'columnName', searchTerm['aggregated'])"
-                                    :key="field.id"
-                                    class="overflow-hidden truncate border-b py-1 last:border-b-0"
-                                >
-                                    <g-icon
-                                        :name="dataTypeIcon(field.dataType)"
-                                        color="var(--elevation-primary)"
-                                    />
+                            <drag :list="$filterBy(aggregationList, 'columnName', searchTerm['aggregated'])" :group="{
+                                name: 'items',
+                                pull: 'clone',
+                                put: false
+                            }" :sort="false">
+                                <div v-for="field of $filterBy(aggregationList, 'columnName', searchTerm['aggregated'])"
+                                    :key="field.id" class="overflow-hidden truncate border-b py-1 last:border-b-0">
+                                    <g-icon :name="dataTypeIcon(field.dataType)" color="var(--elevation-primary)" />
                                     {{ field.columnName }}
                                 </div>
                             </drag>
@@ -186,8 +131,8 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 import { uniqBy } from 'lodash-es'
 import { computed, onMounted, type PropType, ref } from 'vue'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'

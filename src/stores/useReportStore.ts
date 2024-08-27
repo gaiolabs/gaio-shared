@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import type { ReportNodeType } from '@gaio/types/tasks/report.type'
-import type { FieldType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types/tasks/report.type'
+import type { FieldType } from '@gaio/shared/types'
 import useDataType from '@/composables/useDataType'
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 
 export const useReportStore = defineStore('report', () => {
     const { dataTypeName } = useDataType()

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { FormFieldType, FormType } from '@gaio/types'
+import type { FormFieldType, FormType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 
 export const useFormStore = defineStore('form', () => {
     const current = ref<FormType>()

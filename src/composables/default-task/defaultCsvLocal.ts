@@ -1,4 +1,4 @@
-import type { LocalFileTaskType } from '@gaio/types'
+import type { LocalFileTaskType } from '@gaio/shared/types'
 
 export const defaultCsvLocal = (base: LocalFileTaskType) => {
     return {

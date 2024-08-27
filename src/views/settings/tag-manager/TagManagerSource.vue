@@ -10,15 +10,9 @@
                     <n-divider vertical />
                     <n-tooltip>
                         <template #trigger>
-                            <n-button
-                                text
-                                @click="saveAll"
-                            >
+                            <n-button text @click="saveAll">
                                 <template #icon>
-                                    <g-icon
-                                        name="checkAll"
-                                        @click="saveAll"
-                                    />
+                                    <g-icon name="checkAll" @click="saveAll" />
                                 </template>
                             </n-button>
                         </template>
@@ -27,18 +21,11 @@
                 </div>
             </div>
             <div class="px-2 pt-2">
-                <n-input
-                    v-model:value="term"
-                    :placeholder="$t('filter')"
-                    @keyup="resetPage()"
-                />
+                <n-input v-model:value="term" :placeholder="$t('filter')" @keyup="resetPage()" />
             </div>
             <div v-if="hasFilteredTags">
                 <div class="table-responsive mx-1 my-1">
-                    <n-table
-                        striped
-                        size="small"
-                    >
+                    <n-table striped size="small">
                         <thead>
                             <tr>
                                 <th></th>
@@ -47,45 +34,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="(item, index) in filterBy(tags, ['name', 'ref'], term).slice(
-                                    size * (page - 1),
-                                    size * page
-                                )"
-                                :key="index"
-                            >
-                                <td
-                                    class="text-center"
-                                    style="width: 30px"
-                                >
-                                    <g-icon
-                                        v-if="!hasTags(item)"
-                                        name="check"
-                                        @click="addTag(item)"
-                                    />
-                                    <g-icon
-                                        v-else
-                                        name="checked"
-                                        @click="removeTag(item)"
-                                    />
+                            <tr v-for="(item, index) in filterBy(tags, ['name', 'ref'], term).slice(
+                                size * (page - 1),
+                                size * page
+                            )" :key="index">
+                                <td class="text-center" style="width: 30px">
+                                    <g-icon v-if="!hasTags(item)" name="check" @click="addTag(item)" />
+                                    <g-icon v-else name="checked" @click="removeTag(item)" />
                                 </td>
-                                <td
-                                    v-if="item.role"
-                                    style="width: 25px"
-                                    class="el-text-center"
-                                    @click="changeTagRole(item)"
-                                >
+                                <td v-if="item.role" style="width: 25px" class="el-text-center"
+                                    @click="changeTagRole(item)">
                                     <g-icon :name="item.role === 'edit' ? 'edit' : 'eye'" />
                                 </td>
                                 <td>
                                     <div class="flex items-center justify-between">
                                         <n-tooltip>
                                             <template #trigger>
-                                                <n-button
-                                                    text
-                                                    type="primary"
-                                                    @click="filter(item)"
-                                                >
+                                                <n-button text type="primary" @click="filter(item)">
                                                     {{ item.name }}
                                                 </n-button>
                                             </template>
@@ -100,35 +65,20 @@
                         </tbody>
                     </n-table>
                 </div>
-                <div
-                    v-if="filterBy(tags, ['name', 'ref'], term).length > size"
-                    class="my-2 flex w-full justify-center"
-                >
-                    <n-pagination
-                        v-model:page="page"
-                        size="small"
-                        :item-count="filterBy(tags, ['name', 'ref'], term).length"
-                        :page-size="size"
-                    />
+                <div v-if="filterBy(tags, ['name', 'ref'], term).length > size" class="my-2 flex w-full justify-center">
+                    <n-pagination v-model:page="page" size="small"
+                        :item-count="filterBy(tags, ['name', 'ref'], term).length" :page-size="size" />
                 </div>
             </div>
-            <div
-                v-else-if="!loading"
-                class="m-2"
-            >
-                <g-alert
-                    :title="$t('noResult')"
-                    type="info"
-                    show-icon
-                    :closable="false"
-                />
+            <div v-else-if="!loading" class="m-2">
+                <g-alert :title="$t('noResult')" type="info" show-icon :closable="false" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { TagTypePermission } from '@gaio/types'
+import type { TagTypePermission } from '@gaio/shared/types'
 import { computed, ref } from 'vue'
 
 import useApi from '@/composables/useApi'

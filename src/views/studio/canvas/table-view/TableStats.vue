@@ -1,18 +1,9 @@
 <template>
-    <div
-        v-if="localTask"
-        class="table-stats"
-    >
+    <div v-if="localTask" class="table-stats">
         <div class="g-bg-1 mb-3 rounded p-2">
             <div class="table-data-header mb-3 mt-2 flex justify-between">
-                <table-data-filter
-                    :columns="columns"
-                    :local-task="localTask"
-                    :total-rows="totalRows"
-                    :total-rows-filtered="totalRowsFiltered"
-                    class="flex-grow"
-                    @load-filter="applyFilter"
-                />
+                <table-data-filter :columns="columns" :local-task="localTask" :total-rows="totalRows"
+                    :total-rows-filtered="totalRowsFiltered" class="flex-grow" @load-filter="applyFilter" />
             </div>
         </div>
 
@@ -21,58 +12,30 @@
                 <div class="mb-2 flex justify-between">
                     <div>{{ $t('columns') }}</div>
                     <div>
-                        <n-button
-                            v-if="isRunning"
-                            size="tiny"
-                            tertiary
-                            type="error"
-                            @click="isDestroyed = true"
-                        >
+                        <n-button v-if="isRunning" size="tiny" tertiary type="error" @click="isDestroyed = true">
                             {{ $t('stop') }}
                         </n-button>
-                        <n-button
-                            v-else
-                            size="tiny"
-                            tertiary
-                            type="primary"
-                            @click="runAll"
-                        >
+                        <n-button v-else size="tiny" tertiary type="primary" @click="runAll">
                             {{ $t('all') }}
                         </n-button>
                     </div>
                 </div>
 
                 <div class="g-bg-1 mb-3 rounded p-1">
-                    <n-input
-                        v-model:value="searchTerm"
-                        :placeholder="$t('filter')"
-                        min="1"
-                        max="100"
-                        step="1"
-                    />
+                    <n-input v-model:value="searchTerm" :placeholder="$t('filter')" min="1" max="100" step="1" />
                 </div>
 
-                <n-table
-                    size="small"
-                    class="g-bg-2"
-                >
+                <n-table size="small" class="g-bg-2">
                     <tbody>
-                        <tr
-                            v-for="col of $filterBy(columns, 'columnName', searchTerm)"
-                            :key="col.columnName"
-                        >
+                        <tr v-for="col of $filterBy(columns, 'columnName', searchTerm)" :key="col.columnName">
                             <td>
                                 <div class="flex items-center justify-between">
                                     <div class="truncate">
                                         <g-data-type-icon :data-type="col.dataType" />
                                         {{ col.columnName }}
                                     </div>
-                                    <n-switch
-                                        v-model:value="selected[col.columnName]"
-                                        size="small"
-                                        :round="false"
-                                        @update:value="runSelected(col)"
-                                    />
+                                    <n-switch v-model:value="selected[col.columnName]" size="small" :round="false"
+                                        @update:value="runSelected(col)" />
                                 </div>
                             </td>
                         </tr>
@@ -95,27 +58,11 @@
                 <!--                    />-->
                 <!--                </div>-->
             </div>
-            <div
-                ref="leftContainer"
-                class="flex-grow overflow-x-hidden"
-            >
-                <div
-                    class="g-bg-1 rounded p-2"
-                    :class="{ 'flex items-center justify-center': localData.length === 0 }"
-                >
-                    <n-empty
-                        v-if="localData.length === 0"
-                        :description="$t('noData')"
-                    />
-                    <div
-                        v-else
-                        class="w-fit-content overflow-x-scroll"
-                    >
-                        <n-table
-                            striped
-                            :single-line="false"
-                            size="small"
-                        >
+            <div ref="leftContainer" class="flex-grow overflow-x-hidden">
+                <div class="g-bg-1 rounded p-2" :class="{ 'flex items-center justify-center': localData.length === 0 }">
+                    <n-empty v-if="localData.length === 0" :description="$t('noData')" />
+                    <div v-else class="w-fit-content overflow-x-scroll">
+                        <n-table striped :single-line="false" size="small">
                             <thead>
                                 <tr class="*:!text-right first:*:!text-left">
                                     <th>{{ t('column') }}</th>
@@ -131,11 +78,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="item in localData"
-                                    :key="item.columnName"
-                                    class="*:!text-right first:*:!text-left"
-                                >
+                                <tr v-for="item in localData" :key="item.columnName"
+                                    class="*:!text-right first:*:!text-left">
                                     <td>
                                         <g-data-type-icon :data-type="item.dataType" />
 
@@ -161,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType, GenericType } from '@gaio/types'
+import type { BuilderTaskType, FieldType, GenericType } from '@gaio/shared/types'
 import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

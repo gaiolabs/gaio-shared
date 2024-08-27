@@ -3,24 +3,13 @@
         <div class="mx-1 mb-2 rounded-[8px] bg-elevation-1 p-2">
             <div class="mb-2">
                 <div class="">{{ $t('operator') }}</div>
-                <n-select
-                    v-model:value="localField.field.operator"
-                    size="small"
-                    default-value="="
-                    :placeholder="$t('select')"
-                    :options="operators"
-                    @update:value="changeOperator"
-                />
+                <n-select v-model:value="localField.field.operator" size="small" default-value="="
+                    :placeholder="$t('select')" :options="operators" @update:value="changeOperator" />
             </div>
             <div class="mb-2">
                 <div class="">{{ $t('type') }}</div>
-                <n-select
-                    v-model:value="localField.field.valueType"
-                    size="small"
-                    default-value="value"
-                    :placeholder="$t('chooseAType')"
-                    :options="valueTypeList"
-                />
+                <n-select v-model:value="localField.field.valueType" size="small" default-value="value"
+                    :placeholder="$t('chooseAType')" :options="valueTypeList" />
             </div>
             <!--IS VALUE -->
             <div class="">{{ $t('value') }}</div>
@@ -28,55 +17,32 @@
             <template v-if="!['isNull', 'isNotNull'].includes(localField.field.operator)">
                 <!--PARAMETER-->
                 <template v-if="localField.field.valueType === 'parameter'">
-                    <n-select
-                        v-model:value="localField.field.value"
-                        size="small"
-                        :placeholder="$t('chooseAParameter')"
-                        :options="parameterList"
-                    />
-                    <div
-                        v-if="hasExtraValue"
-                        class="mt-2"
-                    >
+                    <n-select v-model:value="localField.field.value" size="small" :placeholder="$t('chooseAParameter')"
+                        :options="parameterList" />
+                    <div v-if="hasExtraValue" class="mt-2">
                         <div>
                             {{ $t('andValue') }}
                         </div>
-                        <n-select
-                            v-model:value="localField.field.extraValue"
-                            size="small"
-                            :placeholder="$t('chooseAParameter')"
-                            :options="parameterList"
-                        />
+                        <n-select v-model:value="localField.field.extraValue" size="small"
+                            :placeholder="$t('chooseAParameter')" :options="parameterList" />
                     </div>
                 </template>
                 <!--COMPUTED-->
                 <template v-else-if="localField.field.valueType === 'computed'">
                     <div class="overflow-hidden rounded-b-[6px]">
-                        <code-editor
-                            v-model="localField.field.value"
-                            style="height: 150px"
-                        />
+                        <code-editor v-model="localField.field.value" style="height: 150px" />
                     </div>
-                    <div
-                        v-if="hasExtraValue"
-                        class="mt-2"
-                    >
+                    <div v-if="hasExtraValue" class="mt-2">
                         <div>
                             {{ $t('andValue') }}
                         </div>
-                        <code-editor
-                            v-model="localField.field.extraValue"
-                            style="height: 150px"
-                        />
+                        <code-editor v-model="localField.field.extraValue" style="height: 150px" />
                     </div>
                 </template>
                 <!--DATE & DATE LITERAL-->
                 <template v-else-if="isLocalFieldADateType">
                     <g-data-literal v-model="localField.field.value" />
-                    <div
-                        v-if="hasExtraValue"
-                        class="mt-2"
-                    >
+                    <div v-if="hasExtraValue" class="mt-2">
                         <div>
                             {{ $t('andValue') }}
                         </div>
@@ -87,108 +53,59 @@
                 <template v-if="localField.field.valueType === 'value'">
                     <!--SINGLE VALUE-->
                     <template v-if="!isWhereIn.includes(localField.field.operator)">
-                        <n-input
-                            v-model:value="localField.field.value"
-                            size="small"
-                            :placeholder="$t('typeHere')"
-                        >
+                        <n-input v-model:value="localField.field.value" size="small" :placeholder="$t('typeHere')">
                             <template #suffix>
-                                <n-button
-                                    size="tiny"
-                                    quaternary
-                                    @click="previewColumn()"
-                                >
+                                <n-button size="tiny" quaternary @click="previewColumn()">
                                     <g-icon name="eye" />
                                 </n-button>
                             </template>
                         </n-input>
-                        <div
-                            v-if="hasExtraValue"
-                            class="mt-2"
-                        >
+                        <div v-if="hasExtraValue" class="mt-2">
                             <div>
                                 {{ $t('andValue') }}
                             </div>
-                            <n-input
-                                v-if="!isWhereIn.includes(localField.field.operator)"
-                                v-model:value="localField.field.extraValue"
-                                size="small"
-                                :placeholder="$t('typeHere')"
-                            />
+                            <n-input v-if="!isWhereIn.includes(localField.field.operator)"
+                                v-model:value="localField.field.extraValue" size="small"
+                                :placeholder="$t('typeHere')" />
                         </div>
                     </template>
                     <template v-else>
-                        <n-select
-                            v-model:value="localField.field.value"
-                            size="small"
-                            filterable
-                            multiple
-                            tag
-                            :placeholder="$t('inputAndCreate')"
-                            :options="
-                                previewList.map((o) => {
+                        <n-select v-model:value="localField.field.value" size="small" filterable multiple tag
+                            :placeholder="$t('inputAndCreate')" :options="previewList.map((o) => {
+                                return {
+                                    label: o.value,
+                                    value: o.value
+                                }
+                            })
+                                " />
+                        <div v-if="hasExtraValue" class="mt-2">
+                            <div>
+                                {{ $t('andValue') }}
+                            </div>
+                            <n-select v-model:value="localField.field.extraValue" size="small" filterable multiple tag
+                                :placeholder="$t('inputAndCreate')" :options="previewList.map((o) => {
                                     return {
                                         label: o.value,
                                         value: o.value
                                     }
                                 })
-                            "
-                        />
-                        <div
-                            v-if="hasExtraValue"
-                            class="mt-2"
-                        >
-                            <div>
-                                {{ $t('andValue') }}
-                            </div>
-                            <n-select
-                                v-model:value="localField.field.extraValue"
-                                size="small"
-                                filterable
-                                multiple
-                                tag
-                                :placeholder="$t('inputAndCreate')"
-                                :options="
-                                    previewList.map((o) => {
-                                        return {
-                                            label: o.value,
-                                            value: o.value
-                                        }
-                                    })
-                                "
-                            />
+                                    " />
                         </div>
                     </template>
-                    <div
-                        v-if="previewList?.length && !isWhereIn.includes(localField.field.operator)"
-                        class="my-3"
-                    >
+                    <div v-if="previewList?.length && !isWhereIn.includes(localField.field.operator)" class="my-3">
                         <n-list bordered>
-                            <n-list-item
-                                v-for="item in previewList"
-                                :key="item.value"
-                            >
+                            <n-list-item v-for="item in previewList" :key="item.value">
                                 <div class="flex cursor-pointer items-center justify-between">
                                     <div class="flex items-center gap-1">
-                                        <n-button
-                                            text
-                                            size="tiny"
-                                            @click="defineValue(item.value)"
-                                        >
+                                        <n-button text size="tiny" @click="defineValue(item.value)">
                                             <template #icon>
                                                 <g-icon name="plus" />
                                             </template>
                                         </n-button>
                                         {{ item.value }}
                                     </div>
-                                    <div
-                                        v-if="item.qtd"
-                                        class="italic"
-                                    >
-                                        <n-divider
-                                            vertical
-                                            class="mx-0"
-                                        />
+                                    <div v-if="item.qtd" class="italic">
+                                        <n-divider vertical class="mx-0" />
                                         {{ item.qtd }}
                                     </div>
                                 </div>
@@ -201,8 +118,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
-import type { BuilderTaskType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
+import type { BuilderTaskType } from '@gaio/shared/types'
 import { isArray } from 'lodash-es'
 import { computed, type PropType, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

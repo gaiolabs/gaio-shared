@@ -1,48 +1,23 @@
 <template>
-    <div
-        v-if="layout.length"
-        class="dash-grid flex justify-center"
-    >
-        <div
-            class="h-full w-full"
-            :style="gridOptions.viewPortSize"
-        >
-            <GridLayout
-                v-if="layout.length"
-                v-model:layout="layout"
-                :row-height="1"
-                :col-num="64"
-                :touch-action="gridOptions.editGrid ? 'none' : 'auto'"
-                :is-draggable="gridOptions.editGrid"
-                :is-resizable="gridOptions.editGrid"
-            >
-                <grid-item
-                    v-for="item in layout"
-                    :key="item.i"
-                    :x="item.x"
-                    :y="item.y"
-                    :w="item.w"
-                    :h="item.h"
-                    :i="item.i"
-                    @moved="saveFlowGrid"
-                    @resized="saveFlowGrid"
-                >
-                    <report-node
-                        :task="
-                            {
-                                ...item.data,
-                                height: (item.h + 1.6) * 10
-                            } as ReportNodeType
-                        "
-                        @trigger="$emit('trigger', $event)"
-                    />
+    <div v-if="layout.length" class="dash-grid flex justify-center">
+        <div class="h-full w-full" :style="gridOptions.viewPortSize">
+            <GridLayout v-if="layout.length" v-model:layout="layout" :row-height="1" :col-num="64"
+                :touch-action="gridOptions.editGrid ? 'none' : 'auto'" :is-draggable="gridOptions.editGrid"
+                :is-resizable="gridOptions.editGrid">
+                <grid-item v-for="item in layout" :key="item.i" :x="item.x" :y="item.y" :w="item.w" :h="item.h"
+                    :i="item.i" @moved="saveFlowGrid" @resized="saveFlowGrid">
+                    <report-node :task="{
+                        ...item.data,
+                        height: (item.h + 1.6) * 10
+                    } as ReportNodeType
+                        " @trigger="$emit('trigger', $event)" />
                 </grid-item>
             </GridLayout>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import type { FlowType, NodeType, ReportNodeType, TaskType } from '@gaio/types'
+import type { FlowType, NodeType, ReportNodeType, TaskType } from '@gaio/shared/types'
 import { GridItem, GridLayout } from 'grid-layout-plus'
 import { cloneDeep, omit } from 'lodash-es'
 import { onMounted, ref, watch } from 'vue'
@@ -93,7 +68,7 @@ const generateLayout = () => {
                 w:
                     node.layout?.[props.gridOptions.currentLayout]?.w >= 0 ?
                         node.layout?.[props.gridOptions.currentLayout]?.w
-                    :   2,
+                        : 2,
                 h: node.layout?.[props.gridOptions.currentLayout]?.h || 4,
                 i: node.id,
                 static: false,

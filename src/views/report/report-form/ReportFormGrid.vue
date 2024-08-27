@@ -1,83 +1,35 @@
 <template>
-    <div
-        v-if="props.formData.formElements"
-        :key="useFormStore().refreshKey"
-        class="report-form"
-    >
-        <vue-draggable
-            v-model="props.formData.formElements"
-            group="grid"
-            class="h-full w-full py-2"
-        >
-            <div
-                v-for="(element, elementIndex) of props.formData.formElements"
-                :key="element.id"
-                class="py-1"
-                @mouseover="onMove('in')"
-                @mouseout="onMove('out')"
-            >
-                <n-grid
-                    :cols="Object.keys(element.cols).length"
-                    :x-gap="5"
-                    :y-gap="5"
-                >
-                    <n-grid-item
-                        v-for="(fields, colId) in element.cols"
-                        :key="colId"
-                        class="min-h-[40px]"
-                    >
-                        <vue-draggable
-                            :key="colId"
-                            v-model="props.formData.formElements[elementIndex].cols[colId]"
+    <div v-if="props.formData.formElements" :key="useFormStore().refreshKey" class="report-form">
+        <vue-draggable v-model="props.formData.formElements" group="grid" class="h-full w-full py-2">
+            <div v-for="(element, elementIndex) of props.formData.formElements" :key="element.id" class="py-1"
+                @mouseover="onMove('in')" @mouseout="onMove('out')">
+                <n-grid :cols="Object.keys(element.cols).length" :x-gap="5" :y-gap="5">
+                    <n-grid-item v-for="(fields, colId) in element.cols" :key="colId" class="min-h-[40px]">
+                        <vue-draggable :key="colId" v-model="props.formData.formElements[elementIndex].cols[colId]"
                             :group="{
                                 name: 'fields'
-                            }"
-                            class="h-full w-full"
-                        >
-                            <report-form-field
-                                v-for="field in fields"
-                                :key="field.id"
-                                :field="field"
-                                :edit="edit"
-                                :is-filter="isFilter"
-                                class="w-full py-1"
-                                @run="$emit('run')"
-                                @click="selectField(field)"
-                            />
+                            }" class="h-full w-full">
+                            <report-form-field v-for="field in fields" :key="field.id" :field="field" :edit="edit"
+                                :is-filter="isFilter" class="w-full py-1" @run="$emit('run')"
+                                @click="selectField(field)" />
                         </vue-draggable>
                     </n-grid-item>
                 </n-grid>
                 <template v-if="edit">
                     <div class="control-secondary my-1 mb-3 flex items-center justify-end gap-2">
-                        <n-button
-                            v-if="Object.keys(element.cols).length > 1"
-                            text
-                            type="error"
-                            @click="removeColumn(element.id)"
-                        >
+                        <n-button v-if="Object.keys(element.cols).length > 1" text type="error"
+                            @click="removeColumn(element.id)">
                             <template #icon>
-                                <g-icon
-                                    name="removeColumn"
-                                    :height="18"
-                                />
+                                <g-icon name="removeColumn" :height="18" />
                             </template>
                         </n-button>
-                        <n-button
-                            text
-                            type="default"
-                            @click="addColumn(element.id)"
-                        >
+                        <n-button text type="default" @click="addColumn(element.id)">
                             <template #icon>
                                 <g-icon name="addColumn" />
                             </template>
                         </n-button>
                         <n-divider vertical />
-                        <n-button
-                            text
-                            size="large"
-                            type="error"
-                            @click="removeContainer(element.id)"
-                        >
+                        <n-button text size="large" type="error" @click="removeContainer(element.id)">
                             <template #icon>
                                 <g-icon name="close" />
                             </template>
@@ -90,8 +42,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FormFieldType, FormType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FormFieldType, FormType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { onBeforeMount, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 

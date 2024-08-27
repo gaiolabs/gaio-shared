@@ -1,5 +1,5 @@
-import type { TaskType } from '@gaio/types'
-import { withoutNullProperties } from '@gaio/utils'
+import type { TaskType } from '@gaio/shared/types'
+import { withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 
 import { defaultAssociationRules } from '@/composables/default-task/defaultAssociationRules'

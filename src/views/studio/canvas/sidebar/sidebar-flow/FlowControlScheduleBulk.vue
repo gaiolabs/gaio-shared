@@ -8,52 +8,25 @@
             </template>
             <template #content>
                 {{ $t('flow') }}
-                <n-select
-                    v-model:value="selectedFlowId"
-                    filterable
-                    :render-label="renderLabel"
-                    :options="flowListOptions"
-                    @update:value="onFlowChange($event)"
-                />
+                <n-select v-model:value="selectedFlowId" filterable :render-label="renderLabel"
+                    :options="flowListOptions" @update:value="onFlowChange($event)" />
 
-                <cron-base
-                    v-if="currentFlow"
-                    :key="currentFlow.flowId"
-                    class="mt-4"
-                    :cron-base="currentFlow.cronBase"
-                    @change="updateCurrentFlow($event)"
-                />
+                <cron-base v-if="currentFlow" :key="currentFlow.flowId" class="mt-4" :cron-base="currentFlow.cronBase"
+                    @change="updateCurrentFlow($event)" />
             </template>
             <template #footer>
                 <div class="flex justify-end">
                     <n-space>
-                        <n-button
-                            secondary
-                            @click="$emit('close')"
-                        >
+                        <n-button secondary @click="$emit('close')">
                             {{ $t('close') }}
                         </n-button>
-                        <n-button
-                            tertiary
-                            :loading="loading"
-                            type="error"
-                            @click="saveAll('inactive')"
-                        >
+                        <n-button tertiary :loading="loading" type="error" @click="saveAll('inactive')">
                             {{ $t('disableAll') }}
                         </n-button>
-                        <n-button
-                            :loading="loading"
-                            type="primary"
-                            tertiary
-                            @click="saveAll('active')"
-                        >
+                        <n-button :loading="loading" type="primary" tertiary @click="saveAll('active')">
                             {{ $t('activeAll') }}
                         </n-button>
-                        <n-button
-                            :loading="loading"
-                            type="primary"
-                            @click="saveAll(undefined)"
-                        >
+                        <n-button :loading="loading" type="primary" @click="saveAll(undefined)">
                             {{ $t('saveModified') }}
                         </n-button>
                     </n-space>
@@ -64,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CronBaseType, FlowType } from '@gaio/types'
+import type { CronBaseType, FlowType } from '@gaio/shared/types'
 import { NButton } from 'naive-ui'
 import { computed, h, onMounted, ref } from 'vue'
 
@@ -139,7 +112,7 @@ const renderLabel = (option) => {
                     color: '#43a12e',
                     name: 'calendarOn'
                 })
-            :   h(VIcon, {
+                : h(VIcon, {
                     name: 'calendarOff',
                     color: '#e32'
                 }),

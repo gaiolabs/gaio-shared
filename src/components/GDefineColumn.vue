@@ -1,38 +1,18 @@
 <template>
-    <div
-        v-if="localValue"
-        class="g-define-column w-full"
-    >
+    <div v-if="localValue" class="g-define-column w-full">
         <div class="flex gap-2">
             <div class="grow">
-                <n-input
-                    v-model:value="localValue.columnName"
-                    clearable
-                    size="small"
-                    :placeholder="$t('columnName')"
-                    @blur="updateSelected"
-                />
+                <n-input v-model:value="localValue.columnName" clearable size="small" :placeholder="$t('columnName')"
+                    @blur="updateSelected" />
             </div>
             <div class="flex gap-2">
                 <div class="min-w-[120px]">
-                    <n-select
-                        v-model:value="localValue.dataType"
-                        class="w-full"
-                        size="small"
-                        :options="dataTypeListOptions"
-                        @update:value="updateSelected"
-                    />
+                    <n-select v-model:value="localValue.dataType" class="w-full" size="small"
+                        :options="dataTypeListOptions" @update:value="updateSelected" />
                 </div>
                 <div v-if="dataTypeIsFloat(localValue.dataType)">
-                    <n-input-number
-                        v-model:value="localValue.columnLength"
-                        size="small"
-                        :placeholder="$t('size')"
-                        :min="1"
-                        :max="10"
-                        :step="1"
-                        @blur="updateSelected"
-                    />
+                    <n-input-number v-model:value="localValue.columnLength" size="small" :placeholder="$t('size')"
+                        :min="1" :max="10" :step="1" @blur="updateSelected" />
                 </div>
             </div>
         </div>
@@ -43,7 +23,7 @@
 import useDataType from '@/composables/useDataType'
 import { watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { FieldType, GenericType } from '@gaio/types'
+import type { FieldType, GenericType } from '@gaio/shared/types'
 
 const { t } = useI18n()
 

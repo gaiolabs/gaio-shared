@@ -1,4 +1,4 @@
-import type { FlowType } from '@gaio/types'
+import type { FlowType } from '@gaio/shared/types'
 
 export type GridOptionsType = {
     editGrid: boolean

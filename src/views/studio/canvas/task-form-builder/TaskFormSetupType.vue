@@ -2,8 +2,7 @@
     <div class="task-form-setup-type py-2">
         <div ref="gridBase">
             <div
-                class="mb-2 flex items-center justify-start gap-2 rounded border bg-paper-200 px-2 py-2 dark:bg-carbon-200"
-            >
+                class="mb-2 flex items-center justify-start gap-2 rounded border bg-paper-200 px-2 py-2 dark:bg-carbon-200">
                 <div>
                     <g-icon name="grid" />
                 </div>
@@ -15,19 +14,10 @@
 
         <n-divider />
 
-        <n-grid
-            ref="elementBase"
-            :cols="2"
-            :x-gap="6"
-            :y-gap="6"
-        >
-            <n-grid-item
-                v-for="item of tools"
-                :key="item.value"
-            >
+        <n-grid ref="elementBase" :cols="2" :x-gap="6" :y-gap="6">
+            <n-grid-item v-for="item of tools" :key="item.value">
                 <div
-                    class="flex items-center justify-start gap-2 rounded border bg-paper-200 px-2 py-2 dark:bg-carbon-200"
-                >
+                    class="flex items-center justify-start gap-2 rounded border bg-paper-200 px-2 py-2 dark:bg-carbon-200">
                     <div>
                         <g-icon :name="item.icon" />
                     </div>
@@ -40,8 +30,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FormElementsType, FormFieldType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FormElementsType, FormFieldType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { ref } from 'vue'
 import { useDraggable } from 'vue-draggable-plus'

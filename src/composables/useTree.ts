@@ -1,5 +1,5 @@
-import type { AppFolderOption, ParamType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { AppFolderOption, ParamType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import type { TreeDropInfo, TreeOption } from 'naive-ui'
 import { NButton } from 'naive-ui'
 import { h } from 'vue'

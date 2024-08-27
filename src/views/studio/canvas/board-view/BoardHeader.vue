@@ -4,37 +4,18 @@
             <div class="flex items-center justify-between gap-1">
                 <!--LEFT ACTIONS-->
                 <div class="flex items-center gap-2">
-                    <n-button
-                        secondary
-                        size="tiny"
-                        @click="$router.push('/apps')"
-                    >
+                    <n-button secondary size="tiny" @click="$router.push('/apps')">
                         <template #icon>
                             <g-icon name="arrowLeft" />
                         </template>
                     </n-button>
-                    <n-divider
-                        vertical
-                        class="m-0 p-0"
-                    />
-                    <n-button
-                        v-if="app?.options?.color"
-                        size="tiny"
-                        ghost
-                    >
+                    <n-divider vertical class="m-0 p-0" />
+                    <n-button v-if="app?.options?.color" size="tiny" ghost>
                         <template #icon>
-                            <g-icon
-                                name="apps"
-                                :color="app.options.color"
-                            />
+                            <g-icon name="apps" :color="app.options.color" />
                         </template>
                     </n-button>
-                    <n-button
-                        size="tiny"
-                        secondary
-                        block
-                        class="max-w-[150px] truncate"
-                    >
+                    <n-button size="tiny" secondary block class="max-w-[150px] truncate">
                         <template #icon>
                             <g-icon name="flow" />
                         </template>
@@ -44,56 +25,23 @@
                     </n-button>
                     <n-divider vertical />
                     <!--RUNNERS-->
-                    <n-button
-                        size="tiny"
-                        quaternary
-                        @click="run()"
-                    >
-                        <g-icon
-                            name="run"
-                            :height="16"
-                        />
+                    <n-button size="tiny" quaternary @click="run()">
+                        <g-icon name="run" :height="16" />
                     </n-button>
-                    <n-button
-                        quaternary
-                        size="tiny"
-                        @click="runFromHere()"
-                    >
-                        <g-icon
-                            name="runFromHere"
-                            :height="17"
-                        />
+                    <n-button quaternary size="tiny" @click="runFromHere()">
+                        <g-icon name="runFromHere" :height="17" />
                     </n-button>
-                    <n-button
-                        quaternary
-                        size="tiny"
-                        @click="runAll()"
-                    >
-                        <g-icon
-                            name="runAll"
-                            :height="19"
-                        />
+                    <n-button quaternary size="tiny" @click="runAll()">
+                        <g-icon name="runAll" :height="19" />
                     </n-button>
-                    <n-divider
-                        vertical
-                        class="m-0 p-0"
-                    />
-                    <n-button
-                        strong
-                        secondary
-                        type="success"
-                        size="tiny"
-                        @click="$emit('open', { taskLog: true })"
-                    >
+                    <n-divider vertical class="m-0 p-0" />
+                    <n-button strong secondary type="success" size="tiny" @click="$emit('open', { taskLog: true })">
                         {{ $t('logs') }}
                     </n-button>
                 </div>
                 <!--RIGHT ACTIONS-->
                 <div class="flex items-center gap-2">
-                    <n-button
-                        size="tiny"
-                        @click="$router.push('/preview')"
-                    >
+                    <n-button size="tiny" @click="$router.push('/preview')">
                         <g-icon name="addAction" />
                     </n-button>
                 </div>
@@ -103,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AppType } from '@gaio/types'
+import type { AppType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
 import useApi from '@/composables/useApi'

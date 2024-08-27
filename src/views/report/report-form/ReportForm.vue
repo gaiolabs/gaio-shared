@@ -1,104 +1,53 @@
 <template>
-    <div
-        v-if="localForm && localTask && type !== 'any'"
-        :key="localForm?.formId"
-        class="report-form w-full"
-    >
+    <div v-if="localForm && localTask && type !== 'any'" :key="localForm?.formId" class="report-form w-full">
         <!-- BUTTON -->
         <template v-if="type === 'button' && ['preview', 'dash'].includes(from) && formFrom !== 'table'">
-            <n-button
-                block
-                :size="buttonSize"
-                :color="buttonTheme"
-                class="text-white"
-                @click="loadOrDialogModal()"
-            >
+            <n-button block :size="buttonSize" :color="buttonTheme" class="text-white" @click="loadOrDialogModal()">
                 {{ localTask.buttonTitle }}
             </n-button>
         </template>
         <!-- CARD -->
         <template v-else-if="type === 'card'">
-            <div
-                style="height: 100%"
-                class="overflow-hidden rounded border bg-paper-100 dark:bg-carbon-100"
-                :class="localTask.removeCardStyle ? 'no-card' : 'card-style'"
-            >
-                <div
-                    v-if="!localTask.removeCardStyle"
-                    class="card-header border-b bg-paper-200 p-1 dark:bg-carbon-200"
-                >
+            <div style="height: 100%" class="overflow-hidden rounded border bg-paper-100 dark:bg-carbon-100"
+                :class="localTask.removeCardStyle ? 'no-card' : 'card-style'">
+                <div v-if="!localTask.removeCardStyle" class="card-header border-b bg-paper-200 p-1 dark:bg-carbon-200">
                     {{ localTask.label }}
-                    <n-tooltip
-                        v-if="hasHidden"
-                        :persistent="false"
-                        :show-after="1500"
-                        :content="$t('lang.PARAMS_SHOW_HIDDEN')"
-                    >
+                    <n-tooltip v-if="hasHidden" :persistent="false" :show-after="1500"
+                        :content="$t('lang.PARAMS_SHOW_HIDDEN')">
                         <template #trigger>
-                            <g-icon
-                                style="margin-top: 2px"
-                                name="g-eye el-cursor el-right"
-                                @click="showHidden = !showHidden"
-                            />
+                            <g-icon style="margin-top: 2px" name="g-eye el-cursor el-right"
+                                @click="showHidden = !showHidden" />
                         </template>
                     </n-tooltip>
                 </div>
                 <div class="card-body">
                     <div class="card-body-inner">
-                        <report-form-grid
-                            :key="fieldKey"
-                            :edit="false"
-                            :form-data="localForm"
-                            :show-hidden="showHidden"
-                            :is-filter="localTask.formFilterBehavior"
-                            @run="run()"
-                        />
-                        <div
-                            v-if="!localTask.formFilterBehavior"
-                            class="m-2 flex justify-end"
-                        >
-                            <n-popover
-                                v-if="localForm?.formConfirm"
-                                :visible="localPopoverConfirm"
-                                :width="200"
-                            >
+                        <report-form-grid :key="fieldKey" :edit="false" :form-data="localForm" :show-hidden="showHidden"
+                            :is-filter="localTask.formFilterBehavior" @run="run()" />
+                        <div v-if="!localTask.formFilterBehavior" class="m-2 flex justify-end">
+                            <n-popover v-if="localForm?.formConfirm" :visible="localPopoverConfirm" :width="200">
                                 <div>
                                     <p>{{ localForm.formConfirmDescription }}</p>
                                     <div class="flex items-center justify-between">
                                         <n-button @click="localPopoverConfirm = false">
                                             {{ $t('lang.CLOSE') }}
                                         </n-button>
-                                        <n-button
-                                            :disabled="invalid"
-                                            type="primary"
-                                            @click="justUpdateParams()"
-                                        >
+                                        <n-button :disabled="invalid" type="primary" @click="justUpdateParams()">
                                             {{ $t('lang.CONFIRM') }}
                                         </n-button>
                                     </div>
                                 </div>
                                 <template #trigger>
                                     <span>
-                                        <n-button
-                                            :disabled="invalid"
-                                            :size="buttonSize"
-                                            :color="buttonTheme"
-                                            style="color: white"
-                                            @click="localPopoverConfirm = true"
-                                        >
+                                        <n-button :disabled="invalid" :size="buttonSize" :color="buttonTheme"
+                                            style="color: white" @click="localPopoverConfirm = true">
                                             {{ $t('confirm') }}
                                         </n-button>
                                     </span>
                                 </template>
                             </n-popover>
-                            <n-button
-                                v-else
-                                :disabled="invalid"
-                                :size="buttonSize"
-                                :color="buttonTheme"
-                                style="color: white"
-                                @click="updateParams()"
-                            >
+                            <n-button v-else :disabled="invalid" :size="buttonSize" :color="buttonTheme"
+                                style="color: white" @click="updateParams()">
                                 {{ formButtonTitle }}
                             </n-button>
                         </div>
@@ -111,73 +60,41 @@
             <g-dialog @close="close()">
                 <template #title>{{ localTask.label || localForm.formName || $t('form') }}</template>
                 <template #content>
-                    <report-form-grid
-                        :key="fieldKey"
-                        :edit="false"
-                        :form-data="localForm"
-                        :show-hidden="showHidden"
-                        @run="run()"
-                        @change="localForm = $event"
-                    />
+                    <report-form-grid :key="fieldKey" :edit="false" :form-data="localForm" :show-hidden="showHidden"
+                        @run="run()" @change="localForm = $event" />
 
                     <div class="flex w-full items-center justify-end">
                         <div>
-                            <n-tooltip
-                                v-if="hasHidden"
-                                :persistent="false"
-                                :show-after="1500"
-                                :content="$t('lang.PARAMS_SHOW_HIDDEN')"
-                            >
+                            <n-tooltip v-if="hasHidden" :persistent="false" :show-after="1500"
+                                :content="$t('lang.PARAMS_SHOW_HIDDEN')">
                                 <template #trigger>
-                                    <g-icon
-                                        style="margin: 6px 0 0 10px"
-                                        name="g-eye el-cursor el-left"
-                                        @click="showHidden = !showHidden"
-                                    />
+                                    <g-icon style="margin: 6px 0 0 10px" name="g-eye el-cursor el-left"
+                                        @click="showHidden = !showHidden" />
                                 </template>
                             </n-tooltip>
                         </div>
                         <div class="flex justify-end">
-                            <n-popover
-                                v-if="localForm?.formConfirm"
-                                :visible="localPopoverConfirm"
-                                :width="200"
-                            >
+                            <n-popover v-if="localForm?.formConfirm" :visible="localPopoverConfirm" :width="200">
                                 <div>
                                     <p>{{ localForm.formConfirmDescription }}</p>
                                     <span class="flex items-center justify-between">
                                         <n-button @click="localPopoverConfirm = false">{{ $t('lang.CLOSE') }}</n-button>
-                                        <n-button
-                                            :disabled="invalid"
-                                            style="margin-left: 5px"
-                                            type="primary"
-                                            @click="justUpdateParams()"
-                                        >
+                                        <n-button :disabled="invalid" style="margin-left: 5px" type="primary"
+                                            @click="justUpdateParams()">
                                             {{ $t('lang.CONFIRM') }}
                                         </n-button>
                                     </span>
                                 </div>
 
                                 <template #trigger>
-                                    <n-button
-                                        :disabled="invalid"
-                                        style="margin-left: 5px; color: white"
-                                        :size="buttonSize"
-                                        :color="buttonTheme"
-                                        @click="localPopoverConfirm = true"
-                                    >
+                                    <n-button :disabled="invalid" style="margin-left: 5px; color: white"
+                                        :size="buttonSize" :color="buttonTheme" @click="localPopoverConfirm = true">
                                         {{ $t('lang.CONFIRM') }}
                                     </n-button>
                                 </template>
                             </n-popover>
-                            <n-button
-                                v-else
-                                size="small"
-                                :disabled="invalid"
-                                style="margin-left: 5px; color: white"
-                                :color="buttonTheme"
-                                @click="updateParams()"
-                            >
+                            <n-button v-else size="small" :disabled="invalid" style="margin-left: 5px; color: white"
+                                :color="buttonTheme" @click="updateParams()">
                                 {{ formButtonTitle }}
                             </n-button>
                         </div>
@@ -189,8 +106,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormCardType, FormFieldType, FormType, GenericType, GenericValueType, ParamType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FormCardType, FormFieldType, FormType, GenericType, GenericValueType, ParamType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { cloneDeep, isArray, isNumber } from 'lodash-es'
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'

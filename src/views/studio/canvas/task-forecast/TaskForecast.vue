@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="600px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="600px" @close="$emit('close')">
         <template #title>
             <task-icon :local-task="localTask" />
             {{ $t('taskTimeSeries') }}
@@ -12,10 +9,7 @@
                 <div class="flex flex-col items-center justify-center gap-1 overflow-auto">
                     <div class="flex w-full justify-center gap-2">
                         <div class="flex w-full flex-col gap-1">
-                            <label
-                                class="control-label"
-                                for="task"
-                            >
+                            <label class="control-label" for="task">
                                 {{ $t('taskLabel') }}
                             </label>
                             <n-input v-model:value="localTask.label" />
@@ -26,112 +20,66 @@
                             <label class="control-label">
                                 {{ $t('sourceTable') }}
                             </label>
-                            <n-input
-                                v-model:value="localTask.tableName"
-                                disabled
-                                class="w-100"
-                            />
+                            <n-input v-model:value="localTask.tableName" disabled class="w-100" />
                         </div>
                         <div class="control grow">
                             <label class="control-label">
                                 {{ $t('resultTable') }}
                             </label>
-                            <n-input
-                                v-model:value="localTask.resultTable"
-                                v-alpha
-                            />
+                            <n-input v-model:value="localTask.resultTable" v-alpha />
                         </div>
                     </div>
                     <div class="mb-2 w-full space-y-2 rounded-md bg-white p-4 px-2.5">
                         <div class="flex items-center gap-2">
                             <div class="flex w-full flex-col gap-1">
-                                <label
-                                    class="control-label"
-                                    for="date"
-                                >
+                                <label class="control-label" for="date">
                                     {{ $t('date') }}
                                 </label>
-                                <g-select-column
-                                    id="date"
-                                    v-model="localTask.columnDate"
-                                    :table-name="localTask.tableName"
-                                />
+                                <g-select-column id="date" v-model="localTask.columnDate"
+                                    :table-name="localTask.tableName" />
                             </div>
                             <div class="flex w-full flex-col gap-1">
-                                <label
-                                    class="control-label"
-                                    for="measure"
-                                >
+                                <label class="control-label" for="measure">
                                     {{ $t('measure') }}
                                 </label>
-                                <g-select-column
-                                    id="measure"
-                                    v-model="localTask.columnMeasure"
-                                    :table-name="localTask.tableName"
-                                />
+                                <g-select-column id="measure" v-model="localTask.columnMeasure"
+                                    :table-name="localTask.tableName" />
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
                             <div class="flex w-full flex-col gap-1">
-                                <label
-                                    class="control-label"
-                                    for="frequency"
-                                >
+                                <label class="control-label" for="frequency">
                                     {{ $t('frequency') }}
                                 </label>
-                                <n-select
-                                    id="frequency"
-                                    v-model:value="localTask.freq"
-                                    :options="[
-                                        {
-                                            label: $t('monthly'),
-                                            value: 'monthly'
-                                        },
-                                        {
-                                            label: $t('daily'),
-                                            value: 'daily'
-                                        }
-                                    ]"
-                                />
+                                <n-select id="frequency" v-model:value="localTask.freq" :options="[
+                                    {
+                                        label: $t('monthly'),
+                                        value: 'monthly'
+                                    },
+                                    {
+                                        label: $t('daily'),
+                                        value: 'daily'
+                                    }
+                                ]" />
                             </div>
                             <div class="flex w-full flex-col gap-1">
-                                <label
-                                    class="control-label"
-                                    for="periods"
-                                >
+                                <label class="control-label" for="periods">
                                     {{ $t('periods') }}
                                 </label>
-                                <n-input-number
-                                    id="periods"
-                                    v-model:value="localTask.periods"
-                                    required
-                                    :min="6"
-                                    :max="100"
-                                    :step="1"
-                                />
+                                <n-input-number id="periods" v-model:value="localTask.periods" required :min="6"
+                                    :max="100" :step="1" />
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full flex-col gap-1">
-                        <label
-                            class="control-label"
-                            for="metricsTable"
-                        >
+                        <label class="control-label" for="metricsTable">
                             {{ $t('metricsTable') }}
                         </label>
-                        <n-input
-                            id="metricsTable"
-                            v-model:value="localTask.resultMetricTable"
-                            v-alpha
-                        />
+                        <n-input id="metricsTable" v-model:value="localTask.resultMetricTable" v-alpha />
                     </div>
                 </div>
                 <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                    <n-button
-                        type="primary"
-                        :loading="loading"
-                        @click="save()"
-                    >
+                    <n-button type="primary" :loading="loading" @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </div>
@@ -140,10 +88,10 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { ForecastTaskType } from '@gaio/types'
+import type { ForecastTaskType } from '@gaio/shared/types'
 import { ref, onMounted } from 'vue'
 import useFlow from '@/composables/useFlow'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 

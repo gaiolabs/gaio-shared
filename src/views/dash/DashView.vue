@@ -1,62 +1,26 @@
 <template>
-    <div
-        class="dash-view"
-        :class="{ 'dash-edit': gridOptions.editGrid }"
-    >
-        <n-spin
-            v-if="loading"
-            class="h-[400px] w-full"
-        />
-        <div
-            v-else
-            class="dash-view-body h-full overflow-y-auto"
-        >
-            <dash-menu
-                :flow-list="flowList"
-                :toggle-fullscreen="toggle"
-                :is-preview-page="isPreviewPage"
-                @close="closeDashboard"
-                @refresh="changeLocalKey"
-                @choose="navigateToFlow"
-            />
-            <dash-grid-options
-                v-if="isPreviewPage"
-                :grid-options="gridOptions"
-            />
+    <div class="dash-view" :class="{ 'dash-edit': gridOptions.editGrid }">
+        <n-spin v-if="loading" class="h-[400px] w-full" />
+        <div v-else class="dash-view-body h-full overflow-y-auto">
+            <dash-menu :flow-list="flowList" :toggle-fullscreen="toggle" :is-preview-page="isPreviewPage"
+                @close="closeDashboard" @refresh="changeLocalKey" @choose="navigateToFlow" />
+            <dash-grid-options v-if="isPreviewPage" :grid-options="gridOptions" />
 
-            <template
-                v-for="(dashFlow, dashIndex) of dashList"
-                :key="dashIndex"
-            >
+            <template v-for="(dashFlow, dashIndex) of dashList" :key="dashIndex">
                 <template v-if="dashIndex === 0 || dashFlow.options.dashboardType !== 'dialog'">
-                    <dash-grid
-                        ref="dash"
-                        :key="dashFlow.refreshKey"
-                        :current-flow="dashFlow"
-                        :grid-options="gridOptions"
-                        :is-preview-page="isPreviewPage"
-                        class="mx-1"
-                        :class="{ 'mt-[50px]': !isPreviewPage }"
-                        @trigger="triggerFlow"
-                    />
+                    <dash-grid ref="dash" :key="dashFlow.refreshKey" :current-flow="dashFlow"
+                        :grid-options="gridOptions" :is-preview-page="isPreviewPage" class="mx-1"
+                        :class="{ 'mt-[50px]': !isPreviewPage }" @trigger="triggerFlow" />
                 </template>
                 <template v-else>
                     <dash-dialog @close="destroyDashboard">
                         <template #title>{{ dashFlow.flowName }}</template>
                         <template #content>
-                            <dash-grid
-                                ref="dash"
-                                :key="dashFlow.refreshKey"
-                                :current-flow="dashFlow"
-                                :grid-options="{
-                                    ...gridOptions,
-                                    editGrid: false
-                                }"
-                                :is-preview-page="isPreviewPage"
-                                class="mx-1"
-                                :class="{ 'mt-[50px]': !isPreviewPage }"
-                                @trigger="triggerFlow"
-                            />
+                            <dash-grid ref="dash" :key="dashFlow.refreshKey" :current-flow="dashFlow" :grid-options="{
+                                ...gridOptions,
+                                editGrid: false
+                            }" :is-preview-page="isPreviewPage" class="mx-1" :class="{ 'mt-[50px]': !isPreviewPage }"
+                                @trigger="triggerFlow" />
                         </template>
                     </dash-dialog>
                 </template>
@@ -65,8 +29,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FlowType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FlowType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -85,7 +49,7 @@ const gridOptions = ref<GridOptionsType>({
     refreshLayoutKey: 'any'
 })
 
-const toggle = () => {}
+const toggle = () => { }
 const dashList = ref<DashFlowItem[]>([])
 const loading = ref(true)
 const router = useRouter()

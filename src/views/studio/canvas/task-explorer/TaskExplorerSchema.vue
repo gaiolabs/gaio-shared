@@ -1,9 +1,6 @@
 <template>
     <div class="task-report-schema">
-        <div
-            v-if="useReportStore()?.current?.schema?.select"
-            class="mx-1 flex items-center justify-between gap-1"
-        >
+        <div v-if="useReportStore()?.current?.schema?.select" class="mx-1 flex items-center justify-between gap-1">
             <div class="flex items-center gap-1 font-bold">
                 <g-icon name="columns" />
                 {{ $t('columns') }}
@@ -12,43 +9,24 @@
                 </span>
             </div>
             <div class="mb-1 flex gap-2">
-                <n-popover
-                    v-if="useReportStore().current.schema.select.length"
-                    :width="240"
-                >
+                <n-popover v-if="useReportStore().current.schema.select.length" :width="240">
                     <div class="d-flex align-items-center justify-content-center w-full gap-2">
-                        <n-radio-group
-                            v-model:value="useBrush"
-                            size="small"
-                        >
-                            <n-radio-button
-                                key="all"
-                                value="all"
-                            >
+                        <n-radio-group v-model:value="useBrush" size="small">
+                            <n-radio-button key="all" value="all">
                                 {{ $t('all') }}
                             </n-radio-button>
-                            <n-radio-button
-                                key="format"
-                                value="format"
-                            >
+                            <n-radio-button key="format" value="format">
                                 {{ $t('format') }}
                             </n-radio-button>
-                            <n-radio-button
-                                key="style"
-                                value="style"
-                            >
+                            <n-radio-button key="style" value="style">
                                 {{ $t('style') }}
                             </n-radio-button>
                         </n-radio-group>
                     </div>
                     <template #trigger>
                         <span>
-                            <n-button
-                                quaternary
-                                size="tiny"
-                                :type="useBrush ? 'primary' : 'default'"
-                                @click="activeBrush"
-                            >
+                            <n-button quaternary size="tiny" :type="useBrush ? 'primary' : 'default'"
+                                @click="activeBrush">
                                 <template #icon>
                                     <g-icon name="brush" />
                                 </template>
@@ -58,12 +36,8 @@
                 </n-popover>
                 <n-tooltip :delay="1000">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            :type="showFilter ? 'primary' : 'default'"
-                            @click="showFilter = !showFilter"
-                        >
+                        <n-button quaternary size="tiny" :type="showFilter ? 'primary' : 'default'"
+                            @click="showFilter = !showFilter">
                             <template #icon>
                                 <g-icon name="filter" />
                             </template>
@@ -73,13 +47,8 @@
                 </n-tooltip>
                 <n-tooltip :delay="1000">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            type="error"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                            @click="removeAll()"
-                        >
+                        <n-button quaternary size="tiny" type="error"
+                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeAll()">
                             <template #icon>
                                 <g-icon name="deleteTag" />
                             </template>
@@ -91,37 +60,22 @@
         </div>
 
         <div class="mb-3 min-h-[40px] rounded border bg-paper-100 p-3 dark:bg-carbon-100">
-            <vue-draggable
-                :key="useReportStore().current.schema.select?.length"
-                v-model="useReportStore().current.schema.select"
-                :sort="true"
-                group="fields"
-                class="drag-table"
-                @add="add"
-            >
-                <v-tag
-                    v-for="(field, i) in useReportStore().current.schema.select"
-                    :key="i"
-                    :field="field"
-                    :selected="useBrushSelected === field"
-                    class="me-2"
-                    :class="useBrushClasses"
-                    @click="select(field)"
-                />
+            <vue-draggable :key="useReportStore().current.schema.select?.length"
+                v-model="useReportStore().current.schema.select" :sort="true" group="fields" class="drag-table"
+                @add="add">
+                <v-tag v-for="(field, i) in useReportStore().current.schema.select" :key="i" :field="field"
+                    :selected="useBrushSelected === field" class="me-2" :class="useBrushClasses"
+                    @click="select(field)" />
             </vue-draggable>
         </div>
 
-        <g-filter-builder
-            v-if="showFilter"
-            class="mb-3"
-            :local-task="useReportStore().current"
-            :table-name="useReportStore().current.tableName"
-        />
+        <g-filter-builder v-if="showFilter" class="mb-3" :local-task="useReportStore().current"
+            :table-name="useReportStore().current.tableName" />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 import { type SortableEvent } from 'sortablejs'
 import { ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'

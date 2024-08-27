@@ -1,40 +1,17 @@
 <template>
     <div class="date-literal">
-        <n-date-picker
-            v-if="localType.type"
-            v-model:value="localValue"
-            class="w-full"
-            :placeholder="placeholderLabel"
-            :type="localType.type"
-            clearable
-            @change="changeDateLiteral"
-        >
+        <n-date-picker v-if="localType.type" v-model:value="localValue" class="w-full" :placeholder="placeholderLabel"
+            :type="localType.type" clearable @change="changeDateLiteral">
             <template #footer>
                 <div>
                     <n-space size="small">
-                        <n-tag
-                            v-for="(item, index) of shortcuts"
-                            :key="index"
-                            size="small"
-                            @click="item.value()"
-                        >
+                        <n-tag v-for="(item, index) of shortcuts" :key="index" size="small" @click="item.value()">
                             {{ item.text }}
                         </n-tag>
                     </n-space>
-                    <div
-                        v-if="showInfoNLiteral"
-                        class="my-1"
-                    >
-                        <n-input-number
-                            v-model:value="localNumberDateLiteral"
-                            size="tiny"
-                            :step="1"
-                            :min="1"
-                            :default-value="7"
-                            class="w-full"
-                            @update:value="defneNDays"
-                            @blur="defneNDays"
-                        >
+                    <div v-if="showInfoNLiteral" class="my-1">
+                        <n-input-number v-model:value="localNumberDateLiteral" size="tiny" :step="1" :min="1"
+                            :default-value="7" class="w-full" @update:value="defneNDays" @blur="defneNDays">
                             <template #prefix>{{ $t('days') }}:</template>
                         </n-input-number>
                     </div>
@@ -42,16 +19,13 @@
             </template>
         </n-date-picker>
 
-        <div
-            v-if="showInfo"
-            class="px-1"
-        >
+        <div v-if="showInfo" class="px-1">
             <small class="text-primary">{{ $t('dynamic') }}: {{ translateDateLiteral(localDateLiteral) }}</small>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { convertToDate, isDateLiteral, isDateNumberLiteral, separateNLiteral } from '@gaio/utils'
+import { convertToDate, isDateLiteral, isDateNumberLiteral, separateNLiteral } from '@gaio/shared/utils'
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash-es'
 import { computed, onMounted, ref } from 'vue'

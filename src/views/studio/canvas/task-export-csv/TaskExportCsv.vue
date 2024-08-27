@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="600px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="600px" @close="$emit('close')">
         <template #title>
             <task-icon :local-task="localTask" />
             {{ $t('taskExportFile') }}
@@ -12,39 +9,26 @@
                 <div class="flex flex-col items-center justify-center gap-1 overflow-auto bg-elevation-1">
                     <div class="flex w-full justify-center gap-2">
                         <div class="flex w-full flex-col gap-1">
-                            <label
-                                class="font-semibold text-neutral-500"
-                                for="task"
-                            >
+                            <label class="font-semibold text-neutral-500" for="task">
                                 {{ $t('taskLabel') }}
                             </label>
-                            <n-input
-                                id="task"
-                                v-model:value="localTask.label"
-                                :placeholder="$t('taskLocalCsvFolder')"
-                            />
+                            <n-input id="task" v-model:value="localTask.label"
+                                :placeholder="$t('taskLocalCsvFolder')" />
                         </div>
                     </div>
                     <div class="flex w-full flex-col gap-2">
                         <div class="w-full">
                             <label class="font-semibold text-neutral-500">{{ $t('separator') }}</label>
-                            <n-select
-                                v-model:value="localTask.separator"
-                                filterable
-                                :options="[
-                                    { value: 'TabSeparatedWithNames', label: $t('tab') },
-                                    { value: 'CSVWithNames', label: $t('comma') },
-                                    { value: '|', label: '|' },
-                                    { value: '||', label: '||' },
-                                    { value: ';', label: ';' }
-                                ]"
-                            />
+                            <n-select v-model:value="localTask.separator" filterable :options="[
+                                { value: 'TabSeparatedWithNames', label: $t('tab') },
+                                { value: 'CSVWithNames', label: $t('comma') },
+                                { value: '|', label: '|' },
+                                { value: '||', label: '||' },
+                                { value: ';', label: ';' }
+                            ]" />
                         </div>
                         <div class="flex w-full items-center gap-2">
-                            <n-checkbox
-                                v-model:checked="localTask.compress"
-                                :label="$t('compressFile')"
-                            />
+                            <n-checkbox v-model:checked="localTask.compress" :label="$t('compressFile')" />
                         </div>
                         <div class="bg-blue-100 px-4 py-2">
                             <span class="text-sm text-gray-400">{{ $t('compressFileInfo') }}</span>
@@ -53,10 +37,7 @@
                 </div>
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -64,7 +45,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { ExportToFileType } from '@gaio/types'
+import type { ExportToFileType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'

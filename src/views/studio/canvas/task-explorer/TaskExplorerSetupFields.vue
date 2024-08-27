@@ -1,21 +1,12 @@
 <template>
-    <div
-        v-if="current"
-        class="task-report-fields py-1"
-    >
+    <div v-if="current" class="task-report-fields py-1">
         <div>
-            <div
-                v-if="!chooseTable"
-                class="mb-3 flex items-center justify-between border-b px-1 pt-2 font-bold"
-            >
+            <div v-if="!chooseTable" class="mb-3 flex items-center justify-between border-b px-1 pt-2 font-bold">
                 {{ current.tableName }}
                 <div>
                     <n-tooltip>
                         <template #trigger>
-                            <n-button
-                                size="tiny"
-                                quaternary
-                            >
+                            <n-button size="tiny" quaternary>
                                 <template #icon>
                                     <g-icon name="exchange" />
                                 </template>
@@ -28,11 +19,7 @@
 
                     <n-tooltip>
                         <template #trigger>
-                            <n-button
-                                size="tiny"
-                                quaternary
-                                @click="$emit('viewTable')"
-                            >
+                            <n-button size="tiny" quaternary @click="$emit('viewTable')">
                                 <template #icon>
                                     <g-icon name="eye" />
                                 </template>
@@ -49,10 +36,7 @@
             </div>
         </div>
         <div class="flex items-center justify-between">
-            <n-button
-                size="tiny"
-                @click="addAllFields()"
-            >
+            <n-button size="tiny" @click="addAllFields()">
                 {{ $t('addAll') }}
             </n-button>
             <div class="flex gap-1">
@@ -69,10 +53,7 @@
         </div>
 
         <div class="my-2">
-            <n-input
-                v-model:value="searchTerm"
-                :placeholder="$t('filter')"
-            >
+            <n-input v-model:value="searchTerm" :placeholder="$t('filter')">
                 <template #prefix>
                     <g-icon name="filter" />
                 </template>
@@ -80,22 +61,11 @@
         </div>
 
         <div>
-            <vue-draggable
-                :key="columns?.length"
-                :model-value="columns"
-                group="fields"
-                class="drag-table"
-            >
-                <div
-                    v-for="field of $filterBy(columns, 'columnName', searchTerm)"
-                    :key="field.id"
+            <vue-draggable :key="columns?.length" :model-value="columns" group="fields" class="drag-table">
+                <div v-for="field of $filterBy(columns, 'columnName', searchTerm)" :key="field.id"
                     class="cursor-pointer overflow-hidden truncate border-b py-1 last:border-b-0 hover:bg-paper-200 dark:hover:bg-carbon-200"
-                    @dblclick="addField(field)"
-                >
-                    <g-icon
-                        :name="dataTypeIcon(field.dataType)"
-                        color="var(--elevation-primary)"
-                    />
+                    @dblclick="addField(field)">
+                    <g-icon :name="dataTypeIcon(field.dataType)" color="var(--elevation-primary)" />
                     {{ field.columnName }}
                 </div>
             </vue-draggable>
@@ -104,8 +74,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FieldType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { onMounted, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
@@ -120,7 +90,7 @@ const { dataTypeIcon } = useDataType()
 
 const chooseTable = ref(false)
 const searchTerm = ref('')
-const addAllFields = () => {}
+const addAllFields = () => { }
 
 const addField = (field: FieldType) => {
     const newField = useReportStore().defineFieldOptions(field)
@@ -141,12 +111,12 @@ const loadFields = () => {
         })
         .then(
             (res) =>
-                (columns.value = res.data.map((o: FieldType) => {
-                    return {
-                        ...o,
-                        id: getId()
-                    }
-                }))
+            (columns.value = res.data.map((o: FieldType) => {
+                return {
+                    ...o,
+                    id: getId()
+                }
+            }))
         )
 }
 

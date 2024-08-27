@@ -1,16 +1,12 @@
 <template>
     <div class="report-bar">
-        <div
-            ref="id"
-            class="h-full w-full"
-            :style="{ height }"
-        />
+        <div ref="id" class="h-full w-full" :style="{ height }" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Bar, type BarOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
@@ -71,8 +67,8 @@ const loadChart = () => {
             ...common,
             color:
                 isGrouped.value || isMultipleMeasure.value ? themeColors.value
-                : settings.value.showLegend ? themeColors.value
-                : themeColors.value[0],
+                    : settings.value.showLegend ? themeColors.value
+                        : themeColors.value[0],
             label: chartHelper.value.linearLabel(total),
             ...foundation.value,
             yAxis: {
@@ -83,7 +79,7 @@ const loadChart = () => {
                                 fill: 'rgba(0,0,0,0.45)'
                             }
                         }
-                    :   null,
+                        : null,
                 grid:
                     settings.value.showYGrid ?
                         {
@@ -93,7 +89,7 @@ const loadChart = () => {
                                 }
                             }
                         }
-                    :   null
+                        : null
             },
             xAxis: {
                 title:
@@ -104,7 +100,7 @@ const loadChart = () => {
                                 fill: 'rgba(0,0,0,0.45)'
                             }
                         }
-                    :   null,
+                        : null,
                 grid:
                     settings.value.showXGrid ?
                         {
@@ -114,7 +110,7 @@ const loadChart = () => {
                                 }
                             }
                         }
-                    :   null
+                        : null
             },
             barBackground:
                 settings.value.columnBackground ?
@@ -123,7 +119,7 @@ const loadChart = () => {
                             fill: 'rgba(0,0,0,0.08)'
                         }
                     }
-                :   undefined
+                    : undefined
         } as BarOptions
     )
     chart.value.render()

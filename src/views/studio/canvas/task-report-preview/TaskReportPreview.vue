@@ -11,7 +11,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 
 import { useAppStore } from '@/stores'
 import ReportNode from '@/views/report/ReportNode.vue'

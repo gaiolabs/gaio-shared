@@ -1,27 +1,14 @@
 <template>
     <div class="task-form-options-list-table mt-2">
         <div class="control list-fields">
-            <n-table
-                class="table-sm table-striped table-bordered table"
-                size="small"
-            >
+            <n-table class="table-sm table-striped table-bordered table" size="small">
                 <thead>
                     <tr>
-                        <th
-                            style="width: 25px; vertical-align: middle"
-                            class="text-center"
-                        />
+                        <th style="width: 25px; vertical-align: middle" class="text-center" />
                         <th>{{ $t('value') }}</th>
                         <th>{{ $t('label') }}</th>
-                        <th
-                            style="width: 25px; vertical-align: middle"
-                            class="text-center"
-                        >
-                            <n-button
-                                quaternary
-                                size="tiny"
-                                @click="addRow()"
-                            >
+                        <th style="width: 25px; vertical-align: middle" class="text-center">
+                            <n-button quaternary size="tiny" @click="addRow()">
                                 <g-icon name="add" />
                             </n-button>
                         </th>
@@ -29,58 +16,28 @@
                 </thead>
                 <tbody v-if="useFormStore().currentField.list.length <= 0">
                     <tr>
-                        <td
-                            colspan="4"
-                            style="white-space: normal"
-                        >
-                            <g-alert
-                                show-icon
-                                :title="$t('formListInfo')"
-                            />
+                        <td colspan="4" style="white-space: normal">
+                            <g-alert show-icon :title="$t('formListInfo')" />
                         </td>
                     </tr>
                 </tbody>
-                <vue-draggable
-                    v-if="useFormStore().currentField.list?.length > 0"
-                    v-model="useFormStore().currentField.list"
-                    draggable=".tr-item"
-                    item-key="id"
-                    tag="tbody"
-                    handle=".handle"
-                >
-                    <tr
-                        v-for="(item, index) in useFormStore().currentField.list"
-                        :key="index"
-                        class="tr-item"
-                    >
+                <vue-draggable v-if="useFormStore().currentField.list?.length > 0"
+                    v-model="useFormStore().currentField.list" draggable=".tr-item" item-key="id" tag="tbody"
+                    handle=".handle">
+                    <tr v-for="(item, index) in useFormStore().currentField.list" :key="index" class="tr-item">
                         <td class="text-center">
-                            <n-button
-                                quaternary
-                                size="tiny"
-                                class="handle"
-                            >
+                            <n-button quaternary size="tiny" class="handle">
                                 <g-icon name="handle" />
                             </n-button>
                         </td>
                         <td>
-                            <n-input
-                                v-model:value="item.value"
-                                @blur="emitChanges"
-                            />
+                            <n-input v-model:value="item.value" @blur="emitChanges" />
                         </td>
                         <td>
-                            <n-input
-                                v-model:value="item.label"
-                                @blur="emitChanges"
-                            />
+                            <n-input v-model:value="item.label" @blur="emitChanges" />
                         </td>
                         <td class="el-text-center">
-                            <n-button
-                                quaternary
-                                size="tiny"
-                                type="error"
-                                @click="deleteRow(index)"
-                            >
+                            <n-button quaternary size="tiny" type="error" @click="deleteRow(index)">
                                 <g-icon name="delete" />
                             </n-button>
                         </td>
@@ -92,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 import { onMounted } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import { useI18n } from 'vue-i18n'

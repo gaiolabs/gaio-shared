@@ -1,16 +1,12 @@
 <template>
     <div class="report-treemap">
-        <div
-            ref="id"
-            class="size-full"
-            :style="{ height }"
-        />
+        <div ref="id" class="size-full" :style="{ height }" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Treemap, type TreemapOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { orderBy } from 'lodash-es'
 import { computed, nextTick, onMounted, shallowRef } from 'vue'
 

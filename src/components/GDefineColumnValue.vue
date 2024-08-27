@@ -1,26 +1,12 @@
 <template>
-    <div
-        v-if="localTask.schema && localTask.schema[type] && initPage"
-        class="g-define-column-value"
-    >
+    <div v-if="localTask.schema && localTask.schema[type] && initPage" class="g-define-column-value">
         <div class="control">
-            <g-select-column
-                v-model="possibles"
-                :table-name="localTask.tableName"
-                multiple
-                @change="changeUpdates"
-                @load-column-list="columns = $event"
-            />
+            <g-select-column v-model="possibles" :table-name="localTask.tableName" multiple @change="changeUpdates"
+                @load-column-list="columns = $event" />
         </div>
         <n-card content-style="padding: 10px">
-            <div
-                v-if="columns"
-                class="control"
-            >
-                <table
-                    v-if="localTask.schema[type].length > 0"
-                    class="w-full table-auto"
-                >
+            <div v-if="columns" class="control">
+                <table v-if="localTask.schema[type].length > 0" class="w-full table-auto">
                     <thead>
                         <tr class="vertical-mid border-b text-left *:p-1">
                             <th>{{ $t('column') }}</th>
@@ -30,73 +16,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="(item, index) in localTask.schema[type]"
-                            :key="index"
-                            class="border-b *:p-1 odd:bg-paper-200"
-                        >
+                        <tr v-for="(item, index) in localTask.schema[type]" :key="index"
+                            class="border-b *:p-1 odd:bg-paper-200">
                             <td>
                                 {{ item.id }}
                                 <g-icon :name="dataTypeIcon(item.dataType)" />
                                 {{ item.columnName }}
                             </td>
                             <td>
-                                <n-select
-                                    v-model:value="item.valueType"
-                                    :options="[
-                                        {
-                                            value: 'value',
-                                            label: $t('value')
-                                        },
-                                        {
-                                            value: 'parameter',
-                                            label: $t('parameter')
-                                        },
-                                        {
-                                            value: 'computed',
-                                            label: $t('computed')
-                                        }
-                                    ]"
-                                    class="min-w-[100px]"
-                                />
+                                <n-select v-model:value="item.valueType" :options="[
+                                    {
+                                        value: 'value',
+                                        label: $t('value')
+                                    },
+                                    {
+                                        value: 'parameter',
+                                        label: $t('parameter')
+                                    },
+                                    {
+                                        value: 'computed',
+                                        label: $t('computed')
+                                    }
+                                ]" class="min-w-[100px]" />
                             </td>
                             <td>
                                 <div v-if="item.valueType === 'value'">
-                                    <n-input
-                                        v-model:value="item.value"
-                                        :placeholder="$t('value')"
-                                        type="text"
-                                    />
+                                    <n-input v-model:value="item.value" :placeholder="$t('value')" type="text" />
                                 </div>
                                 <div v-else-if="item.valueType === 'parameter'">
-                                    <n-select
-                                        v-model:value="item.value"
-                                        class="w-100"
-                                        filterable
-                                        value-field="paramName"
-                                        label-field="paramName"
-                                        :options="useAppStore().params"
-                                    />
+                                    <n-select v-model:value="item.value" class="w-100" filterable
+                                        value-field="paramName" label-field="paramName"
+                                        :options="useAppStore().params" />
                                 </div>
                                 <template v-else-if="item.valueType === 'computed'">
-                                    <div
-                                        class="control"
-                                        style="min-height: 90px"
-                                    >
-                                        <code-editor
-                                            v-model="item.content"
-                                            class="h-[90px] min-w-[250px] overflow-hidden rounded"
-                                        />
+                                    <div class="control" style="min-height: 90px">
+                                        <code-editor v-model="item.content"
+                                            class="h-[90px] min-w-[250px] overflow-hidden rounded" />
                                     </div>
                                 </template>
                             </td>
                             <td>
-                                <n-button
-                                    size="tiny"
-                                    quaternary
-                                    type="error"
-                                    @click="removeField(item.columnName)"
-                                >
+                                <n-button size="tiny" quaternary type="error" @click="removeField(item.columnName)">
                                     <template #icon>
                                         <g-icon name="delete" />
                                     </template>
@@ -108,15 +68,11 @@
             </div>
         </n-card>
     </div>
-    <n-alert
-        v-else
-        :closable="false"
-        :title="$t('addField')"
-    />
+    <n-alert v-else :closable="false" :title="$t('addField')" />
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NButton } from 'naive-ui'
 import { onMounted, ref } from 'vue'

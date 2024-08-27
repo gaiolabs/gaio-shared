@@ -1,33 +1,17 @@
 <template>
-    <div
-        v-if="localTask"
-        class="task-rest-general flex size-full flex-col gap-6 p-6"
-    >
+    <div v-if="localTask" class="task-rest-general flex size-full flex-col gap-6 p-6">
         <div class="flex w-full gap-1">
             <div class="w-full">
-                <label
-                    class="control-label"
-                    for="endpoint"
-                >
+                <label class="control-label" for="endpoint">
                     {{ $t('endpoint') }}
                 </label>
-                <n-input
-                    id="endpoint"
-                    v-model:value="localTask.url"
-                />
+                <n-input id="endpoint" v-model:value="localTask.url" />
             </div>
             <div class="w-[180px]">
-                <label
-                    class="control-label"
-                    for="method"
-                >
+                <label class="control-label" for="method">
                     {{ $t('method') }}
                 </label>
-                <n-select
-                    id="method"
-                    v-model:value="localTask.method"
-                    :options="restMethods"
-                />
+                <n-select id="method" v-model:value="localTask.method" :options="restMethods" />
             </div>
             <!--            <div class="w-1/2">-->
             <!--                <label-->
@@ -51,7 +35,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { RestTaskType } from '@gaio/types'
+import type { RestTaskType } from '@gaio/shared/types'
 import { ref } from 'vue'
 import useApi from '@/composables/useApi'
 

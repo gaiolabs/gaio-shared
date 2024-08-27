@@ -1,4 +1,4 @@
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 
 import { defaultReportChartAxis } from '@/composables/default-reports/defaultReportChartAxis'
 import { defaultReportChartLegend } from '@/composables/default-reports/defaultReportChartLegend'

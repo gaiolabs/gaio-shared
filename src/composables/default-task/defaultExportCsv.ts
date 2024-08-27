@@ -1,4 +1,4 @@
-import type { ExportToFileType } from '@gaio/types'
+import type { ExportToFileType } from '@gaio/shared/types'
 
 export const defaultExportCsv = (base: ExportToFileType) => {
     return {

@@ -1,28 +1,12 @@
 <template>
     <div class="filter-builder">
-        <div
-            v-if="hasFilter"
-            class="canvas-task-update-body"
-        >
-            <n-card
-                v-if="columns"
-                content-style="padding: 10px"
-            >
-                <table
-                    v-if="localTask.schema.filter[0].list.length > 0"
-                    class="w-full table-auto"
-                >
+        <div v-if="hasFilter" class="canvas-task-update-body">
+            <n-card v-if="columns" content-style="padding: 10px">
+                <table v-if="localTask.schema.filter[0].list.length > 0" class="w-full table-auto">
                     <thead>
                         <tr class="vertical-mid border-b text-left *:p-1">
-                            <th
-                                class="el-text-center"
-                                style="width: 45px"
-                            >
-                                <n-button
-                                    size="tiny"
-                                    secondary
-                                    @click="addCol()"
-                                >
+                            <th class="el-text-center" style="width: 45px">
+                                <n-button size="tiny" secondary @click="addCol()">
                                     <template #icon>
                                         <g-icon name="add" />
                                     </template>
@@ -36,139 +20,81 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="(item, index) in localTask.schema.filter[0].list"
-                            :key="index"
-                            class="vertical-mid border-b text-left *:p-1 odd:bg-paper-200"
-                        >
-                            <td
-                                v-if="index > 0"
-                                class="text-right"
-                            >
-                                <n-button
-                                    size="tiny"
-                                    type="primary"
-                                    @click="item.andOr = item.andOr === 'and' ? 'or' : 'and'"
-                                >
+                        <tr v-for="(item, index) in localTask.schema.filter[0].list" :key="index"
+                            class="vertical-mid border-b text-left *:p-1 odd:bg-paper-200">
+                            <td v-if="index > 0" class="text-right">
+                                <n-button size="tiny" type="primary"
+                                    @click="item.andOr = item.andOr === 'and' ? 'or' : 'and'">
                                     {{ item.andOr }}
                                 </n-button>
                             </td>
                             <td v-else></td>
                             <td>
-                                <n-select
-                                    v-model:value="item.columnName"
-                                    filterable
-                                    :options="columnList"
-                                    value-field="columnName"
-                                    label-field="columnName"
-                                    @update:value="changeFilter(item)"
-                                />
+                                <n-select v-model:value="item.columnName" filterable :options="columnList"
+                                    value-field="columnName" label-field="columnName"
+                                    @update:value="changeFilter(item)" />
                             </td>
                             <td>
-                                <n-select
-                                    v-model:value="item.valueType"
-                                    :options="[
-                                        {
-                                            value: 'value',
-                                            label: $t('value')
-                                        },
-                                        {
-                                            value: 'parameter',
-                                            label: $t('parameter')
-                                        },
-                                        {
-                                            value: 'computed',
-                                            label: $t('computed')
-                                        }
-                                    ]"
-                                    class="min-w-[100px]"
-                                />
+                                <n-select v-model:value="item.valueType" :options="[
+                                    {
+                                        value: 'value',
+                                        label: $t('value')
+                                    },
+                                    {
+                                        value: 'parameter',
+                                        label: $t('parameter')
+                                    },
+                                    {
+                                        value: 'computed',
+                                        label: $t('computed')
+                                    }
+                                ]" class="min-w-[100px]" />
                             </td>
                             <td>
-                                <n-select
-                                    v-model:value="item.operator"
-                                    filterable
-                                    :options="operators(item)"
-                                />
+                                <n-select v-model:value="item.operator" filterable :options="operators(item)" />
                             </td>
                             <td>
                                 <span v-if="!['isNull', 'isNotNull'].includes(item.operator)">
                                     <span v-if="item.valueType === 'value'">
                                         <n-input-group v-if="!['in', 'notIn'].includes(item.operator)">
-                                            <n-input
-                                                v-model:value="item.value"
-                                                :placeholder="$t('value')"
-                                                type="text"
-                                            />
-                                            <n-popover
-                                                :width="350"
-                                                trigger="click"
-                                            >
-                                                <n-select
-                                                    v-model:value="item.value"
-                                                    filterable
-                                                    clearable
+                                            <n-input v-model:value="item.value" :placeholder="$t('value')"
+                                                type="text" />
+                                            <n-popover :width="350" trigger="click">
+                                                <n-select v-model:value="item.value" filterable clearable
                                                     :placeholder="$t('filter')"
-                                                    :options="columnValues[item.columnName]"
-                                                />
+                                                    :options="columnValues[item.columnName]" />
                                                 <template #trigger>
-                                                    <n-button
-                                                        :underline="false"
-                                                        class="w-100 h-100"
-                                                        @click="listByField(item)"
-                                                    >
+                                                    <n-button :underline="false" class="w-100 h-100"
+                                                        @click="listByField(item)">
                                                         <g-icon name="eye" />
                                                     </n-button>
                                                 </template>
                                             </n-popover>
                                         </n-input-group>
                                         <template v-else>
-                                            <n-select
-                                                v-model:value="item.value"
-                                                tag
-                                                multiple
-                                                filterable
-                                                clearable
-                                                :placeholder="$t('filter')"
-                                                :options="columnValues[item.columnName]"
-                                                @focus="listByField(item)"
-                                            />
+                                            <n-select v-model:value="item.value" tag multiple filterable clearable
+                                                :placeholder="$t('filter')" :options="columnValues[item.columnName]"
+                                                @focus="listByField(item)" />
                                         </template>
                                     </span>
                                     <template v-else-if="item.valueType === 'parameter'">
-                                        <n-select
-                                            v-model:value="item.value"
-                                            class="w-100"
-                                            filterable
-                                            value-field="paramName"
-                                            label-field="paramName"
-                                            :options="params"
-                                        />
+                                        <n-select v-model:value="item.value" class="w-100" filterable
+                                            value-field="paramName" label-field="paramName" :options="params" />
                                     </template>
                                     <template v-else-if="item.valueType === 'computed'">
                                         <div class="control-label">
                                             {{ $t('computed') }}
                                         </div>
-                                        <div
-                                            class="control"
-                                            style="min-height: 90px"
-                                        >
-                                            <code-editor
-                                                v-model="item.value"
+                                        <div class="control" style="min-height: 90px">
+                                            <code-editor v-model="item.value"
                                                 class="h-[90px] min-w-[250px] overflow-hidden rounded"
-                                                :labels="columns.map((o) => o.columnName)"
-                                            />
+                                                :labels="columns.map((o) => o.columnName)" />
                                         </div>
                                     </template>
                                 </span>
                             </td>
                             <td>
-                                <n-button
-                                    size="tiny"
-                                    quaternary
-                                    type="error"
-                                    @click="deleteFilter(item.id)"
-                                >
+                                <n-button size="tiny" quaternary type="error" @click="deleteFilter(item.id)">
                                     <template #icon>
                                         <g-icon name="delete" />
                                     </template>
@@ -177,20 +103,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <div
-                    v-else
-                    class="w-100"
-                >
+                <div v-else class="w-100">
                     <n-alert :closable="false">
                         <div class="flex w-full items-center justify-between">
                             <div class="grow">
                                 {{ $t('addFilter') }}
                             </div>
                             <div>
-                                <n-button
-                                    type="primary"
-                                    @click="addCol()"
-                                >
+                                <n-button type="primary" @click="addCol()">
                                     {{ $t('add') }}
                                 </n-button>
                             </div>
@@ -202,8 +122,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { NButton } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
@@ -257,10 +177,10 @@ const listByField = (col: FieldType) => {
         })
         .then(
             (res) =>
-                (columnValues.value[col.columnName] = res.data.map((item) => ({
-                    label: item[col.columnName],
-                    value: item[col.columnName]
-                })))
+            (columnValues.value[col.columnName] = res.data.map((item) => ({
+                label: item[col.columnName],
+                value: item[col.columnName]
+            })))
         )
 }
 

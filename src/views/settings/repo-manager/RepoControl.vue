@@ -1,14 +1,8 @@
 <template>
-    <g-dialog
-        width="500px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="500px" @close="$emit('close')">
         <template #title>{{ $t('repository') }}</template>
         <template #content>
-            <n-spin
-                size="small"
-                :show="loading"
-            >
+            <n-spin size="small" :show="loading">
                 <div class="overflow-auto">
                     <div class="modal-body">
                         <div class="control">
@@ -54,30 +48,18 @@
                             <div class="control-label">
                                 {{ $t('password') }}
                             </div>
-                            <n-input
-                                v-model:value="source.credentials.password"
-                                show-password
-                            ></n-input>
+                            <n-input v-model:value="source.credentials.password" show-password></n-input>
                         </div>
                     </div>
                 </div>
                 <!-- FOOTER -->
                 <div class="bg-paper-100 px-4 py-2 dark:bg-carbon-200">
                     <div class="flex items-center justify-between gap-2">
-                        <div
-                            v-if="source.repoId"
-                            class="flex items-center gap-2"
-                        >
-                            <n-popconfirm
-                                :positive-text="$t('delete')"
-                                :negative-text="$t('cancel')"
-                                @positive-click="remove()"
-                            >
+                        <div v-if="source.repoId" class="flex items-center gap-2">
+                            <n-popconfirm :positive-text="$t('delete')" :negative-text="$t('cancel')"
+                                @positive-click="remove()">
                                 <template #activator>
-                                    <n-button
-                                        quaternary
-                                        type="error"
-                                    >
+                                    <n-button quaternary type="error">
                                         {{ $t('remove') }}
                                     </n-button>
                                 </template>
@@ -85,10 +67,7 @@
                             </n-popconfirm>
                         </div>
                         <div></div>
-                        <n-button
-                            type="primary"
-                            @click="saveRepo"
-                        >
+                        <n-button type="primary" @click="saveRepo">
                             {{ $t('save') }}
                         </n-button>
                     </div>
@@ -99,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SourceType } from '@gaio/types'
+import type { SourceType } from '@gaio/shared/types'
 import { onBeforeMount, ref } from 'vue'
 import useApi from '@/composables/useApi'
 import { cloneDeep } from 'lodash-es'

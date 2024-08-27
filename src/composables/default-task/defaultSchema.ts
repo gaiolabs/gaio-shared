@@ -1,4 +1,4 @@
-import type { SchemaType } from '@gaio/types'
+import type { SchemaType } from '@gaio/shared/types'
 
 export const defaultSchema = {
     select: [],

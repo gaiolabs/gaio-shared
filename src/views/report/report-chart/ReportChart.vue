@@ -1,67 +1,28 @@
 <template>
-    <div
-        :key="localKey"
-        class="report-chart m-0 overflow-hidden rounded border bg-paper-100 p-0 dark:bg-carbon-100"
-    >
-        <n-spin
-            :show="loading"
-            :style="{ height }"
-        >
-            <report-node-header
-                :task="task"
-                :table-rows="tableRows"
-            />
+    <div :key="localKey" class="report-chart m-0 overflow-hidden rounded border bg-paper-100 p-0 dark:bg-carbon-100">
+        <n-spin :show="loading" :style="{ height }">
+            <report-node-header :task="task" :table-rows="tableRows" />
             <template v-if="list.length">
                 <div class="px-2">
-                    <report-chart-bar-bk
-                        v-if="['bar'].includes(task.reportType) && !settings.columnBar"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
-                    <report-chart-column
-                        v-if="['bar'].includes(task.reportType) && settings.columnBar"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
-                    <report-chart-line
-                        v-else-if="task.reportType === 'line'"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
-                    <report-chart-area
-                        v-else-if="task.reportType === 'area'"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
-                    <report-chart-pie
-                        v-else-if="task.reportType === 'pie'"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
-                    <report-chart-treemap
-                        v-else-if="task.reportType === 'treemap'"
-                        :task="task"
-                        :list="list"
-                        :height="height"
-                        @change="$emit('change', $event)"
-                    />
+                    <report-chart-bar-bk v-if="['bar'].includes(task.reportType) && !settings.columnBar" :task="task"
+                        :list="list" :height="height" @change="$emit('change', $event)" />
+                    <report-chart-column v-if="['bar'].includes(task.reportType) && settings.columnBar" :task="task"
+                        :list="list" :height="height" @change="$emit('change', $event)" />
+                    <report-chart-line v-else-if="task.reportType === 'line'" :task="task" :list="list" :height="height"
+                        @change="$emit('change', $event)" />
+                    <report-chart-area v-else-if="task.reportType === 'area'" :task="task" :list="list" :height="height"
+                        @change="$emit('change', $event)" />
+                    <report-chart-pie v-else-if="task.reportType === 'pie'" :task="task" :list="list" :height="height"
+                        @change="$emit('change', $event)" />
+                    <report-chart-treemap v-else-if="task.reportType === 'treemap'" :task="task" :list="list"
+                        :height="height" @change="$emit('change', $event)" />
                 </div>
             </template>
         </n-spin>
     </div>
 </template>
 <script setup lang="ts">
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep, debounce } from 'lodash-es'
 import { computed, onMounted, ref, watch } from 'vue'
 

@@ -1,4 +1,4 @@
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
 
 export const defaultReportDownload = (base: ReportNodeType) => {

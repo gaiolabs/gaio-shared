@@ -2,15 +2,9 @@
     <g-card class="local-card g-bg-1 w-full cursor-pointer rounded-[8px] p-0">
         <div class="flex justify-between gap-2">
             <div class="flex items-start gap-1">
-                <n-button
-                    size="tiny"
-                    secondary
-                >
+                <n-button size="tiny" secondary>
                     <template #icon>
-                        <g-app-icon
-                            :name="app.options.icon"
-                            :color="app.options.color"
-                        />
+                        <g-app-icon :name="app.options.icon" :color="app.options.color" />
                     </template>
                 </n-button>
                 <div class="grow">
@@ -26,16 +20,9 @@
                     </div>
                 </div>
             </div>
-            <n-button
-                size="tiny"
-                quaternary
-                @click="useAuthStore().toggleFavoriteApp(app.appId)"
-            >
+            <n-button size="tiny" quaternary @click="useAuthStore().toggleFavoriteApp(app.appId)">
                 <template #icon>
-                    <g-icon
-                        name="star"
-                        :color="generateFavorAppColor"
-                    />
+                    <g-icon name="star" :color="generateFavorAppColor" />
                 </template>
             </n-button>
         </div>
@@ -46,31 +33,17 @@
                 </a>
             </div>
             <div class="flex min-w-[72px] items-center justify-end gap-2">
-                <n-button
-                    size="tiny"
-                    text
-                    @click="goTo(app, 'dashboard')"
-                >
+                <n-button size="tiny" text @click="goTo(app, 'dashboard')">
                     <template #icon>
                         <g-icon name="dashboard" />
                     </template>
                 </n-button>
-                <n-button
-                    v-if="app.role === 'edit'"
-                    size="tiny"
-                    text
-                    @click="$emit('edit', app)"
-                >
+                <n-button v-if="app.role === 'edit'" size="tiny" text @click="$emit('edit', app)">
                     <template #icon>
                         <g-icon name="pencil" />
                     </template>
                 </n-button>
-                <n-button
-                    v-if="app.role === 'edit'"
-                    size="tiny"
-                    text
-                    @click="goTo(app, 'studio')"
-                >
+                <n-button v-if="app.role === 'edit'" size="tiny" text @click="goTo(app, 'studio')">
                     <template #icon>
                         <g-icon name="workflow" />
                     </template>
@@ -81,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AppType } from '@gaio/types'
+import type { AppType } from '@gaio/shared/types'
 import { cloneDeep, uniq } from 'lodash-es'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'

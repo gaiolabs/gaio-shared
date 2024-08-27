@@ -1,6 +1,6 @@
-import type { FormFieldType } from '@gaio/types'
+import type { FormFieldType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
-import { definedOrDefault, getId, withoutNullProperties } from '@gaio/utils'
+import { definedOrDefault, getId, withoutNullProperties } from '@gaio/shared/utils'
 
 export default (base: FormFieldType) => {
     const field = cloneDeep(base)

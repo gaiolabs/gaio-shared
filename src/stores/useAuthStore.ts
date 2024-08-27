@@ -1,4 +1,4 @@
-import type { UserOptionsType, UserType } from '@gaio/types'
+import type { UserOptionsType, UserType } from '@gaio/shared/types'
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 

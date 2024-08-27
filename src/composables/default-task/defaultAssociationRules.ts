@@ -1,4 +1,4 @@
-import type { AssociationRulesTaskType } from '@gaio/types'
+import type { AssociationRulesTaskType } from '@gaio/shared/types'
 
 export const defaultAssociationRules = (base: AssociationRulesTaskType) => {
     const { appId, client, columnCategory, columnReference, minThreshold, minSupport, databaseName, id } = base

@@ -11,76 +11,51 @@
         <div class="control">
             <div class="flex items-center justify-between">
                 <div class="control-label">{{ $t('table') }}</div>
-                <g-view-table
-                    v-if="useFormStore().currentField.bucketTable"
-                    :table-name="useFormStore().currentField.bucketTable"
-                />
+                <g-view-table v-if="useFormStore().currentField.bucketTable"
+                    :table-name="useFormStore().currentField.bucketTable" />
             </div>
-            <g-select-table
-                v-model="useFormStore().currentField.bucketTable"
-                @change="clearFields"
-            />
+            <g-select-table v-model="useFormStore().currentField.bucketTable" @change="clearFields" />
         </div>
         <template v-if="useFormStore().currentField.bucketTable">
             <div class="control">
                 <div class="control-label">
                     {{ $t('value') }}
                 </div>
-                <g-select-column
-                    :key="useFormStore().currentField.bucketTable"
+                <g-select-column :key="useFormStore().currentField.bucketTable"
                     v-model="useFormStore().currentField.bucketFieldValue"
-                    :table-name="useFormStore().currentField.bucketTable"
-                />
+                    :table-name="useFormStore().currentField.bucketTable" />
             </div>
 
             <div class="control">
                 <div class="control-label">
                     {{ $t('label') }}
                 </div>
-                <g-select-column
-                    :key="useFormStore().currentField.bucketTable"
+                <g-select-column :key="useFormStore().currentField.bucketTable"
                     v-model="useFormStore().currentField.bucketFieldLabel"
-                    :table-name="useFormStore().currentField.bucketTable"
-                />
+                    :table-name="useFormStore().currentField.bucketTable" />
             </div>
 
             <div class="control">
                 <div class="control-label">{{ $t('order') }}</div>
-                <n-select
-                    v-model:value="useFormStore().currentField.bucketFieldOrder"
-                    filterable
-                    :options="[
-                        { label: $t('none'), value: undefined },
-                        { label: $t('asc'), value: 'asc' },
-                        { label: $t('desc'), value: 'desc' }
-                    ]"
-                />
+                <n-select v-model:value="useFormStore().currentField.bucketFieldOrder" filterable :options="[
+                    { label: $t('none'), value: undefined },
+                    { label: $t('asc'), value: 'asc' },
+                    { label: $t('desc'), value: 'desc' }
+                ]" />
             </div>
             <div class="control">
                 <div class="control-label">
                     {{ $t('rows') }}
                 </div>
-                <n-input-number
-                    v-model:value="useFormStore().currentField.bucketFieldLimit"
-                    :min="1"
-                    :step="1"
-                />
+                <n-input-number v-model:value="useFormStore().currentField.bucketFieldLimit" :min="1" :step="1" />
             </div>
             <div class="control">
-                <n-button
-                    block
-                    class="w-full"
-                    type="primary"
-                    @click="refreshInputsWithList()"
-                >
+                <n-button block class="w-full" type="primary" @click="refreshInputsWithList()">
                     {{ $t('load') }}
                 </n-button>
             </div>
             <div class="control">
-                <g-alert
-                    show-icon
-                    :title="$t('remoteFilterWarning')"
-                />
+                <g-alert show-icon :title="$t('remoteFilterWarning')" />
             </div>
         </template>
         <div class="bg-transparent p-0">
@@ -115,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 
 import GViewTable from '@/components/GViewTable.vue'
 import { useFormStore } from '@/stores'

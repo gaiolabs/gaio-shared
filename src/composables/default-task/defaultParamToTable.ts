@@ -1,4 +1,4 @@
-import type { ParamToTableTaskType } from '@gaio/types'
+import type { ParamToTableTaskType } from '@gaio/shared/types'
 
 export const defaultParamToTable = (base: ParamToTableTaskType) => {
     return {

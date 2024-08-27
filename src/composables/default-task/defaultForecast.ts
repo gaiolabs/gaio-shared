@@ -1,4 +1,4 @@
-import type { ForecastTaskType, TaskType } from '@gaio/types'
+import type { ForecastTaskType, TaskType } from '@gaio/shared/types'
 
 export const defaultForecast = (base: ForecastTaskType & TaskType) => {
     return {

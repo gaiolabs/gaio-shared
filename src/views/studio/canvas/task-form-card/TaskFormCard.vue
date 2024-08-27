@@ -3,10 +3,7 @@
         <template #title>{{ $t('taskForm') }}</template>
         <template #content>
             <div v-if="localTask">
-                <div
-                    v-if="!showFormPreview"
-                    class="task-sample overflow-auto"
-                >
+                <div v-if="!showFormPreview" class="task-sample overflow-auto">
                     <div class="control">
                         <div class="control-label">{{ $t('label') }}</div>
                         <n-input v-model:value="localTask.label" />
@@ -20,16 +17,10 @@
                             </div>
                             <div v-if="localTask.formId">
                                 <n-button-group>
-                                    <n-button
-                                        type="primary"
-                                        @click="showFormPreview = !showFormPreview"
-                                    >
+                                    <n-button type="primary" @click="showFormPreview = !showFormPreview">
                                         <g-icon name="eye" />
                                     </n-button>
-                                    <n-button
-                                        type="primary"
-                                        @click="editForm"
-                                    >
+                                    <n-button type="primary" @click="editForm">
                                         <g-icon name="edit" />
                                     </n-button>
                                 </n-button-group>
@@ -42,37 +33,16 @@
                     </div>
                     <n-card content-style="padding:10px">
                         <div class="control">
-                            <n-radio-group
-                                v-model:value="localTask.formLoadType"
-                                @update:value="prepareCardEvent()"
-                            >
-                                <n-radio
-                                    :label="$t('buttonOnDashboard')"
-                                    value="button"
-                                    class="w-full"
-                                />
-                                <n-radio
-                                    :label="$t('cardOnDashboard')"
-                                    value="card"
-                                    class="w-full"
-                                />
-                                <n-radio
-                                    :label="$t('formSidebarAside')"
-                                    value="aside"
-                                    class="w-full"
-                                />
+                            <n-radio-group v-model:value="localTask.formLoadType" @update:value="prepareCardEvent()">
+                                <n-radio :label="$t('buttonOnDashboard')" value="button" class="w-full" />
+                                <n-radio :label="$t('cardOnDashboard')" value="card" class="w-full" />
+                                <n-radio :label="$t('formSidebarAside')" value="aside" class="w-full" />
                             </n-radio-group>
                         </div>
                     </n-card>
-                    <div
-                        v-if="localTask.formLoadType !== 'button'"
-                        class="control mx-1 mt-2"
-                    >
-                        <n-checkbox
-                            v-model:checked="localTask.formFilterBehavior"
-                            :label="$t('formFilterBehavior')"
-                            class="w-full"
-                        />
+                    <div v-if="localTask.formLoadType !== 'button'" class="control mx-1 mt-2">
+                        <n-checkbox v-model:checked="localTask.formFilterBehavior" :label="$t('formFilterBehavior')"
+                            class="w-full" />
                     </div>
                     <n-divider />
                     <div class="control-label mt-2">{{ $t('style') }}</div>
@@ -82,22 +52,15 @@
                                 <div class="control-label">
                                     {{ $t('buttonTitle') }}
                                 </div>
-                                <n-input
-                                    v-model:value="localTask.buttonTitle"
-                                    size="small"
-                                />
+                                <n-input v-model:value="localTask.buttonTitle" size="small" />
                             </div>
 
                             <div class="control grow">
                                 <div class="control-label">{{ $t('size') }}</div>
-                                <n-select
-                                    v-model:value="localTask.buttonSize"
-                                    size="small"
-                                    :options="[
-                                        { label: $t('large'), value: 'large' },
-                                        { label: $t('small'), value: 'small' }
-                                    ]"
-                                />
+                                <n-select v-model:value="localTask.buttonSize" size="small" :options="[
+                                    { label: $t('large'), value: 'large' },
+                                    { label: $t('small'), value: 'small' }
+                                ]" />
                             </div>
                         </div>
 
@@ -105,10 +68,7 @@
                             <div class="control-label">
                                 {{ $t('buttonTheme') }}
                             </div>
-                            <n-color-picker
-                                v-model:value="localTask.buttonTheme"
-                                :modes="['hex']"
-                            />
+                            <n-color-picker v-model:value="localTask.buttonTheme" :modes="['hex']" />
                         </div>
 
                         <div class="control">
@@ -118,12 +78,8 @@
                             <div class="preview">
                                 <n-tooltip :show-after="1500">
                                     <template #trigger>
-                                        <n-button
-                                            class="w-100"
-                                            :color="localTask.buttonTheme"
-                                            :size="localTask.buttonSize"
-                                            style="color: white"
-                                        >
+                                        <n-button class="w-100" :color="localTask.buttonTheme"
+                                            :size="localTask.buttonSize" style="color: white">
                                             {{ localTask.buttonTitle ? localTask.buttonTitle : $t('preview') }}
                                         </n-button>
                                     </template>
@@ -144,10 +100,7 @@
                 <!--                preview here, add later-->
                 <!--            </div>-->
                 <div class="flex justify-end">
-                    <n-button
-                        type="primary"
-                        @click="save()"
-                    >
+                    <n-button type="primary" @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </div>
@@ -157,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormCardType } from '@gaio/types'
+import type { FormCardType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 
 import useDefault from '@/composables/useDefault'

@@ -1,10 +1,6 @@
 <template>
     <div class="report-table-form">
-        <n-dropdown
-            trigger="click"
-            :options="formOptions"
-            @select="handleSelect"
-        >
+        <n-dropdown trigger="click" :options="formOptions" @select="handleSelect">
             <g-icon name="taskList" />
         </n-dropdown>
         <!--        <report-form-->
@@ -19,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { ref } from 'vue'
 
 defineEmits(['trigger'])

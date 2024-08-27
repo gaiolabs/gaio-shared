@@ -1,14 +1,6 @@
 <template>
-    <n-select
-        v-model:value="selected"
-        size="small"
-        :options="paramList"
-        :placeholder="$t('selectParam')"
-        :clearable="clearable"
-        :multiple="multiple"
-        filterable
-        @update:value="updateSelected"
-    />
+    <n-select v-model:value="selected" size="small" :options="paramList" :placeholder="$t('selectParam')"
+        :clearable="clearable" :multiple="multiple" filterable @update:value="updateSelected" />
 </template>
 
 <script setup lang="ts">
@@ -16,7 +8,7 @@ import { ref, computed, watch } from 'vue'
 
 import { useAppStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
-import type { ParamType } from '@gaio/types'
+import type { ParamType } from '@gaio/shared/types'
 
 const { t } = useI18n()
 

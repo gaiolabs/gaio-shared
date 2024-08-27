@@ -1,9 +1,6 @@
 <template>
     <div class="task-builder-join-control">
-        <g-dialog
-            :show="!!joinItem"
-            @close="$emit('close')"
-        >
+        <g-dialog :show="!!joinItem" @close="$emit('close')">
             <template #title>
                 <div class="flex items-center gap-1">
                     <g-icon name="join" />
@@ -11,74 +8,44 @@
                 </div>
             </template>
             <template #content>
-                <div
-                    v-if="localJoin"
-                    class="w-full"
-                >
+                <div v-if="localJoin" class="w-full">
                     <div class="mb-1">
                         {{ $t('type') }}
                     </div>
-                    <n-select
-                        v-model:value="currentType"
-                        size="small"
-                        :options="
-                            joinListTypes
-                                .map((o) => ({
-                                    label: $t(o.label),
-                                    value: o.currentType
-                                }))
-                                .concat([
-                                    {
-                                        label: $t('computed'),
-                                        value: 4
-                                    }
-                                ])
-                        "
-                    />
+                    <n-select v-model:value="currentType" size="small" :options="joinListTypes
+                        .map((o) => ({
+                            label: $t(o.label),
+                            value: o.currentType
+                        }))
+                        .concat([
+                            {
+                                label: $t('computed'),
+                                value: 4
+                            }
+                        ])
+                        " />
                     <!--DEFAULT RAW JOIN-->
-                    <div
-                        v-if="currentType === 4"
-                        class="raw-builder-join mt-2"
-                    >
+                    <div v-if="currentType === 4" class="raw-builder-join mt-2">
                         <n-card content-style="padding: 6px">
-                            <code-editor
-                                v-model="localJoin.raw"
-                                language="sql"
-                                class="h-[300px] overflow-hidden rounded-[8px]"
-                            />
+                            <code-editor v-model="localJoin.raw" language="sql"
+                                class="h-[300px] overflow-hidden rounded-[8px]" />
                         </n-card>
 
-                        <n-card
-                            content-style="padding: 6px"
-                            class="mt-2"
-                        >
-                            <n-table
-                                size="small"
-                                :columns="columnRefs"
-                                :data="localJoin.refs"
-                                :pagination="false"
-                            >
+                        <n-card content-style="padding: 6px" class="mt-2">
+                            <n-table size="small" :columns="columnRefs" :data="localJoin.refs" :pagination="false">
                                 <thead>
                                     <tr>
-                                        <th
-                                            v-for="col of columnRefs"
-                                            :key="col.title"
-                                        >
+                                        <th v-for="col of columnRefs" :key="col.title">
                                             {{ col.title }}
                                         </th>
                                         <th class="w-[30px]">
-                                            <n-button
-                                                size="tiny"
-                                                quaternary
-                                                type="info"
-                                                @click="
-                                                    localJoin.refs.push({
-                                                        id: useHelper().generateId(),
-                                                        databaseName: '',
-                                                        tableName: ''
-                                                    })
-                                                "
-                                            >
+                                            <n-button size="tiny" quaternary type="info" @click="
+                                                localJoin.refs.push({
+                                                    id: useHelper().generateId(),
+                                                    databaseName: '',
+                                                    tableName: ''
+                                                })
+                                                ">
                                                 <template #icon>
                                                     <g-icon name="addCheck" />
                                                 </template>
@@ -87,33 +54,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="(item, index) of localJoin.refs"
-                                        :key="index"
-                                    >
-                                        <td
-                                            v-for="(col, colRefIndex) of columnRefs"
-                                            :key="colRefIndex"
-                                        >
-                                            <n-input
-                                                v-model:value="item[col.key]"
-                                                class="w-full"
-                                                :placeholder="$t('typeHere')"
-                                                size="tiny"
-                                            />
+                                    <tr v-for="(item, index) of localJoin.refs" :key="index">
+                                        <td v-for="(col, colRefIndex) of columnRefs" :key="colRefIndex">
+                                            <n-input v-model:value="item[col.key]" class="w-full"
+                                                :placeholder="$t('typeHere')" size="tiny" />
                                         </td>
                                         <td>
-                                            <n-button
-                                                quaternary
-                                                size="tiny"
-                                                type="error"
-                                                @click="
-                                                    localJoin.refs.splice(
-                                                        localJoin.refs.findIndex((o) => o.id === item.id),
-                                                        1
-                                                    )
-                                                "
-                                            >
+                                            <n-button quaternary size="tiny" type="error" @click="
+                                                localJoin.refs.splice(
+                                                    localJoin.refs.findIndex((o) => o.id === item.id),
+                                                    1
+                                                )
+                                                ">
                                                 <template #icon>
                                                     <g-icon name="delete" />
                                                 </template>
@@ -126,77 +78,48 @@
                     </div>
 
                     <!--DEFAULT BUILDER JOIN-->
-                    <div
-                        v-else
-                        class="default-builder-join"
-                    >
-                        <n-card
-                            class="my-2"
-                            content-style="padding: 10px"
-                        >
+                    <div v-else class="default-builder-join">
+                        <n-card class="my-2" content-style="padding: 10px">
                             <!--DATABASE -->
                             <div class="mb-2 flex gap-2">
                                 <div class="w-[50%] grow">
                                     <div class="mb-1">{{ $t('database') }}</div>
-                                    <n-select
-                                        v-model:value="localJoin.byDatabaseName"
-                                        :default-active-first-option="true"
-                                        size="small"
-                                        allow-search
-                                        :options="leftSourceDatabaseList"
-                                    />
+                                    <n-select v-model:value="localJoin.byDatabaseName"
+                                        :default-active-first-option="true" size="small" allow-search
+                                        :options="leftSourceDatabaseList" />
                                 </div>
                             </div>
                             <div class="grow">
                                 <div>{{ $t('table') }}</div>
-                                <n-select
-                                    v-model:value="localJoin.by"
-                                    size="small"
-                                    :placeholder="$t('selectTable')"
-                                    :options="
-                                        tableList.left
-                                            .filter((o) => o.databaseName === localJoin.byDatabaseName)
-                                            .map((o) => {
-                                                return {
-                                                    label: o.tableName,
-                                                    value: o.tableName
-                                                }
-                                            })
-                                    "
-                                    @update:value="loadColumnsFrom('tableLeft', 'left')"
-                                />
+                                <n-select v-model:value="localJoin.by" size="small" :placeholder="$t('selectTable')"
+                                    :options="tableList.left
+                                        .filter((o) => o.databaseName === localJoin.byDatabaseName)
+                                        .map((o) => {
+                                            return {
+                                                label: o.tableName,
+                                                value: o.tableName
+                                            }
+                                        })
+                                        " @update:value="loadColumnsFrom('tableLeft', 'left')" />
                             </div>
                         </n-card>
-                        <n-card
-                            class="my-2"
-                            content-style="padding: 10px"
-                        >
+                        <n-card class="my-2" content-style="padding: 10px">
                             <div>
                                 <div class="w-[50%] grow">
                                     <div class="mb-1">{{ $t('database') }}</div>
-                                    <n-select
-                                        v-model:value="localJoin.toDatabaseName"
-                                        size="small"
-                                        :options="
-                                            sourceList.map((o) => {
-                                                return {
-                                                    label: o.databaseName,
-                                                    value: o.databaseName
-                                                }
-                                            })
-                                        "
-                                    />
+                                    <n-select v-model:value="localJoin.toDatabaseName" size="small" :options="sourceList.map((o) => {
+                                        return {
+                                            label: o.databaseName,
+                                            value: o.databaseName
+                                        }
+                                    })
+                                        " />
                                 </div>
                             </div>
                             <!--TABLES-->
                             <div class="flex items-center gap-2">
                                 <div class="flex h-full grow items-end pt-5 text-center">
-                                    <n-button
-                                        size="small"
-                                        block
-                                        type="primary"
-                                        @click="changeJoinType"
-                                    >
+                                    <n-button size="small" block type="primary" @click="changeJoinType">
                                         <template #icon>
                                             <g-icon :name="`${joinListTypes[currentType]?.value}Join`" />
                                         </template>
@@ -204,81 +127,48 @@
                                 </div>
                                 <div class="w-[45%] grow">
                                     <div>{{ $t('table') }}</div>
-                                    <n-select
-                                        v-model:value="localJoin.to"
-                                        :default-active-first-option="true"
-                                        size="small"
-                                        allow-search
-                                        :placeholder="$t('selectTable')"
-                                        :options="
-                                            tableList.right.map((o) => ({
-                                                label: o.tableName,
-                                                value: o.tableName
-                                            }))
-                                        "
-                                        @update:value="loadColumnsFrom('tableRight', 'right')"
-                                    />
+                                    <n-select v-model:value="localJoin.to" :default-active-first-option="true"
+                                        size="small" allow-search :placeholder="$t('selectTable')" :options="tableList.right.map((o) => ({
+                                            label: o.tableName,
+                                            value: o.tableName
+                                        }))
+                                            " @update:value="loadColumnsFrom('tableRight', 'right')" />
                                 </div>
                             </div>
                         </n-card>
-                        <n-card
-                            v-if="localJoin.by && localJoin.to"
-                            class="my-2"
-                            content-style="padding: 10px"
-                        >
+                        <n-card v-if="localJoin.by && localJoin.to" class="my-2" content-style="padding: 10px">
                             <div class="mb-2 flex items-end gap-2">
                                 <div class="w-[50%] grow">
                                     <div class="mb-1">{{ $t('columns') }}</div>
-                                    <n-select
-                                        v-model:value="selectedColumns.left"
-                                        size="small"
-                                        :placeholder="$t('selectColumn')"
-                                        :options="
-                                            columnList.left.map((o) => ({
-                                                label: o.columnName,
-                                                value: o.columnName
-                                            }))
-                                        "
-                                    />
+                                    <n-select v-model:value="selectedColumns.left" size="small"
+                                        :placeholder="$t('selectColumn')" :options="columnList.left.map((o) => ({
+                                            label: o.columnName,
+                                            value: o.columnName
+                                        }))
+                                            " />
                                 </div>
                                 <div class="w-[50%] grow">
                                     <div class="mb-1">{{ $t('columns') }}</div>
-                                    <n-select
-                                        v-model:value="selectedColumns.right"
-                                        :default-active-first-option="true"
-                                        size="small"
-                                        allow-search
-                                        :placeholder="$t('selectColumn')"
-                                        :options="
-                                            columnList.right.map((o) => ({
-                                                label: o.columnName,
-                                                value: o.columnName
-                                            }))
-                                        "
-                                    />
+                                    <n-select v-model:value="selectedColumns.right" :default-active-first-option="true"
+                                        size="small" allow-search :placeholder="$t('selectColumn')" :options="columnList.right.map((o) => ({
+                                            label: o.columnName,
+                                            value: o.columnName
+                                        }))
+                                            " />
                                 </div>
                                 <div>
-                                    <n-button
-                                        :disabled="!validateAddColumnButton"
-                                        size="small"
-                                        type="primary"
-                                        @click="addNewColumnReference()"
-                                    >
+                                    <n-button :disabled="!validateAddColumnButton" size="small" type="primary"
+                                        @click="addNewColumnReference()">
                                         {{ $t('add') }}
                                     </n-button>
                                 </div>
                             </div>
                         </n-card>
 
-                        <div
-                            v-if="localJoin?.list?.length"
-                            class="mt-2 rounded-[8px] border bg-paper-100 p-2 dark:bg-carbon-100"
-                        >
-                            <div
-                                v-for="(sub, subIndex) of localJoin.list"
-                                :key="subIndex"
-                                class="mb-1 flex w-full items-center rounded border-elevation-2"
-                            >
+                        <div v-if="localJoin?.list?.length"
+                            class="mt-2 rounded-[8px] border bg-paper-100 p-2 dark:bg-carbon-100">
+                            <div v-for="(sub, subIndex) of localJoin.list" :key="subIndex"
+                                class="mb-1 flex w-full items-center rounded border-elevation-2">
                                 <div class="min-w-[150px] grow rounded-s bg-elevation-1 p-1 text-center">
                                     {{ sub.columnBy }}
                                 </div>
@@ -289,12 +179,8 @@
                                     {{ sub.columnTo }}
                                 </div>
                                 <div class="flex max-w-[30px] flex-none justify-center px-1">
-                                    <n-button
-                                        size="tiny"
-                                        quaternary
-                                        type="error"
-                                        @click="localJoin.list.splice(subIndex, 1)"
-                                    >
+                                    <n-button size="tiny" quaternary type="error"
+                                        @click="localJoin.list.splice(subIndex, 1)">
                                         <g-icon name="delete" />
                                     </n-button>
                                 </div>
@@ -303,10 +189,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                    <n-button
-                        type="primary"
-                        @click="save()"
-                    >
+                    <n-button type="primary" @click="save()">
                         {{ $t('confirm') }}
                     </n-button>
                 </div>
@@ -316,7 +199,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, SchemaJoinType, TableType } from '@gaio/types'
+import type { BuilderTaskType, SchemaJoinType, TableType } from '@gaio/shared/types'
 import { cloneDeep, uniq, uniqBy } from 'lodash-es'
 import { useMessage } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'

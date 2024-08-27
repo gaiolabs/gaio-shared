@@ -1,4 +1,4 @@
-import type { TaskType } from '@gaio/types'
+import type { TaskType } from '@gaio/shared/types'
 
 type LocalSettingsType = {
     shared: boolean

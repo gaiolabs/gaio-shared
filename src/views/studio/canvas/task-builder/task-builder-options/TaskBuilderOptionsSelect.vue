@@ -4,75 +4,38 @@
             <div class="mx-1 mb-1">
                 {{ $t('alias') }}
             </div>
-            <n-input
-                v-model:value="localField.field.alias"
-                v-alpha
-                size="small"
-                :placeholder="$t('typeHere')"
-                class="mb-2"
-            />
+            <n-input v-model:value="localField.field.alias" v-alpha size="small" :placeholder="$t('typeHere')"
+                class="mb-2" />
             <div class="flex gap-2">
                 <div class="grow">
-                    <n-select
-                        v-model:value="localField.field.dataType"
-                        size="small"
-                        :options="dataTypeList"
-                    />
+                    <n-select v-model:value="localField.field.dataType" size="small" :options="dataTypeList" />
                 </div>
-                <div
-                    v-if="dataTypeIsFloat(localField.field.dataType)"
-                    class="w-[80px]"
-                >
-                    <n-input-number
-                        v-model:value="localField.field.columnLength"
-                        size="small"
-                        :min="1"
-                        :max="10"
-                        :step="1"
-                    />
+                <div v-if="dataTypeIsFloat(localField.field.dataType)" class="w-[80px]">
+                    <n-input-number v-model:value="localField.field.columnLength" size="small" :min="1" :max="10"
+                        :step="1" />
                 </div>
             </div>
         </div>
         <div class="my-2 rounded-[8px] bg-elevation-1 p-2">
-            <n-radio-group
-                v-model:value="localFieldType"
-                @change="defineTypeBasedOnAggregations()"
-            >
-                <n-radio
-                    v-for="item in fieldValueType"
-                    :key="item.value"
-                    class="w-full py-1"
-                    :value="item.value"
-                    :label="$t(item.label)"
-                />
+            <n-radio-group v-model:value="localFieldType" @change="defineTypeBasedOnAggregations()">
+                <n-radio v-for="item in fieldValueType" :key="item.value" class="w-full py-1" :value="item.value"
+                    :label="$t(item.label)" />
             </n-radio-group>
         </div>
 
-        <div
-            v-if="!localTask.tableView"
-            class="mt-2"
-        >
-            <n-list
-                bordered
-                class="bg-elevation-1"
-            >
+        <div v-if="!localTask.tableView" class="mt-2">
+            <n-list bordered class="bg-elevation-1">
                 <n-list-item class="!p-2 font-bold">{{ $t('advanced') }}</n-list-item>
                 <n-list-item class="!p-2">
                     <div class="flex items-center justify-between">
                         {{ $t('orderByOnCreation') }}
-                        <n-switch
-                            v-model:value="localField.field.createOrderBy"
-                            size="small"
-                        />
+                        <n-switch v-model:value="localField.field.createOrderBy" size="small" />
                     </div>
                 </n-list-item>
                 <n-list-item>
                     <div class="flex items-center justify-between">
                         {{ $t('primaryKey') }}
-                        <n-switch
-                            v-model:value="localField.field.primaryKey"
-                            size="small"
-                        />
+                        <n-switch v-model:value="localField.field.primaryKey" size="small" />
                     </div>
                 </n-list-item>
             </n-list>
@@ -81,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import { type PropType, ref, onMounted, computed } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import useDataType from '@/composables/useDataType'

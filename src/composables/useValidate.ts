@@ -1,4 +1,4 @@
-import type { GenericType } from '@gaio/types'
+import type { GenericType } from '@gaio/shared/types'
 import Validator from 'fastest-validator'
 
 // rule docs: https://github.com/icebob/fastest-validator

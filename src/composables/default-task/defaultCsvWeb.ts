@@ -1,4 +1,4 @@
-import type { CsvUrlTaskType } from '@gaio/types'
+import type { CsvUrlTaskType } from '@gaio/shared/types'
 
 export const defaultCsvWeb = (base: CsvUrlTaskType) => {
     return {

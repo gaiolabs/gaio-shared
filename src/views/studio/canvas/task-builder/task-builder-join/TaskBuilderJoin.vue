@@ -1,8 +1,5 @@
 <template>
-    <div
-        :key="props.localTask.schema.join.length"
-        class="task-builder-drop-join block"
-    >
+    <div :key="props.localTask.schema.join.length" class="task-builder-drop-join block">
         <div class="mx-1 flex items-center justify-between gap-1">
             <div class="flex items-center gap-1 font-bold">
                 <g-icon name="flow" />
@@ -10,23 +7,14 @@
                 <span v-if="localTask.schema.join.length">({{ localTask.schema.join.length }})</span>
             </div>
             <div class="mb-1 flex gap-1">
-                <n-button
-                    quaternary
-                    size="tiny"
-                    class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                    @click="addJoin()"
-                >
+                <n-button quaternary size="tiny" class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
+                    @click="addJoin()">
                     {{ $t('addJoin') }}
                 </n-button>
                 <n-tooltip :delay="1500">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            type="error"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                            @click="removeAll()"
-                        >
+                        <n-button quaternary size="tiny" type="error"
+                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeAll()">
                             <template #icon>
                                 <g-icon name="deleteTag" />
                             </template>
@@ -37,22 +25,13 @@
             </div>
         </div>
         <div
-            class="task-builder-drop-tag min-h-[30px] w-full rounded-[8px] border-elevation-2 bg-paper-100 p-2 pb-1 dark:bg-carbon-200"
-        >
-            <div
-                v-for="(item, joinKey) of localTask.schema.join"
-                :key="joinKey"
-                class="mb-1 flex items-start gap-2"
-            >
+            class="task-builder-drop-tag min-h-[30px] w-full rounded-[8px] border-elevation-2 bg-paper-100 p-2 pb-1 dark:bg-carbon-200">
+            <div v-for="(item, joinKey) of localTask.schema.join" :key="joinKey" class="mb-1 flex items-start gap-2">
                 <!--RAW JOIN-->
                 <template v-if="item.type === 'raw'">
                     <div class="mb-1 flex w-full items-center overflow-hidden rounded border-elevation-3">
                         <div class="flex w-[30px] items-center justify-center">
-                            <n-button
-                                size="tiny"
-                                quaternary
-                                @click="editJoin(joinKey)"
-                            >
+                            <n-button size="tiny" quaternary @click="editJoin(joinKey)">
                                 <g-icon name="edit" />
                             </n-button>
                         </div>
@@ -60,12 +39,7 @@
                             {{ $t('computed') }}
                         </div>
                         <div class="w-[60px] text-center">
-                            <n-button
-                                size="tiny"
-                                quaternary
-                                type="error"
-                                @click="removeJoinItem(joinKey)"
-                            >
+                            <n-button size="tiny" quaternary type="error" @click="removeJoinItem(joinKey)">
                                 <template #icon>
                                     <g-icon name="delete" />
                                 </template>
@@ -77,11 +51,7 @@
                 <template v-else>
                     <div class="flex max-w-[50%] grow items-center overflow-hidden rounded border-elevation-3">
                         <div class="flex max-w-[40px] flex-none items-center justify-center px-1">
-                            <n-button
-                                size="tiny"
-                                quaternary
-                                @click="editJoin(joinKey)"
-                            >
+                            <n-button size="tiny" quaternary @click="editJoin(joinKey)">
                                 <template #icon>
                                     <g-icon name="edit" />
                                 </template>
@@ -90,16 +60,9 @@
                         <div class="grow overflow-hidden text-ellipsis bg-elevation-2 p-1 text-center">
                             {{ item.by }}
                         </div>
-                        <div
-                            class="flex max-w-[40px] flex-none items-center justify-center px-1"
-                            @click="changeJoinType(joinKey, item.type)"
-                        >
-                            <n-button
-                                size="tiny"
-                                quaternary
-                                class="text-base"
-                                @click="editJoin(joinKey)"
-                            >
+                        <div class="flex max-w-[40px] flex-none items-center justify-center px-1"
+                            @click="changeJoinType(joinKey, item.type)">
+                            <n-button size="tiny" quaternary class="text-base" @click="editJoin(joinKey)">
                                 <template #icon>
                                     <g-icon :name="`${item.type}Join`" />
                                 </template>
@@ -110,11 +73,8 @@
                         </div>
                     </div>
                     <div class="grow">
-                        <div
-                            v-for="(sub, subIndex) of item.list"
-                            :key="subIndex"
-                            class="mb-1 flex w-full items-center rounded border-elevation-3"
-                        >
+                        <div v-for="(sub, subIndex) of item.list" :key="subIndex"
+                            class="mb-1 flex w-full items-center rounded border-elevation-3">
                             <div class="grow overflow-hidden text-ellipsis rounded-s bg-elevation-1 p-1 text-center">
                                 {{ sub.columnBy }}
                             </div>
@@ -125,12 +85,8 @@
                                 {{ sub.columnTo }}
                             </div>
                             <div class="flex max-w-[30px] flex-none justify-center px-1">
-                                <n-button
-                                    size="tiny"
-                                    quaternary
-                                    type="error"
-                                    @click="removeJoinItem(joinKey, subIndex)"
-                                >
+                                <n-button size="tiny" quaternary type="error"
+                                    @click="removeJoinItem(joinKey, subIndex)">
                                     <template #icon>
                                         <g-icon name="delete" />
                                     </template>
@@ -141,19 +97,14 @@
                 </template>
             </div>
             <!--JOIN CONTROL PANEL-->
-            <task-builder-join-control
-                v-if="joinItem"
-                :join-item="joinItem"
-                :local-task="localTask"
-                :join-index="joinIndex"
-                @close="joinItem = null"
-            />
+            <task-builder-join-control v-if="joinItem" :join-item="joinItem" :local-task="localTask"
+                :join-index="joinIndex" @close="joinItem = null" />
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType } from '@gaio/types'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import type { BuilderTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 import { type PropType, ref } from 'vue'
 
 import { useAppStore } from '@/stores/useAppStore'

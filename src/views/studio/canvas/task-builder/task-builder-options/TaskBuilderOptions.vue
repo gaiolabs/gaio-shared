@@ -6,22 +6,15 @@
                     <div class="overflow-hidden truncate font-bold">
                         {{ localField.field.columnName }}
                     </div>
-                    <div
-                        v-if="!localField.field.computedId"
-                        class="flex items-center gap-1 overflow-hidden truncate text-[10px]"
-                    >
+                    <div v-if="!localField.field.computedId"
+                        class="flex items-center gap-1 overflow-hidden truncate text-[10px]">
                         <g-icon name="table" />
                         {{ localField.field.tableName }}
                     </div>
                 </div>
                 <div>
-                    <n-button
-                        size="tiny"
-                        type="error"
-                        quaternary
-                        class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                        @click="removeItem()"
-                    >
+                    <n-button size="tiny" type="error" quaternary
+                        class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeItem()">
                         <template #icon>
                             <g-icon name="delete" />
                         </template>
@@ -29,24 +22,12 @@
                 </div>
             </div>
             <template v-if="!localField?.field?.computedId">
-                <task-builder-options-select
-                    v-if="localField.type === 'select'"
-                    :key="localField.field.id"
-                    :local-field="localField"
-                    :local-task="localTask"
-                />
-                <task-builder-options-filter
-                    v-if="localField.type === 'filter'"
-                    :key="localField.field.id"
-                    :local-field="localField"
-                    :local-task="localTask"
-                />
-                <task-builder-options-sort
-                    v-if="localField.type === 'sort'"
-                    :key="localField.field.id"
-                    :local-field="localField"
-                    :local-task="localTask"
-                />
+                <task-builder-options-select v-if="localField.type === 'select'" :key="localField.field.id"
+                    :local-field="localField" :local-task="localTask" />
+                <task-builder-options-filter v-if="localField.type === 'filter'" :key="localField.field.id"
+                    :local-field="localField" :local-task="localTask" />
+                <task-builder-options-sort v-if="localField.type === 'sort'" :key="localField.field.id"
+                    :local-field="localField" :local-task="localTask" />
             </template>
         </template>
         <template v-else>
@@ -58,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import type { PropType } from 'vue'
 
 import TaskBuilderOptionsFilter from './TaskBuilderOptionsFilter.vue'

@@ -9,10 +9,7 @@
                 <div class="flex flex-col gap-2 overflow-auto">
                     <div class="flex w-full flex-col gap-1">
                         <label class="control-label">{{ $t('taskLabel') }}</label>
-                        <n-input
-                            id="task"
-                            v-model:value="localTask.label"
-                        />
+                        <n-input id="task" v-model:value="localTask.label" />
                     </div>
                     <div class="control-label rounded bg-paper-200 p-2 dark:bg-carbon-300">
                         {{ $t('migrateDataByInsert') }}
@@ -23,52 +20,32 @@
                                 <div class="control-label">
                                     {{ $t('sourceTable') }}
                                 </div>
-                                <g-select-table
-                                    v-model="localTask.tableName"
-                                    :placeholder="$t('selectTable')"
-                                    :disabled="true"
-                                />
+                                <g-select-table v-model="localTask.tableName" :placeholder="$t('selectTable')"
+                                    :disabled="true" />
                             </div>
                             <div class="grow">
                                 <div class="control-label">{{ $t('targetTable') }}</div>
-                                <g-select-table
-                                    v-model="localTask.resultTable"
-                                    :placeholder="$t('selectTable')"
-                                    @update:model-value="onChooseTable(localTask.resultTable, 'resultTable')"
-                                />
+                                <g-select-table v-model="localTask.resultTable" :placeholder="$t('selectTable')"
+                                    @update:model-value="onChooseTable(localTask.resultTable, 'resultTable')" />
                             </div>
                         </div>
                     </n-card>
 
-                    <div
-                        v-if="showFinds()"
-                        class="flex items-center gap-2"
-                    >
-                        <n-button
-                            class="w-50 grow"
-                            type="primary"
-                            style="color: white"
-                            :disabled="showButtonAuto"
-                            @click="autoColumns()"
-                        >
+                    <div v-if="showFinds()" class="flex items-center gap-2">
+                        <n-button class="w-50 grow" type="primary" style="color: white" :disabled="showButtonAuto"
+                            @click="autoColumns()">
                             {{ $t('autoFill') }}
                         </n-button>
 
-                        <n-button
-                            class="w-50 grow"
-                            style="color: black"
-                            :disabled="showButtonClean"
-                            @click="autoClean()"
-                        >
+                        <n-button class="w-50 grow" style="color: black" :disabled="showButtonClean"
+                            @click="autoClean()">
                             {{ $t('clearFields') }}
                         </n-button>
                     </div>
 
                     <n-card content-style="padding: 10px">
-                        <table
-                            v-if="columns.resultTable.length && columns.sourceTable.length"
-                            class="w-full table-auto"
-                        >
+                        <table v-if="columns.resultTable.length && columns.sourceTable.length"
+                            class="w-full table-auto">
                             <thead>
                                 <tr class="border-b text-left *:p-1 even:bg-paper-200">
                                     <th>
@@ -78,26 +55,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="item in columns.sourceTable"
-                                    :key="item.columnName"
-                                    class="border-b *:p-1 odd:bg-paper-200"
-                                >
+                                <tr v-for="item in columns.sourceTable" :key="item.columnName"
+                                    class="border-b *:p-1 odd:bg-paper-200">
                                     <td>
                                         <g-icon :name="dataTypeIcon(item.dataType)" />
                                         {{ item.columnName }}
                                     </td>
                                     <td>
-                                        <n-select
-                                            :key="item.targetColumn"
-                                            v-model:value="item.targetColumn"
-                                            class="w-96"
-                                            :placeholder="$t('selectColumn')"
-                                            :filterable="true"
-                                            value-field="columnName"
-                                            label-field="columnName"
-                                            :options="columns.resultTable"
-                                        />
+                                        <n-select :key="item.targetColumn" v-model:value="item.targetColumn"
+                                            class="w-96" :placeholder="$t('selectColumn')" :filterable="true"
+                                            value-field="columnName" label-field="columnName"
+                                            :options="columns.resultTable" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -105,11 +73,7 @@
                     </n-card>
                 </div>
                 <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                    <n-button
-                        type="primary"
-                        :loading="loading"
-                        @click="save()"
-                    >
+                    <n-button type="primary" :loading="loading" @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </div>
@@ -118,7 +82,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { FieldType, InsertTableTaskType } from '@gaio/types'
+import type { FieldType, InsertTableTaskType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { onMounted, reactive, ref } from 'vue'
 

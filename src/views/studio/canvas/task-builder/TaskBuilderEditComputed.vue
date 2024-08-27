@@ -5,11 +5,7 @@
                 <n-button @click="$emit('close')">
                     <g-icon name="close" />
                 </n-button>
-                <n-button
-                    type="primary"
-                    :disabled="!isValid"
-                    @click="saveOrCreate()"
-                >
+                <n-button type="primary" :disabled="!isValid" @click="saveOrCreate()">
                     {{ $t('saveComputed') }}
                 </n-button>
                 <n-button>
@@ -19,19 +15,16 @@
             <g-define-column v-model="localComputed" />
         </div>
         <div class="flex grow flex-col py-2">
-            <code-editor
-                :key="localComputed.computedId"
-                v-model="localComputed.content"
-                class="h-full overflow-hidden rounded"
-            />
+            <code-editor :key="localComputed.computedId" v-model="localComputed.content"
+                class="h-full overflow-hidden rounded" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { type BuilderTaskType, type FieldType, type SchemaComputedType } from '@gaio/types'
-import { getId } from '@gaio/utils'
-import { bridgeDataType } from '@gaio/utils/libs/dataTypeHelper'
+import { type BuilderTaskType, type FieldType, type SchemaComputedType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
+import { bridgeDataType } from '@gaio/shared/utils/libs/dataTypeHelper'
 import { cloneDeep } from 'lodash-es'
 import { onMounted, type PropType } from 'vue'
 import { computed, ref } from 'vue'

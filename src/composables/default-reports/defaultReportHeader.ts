@@ -1,4 +1,4 @@
-import type { ReportTaskSettingsType } from '@gaio/types'
+import type { ReportTaskSettingsType } from '@gaio/shared/types'
 
 export const defaultReportHeader = (settings: ReportTaskSettingsType) => {
     return {

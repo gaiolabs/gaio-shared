@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash-es'
 import dayjs from 'dayjs'
 import { useAppStore, useAuthStore } from '@/stores'
-import type { WorkflowType, TaskType, FlowType, NodeType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { WorkflowType, TaskType, FlowType, NodeType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import useApi from '@/composables/useApi'
 
 type TaskFlowType<T> = {

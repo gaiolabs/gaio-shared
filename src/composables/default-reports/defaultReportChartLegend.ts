@@ -1,4 +1,4 @@
-import { definedOrDefault } from '@gaio/utils'
+import { definedOrDefault } from '@gaio/shared/utils'
 
 export const defaultReportChartLegend = (settings) => {
     return {

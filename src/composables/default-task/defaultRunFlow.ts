@@ -1,5 +1,5 @@
-import type { FlowTaskType } from '@gaio/types/tasks/flow.task.type'
-import type { TaskType } from '@gaio/types'
+import type { FlowTaskType } from '@gaio/shared/types/tasks/flow.task.type'
+import type { TaskType } from '@gaio/shared/types'
 
 export const defaultRunFlow = (base: FlowTaskType & TaskType) => {
     return {

@@ -1,37 +1,20 @@
 <template>
-    <div
-        v-if="useReportStore().current"
-        class="task-report-view h-full"
-    >
-        <drawer-view
-            tag="task-report-view"
-            class="task-report-view"
-            @close="$emit('close')"
-        >
+    <div v-if="useReportStore().current" class="task-report-view h-full">
+        <drawer-view tag="task-report-view" class="task-report-view" @close="$emit('close')">
             <template #header>
                 <div class="flex w-full justify-between">
                     <div class="flex items-center gap-2">
-                        <task-icon
-                            :local-task="useReportStore().current"
-                            class="ms-2 size-[18px]"
-                        />
+                        <task-icon :local-task="useReportStore().current" class="ms-2 size-[18px]" />
                         <n-input v-model:value="useReportStore().current.label" />
                     </div>
                     <div class="flex items-center gap-2">
-                        <n-button
-                            size="small"
-                            @click="refresh()"
-                        >
+                        <n-button size="small" @click="refresh()">
                             <template #icon>
                                 <g-icon name="refresh" />
                             </template>
                             {{ $t('refresh') }}
                         </n-button>
-                        <n-button
-                            size="small"
-                            type="primary"
-                            @click="save()"
-                        >
+                        <n-button size="small" type="primary" @click="save()">
                             {{ $t('save') }}
                         </n-button>
                         <n-divider vertical />
@@ -62,8 +45,8 @@
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 
-import type { ReportNodeType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { ReportNodeType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onMounted } from 'vue'
 

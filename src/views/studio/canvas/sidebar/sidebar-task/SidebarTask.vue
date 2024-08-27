@@ -3,12 +3,8 @@
         <div class="flex w-full items-stretch justify-between px-4 pt-3">
             <div class="text-lg font-bold">{{ $t('tasks') }}</div>
             <div class="flex gap-1">
-                <n-button
-                    size="tiny"
-                    tertiary
-                    :type="showAs === 'grid' ? 'primary' : 'default'"
-                    @click="() => (showAs = showAs === 'grid' ? 'tree' : 'grid')"
-                >
+                <n-button size="tiny" tertiary :type="showAs === 'grid' ? 'primary' : 'default'"
+                    @click="() => (showAs = showAs === 'grid' ? 'tree' : 'grid')">
                     <template #icon>
                         <g-icon name="grid" />
                     </template>
@@ -16,71 +12,42 @@
             </div>
         </div>
         <div class="sidebar-flow-search px-4 pt-1">
-            <n-input
-                v-model:value="searchTerm"
-                size="small"
-                :placeholder="$t('search')"
-            />
+            <n-input v-model:value="searchTerm" size="small" :placeholder="$t('search')" />
         </div>
-        <n-scrollbar
-            style="calc(100% - 20px) overflow: auto"
-            outer-class="h-full overflow-auto"
-        >
+        <n-scrollbar style="calc(100% - 20px) overflow: auto" outer-class="h-full overflow-auto">
             <template v-if="showAs === 'grid'">
-                <div
-                    v-for="tree of localTreeFiltered"
-                    :key="tree.key"
-                    class="mb-5 px-4"
-                >
+                <div v-for="tree of localTreeFiltered" :key="tree.key" class="mb-5 px-4">
                     <div class="mx-4 mt-2 font-bold">
                         {{ tree.label }}
                     </div>
                     <div class="grid grid-cols-3 gap-1">
-                        <div
-                            v-for="item of tree.children"
-                            :key="item.key"
-                            class="mb-2 flex h-[79px] flex-col items-center justify-start"
-                        >
-                            <div
-                                class="mb-1 flex size-[55px] cursor-pointer items-center justify-center rounded border-elevation-2 bg-elevation-1"
-                                @click="select(item)"
-                            >
+                        <div v-for="item of tree.children" :key="item.key"
+                            class="mb-2 flex h-[79px] flex-col items-center justify-start">
+                            <div class="mb-1 flex size-[55px] cursor-pointer items-center justify-center rounded border-elevation-2 bg-elevation-1"
+                                @click="select(item)">
                                 <component :is="item.prefix()" />
                             </div>
-                            <div
-                                class="text-xs"
-                                style="
+                            <div class="text-xs" style="
                                     text-align: center;
                                     font-size: 10px;
                                     font-style: normal;
                                     font-weight: 400;
                                     line-height: 10px;
-                                "
-                            >
+                                ">
                                 {{ item.label }}
                             </div>
                         </div>
                     </div>
                 </div>
             </template>
-            <n-tree
-                v-else
-                class="mx-4 mb-5"
-                block-node
-                block-line
-                expand-on-click
-                :default-expanded-keys="['etl']"
-                :get-children="baseChildren"
-                :data="localTreeFiltered"
-                :default-expand-all="searchTerm.length > 0"
-                :node-props="nodeProps"
-                @select="select"
-            />
+            <n-tree v-else class="mx-4 mb-5" block-node block-line expand-on-click :default-expanded-keys="['etl']"
+                :get-children="baseChildren" :data="localTreeFiltered" :default-expand-all="searchTerm.length > 0"
+                :node-props="nodeProps" @select="select" />
         </n-scrollbar>
     </div>
 </template>
 <script setup lang="ts">
-import { taskList } from '@gaio/utils'
+import { taskList } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { NButton, type TreeOption, useMessage } from 'naive-ui'
 import { computed, h, ref } from 'vue'
@@ -140,13 +107,12 @@ const getByCategory = (cat: string) =>
         })
 
 const generateIcon = (item) => {
-    const image = `../../../../../assets${
-        generateBase({
-            ...item,
-            client: 'clickhouse',
-            sourceType: 'bucket'
-        }).image
-    }`
+    const image = `../../../../../assets${generateBase({
+        ...item,
+        client: 'clickhouse',
+        sourceType: 'bucket'
+    }).image
+        }`
     return new URL(image, import.meta.url).href
 }
 

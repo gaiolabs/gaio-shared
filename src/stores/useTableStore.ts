@@ -1,4 +1,4 @@
-import type { BuilderTaskType, SchemaFilterType } from '@gaio/types'
+import type { BuilderTaskType, SchemaFilterType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'

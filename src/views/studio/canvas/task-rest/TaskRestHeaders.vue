@@ -1,13 +1,7 @@
 <template>
-    <div
-        v-if="localTask"
-        class="task-rest-headers flex size-full flex-col gap-4 p-4"
-    >
+    <div v-if="localTask" class="task-rest-headers flex size-full flex-col gap-4 p-4">
         <div class="flex flex-col gap-1">
-            <label
-                class="control-label"
-                for="rows"
-            >
+            <label class="control-label" for="rows">
                 {{ $t('timeout') }}
             </label>
             <n-input-number id="rows" />
@@ -39,22 +33,14 @@
                     </tr>
                 </thead>
                 <tbody class="[&_tr:last-child]:border-0">
-                    <tr
-                        v-for="(header, index) of localTask.headers"
-                        :key="index"
-                    >
+                    <tr v-for="(header, index) of localTask.headers" :key="index">
                         <td class="p-2 align-middle [&:has([role=checkbox])]:pr-0">
                             <n-input v-model:value="header.prop" />
                         </td>
                         <td class="p-2 align-middle [&:has([role=checkbox])]:pr-0">
                             <div class="flex gap-1">
                                 <n-input v-model:value="header.value" />
-                                <n-button
-                                    size="tiny"
-                                    text
-                                    type="error"
-                                    @click="removeProperty(index)"
-                                >
+                                <n-button size="tiny" text type="error" @click="removeProperty(index)">
                                     <template #icon>
                                         <g-icon name="delete" />
                                     </template>
@@ -69,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RestTaskType } from '@gaio/types'
+import type { RestTaskType } from '@gaio/shared/types'
 
 const props = withDefaults(defineProps<{ localTask: RestTaskType }>(), { localTask: null })
 

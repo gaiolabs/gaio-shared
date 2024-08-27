@@ -1,9 +1,9 @@
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { defaultReportHeader } from '@/composables/default-reports/defaultReportHeader'
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
 import { defaultReportTheme } from '@/composables/default-reports/defaultReportTheme'
 import { defaultReportChartLegend } from '@/composables/default-reports/defaultReportChartLegend'
-import { definedOrDefault } from '@gaio/utils'
+import { definedOrDefault } from '@gaio/shared/utils'
 
 export const defaultReportChartPie = (base: ReportNodeType) => {
     const { settings } = base

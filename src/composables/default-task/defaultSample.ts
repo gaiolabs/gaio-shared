@@ -1,5 +1,5 @@
-import type { SampleTaskType, TaskType } from '@gaio/types'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import type { SampleTaskType, TaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultSample = (base: SampleTaskType & TaskType) => {
     return {

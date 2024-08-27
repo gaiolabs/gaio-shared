@@ -1,4 +1,4 @@
-import type { MetaType, TaskType } from '@gaio/types'
+import type { MetaType, TaskType } from '@gaio/shared/types'
 
 export const defaultMeta = (base: MetaType & TaskType) => {
     return {

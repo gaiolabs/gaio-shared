@@ -2,57 +2,34 @@
     <settings-view>
         <template #title>
             <div>
-                <g-icon
-                    name="user"
-                    :height="22"
-                />
+                <g-icon name="user" :height="22" />
                 {{ $t('users') }}
             </div>
         </template>
-        <div
-            :key="localKey"
-            class="user-manager"
-        >
+        <div :key="localKey" class="user-manager">
             <template v-if="loading">
                 <n-space vertical>
-                    <n-skeleton
-                        :height="30"
-                        class="rounded"
-                    />
-                    <n-skeleton
-                        :height="90"
-                        class="rounded"
-                    />
+                    <n-skeleton :height="30" class="rounded" />
+                    <n-skeleton :height="90" class="rounded" />
                 </n-space>
             </template>
             <template v-else>
                 <div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
                     <div class="flex grow items-center justify-start gap-2">
                         <template v-if="numberOfUsers <= userLimit">
-                            <n-button
-                                type="primary"
-                                @click="addUser()"
-                            >
+                            <n-button type="primary" @click="addUser()">
                                 <template #icon>
                                     <g-icon name="addUser" />
                                 </template>
                             </n-button>
                             <n-divider vertical />
                         </template>
-                        <n-input
-                            v-model:value="searchTerm"
-                            :placeholder="$t('filter')"
-                            clearable
-                            style="max-width: 300px"
-                        />
+                        <n-input v-model:value="searchTerm" :placeholder="$t('filter')" clearable
+                            style="max-width: 300px" />
                         <n-divider vertical />
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    color="#333"
-                                    style="color: #fff"
-                                    @click="filterRole = 'admin'"
-                                >
+                                <n-button color="#333" style="color: #fff" @click="filterRole = 'admin'">
                                     A
                                 </n-button>
                             </template>
@@ -60,11 +37,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    color="#1976d2"
-                                    style="color: #fff"
-                                    @click="filterRole = 'dev'"
-                                >
+                                <n-button color="#1976d2" style="color: #fff" @click="filterRole = 'dev'">
                                     D
                                 </n-button>
                             </template>
@@ -72,11 +45,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    color="#e91e63"
-                                    style="color: #fff"
-                                    @click="filterRole = 'user'"
-                                >
+                                <n-button color="#e91e63" style="color: #fff" @click="filterRole = 'user'">
                                     U
                                 </n-button>
                             </template>
@@ -84,11 +53,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    color="#ccc"
-                                    style="color: #222"
-                                    @click="filterRole = ''"
-                                >
+                                <n-button color="#ccc" style="color: #222" @click="filterRole = ''">
                                     C
                                 </n-button>
                             </template>
@@ -96,39 +61,17 @@
                         </n-tooltip>
                     </div>
                     <div class="flex items-center justify-between gap-2">
-                        <n-select
-                            v-model:value="filterGroup"
-                            class="w-[150px]"
-                            filterable
-                            :placeholder="$t('filterByGroup')"
-                            value-field="userId"
-                            label-field="name"
-                            :options="groups"
-                        />
+                        <n-select v-model:value="filterGroup" class="w-[150px]" filterable
+                            :placeholder="$t('filterByGroup')" value-field="userId" label-field="name"
+                            :options="groups" />
                         <n-divider vertical />
-                        <n-select
-                            v-if="hasSelected"
-                            v-model:value="bulkGroup"
-                            class="w-[210px]"
-                            filterable
-                            multiple
-                            collapse-tags
-                            value-field="userId"
-                            label-field="name"
-                            :options="groups"
-                            :placeholder="$t('teams')"
-                        />
-                        <n-divider
-                            v-if="hasSelected"
-                            vertical
-                        />
+                        <n-select v-if="hasSelected" v-model:value="bulkGroup" class="w-[210px]" filterable multiple
+                            collapse-tags value-field="userId" label-field="name" :options="groups"
+                            :placeholder="$t('teams')" />
+                        <n-divider v-if="hasSelected" vertical />
                         <template v-if="hasSelected">
-                            <n-popconfirm
-                                :width="350"
-                                :positive-text="$t('delete')"
-                                :negative-text="$t('cancel')"
-                                @positive-click="removeAllSelected()"
-                            >
+                            <n-popconfirm :width="350" :positive-text="$t('delete')" :negative-text="$t('cancel')"
+                                @positive-click="removeAllSelected()">
                                 <template #activator>
                                     <span>
                                         <n-button type="error">
@@ -141,17 +84,10 @@
                                 </div>
                             </n-popconfirm>
                         </template>
-                        <n-input-number
-                            v-model:value="size"
-                            :step="5"
-                            style="margin-left: 5px; min-width: 90px"
-                        />
+                        <n-input-number v-model:value="size" :step="5" style="margin-left: 5px; min-width: 90px" />
                         <n-tooltip :persistent="false">
                             <template #trigger>
-                                <n-button
-                                    tertiary
-                                    @click="downloadUsers()"
-                                >
+                                <n-button tertiary @click="downloadUsers()">
                                     <template #icon>
                                         <g-icon name="download" />
                                     </template>
@@ -161,27 +97,13 @@
                         </n-tooltip>
                     </div>
                 </div>
-                <g-alert
-                    v-if="numberOfUsers >= userLimit"
-                    type="error"
-                    class="mb-2"
-                    :title="$t('maxUserReached')"
-                />
-                <div
-                    v-if="filterApplied"
-                    class="g-bg-1 rounded p-2 shadow"
-                >
+                <g-alert v-if="numberOfUsers >= userLimit" type="error" class="mb-2" :title="$t('maxUserReached')" />
+                <div v-if="filterApplied" class="g-bg-1 rounded p-2 shadow">
                     <n-table>
                         <thead>
                             <tr>
-                                <th
-                                    style="width: 40px"
-                                    class="!text-center"
-                                >
-                                    <n-checkbox
-                                        v-model:checked="selectAll"
-                                        @update:checked="onSelectAll()"
-                                    />
+                                <th style="width: 40px" class="!text-center">
+                                    <n-checkbox v-model:checked="selectAll" @update:checked="onSelectAll()" />
                                 </th>
                                 <th style="width: 45px">{{ $t('type') }}</th>
                                 <th style="width: 70px">ID</th>
@@ -195,65 +117,33 @@
                             </tr>
                         </thead>
                         <tbody :key="searchTerm">
-                            <tr
-                                v-for="user of myUsers"
-                                :key="user.userId"
-                            >
-                                <td
-                                    class="text-center"
-                                    style="width: 40px"
-                                >
+                            <tr v-for="user of myUsers" :key="user.userId">
+                                <td class="text-center" style="width: 40px">
                                     <n-checkbox v-model="user['selected']" />
                                 </td>
-                                <td
-                                    :key="user.role"
-                                    class="text-center"
-                                >
-                                    <n-tooltip
-                                        v-if="user.role === 'admin'"
-                                        :persistent="false"
-                                        :show-after="1500"
-                                    >
+                                <td :key="user.role" class="text-center">
+                                    <n-tooltip v-if="user.role === 'admin'" :persistent="false" :show-after="1500">
                                         <template #trigger>
-                                            <n-button
-                                                size="tiny"
-                                                color="#333"
-                                                style="color: #fff"
-                                                @click="changeRole(user)"
-                                            >
+                                            <n-button size="tiny" color="#333" style="color: #fff"
+                                                @click="changeRole(user)">
                                                 A
                                             </n-button>
                                         </template>
                                         {{ t('admin') }}
                                     </n-tooltip>
-                                    <n-tooltip
-                                        v-else-if="user.role === 'dev'"
-                                        :persistent="false"
-                                    >
+                                    <n-tooltip v-else-if="user.role === 'dev'" :persistent="false">
                                         <template #trigger>
-                                            <n-button
-                                                size="tiny"
-                                                color="#1976d2"
-                                                style="color: #fff"
-                                                @click="changeRole(user)"
-                                            >
+                                            <n-button size="tiny" color="#1976d2" style="color: #fff"
+                                                @click="changeRole(user)">
                                                 D
                                             </n-button>
                                         </template>
                                         {{ t('developer') }}
                                     </n-tooltip>
-                                    <n-tooltip
-                                        v-else
-                                        :persistent="false"
-                                        :show-after="1500"
-                                    >
+                                    <n-tooltip v-else :persistent="false" :show-after="1500">
                                         <template #trigger>
-                                            <n-button
-                                                size="tiny"
-                                                color="#e91e63"
-                                                style="color: #fff"
-                                                @click="changeRole(user)"
-                                            >
+                                            <n-button size="tiny" color="#e91e63" style="color: #fff"
+                                                @click="changeRole(user)">
                                                 U
                                             </n-button>
                                         </template>
@@ -262,55 +152,34 @@
                                 </td>
                                 <td>{{ user.userId }}</td>
                                 <td>
-                                    <n-button
-                                        text
-                                        type="primary"
-                                        @click="selectAndEditUser(user)"
-                                    >
+                                    <n-button text type="primary" @click="selectAndEditUser(user)">
                                         {{ user.name }}
                                     </n-button>
                                 </td>
                                 <td>{{ user.email }}</td>
                                 <td>
-                                    <n-select
-                                        :key="user.userId"
+                                    <n-select :key="user.userId"
                                         v-model:value="users[users.findIndex((o) => o.userId === user.userId)].tags"
-                                        filterable
-                                        multiple
-                                        collapse-tags
-                                        :options="groups"
-                                        value-field="userId"
-                                        label-field="name"
-                                        @update:value="
+                                        filterable multiple collapse-tags :options="groups" value-field="userId"
+                                        label-field="name" @update:value="
                                             saveSingleUser(users[users.findIndex((o) => o.userId === user.userId)])
-                                        "
-                                    />
+                                            " />
                                 </td>
                                 <td class="text-center">
                                     <n-switch
                                         v-model:value="users[users.findIndex((o) => o.userId === user.userId)].status"
-                                        checked-value="active"
-                                        unchecked-value="inactive"
-                                        @update:value="
+                                        checked-value="active" unchecked-value="inactive" @update:value="
                                             globalChangeUser(users[users.findIndex((o) => o.userId === user.userId)])
-                                        "
-                                    >
+                                            ">
                                         <template #checked>{{ $t('active') }}</template>
                                         <template #unchecked>{{ $t('inactive') }}</template>
                                     </n-switch>
                                 </td>
                                 <td class="text-center">
-                                    <n-popconfirm
-                                        :width="350"
-                                        :positive-text="$t('delete')"
-                                        :negative-text="$t('cancel')"
-                                        @positive-click="removeUser(user.userId)"
-                                    >
+                                    <n-popconfirm :width="350" :positive-text="$t('delete')"
+                                        :negative-text="$t('cancel')" @positive-click="removeUser(user.userId)">
                                         <template #activator>
-                                            <n-button
-                                                :disabled="currentUser.userId === user.userId"
-                                                text
-                                            >
+                                            <n-button :disabled="currentUser.userId === user.userId" text>
                                                 <g-icon name="delete" />
                                             </n-button>
                                         </template>
@@ -322,37 +191,23 @@
                             </tr>
                         </tbody>
                     </n-table>
-                    <div
-                        v-if="filterBy(users, ['userId', 'name', 'email'], searchTerm).length > size"
-                        class="d-flex justify-content-center w-100"
-                    >
-                        <n-pagination
-                            v-model:page="page"
-                            size="small"
+                    <div v-if="filterBy(users, ['userId', 'name', 'email'], searchTerm).length > size"
+                        class="d-flex justify-content-center w-100">
+                        <n-pagination v-model:page="page" size="small"
                             :page-count="filterBy(users, ['userId', 'name', 'email'], searchTerm).length"
-                            :page-size="size"
-                            @update:page="listUsers()"
-                        />
+                            :page-size="size" @update:page="listUsers()" />
                     </div>
                 </div>
-                <g-alert
-                    v-else
-                    :title="$t('noResult')"
-                />
-                <user-control
-                    v-if="showEditUser"
-                    :current="current"
-                    :groups="groups"
-                    @close="closeEditUser"
-                    @save="saveAndRefresh"
-                />
+                <g-alert v-else :title="$t('noResult')" />
+                <user-control v-if="showEditUser" :current="current" :groups="groups" @close="closeEditUser"
+                    @save="saveAndRefresh" />
             </template>
         </div>
     </settings-view>
 </template>
 
 <script setup lang="ts">
-import type { UserType } from '@gaio/types'
+import type { UserType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { useMessage } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
@@ -398,8 +253,8 @@ const userLimit = computed(() => {
         license.value ?
             license.value.userLimit <= 0 ?
                 10000 * 100
-            :   license.value.userLimit || 1
-        :   1
+                : license.value.userLimit || 1
+            : 1
     )
 })
 

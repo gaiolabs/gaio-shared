@@ -1,4 +1,4 @@
-import type { AppType } from '@gaio/types'
+import type { AppType } from '@gaio/shared/types'
 import { take } from 'lodash-es'
 import { computed, ref } from 'vue'
 

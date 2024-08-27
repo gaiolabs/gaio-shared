@@ -7,18 +7,9 @@
                     {{ $t('dataApps') }}
                 </div>
                 <div class="flex max-w-[320px] grow gap-2">
-                    <n-input
-                        v-model:value="searchTerm"
-                        clearable
-                        class="w-full"
-                        size="small"
-                        :placeholder="$t('filterApps')"
-                    />
-                    <n-button
-                        secondary
-                        size="small"
-                        type="default"
-                    >
+                    <n-input v-model:value="searchTerm" clearable class="w-full" size="small"
+                        :placeholder="$t('filterApps')" />
+                    <n-button secondary size="small" type="default">
                         {{ $t('filter') }}
                     </n-button>
                 </div>
@@ -26,20 +17,12 @@
             <!--RECENT AND FAVORITES-->
             <div class="my-3 flex">
                 <div class="g-bg-1 flex gap-1 rounded bg-paper-100 p-1 shadow">
-                    <n-button
-                        :type="currentTab === 'recent' ? 'primary' : 'default'"
-                        size="small"
-                        :quaternary="currentTab === 'favorites'"
-                        @click="currentTab = 'recent'"
-                    >
+                    <n-button :type="currentTab === 'recent' ? 'primary' : 'default'" size="small"
+                        :quaternary="currentTab === 'favorites'" @click="currentTab = 'recent'">
                         {{ $t('recent') }}
                     </n-button>
-                    <n-button
-                        :type="currentTab === 'favorites' ? 'primary' : 'default'"
-                        size="small"
-                        :quaternary="currentTab === 'recent'"
-                        @click="currentTab = 'favorites'"
-                    >
+                    <n-button :type="currentTab === 'favorites' ? 'primary' : 'default'" size="small"
+                        :quaternary="currentTab === 'recent'" @click="currentTab = 'favorites'">
                         {{ $t('favorites') }}
                     </n-button>
                 </div>
@@ -47,24 +30,12 @@
             <div class="apps-filtered-by-user my-3">
                 <template v-if="loading">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div
-                            v-for="n in 4"
-                            :key="n"
-                            class="core-gradient h-[108px] animate-pulse rounded-[16px] border bg-gray-200 p-0 dark:border-gray-800 dark:bg-gray-700"
-                        />
+                        <div v-for="n in 4" :key="n"
+                            class="core-gradient h-[108px] animate-pulse rounded-[16px] border bg-gray-200 p-0 dark:border-gray-800 dark:bg-gray-700" />
                     </div>
                 </template>
-                <div
-                    v-else-if="filteredApps.length"
-                    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-                >
-                    <apps-card
-                        v-for="app of filteredApps"
-                        :key="app.appId"
-                        :shadow="!isDark"
-                        gradient
-                        :app="app"
-                    />
+                <div v-else-if="filteredApps.length" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <apps-card v-for="app of filteredApps" :key="app.appId" :shadow="!isDark" gradient :app="app" />
                 </div>
                 <div v-else-if="currentTab === 'recent'">
                     <g-alert :title="$t('noRecentApps')" />
@@ -82,24 +53,15 @@
                 </div>
                 <div class="my-3 flex">
                     <div
-                        class="core-shadow flex gap-1 rounded-[8px] bg-paper-100 p-1 dark:border dark:border-gray-800 dark:bg-carbon-200"
-                    >
-                        <n-button
-                            :type="listType === 'grid' ? 'primary' : 'default'"
-                            size="small"
-                            :quaternary="listType === 'list'"
-                            @click="changeUserViewType('grid')"
-                        >
+                        class="core-shadow flex gap-1 rounded-[8px] bg-paper-100 p-1 dark:border dark:border-gray-800 dark:bg-carbon-200">
+                        <n-button :type="listType === 'grid' ? 'primary' : 'default'" size="small"
+                            :quaternary="listType === 'list'" @click="changeUserViewType('grid')">
                             <template #icon>
                                 <g-icon name="grid" />
                             </template>
                         </n-button>
-                        <n-button
-                            :quaternary="listType === 'grid'"
-                            :type="listType === 'list' ? 'primary' : 'default'"
-                            size="small"
-                            @click="changeUserViewType('list')"
-                        >
+                        <n-button :quaternary="listType === 'grid'" :type="listType === 'list' ? 'primary' : 'default'"
+                            size="small" @click="changeUserViewType('list')">
                             <template #icon>
                                 <g-icon name="list" />
                             </template>
@@ -111,56 +73,33 @@
             <template v-if="listType === 'grid'">
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <template v-if="loading">
-                        <div
-                            v-for="n in 8"
-                            :key="n"
-                            class="core-gradient h-[108px] animate-pulse rounded-[8px] border bg-gray-200 dark:border-gray-800 dark:bg-gray-700"
-                        ></div>
+                        <div v-for="n in 8" :key="n"
+                            class="core-gradient h-[108px] animate-pulse rounded-[8px] border bg-gray-200 dark:border-gray-800 dark:bg-gray-700">
+                        </div>
                     </template>
                     <template v-else>
-                        <apps-card
-                            v-for="app of listLocalApps"
-                            :key="app.appId"
-                            gradient
-                            :shadow="!isDark"
-                            :app="app"
-                            @edit="editApp"
-                        />
+                        <apps-card v-for="app of listLocalApps" :key="app.appId" gradient :shadow="!isDark" :app="app"
+                            @edit="editApp" />
                     </template>
                 </div>
             </template>
             <!-- LIST CARD -->
             <template v-else>
                 <ul class="flex w-full flex-col">
-                    <li
-                        v-for="app of listLocalApps"
-                        :key="app.appId"
-                        class="g-bg-1 g-border-500 -mt-px inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0"
-                    >
+                    <li v-for="app of listLocalApps" :key="app.appId"
+                        class="g-bg-1 g-border-500 -mt-px inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0">
                         <div class="flex min-w-[80px] items-center gap-4">
-                            <n-button
-                                text
-                                size="tiny"
-                            >
+                            <n-button text size="tiny">
                                 <template #icon>
                                     <g-icon name="dashboard" />
                                 </template>
                             </n-button>
-                            <n-button
-                                v-if="app.role === 'edit'"
-                                text
-                                size="tiny"
-                                @click="editApp(app)"
-                            >
+                            <n-button v-if="app.role === 'edit'" text size="tiny" @click="editApp(app)">
                                 <template #icon>
                                     <g-icon name="pencil" />
                                 </template>
                             </n-button>
-                            <n-button
-                                v-if="app.role === 'edit'"
-                                text
-                                size="tiny"
-                            >
+                            <n-button v-if="app.role === 'edit'" text size="tiny">
                                 <template #icon>
                                     <g-icon name="workflow" />
                                 </template>
@@ -168,10 +107,7 @@
                         </div>
                         <n-divider vertical />
                         <div class="ms-3 flex gap-2">
-                            <g-app-icon
-                                :name="app.options.icon"
-                                :color="app.options.color"
-                            />
+                            <g-app-icon :name="app.options.icon" :color="app.options.color" />
                             {{ app.appName }}
                         </div>
                     </li>
@@ -179,26 +115,18 @@
             </template>
             <!--PAGINATE-->
             <div class="mt-5 flex w-full justify-center">
-                <n-pagination
-                    v-if="appList.length > 12"
-                    v-model:page="currentPage"
-                    :page-count="Math.round(appList.length / 12)"
-                />
+                <n-pagination v-if="appList.length > 12" v-model:page="currentPage"
+                    :page-count="Math.round(appList.length / 12)" />
             </div>
             <!--EDIT APP-->
-            <app-control
-                v-if="show"
-                :app="currentApp as AppType"
-                @save="manuallyUpdateApp"
-                @close="show = false"
-            />
+            <app-control v-if="show" :app="currentApp as AppType" @save="manuallyUpdateApp" @close="show = false" />
         </div>
         <home-nav />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { AppType } from '@gaio/types'
+import type { AppType } from '@gaio/shared/types'
 import { useDark } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 

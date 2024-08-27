@@ -1,11 +1,7 @@
 <template>
-    <div
-        v-if="localField"
-        class="report-field col rounded p-1"
-        :class="{
-            'edit-col': edit && isCurrentField
-        }"
-    >
+    <div v-if="localField" class="report-field col rounded p-1" :class="{
+        'edit-col': edit && isCurrentField
+    }">
         {{ field.value }}
         <!--FIELD LABEL-->
         <div class="control-label flex justify-between">
@@ -15,11 +11,7 @@
                 </template>
             </div>
             <div v-if="edit">
-                <n-button
-                    text
-                    type="error"
-                    @click="useFormStore().deleteFieldById(localField.id)"
-                >
+                <n-button text type="error" @click="useFormStore().deleteFieldById(localField.id)">
                     <template #icon>
                         <g-icon name="delete" />
                     </template>
@@ -28,10 +20,7 @@
         </div>
         <!--DESCRIPTION-->
         <template v-if="localField.type === 'description'">
-            <report-tip-tap
-                :edit="edit"
-                :content="localField.description"
-            />
+            <report-tip-tap :edit="edit" :content="localField.description" />
         </template>
         <!-- DIVIDER -->
         <template v-else-if="localField.type === 'divider'">
@@ -42,136 +31,67 @@
             <!-- I::TEXT-->
             <template v-if="localField.type === 'lineText'">
                 <template v-if="localField.longText">
-                    <n-input
-                        :key="localField.paramName"
-                        v-model:value="localField.value"
-                        :maxlength="localField.max || 255"
-                        :readonly="localField.readonly"
-                        :placeholder="localField.placeholder"
-                        :rows="localField.textareaRows || 2"
-                        show-count
-                        type="textarea"
-                        @blur="executeWhenFilter"
-                    />
+                    <n-input :key="localField.paramName" v-model:value="localField.value"
+                        :maxlength="localField.max || 255" :readonly="localField.readonly"
+                        :placeholder="localField.placeholder" :rows="localField.textareaRows || 2" show-count
+                        type="textarea" @blur="executeWhenFilter" />
                 </template>
-                <n-input
-                    v-else
-                    :key="localField.paramName"
-                    v-model:value="localField.value"
-                    :maxlength="localField.max || 255"
-                    :readonly="localField.readonly"
-                    :placeholder="localField.placeholder"
-                    @blur="executeWhenFilter"
-                />
+                <n-input v-else :key="localField.paramName" v-model:value="localField.value"
+                    :maxlength="localField.max || 255" :readonly="localField.readonly"
+                    :placeholder="localField.placeholder" @blur="executeWhenFilter" />
             </template>
             <!-- I::NUMBER-->
             <template v-else-if="localField.type === 'lineNumber'">
-                <n-input-number
-                    v-model:value="localField.value"
-                    :placeholder="localField.placeholder"
-                    @blur="run()"
-                />
+                <n-input-number v-model:value="localField.value" :placeholder="localField.placeholder" @blur="run()" />
             </template>
             <!-- I::DATE RANGE -->
             <template v-else-if="localField.type === 'date'">
-                <n-date-picker
-                    v-if="!localField.isRange"
-                    v-model:formatted-value="localField.value"
-                    :readonly="localField.readonly"
-                    :size="fieldSize"
-                    :type="customDateType(localField)"
-                    :placeholder="localField.placeholder"
-                    :format="localDateFormat"
-                    value-format="yyyy-MM-dd"
-                    @update:value="executeWhenFilter"
-                />
-                <n-date-picker
-                    v-else
-                    v-model:formatted-value="extraListValue"
-                    :readonly="localField.readonly"
-                    :size="fieldSize"
-                    :type="customDateRangeType(localField)"
-                    :placeholder="localField.placeholder"
-                    :format="localDateFormat"
-                    value-format="yyyy-MM-dd"
-                    @update:value="executeWhenFilter"
-                />
+                <n-date-picker v-if="!localField.isRange" v-model:formatted-value="localField.value"
+                    :readonly="localField.readonly" :size="fieldSize" :type="customDateType(localField)"
+                    :placeholder="localField.placeholder" :format="localDateFormat" value-format="yyyy-MM-dd"
+                    @update:value="executeWhenFilter" />
+                <n-date-picker v-else v-model:formatted-value="extraListValue" :readonly="localField.readonly"
+                    :size="fieldSize" :type="customDateRangeType(localField)" :placeholder="localField.placeholder"
+                    :format="localDateFormat" value-format="yyyy-MM-dd" @update:value="executeWhenFilter" />
             </template>
             <!-- I::DATETIME-->
             <template v-else-if="localField.type === 'datetime'">
-                <n-date-picker
-                    v-model:formatted-value="localField.value"
-                    :readonly="localField.readonly"
-                    :size="fieldSize"
-                    :type="customDateType(field)"
-                    :placeholder="localField.placeholder"
-                    :format="localField.labelFormat"
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    @update:value="executeWhenFilter"
-                />
+                <n-date-picker v-model:formatted-value="localField.value" :readonly="localField.readonly"
+                    :size="fieldSize" :type="customDateType(field)" :placeholder="localField.placeholder"
+                    :format="localField.labelFormat" value-format="yyyy-MM-dd HH:mm:ss"
+                    @update:value="executeWhenFilter" />
             </template>
             <!-- I::TIME -->
             <template v-else-if="localField.type === 'time'">
-                <n-time-picker
-                    v-model:formatted-value="localField.value"
-                    :readonly="localField.readonly"
-                    :size="fieldSize"
-                    :placeholder="localField.placeholder"
-                    :format="localField.labelFormat"
-                    value-format="HH:mm:ss"
-                    @update:value="executeWhenFilter"
-                />
+                <n-time-picker v-model:formatted-value="localField.value" :readonly="localField.readonly"
+                    :size="fieldSize" :placeholder="localField.placeholder" :format="localField.labelFormat"
+                    value-format="HH:mm:ss" @update:value="executeWhenFilter" />
             </template>
             <!-- I::SELECT -->
             <template v-else-if="localField.type === 'select'">
-                <n-select
-                    :key="`${localKey}_${localField.paramName || ''}`"
-                    v-model:value="localField.value"
-                    :options="localList"
-                    :readonly="localField.readonly"
-                    :placeholder="localField.placeholder"
-                    :multiple="localField.multiple"
-                    filterable
-                    @update:value="executeWhenFilter"
-                />
+                <n-select :key="`${localKey}_${localField.paramName || ''}`" v-model:value="localField.value"
+                    :options="localList" :readonly="localField.readonly" :placeholder="localField.placeholder"
+                    :multiple="localField.multiple" filterable @update:value="executeWhenFilter" />
             </template>
             <!-- I::SLIDER -->
             <template v-else-if="localField.type === 'slider'">
-                <n-slider
-                    v-if="localField.sliderType === 'monthly'"
-                    v-model:value="extraListValue"
-                    :min="localField.sliderMinValue"
-                    :max="localField.sliderMaxValue"
-                    :step="localField.sliderStepValue"
-                    :format-tooltip="sliderMonthlyTooltip"
-                    :disabled="localField.readonly"
-                    @update:value="executeWhenFilter"
-                />
-                <n-slider
-                    v-else
-                    v-model:value="extraListValue"
-                    :min="localField.sliderMinValue"
-                    :max="localField.sliderMaxValue"
-                    :step="localField.sliderStepValue"
-                    range
-                    @update:value="executeWhenFilter"
-                />
+                <n-slider v-if="localField.sliderType === 'monthly'" v-model:value="extraListValue"
+                    :min="localField.sliderMinValue" :max="localField.sliderMaxValue" :step="localField.sliderStepValue"
+                    :format-tooltip="sliderMonthlyTooltip" :disabled="localField.readonly"
+                    @update:value="executeWhenFilter" />
+                <n-slider v-else v-model:value="extraListValue" :min="localField.sliderMinValue"
+                    :max="localField.sliderMaxValue" :step="localField.sliderStepValue" range
+                    @update:value="executeWhenFilter" />
             </template>
             <!-- I::CHECKBOX -->
             <template v-else-if="localField.type === 'checkbox'">
-                <div
-                    class="flex gap-1"
-                    :class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }"
-                >
+                <div class="flex gap-1"
+                    :class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }">
                     <template v-if="localField.isButton">
                         <n-button-group :vertical="localField.isVertical">
-                            <n-button
-                                v-for="(li, liIndex) in localList"
-                                :key="liIndex"
-                                size="small"
+                            <n-button v-for="(li, liIndex) in localList" :key="liIndex" size="small"
                                 :type="extraListValue.includes(li.value) ? 'primary' : 'default'"
-                                @click="addOrRemoveInList(li.value)"
-                            >
+                                @click="addOrRemoveInList(li.value)">
                                 {{ li.label }}
                             </n-button>
                         </n-button-group>
@@ -210,35 +130,20 @@
                         <!--                        </div>-->
                     </template>
                     <template v-else>
-                        <n-checkbox-group
-                            v-model:value="extraListValue"
-                            class="flex gap-1"
+                        <n-checkbox-group v-model:value="extraListValue" class="flex gap-1"
                             :class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }"
-                            @update:value="executeWhenFilter"
-                        >
-                            <n-checkbox
-                                v-for="(li, liIndex) in localList"
-                                :key="liIndex"
-                                :readonly="localField.readonly"
-                                :label="li.label"
-                                :value="li.value"
-                            />
+                            @update:value="executeWhenFilter">
+                            <n-checkbox v-for="(li, liIndex) in localList" :key="liIndex"
+                                :readonly="localField.readonly" :label="li.label" :value="li.value" />
                         </n-checkbox-group>
                     </template>
                     <template v-if="!isFilter">
-                        <div
-                            :class="{
-                                'flex items-center': !localField.isVertical
-                            }"
-                        >
+                        <div :class="{
+                            'flex items-center': !localField.isVertical
+                        }">
                             <n-divider :vertical="!localField.isVertical" />
-                            <n-button
-                                size="small"
-                                type="primary"
-                                :block="localField.isVertical && localField.isButton"
-                                ghost
-                                @click="executeWhenFilter()"
-                            >
+                            <n-button size="small" type="primary" :block="localField.isVertical && localField.isButton"
+                                ghost @click="executeWhenFilter()">
                                 {{ $t('confirm') }}
                             </n-button>
                         </div>
@@ -247,32 +152,14 @@
             </template>
             <!-- I::RADIO -->
             <template v-else-if="localField.type === 'radio'">
-                <n-radio-group
-                    v-if="localField.isButton"
-                    v-model:value="localField.value"
-                    @update:value="executeWhenFilter"
-                >
-                    <n-radio-button
-                        v-for="(li, liIndex) in localList"
-                        :key="liIndex"
-                        :readonly="localField.readonly"
-                        :label="li.label"
-                        :value="li.value"
-                    />
+                <n-radio-group v-if="localField.isButton" v-model:value="localField.value"
+                    @update:value="executeWhenFilter">
+                    <n-radio-button v-for="(li, liIndex) in localList" :key="liIndex" :readonly="localField.readonly"
+                        :label="li.label" :value="li.value" />
                 </n-radio-group>
-                <n-radio-group
-                    v-else
-                    v-model:value="localField.value"
-                    @update:value="executeWhenFilter"
-                >
-                    <n-radio
-                        v-for="(li, liIndex) in localList"
-                        :key="liIndex"
-                        :readonly="localField.readonly"
-                        :class="{ 'w-full': localField.isVertical }"
-                        :label="li.label"
-                        :value="li.value"
-                    />
+                <n-radio-group v-else v-model:value="localField.value" @update:value="executeWhenFilter">
+                    <n-radio v-for="(li, liIndex) in localList" :key="liIndex" :readonly="localField.readonly"
+                        :class="{ 'w-full': localField.isVertical }" :label="li.label" :value="li.value" />
                 </n-radio-group>
             </template>
         </template>
@@ -280,8 +167,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormFieldType } from '@gaio/types'
-import { definedOrDefault } from '@gaio/utils'
+import type { FormFieldType } from '@gaio/shared/types'
+import { definedOrDefault } from '@gaio/shared/utils'
 import { format } from 'date-fns'
 import dayjs from 'dayjs'
 import { computed, onBeforeMount, ref, watch } from 'vue'
@@ -367,7 +254,7 @@ const addOrRemoveInList = (value: string) => {
     extraListValue.value =
         extraListValue.value.includes(value) ?
             extraListValue.value.filter((item) => item !== value)
-        :   [...extraListValue.value, value]
+            : [...extraListValue.value, value]
 }
 
 const sliderMonthlyTooltip = (value: number) => {
@@ -533,7 +420,7 @@ const prepareWhenWhenListFields = async () => {
                                 ...colValue
                             }
                         ]
-                    :   [])
+                        : [])
                 ],
                 sort:
                     ['asc', 'desc'].includes(field.bucketFieldOrder) ?
@@ -544,7 +431,7 @@ const prepareWhenWhenListFields = async () => {
                                 ...colValue
                             }
                         ]
-                    :   []
+                        : []
             }
         }
 

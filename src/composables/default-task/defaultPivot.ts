@@ -1,5 +1,5 @@
-import type { TaskType } from '@gaio/types'
-import type { PivotTaskType } from '@gaio/types/tasks/pivot.task.type'
+import type { TaskType } from '@gaio/shared/types'
+import type { PivotTaskType } from '@gaio/shared/types/tasks/pivot.task.type'
 
 export const defaultPivot = (base: PivotTaskType & TaskType) => {
     return {

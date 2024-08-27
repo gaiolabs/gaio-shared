@@ -2,28 +2,11 @@
     <div class="studio relative flex h-full grow bg-elevation-1">
         <board-background />
         <template v-if="!loading">
-            <sidebar
-                v-model="sidebarPanel"
-                class="z-10"
-                @choose="selectElement"
-            />
-            <sidebar-nav
-                v-model="sidebarPanel"
-                class="z-20"
-            />
-            <vue-draggable
-                v-model="items"
-                class="drag-table h-full w-full"
-                ghost-class="drag-hide"
-                :group="{ name: 'sources', pull: false, put: true }"
-                handle=".handle-board"
-                @add="addDrag"
-            >
-                <board-view
-                    :key="useAppStore().refreshKey"
-                    @choose="selectElement"
-                    @open="selectElement"
-                />
+            <sidebar v-model="sidebarPanel" class="z-10" @choose="selectElement" />
+            <sidebar-nav v-model="sidebarPanel" class="z-20" />
+            <vue-draggable v-model="items" class="drag-table h-full w-full" ghost-class="drag-hide"
+                :group="{ name: 'sources', pull: false, put: true }" handle=".handle-board" @add="addDrag">
+                <board-view :key="useAppStore().refreshKey" @choose="selectElement" @open="selectElement" />
             </vue-draggable>
             <!--            <table-view-->
             <!--                v-if="showDrawer === 'tableView'"-->
@@ -31,58 +14,22 @@
             <!--                :table-name="currentTable"-->
             <!--                @close="closeTable()"-->
             <!--            />-->
-            <table-view
-                v-if="showDrawer === 'table'"
-                class="z-30"
-                @close="showDrawer = undefined"
-            />
-            <task-log-view
-                v-if="showDrawer === 'taskLogView'"
-                class="z-30"
-                @close="showDrawer = undefined"
-            />
-            <task-builder
-                v-if="showDrawer === 'builder'"
-                class="z-30"
-                @close="closeTask()"
-            />
-            <task-builder
-                v-if="showDrawer === 'builder'"
-                class="z-30"
-                @close="closeTask()"
-            />
-            <task-form-builder
-                v-if="showDrawer === 'form'"
-                class="z-30"
-                @close="closeTask()"
-            />
-            <task-explorer-view
-                v-if="showDrawer === 'report'"
-                class="z-30"
-                @close="closeTask()"
-            />
-            <sidebar-sub-nav
-                class="z-40"
-                :is-bucket-table="isBucketTable"
-                @choose="selectElement"
-            />
-            <component
-                :is="currentElement"
-                v-if="currentElement"
-                @choose="selectAndClose"
-                @close="closeTask()"
-                @close-and-refresh="closeTask()"
-            />
+            <table-view v-if="showDrawer === 'table'" class="z-30" @close="showDrawer = undefined" />
+            <task-log-view v-if="showDrawer === 'taskLogView'" class="z-30" @close="showDrawer = undefined" />
+            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />
+            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />
+            <task-form-builder v-if="showDrawer === 'form'" class="z-30" @close="closeTask()" />
+            <task-explorer-view v-if="showDrawer === 'report'" class="z-30" @close="closeTask()" />
+            <sidebar-sub-nav class="z-40" :is-bucket-table="isBucketTable" @choose="selectElement" />
+            <component :is="currentElement" v-if="currentElement" @choose="selectAndClose" @close="closeTask()"
+                @close-and-refresh="closeTask()" />
         </template>
-        <n-spin
-            v-else
-            class="h-full w-full"
-        />
+        <n-spin v-else class="h-full w-full" />
     </div>
 </template>
 <script setup lang="ts">
-import type { TableType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { TableType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import type { SortableEvent } from 'sortablejs'
 import { defineComponent, onBeforeUnmount, ref, shallowRef } from 'vue'

@@ -1,4 +1,4 @@
-import type { TaskType, GoogleSpreadsheetTaskType } from '@gaio/types'
+import type { TaskType, GoogleSpreadsheetTaskType } from '@gaio/shared/types'
 
 export const defaultGoogleSpreadsheet = (base: GoogleSpreadsheetTaskType & TaskType) => {
     return {

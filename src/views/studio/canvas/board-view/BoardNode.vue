@@ -1,25 +1,11 @@
 <template>
-    <div
-        v-if="data"
-        class="board-node"
-        :class="minW"
-    >
-        <div
-            class="g-bg-100 rounded-[10px] p-0"
-            :class="nodeStyle"
-        >
+    <div v-if="data" class="board-node" :class="minW">
+        <div class="g-bg-100 rounded-[10px] p-0" :class="nodeStyle">
             <div class="flex items-center gap-2 leading-3">
                 <div class="flex size-[45px] items-center justify-center gap-2 rounded-[8px] text-white">
-                    <img
-                        class="size-[30px]"
-                        :src="generateIcon(data)"
-                        alt="Board Icon"
-                    />
+                    <img class="size-[30px]" :src="generateIcon(data)" alt="Board Icon" />
                 </div>
-                <div
-                    v-if="data.type !== 'reportPreview'"
-                    class="flex max-w-[150px] items-center"
-                >
+                <div v-if="data.type !== 'reportPreview'" class="flex max-w-[150px] items-center">
                     <div class="max-w-[160px] pe-3">
                         <small class="text-gray text-xs font-light">{{ data.type }}</small>
                         <div class="truncate text-sm">
@@ -28,22 +14,13 @@
                     </div>
                 </div>
             </div>
-            <Handle
-                v-if="!hideRightEdge"
-                id="a"
-                type="source"
-                :position="Position.Right"
-            />
-            <Handle
-                id="b"
-                type="target"
-                :position="Position.Left"
-            />
+            <Handle v-if="!hideRightEdge" id="a" type="source" :position="Position.Right" />
+            <Handle id="b" type="target" :position="Position.Left" />
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import type { NodeType, TaskJobType } from '@gaio/types'
+import type { NodeType, TaskJobType } from '@gaio/shared/types'
 import { Handle, Position } from '@vue-flow/core'
 import { computed } from 'vue'
 

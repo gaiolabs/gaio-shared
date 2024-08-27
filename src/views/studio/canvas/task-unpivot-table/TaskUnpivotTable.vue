@@ -9,33 +9,20 @@
                             {{ $t('task') }}
                         </div>
 
-                        <n-input
-                            v-model:value="localTask.label"
-                            name="task"
-                            :placeholder="$t('taskLabel')"
-                        />
+                        <n-input v-model:value="localTask.label" name="task" :placeholder="$t('taskLabel')" />
                     </div>
                     <div class="flex w-full flex-col gap-1">
                         <label class="font-semibold text-neutral-500">
                             {{ $t('resultTable') }}
                         </label>
-                        <n-input
-                            v-model:value="localTask.resultTable"
-                            v-alpha
-                            :placeholder="$t('selectTable')"
-                        >
+                        <n-input v-model:value="localTask.resultTable" v-alpha :placeholder="$t('selectTable')">
                             <template #prefix>
-                                <n-tooltip
-                                    :arrow-style="{ background: 'white' }"
-                                    :style="{ background: 'white', color: 'black', maxWidth: '300px' }"
-                                    trigger="hover"
-                                >
+                                <n-tooltip :arrow-style="{ background: 'white' }"
+                                    :style="{ background: 'white', color: 'black', maxWidth: '300px' }" trigger="hover">
                                     <template #trigger>
-                                        <g-icon
-                                            name="clock"
+                                        <g-icon name="clock"
                                             :color="localTask?.resultTable?.startsWith('tmp_') ? '#E32' : ''"
-                                            :height="14"
-                                        />
+                                            :height="14" />
                                     </template>
                                     <template #header>
                                         <strong>{{ $t('temporaryTable') }}</strong>
@@ -54,11 +41,7 @@
                     <div class="control-label">
                         {{ $t('unpivotColumns') }}
                     </div>
-                    <g-select-column
-                        v-model="localTask.unpivotColumns"
-                        :table-name="localTask.tableName"
-                        multiple
-                    />
+                    <g-select-column v-model="localTask.unpivotColumns" :table-name="localTask.tableName" multiple />
                 </div>
 
                 <div class="control flex gap-2">
@@ -66,33 +49,26 @@
                         <div class="control-label">
                             {{ $t('pivotValue') }}
                         </div>
-                        <g-select-column
-                            v-model="localTask.orderBy"
-                            :table-name="localTask?.tableName"
-                        />
+                        <g-select-column v-model="localTask.orderBy" :table-name="localTask?.tableName" />
                     </div>
                     <div class="grow">
                         <div class="control-label">
                             {{ $t('pivotSort') }}
                         </div>
-                        <n-select
-                            v-model:value="localTask.orderByType"
-                            size="small"
-                            :options="[
-                                {
-                                    label: $t('none'),
-                                    value: ''
-                                },
-                                {
-                                    label: $t('asc'),
-                                    value: 'asc'
-                                },
-                                {
-                                    label: $t('desc'),
-                                    value: 'desc'
-                                }
-                            ]"
-                        />
+                        <n-select v-model:value="localTask.orderByType" size="small" :options="[
+                            {
+                                label: $t('none'),
+                                value: ''
+                            },
+                            {
+                                label: $t('asc'),
+                                value: 'asc'
+                            },
+                            {
+                                label: $t('desc'),
+                                value: 'desc'
+                            }
+                        ]" />
                     </div>
                 </div>
 
@@ -101,37 +77,28 @@
                         <div class="control-label">
                             {{ $t('pivotExtraColumns') }}
                         </div>
-                        <g-select-column
-                            v-model:value="localTask.extraColumns"
-                            :table-name="localTask.tableName"
-                            multiple
-                        />
+                        <g-select-column v-model:value="localTask.extraColumns" :table-name="localTask.tableName"
+                            multiple />
                     </div>
                     <div class="grow">
                         <div class="control-label">
                             {{ $t('pivotExtraColumnsPosition') }}
                         </div>
-                        <n-select
-                            v-model:value="localTask.extraColumnPosition"
-                            :options="[
-                                {
-                                    label: $t('atStart'),
-                                    value: 'start'
-                                },
-                                {
-                                    label: $t('atEnd'),
-                                    value: 'end'
-                                }
-                            ]"
-                        />
+                        <n-select v-model:value="localTask.extraColumnPosition" :options="[
+                            {
+                                label: $t('atStart'),
+                                value: 'start'
+                            },
+                            {
+                                label: $t('atEnd'),
+                                value: 'end'
+                            }
+                        ]" />
                     </div>
                 </div>
             </div>
             <div class="flex justify-end bg-elevation-0 px-4 py-2">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -139,7 +106,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { UnpivotTaskType } from '@gaio/types'
+import type { UnpivotTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 
 import useDefault from '@/composables/useDefault'

@@ -1,72 +1,48 @@
 <template>
     <div class="flex flex-col gap-2 py-3">
         <n-input-group>
-            <n-input
-                v-model:value="localUser.name"
-                :placeholder="$t('name')"
-                @blur="updateUser"
-            >
+            <n-input v-model:value="localUser.name" :placeholder="$t('name')" @blur="updateUser">
                 <template #prefix>
                     <g-icon name="user" />
                 </template>
             </n-input>
         </n-input-group>
-        <n-input
-            v-model:value="localUser.email"
-            :placeholder="$t('email')"
-            @blur="updateUser"
-        >
+        <n-input v-model:value="localUser.email" :placeholder="$t('email')" @blur="updateUser">
             <template #prefix>
                 <g-icon name="email" />
             </template>
         </n-input>
-        <n-select
-            v-model:value="localUser.lang"
-            placeholder="$t('lang')"
-            :options="[
-                {
-                    label: $t('english'),
-                    value: 'en-US'
-                },
-                {
-                    label: $t('portuguese'),
-                    value: 'pt-BR'
-                },
-                {
-                    label: $t('spanish'),
-                    value: 'es-ES'
-                }
-            ]"
-            @update:value="updateUser"
-        />
+        <n-select v-model:value="localUser.lang" placeholder="$t('lang')" :options="[
+            {
+                label: $t('english'),
+                value: 'en-US'
+            },
+            {
+                label: $t('portuguese'),
+                value: 'pt-BR'
+            },
+            {
+                label: $t('spanish'),
+                value: 'es-ES'
+            }
+        ]" @update:value="updateUser" />
 
         <div class="mb-2 mt-4 grid grid-cols-2 gap-2">
-            <n-button
-                size="large"
-                tertiary
-                @click="toggleTheme('light')"
-            >
+            <n-button size="large" tertiary @click="toggleTheme('light')">
                 <g-icon name="sun" />
             </n-button>
-            <n-button
-                size="large"
-                tertiary
-                @click="toggleTheme('dark')"
-            >
+            <n-button size="large" tertiary @click="toggleTheme('dark')">
                 <g-icon name="moon" />
             </n-button>
         </div>
 
-        <n-button
-            tertiary
-            @click="$router.push('/login')"
-        >
+        <n-button tertiary @click="$router.push('/login')">
             {{ $t('logout') }}
         </n-button>
     </div>
 </template>
 <script setup lang="ts">
-import type { UserType } from '@gaio/types'
+import type { UserType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { useMessage } from 'naive-ui'
 import { computed, onBeforeMount, ref } from 'vue'

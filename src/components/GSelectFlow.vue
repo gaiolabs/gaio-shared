@@ -1,21 +1,11 @@
 <template>
-    <n-select
-        v-model:value="selected"
-        size="small"
-        :options="flowList"
-        :placeholder="$t('selectFlow')"
-        :clearable="clearable"
-        :multiple="multiple"
-        :render-label="renderLabel"
-        value-field="flowId"
-        label-field="flowName"
-        filterable
-        @update:value="updateSelected"
-    />
+    <n-select v-model:value="selected" size="small" :options="flowList" :placeholder="$t('selectFlow')"
+        :clearable="clearable" :multiple="multiple" :render-label="renderLabel" value-field="flowId"
+        label-field="flowName" filterable @update:value="updateSelected" />
 </template>
 
 <script setup lang="ts">
-import type { FlowType } from '@gaio/types'
+import type { FlowType } from '@gaio/shared/types'
 import { computed, h, ref, type VNodeChild, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -69,7 +59,7 @@ const renderLabel = (option): VNodeChild => {
                 color: '#e32',
                 name: 'dashboard'
             })
-        :   h(VIcon, {
+            : h(VIcon, {
                 color: '#216ec9',
                 name: 'flow'
             }),

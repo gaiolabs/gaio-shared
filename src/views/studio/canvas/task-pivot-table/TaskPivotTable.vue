@@ -3,46 +3,28 @@
         <g-dialog @close="$emit('close')">
             <template #title>{{ $t('pivotTable') }}</template>
             <template #content>
-                <div
-                    v-if="localTask"
-                    class="flex flex-col items-center justify-center gap-1 overflow-auto"
-                >
+                <div v-if="localTask" class="flex flex-col items-center justify-center gap-1 overflow-auto">
                     <div class="flex w-full gap-2">
                         <div class="flex w-full flex-col gap-1">
-                            <label
-                                class="font-semibold text-neutral-500"
-                                for="task"
-                            >
+                            <label class="font-semibold text-neutral-500" for="task">
                                 {{ $t('task') }}
                             </label>
 
-                            <n-input
-                                v-model:value="localTask.label"
-                                name="task"
-                                :placeholder="$t('taskLabel')"
-                            />
+                            <n-input v-model:value="localTask.label" name="task" :placeholder="$t('taskLabel')" />
                         </div>
                         <div class="flex w-full flex-col gap-1">
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('resultTable') }}
                             </label>
-                            <n-input
-                                v-model:value="localTask.resultTable"
-                                v-alpha
-                                :placeholder="$t('selectTable')"
-                            >
+                            <n-input v-model:value="localTask.resultTable" v-alpha :placeholder="$t('selectTable')">
                                 <template #prefix>
-                                    <n-tooltip
-                                        :arrow-style="{ background: 'white' }"
+                                    <n-tooltip :arrow-style="{ background: 'white' }"
                                         :style="{ background: 'white', color: 'black', maxWidth: '300px' }"
-                                        trigger="hover"
-                                    >
+                                        trigger="hover">
                                         <template #trigger>
-                                            <g-icon
-                                                name="clock"
+                                            <g-icon name="clock"
                                                 :color="localTask?.resultTable?.startsWith('tmp_') ? '#E32' : ''"
-                                                :height="14"
-                                            />
+                                                :height="14" />
                                         </template>
                                         <template #header>
                                             <strong>{{ $t('temporaryTable') }}</strong>
@@ -62,53 +44,37 @@
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotColumn') }}
                             </label>
-                            <g-select-column
-                                v-model="localTask.transposeColumn"
-                                :table-name="localTask?.tableName"
-                                @update:model-value="listColumnValuesToTranspose"
-                            />
+                            <g-select-column v-model="localTask.transposeColumn" :table-name="localTask?.tableName"
+                                @update:model-value="listColumnValuesToTranspose" />
                         </div>
                         <div class="w-full">
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotSort') }}
                             </label>
-                            <n-select
-                                v-model:value="localTask.order"
-                                size="small"
-                                :options="[
-                                    {
-                                        label: $t('none'),
-                                        value: ''
-                                    },
-                                    {
-                                        label: $t('ascending'),
-                                        value: 'ASC'
-                                    },
-                                    {
-                                        label: $t('descending'),
-                                        value: 'DESC'
-                                    }
-                                ]"
-                            />
+                            <n-select v-model:value="localTask.order" size="small" :options="[
+                                {
+                                    label: $t('none'),
+                                    value: ''
+                                },
+                                {
+                                    label: $t('ascending'),
+                                    value: 'ASC'
+                                },
+                                {
+                                    label: $t('descending'),
+                                    value: 'DESC'
+                                }
+                            ]" />
                         </div>
                     </div>
 
-                    <n-card
-                        v-if="localTask?.columns?.length > 0"
-                        content-style="padding: 0"
-                        class="mt-1"
-                    >
+                    <n-card v-if="localTask?.columns?.length > 0" content-style="padding: 0" class="mt-1">
                         <div class="flex justify-between border-b bg-paper-300 p-1 font-semibold">
                             <div class="font-semibold text-neutral-500">
                                 {{ $t('columnsValuesToPivot') }}
                             </div>
                             <div>
-                                <n-button
-                                    type="info"
-                                    size="tiny"
-                                    secondary
-                                    @click="loadColumns"
-                                >
+                                <n-button type="info" size="tiny" secondary @click="loadColumns">
                                     <template #icon>
                                         <g-icon name="refresh" />
                                     </template>
@@ -124,19 +90,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="col of localTask.columns"
-                                        :key="col.id"
-                                        class="border-b *:p-1 odd:bg-paper-200"
-                                    >
+                                    <tr v-for="col of localTask.columns" :key="col.id"
+                                        class="border-b *:p-1 odd:bg-paper-200">
                                         <td>
                                             {{ col.columnName }}
                                         </td>
                                         <td>
-                                            <n-input
-                                                v-model:value="col.transposeName"
-                                                :placeholder="$t('value')"
-                                            />
+                                            <n-input v-model:value="col.transposeName" :placeholder="$t('value')" />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -149,44 +109,39 @@
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotValue') }}
                             </label>
-                            <g-select-column
-                                v-model="localTask.transposeColumnValue"
-                                :table-name="localTask?.tableName"
-                            />
+                            <g-select-column v-model="localTask.transposeColumnValue"
+                                :table-name="localTask?.tableName" />
                         </div>
                         <div class="w-full">
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotAggregation') }}
                             </label>
-                            <n-select
-                                v-model:value="localTask.transposeAggregator"
-                                :options="[
-                                    {
-                                        label: $t('none'),
-                                        value: ''
-                                    },
-                                    {
-                                        label: $t('sum'),
-                                        value: 'SUM'
-                                    },
-                                    {
-                                        label: $t('count'),
-                                        value: 'count'
-                                    },
-                                    {
-                                        label: $t('average'),
-                                        value: 'AVG'
-                                    },
-                                    {
-                                        label: $t('min'),
-                                        value: 'MIN'
-                                    },
-                                    {
-                                        label: $t('max'),
-                                        value: 'MAX'
-                                    }
-                                ]"
-                            />
+                            <n-select v-model:value="localTask.transposeAggregator" :options="[
+                                {
+                                    label: $t('none'),
+                                    value: ''
+                                },
+                                {
+                                    label: $t('sum'),
+                                    value: 'SUM'
+                                },
+                                {
+                                    label: $t('count'),
+                                    value: 'count'
+                                },
+                                {
+                                    label: $t('average'),
+                                    value: 'AVG'
+                                },
+                                {
+                                    label: $t('min'),
+                                    value: 'MIN'
+                                },
+                                {
+                                    label: $t('max'),
+                                    value: 'MAX'
+                                }
+                            ]" />
                         </div>
                     </div>
                     <div class="my-2 h-[1px] w-full bg-neutral-300" />
@@ -195,38 +150,29 @@
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotExtraColumns') }}
                             </label>
-                            <g-select-column
-                                v-model:value="localTask.extraFields"
-                                :table-name="localTask?.tableName"
-                                multiple
-                            />
+                            <g-select-column v-model:value="localTask.extraFields" :table-name="localTask?.tableName"
+                                multiple />
                         </div>
                         <div class="flex w-full flex-col items-start justify-start gap-1">
                             <label class="font-semibold text-neutral-500">
                                 {{ $t('pivotExtraColumnsPosition') }}
                             </label>
-                            <n-select
-                                v-model:value="localTask.extraFieldsPosition"
-                                :options="[
-                                    {
-                                        label: $t('atStart'),
-                                        value: 'start'
-                                    },
-                                    {
-                                        label: $t('atEnd'),
-                                        value: 'end'
-                                    }
-                                ]"
-                            />
+                            <n-select v-model:value="localTask.extraFieldsPosition" :options="[
+                                {
+                                    label: $t('atStart'),
+                                    value: 'start'
+                                },
+                                {
+                                    label: $t('atEnd'),
+                                    value: 'end'
+                                }
+                            ]" />
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-end bg-elevation-0 px-4 py-2">
-                    <n-button
-                        type="primary"
-                        :disabled="localTask?.tableName ? hasAllFieldsFulfilled : false"
-                        @click="save()"
-                    >
+                    <n-button type="primary" :disabled="localTask?.tableName ? hasAllFieldsFulfilled : false"
+                        @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </div>
@@ -235,9 +181,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FieldType, SchemaSortType, SchemaType } from '@gaio/types'
-import type { PivotTaskType } from '@gaio/types/tasks/pivot.task.type'
-import { getId } from '@gaio/utils'
+import type { FieldType, SchemaSortType, SchemaType } from '@gaio/shared/types'
+import type { PivotTaskType } from '@gaio/shared/types/tasks/pivot.task.type'
+import { getId } from '@gaio/shared/utils'
 import { computed, onMounted, ref } from 'vue'
 
 import useApi from '@/composables/useApi'

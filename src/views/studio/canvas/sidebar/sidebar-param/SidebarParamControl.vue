@@ -10,55 +10,32 @@
                         {{ $t('paramName') }}
                         <sup>*</sup>
                     </div>
-                    <n-input
-                        v-model:value="localParam.paramName"
-                        v-alpha
-                    />
+                    <n-input v-model:value="localParam.paramName" v-alpha />
                 </div>
                 {{ isFunction }}
                 <div class="control">
                     <div class="control-label">
                         {{ $t('description') }}
-                        <n-input
-                            v-model:value="localParam.paramDescription"
-                            type="textarea"
-                            rows="2"
-                        />
+                        <n-input v-model:value="localParam.paramDescription" type="textarea" rows="2" />
                     </div>
                 </div>
                 <div class="control">
                     <div class="control-label">
                         {{ $t('value') }}
-                        <n-input
-                            v-model:value="localParam.paramValue"
-                            :placeholder="$t('typeHere')"
-                        />
+                        <n-input v-model:value="localParam.paramValue" :placeholder="$t('typeHere')" />
                     </div>
                 </div>
-                <div
-                    v-if="isFunction"
-                    class="control"
-                >
+                <div v-if="isFunction" class="control">
                     <n-input-group>
-                        <n-button
-                            type="primary"
-                            @click="loadFunction()"
-                        >
+                        <n-button type="primary" @click="loadFunction()">
                             {{ $t('test') }}
                         </n-button>
-                        <n-input
-                            v-model:value="testedValue"
-                            readonly
-                            :placeholder="$t('result')"
-                        />
+                        <n-input v-model:value="testedValue" readonly :placeholder="$t('result')" />
                     </n-input-group>
                 </div>
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save"
-                >
+                <n-button type="primary" @click="save">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -68,7 +45,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import type { ParamType } from '@gaio/types'
+import type { ParamType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { useAppStore } from '@/stores'
 import useApi from '@/composables/useApi'

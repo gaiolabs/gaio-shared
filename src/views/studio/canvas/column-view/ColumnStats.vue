@@ -2,10 +2,7 @@
     <div class="column-stats pb-3">
         <n-table striped>
             <tbody>
-                <tr
-                    v-for="(value, key) of stats"
-                    :key="key"
-                >
+                <tr v-for="(value, key) of stats" :key="key">
                     <td class="mx-2 flex items-center justify-between">
                         {{ $t(`${key}`) }}
                         <div>{{ value }}</div>
@@ -17,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { GenericType } from '@gaio/types'
+import type { GenericType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import { computed } from 'vue'
 

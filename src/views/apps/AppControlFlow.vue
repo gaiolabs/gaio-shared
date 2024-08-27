@@ -1,47 +1,23 @@
 <template>
-    <div
-        v-if="localApp"
-        class="app-control-flow px-4"
-    >
+    <div v-if="localApp" class="app-control-flow px-4">
         <div class="my-2">
             <div>{{ $t('firstFlowAtStudio') }}</div>
-            <n-select
-                v-model:value="localApp.options.studioFlowStart"
-                :options="flowList"
-            />
+            <n-select v-model:value="localApp.options.studioFlowStart" :options="flowList" />
         </div>
 
-        <div
-            v-if="!loading && flowList.length"
-            class="mb-2"
-        >
+        <div v-if="!loading && flowList.length" class="mb-2">
             <div>
                 {{ $t('dashboard') }}
             </div>
 
             <div>
-                <n-list
-                    size="small"
-                    bordered
-                >
-                    <drag
-                        :list="flowList"
-                        @change="updateFlowOrder"
-                    >
-                        <n-list-item
-                            v-for="flow of flowList"
-                            :key="flow.value"
-                        >
+                <n-list size="small" bordered>
+                    <drag :list="flowList" @change="updateFlowOrder">
+                        <n-list-item v-for="flow of flowList" :key="flow.value">
                             <div class="flex items-center gap-2">
                                 <div>
-                                    <g-icon
-                                        v-if="flow.flowType === 'infoPub'"
-                                        name="dashboard"
-                                    />
-                                    <g-icon
-                                        v-else
-                                        name="dashboard"
-                                    />
+                                    <g-icon v-if="flow.flowType === 'infoPub'" name="dashboard" />
+                                    <g-icon v-else name="dashboard" />
                                 </div>
                                 <div>{{ flow.label }} - {{ flow.value }}</div>
                             </div>
@@ -54,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AppType, FlowType } from '@gaio/types'
+import type { AppType, FlowType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 
@@ -66,7 +42,7 @@ const props = withDefaults(defineProps<{ localApp: AppType }>(), {
 
 const loading = ref(false)
 
-const flowList = ref<{ label: string; value: string; [key: string]: unknown }[]>([])
+const flowList = ref<{ label: string; value: string;[key: string]: unknown }[]>([])
 
 const loadFlow = async () => {
     loading.value = true

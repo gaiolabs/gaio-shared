@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="500px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="500px" @close="$emit('close')">
         <template #title>{{ $t('taskSample') }}</template>
         <template #content>
             <div class="task-sample overflow-auto">
@@ -12,56 +9,32 @@
                 </div>
                 <div class="mb-2">
                     <div class="font-semibold text-neutral-500">{{ $t('resultTable') }}</div>
-                    <n-input
-                        v-model:value="localTask.resultTable"
-                        v-alpha
-                    />
+                    <n-input v-model:value="localTask.resultTable" v-alpha />
                 </div>
                 <div class="mb-2">
                     <div class="font-semibold text-neutral-500">
                         {{ $t('type') }}
                     </div>
-                    <n-select
-                        v-model:value="localTask.calcType"
-                        :options="[
-                            { value: 'percent', label: $t('percentage') },
-                            { value: 'rows', label: $t('rows') }
-                        ]"
-                        class="w-100"
-                        @update:value="changeCalcType()"
-                    />
+                    <n-select v-model:value="localTask.calcType" :options="[
+                        { value: 'percent', label: $t('percentage') },
+                        { value: 'rows', label: $t('rows') }
+                    ]" class="w-100" @update:value="changeCalcType()" />
                 </div>
                 <div class="mb-2">
                     <div class="font-semibold text-neutral-500">{{ $t('value') }}</div>
                     <div class="flex items-center gap-2">
-                        <div
-                            v-if="localTask.calcType === 'percent'"
-                            class="grow"
-                        >
-                            <n-slider
-                                v-model:value="localTask.calcValue"
-                                class="w-full"
-                                show-input
-                                :format-tooltip="formatLabel"
-                                :step="0.01"
-                                :max="1"
-                                :min="0"
-                            />
+                        <div v-if="localTask.calcType === 'percent'" class="grow">
+                            <n-slider v-model:value="localTask.calcValue" class="w-full" show-input
+                                :format-tooltip="formatLabel" :step="0.01" :max="1" :min="0" />
                         </div>
                         <div :class="localTask.calcType === 'percent' ? 'max-w-[100px]' : 'grow'">
-                            <n-input-number
-                                v-model:value="localTask.calcValue"
-                                class="w-100"
-                            />
+                            <n-input-number v-model:value="localTask.calcValue" class="w-100" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -69,7 +42,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { SampleTaskType } from '@gaio/types'
+import type { SampleTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

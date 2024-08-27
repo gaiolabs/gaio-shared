@@ -1,5 +1,5 @@
-import type { FormCardType, TaskType } from '@gaio/types'
-import { definedOrDefault } from '@gaio/utils'
+import type { FormCardType, TaskType } from '@gaio/shared/types'
+import { definedOrDefault } from '@gaio/shared/utils'
 
 export const defaultFormCard = (base: FormCardType & TaskType) => {
     return {

@@ -1,4 +1,4 @@
-import type { QuickTableTaskType } from '@gaio/types'
+import type { QuickTableTaskType } from '@gaio/shared/types'
 
 export const defaultQuickTable = (base: QuickTableTaskType) => {
     return {

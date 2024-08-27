@@ -14,91 +14,53 @@
                     </div>
                     <div class="control">
                         <n-card content-style="padding: 10px">
-                            <n-input
-                                v-model:value="localContent"
-                                type="textarea"
-                                :placeholder="$t('csvDataHere')"
-                                rows="6"
-                            />
+                            <n-input v-model:value="localContent" type="textarea" :placeholder="$t('csvDataHere')"
+                                rows="6" />
                         </n-card>
                     </div>
-                    <div
-                        class="control flex grow justify-center"
-                        @click="prepare()"
-                    >
-                        <n-button
-                            type="primary"
-                            :loading="loading"
-                            block
-                        >
+                    <div class="control flex grow justify-center" @click="prepare()">
+                        <n-button type="primary" :loading="loading" block>
                             {{ $t('prepareData') }}
                         </n-button>
                     </div>
-                    <div
-                        v-if="localData.length && localTask.columns.length"
-                        class="control"
-                    >
+                    <div v-if="localData.length && localTask.columns.length" class="control">
                         <n-card content-style="padding: 10px">
                             <div class="control">
-                                <div
-                                    class="control-label rounded bg-paper-200 p-3 dark:bg-carbon-300"
-                                    v-html="$t('quickTableHelper')"
-                                />
+                                <div class="control-label rounded bg-paper-200 p-3 dark:bg-carbon-300"
+                                    v-html="$t('quickTableHelper')" />
                             </div>
                             <div class="block">
                                 <table class="table-bordered table-striped table-sm table w-full">
                                     <thead>
                                         <tr>
-                                            <th
-                                                v-for="(col, index) of localTask.columns"
-                                                :key="index"
-                                            >
+                                            <th v-for="(col, index) of localTask.columns" :key="index">
                                                 <div class="flex items-center justify-between">
                                                     <div>
-                                                        <n-popover
-                                                            placement="right"
-                                                            width="400"
-                                                            trigger="click"
-                                                        >
+                                                        <n-popover placement="right" width="400" trigger="click">
                                                             <div>
                                                                 <div>
-                                                                    <n-radio
-                                                                        v-model="col.dataType"
-                                                                        label="Nullable(String)"
-                                                                        class="w-full"
-                                                                    >
+                                                                    <n-radio v-model="col.dataType"
+                                                                        label="Nullable(String)" class="w-full">
                                                                         {{
                                                                             dataTypeClickhouseNames('Nullable(String)')
                                                                         }}
                                                                     </n-radio>
-                                                                    <n-radio
-                                                                        v-model="col.dataType"
-                                                                        label="Nullable(Int64)"
-                                                                        class="w-full"
-                                                                    >
+                                                                    <n-radio v-model="col.dataType"
+                                                                        label="Nullable(Int64)" class="w-full">
                                                                         {{ dataTypeClickhouseNames('Nullable(Int64)') }}
                                                                     </n-radio>
-                                                                    <n-radio
-                                                                        v-model="col.dataType"
-                                                                        label="Nullable(Float64)"
-                                                                        class="w-full"
-                                                                    >
+                                                                    <n-radio v-model="col.dataType"
+                                                                        label="Nullable(Float64)" class="w-full">
                                                                         {{
                                                                             dataTypeClickhouseNames('Nullable(Float64)')
                                                                         }}
                                                                     </n-radio>
-                                                                    <n-radio
-                                                                        v-model="col.dataType"
-                                                                        label="Nullable(Date)"
-                                                                        class="w-full"
-                                                                    >
+                                                                    <n-radio v-model="col.dataType"
+                                                                        label="Nullable(Date)" class="w-full">
                                                                         {{ dataTypeClickhouseNames('Nullable(Date)') }}
                                                                     </n-radio>
-                                                                    <n-radio
-                                                                        v-model="col.dataType"
-                                                                        label="Nullable(DateTime)"
-                                                                        class="w-full"
-                                                                    >
+                                                                    <n-radio v-model="col.dataType"
+                                                                        label="Nullable(DateTime)" class="w-full">
                                                                         {{
                                                                             dataTypeClickhouseNames(
                                                                                 'Nullable(DateTime)'
@@ -108,24 +70,16 @@
                                                                 </div>
                                                             </div>
                                                             <template #trigger>
-                                                                <g-icon
-                                                                    :name="dataTypeIcon(col.dataType)"
-                                                                    style="font-size: 11px"
-                                                                />
+                                                                <g-icon :name="dataTypeIcon(col.dataType)"
+                                                                    style="font-size: 11px" />
                                                             </template>
                                                         </n-popover>
                                                         {{ col.columnName }}
                                                     </div>
                                                     <div class="el-text-right">
-                                                        <n-popconfirm
-                                                            :width="350"
-                                                            @positive-click="removeColumn(col)"
-                                                        >
+                                                        <n-popconfirm :width="350" @positive-click="removeColumn(col)">
                                                             <template #trigger>
-                                                                <g-icon
-                                                                    name="delete"
-                                                                    color="#e32"
-                                                                />
+                                                                <g-icon name="delete" color="#e32" />
                                                             </template>
                                                             {{ $t('deleteConfirm') }}
                                                         </n-popconfirm>
@@ -135,69 +89,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr
-                                            v-for="(row, rowIndex) of localData.slice(size * (page - 1), size * page)"
-                                            :key="rowIndex"
-                                        >
-                                            <td
-                                                v-for="(col, colIndex) of localTask.columns"
-                                                :key="colIndex"
-                                            >
+                                        <tr v-for="(row, rowIndex) of localData.slice(size * (page - 1), size * page)"
+                                            :key="rowIndex">
+                                            <td v-for="(col, colIndex) of localTask.columns" :key="colIndex">
                                                 {{ row[col.columnName] }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div
-                                v-if="localData.length > size"
-                                class="d-flex justify-content-center w-100"
-                            >
-                                <n-pagination
-                                    v-model:default-page="page"
-                                    small
-                                    background
-                                    :page-size="size"
-                                    :total="localData.length"
-                                />
+                            <div v-if="localData.length > size" class="d-flex justify-content-center w-100">
+                                <n-pagination v-model:default-page="page" small background :page-size="size"
+                                    :total="localData.length" />
                             </div>
                         </n-card>
                     </div>
-                    <div
-                        v-if="localData.length > 0"
-                        class="control"
-                    >
+                    <div v-if="localData.length > 0" class="control">
                         <div class="control">
                             <div class="control-label">{{ $t('resultTable') }}</div>
-                            <n-input
-                                v-model:value="localTask.resultTable"
-                                v-alpha
-                                class="w-full"
-                            />
+                            <n-input v-model:value="localTask.resultTable" v-alpha class="w-full" />
                         </div>
                         <div class="control flex flex-col">
-                            <n-checkbox
-                                v-model:checked="localTask.dropTable"
-                                :label="$t('dropOrCreate')"
-                            />
-                            <n-checkbox
-                                v-model:checked="saveReference"
-                                :label="$t('createReference')"
-                            />
+                            <n-checkbox v-model:checked="localTask.dropTable" :label="$t('dropOrCreate')" />
+                            <n-checkbox v-model:checked="saveReference" :label="$t('createReference')" />
                         </div>
                     </div>
                 </div>
-                <div
-                    v-if="localData.length && localTask.columns.length"
-                    class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200"
-                >
-                    <n-button
-                        :loading="loading"
-                        class="w-100"
-                        type="primary"
-                        :disabled="!localTask.resultTable"
-                        @click="run()"
-                    >
+                <div v-if="localData.length && localTask.columns.length"
+                    class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
+                    <n-button :loading="loading" class="w-100" type="primary" :disabled="!localTask.resultTable"
+                        @click="run()">
                         {{ $t('execute') }}
                     </n-button>
                 </div>
@@ -206,7 +127,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { QuickTableTaskType } from '@gaio/types'
+import type { QuickTableTaskType } from '@gaio/shared/types'
 import { deburr } from 'lodash-es'
 import Papa from 'papaparse'
 import { onMounted, ref } from 'vue'

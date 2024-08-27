@@ -1,30 +1,13 @@
 <template>
-    <div
-        v-if="option.isLeaf && localParam"
-        class="sidebar-param-label py-1"
-    >
+    <div v-if="option.isLeaf && localParam" class="sidebar-param-label py-1">
         <div class="control-label text-sm">
             {{ localParam.paramName }}
         </div>
-        <n-input
-            v-model:value="localParam.paramValue"
-            size="tiny"
-            @blur="updateParamValue"
-        >
-            <template
-                v-if="localParam.paramName !== 'userId'"
-                #suffix
-            >
-                <g-icon
-                    name="pencil"
-                    @click="$emit('edit', localParam)"
-                />
-                <n-popconfirm
-                    :show-icon="false"
-                    :positive-button-props="{ type: 'error' }"
-                    :positive-text="$t('delete')"
-                    @positive-click="remove()"
-                >
+        <n-input v-model:value="localParam.paramValue" size="tiny" @blur="updateParamValue">
+            <template v-if="localParam.paramName !== 'userId'" #suffix>
+                <g-icon name="pencil" @click="$emit('edit', localParam)" />
+                <n-popconfirm :show-icon="false" :positive-button-props="{ type: 'error' }"
+                    :positive-text="$t('delete')" @positive-click="remove()">
                     <template #trigger>
                         <g-icon name="delete" />
                     </template>
@@ -39,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParamType } from '@gaio/types'
+import type { ParamType } from '@gaio/shared/types'
 import type { TreeOption } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 

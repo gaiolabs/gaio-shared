@@ -1,10 +1,6 @@
 <template>
     <div class="table-columns g-bg-1 rounded p-2">
-        <n-table
-            striped
-            class="w-full"
-            size="small"
-        >
+        <n-table striped class="w-full" size="small">
             <thead>
                 <tr>
                     <th class="w-[40px]"></th>
@@ -15,10 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    v-for="item in localData"
-                    :key="item.columnName"
-                >
+                <tr v-for="item in localData" :key="item.columnName">
                     <td class="!text-center">
                         <g-data-type-icon :data-type="item.dataType" />
                     </td>
@@ -33,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 

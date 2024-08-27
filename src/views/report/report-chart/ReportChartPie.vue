@@ -1,16 +1,12 @@
 <template>
     <div class="report-pie">
-        <div
-            ref="id"
-            class="size-full"
-            :style="{ height }"
-        />
+        <div ref="id" class="size-full" :style="{ height }" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Pie, type PieOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
 
@@ -90,7 +86,7 @@ const loadChart = () => {
                             return text.join('\n')
                         }
                     }
-                :   null,
+                    : null,
             statistic:
                 !settings.value.pieDonut && settings.value.showStatistic ?
                     {
@@ -109,7 +105,7 @@ const loadChart = () => {
                                         textOverflow: 'ellipsis'
                                     }
                                 }
-                            :   false,
+                                : false,
                         content: {
                             offsetY: 4,
                             style: {
@@ -125,7 +121,7 @@ const loadChart = () => {
                                         ...firstMeasure.value,
                                         compactNumber: settings.value.compactNumberStatistic
                                     })}`
-                                :   `${formatValue(
+                                    : `${formatValue(
                                         data.reduce((r, d) => r + d[columnName(firstMeasure.value)], 0),
                                         {
                                             ...firstMeasure.value,
@@ -134,7 +130,7 @@ const loadChart = () => {
                                     )}`
                         }
                     }
-                :   null,
+                    : null,
             interactions: [{ type: 'element-selected' }]
         } as PieOptions
     )

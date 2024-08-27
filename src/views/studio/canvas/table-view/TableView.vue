@@ -1,9 +1,5 @@
 <template>
-    <drawer-view
-        tag="table-view"
-        data-tag="table-view"
-        @close="$emit('close')"
-    >
+    <drawer-view tag="table-view" data-tag="table-view" @close="$emit('close')">
         <template #header>
             <div class="flex w-full items-center justify-between gap-3">
                 <div class="flex flex-grow items-center gap-3">
@@ -13,112 +9,56 @@
                     </div>
                     <n-divider vertical />
                     <n-button-group size="small">
-                        <n-button
-                            strong
-                            secondary
-                            :type="showTab === 'data' ? 'primary' : 'default'"
-                            @click="showTab = 'data'"
-                        >
+                        <n-button strong secondary :type="showTab === 'data' ? 'primary' : 'default'"
+                            @click="showTab = 'data'">
                             {{ $t('data') }}
                         </n-button>
-                        <n-button
-                            strong
-                            secondary
-                            :type="showTab === 'columns' ? 'primary' : 'default'"
-                            @click="showTab = 'columns'"
-                        >
+                        <n-button strong secondary :type="showTab === 'columns' ? 'primary' : 'default'"
+                            @click="showTab = 'columns'">
                             {{ $t('columns') }}
                         </n-button>
-                        <n-button
-                            strong
-                            secondary
-                            :type="showTab === 'stats' ? 'primary' : 'default'"
-                            @click="showTab = 'stats'"
-                        >
+                        <n-button strong secondary :type="showTab === 'stats' ? 'primary' : 'default'"
+                            @click="showTab = 'stats'">
                             {{ $t('stats') }}
                         </n-button>
-                        <n-button
-                            strong
-                            secondary
-                            :type="showTab === 'frequency' ? 'primary' : 'default'"
-                            @click="showTab = 'frequency'"
-                        >
+                        <n-button strong secondary :type="showTab === 'frequency' ? 'primary' : 'default'"
+                            @click="showTab = 'frequency'">
                             {{ $t('frequency') }}
                         </n-button>
                     </n-button-group>
                 </div>
                 <div class="me-3 flex gap-3">
-                    <n-button
-                        v-if="showTab === 'data'"
-                        strong
-                        secondary
-                        @click="refreshData(true)"
-                    >
+                    <n-button v-if="showTab === 'data'" strong secondary @click="refreshData(true)">
                         {{ $t('refresh') }}
                     </n-button>
-                    <div
-                        v-if="['data', 'frequency'].includes(showTab)"
-                        class="w-[140px]"
-                    >
-                        <n-select
-                            v-model:value="itemsPerPage"
-                            :options="itemsPerPageList"
-                            @update:value="changePageSizeAndRefresh"
-                        />
+                    <div v-if="['data', 'frequency'].includes(showTab)" class="w-[140px]">
+                        <n-select v-model:value="itemsPerPage" :options="itemsPerPageList"
+                            @update:value="changePageSizeAndRefresh" />
                     </div>
                 </div>
             </div>
         </template>
         <template #content>
-            <div
-                v-if="columns.length"
-                ref="content"
-                class="table-view table-view-content w-100 h-full px-3 py-2"
-            >
+            <div v-if="columns.length" ref="content" class="table-view table-view-content w-100 h-full px-3 py-2">
                 <div v-if="showTab === 'data'">
-                    <table-data
-                        v-if="columns.length"
-                        :key="localKey"
-                        :local-task="localTask"
-                        :columns="columns"
-                        :loading="loading"
-                        :total-rows="totalRows"
-                        :items-per-page="itemsPerPage"
-                        @load="loading = $event"
-                        @select-column="selectColumn"
-                    />
+                    <table-data v-if="columns.length" :key="localKey" :local-task="localTask" :columns="columns"
+                        :loading="loading" :total-rows="totalRows" :items-per-page="itemsPerPage"
+                        @load="loading = $event" @select-column="selectColumn" />
                 </div>
                 <div v-if="showTab === 'columns'">
-                    <table-columns
-                        :columns="columns"
-                        :local-task="localTask"
-                        :loading="loading"
-                        @load="loading = $event"
-                        @select-column="selectColumn"
-                    />
+                    <table-columns :columns="columns" :local-task="localTask" :loading="loading"
+                        @load="loading = $event" @select-column="selectColumn" />
                 </div>
                 <div v-if="showTab === 'stats'">
-                    <table-stats
-                        :columns="columns"
-                        :local-task="localTask"
-                        :total-rows="totalRows"
-                        :loading="loading"
-                        @load="loading = $event"
-                    />
+                    <table-stats :columns="columns" :local-task="localTask" :total-rows="totalRows" :loading="loading"
+                        @load="loading = $event" />
                 </div>
                 <div v-if="showTab === 'frequency'">
-                    <table-frequency
-                        :local-task="localTask"
-                        :columns="columns"
-                        :total-rows="totalRows"
-                        :loading="loading"
-                    />
+                    <table-frequency :local-task="localTask" :columns="columns" :total-rows="totalRows"
+                        :loading="loading" />
                 </div>
             </div>
-            <g-alert
-                v-else-if="!loading"
-                :title="$t('missingTable')"
-            />
+            <g-alert v-else-if="!loading" :title="$t('missingTable')" />
             <template v-if="showTableInfo">
                 <column-view @close="showTableInfo = false" />
             </template>
@@ -126,7 +66,7 @@
     </drawer-view>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType, FieldType } from '@gaio/types'
+import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -275,6 +215,7 @@ watch(
 <style lang="scss">
 .table-view {
     table {
+
         td,
         th {
             white-space: nowrap;

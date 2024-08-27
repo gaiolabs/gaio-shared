@@ -1,4 +1,4 @@
-import type { FieldType, TaskType } from '@gaio/types'
+import type { FieldType, TaskType } from '@gaio/shared/types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 

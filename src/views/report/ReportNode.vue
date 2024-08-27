@@ -1,15 +1,7 @@
 <template>
-    <div
-        v-if="task"
-        class="report-card"
-    >
+    <div v-if="task" class="report-card">
         <template v-if="task.reportType === 'table'">
-            <report-table
-                :task="task"
-                :height="height"
-                :card-height="cardHeight"
-                @trigger="$emit('trigger', $event)"
-            />
+            <report-table :task="task" :height="height" :card-height="cardHeight" @trigger="$emit('trigger', $event)" />
         </template>
         <template v-if="task.reportType === 'card'">
             <report-card />
@@ -18,22 +10,15 @@
             <report-download :task="task" />
         </template>
         <template v-if="['line', 'bar', 'area', 'pie', 'treemap'].includes(task.reportType)">
-            <report-chart
-                :task="task"
-                :height="height"
-                :card-height="cardHeight"
-            />
+            <report-chart :task="task" :height="height" :card-height="cardHeight" />
         </template>
         <template v-if="task.reportType === 'form'">
-            <report-form
-                :task="task"
-                :height="height"
-            />
+            <report-form :task="task" :height="height" />
         </template>
     </div>
 </template>
 <script setup lang="ts">
-import type { ReportNodeType } from '@gaio/types/tasks/report.type'
+import type { ReportNodeType } from '@gaio/shared/types/tasks/report.type'
 import { computed } from 'vue'
 
 import ReportChart from '@/views/report/report-chart/ReportChart.vue'

@@ -42,7 +42,7 @@
     </g-card>
 </template>
 <script setup lang="ts">
-import type { InsightCardType } from '@gaio/types'
+import type { InsightCardType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
 const props = defineProps<{ insight: InsightCardType }>()

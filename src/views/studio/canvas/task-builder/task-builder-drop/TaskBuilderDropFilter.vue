@@ -8,12 +8,8 @@
             <div class="mb-1 flex gap-1">
                 <n-tooltip :delay="1000">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                            @click="addFilter()"
-                        >
+                        <n-button quaternary size="tiny" class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
+                            @click="addFilter()">
                             <template #icon>
                                 <g-icon name="addFilter" />
                             </template>
@@ -24,13 +20,8 @@
 
                 <n-tooltip :delay="1000">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            type="error"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                            @click="removeAll()"
-                        >
+                        <n-button quaternary size="tiny" type="error"
+                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeAll()">
                             <template #icon>
                                 <g-icon name="deleteTag" />
                             </template>
@@ -41,35 +32,19 @@
             </div>
         </div>
 
-        <div
-            v-for="(filter, filterIndex) of localFilter"
-            :key="filterIndex"
-            class="flex gap-2"
-        >
-            <div
-                v-if="filterIndex > 0"
-                class="flex min-w-[48px] justify-center"
-            >
-                <n-button
-                    class="custom-rounded-button"
-                    size="tiny"
-                    quaternary
-                    @click="interchangeAndOr(filter)"
-                >
+        <div v-for="(filter, filterIndex) of localFilter" :key="filterIndex" class="flex gap-2">
+            <div v-if="filterIndex > 0" class="flex min-w-[48px] justify-center">
+                <n-button class="custom-rounded-button" size="tiny" quaternary @click="interchangeAndOr(filter)">
                     {{ $t(filter.andOr) }}
                 </n-button>
             </div>
-            <task-builder-drop-tag-filter
-                class="mb-2"
-                :fields="filter.list"
-                @choose="$emit('choose', $event)"
-            />
+            <task-builder-drop-tag-filter class="mb-2" :fields="filter.list" @choose="$emit('choose', $event)" />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import type { BuilderTaskType, SchemaFilterType } from '@gaio/types'
+import type { BuilderTaskType, SchemaFilterType } from '@gaio/shared/types'
 import { onMounted, type PropType, ref } from 'vue'
 
 import TaskBuilderDropTagFilter from '@/views/studio/canvas/task-builder/task-builder-tags/TaskBuilderDropTagFilter.vue'

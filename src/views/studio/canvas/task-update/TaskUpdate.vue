@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="750px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="750px" @close="$emit('close')">
         <template #title>
             <task-icon :local-task="localTask" />
             {{ $t('taskUpdateTable') }}
@@ -30,11 +27,7 @@
                     <div class="control-label">
                         {{ $t('columns') }}
                     </div>
-                    <g-define-column-value
-                        :local-task="localTask"
-                        type="update"
-                        :columns="[]"
-                    />
+                    <g-define-column-value :local-task="localTask" type="update" :columns="[]" />
                 </div>
 
                 <div class="flex-between flex">
@@ -42,17 +35,11 @@
                         {{ $t('filters') }}
                     </div>
                 </div>
-                <g-filter-builder
-                    :key="localTask.tableName"
-                    :local-task="localTask"
-                    :table-name="localTask.tableName"
-                />
+                <g-filter-builder :key="localTask.tableName" :local-task="localTask"
+                    :table-name="localTask.tableName" />
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -60,7 +47,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { UpdateRowTaskType } from '@gaio/types'
+import type { UpdateRowTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'

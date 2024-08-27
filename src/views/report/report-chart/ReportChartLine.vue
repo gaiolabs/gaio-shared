@@ -1,16 +1,12 @@
 <template>
     <div class="report-column">
-        <div
-            ref="id"
-            class="size-full"
-            :style="{ height }"
-        />
+        <div ref="id" class="size-full" :style="{ height }" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Line, type LineOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
 
@@ -69,7 +65,7 @@ const loadChart = () => {
                 formatter:
                     !settings.value.compactNumberLabel ?
                         null
-                    :   (v) => {
+                        : (v) => {
                             const value = v['measure'] || v[columnName(firstMeasure.value)]
                             return formatValue(value, {
                                 compactNumber: settings.value.compactNumberLabel
@@ -82,11 +78,11 @@ const loadChart = () => {
                     {
                         shape: settings.value.pointType
                     }
-                :   null,
+                    : null,
             color:
                 isGrouped.value || isMultipleMeasure.value ? themeColors.value
-                : settings.value.showLegend ? themeColors.value
-                : themeColors.value[0]
+                    : settings.value.showLegend ? themeColors.value
+                        : themeColors.value[0]
         } as LineOptions
     )
     chart.value.render()

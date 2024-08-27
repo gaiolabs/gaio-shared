@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="600px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="600px" @close="$emit('close')">
         <template #title>{{ $t('taskCsvWeb') }}</template>
         <template #content>
             <div class="canvas-task-url-body overflow-auto">
@@ -13,10 +10,7 @@
                     </div>
                     <div class="control grow">
                         <div class="control-label">{{ $t('resultTable') }}</div>
-                        <n-input
-                            v-model:value="localTask.resultTable"
-                            :placeholder="$t('tableName')"
-                        />
+                        <n-input v-model:value="localTask.resultTable" :placeholder="$t('tableName')" />
                     </div>
                 </div>
 
@@ -25,52 +19,35 @@
                         <div class="control-label">
                             {{ $t('fileUrl') }}
                         </div>
-                        <n-input
-                            v-model:value="localTask.url"
-                            :placeholder="$t('paramsApplicable')"
-                        />
+                        <n-input v-model:value="localTask.url" :placeholder="$t('paramsApplicable')" />
                     </div>
                 </div>
 
                 <div class="control grow">
                     <div class="control-label">{{ $t('fieldsTerminatedBy') }}</div>
-                    <n-select
-                        v-model:value="localTask.fileFormatType"
-                        filterable
-                        :options="[
-                            { value: 'TabSeparatedWithNames', label: $t('tab') },
-                            { value: 'CSVWithNames', label: $t('comma') },
-                            { value: '|', label: '|' },
-                            { value: '||', label: '||' },
-                            { value: ';', label: ';' }
-                        ]"
-                    />
+                    <n-select v-model:value="localTask.fileFormatType" filterable :options="[
+                        { value: 'TabSeparatedWithNames', label: $t('tab') },
+                        { value: 'CSVWithNames', label: $t('comma') },
+                        { value: '|', label: '|' },
+                        { value: '||', label: '||' },
+                        { value: ';', label: ';' }
+                    ]" />
                 </div>
 
                 <div class="control grow">
                     <div class="control-label">{{ $t('options') }}</div>
-                    <n-select
-                        v-model:value="localTask.schemaInference"
-                        filterable
-                        :options="[
-                            { value: 'schemaInference', label: $t('withSchemaInference') },
-                            { value: 'noSchemaInference', label: $t('noSchemaInference') }
-                        ]"
-                    />
+                    <n-select v-model:value="localTask.schemaInference" filterable :options="[
+                        { value: 'schemaInference', label: $t('withSchemaInference') },
+                        { value: 'noSchemaInference', label: $t('noSchemaInference') }
+                    ]" />
                 </div>
 
                 <div class="control">
-                    <n-checkbox
-                        v-model:checked="localTask.insertMode"
-                        :label="$t('insertMode')"
-                    />
+                    <n-checkbox v-model:checked="localTask.insertMode" :label="$t('insertMode')" />
                 </div>
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -78,7 +55,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { CsvUrlTaskType } from '@gaio/types'
+import type { CsvUrlTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'

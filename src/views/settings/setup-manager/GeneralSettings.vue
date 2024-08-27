@@ -1,8 +1,7 @@
 <template>
     <div class="flex flex-col">
         <h2
-            class="mb-3 text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight"
-        >
+            class="mb-3 text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">
             {{ $t('generalSettings') }}
         </h2>
         <main class="flex flex-col gap-8">
@@ -13,16 +12,9 @@
                 <p class="mt-1 text-sm leading-6 text-carbon-500 dark:text-paper-500">{{ $t('yourAccountDetails') }}</p>
 
                 <div class="mt-4">
-                    <n-table
-                        striped
-                        :bordered="true"
-                        :single-line="false"
-                    >
+                    <n-table striped :bordered="true" :single-line="false">
                         <tbody>
-                            <tr
-                                v-for="item in data"
-                                :key="item.key"
-                            >
+                            <tr v-for="item in data" :key="item.key">
                                 <td class="font-medium text-carbon-900 dark:text-paper-900">{{ $t(item.title) }}</td>
                                 <td class="text-carbon-700 dark:text-paper-700">{{ item.value }}</td>
                             </tr>

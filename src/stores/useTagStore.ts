@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import useApi from '@/composables/useApi'
 import { cloneDeep } from 'lodash-es'
-import type { TagTypePermission } from '@gaio/types'
+import type { TagTypePermission } from '@gaio/shared/types'
 
 type TagResult = {
     tags: TagTypePermission[]

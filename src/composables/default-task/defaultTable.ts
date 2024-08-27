@@ -1,4 +1,4 @@
-import { getBucketNameFromAppId } from '@gaio/utils'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultTable = (base) => {
     console.log({

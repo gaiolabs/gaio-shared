@@ -2,22 +2,12 @@
     <div class="sidebar-discovery flex h-[100%] flex-col items-stretch pt-3">
         <div class="flex w-full items-stretch justify-between px-4">
             <div class="text-lg font-bold">
-                <g-icon
-                    name="tableThunder"
-                    :height="18"
-                />
+                <g-icon name="tableThunder" :height="18" />
                 {{ $t('discovery') }}
             </div>
             <div>
-                <n-dropdown
-                    trigger="hover"
-                    :options="options"
-                    @select="handleDropdownSelect"
-                >
-                    <n-button
-                        text
-                        size="tiny"
-                    >
+                <n-dropdown trigger="hover" :options="options" @select="handleDropdownSelect">
+                    <n-button text size="tiny">
                         <template #icon>
                             <g-icon name="add" />
                         </template>
@@ -27,31 +17,19 @@
         </div>
         <div>
             <div class="sidebar-search mb-2 px-4 pt-1">
-                <n-input
-                    v-model:value="searchTerm"
-                    size="small"
-                    :placeholder="$t('search')"
-                />
+                <n-input v-model:value="searchTerm" size="small" :placeholder="$t('search')" />
             </div>
-            <div
-                v-for="item of $filterBy(discoveryList, 'label', searchTerm)"
-                :key="item.metaId"
-                class="mx-4 border-b py-2"
-                @click="choose(item)"
-            >
+            <div v-for="item of $filterBy(discoveryList, 'label', searchTerm)" :key="item.metaId"
+                class="mx-4 border-b py-2" @click="choose(item)">
                 <g-icon :name="item.type" />
                 {{ item.label }}
             </div>
         </div>
-        <task-meta
-            v-if="showPanel"
-            @save="getDiscoveryList"
-            @close="showPanel = false"
-        />
+        <task-meta v-if="showPanel" @save="getDiscoveryList" @close="showPanel = false" />
     </div>
 </template>
 <script setup lang="ts">
-import type { MetaType } from '@gaio/types'
+import type { MetaType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

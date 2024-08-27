@@ -1,4 +1,4 @@
-import { getId } from '@gaio/utils'
+import { getId } from '@gaio/shared/utils'
 
 // const columns = [
 //     {
@@ -40,7 +40,7 @@ import { getId } from '@gaio/utils'
 //     }
 // ]
 
-import type { CreateTableTaskType } from '@gaio/types'
+import type { CreateTableTaskType } from '@gaio/shared/types'
 
 export const defaultCreateTable = (base: CreateTableTaskType) => {
     return {

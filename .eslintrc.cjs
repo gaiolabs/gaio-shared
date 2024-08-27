@@ -19,7 +19,7 @@ module.exports = {
             }
         ]
     },
-    extends: ['@gaio/eslint-config/vue'],
+    extends: ['@gaio/shared/eslint-config/vue'],
     'parserOptions': {
         'sourceType': 'module',
         'ecmaVersion': 'latest'

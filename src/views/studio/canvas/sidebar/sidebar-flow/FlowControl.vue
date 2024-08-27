@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        v-if="localFlow && localFlow.options"
-        @close="$emit('close')"
-    >
+    <g-dialog v-if="localFlow && localFlow.options" @close="$emit('close')">
         <template #title>
             <div class="flex w-full items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -22,54 +19,23 @@
         </template>
         <template #tabs>
             <div class="flow-control">
-                <n-tabs
-                    pane-class="bg-elevation-1"
-                    size="small"
-                    type="line"
-                    :default-value="currentTab"
-                >
-                    <n-tab-pane
-                        name="general"
-                        :tab="$t('general')"
-                        display-directive="show:lazy"
-                    >
-                        <flow-control-general
-                            :local-flow="localFlow"
-                            class="my-4"
-                        />
+                <n-tabs pane-class="bg-elevation-1" size="small" type="line" :default-value="currentTab">
+                    <n-tab-pane name="general" :tab="$t('general')" display-directive="show:lazy">
+                        <flow-control-general :local-flow="localFlow" class="my-4" />
                     </n-tab-pane>
-                    <n-tab-pane
-                        v-if="localFlow && localFlow.flowId"
-                        name="schedule"
-                        :tab="$t('schedule')"
-                        display-directive="show:lazy"
-                    >
-                        <flow-control-schedule
-                            :local-flow="localFlow"
-                            class="my-4"
-                        />
+                    <n-tab-pane v-if="localFlow && localFlow.flowId" name="schedule" :tab="$t('schedule')"
+                        display-directive="show:lazy">
+                        <flow-control-schedule :local-flow="localFlow" class="my-4" />
                     </n-tab-pane>
                 </n-tabs>
             </div>
             <div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
                 <div>
-                    <n-space
-                        v-if="localFlow.flowId"
-                        size="small"
-                    >
-                        <n-popconfirm
-                            v-if="canDeleteFlow"
-                            :show-icon="false"
-                            :positive-button-props="{ type: 'error' }"
-                            :positive-text="$t('delete')"
-                            @positive-click="remove()"
-                        >
+                    <n-space v-if="localFlow.flowId" size="small">
+                        <n-popconfirm v-if="canDeleteFlow" :show-icon="false" :positive-button-props="{ type: 'error' }"
+                            :positive-text="$t('delete')" @positive-click="remove()">
                             <template #trigger>
-                                <n-button
-                                    size="tiny"
-                                    quaternary
-                                    type="error"
-                                >
+                                <n-button size="tiny" quaternary type="error">
                                     <template #icon>
                                         <g-icon name="delete" />
                                     </template>
@@ -77,12 +43,7 @@
                             </template>
                             {{ $t('deletionConfirmation') }}
                         </n-popconfirm>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                            type="primary"
-                            @click="replicateFlow()"
-                        >
+                        <n-button size="tiny" quaternary type="primary" @click="replicateFlow()">
                             <template #icon>
                                 <g-icon name="clone" />
                             </template>
@@ -90,17 +51,10 @@
                     </n-space>
                 </div>
                 <n-space>
-                    <n-button
-                        secondary
-                        @click="$emit('close')"
-                    >
+                    <n-button secondary @click="$emit('close')">
                         {{ $t('cancel') }}
                     </n-button>
-                    <n-button
-                        :loading="loading"
-                        type="primary"
-                        @click="save()"
-                    >
+                    <n-button :loading="loading" type="primary" @click="save()">
                         {{ $t('save') }}
                     </n-button>
                 </n-space>
@@ -110,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FlowType } from '@gaio/types'
+import type { FlowType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NButton } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'

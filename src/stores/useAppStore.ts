@@ -1,5 +1,5 @@
-import type { AppType, FlowType, FormType, ParamType, ReportNodeType, SourceType, TaskType } from '@gaio/types'
-import { getBucketNameFromAppId, getId } from '@gaio/utils'
+import type { AppType, FlowType, FormType, ParamType, ReportNodeType, SourceType, TaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId, getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'

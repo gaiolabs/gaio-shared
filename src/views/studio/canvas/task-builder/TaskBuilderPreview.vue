@@ -1,31 +1,17 @@
 <template>
     <div class="task-builder-preview flex h-full w-full flex-shrink flex-col overflow-y-auto p-2 pb-4">
         <template v-if="errorData?.message">
-            <n-alert
-                type="error"
-                class="mb-3"
-            >
+            <n-alert type="error" class="mb-3">
                 {{ errorData.message }}
             </n-alert>
-            <code-editor
-                :key="errorData.query"
-                v-model="errorData.query"
-                class="h-full w-full grow"
-                readonly
-            />
+            <code-editor :key="errorData.query" v-model="errorData.query" class="h-full w-full grow" readonly />
         </template>
-        <n-data-table
-            v-else-if="columns?.length"
-            size="small"
-            fixed-header
-            :max-height="350"
-            :columns="columns"
-            :data="result"
-        />
+        <n-data-table v-else-if="columns?.length" size="small" fixed-header :max-height="350" :columns="columns"
+            :data="result" />
     </div>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType } from '@gaio/types'
+import type { BuilderTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import useApi from '@/composables/useApi'
 import { cloneDeep } from 'lodash-es'

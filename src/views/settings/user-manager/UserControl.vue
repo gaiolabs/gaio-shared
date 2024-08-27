@@ -9,28 +9,17 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <div class="control-label">{{ $t('type') }}</div>
-                            <n-select
-                                v-model:value="user.role"
-                                filterable
-                                :disabled="currentAdmin.userId === user.userId"
-                                size="small"
-                                default-value="user"
+                            <n-select v-model:value="user.role" filterable
+                                :disabled="currentAdmin.userId === user.userId" size="small" default-value="user"
                                 :options="[
                                     { label: $t('user'), value: 'user' },
                                     { label: $t('developer'), value: 'dev' },
                                     { label: $t('admin'), value: 'admin' }
-                                ]"
-                            />
+                                ]" />
                         </div>
                         <div>
-                            <n-switch
-                                v-if="user.userId"
-                                v-model="user.status"
-                                :active-text="$t('active')"
-                                :inactive-text="$t('inactive')"
-                                active-value="active"
-                                inactive-value="inactive"
-                            >
+                            <n-switch v-if="user.userId" v-model="user.status" :active-text="$t('active')"
+                                :inactive-text="$t('inactive')" active-value="active" inactive-value="inactive">
                                 <template #checked>{{ $t('active') }}</template>
                                 <template #unchecked>{{ $t('inactive') }}</template>
                             </n-switch>
@@ -40,36 +29,23 @@
                 <div class="flex justify-between">
                     <div class="control grow pe-1">
                         <div class="control-label">{{ $t('name') }}</div>
-                        <n-input
-                            v-model:value="user.name"
-                            size="small"
-                        />
+                        <n-input v-model:value="user.name" size="small" />
                     </div>
                     <div class="control grow ps-1">
                         <div class="flex">
                             <div class="control-label">{{ $t('email') }}</div>
                             <div v-if="isFocused === false">
-                                <div
-                                    v-if="resultEmailEdit !== null && resultEmailEdit === true"
-                                    class="text-success ms-2"
-                                >
+                                <div v-if="resultEmailEdit !== null && resultEmailEdit === true"
+                                    class="text-success ms-2">
                                     ({{ $t('validEmail') }})
                                 </div>
-                                <div
-                                    v-else
-                                    class="text-danger ms-2"
-                                >
+                                <div v-else class="text-danger ms-2">
                                     ( {{ $t('invalidEmail') }})
                                 </div>
                             </div>
                         </div>
-                        <n-input
-                            v-model:value="user.email"
-                            size="small"
-                            @keyup="checkMail()"
-                            @blur="checkMail()"
-                            @focus="checkMail()"
-                        />
+                        <n-input v-model:value="user.email" size="small" @keyup="checkMail()" @blur="checkMail()"
+                            @focus="checkMail()" />
                     </div>
                 </div>
 
@@ -79,36 +55,18 @@
                             <div>
                                 {{ $t('password') }}
                             </div>
-                            <div
-                                v-if="user.userId"
-                                class="text-[11px]"
-                            >
+                            <div v-if="user.userId" class="text-[11px]">
                                 {{ $t('changePasswordOptional') }}
                             </div>
                         </div>
                         <div v-if="user.password">
-                            <n-popover
-                                :width="400"
-                                trigger="hover"
-                            >
+                            <n-popover :width="400" trigger="hover">
                                 <template #trigger>
                                     <div class="password-base">
-                                        <div
-                                            class="line"
-                                            :class="{ active: checkerCount >= 1 }"
-                                        />
-                                        <div
-                                            class="line"
-                                            :class="{ active: checkerCount >= 2 }"
-                                        />
-                                        <div
-                                            class="line"
-                                            :class="{ active: checkerCount >= 3 }"
-                                        />
-                                        <div
-                                            class="line"
-                                            :class="{ active: checkerCount >= 4 }"
-                                        />
+                                        <div class="line" :class="{ active: checkerCount >= 1 }" />
+                                        <div class="line" :class="{ active: checkerCount >= 2 }" />
+                                        <div class="line" :class="{ active: checkerCount >= 3 }" />
+                                        <div class="line" :class="{ active: checkerCount >= 4 }" />
                                     </div>
                                 </template>
                                 <div>
@@ -117,46 +75,25 @@
                             </n-popover>
                         </div>
                     </div>
-                    <n-input
-                        v-model:value="user.password"
-                        type="password"
-                        show-password
-                        @keyup="passwordChecker()"
-                    />
+                    <n-input v-model:value="user.password" type="password" show-password @keyup="passwordChecker()" />
                 </div>
 
-                <div
-                    v-if="groups.length"
-                    class="control"
-                >
+                <div v-if="groups.length" class="control">
                     <div class="control-label">
                         {{ $t('group') }}
                     </div>
-                    <n-select
-                        v-model:value="user.tags"
-                        class="w-100"
-                        filterable
-                        multiple
-                        collapse-tags
-                        :placeholder="$t('group')"
-                        value-field="userId"
-                        label-field="name"
-                        :options="groups"
-                    />
+                    <n-select v-model:value="user.tags" class="w-100" filterable multiple collapse-tags
+                        :placeholder="$t('group')" value-field="userId" label-field="name" :options="groups" />
                 </div>
                 <div class="control">
                     <div class="control-label">
                         {{ $t('language') }}
                     </div>
-                    <n-select
-                        v-model:value="user.lang"
-                        default-value="en-US"
-                        :options="[
-                            { label: $t('portuguese'), value: 'pt-BR' },
-                            { label: $t('spanish'), value: 'es-US' },
-                            { label: $t('english'), value: 'en-US' }
-                        ]"
-                    />
+                    <n-select v-model:value="user.lang" default-value="en-US" :options="[
+                        { label: $t('portuguese'), value: 'pt-BR' },
+                        { label: $t('spanish'), value: 'es-US' },
+                        { label: $t('english'), value: 'en-US' }
+                    ]" />
                 </div>
             </div>
         </template>
@@ -165,12 +102,8 @@
             <div class="flex items-center justify-between">
                 <div>
                     <div v-if="backupCurrentUser.role !== 'admin' && backupCurrentUser.userId">
-                        <n-popconfirm
-                            :width="350"
-                            :positive-text="$t('delete')"
-                            :negative-text="$t('cancel')"
-                            @positive-click="removeUser(backupCurrentUser.userId)"
-                        >
+                        <n-popconfirm :width="350" :positive-text="$t('delete')" :negative-text="$t('cancel')"
+                            @positive-click="removeUser(backupCurrentUser.userId)">
                             <template #trigger>
                                 <span>
                                     <n-button text>
@@ -183,21 +116,12 @@
                             </div>
                         </n-popconfirm>
                     </div>
-                    <n-button
-                        v-if="twoFa === true"
-                        class="ms-2"
-                        @click="resetTwo2FA()"
-                    >
+                    <n-button v-if="twoFa === true" class="ms-2" @click="resetTwo2FA()">
                         {{ $t('resetTwoFactor') }}
                     </n-button>
                 </div>
                 <div></div>
-                <n-button
-                    type="primary"
-                    :loading="loading"
-                    :disabled="disableSave"
-                    @click="save"
-                >
+                <n-button type="primary" :loading="loading" :disabled="disableSave" @click="save">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -206,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UserType } from '@gaio/types'
+import type { UserType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { useMessage } from 'naive-ui'
 import { computed, onBeforeMount, ref } from 'vue'

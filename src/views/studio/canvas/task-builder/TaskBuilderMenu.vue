@@ -1,74 +1,42 @@
 <template>
-    <div
-        v-if="localTask?.tableName"
-        class="task-builder-menu flex w-full items-center gap-3 p-3 px-0"
-    >
+    <div v-if="localTask?.tableName" class="task-builder-menu flex w-full items-center gap-3 p-3 px-0">
         <div class="flex items-center gap-1 text-lg font-bold">
             <g-icon name="flow" />
             {{ $t('builder') }}
         </div>
         <div class="flex grow items-center justify-between gap-2 px-3">
             <div class="flex items-center gap-2">
-                <n-input
-                    v-model:value="localTask.label"
-                    size="small"
-                    :placeholder="$t('label')"
-                >
+                <n-input v-model:value="localTask.label" size="small" :placeholder="$t('label')">
                     <template #prefix>
                         <g-icon name="write" />
                     </template>
                 </n-input>
-                <n-input
-                    v-model:value="localTask.resultTable"
-                    v-alpha
-                    size="small"
-                    :placeholder="$t('tableName')"
-                >
+                <n-input v-model:value="localTask.resultTable" v-alpha size="small" :placeholder="$t('tableName')">
                     <template #prefix>
-                        <g-icon
-                            name="timer"
-                            :color="(localTask.resultTable || '').startsWith('tmp_') ? 'e32' : '#ccc'"
-                        />
+                        <g-icon name="timer"
+                            :color="(localTask.resultTable || '').startsWith('tmp_') ? 'e32' : '#ccc'" />
                     </template>
                 </n-input>
 
                 <n-divider vertical />
-                <n-button
-                    size="small"
-                    @click="saveBuilder('save')"
-                >
+                <n-button size="small" @click="saveBuilder('save')">
                     {{ $t('save') }}
                 </n-button>
-                <n-button
-                    size="small"
-                    @click="saveBuilder('run')"
-                >
+                <n-button size="small" @click="saveBuilder('run')">
                     {{ $t('saveAndRun') }}
                 </n-button>
             </div>
             <n-button-group size="small">
-                <n-button
-                    :type="showTab === 'builder' ? 'primary' : 'default'"
-                    secondary
-                    class="border-elevation-2"
-                    @click="$emit('showTab', 'builder')"
-                >
+                <n-button :type="showTab === 'builder' ? 'primary' : 'default'" secondary class="border-elevation-2"
+                    @click="$emit('showTab', 'builder')">
                     {{ $t('builder') }}
                 </n-button>
-                <n-button
-                    :type="showTab === 'preview' ? 'primary' : 'default'"
-                    secondary
-                    class="border-elevation-2"
-                    @click="$emit('showTab', 'preview')"
-                >
+                <n-button :type="showTab === 'preview' ? 'primary' : 'default'" secondary class="border-elevation-2"
+                    @click="$emit('showTab', 'preview')">
                     {{ $t('preview') }}
                 </n-button>
-                <n-button
-                    :type="showTab === 'sql' ? 'primary' : 'default'"
-                    secondary
-                    class="border-elevation-2"
-                    @click="$emit('showTab', 'sql')"
-                >
+                <n-button :type="showTab === 'sql' ? 'primary' : 'default'" secondary class="border-elevation-2"
+                    @click="$emit('showTab', 'sql')">
                     {{ $t('sql') }}
                 </n-button>
             </n-button-group>
@@ -76,8 +44,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { type BuilderTaskType } from '@gaio/types'
-import { getBucketNameFromAppId, getId } from '@gaio/utils'
+import { type BuilderTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId, getId } from '@gaio/shared/utils'
 import { flatMap, uniqBy } from 'lodash-es'
 import type { PropType } from 'vue'
 

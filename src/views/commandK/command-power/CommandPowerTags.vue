@@ -1,11 +1,7 @@
 <template>
     <div class="command-power-tags flex gap-2">
-        <div
-            v-for="(tag, index) of usePowerStore().tags"
-            :key="index"
-            class="tag flex items-center gap-2 px-2 py-[2px]"
-            :class="className(tag)"
-        >
+        <div v-for="(tag, index) of usePowerStore().tags" :key="index" class="tag flex items-center gap-2 px-2 py-[2px]"
+            :class="className(tag)">
             <div class="tag-options">v</div>
             <div class="flex-grow">
                 {{ tagName(tag) }}
@@ -15,7 +11,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 
 import useDataType from '@/composables/useDataType'
 import { usePowerStore } from '@/stores'

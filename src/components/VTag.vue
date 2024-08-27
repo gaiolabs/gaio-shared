@@ -1,20 +1,14 @@
 <template>
-    <n-tag
-        :class="classBasedOnType"
-        class="v-tag"
-    >
+    <n-tag :class="classBasedOnType" class="v-tag">
         <div class="flex w-full items-center justify-center gap-1">
-            <g-icon
-                v-if="showIcon"
-                :name="iconName"
-            />
+            <g-icon v-if="showIcon" :name="iconName" />
             {{ title }}
         </div>
     </n-tag>
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
 import useDataType from '@/composables/useDataType'

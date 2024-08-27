@@ -2,24 +2,15 @@
     <settings-view>
         <template #title>
             <div class="flex items-center gap-2">
-                <g-icon
-                    name="appShare"
-                    :height="22"
-                />
+                <g-icon name="appShare" :height="22" />
                 {{ $t('apps') }}
             </div>
         </template>
         <div class="source-manager">
             <template v-if="loading">
                 <n-space vertical>
-                    <n-skeleton
-                        :height="30"
-                        class="rounded"
-                    />
-                    <n-skeleton
-                        :height="100"
-                        class="rounded"
-                    />
+                    <n-skeleton :height="30" class="rounded" />
+                    <n-skeleton :height="100" class="rounded" />
                 </n-space>
             </template>
             <template v-else>
@@ -28,33 +19,18 @@
                         <div class="flex grow text-nowrap">
                             {{ $t('grantFrom') }}
                         </div>
-                        <n-select
-                            v-model:value="appId"
-                            filterable
-                            value-field="appId"
-                            label-field="appName"
-                            :options="apps"
-                            @update:value="selectApp"
-                        />
+                        <n-select v-model:value="appId" filterable value-field="appId" label-field="appName"
+                            :options="apps" @update:value="selectApp" />
 
                         <div>
-                            <n-button
-                                type="primary"
-                                @click="save()"
-                            >
+                            <n-button type="primary" @click="save()">
                                 {{ $t('apply') }}
                             </n-button>
                         </div>
                     </div>
                     <div class="g-bg-1 mb-3 flex items-center rounded shadow">
-                        <n-transfer
-                            ref="transfer"
-                            v-model:value="currentApp.sees"
-                            source-filterable
-                            value-field="appId"
-                            label-field="appName"
-                            :options="apps"
-                        />
+                        <n-transfer ref="transfer" v-model:value="currentApp.sees" source-filterable value-field="appId"
+                            label-field="appName" :options="apps" />
                     </div>
                 </div>
             </template>
@@ -63,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AppType } from '@gaio/types'
+import type { AppType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 
 type PassType = Partial<{

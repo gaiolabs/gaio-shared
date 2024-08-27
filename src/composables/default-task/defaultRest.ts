@@ -1,5 +1,5 @@
-import type { RestTaskType, TaskType } from '@gaio/types'
-import { definedOrDefault, getBucketNameFromAppId } from '@gaio/utils'
+import type { RestTaskType, TaskType } from '@gaio/shared/types'
+import { definedOrDefault, getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultRest = (base: RestTaskType & TaskType) => {
     return {

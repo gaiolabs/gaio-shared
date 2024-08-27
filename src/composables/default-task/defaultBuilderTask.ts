@@ -1,5 +1,5 @@
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultBuilderTask = (base) => {
     return {

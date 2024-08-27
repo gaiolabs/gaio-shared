@@ -1,133 +1,68 @@
 <template>
-    <div
-        v-if="task"
-        class="report-table"
-    >
+    <div v-if="task" class="report-table">
         <!-- FIX .icon later-->
-        <div
-            class="overflow-hidden rounded border bg-paper-100 dark:bg-carbon-100"
-            :style="{ height: cardHeight }"
-        >
-            <report-node-header
-                :task="task"
-                :table-rows="tableRows"
-            />
-            <div
-                class="px-1 pb-2"
-                :style="{ height }"
-            >
+        <div class="overflow-hidden rounded border bg-paper-100 dark:bg-carbon-100" :style="{ height: cardHeight }">
+            <report-node-header :task="task" :table-rows="tableRows" />
+            <div class="px-1 pb-2" :style="{ height }">
                 <n-spin :show="loading">
                     <div class="table-responsive mb-2">
-                        <n-table
-                            class="table"
-                            :bordered="tableStyle.bordered"
-                            :bottom-bordered="false"
-                            :single-column="tableStyle.singleColumn"
-                            :single-line="tableStyle.singleLine"
-                            :size="tableStyle.size"
-                            :striped="tableStyle.striped"
-                        >
+                        <n-table class="table" :bordered="tableStyle.bordered" :bottom-bordered="false"
+                            :single-column="tableStyle.singleColumn" :single-line="tableStyle.singleLine"
+                            :size="tableStyle.size" :striped="tableStyle.striped">
                             <thead>
                                 <tr>
-                                    <th
-                                        v-if="formPosition.atStart"
-                                        class="w-[30px]"
-                                    />
-                                    <th
-                                        v-for="col of columns"
-                                        :key="col.id"
-                                    >
+                                    <th v-if="formPosition.atStart" class="w-[30px]" />
+                                    <th v-for="col of columns" :key="col.id">
                                         {{ defineColumnTitle(col) }}
                                     </th>
-                                    <th
-                                        v-if="formPosition.atEnd"
-                                        class="w-[30px]"
-                                    />
+                                    <th v-if="formPosition.atEnd" class="w-[30px]" />
                                 </tr>
                                 <!--SUMMARIZE AT HEADER-->
                                 <tr v-if="showTotalAt('header')">
-                                    <th
-                                        v-if="formPosition.atStart"
-                                        class="w-[30px]"
-                                    />
-                                    <template
-                                        v-for="col in columns.filter((o) => !o.hidden)"
-                                        :key="col.id"
-                                    >
-                                        <th
-                                            style="border-bottom-width: 4px"
-                                            :style="preFormatStyle(col)"
-                                        >
+                                    <th v-if="formPosition.atStart" class="w-[30px]" />
+                                    <template v-for="col in columns.filter((o) => !o.hidden)" :key="col.id">
+                                        <th style="border-bottom-width: 4px" :style="preFormatStyle(col)">
                                             {{ summarize(col) }}
                                         </th>
                                     </template>
-                                    <th
-                                        v-if="formPosition.atEnd"
-                                        class="w-[30px]"
-                                    />
+                                    <th v-if="formPosition.atEnd" class="w-[30px]" />
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="(row, rowIndex) in list"
-                                    :key="rowIndex"
-                                >
-                                    <td
-                                        v-if="formPosition.atStart"
-                                        class="w-[30px] text-center"
-                                    >
-                                        <report-table-form
-                                            :task="task"
-                                            :row="row"
-                                            @trigger="$emit('trigger', $event)"
-                                        />
+                                <tr v-for="(row, rowIndex) in list" :key="rowIndex">
+                                    <td v-if="formPosition.atStart" class="w-[30px] text-center">
+                                        <report-table-form :task="task" :row="row"
+                                            @trigger="$emit('trigger', $event)" />
                                     </td>
 
-                                    <template
-                                        v-for="col in columns.filter((o) => !o.hidden)"
-                                        :key="col.id"
-                                    >
-                                        <template
-                                            v-if="
-                                                (
-                                                    row[`${defineColumnName(col)}#rowSpan`] &&
-                                                    row[`${defineColumnName(col)}#rowSpan`] > 0
-                                                ) ?
-                                                    row[`${defineColumnName(col)}#rowSpanStart`]
-                                                :   true
-                                            "
-                                        >
-                                            <td
-                                                :style="generateStyle(row, col)"
-                                                :class="generateClass(row, col)"
-                                                :rowspan="
-                                                    row[`${defineColumnName(col)}#rowSpanStart`] ?
-                                                        row[`${defineColumnName(col)}#rowSpan`]
-                                                    :   null
-                                                "
-                                            >
+                                    <template v-for="col in columns.filter((o) => !o.hidden)" :key="col.id">
+                                        <template v-if="
+                                            (
+                                                row[`${defineColumnName(col)}#rowSpan`] &&
+                                                row[`${defineColumnName(col)}#rowSpan`] > 0
+                                            ) ?
+                                                row[`${defineColumnName(col)}#rowSpanStart`]
+                                                : true
+                                        ">
+                                            <td :style="generateStyle(row, col)" :class="generateClass(row, col)"
+                                                :rowspan="row[`${defineColumnName(col)}#rowSpanStart`] ?
+                                                    row[`${defineColumnName(col)}#rowSpan`]
+                                                    : null
+                                                    ">
                                                 <template v-if="!col.accumulated">
                                                     <template v-if="col.linkValue">
-                                                        <n-button
-                                                            text
-                                                            :color="linkColor(col)"
-                                                            @click="setParameters(col.linkType, col.linkValue, row)"
-                                                        >
-                                                            <span
-                                                                v-if="col.html"
-                                                                class="w-100"
-                                                                v-html="row[col.alias || col.columnName]"
-                                                            />
+                                                        <n-button text :color="linkColor(col)"
+                                                            @click="setParameters(col.linkType, col.linkValue, row)">
+                                                            <span v-if="col.html" class="w-100"
+                                                                v-html="row[col.alias || col.columnName]" />
                                                             <template v-else>
                                                                 {{ formatRowValue(row, col) }}
                                                             </template>
                                                         </n-button>
                                                     </template>
                                                     <template v-else-if="col.html">
-                                                        <span
-                                                            class="table-html"
-                                                            v-html="row[col.alias || col.columnName]"
-                                                        />
+                                                        <span class="table-html"
+                                                            v-html="row[col.alias || col.columnName]" />
                                                     </template>
                                                     <template v-else>
                                                         <span>
@@ -144,15 +79,9 @@
                                             </td>
                                         </template>
                                     </template>
-                                    <td
-                                        v-if="formPosition.atEnd"
-                                        class="w-[30px] text-center"
-                                    >
-                                        <report-table-form
-                                            :task="task"
-                                            :row="row"
-                                            @trigger="$emit('trigger', $event)"
-                                        />
+                                    <td v-if="formPosition.atEnd" class="w-[30px] text-center">
+                                        <report-table-form :task="task" :row="row"
+                                            @trigger="$emit('trigger', $event)" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -160,25 +89,13 @@
                             <template v-if="list.length && !loading && showTotalAt('footer')">
                                 <tfoot>
                                     <tr v-if="showTotalAt('header')">
-                                        <td
-                                            v-if="formPosition.atStart"
-                                            class="w-[30px]"
-                                        />
-                                        <template
-                                            v-for="col in columns.filter((o) => !o.hidden)"
-                                            :key="col.id"
-                                        >
-                                            <td
-                                                style="border-bottom-width: 4px"
-                                                :style="preFormatStyle(col)"
-                                            >
+                                        <td v-if="formPosition.atStart" class="w-[30px]" />
+                                        <template v-for="col in columns.filter((o) => !o.hidden)" :key="col.id">
+                                            <td style="border-bottom-width: 4px" :style="preFormatStyle(col)">
                                                 {{ summarize(col) }}
                                             </td>
                                         </template>
-                                        <td
-                                            v-if="formPosition.atEnd"
-                                            class="w-[30px]"
-                                        />
+                                        <td v-if="formPosition.atEnd" class="w-[30px]" />
                                     </tr>
                                 </tfoot>
                             </template>
@@ -186,16 +103,9 @@
                     </div>
                 </n-spin>
 
-                <div
-                    v-if="tableRows > list.length"
-                    class="flex w-full justify-center pb-2"
-                >
-                    <n-pagination
-                        v-model:page="pagination.page"
-                        :item-count="tableRows"
-                        size="small"
-                        @update:page="loadData"
-                    >
+                <div v-if="tableRows > list.length" class="flex w-full justify-center pb-2">
+                    <n-pagination v-model:page="pagination.page" :item-count="tableRows" size="small"
+                        @update:page="loadData">
                         <template #prefix="{ itemCount }">{{ itemCount }} {{ $t('total') }}</template>
                     </n-pagination>
                 </div>
@@ -205,7 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import { type FieldType, type ReportNodeType, type SchemaSortType } from '@gaio/types'
+import { type FieldType, type ReportNodeType, type SchemaSortType } from '@gaio/shared/types'
 import { cloneDeep, take } from 'lodash-es'
 import { computed, type CSSProperties, onMounted, ref } from 'vue'
 

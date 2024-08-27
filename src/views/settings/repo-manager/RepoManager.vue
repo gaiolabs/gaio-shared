@@ -3,24 +3,15 @@
         <settings-view>
             <template #title>
                 <div class="flex items-center gap-2">
-                    <g-icon
-                        name="bucket"
-                        :height="22"
-                    />
+                    <g-icon name="bucket" :height="22" />
                     {{ $t('repository') }}
                 </div>
             </template>
             <div class="source-manager">
                 <template v-if="loading">
                     <n-space vertical>
-                        <n-skeleton
-                            :height="30"
-                            class="rounded"
-                        />
-                        <n-skeleton
-                            :height="90"
-                            class="rounded"
-                        />
+                        <n-skeleton :height="30" class="rounded" />
+                        <n-skeleton :height="90" class="rounded" />
                     </n-space>
                 </template>
 
@@ -30,11 +21,7 @@
                             <div>{{ sources.length }} {{ $t('repositories').toLowerCase() }}</div>
                             <n-tooltip :content="$t('addSource')">
                                 <template #trigger>
-                                    <n-button
-                                        type="primary"
-                                        size="small"
-                                        @click="addSource()"
-                                    >
+                                    <n-button type="primary" size="small" @click="addSource()">
                                         <template #icon>
                                             <g-icon name="add" />
                                         </template>
@@ -45,15 +32,8 @@
                             </n-tooltip>
                         </div>
                         <div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
-                            <g-alert
-                                v-if="sources.length <= 0"
-                                :title="$t('noResult')"
-                            />
-                            <n-table
-                                v-else
-                                striped
-                                size="small"
-                            >
+                            <g-alert v-if="sources.length <= 0" :title="$t('noResult')" />
+                            <n-table v-else striped size="small">
                                 <thead>
                                     <tr>
                                         <th style="width: 80px">ID</th>
@@ -63,29 +43,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="(item, index) in sources"
-                                        :key="index"
-                                    >
+                                    <tr v-for="(item, index) in sources" :key="index">
                                         <td class="px-2">
                                             <g-id :id="item.repoId" />
                                         </td>
                                         <td>
                                             <div class="flex gap-2">
-                                                <img
-                                                    :alt="item.client"
-                                                    style="height: 18px; margin-right: 4px"
-                                                    :src="sourceIcon(item)"
-                                                />
+                                                <img :alt="item.client" style="height: 18px; margin-right: 4px"
+                                                    :src="sourceIcon(item)" />
                                                 {{ item.repoName }}
                                             </div>
                                         </td>
                                         <td>{{ item.client }}</td>
                                         <td class="el-text-left">
-                                            <n-button
-                                                quaternary
-                                                @click="selectSource(item)"
-                                            >
+                                            <n-button quaternary @click="selectSource(item)">
                                                 <template #icon>
                                                     <g-icon name="edit" />
                                                 </template>
@@ -96,12 +67,8 @@
                                 </tbody>
                             </n-table>
                         </div>
-                        <repo-control
-                            v-if="showControl"
-                            :current="current"
-                            @close="showControl = false"
-                            @save="sourceSaved()"
-                        />
+                        <repo-control v-if="showControl" :current="current" @close="showControl = false"
+                            @save="sourceSaved()" />
                     </div>
                 </template>
             </div>
@@ -109,7 +76,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { SourceType } from '@gaio/types'
+import type { SourceType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 
 import useApi from '@/composables/useApi'

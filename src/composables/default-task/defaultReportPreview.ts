@@ -1,4 +1,4 @@
-import type { ReportPreviewTaskType } from '@gaio/types'
+import type { ReportPreviewTaskType } from '@gaio/shared/types'
 
 export const defaultReportPreview = (base: ReportPreviewTaskType) => {
     return {

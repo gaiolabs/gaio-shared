@@ -1,32 +1,15 @@
 <template>
-    <div
-        v-if="task"
-        class="report-node-header p-1"
-    >
-        <div
-            v-if="settings.showHeader"
-            class="flex items-center border-b px-2 py-2"
-            :class="headerBackground"
-        >
+    <div v-if="task" class="report-node-header p-1">
+        <div v-if="settings.showHeader" class="flex items-center border-b px-2 py-2" :class="headerBackground">
             <div class="grow text-lg">
                 {{ task.label }}
             </div>
             <div class="flex items-center">
-                <n-popover
-                    v-if="task.settings.description"
-                    :width="300"
-                    trigger="hover"
-                >
-                    <div
-                        v-if="task.settings.description"
-                        class="control whitespace-pre-wrap p-2"
-                        v-html="renderString(task.settings.description)"
-                    />
+                <n-popover v-if="task.settings.description" :width="300" trigger="hover">
+                    <div v-if="task.settings.description" class="control whitespace-pre-wrap p-2"
+                        v-html="renderString(task.settings.description)" />
                     <template #trigger>
-                        <n-button
-                            size="tiny"
-                            quaternary
-                        >
+                        <n-button size="tiny" quaternary>
                             <template #icon>
                                 <g-icon name="info" />
                             </template>
@@ -35,10 +18,7 @@
                 </n-popover>
                 <div v-if="showCloseTable">
                     <n-divider vertical />
-                    <g-icon
-                        name="close"
-                        @click="$emit('close')"
-                    />
+                    <g-icon name="close" @click="$emit('close')" />
                 </div>
                 <div v-if="settings.showRows">
                     <n-divider vertical />
@@ -46,62 +26,33 @@
                 </div>
             </div>
         </div>
-        <div
-            v-if="task.settings.title"
-            class="flex grow items-center"
-        >
+        <div v-if="task.settings.title" class="flex grow items-center">
             <div class="grow whitespace-pre-wrap py-2">
-                <div
-                    :style="titleStyle"
-                    v-html="renderString(task.settings.title)"
-                />
+                <div :style="titleStyle" v-html="renderString(task.settings.title)" />
             </div>
             <template v-if="!task.settings.showHeader && showRightActions">
-                <div
-                    class="mx-1 py-2 text-right"
-                    :class="task.settings.title ? 'flex-grow-0' : 'flex-grow-1'"
-                >
-                    <n-popover
-                        v-if="task.settings.description"
-                        :width="300"
-                        trigger="hover"
-                    >
-                        <div
-                            v-if="task.settings.description"
-                            class="control whitespace-pre-wrap p-2"
-                            v-html="renderString(task.settings.description)"
-                        />
+                <div class="mx-1 py-2 text-right" :class="task.settings.title ? 'flex-grow-0' : 'flex-grow-1'">
+                    <n-popover v-if="task.settings.description" :width="300" trigger="hover">
+                        <div v-if="task.settings.description" class="control whitespace-pre-wrap p-2"
+                            v-html="renderString(task.settings.description)" />
                         <template #trigger>
-                            <n-button
-                                size="tiny"
-                                quaternary
-                            >
+                            <n-button size="tiny" quaternary>
                                 <template #icon>
                                     <g-icon name="info" />
                                 </template>
                             </n-button>
                         </template>
                     </n-popover>
-                    <n-tooltip
-                        v-if="settings.showTable"
-                        :persistent="false"
-                        :show-after="1500"
-                    >
+                    <n-tooltip v-if="settings.showTable" :persistent="false" :show-after="1500">
                         <template #trigger>
-                            <n-button
-                                text
-                                @click="showTable = !showTable"
-                            >
+                            <n-button text @click="showTable = !showTable">
                                 <g-icon name="table" />
                             </n-button>
                         </template>
                         {{ $t('showTable') }}
                     </n-tooltip>
                     <div v-if="!settings.showHeader && settings.showRows">#{{ tableRows }}</div>
-                    <report-download
-                        v-if="task.settings.downloadData && !task.settings.showHeader"
-                        :task="task"
-                    />
+                    <report-download v-if="task.settings.downloadData && !task.settings.showHeader" :task="task" />
                 </div>
             </template>
         </div>
@@ -109,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ReportNodeType, ReportTaskSettingsType } from '@gaio/types'
+import type { ReportNodeType, ReportTaskSettingsType } from '@gaio/shared/types'
 import { computed, ref } from 'vue'
 
 import ReportDownload from '@/views/report/ReportDownload.vue'

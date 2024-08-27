@@ -1,8 +1,5 @@
 <template>
-    <g-dialog
-        width="750px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="750px" @close="$emit('close')">
         <template #title>
             <task-icon :local-task="localTask" />
             {{ $t('taskDeleteTable') }}
@@ -33,37 +30,23 @@
                                 {{ $t('filters') }}
                             </div>
                             <div>
-                                <n-button
-                                    size="tiny"
-                                    secondary
-                                    @click="showPreview = true"
-                                >
+                                <n-button size="tiny" secondary @click="showPreview = true">
                                     <template #icon>
                                         <g-icon name="sql" />
                                     </template>
                                 </n-button>
                             </div>
                         </div>
-                        <g-filter-builder
-                            :key="localTask.tableName"
-                            :local-task="localTask"
-                            :table-name="localTask.tableName"
-                        />
+                        <g-filter-builder :key="localTask.tableName" :local-task="localTask"
+                            :table-name="localTask.tableName" />
                     </div>
                 </template>
                 <template v-else>
-                    <g-query-preview
-                        :local-task="localTask"
-                        class="min-h-[200px]"
-                        @close="showPreview = false"
-                    />
+                    <g-query-preview :local-task="localTask" class="min-h-[200px]" @close="showPreview = false" />
                 </template>
             </div>
             <div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-                <n-button
-                    type="primary"
-                    @click="save()"
-                >
+                <n-button type="primary" @click="save()">
                     {{ $t('save') }}
                 </n-button>
             </div>
@@ -72,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import type { DeleteTaskType } from '@gaio/types'
+import type { DeleteTaskType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 
 import useDefault from '@/composables/useDefault'

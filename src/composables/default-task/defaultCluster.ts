@@ -1,5 +1,5 @@
-import type { ClusterTaskType, TaskType } from '@gaio/types'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import type { ClusterTaskType, TaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultCluster = (base: ClusterTaskType & TaskType) => {
     return {

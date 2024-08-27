@@ -7,12 +7,8 @@
                 <span v-if="localTask.schema.sort.length">({{ localTask.schema.group.length }})</span>
             </div>
             <div class="mb-1 flex items-center gap-1">
-                <n-button
-                    size="tiny"
-                    quaternary
-                    class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                    @click="addFieldsWithoutAggregation()"
-                >
+                <n-button size="tiny" quaternary class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
+                    @click="addFieldsWithoutAggregation()">
                     <template #icon>
                         <g-icon name="addCheck" />
                     </template>
@@ -20,13 +16,8 @@
                 </n-button>
                 <n-tooltip :delay="1000">
                     <template #trigger>
-                        <n-button
-                            quaternary
-                            size="tiny"
-                            type="error"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-                            @click="removeAll()"
-                        >
+                        <n-button quaternary size="tiny" type="error"
+                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeAll()">
                             <template #icon>
                                 <g-icon name="deleteTag" />
                             </template>
@@ -36,15 +27,12 @@
                 </n-tooltip>
             </div>
         </div>
-        <task-builder-drop-tag
-            custom-class="group"
-            :fields="localTask.schema.group"
-            @choose="$emit('choose', $event)"
-        />
+        <task-builder-drop-tag custom-class="group" :fields="localTask.schema.group"
+            @choose="$emit('choose', $event)" />
     </div>
 </template>
 <script setup lang="ts">
-import type { BuilderTaskType } from '@gaio/types'
+import type { BuilderTaskType } from '@gaio/shared/types'
 import { uniqBy } from 'lodash-es'
 import type { PropType } from 'vue'
 

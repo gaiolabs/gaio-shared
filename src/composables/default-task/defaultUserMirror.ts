@@ -1,5 +1,5 @@
-import type { TaskType, UserTaskType } from '@gaio/types'
-import { getBucketNameFromAppId } from '@gaio/utils'
+import type { TaskType, UserTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultUserMirror = (base: UserTaskType & TaskType) => {
     return {

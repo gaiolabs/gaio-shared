@@ -1,35 +1,23 @@
 <template>
-    <g-dialog
-        width="500px"
-        @close="$emit('close')"
-    >
+    <g-dialog width="500px" @close="$emit('close')">
         <template #title>{{ $t('source') }}</template>
         <template #content>
-            <n-spin
-                size="small"
-                :show="loading"
-            >
+            <n-spin size="small" :show="loading">
                 <div class="overflow-auto">
                     <div class="control grow">
                         <div class="control-label">{{ $t('client') }}</div>
-                        <n-select
-                            v-model:value="source.client"
-                            default-value="mysql"
-                            filterable
-                            :options="[
-                                { value: 'mysql', label: 'MySQL' },
-                                { value: 'clickhouse', label: 'Clickhouse' },
-                                { value: 'memsql', label: 'MemSQL' },
-                                { value: 'mariadb', label: 'MariaDB' },
-                                { value: 'mssql', label: 'SQL Server' },
-                                { value: 'pg', label: 'PostgreSQL' },
-                                { value: 'redshift', label: 'Redshift' },
-                                { value: 'oracle', label: 'Oracle' },
-                                { value: 'salesforce', label: 'Salesforce' },
-                                { value: 's3', label: 'S3 AWS' }
-                            ]"
-                            @update:value="controlClient()"
-                        />
+                        <n-select v-model:value="source.client" default-value="mysql" filterable :options="[
+                            { value: 'mysql', label: 'MySQL' },
+                            { value: 'clickhouse', label: 'Clickhouse' },
+                            { value: 'memsql', label: 'MemSQL' },
+                            { value: 'mariadb', label: 'MariaDB' },
+                            { value: 'mssql', label: 'SQL Server' },
+                            { value: 'pg', label: 'PostgreSQL' },
+                            { value: 'redshift', label: 'Redshift' },
+                            { value: 'oracle', label: 'Oracle' },
+                            { value: 'salesforce', label: 'Salesforce' },
+                            { value: 's3', label: 'S3 AWS' }
+                        ]" @update:value="controlClient()" />
                     </div>
                     <div class="control grow">
                         <div class="control-label">
@@ -47,14 +35,10 @@
                                     <div class="control-label">
                                         {{ $t('organizationType') }}
                                     </div>
-                                    <n-select
-                                        v-model:value="source.credentials.loginUrl"
-                                        :options="[
-                                            { value: 'https://login.salesforce.com', label: 'Production' },
-                                            { value: 'https://test.salesforce.com', label: 'Sandbox' }
-                                        ]"
-                                        class="w-full"
-                                    />
+                                    <n-select v-model:value="source.credentials.loginUrl" :options="[
+                                        { value: 'https://login.salesforce.com', label: 'Production' },
+                                        { value: 'https://test.salesforce.com', label: 'Sandbox' }
+                                    ]" class="w-full" />
                                 </div>
                             </div>
                         </template>
@@ -76,86 +60,44 @@
                                 </div>
                             </div>
                         </template>
-                        <div
-                            v-if="source.client !== 'salesforce'"
-                            class="control"
-                        >
+                        <div v-if="source.client !== 'salesforce'" class="control">
                             <div class="control-label">
                                 {{ $t('database') }}
                             </div>
                             <n-input v-model:value="source.credentials.database" />
                         </div>
-                        <div
-                            v-if="source.client === 'salesforce'"
-                            class="control"
-                        >
+                        <div v-if="source.client === 'salesforce'" class="control">
                             <div class="control-label">Security Token</div>
                             <n-input v-model:value="source.credentials.token" />
                         </div>
-                        <div
-                            v-if="source.client === 'pg'"
-                            class="control"
-                        >
+                        <div v-if="source.client === 'pg'" class="control">
                             <div class="control-label">
                                 {{ $t('schemaName') }}
                             </div>
                             <n-input v-model:value="source.credentials.schema" />
                         </div>
-                        <div
-                            v-if="source.client === 'oracle'"
-                            class="control"
-                        >
+                        <div v-if="source.client === 'oracle'" class="control">
                             <div class="control-label">SID</div>
-                            <n-input
-                                v-model:value="source.credentials.sid"
-                                name="sid"
-                            />
+                            <n-input v-model:value="source.credentials.sid" name="sid" />
                         </div>
-                        <div
-                            v-if="source.client === 'oracle'"
-                            class="control"
-                        >
+                        <div v-if="source.client === 'oracle'" class="control">
                             <div class="control-label">Service Name</div>
-                            <n-input
-                                v-model:value="source.credentials.serviceName"
-                                name="serviceName"
-                            />
+                            <n-input v-model:value="source.credentials.serviceName" name="serviceName" />
                         </div>
-                        <div
-                            v-if="source.client === 'mssql'"
-                            class="control control-secondary"
-                        >
-                            <n-checkbox
-                                v-model:checked="source.credentials.encrypt"
-                                :label="$t('encrypt')"
-                            />
+                        <div v-if="source.client === 'mssql'" class="control control-secondary">
+                            <n-checkbox v-model:checked="source.credentials.encrypt" :label="$t('encrypt')" />
                         </div>
-                        <div
-                            v-if="source.client === 'mssql'"
-                            class="control control-secondary"
-                        >
-                            <n-checkbox
-                                v-model:checked="source.credentials.encryptSource"
-                                :label="$t('encryptSource')"
-                            />
+                        <div v-if="source.client === 'mssql'" class="control control-secondary">
+                            <n-checkbox v-model:checked="source.credentials.encryptSource"
+                                :label="$t('encryptSource')" />
                         </div>
-                        <div
-                            v-if="source.client === 'oracle'"
-                            class="control control-secondary"
-                        >
-                            <n-checkbox
-                                v-model:checked="source.credentials.oracleAlternativeDriver"
-                                :label="$t('oracleAlternativeDriver')"
-                            />
+                        <div v-if="source.client === 'oracle'" class="control control-secondary">
+                            <n-checkbox v-model:checked="source.credentials.oracleAlternativeDriver"
+                                :label="$t('oracleAlternativeDriver')" />
                         </div>
-                        <div
-                            v-if="source.client === 'oracle'"
-                            class="control control-secondary"
-                        >
-                            <n-checkbox
-                                v-model:checked="source.credentials.oracleCaseSensitive"
-                                :label="$t('oracleCaseSensitive')"
-                            />
+                        <div v-if="source.client === 'oracle'" class="control control-secondary">
+                            <n-checkbox v-model:checked="source.credentials.oracleCaseSensitive"
+                                :label="$t('oracleCaseSensitive')" />
                         </div>
                         <div class="control">
                             <div>
@@ -164,11 +106,8 @@
                                         <div class="control-label">
                                             {{ $t('user') }}
                                         </div>
-                                        <n-input
-                                            v-model:value="source.credentials.user"
-                                            autocomplete="off"
-                                            name="base"
-                                        />
+                                        <n-input v-model:value="source.credentials.user" autocomplete="off"
+                                            name="base" />
                                     </div>
                                 </div>
                                 <div>
@@ -176,19 +115,13 @@
                                         <div class="control-label">
                                             {{ $t('password') }}
                                         </div>
-                                        <n-input
-                                            v-model:value="source.credentials.password"
-                                            show-password
-                                        />
+                                        <n-input v-model:value="source.credentials.password" show-password />
                                     </div>
                                 </div>
                             </div>
                             <div class="control control-secondary">
-                                <n-checkbox
-                                    v-model:checked="source.credentials.canExecuteRaw"
-                                    :label="$t('executeRawQuery')"
-                                    :disabled="disableRaw"
-                                />
+                                <n-checkbox v-model:checked="source.credentials.canExecuteRaw"
+                                    :label="$t('executeRawQuery')" :disabled="disableRaw" />
                             </div>
                         </div>
                     </div>
@@ -223,36 +156,21 @@
                 <div class="bg-paper-100 px-4 py-2 dark:bg-carbon-200">
                     <div class="flex items-center justify-between gap-2">
                         <div class="flex items-center gap-2">
-                            <n-popconfirm
-                                :positive-text="$t('delete')"
-                                :negative-text="$t('cancel')"
-                                @positive-click="remove()"
-                            >
+                            <n-popconfirm :positive-text="$t('delete')" :negative-text="$t('cancel')"
+                                @positive-click="remove()">
                                 <template #activator>
-                                    <n-button
-                                        quaternary
-                                        type="error"
-                                    >
+                                    <n-button quaternary type="error">
                                         {{ $t('remove') }}
                                     </n-button>
                                 </template>
                                 {{ $t('deleteSource') }}
                             </n-popconfirm>
-                            <n-button
-                                v-if="source.client !== 's3'"
-                                type="success"
-                                quaternary
-                                plain
-                                @click="testSource"
-                            >
+                            <n-button v-if="source.client !== 's3'" type="success" quaternary plain @click="testSource">
                                 {{ $t('test') }}
                             </n-button>
                         </div>
 
-                        <n-button
-                            type="primary"
-                            @click="saveSource"
-                        >
+                        <n-button type="primary" @click="saveSource">
                             {{ $t('save') }}
                         </n-button>
                     </div>
@@ -262,7 +180,7 @@
     </g-dialog>
 </template>
 <script setup lang="ts">
-import type { SourceType } from '@gaio/types'
+import type { SourceType } from '@gaio/shared/types'
 import { ref, onBeforeMount } from 'vue'
 import useApi from '@/composables/useApi'
 import { cloneDeep } from 'lodash-es'

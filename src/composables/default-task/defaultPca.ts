@@ -1,4 +1,4 @@
-import type { PcaTaskType, TaskType } from '@gaio/types'
+import type { PcaTaskType, TaskType } from '@gaio/shared/types'
 
 export const defaultPca = (base: PcaTaskType & TaskType) => {
     return {

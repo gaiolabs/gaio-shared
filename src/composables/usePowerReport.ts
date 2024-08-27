@@ -1,5 +1,5 @@
-import type { ReportTaskSettingsType } from '@gaio/types'
-import { canBeANumber, getId } from '@gaio/utils'
+import type { ReportTaskSettingsType } from '@gaio/shared/types'
+import { canBeANumber, getId } from '@gaio/shared/utils'
 import { cloneDeep, uniq } from 'lodash-es'
 import { computed } from 'vue'
 

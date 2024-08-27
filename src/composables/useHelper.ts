@@ -1,6 +1,6 @@
 import { drop } from 'lodash-es'
-import type { FieldType, GenericType } from '@gaio/types'
-import { getId } from '@gaio/utils'
+import type { FieldType, GenericType } from '@gaio/shared/types'
+import { getId } from '@gaio/shared/utils'
 
 interface Data {
     [prop: string]: string | number | boolean

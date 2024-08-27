@@ -1,4 +1,4 @@
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 import dayjs from 'dayjs'
 import { cloneDeep, isNil } from 'lodash-es'
 

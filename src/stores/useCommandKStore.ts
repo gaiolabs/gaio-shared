@@ -1,4 +1,4 @@
-import type { GenericType } from '@gaio/types'
+import type { GenericType } from '@gaio/shared/types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

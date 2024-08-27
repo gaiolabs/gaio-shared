@@ -1,21 +1,11 @@
 <template>
-    <n-select
-        v-model:value="selected"
-        size="small"
-        :options="columnList"
-        :placeholder="$t('selectColumn')"
-        :clearable="clearable"
-        :multiple="multiple"
-        :render-label="renderLabel"
-        value-field="columnName"
-        label-field="columnName"
-        filterable
-        @update:value="updateSelected"
-    />
+    <n-select v-model:value="selected" size="small" :options="columnList" :placeholder="$t('selectColumn')"
+        :clearable="clearable" :multiple="multiple" :render-label="renderLabel" value-field="columnName"
+        label-field="columnName" filterable @update:value="updateSelected" />
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/types'
+import type { FieldType } from '@gaio/shared/types'
 import type { SelectOption } from 'naive-ui'
 import { h, onMounted, ref, type VNodeChild, watch } from 'vue'
 
@@ -61,7 +51,7 @@ const renderLabel = (option: ColumnListType): VNodeChild => {
                 name: option.dataIcon,
                 class: 'text-primary'
             })
-        :   '',
+            : '',
         ' ',
         option.columnName
     ]

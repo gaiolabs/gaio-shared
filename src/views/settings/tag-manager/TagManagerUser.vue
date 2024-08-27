@@ -2,33 +2,15 @@
     <div class="tag-manager-users">
         <div class="g-bg-1 card-header-fix card-tags min-h-[410px] rounded shadow">
             <div class="card-header g-bg-400 flex h-[35px] items-center justify-between gap-2 px-2 py-1">
-                <n-radio-group
-                    v-model:value="tagType"
-                    size="small"
-                    @update:value="filterTag = ''"
-                >
-                    <n-radio-button
-                        :label="$t('group')"
-                        value="group"
-                    />
-                    <n-radio-button
-                        :label="$t('user')"
-                        value="user"
-                    />
+                <n-radio-group v-model:value="tagType" size="small" @update:value="filterTag = ''">
+                    <n-radio-button :label="$t('group')" value="group" />
+                    <n-radio-button :label="$t('user')" value="user" />
                 </n-radio-group>
                 <div class="flex items-center justify-end gap-2">
-                    <div
-                        v-if="tagType === 'user'"
-                        class="flex items-center gap-1"
-                    >
+                    <div v-if="tagType === 'user'" class="flex items-center gap-1">
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    size="tiny"
-                                    color="#333"
-                                    style="color: #fff"
-                                    @click="filterTag = 'admin'"
-                                >
+                                <n-button size="tiny" color="#333" style="color: #fff" @click="filterTag = 'admin'">
                                     A
                                 </n-button>
                             </template>
@@ -36,12 +18,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    size="tiny"
-                                    color="#1976d2"
-                                    style="color: #fff"
-                                    @click="filterTag = 'dev'"
-                                >
+                                <n-button size="tiny" color="#1976d2" style="color: #fff" @click="filterTag = 'dev'">
                                     D
                                 </n-button>
                             </template>
@@ -49,12 +26,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    size="tiny"
-                                    color="#e91e63"
-                                    style="color: #fff"
-                                    @click="filterTag = 'user'"
-                                >
+                                <n-button size="tiny" color="#e91e63" style="color: #fff" @click="filterTag = 'user'">
                                     U
                                 </n-button>
                             </template>
@@ -62,12 +34,7 @@
                         </n-tooltip>
                         <n-tooltip>
                             <template #trigger>
-                                <n-button
-                                    size="tiny"
-                                    color="#ccc"
-                                    style="color: #222"
-                                    @click="filterTag = ''"
-                                >
+                                <n-button size="tiny" color="#ccc" style="color: #222" @click="filterTag = ''">
                                     C
                                 </n-button>
                             </template>
@@ -77,10 +44,7 @@
                     </div>
                     <n-tooltip v-if="currentUser.userId && tagType !== 'user'">
                         <template #trigger>
-                            <n-button
-                                text
-                                @click="showEditUser = true"
-                            >
+                            <n-button text @click="showEditUser = true">
                                 <template #icon>
                                     <g-icon name="edit" />
                                 </template>
@@ -88,36 +52,21 @@
                         </template>
                         {{ $t('newGroup') }}
                     </n-tooltip>
-                    <n-divider
-                        v-if="current && current.userId"
-                        vertical
-                    />
+                    <n-divider v-if="current && current.userId" vertical />
                     <n-tooltip v-if="tagType !== 'user'">
                         <template #trigger>
-                            <n-button
-                                text
-                                @click="addNewGroup"
-                            >
+                            <n-button text @click="addNewGroup">
                                 <template #icon>
-                                    <g-icon
-                                        style="margin-top: 2px"
-                                        name="add"
-                                    />
+                                    <g-icon style="margin-top: 2px" name="add" />
                                 </template>
                             </n-button>
                         </template>
                         {{ $t('newGroup') }}
                     </n-tooltip>
-                    <n-divider
-                        v-if="tagType !== 'user'"
-                        vertical
-                    />
+                    <n-divider v-if="tagType !== 'user'" vertical />
                     <n-tooltip>
                         <template #trigger>
-                            <n-button
-                                text
-                                @click="saveAll()"
-                            >
+                            <n-button text @click="saveAll()">
                                 <template #icon>
                                     <g-icon name="checkAll" />
                                 </template>
@@ -128,12 +77,8 @@
                 </div>
             </div>
             <div class="px-2 pt-2">
-                <n-input
-                    v-model:value="term"
-                    :disabled="!!currentUser.userId"
-                    :placeholder="$t('filter')"
-                    @keyup="page = 1"
-                />
+                <n-input v-model:value="term" :disabled="!!currentUser.userId" :placeholder="$t('filter')"
+                    @keyup="page = 1" />
             </div>
             <template v-if="loading">
                 <g-alert :title="$t('loading')" />
@@ -142,10 +87,7 @@
             <template v-if="tagType === 'user'">
                 <template v-if="hasFilteredTagsOfOnlyUsers">
                     <div class="table-responsive mx-1 my-1">
-                        <n-table
-                            striped
-                            size="small"
-                        >
+                        <n-table striped size="small">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -158,37 +100,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="(item, index) in filterBy(
-                                        tags.filter((t) => t.role !== 'group'),
-                                        'name',
-                                        term
-                                    ).slice(size * (page - 1), size * page)"
-                                    :key="index"
-                                >
-                                    <td
-                                        class="el-text-center"
-                                        style="width: 30px"
-                                    >
-                                        <g-icon
-                                            v-if="!hasTags(item)"
-                                            name="check"
-                                            @click="addTag(item)"
-                                        />
-                                        <g-icon
-                                            v-else
-                                            name="checked"
-                                            @click="removeTag(item)"
-                                        />
+                                <tr v-for="(item, index) in filterBy(
+                                    tags.filter((t) => t.role !== 'group'),
+                                    'name',
+                                    term
+                                ).slice(size * (page - 1), size * page)" :key="index">
+                                    <td class="el-text-center" style="width: 30px">
+                                        <g-icon v-if="!hasTags(item)" name="check" @click="addTag(item)" />
+                                        <g-icon v-else name="checked" @click="removeTag(item)" />
                                     </td>
                                     <td class="el-text-center">
                                         <n-tooltip v-if="item.role === 'admin'">
                                             <template #trigger>
-                                                <n-button
-                                                    size="tiny"
-                                                    color="#333"
-                                                    style="color: #fff"
-                                                >
+                                                <n-button size="tiny" color="#333" style="color: #fff">
                                                     A
                                                 </n-button>
                                             </template>
@@ -196,11 +120,7 @@
                                         </n-tooltip>
                                         <n-tooltip v-else-if="item.role === 'dev'">
                                             <template #trigger>
-                                                <n-button
-                                                    size="tiny"
-                                                    color="#1976d2"
-                                                    style="color: #fff"
-                                                >
+                                                <n-button size="tiny" color="#1976d2" style="color: #fff">
                                                     D
                                                 </n-button>
                                             </template>
@@ -208,11 +128,7 @@
                                         </n-tooltip>
                                         <n-tooltip v-else>
                                             <template #trigger>
-                                                <n-button
-                                                    size="tiny"
-                                                    color="#e91e63"
-                                                    style="color: #fff"
-                                                >
+                                                <n-button size="tiny" color="#e91e63" style="color: #fff">
                                                     U
                                                 </n-button>
                                             </template>
@@ -221,10 +137,7 @@
                                     </td>
                                     <td class="el-text-center">{{ item.userId }}</td>
                                     <td>
-                                        <n-button
-                                            text
-                                            @click="filter(item)"
-                                        >
+                                        <n-button text @click="filter(item)">
                                             {{ item.name }}
                                         </n-button>
                                     </td>
@@ -233,31 +146,20 @@
                             </tbody>
                         </n-table>
                     </div>
-                    <div
-                        v-if="filterBy(tags, 'name', term).filter((t) => t.role !== 'group').length > size"
-                        class="d-flex justify-content-center w-100"
-                    >
-                        <n-pagination
-                            v-model:page="page"
-                            size="small"
+                    <div v-if="filterBy(tags, 'name', term).filter((t) => t.role !== 'group').length > size"
+                        class="d-flex justify-content-center w-100">
+                        <n-pagination v-model:page="page" size="small"
                             :item-count="filterBy(tags, 'name', term).filter((t) => t.role !== 'group').length"
-                            :page-size="size"
-                        />
+                            :page-size="size" />
                     </div>
                 </template>
-                <g-alert
-                    v-else-if="!loading"
-                    :title="$t('noData')"
-                />
+                <g-alert v-else-if="!loading" :title="$t('noData')" />
             </template>
             <template v-else>
                 <!-- TABLE GROUPS-->
                 <template v-if="hasFilteredTags">
                     <div class="table-responsive mx-1 my-1">
-                        <n-table
-                            striped
-                            size="small"
-                        >
+                        <n-table striped size="small">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -265,33 +167,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="(item, index) in filterBy(tags, 'name', term)
-                                        .filter((t) => t.role === 'group')
-                                        .slice(size * (page - 1), size * page)"
-                                    :key="index"
-                                >
-                                    <td
-                                        class="el-text-center"
-                                        style="width: 30px"
-                                    >
-                                        <g-icon
-                                            v-if="!hasTags(item)"
-                                            name="check"
-                                            @click="addTag(item)"
-                                        />
-                                        <g-icon
-                                            v-else
-                                            name="checked"
-                                            @click="removeTag(item)"
-                                        />
+                                <tr v-for="(item, index) in filterBy(tags, 'name', term)
+                                    .filter((t) => t.role === 'group')
+                                    .slice(size * (page - 1), size * page)" :key="index">
+                                    <td class="el-text-center" style="width: 30px">
+                                        <g-icon v-if="!hasTags(item)" name="check" @click="addTag(item)" />
+                                        <g-icon v-else name="checked" @click="removeTag(item)" />
                                     </td>
                                     <td>
-                                        <n-button
-                                            text
-                                            type="primary"
-                                            @click="filter(item)"
-                                        >
+                                        <n-button text type="primary" @click="filter(item)">
                                             {{ item.name }}
                                         </n-button>
                                     </td>
@@ -299,36 +183,23 @@
                             </tbody>
                         </n-table>
                     </div>
-                    <div
-                        v-if="filterBy(tags, 'name', term).filter((t) => t.role === 'group').length > size"
-                        class="flex w-full justify-center"
-                    >
-                        <n-pagination
-                            v-model:page="page"
-                            size="small"
+                    <div v-if="filterBy(tags, 'name', term).filter((t) => t.role === 'group').length > size"
+                        class="flex w-full justify-center">
+                        <n-pagination v-model:page="page" size="small"
                             :item-count="filterBy(tags, 'name', term).filter((t) => t.role === 'group').length"
-                            :page-size="size"
-                        />
+                            :page-size="size" />
                     </div>
                 </template>
-                <g-alert
-                    v-else-if="!loading"
-                    :title="$t('noData')"
-                    show-icon
-                />
+                <g-alert v-else-if="!loading" :title="$t('noData')" show-icon />
             </template>
-            <tag-manager-group-control
-                v-if="showEditUser"
-                :current="current"
-                @close="closeGroupOn('close')"
-                @save="closeGroupOn('save')"
-            />
+            <tag-manager-group-control v-if="showEditUser" :current="current" @close="closeGroupOn('close')"
+                @save="closeGroupOn('save')" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { TagTypePermission } from '@gaio/types'
+import type { TagTypePermission } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { computed, ref } from 'vue'
 

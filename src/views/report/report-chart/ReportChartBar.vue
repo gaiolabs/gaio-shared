@@ -1,15 +1,11 @@
 <template>
     <div class="report-bar">
-        <v-chart
-            class="chart"
-            style="height: 350px"
-            :option="option"
-        />
+        <v-chart class="chart" style="height: 350px" :option="option" />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { ReportNodeType } from '@gaio/types'
+import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
 import useReportChartHelper from './ReportChartHelper'
