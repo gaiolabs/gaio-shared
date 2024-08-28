@@ -18,10 +18,5 @@ module.exports = {
                 'order': ['imports', 'variables', 'functions', 'lifecycle', 'render-function']
             }
         ]
-    },
-    extends: ['@gaio/shared/eslint-config/vue'],
-    'parserOptions': {
-        'sourceType': 'module',
-        'ecmaVersion': 'latest'
     }
 }

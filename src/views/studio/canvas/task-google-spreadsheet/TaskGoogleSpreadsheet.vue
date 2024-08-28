@@ -3,21 +3,24 @@
         <template #title>{{ $t('googleSpreadsheet') }}</template>
         <template #content>
             <div class="task-google-spreadsheet size-full flex-col items-center justify-center">
-                <div class="flex flex-col items-center justify-center gap-1 overflow-auto">
+                <div class="flex flex-col items-center justify-center gap-1 overflow-auto"
+                     v-if="localTask"
+                >
+
                     <div class="flex w-full gap-2">
                         <div class="flex w-full flex-col gap-1">
                             <label class="font-semibold text-neutral-500" for="task">
                                 {{ $t('task') }}
                             </label>
                             <n-input id="task" v-model:value="localTask.label" name="task"
-                                :placeholder="$t('taskLabel')" />
+                                     :placeholder="$t('taskLabel')" />
                         </div>
                         <div class="flex w-full flex-col gap-1">
                             <label class="font-semibold text-neutral-500" for="resultTable">
                                 {{ $t('resultTable') }}
                             </label>
                             <n-input id="resultTable" v-model:value="localTask.resultTable"
-                                :placeholder="$t('resultTable')" />
+                                     :placeholder="$t('resultTable')" />
                         </div>
                     </div>
                     <div class="flex w-full flex-col gap-1">
@@ -80,6 +83,7 @@ const save = async (): Promise<void> => {
         .then(() => emit('close'))
 }
 onMounted(() => {
+    console.log('casa')
     localTask.value = useDefault({
         type: 'googleSpreadsheet',
         base: {

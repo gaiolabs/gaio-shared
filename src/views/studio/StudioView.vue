@@ -17,7 +17,7 @@
             <table-view v-if="showDrawer === 'table'" class="z-30" @close="showDrawer = undefined" />
             <task-log-view v-if="showDrawer === 'taskLogView'" class="z-30" @close="showDrawer = undefined" />
             <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />
-            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />
+<!--            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />-->
             <task-form-builder v-if="showDrawer === 'form'" class="z-30" @close="closeTask()" />
             <task-explorer-view v-if="showDrawer === 'report'" class="z-30" @close="closeTask()" />
             <sidebar-sub-nav class="z-40" :is-bucket-table="isBucketTable" @choose="selectElement" />
