@@ -122,6 +122,7 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
                 break
         }
     } else {
+        console.log("item.type", item.type)
         switch (item.type) {
             case 'table':
                 showDrawer.value = 'table'
@@ -200,6 +201,9 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
                 break
             case 'quickTable':
                 currentElement.value = taskView.TaskQuickTable
+                break
+            case 'staticContent':
+                currentElement.value = taskView.TaskStaticContent
                 break
             default:
                 break

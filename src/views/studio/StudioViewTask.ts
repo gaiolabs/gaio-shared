@@ -22,6 +22,7 @@ import TaskUnpivotTable from '@/views/studio/canvas/task-unpivot-table/TaskUnpiv
 import TaskFormCard from '@/views/studio/canvas/task-form-card/TaskFormCard.vue'
 import TaskRest from './canvas/task-rest/TaskRest.vue'
 import TaskReportPreview from '@/views/studio/canvas/task-report-preview/TaskReportPreview.vue'
+import TaskStaticContent from './canvas/task-static-content/TaskStaticContent.vue'
 
 export const taskView = {
     TaskReportPreview,
@@ -47,5 +48,6 @@ export const taskView = {
     TaskInsertTable,
     TaskQuickTable,
     TaskUnpivotTable,
-    TaskFormCard
+    TaskFormCard,
+    TaskStaticContent
 }

@@ -9,7 +9,6 @@ export default (refId?: string) => {
     // eslint-disable-next-line turbo/no-undeclared-env-vars
     const baseUrl = import.meta.env.VITE_APP_API
     
-    console.log("baseUrl",baseUrl);
     return {
         baseUrl,
         post: async (url: string, options?: optionType) =>
