@@ -2,6 +2,7 @@ import type { SchemaType } from '../core/schema.type'
 import type { TableType } from '../core/table.type'
 import type { ReportTaskSettingsType } from './report.task.settings'
 import type { FormCardType } from './form-card.type'
+import { StaticContentType } from './static-content.type'
 
 export type ReportNodeType = Partial<{
     label: string
@@ -17,4 +18,5 @@ export type ReportNodeType = Partial<{
     settings: ReportTaskSettingsType
 }> &
     TableType &
-    FormCardType
+    FormCardType &
+    StaticContentType
