@@ -1,7 +1,6 @@
 import type { ReportNodeType } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
-
 import { defaultReportChartArea } from '@/composables/default-reports/defaultReportChartArea'
 import { defaultReportChartBar } from '@/composables/default-reports/defaultReportChartBar'
 import { defaultReportChartLine } from '@/composables/default-reports/defaultReportChartLine'
@@ -9,6 +8,7 @@ import { defaultReportChartPie } from '@/composables/default-reports/defaultRepo
 import { defaultReportChartTreemap } from '@/composables/default-reports/defaultReportChartTreemap'
 import { defaultReportDownload } from '@/composables/default-reports/defaultReportDownload'
 import { defaultTableReport } from '@/composables/default-reports/defaultTableReport'
+import { defaultStaticContentReport } from '@/composables/default-reports/defaultStaticContentReport'
 
 export default ({ type, reportType, base }: { type: string; reportType: string; base: ReportNodeType }) => {
     const sourceProperties = cloneDeep(base)
@@ -27,7 +27,8 @@ export default ({ type, reportType, base }: { type: string; reportType: string; 
         download: () => defaultReportDownload(sourceProperties),
         treemap: () => defaultReportChartTreemap(sourceProperties),
         pie: () => defaultReportChartPie(sourceProperties),
-        area: () => defaultReportChartArea(sourceProperties)
+        area: () => defaultReportChartArea(sourceProperties),
+        staticContent: () => defaultStaticContentReport(sourceProperties)
     }
 
     return withoutNullProperties({

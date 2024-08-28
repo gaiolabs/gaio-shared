@@ -1,20 +1,19 @@
 <template>
     <div>
-        <table-view v-if="showTab === 'table'" :table-name="viewTableData?.tableName" @close="showTab = 'builder'" />
-        <drawer-view v-else tag="task-builder" class="task-builder" @close="$emit('close')">
+        <drawer-view tag="task-builder" class="task-builder" @close="$emit('close')">
             <template #header>
-                <task-builder-menu :show-tab="showTab" :local-task="localTask" @show-tab="showTab = $event"
+                <task-static-content-menu :show-tab="showTab" :local-task="localTask" @show-tab="showTab = $event"
                     @close="$emit('close')" />
             </template>
             <template #content>
                 <div v-if="localTask" class="task-builder-drops h-full w-full">
                     <Splitpanes class="h-full w-full">
-                        <pane :size="22">
+                        <pane :size="16">
                             <div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
                                 <n-scrollbar style="max-height: calc(100vh - 72px)">
                                     <div class="flex items-center justify-between p-3 pb-0 pt-2 font-bold">
                                         <div class="text-lg">
-                                            {{ $t('columns') }}
+                                            {{ $t('general') }}
                                         </div>
                                         <div class="flex items-center gap-1">
                                             <n-button size="tiny" quaternary
@@ -32,19 +31,18 @@
                                             </n-button>
                                         </div>
                                     </div>
-                                    <task-builder-fields class="px-3" :local-task="localTask" @view-table="viewTable"
-                                        @edit-computed="editComputed" />
+                                    <!-- <task-builder-fields class="px-3" :local-task="localTask" @view-table="viewTable"
+                                        @edit-computed="editComputed" /> -->
                                 </n-scrollbar>
                             </div>
                         </pane>
-                        <pane :size="78">
-                            <!--BUILDER-->
+                        <pane :size="84">
                             <splitpanes v-if="showTab === 'builder'" class="h-full">
-                                <pane :size="78">
+                                <pane :size="50">
                                     <div class="my-2 h-full rounded bg-paper-200 dark:bg-carbon-100">
                                         <n-scrollbar style="max-height: calc(100vh - 72px)">
                                             <div class="mt-3 pb-[60px]">
-                                                <task-builder-drop-select class="p-3 pt-0" :local-task="localTask"
+                                                <!-- <task-builder-drop-select class="p-3 pt-0" :local-task="localTask"
                                                     @choose="defineLocalField('select', $event)" />
                                                 <task-builder-drop-filter class="p-3" type="filter"
                                                     :local-task="localTask"
@@ -72,18 +70,18 @@
                                                 <task-builder-drop-limit-by v-if="
                                                     localTask.client === 'clickhouse' && localTask.schema.limit > 0
                                                 " class="p-3" :local-task="localTask"
-                                                    @choose="defineLocalField('limitBy', $event)" />
+                                                    @choose="defineLocalField('limitBy', $event)" /> -->
                                             </div>
                                         </n-scrollbar>
                                     </div>
                                 </pane>
-                                <pane :size="22">
+                                <pane :size="50">
                                     <div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
                                         <n-scrollbar style="max-height: calc(100vh - 72px)">
                                             <div class="flex justify-between px-2 pb-1 pt-2 text-lg font-bold">
                                                 {{ $t('options') }}
                                             </div>
-                                            <task-builder-options :local-task="localTask" :local-field="localField" />
+                                            <!-- <task-builder-options :local-task="localTask" :local-field="localField" /> -->
                                         </n-scrollbar>
                                     </div>
                                 </pane>
@@ -104,9 +102,9 @@
                             <splitpanes v-else-if="showTab === 'computed'">
                                 <pane>
                                     <div class="my-2 h-full">
-                                        <task-builder-edit-computed :key="localField?.field?.computedId"
+                                        <!-- <task-builder-edit-computed :key="localField?.field?.computedId"
                                             :local-field="localField" :local-task="localTask"
-                                            @close="showTab = 'builder'" />
+                                            @close="showTab = 'builder'" /> -->
                                     </div>
                                 </pane>
                             </splitpanes>
@@ -117,18 +115,17 @@
         </drawer-view>
     </div>
 </template>
+
+
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 
-import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
+import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, ref } from 'vue'
-
 import useDefault from '@/composables/useDefault'
-import { useAppStore } from '@/stores'
+import { useAppStore, useReportStore } from '@/stores'
 import TableView from '@/views/studio/canvas/table-view/TableView.vue'
-
-
 import TaskBuilderDropGroup from './task-builder-drop/TaskBuilderDropGroup.vue'
 import TaskBuilderDropSelect from './task-builder-drop/TaskBuilderDropSelect.vue'
 import TaskBuilderDropSort from './task-builder-drop/TaskBuilderDropSort.vue'
@@ -136,13 +133,16 @@ import TaskBuilderJoin from './task-builder-join/TaskBuilderJoin.vue'
 import TaskBuilderOptions from './task-builder-options/TaskBuilderOptions.vue'
 import TaskBuilderEditComputed from './TaskBuilderEditComputed.vue'
 import TaskBuilderFields from './TaskBuilderFields.vue'
-import TaskBuilderMenu from './TaskBuilderMenu.vue'
 import TaskBuilderPreview from './TaskBuilderPreview.vue'
 import TaskBuilderSql from './TaskBuilderSql.vue'
+import TaskStaticContentMenu from './TaskStaticContentMenu.vue'
+import useDefaultReport from '@/composables/useDefaultReport'
+import { getId } from '@gaio/shared/utils'
+import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
 
 defineEmits(['close'])
 
-const localTask = ref<BuilderTaskType>()
+const localTask = ref<StaticContentType>()
 
 const localField = ref<{ type: string; field: Partial<FieldType> }>({
     type: '',
@@ -150,7 +150,7 @@ const localField = ref<{ type: string; field: Partial<FieldType> }>({
 })
 
 const viewTableData = ref()
-const showTab = ref('builder')
+const showTab = ref('staticContainer')
 
 const editComputed = (field: FieldType) => {
     defineLocalField('computed', field)
@@ -170,11 +170,17 @@ const viewTable = (table) => {
 }
 
 onBeforeMount(() => {
-    localTask.value = useDefault({
-        type: 'builder',
-        base: useAppStore().cloneTask()
+    useReportStore().resetReport()
+    useReportStore().current = useDefaultReport({
+        type: 'report',
+        reportType: useAppStore().cloneTask()?.reportType || 'staticContent',
+        base: {
+            ...useAppStore().appInfo,
+            ...useAppStore().cloneTask(),
+            id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id
+        } as ReportNodeType
     })
 
-    console.log(localTask.value)
+    console.log("useReportStore().current", useReportStore().current)
 })
 </script>

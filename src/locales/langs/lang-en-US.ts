@@ -748,5 +748,6 @@ export default {
     userLimit: 'User Limit',
     backup: 'Backup',
     taskInsightsHelp:
-        'To generate insights, it is essential to prioritize the dimensions (e.g. State -> City). To do this, choose the class (Dimensions), numeric (Metrics) and date (Periods) fields'
+        'To generate insights, it is essential to prioritize the dimensions (e.g. State -> City). To do this, choose the class (Dimensions), numeric (Metrics) and date (Periods) fields',
+        content: "Content"
 }

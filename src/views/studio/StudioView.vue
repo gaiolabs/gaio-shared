@@ -17,9 +17,10 @@
             <table-view v-if="showDrawer === 'table'" class="z-30" @close="showDrawer = undefined" />
             <task-log-view v-if="showDrawer === 'taskLogView'" class="z-30" @close="showDrawer = undefined" />
             <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />
-<!--            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />-->
+            <!--            <task-builder v-if="showDrawer === 'builder'" class="z-30" @close="closeTask()" />-->
             <task-form-builder v-if="showDrawer === 'form'" class="z-30" @close="closeTask()" />
             <task-explorer-view v-if="showDrawer === 'report'" class="z-30" @close="closeTask()" />
+            <task-static-content v-if="showDrawer === 'staticContent'" class="z-30" @close="closeTask()" />
             <sidebar-sub-nav class="z-40" :is-bucket-table="isBucketTable" @choose="selectElement" />
             <component :is="currentElement" v-if="currentElement" @choose="selectAndClose" @close="closeTask()"
                 @close-and-refresh="closeTask()" />
@@ -50,6 +51,7 @@ import TaskBuilder from '@/views/studio/canvas/task-builder/TaskBuilder.vue'
 import TaskExplorerView from '@/views/studio/canvas/task-explorer/TaskExplorerView.vue'
 import TaskFormBuilder from '@/views/studio/canvas/task-form-builder/TaskFormBuilder.vue'
 import TaskLogView from '@/views/studio/canvas/task-log-view/TaskLogView.vue'
+import TaskStaticContent from '@/views/studio/canvas/task-static-content/TaskStaticContent.vue'
 import { taskView } from '@/views/studio/StudioViewTask'
 
 defineComponent({
@@ -122,7 +124,6 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
                 break
         }
     } else {
-        console.log("item.type", item.type)
         switch (item.type) {
             case 'table':
                 showDrawer.value = 'table'
@@ -135,6 +136,10 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
                 break
             case 'form':
                 showDrawer.value = 'form'
+                break
+            case 'staticContent':
+                // currentElement.value = taskView.TaskStaticContent                
+                showDrawer.value = 'staticContent'
                 break
             case 'update':
                 currentElement.value = taskView.TaskUpdate
@@ -202,9 +207,7 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
             case 'quickTable':
                 currentElement.value = taskView.TaskQuickTable
                 break
-            case 'staticContent':
-                currentElement.value = taskView.TaskStaticContent
-                break
+
             default:
                 break
         }

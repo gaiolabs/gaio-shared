@@ -173,5 +173,6 @@ export default {
     sessionTimeout: 'Tempo limite da sessão',
     sessionTimeoutDescription: '(zero para infinito)',
     thirdPartyProviders: 'Provedores terceiros',
-    thirdPartyProvidersDescription: 'Conecte sua conta com provedores de autenticação de terceiros.'
+    thirdPartyProvidersDescription: 'Conecte sua conta com provedores de autenticação de terceiros.',
+    general: 'Geral',
 }
