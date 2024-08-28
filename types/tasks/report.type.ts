@@ -2,7 +2,7 @@ import type { SchemaType } from '../core/schema.type'
 import type { TableType } from '../core/table.type'
 import type { ReportTaskSettingsType } from './report.task.settings'
 import type { FormCardType } from './form-card.type'
-import { StaticContentType } from './static-content.type'
+import type { StaticContentType } from './static-content.type'
 
 export type ReportNodeType = Partial<{
     label: string
