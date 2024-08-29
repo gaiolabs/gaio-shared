@@ -1,71 +1,121 @@
 <template>
-    <div class="sidebar-flow flex h-[100%] flex-col items-stretch pt-3">
-        <div class="flex w-full items-stretch justify-between px-4">
-            <div class="text-lg font-bold">{{ $t('flow') }}</div>
-            <div class="flex">
-                <n-button size="tiny" quaternary @click="showScheduleBulk = true">
-                    <template #icon>
-                        <g-icon name="cronEdit" />
-                    </template>
-                </n-button>
-                <n-popover placement="bottom" trigger="click">
-                    <template #trigger>
-                        <n-button size="tiny" quaternary>
-                            <template #icon>
-                                <g-icon name="createFolder" />
-                            </template>
-                        </n-button>
-                    </template>
-                    <div>
-                        {{ $t('folder') }}
-                        <n-input v-model:value="newFolderName" :placeholder="$t('typeHere')">
-                            <template #suffix>
-                                <n-button size="tiny" text @click="addNewFolder">
-                                    {{ $t('add') }}
-                                </n-button>
-                            </template>
-                        </n-input>
-                    </div>
-                </n-popover>
-                <n-button size="tiny" quaternary @click="currentFlow = {}">
-                    <template #icon>
-                        <g-icon name="add" />
-                    </template>
-                </n-button>
-            </div>
-        </div>
-        <div class="sidebar-flow-search px-4 pt-1">
-            <n-input v-model:value="searchTerm" size="small" :placeholder="$t('search')" />
-        </div>
-        <div class="my-3 flex grow flex-col items-stretch overflow-hidden">
-            <flow-control v-if="currentFlow" :flow="currentFlow" @save="initSidebarFlow()"
-                @close="currentFlow = null" />
-            <flow-control-schedule-bulk v-if="showScheduleBulk" @close="showScheduleBulk = false" />
-            <n-dropdown trigger="manual" :show="showDropdown" :options="optionsRef as any" :x="x" :y="y"
-                @select="handleSelectDelete" @clickoutside="showDropdown = false" />
-            <n-scrollbar style="height: 100%; overflow: auto" outer-class="h-full overflow-auto">
-                <div class="px-2">
-                    <n-tree block-node block-line draggable expand-on-click expand-on-dragenter
-                        :get-children="baseChildren" :data="localTreeFiltered" :node-props="nodeProps"
-                        :render-switcher-icon="removeRenderSwitcherIcon" :default-expand-all="searchTerm.length > 0"
-                        @drop="handleDropThenUpdate" />
-                </div>
-            </n-scrollbar>
-        </div>
-    </div>
+	<div class="sidebar-flow flex h-[100%] flex-col items-stretch pt-3">
+		<div class="flex w-full items-stretch justify-between px-4">
+			<div class="text-lg font-bold">{{ $t('flow') }}</div>
+			<div class="flex">
+				<n-button
+					size="tiny"
+					quaternary
+					@click="showScheduleBulk = true"
+				>
+					<template #icon>
+						<g-icon name="cronEdit" />
+					</template>
+				</n-button>
+				<n-popover
+					placement="bottom"
+					trigger="click"
+				>
+					<template #trigger>
+						<n-button
+							size="tiny"
+							quaternary
+						>
+							<template #icon>
+								<g-icon name="createFolder" />
+							</template>
+						</n-button>
+					</template>
+					<div>
+						{{ $t('folder') }}
+						<n-input
+							v-model:value="newFolderName"
+							:placeholder="$t('typeHere')"
+						>
+							<template #suffix>
+								<n-button
+									size="tiny"
+									text
+									@click="addNewFolder"
+								>
+									{{ $t('add') }}
+								</n-button>
+							</template>
+						</n-input>
+					</div>
+				</n-popover>
+				<n-button
+					size="tiny"
+					quaternary
+					@click="currentFlow = {}"
+				>
+					<template #icon>
+						<g-icon name="add" />
+					</template>
+				</n-button>
+			</div>
+		</div>
+		<div class="sidebar-flow-search px-4 pt-1">
+			<n-input
+				v-model:value="searchTerm"
+				size="small"
+				:placeholder="$t('search')"
+			/>
+		</div>
+		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">
+			<flow-control
+				v-if="currentFlow"
+				:flow="currentFlow"
+				@save="initSidebarFlow()"
+				@close="currentFlow = null"
+			/>
+			<flow-control-schedule-bulk
+				v-if="showScheduleBulk"
+				@close="showScheduleBulk = false"
+			/>
+			<n-dropdown
+				trigger="manual"
+				:show="showDropdown"
+				:options="optionsRef as any"
+				:x="x"
+				:y="y"
+				@select="handleSelectDelete"
+				@clickoutside="showDropdown = false"
+			/>
+			<n-scrollbar
+				style="height: 100%; overflow: auto"
+				outer-class="h-full overflow-auto"
+			>
+				<div class="px-2">
+					<n-tree
+						block-node
+						block-line
+						draggable
+						expand-on-click
+						expand-on-dragenter
+						:get-children="baseChildren"
+						:data="localTreeFiltered"
+						:node-props="nodeProps"
+						:render-switcher-icon="removeRenderSwitcherIcon"
+						:default-expand-all="searchTerm.length > 0"
+						@drop="handleDropThenUpdate"
+					/>
+				</div>
+			</n-scrollbar>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
-import type { AppFolderOption, FlowType } from '@gaio/shared/types'
-import { type DropdownOption, NButton, type TreeOption, useMessage } from 'naive-ui'
-import { computed, onMounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-
 import useApi from '@/composables/useApi'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'
 import FlowControl from '@/views/studio/canvas/sidebar/sidebar-flow/FlowControl.vue'
 import FlowControlScheduleBulk from '@/views/studio/canvas/sidebar/sidebar-flow/FlowControlScheduleBulk.vue'
+import type { AppFolderOption, FlowType } from '@gaio/shared/types'
+import { type DropdownOption, NButton, type TreeOption, useMessage } from 'naive-ui'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
@@ -85,165 +135,165 @@ const message = useMessage()
 const { handleDrop, removeRenderSwitcherIcon, baseChildren, baseFlowTreeSchema, baseFolderTreeSchema } = useTree()
 
 const handleSelectDelete = (_, base) => {
-    showDropdown.value = false
-    const reference = base.reference
+	showDropdown.value = false
+	const reference = base.reference
 
-    const walkAndDelete = (tree: TreeOption[]) => {
-        for (let i = 0; i < tree.length; ++i) {
-            const node = tree[i]
-            if (node.key === reference) {
-                tree.splice(i, 1)
-                return true
-            }
-            if (node.children) {
-                const found = walkAndDelete(node.children)
-                if (found) return true
-            }
-        }
-        return false
-    }
+	const walkAndDelete = (tree: TreeOption[]) => {
+		for (let i = 0; i < tree.length; ++i) {
+			const node = tree[i]
+			if (node.key === reference) {
+				tree.splice(i, 1)
+				return true
+			}
+			if (node.children) {
+				const found = walkAndDelete(node.children)
+				if (found) return true
+			}
+		}
+		return false
+	}
 
-    walkAndDelete(localTree.value)
-    updateAppFolderOptions()
+	walkAndDelete(localTree.value)
+	updateAppFolderOptions()
 }
 
 const addNewFolder = () => {
-    if (!newFolderName.value) {
-        return
-    }
-    localTree.value.push(baseFolderTreeSchema(newFolderName.value))
-    newFolderName.value = ''
+	if (!newFolderName.value) {
+		return
+	}
+	localTree.value.push(baseFolderTreeSchema(newFolderName.value))
+	newFolderName.value = ''
 
-    updateAppFolderOptions()
+	updateAppFolderOptions()
 }
 
 const localTreeFiltered = computed(() => {
-    const filterTree = (tree: TreeOption[], searchTerm: string) => {
-        return tree.filter((node) => {
-            if (node.label.toLowerCase().includes(searchTerm.toLowerCase())) {
-                return true
-            }
-            if (node.children) {
-                node.children = filterTree(node.children, searchTerm)
-                return node.children.length > 0
-            }
-            return false
-        })
-    }
+	const filterTree = (tree: TreeOption[], searchTerm: string) => {
+		return tree.filter((node) => {
+			if (node.label.toLowerCase().includes(searchTerm.toLowerCase())) {
+				return true
+			}
+			if (node.children) {
+				node.children = filterTree(node.children, searchTerm)
+				return node.children.length > 0
+			}
+			return false
+		})
+	}
 
-    return filterTree(localTree.value, searchTerm.value)
+	return filterTree(localTree.value, searchTerm.value)
 })
 
 const handleDropThenUpdate = (e) => {
-    localTree.value = handleDrop(e, localTree.value)
-    updateAppFolderOptions()
+	localTree.value = handleDrop(e, localTree.value)
+	updateAppFolderOptions()
 }
 
 const updateAppFolderOptions = () => {
-    const buildAppFolder = (tree: TreeOption[]): AppFolderOption[] => {
-        return tree.map((node) => {
-            const appFolder: AppFolderOption = {
-                label: node.isLeaf ? `${node.key}` : node.label,
-                isLeaf: !!node.isLeaf
-            }
-            if (node.children) {
-                appFolder.children = buildAppFolder(node.children)
-            }
-            return appFolder
-        })
-    }
+	const buildAppFolder = (tree: TreeOption[]): AppFolderOption[] => {
+		return tree.map((node) => {
+			const appFolder: AppFolderOption = {
+				label: node.isLeaf ? `${node.key}` : node.label,
+				isLeaf: !!node.isLeaf
+			}
+			if (node.children) {
+				appFolder.children = buildAppFolder(node.children)
+			}
+			return appFolder
+		})
+	}
 
-    const appFolderList = buildAppFolder(localTree.value)
+	const appFolderList = buildAppFolder(localTree.value)
 
-    useApi().post('api/app/update-options', {
-        body: {
-            options: {
-                ...useAppStore().app.options,
-                folderFlow: appFolderList
-            },
-            appId: useAppStore().app.appId
-        }
-    })
+	useApi().post('api/app/update-options', {
+		body: {
+			options: {
+				...useAppStore().app.options,
+				folderFlow: appFolderList
+			},
+			appId: useAppStore().app.appId
+		}
+	})
 }
 
 const nodeProps = ({ option }: { option: TreeOption }) => {
-    return {
-        onClick() {
-            selectFlow(option)
-        },
-        onContextmenu(e: MouseEvent) {
-            e.preventDefault()
-            e.stopPropagation()
+	return {
+		onClick() {
+			selectFlow(option)
+		},
+		onContextmenu(e: MouseEvent) {
+			e.preventDefault()
+			e.stopPropagation()
 
-            if (option.children && option.children.length > 0) {
-                showDropdown.value = false
-                message.info(t('deleteIfEmptyFolder'))
-                return
-            } else {
-                optionsRef.value = [
-                    {
-                        label: t('delete') + ': ' + option.label,
-                        key: 'delete',
-                        reference: option.key
-                    }
-                ]
-                showDropdown.value = true
-                x.value = e.clientX
-                y.value = e.clientY
-            }
-        }
-    }
+			if (option.children && option.children.length > 0) {
+				showDropdown.value = false
+				message.info(t('deleteIfEmptyFolder'))
+				return
+			} else {
+				optionsRef.value = [
+					{
+						label: t('delete') + ': ' + option.label,
+						key: 'delete',
+						reference: option.key
+					}
+				]
+				showDropdown.value = true
+				x.value = e.clientX
+				y.value = e.clientY
+			}
+		}
+	}
 }
 
 const selectFlow = (option) => {
-    if (option.isLeaf) useAppStore().defineCurrentFlow(option.key as string)
+	if (option.isLeaf) useAppStore().defineCurrentFlow(option.key as string)
 }
 
 const openFlowControl = (flow) => {
-    currentFlow.value = flow
+	currentFlow.value = flow
 }
 
 const constructLocalTree = () => {
-    localTree.value = []
+	localTree.value = []
 
-    const flowItems = flowList.value.reduce((acc, flow) => {
-        acc[flow.flowId] = flow
-        return acc
-    }, {})
+	const flowItems = flowList.value.reduce((acc, flow) => {
+		acc[flow.flowId] = flow
+		return acc
+	}, {})
 
-    const buildTree = (appFolderOptions: AppFolderOption[]): TreeOption[] => {
-        return appFolderOptions
-            .map((appFolderOption) => {
-                let treeOption: TreeOption
+	const buildTree = (appFolderOptions: AppFolderOption[]): TreeOption[] => {
+		return appFolderOptions
+			.map((appFolderOption) => {
+				let treeOption: TreeOption
 
-                if (appFolderOption.isLeaf) {
-                    const flow = flowItems[appFolderOption.label]
-                    treeOption = baseFlowTreeSchema(flow, openFlowControl)
-                } else {
-                    treeOption = baseFolderTreeSchema(appFolderOption.label)
-                }
+				if (appFolderOption.isLeaf) {
+					const flow = flowItems[appFolderOption.label]
+					treeOption = baseFlowTreeSchema(flow, openFlowControl)
+				} else {
+					treeOption = baseFolderTreeSchema(appFolderOption.label)
+				}
 
-                delete flowItems[appFolderOption.label]
+				delete flowItems[appFolderOption.label]
 
-                if (appFolderOption.children) {
-                    treeOption.children = buildTree(appFolderOption.children)
-                }
-                return treeOption
-            })
-            .filter((o) => o.label)
-    }
+				if (appFolderOption.children) {
+					treeOption.children = buildTree(appFolderOption.children)
+				}
+				return treeOption
+			})
+			.filter((o) => o.label)
+	}
 
-    localTree.value = buildTree(useAppStore().app.options.folderFlow || [])
+	localTree.value = buildTree(useAppStore().app.options.folderFlow || [])
 
-    for (let lastFlow of Object.keys(flowItems)) {
-        localTree.value.push(baseFlowTreeSchema(flowItems[lastFlow], openFlowControl))
-    }
+	for (let lastFlow of Object.keys(flowItems)) {
+		localTree.value.push(baseFlowTreeSchema(flowItems[lastFlow], openFlowControl))
+	}
 }
 
 const initSidebarFlow = () => {
-    currentFlow.value = null
-    flowList.value = useAppStore().flowList || []
-    constructLocalTree()
+	currentFlow.value = null
+	flowList.value = useAppStore().flowList || []
+	constructLocalTree()
 }
 
 onMounted(() => initSidebarFlow())
@@ -251,8 +301,8 @@ onMounted(() => initSidebarFlow())
 
 <style lang="scss">
 .sidebar-flow {
-    .n-tree-node-switcher {
-        width: 10px !important;
-    }
+	.n-tree-node-switcher {
+		width: 10px !important;
+	}
 }
 </style>

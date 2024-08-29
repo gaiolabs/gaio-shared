@@ -1,3 +1,3 @@
 <template>
-    <div class="dash-options">options</div>
+	<div class="dash-options">options</div>
 </template>

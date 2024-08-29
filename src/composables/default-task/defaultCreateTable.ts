@@ -1,3 +1,4 @@
+import type { CreateTableTaskType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
 
 // const columns = [
@@ -40,27 +41,25 @@ import { getId } from '@gaio/shared/utils'
 //     }
 // ]
 
-import type { CreateTableTaskType } from '@gaio/shared/types'
-
 export const defaultCreateTable = (base: CreateTableTaskType) => {
-    return {
-        id: base.id || null,
-        type: 'create',
-        appId: base.appId,
-        label: base.label || null,
-        client: base.client || 'clickhouse',
-        repoId: base.repoId || null,
-        sourceType: 'bucket',
+	return {
+		id: base.id || null,
+		type: 'create',
+		appId: base.appId,
+		label: base.label || null,
+		client: base.client || 'clickhouse',
+		repoId: base.repoId || null,
+		sourceType: 'bucket',
 
-        tableName: base.tableName || '',
-        resultTable: base.resultTable || '',
-        databaseName: base.databaseName || '',
-        resultDatabase: base.databaseName || '',
+		tableName: base.tableName || '',
+		resultTable: base.resultTable || '',
+		databaseName: base.databaseName || '',
+		resultDatabase: base.databaseName || '',
 
-        columns: (base.columns || []).map((col) => {
-            col.id = col.id || getId()
-            return col
-        }),
-        dropTable: base.dropTable || 0
-    }
+		columns: (base.columns || []).map((col) => {
+			col.id = col.id || getId()
+			return col
+		}),
+		dropTable: base.dropTable || 0
+	}
 }

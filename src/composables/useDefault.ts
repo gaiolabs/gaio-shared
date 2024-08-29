@@ -1,7 +1,3 @@
-import type { TaskType } from '@gaio/shared/types'
-import { withoutNullProperties } from '@gaio/shared/utils'
-import { cloneDeep } from 'lodash-es'
-
 import { defaultAssociationRules } from '@/composables/default-task/defaultAssociationRules'
 import { defaultBuilderTask } from '@/composables/default-task/defaultBuilderTask'
 import { defaultCluster } from '@/composables/default-task/defaultCluster'
@@ -29,46 +25,48 @@ import { defaultTableToParam } from '@/composables/default-task/defaultTableToPa
 import { defaultUnpivot } from '@/composables/default-task/defaultUnpivot'
 import { defaultUpdate } from '@/composables/default-task/defaultUpdate'
 import { defaultUserMirror } from '@/composables/default-task/defaultUserMirror'
-
+import type { TaskType } from '@gaio/shared/types'
+import { withoutNullProperties } from '@gaio/shared/utils'
+import { cloneDeep } from 'lodash-es'
 import { defaultCsvLocal } from './default-task/defaultCsvLocal'
 
 export default ({ type, base }: { type: string; base: TaskType }) => {
-    const sourceProperties = cloneDeep(base)
+	const sourceProperties = cloneDeep(base)
 
-    if (type !== sourceProperties.type && !['form'].includes(type)) {
-        sourceProperties.id = null
-    }
+	if (type !== sourceProperties.type && !['form'].includes(type)) {
+		sourceProperties.id = null
+	}
 
-    const prepare = {
-        schema: () => defaultSchema,
-        googleSpreadsheet: () => defaultGoogleSpreadsheet(sourceProperties),
-        tableToParam: () => defaultTableToParam(sourceProperties),
-        paramToTable: () => defaultParamToTable(sourceProperties),
-        basket: () => defaultAssociationRules(sourceProperties),
-        userMirror: () => defaultUserMirror(sourceProperties),
-        insertRow: () => defaultInsertRow(sourceProperties),
-        builder: () => defaultBuilderTask(sourceProperties),
-        create: () => defaultCreateTable(sourceProperties),
-        localCsv: () => defaultCsvLocal(sourceProperties),
-        cluster: () => defaultCluster(sourceProperties),
-        sample: () => defaultSample(sourceProperties),
-        csvUrl: () => defaultCsvWeb(sourceProperties),
-        delete: () => defaultDelete(sourceProperties),
-        update: () => defaultUpdate(sourceProperties),
-        flow: () => defaultRunFlow(sourceProperties),
-        table: () => defaultTable(sourceProperties),
-        pivot: () => defaultPivot(sourceProperties),
-        unpivot: () => defaultUnpivot(sourceProperties),
-        pca: () => defaultPca(sourceProperties),
-        timeseries: () => defaultForecast(sourceProperties),
-        export: () => defaultExportCsv(sourceProperties),
-        insert: () => defaultInsertTable(sourceProperties),
-        quickTable: () => defaultQuickTable(sourceProperties),
-        reportPreview: () => defaultReportPreview(sourceProperties),
-        form: () => defaultFormCard(sourceProperties),
-        rest: () => defaultRest(sourceProperties),
-        discovery: () => defaultMeta(sourceProperties)
-    }
+	const prepare = {
+		schema: () => defaultSchema,
+		googleSpreadsheet: () => defaultGoogleSpreadsheet(sourceProperties),
+		tableToParam: () => defaultTableToParam(sourceProperties),
+		paramToTable: () => defaultParamToTable(sourceProperties),
+		basket: () => defaultAssociationRules(sourceProperties),
+		userMirror: () => defaultUserMirror(sourceProperties),
+		insertRow: () => defaultInsertRow(sourceProperties),
+		builder: () => defaultBuilderTask(sourceProperties),
+		create: () => defaultCreateTable(sourceProperties),
+		localCsv: () => defaultCsvLocal(sourceProperties),
+		cluster: () => defaultCluster(sourceProperties),
+		sample: () => defaultSample(sourceProperties),
+		csvUrl: () => defaultCsvWeb(sourceProperties),
+		delete: () => defaultDelete(sourceProperties),
+		update: () => defaultUpdate(sourceProperties),
+		flow: () => defaultRunFlow(sourceProperties),
+		table: () => defaultTable(sourceProperties),
+		pivot: () => defaultPivot(sourceProperties),
+		unpivot: () => defaultUnpivot(sourceProperties),
+		pca: () => defaultPca(sourceProperties),
+		timeseries: () => defaultForecast(sourceProperties),
+		export: () => defaultExportCsv(sourceProperties),
+		insert: () => defaultInsertTable(sourceProperties),
+		quickTable: () => defaultQuickTable(sourceProperties),
+		reportPreview: () => defaultReportPreview(sourceProperties),
+		form: () => defaultFormCard(sourceProperties),
+		rest: () => defaultRest(sourceProperties),
+		discovery: () => defaultMeta(sourceProperties)
+	}
 
-    return withoutNullProperties(prepare[type]())
+	return withoutNullProperties(prepare[type]())
 }

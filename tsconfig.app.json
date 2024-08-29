@@ -5,7 +5,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "composite": true,
     "baseUrl": ".",
     "paths": {

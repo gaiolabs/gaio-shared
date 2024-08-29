@@ -1,18 +1,18 @@
-import type { ReportNodeType } from '@gaio/shared/types'
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
+import type { ReportNodeType } from '@gaio/shared/types'
 
 export const defaultReportDownload = (base: ReportNodeType) => {
-    const { settings } = base
+	const { settings } = base
 
-    return {
-        id: base.id || null,
-        reportType: 'download',
-        schema: base.schema || defaultSchema,
-        settings: {
-            downloadSize: settings.downloadSize || 'small',
-            downloadColor: settings.downloadColor || '',
-            downloadRows: settings.downloadRows || 1000,
-            downloadData: settings.downloadData || false
-        }
-    }
+	return {
+		id: base.id || null,
+		reportType: 'download',
+		schema: base.schema || defaultSchema,
+		settings: {
+			downloadSize: settings.downloadSize || 'small',
+			downloadColor: settings.downloadColor || '',
+			downloadRows: settings.downloadRows || 1000,
+			downloadData: settings.downloadData || false
+		}
+	}
 }

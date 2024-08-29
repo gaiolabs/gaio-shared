@@ -1,3 +1,3 @@
 <template>
-    <div class="home-indicators"></div>
+	<div class="home-indicators"></div>
 </template>

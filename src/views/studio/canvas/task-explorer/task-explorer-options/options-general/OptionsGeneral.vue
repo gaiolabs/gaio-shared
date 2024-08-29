@@ -1,10 +1,10 @@
 <template>
-    <div class="options-general">
-        <n-checkbox
-            v-model:checked="current.settings.showHeader"
-            :label="$t('showCardHeader')"
-        />
-    </div>
+	<div class="options-general">
+		<n-checkbox
+			v-model:checked="current.settings.showHeader"
+			:label="$t('showCardHeader')"
+		/>
+	</div>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-    <div class="power-search-control">Power search</div>
+	<div class="power-search-control">Power search</div>
 </template>
 <script setup lang="ts">
 import type { MetaType } from '@gaio/shared/types/core/meta.type'

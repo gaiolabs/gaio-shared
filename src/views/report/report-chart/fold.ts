@@ -1,29 +1,29 @@
 import DataSet from '@antv/data-set'
 
 export const fold = (sourceData: Record<string, unknown>[], measures) => {
-    const dv = new DataSet.View().source(sourceData)
+	const dv = new DataSet.View().source(sourceData)
 
-    // GET ALIAS/TITLE
-    const renameList = {}
+	// GET ALIAS/TITLE
+	const renameList = {}
 
-    const measuresList = Object.assign([], measures)
-    measuresList.forEach((obj) => {
-        renameList[obj.alias || obj.columnName] = obj.title || obj.alias || obj.columnName
-    })
+	const measuresList = Object.assign([], measures)
+	measuresList.forEach((obj) => {
+		renameList[obj.alias || obj.columnName] = obj.title || obj.alias || obj.columnName
+	})
 
-    dv.transform({
-        type: 'rename',
-        map: renameList
-    })
+	dv.transform({
+		type: 'rename',
+		map: renameList
+	})
 
-    dv.transform({
-        type: 'fold',
-        fields: Object.values(renameList),
-        key: 'category',
-        value: 'measure'
-    })
+	dv.transform({
+		type: 'fold',
+		fields: Object.values(renameList),
+		key: 'category',
+		value: 'measure'
+	})
 
-    return dv.rows || []
+	return dv.rows || []
 }
 
 // import { defaults, difference, keys, head, pick, flatMap, map } from 'lodash-es'

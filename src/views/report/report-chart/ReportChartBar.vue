@@ -1,16 +1,20 @@
 <template>
-    <div class="report-bar">
-        <v-chart class="chart" style="height: 350px" :option="option" />
-    </div>
+	<div class="report-bar">
+		<v-chart
+			class="chart"
+			style="height: 350px"
+			:option="option"
+		/>
+	</div>
 </template>
 
 <script setup lang="ts">
+import { fold } from '@/views/report/report-chart/fold'
 import type { ReportNodeType } from '@gaio/shared/types'
+import { groupBy, sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
 import useReportChartHelper from './ReportChartHelper'
-import { fold } from '@/views/report/report-chart/fold'
-import { groupBy, sumBy } from 'lodash-es'
 
 defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
@@ -97,11 +101,11 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { BarChart } from 'echarts/charts'
 import {
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-    GridComponent,
-    type GridComponentOption
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent,
+	GridComponent,
+	type GridComponentOption
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { ref, provide } from 'vue'
@@ -117,101 +121,101 @@ const chartHelper = computed(() => useReportChartHelper(props.task))
 const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
 
 const series = computed(() => {
-    let defineSeries = []
+	let defineSeries = []
 
-    if (isGrouped.value) {
-        return defineSeries
-    } else {
-        for (let i = 0; i < measures.value.length; i++) {
-            defineSeries.push({
-                data: localList.value.map((o) => o[columnName(measures.value[i])]),
-                type: 'bar'
-            })
-        }
-    }
-    return defineSeries
+	if (isGrouped.value) {
+		return defineSeries
+	} else {
+		for (let i = 0; i < measures.value.length; i++) {
+			defineSeries.push({
+				data: localList.value.map((o) => o[columnName(measures.value[i])]),
+				type: 'bar'
+			})
+		}
+	}
+	return defineSeries
 })
 
 const yAxis = computed(() => {
-    return {
-        type: 'category',
-        data: localList.value.map((o) => o[dimensions.value[0].alias || dimensions.value[0].columnName])
-    }
+	return {
+		type: 'category',
+		data: localList.value.map((o) => o[dimensions.value[0].alias || dimensions.value[0].columnName])
+	}
 })
 
 const defineDataset = computed(() => {
-    let data = props.list
-    const fields = props.task.schema.select.map((o) => columnName(o))
+	let data = props.list
+	const fields = props.task.schema.select.map((o) => columnName(o))
 
-    let datasetSource = data.map((item) => {
-        let row = []
-        fields.forEach((field) => {
-            row.push(item[field])
-        })
-        return row
-    })
+	let datasetSource = data.map((item) => {
+		let row = []
+		fields.forEach((field) => {
+			row.push(item[field])
+		})
+		return row
+	})
 
-    datasetSource.unshift(fields)
+	datasetSource.unshift(fields)
 
-    return datasetSource
+	return datasetSource
 })
 
 const defineOption = () => {
-    console.log(dimensions)
-    option.value = {
-        color: props.task.settings.theme.colors,
-        grid: {
-            left: '1%',
-            right: '1%',
-            bottom: '3%',
-            top: '3%',
-            containLabel: true
-        } as GridComponentOption,
-        dataset: {
-            source: defineDataset.value
-        },
-        xAxis: {
-            // type: 'value'
-        },
-        yAxis: {
-            type: 'category'
-        },
-        series: [
-            {
-                type: 'bar',
-                encode: {
-                    // Map "amount" column to x-axis.
-                    y: dimensions.value[0].alias || dimensions.value[0].columnName,
-                    // Map "product" row to y-axis.
-                    x: measures.value[0].alias || measures.value[0].columnName
-                }
-            }
-        ]
-        // series: series.value
-    }
+	console.log(dimensions)
+	option.value = {
+		color: props.task.settings.theme.colors,
+		grid: {
+			left: '1%',
+			right: '1%',
+			bottom: '3%',
+			top: '3%',
+			containLabel: true
+		} as GridComponentOption,
+		dataset: {
+			source: defineDataset.value
+		},
+		xAxis: {
+			// type: 'value'
+		},
+		yAxis: {
+			type: 'category'
+		},
+		series: [
+			{
+				type: 'bar',
+				encode: {
+					// Map "amount" column to x-axis.
+					y: dimensions.value[0].alias || dimensions.value[0].columnName,
+					// Map "product" row to y-axis.
+					x: measures.value[0].alias || measures.value[0].columnName
+				}
+			}
+		]
+		// series: series.value
+	}
 
-    console.log(option.value)
+	console.log(option.value)
 }
 
 const isMultipleMeasure = computed(() => {
-    return props.task.schema.select.filter((o) => o.type !== 'value').length > 1
+	return props.task.schema.select.filter((o) => o.type !== 'value').length > 1
 })
 
 const isGrouped = computed(() => {
-    return props.task.schema.select.filter((o) => o.type === 'value').length > 1
+	return props.task.schema.select.filter((o) => o.type === 'value').length > 1
 })
 
 onMounted(() => {
-    let data = props.list
+	let data = props.list
 
-    if (isGrouped.value || !isMultipleMeasure.value) {
-        localList.value = data
-    } else {
-        localList.value = fold(data, measures.value)
-    }
+	if (isGrouped.value || !isMultipleMeasure.value) {
+		localList.value = data
+	} else {
+		localList.value = fold(data, measures.value)
+	}
 
-    console.log(localList.value)
+	console.log(localList.value)
 
-    defineOption()
+	defineOption()
 })
 </script>

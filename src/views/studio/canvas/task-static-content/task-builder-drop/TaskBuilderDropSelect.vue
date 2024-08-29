@@ -1,46 +1,53 @@
 <template>
-    <div class="task-builder-drop-select block">
-        <div class="mx-1 flex items-center justify-between gap-1">
-            <div class="flex items-center gap-1 font-bold">
-                <g-icon name="columns" />
-                {{ $t('columns') }}
-                <span v-if="localTask.schema.select.length">({{ localTask.schema.select.length }})</span>
-            </div>
-            <div class="mb-1">
-                <n-tooltip :delay="1000">
-                    <template #trigger>
-                        <n-button quaternary size="tiny" type="error"
-                            class="border-elevation-2 bg-paper-100 dark:bg-carbon-200" @click="removeAll()">
-                            <template #icon>
-                                <g-icon name="deleteTag" />
-                            </template>
-                        </n-button>
-                    </template>
-                    {{ $t('deleteAllTags') }}
-                </n-tooltip>
-            </div>
-        </div>
-        <task-builder-drop-tag custom-class="select" :fields="localTask.schema.select"
-            @choose="$emit('choose', $event)" />
-    </div>
+	<div class="task-builder-drop-select block">
+		<div class="mx-1 flex items-center justify-between gap-1">
+			<div class="flex items-center gap-1 font-bold">
+				<g-icon name="columns" />
+				{{ $t('columns') }}
+				<span v-if="localTask.schema.select.length">({{ localTask.schema.select.length }})</span>
+			</div>
+			<div class="mb-1">
+				<n-tooltip :delay="1000">
+					<template #trigger>
+						<n-button
+							quaternary
+							size="tiny"
+							type="error"
+							class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
+							@click="removeAll()"
+						>
+							<template #icon>
+								<g-icon name="deleteTag" />
+							</template>
+						</n-button>
+					</template>
+					{{ $t('deleteAllTags') }}
+				</n-tooltip>
+			</div>
+		</div>
+		<task-builder-drop-tag
+			custom-class="select"
+			:fields="localTask.schema.select"
+			@choose="$emit('choose', $event)"
+		/>
+	</div>
 </template>
 <script setup lang="ts">
+import TaskBuilderDropTag from '@/views/studio/canvas/task-builder/task-builder-tags/TaskBuilderDropTag.vue'
 import type { BuilderTaskType, SchemaSelectType } from '@gaio/shared/types'
 import type { PropType } from 'vue'
-
-import TaskBuilderDropTag from '@/views/studio/canvas/task-builder/task-builder-tags/TaskBuilderDropTag.vue'
 
 defineEmits(['choose'])
 
 const props = defineProps({
-    localTask: {
-        type: Object as PropType<BuilderTaskType>,
-        required: true,
-        default: () => null as BuilderTaskType
-    }
+	localTask: {
+		type: Object as PropType<BuilderTaskType>,
+		required: true,
+		default: () => null as BuilderTaskType
+	}
 })
 
 const removeAll = () => {
-    props.localTask.schema.select = [] as SchemaSelectType[]
+	props.localTask.schema.select = [] as SchemaSelectType[]
 }
 </script>
