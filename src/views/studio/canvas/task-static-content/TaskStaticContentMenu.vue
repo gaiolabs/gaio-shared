@@ -4,8 +4,9 @@ import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
 import { getId } from '@gaio/shared/utils'
-import { NButton, NButtonGroup, NTooltip } from 'naive-ui'
-import type { PropType } from 'vue'
+import { NInput, NButton, NTooltip, NDivider } from 'naive-ui'
+import { ref, type PropType } from 'vue'
+import PreviewModal from './preview-modal/PreviewModal.vue'
 
 const props = defineProps({
 	localTask: {
@@ -21,6 +22,8 @@ const props = defineProps({
 
 const emit = defineEmits(['showTab', 'close'])
 
+const openPreviewModal = ref(false)
+
 console.log('props.showTab', props.showTab)
 
 const save = () => {
@@ -33,6 +36,7 @@ const save = () => {
 			...task
 		}
 	})
+
 	console.log('task', task)
 	console.log('taskToBeSaved', taskToBeSaved)
 	// useFlow(useAppStore().flow.workflow)
@@ -47,6 +51,10 @@ const save = () => {
 </script>
 
 <template>
+	<PreviewModal
+		:open-preview-modal="openPreviewModal"
+		@update:open-preview-modal="openPreviewModal = $event"
+	/>
 	<div class="task-builder-menu flex w-full items-center gap-3 p-3 px-0">
 		<div class="flex items-center gap-1 text-lg font-bold">
 			<g-icon name="staticContent" />
@@ -54,66 +62,63 @@ const save = () => {
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<n-input
+				<NInput
 					v-model:value="localTask.label"
 					size="small"
 					:placeholder="$t('task')"
 				/>
-				<n-divider vertical />
-				<n-button
+				<NDivider vertical />
+				<NButton
 					size="small"
 					@click="save()"
 				>
-					>
 					{{ $t('save') }}
-				</n-button>
+				</NButton>
 			</div>
 			<div class="flex items-center justify-between gap-2">
-				<n-tooltip :show-after="1500">
+				<NTooltip :show-after="1500">
 					<template #trigger>
-						<n-button
-							:type="showTab === 'builder' ? 'primary' : 'default'"
+						<NButton
+							:type="openPreviewModal ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
-							@click="$emit('showTab', 'builder')"
+							@click="() => (openPreviewModal = !openPreviewModal)"
 						>
-							>
 							<g-icon name="eye" />
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('preview') }}
-				</n-tooltip>
+				</NTooltip>
 
-				<n-tooltip :show-after="1500">
+				<NTooltip :show-after="1500">
 					<template #trigger>
-						<n-button
+						<NButton
 							title="Tooltip directive content"
-							:type="showTab === 'preview' ? 'primary' : 'default'"
+							:type="showTab === 'openPreviewModal' ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
-							@click="$emit('showTab', 'preview')"
+							@click="() => (openPreviewModal = !openPreviewModal)"
 						>
 							<g-icon name="panelLeft" />
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('toggleLeftMenu') }}
-				</n-tooltip>
+				</NTooltip>
 
-				<n-tooltip :show-after="1500">
+				<NTooltip :show-after="1500">
 					<template #trigger>
-						<n-button
+						<NButton
 							:type="showTab === 'sql' ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
 							@click="$emit('showTab', 'sql')"
 						>
-							>
-							<g-icon name="panelRight" />
-						</n-button>
+							<GIcon name="panelRight" />
+						</NButton>
 					</template>
 					{{ $t('toggleRightMenu') }}
-				</n-tooltip>
-				<n-divider vertical />
+				</NTooltip>
+				<NDivider vertical />
 			</div>
 		</div>
 	</div>
