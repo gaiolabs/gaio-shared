@@ -19,12 +19,12 @@
 				<g-icon name="info" />
 				<p class="text-gray-500">{{ $t('headersInfo') }}</p>
 			</div>
-			<n-button @click="addProperty">
+			<NButton @click="addProperty">
 				<template #icon>
 					<g-icon name="plus" />
 				</template>
 				{{ $t('addProperty') }}
-			</n-button>
+			</NButton>
 		</div>
 		<div class="relative w-full overflow-auto">
 			<table class="text-md w-full caption-bottom rounded-md border">
@@ -49,7 +49,7 @@
 						<td class="p-2 align-middle [&:has([role=checkbox])]:pr-0">
 							<div class="flex gap-1">
 								<n-input v-model:value="header.value" />
-								<n-button
+								<NButton
 									size="tiny"
 									text
 									type="error"
@@ -58,7 +58,7 @@
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
-								</n-button>
+								</NButton>
 							</div>
 						</td>
 					</tr>

@@ -6,13 +6,13 @@
 			:content="$t('viewTable')"
 		>
 			<template #trigger>
-				<n-button
+				<NButton
 					text
 					:underline="false"
 					@click="useBus.emit('openTable', tableName)"
 				>
 					<g-icon name="eye" />
-				</n-button>
+				</NButton>
 			</template>
 			{{ $t('viewTable') }}
 		</n-tooltip>

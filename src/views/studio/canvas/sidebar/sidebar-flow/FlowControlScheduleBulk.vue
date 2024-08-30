@@ -26,37 +26,37 @@
 			</template>
 			<template #footer>
 				<div class="flex justify-end">
-					<n-space>
-						<n-button
+					<NSpace>
+						<NButton
 							secondary
 							@click="$emit('close')"
 						>
 							{{ $t('close') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							tertiary
 							:loading="loading"
 							type="error"
 							@click="saveAll('inactive')"
 						>
 							{{ $t('disableAll') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							:loading="loading"
 							type="primary"
 							tertiary
 							@click="saveAll('active')"
 						>
 							{{ $t('activeAll') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							:loading="loading"
 							type="primary"
 							@click="saveAll(undefined)"
 						>
 							{{ $t('saveModified') }}
-						</n-button>
-					</n-space>
+						</NButton>
+					</NSpace>
 				</div>
 			</template>
 		</g-dialog>

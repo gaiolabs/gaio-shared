@@ -19,23 +19,23 @@
 					</template>
 					<div class="mx-2">
 						<div class="flex items-center justify-between">
-							<n-button
+							<NButton
 								size="tiny"
 								@click="addAllFields(tableIndex)"
 							>
 								{{ $t('addAll') }}
-							</n-button>
+							</NButton>
 							<div class="flex gap-1">
 								<n-tooltip>
 									<template #trigger>
-										<n-button
+										<NButton
 											size="tiny"
 											@click="$emit('viewTable', table)"
 										>
 											<template #icon>
 												<g-icon name="eye" />
 											</template>
-										</n-button>
+										</NButton>
 									</template>
 									<div>
 										{{ $t('viewTable') }}

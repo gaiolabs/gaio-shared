@@ -32,46 +32,46 @@
 					</template>
 				</n-input>
 
-				<n-divider vertical />
-				<n-button
+				<NDivider vertical />
+				<NButton
 					size="small"
 					@click="saveBuilder('save')"
 				>
 					{{ $t('save') }}
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					size="small"
 					@click="saveBuilder('run')"
 				>
 					{{ $t('saveAndRun') }}
-				</n-button>
+				</NButton>
 			</div>
-			<n-button-group size="small">
-				<n-button
+			<NButton-group size="small">
+				<NButton
 					:type="showTab === 'builder' ? 'primary' : 'default'"
 					secondary
 					class="border-elevation-2"
 					@click="$emit('showTab', 'builder')"
 				>
 					{{ $t('builder') }}
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					:type="showTab === 'preview' ? 'primary' : 'default'"
 					secondary
 					class="border-elevation-2"
 					@click="$emit('showTab', 'preview')"
 				>
 					{{ $t('preview') }}
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					:type="showTab === 'sql' ? 'primary' : 'default'"
 					secondary
 					class="border-elevation-2"
 					@click="$emit('showTab', 'sql')"
 				>
 					{{ $t('sql') }}
-				</n-button>
-			</n-button-group>
+				</NButton>
+			</NButton-group>
 		</div>
 	</div>
 </template>

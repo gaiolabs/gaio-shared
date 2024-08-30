@@ -14,34 +14,34 @@
 						size="small"
 						:placeholder="$t('filterApps')"
 					/>
-					<n-button
+					<NButton
 						secondary
 						size="small"
 						type="default"
 					>
 						{{ $t('filter') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<!--RECENT AND FAVORITES-->
 			<div class="my-3 flex">
 				<div class="g-bg-1 flex gap-1 rounded bg-paper-100 p-1 shadow">
-					<n-button
+					<NButton
 						:type="currentTab === 'recent' ? 'primary' : 'default'"
 						size="small"
 						:quaternary="currentTab === 'favorites'"
 						@click="currentTab = 'recent'"
 					>
 						{{ $t('recent') }}
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						:type="currentTab === 'favorites' ? 'primary' : 'default'"
 						size="small"
 						:quaternary="currentTab === 'recent'"
 						@click="currentTab = 'favorites'"
 					>
 						{{ $t('favorites') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<div class="apps-filtered-by-user my-3">
@@ -84,7 +84,7 @@
 					<div
 						class="core-shadow flex gap-1 rounded-[8px] bg-paper-100 p-1 dark:border dark:border-gray-800 dark:bg-carbon-200"
 					>
-						<n-button
+						<NButton
 							:type="listType === 'grid' ? 'primary' : 'default'"
 							size="small"
 							:quaternary="listType === 'list'"
@@ -93,8 +93,8 @@
 							<template #icon>
 								<g-icon name="grid" />
 							</template>
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							:quaternary="listType === 'grid'"
 							:type="listType === 'list' ? 'primary' : 'default'"
 							size="small"
@@ -103,7 +103,7 @@
 							<template #icon>
 								<g-icon name="list" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</div>
@@ -138,15 +138,15 @@
 						class="g-bg-1 g-border-500 -mt-px inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0"
 					>
 						<div class="flex min-w-[80px] items-center gap-4">
-							<n-button
+							<NButton
 								text
 								size="tiny"
 							>
 								<template #icon>
 									<g-icon name="dashboard" />
 								</template>
-							</n-button>
-							<n-button
+							</NButton>
+							<NButton
 								v-if="app.role === 'edit'"
 								text
 								size="tiny"
@@ -155,8 +155,8 @@
 								<template #icon>
 									<g-icon name="pencil" />
 								</template>
-							</n-button>
-							<n-button
+							</NButton>
+							<NButton
 								v-if="app.role === 'edit'"
 								text
 								size="tiny"
@@ -164,9 +164,9 @@
 								<template #icon>
 									<g-icon name="workflow" />
 								</template>
-							</n-button>
+							</NButton>
 						</div>
-						<n-divider vertical />
+						<NDivider vertical />
 						<div class="ms-3 flex gap-2">
 							<g-app-icon
 								:name="app.options.icon"

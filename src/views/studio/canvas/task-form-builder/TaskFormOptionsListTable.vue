@@ -17,13 +17,13 @@
 							style="width: 25px; vertical-align: middle"
 							class="text-center"
 						>
-							<n-button
+							<NButton
 								quaternary
 								size="tiny"
 								@click="addRow()"
 							>
 								<g-icon name="add" />
-							</n-button>
+							</NButton>
 						</th>
 					</tr>
 				</thead>
@@ -54,13 +54,13 @@
 						class="tr-item"
 					>
 						<td class="text-center">
-							<n-button
+							<NButton
 								quaternary
 								size="tiny"
 								class="handle"
 							>
 								<g-icon name="handle" />
-							</n-button>
+							</NButton>
 						</td>
 						<td>
 							<n-input
@@ -75,14 +75,14 @@
 							/>
 						</td>
 						<td class="el-text-center">
-							<n-button
+							<NButton
 								quaternary
 								size="tiny"
 								type="error"
 								@click="deleteRow(index)"
 							>
 								<g-icon name="delete" />
-							</n-button>
+							</NButton>
 						</td>
 					</tr>
 				</vue-draggable>

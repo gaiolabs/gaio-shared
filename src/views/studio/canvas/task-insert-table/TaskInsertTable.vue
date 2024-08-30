@@ -44,7 +44,7 @@
 						v-if="showFinds()"
 						class="flex items-center gap-2"
 					>
-						<n-button
+						<NButton
 							class="w-50 grow"
 							type="primary"
 							style="color: white"
@@ -52,16 +52,16 @@
 							@click="autoColumns()"
 						>
 							{{ $t('autoFill') }}
-						</n-button>
+						</NButton>
 
-						<n-button
+						<NButton
 							class="w-50 grow"
 							style="color: black"
 							:disabled="showButtonClean"
 							@click="autoClean()"
 						>
 							{{ $t('clearFields') }}
-						</n-button>
+						</NButton>
 					</div>
 
 					<n-card content-style="padding: 10px">
@@ -105,13 +105,13 @@
 					</n-card>
 				</div>
 				<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-					<n-button
+					<NButton
 						type="primary"
 						:loading="loading"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</template>

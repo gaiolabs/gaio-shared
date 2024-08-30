@@ -9,7 +9,7 @@
 				:class="{ 'active-pane': isPaneActive(item.name) }"
 				class="inactive-pane flex h-[50px] w-full items-center justify-center"
 			>
-				<n-button
+				<NButton
 					text
 					size="medium"
 					@click="workWithPanel(item.name)"
@@ -21,7 +21,7 @@
 							class="text-[20px]"
 						/>
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 	</div>

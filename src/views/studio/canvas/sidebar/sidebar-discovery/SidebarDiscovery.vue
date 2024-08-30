@@ -14,14 +14,14 @@
 					:options="options"
 					@select="handleDropdownSelect"
 				>
-					<n-button
+					<NButton
 						text
 						size="tiny"
 					>
 						<template #icon>
 							<g-icon name="add" />
 						</template>
-					</n-button>
+					</NButton>
 				</n-dropdown>
 			</div>
 		</div>

@@ -2,19 +2,19 @@
 	<div class="task-builder-edit-computed me-2 flex h-full flex-col">
 		<div class="flex gap-2">
 			<div class="flex gap-2">
-				<n-button @click="$emit('close')">
+				<NButton @click="$emit('close')">
 					<g-icon name="close" />
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					type="primary"
 					:disabled="!isValid"
 					@click="saveOrCreate()"
 				>
 					{{ $t('saveComputed') }}
-				</n-button>
-				<n-button>
+				</NButton>
+				<NButton>
 					<g-icon name="globalComputed" />
-				</n-button>
+				</NButton>
 			</div>
 			<g-define-column v-model="localComputed" />
 		</div>

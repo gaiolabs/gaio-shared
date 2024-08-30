@@ -11,7 +11,7 @@
 		>
 			<template #footer>
 				<div>
-					<n-space size="small">
+					<NSpace size="small">
 						<n-tag
 							v-for="(item, index) of shortcuts"
 							:key="index"
@@ -20,7 +20,7 @@
 						>
 							{{ item.text }}
 						</n-tag>
-					</n-space>
+					</NSpace>
 					<div
 						v-if="showInfoNLiteral"
 						class="my-1"

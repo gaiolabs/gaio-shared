@@ -4,7 +4,7 @@
 		class="task-form-preview mt-2"
 	>
 		<div class="mb-1 flex items-center justify-end">
-			<n-button
+			<NButton
 				text
 				size="small"
 				@click="edit = !edit"
@@ -12,7 +12,7 @@
 				<template #icon>
 					<g-icon name="editLayout" />
 				</template>
-			</n-button>
+			</NButton>
 		</div>
 		<div
 			v-if="useFormStore().current"

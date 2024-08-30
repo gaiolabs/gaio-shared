@@ -6,7 +6,7 @@
 	>
 		<!-- BUTTON -->
 		<template v-if="type === 'button' && ['preview', 'dash'].includes(from) && formFrom !== 'table'">
-			<n-button
+			<NButton
 				block
 				:size="buttonSize"
 				:color="buttonTheme"
@@ -14,7 +14,7 @@
 				@click="loadOrDialogModal()"
 			>
 				{{ localTask.buttonTitle }}
-			</n-button>
+			</NButton>
 		</template>
 		<!-- CARD -->
 		<template v-else-if="type === 'card'">
@@ -65,21 +65,21 @@
 								<div>
 									<p>{{ localForm.formConfirmDescription }}</p>
 									<div class="flex items-center justify-between">
-										<n-button @click="localPopoverConfirm = false">
+										<NButton @click="localPopoverConfirm = false">
 											{{ $t('lang.CLOSE') }}
-										</n-button>
-										<n-button
+										</NButton>
+										<NButton
 											:disabled="invalid"
 											type="primary"
 											@click="justUpdateParams()"
 										>
 											{{ $t('lang.CONFIRM') }}
-										</n-button>
+										</NButton>
 									</div>
 								</div>
 								<template #trigger>
 									<span>
-										<n-button
+										<NButton
 											:disabled="invalid"
 											:size="buttonSize"
 											:color="buttonTheme"
@@ -87,11 +87,11 @@
 											@click="localPopoverConfirm = true"
 										>
 											{{ $t('confirm') }}
-										</n-button>
+										</NButton>
 									</span>
 								</template>
 							</n-popover>
-							<n-button
+							<NButton
 								v-else
 								:disabled="invalid"
 								:size="buttonSize"
@@ -100,7 +100,7 @@
 								@click="updateParams()"
 							>
 								{{ formButtonTitle }}
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 				</div>
@@ -146,20 +146,20 @@
 								<div>
 									<p>{{ localForm.formConfirmDescription }}</p>
 									<span class="flex items-center justify-between">
-										<n-button @click="localPopoverConfirm = false">{{ $t('lang.CLOSE') }}</n-button>
-										<n-button
+										<NButton @click="localPopoverConfirm = false">{{ $t('lang.CLOSE') }}</NButton>
+										<NButton
 											:disabled="invalid"
 											style="margin-left: 5px"
 											type="primary"
 											@click="justUpdateParams()"
 										>
 											{{ $t('lang.CONFIRM') }}
-										</n-button>
+										</NButton>
 									</span>
 								</div>
 
 								<template #trigger>
-									<n-button
+									<NButton
 										:disabled="invalid"
 										style="margin-left: 5px; color: white"
 										:size="buttonSize"
@@ -167,10 +167,10 @@
 										@click="localPopoverConfirm = true"
 									>
 										{{ $t('lang.CONFIRM') }}
-									</n-button>
+									</NButton>
 								</template>
 							</n-popover>
-							<n-button
+							<NButton
 								v-else
 								size="small"
 								:disabled="invalid"
@@ -179,7 +179,7 @@
 								@click="updateParams()"
 							>
 								{{ formButtonTitle }}
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 				</template>

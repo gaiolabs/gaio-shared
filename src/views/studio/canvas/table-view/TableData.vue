@@ -29,12 +29,12 @@
 									@click="$emit('selectColumn', col)"
 								>
 									<div class="flex justify-between gap-2">
-										<n-button text>
+										<NButton text>
 											<template #icon>
 												<g-icon :name="dataTypeIcon(col.dataType)" />
 											</template>
 											{{ col.columnName }}
-										</n-button>
+										</NButton>
 									</div>
 								</th>
 							</tr>

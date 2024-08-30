@@ -24,7 +24,7 @@
 					class="w-full"
 				/>
 			</div>
-			<n-divider class="!my-3" />
+			<NDivider class="!my-3" />
 		</template>
 	</div>
 </template>

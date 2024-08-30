@@ -11,7 +11,7 @@
 		</template>
 		<div class="tag-manager">
 			<template v-if="useTagStore().loading">
-				<n-space vertical>
+				<NSpace vertical>
 					<n-skeleton
 						:height="30"
 						class="rounded"
@@ -36,32 +36,32 @@
 					<!--                            class="rounded"-->
 					<!--                        />-->
 					<!--                    </div>-->
-				</n-space>
+				</NSpace>
 			</template>
 			<template v-else>
 				<div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
 					<div>{{ $t('selectTagsBelow') }}</div>
 					<div class="flex gap-2">
-						<n-button
+						<NButton
 							type="primary"
 							:disabled="canAction"
 							@click="addTag"
 						>
 							{{ $t('grant') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							type="error"
 							:disabled="canAction"
 							@click="removeTag"
 						>
 							{{ $t('remove') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							tertiary
 							@click="reset()"
 						>
 							{{ $t('clear') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 				<div>

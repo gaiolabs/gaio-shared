@@ -31,7 +31,7 @@
 			/>
 		</div>
 		<div class="control">
-			<n-button
+			<NButton
 				block
 				type="primary"
 				:loading="loading"
@@ -39,7 +39,7 @@
 				@click="updatePassword"
 			>
 				{{ $t('update') }}
-			</n-button>
+			</NButton>
 		</div>
 	</div>
 </template>

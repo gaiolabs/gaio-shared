@@ -9,21 +9,21 @@
 				10 {{ $t('new') }} {{ $t('insights') }}
 			</div>
 
-			<n-button tertiary>
+			<NButton tertiary>
 				{{ $t('seeAll') }}
-			</n-button>
+			</NButton>
 		</div>
 		<div
 			v-if="collapse"
 			class="animate-fade-in mt-3 w-full px-4 pb-4"
 		>
-			<n-space>
+			<NSpace>
 				<insight-card
 					v-for="(ins, index) of insightsList"
 					:key="index"
 					:insight="ins"
 				/>
-			</n-space>
+			</NSpace>
 		</div>
 	</div>
 </template>

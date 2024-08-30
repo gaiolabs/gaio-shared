@@ -1,7 +1,7 @@
 <template>
 	<div class="dash-menu fixed left-1 right-1 top-2 z-10 px-2">
 		<div class="g-bg-1 flex items-center gap-2 rounded px-2 shadow">
-			<n-button
+			<NButton
 				secondary
 				size="tiny"
 				@click="emit('close')"
@@ -9,8 +9,8 @@
 				<template #icon>
 					<g-icon name="arrowLeft" />
 				</template>
-			</n-button>
-			<n-divider
+			</NButton>
+			<NDivider
 				vertical
 				class="m-0 p-0"
 			/>
@@ -29,11 +29,11 @@
 				/>
 			</div>
 			<div class="flex items-center gap-2">
-				<n-divider
+				<NDivider
 					vertical
 					class="m-0 p-0"
 				/>
-				<n-button
+				<NButton
 					secondary
 					size="tiny"
 					@click="$emit('refresh')"
@@ -41,8 +41,8 @@
 					<template #icon>
 						<g-icon name="refresh" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					v-if="isPreviewPage"
 					secondary
 					size="tiny"
@@ -51,8 +51,8 @@
 					<template #icon>
 						<g-icon name="params" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					secondary
 					size="tiny"
 					@click="toggleFullscreen()"
@@ -60,7 +60,7 @@
 					<template #icon>
 						<g-icon name="fullscreen" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<dash-params

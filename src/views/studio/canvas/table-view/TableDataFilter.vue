@@ -24,14 +24,14 @@
 						v-if="localFilter[0].list.length > 1"
 						class="flex w-[55px] items-center"
 					>
-						<n-button
+						<NButton
 							v-if="itemIndex > 0"
 							v-model:value="item.andOr"
 							block
 							@click="changeLogicOperator(item)"
 						>
 							{{ item.andOr }}
-						</n-button>
+						</NButton>
 					</div>
 					<div>
 						<n-select
@@ -58,28 +58,28 @@
 						/>
 					</div>
 					<div class="flex gap-2">
-						<n-button
+						<NButton
 							tertiary
 							@click="applyFilter('current', itemIndex)"
 						>
 							{{ $t('apply') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							tertiary
 							@click="removeFilter(itemIndex)"
 						>
 							<template #icon>
 								<g-icon name="close" />
 							</template>
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							tertiary
 							@click="addFilter(itemIndex)"
 						>
 							<template #icon>
 								<g-icon name="plus" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 				<div></div>
@@ -91,10 +91,10 @@
 		>
 			<div class="flex items-center justify-center gap-3 px-2">
 				<div>{{ columns.length }} {{ $t('columns') }}</div>
-				<n-divider vertical />
+				<NDivider vertical />
 				<div>{{ defaultFormatNumeric(totalRows) }} {{ $t('rows') }}</div>
 				<template v-if="filterDirty">
-					<n-divider vertical />
+					<NDivider vertical />
 					<div>
 						<g-icon name="filter" />
 						{{ defaultFormatNumeric(totalRowsFiltered) }} {{ $t('filtered') }}
@@ -105,13 +105,13 @@
 				v-if="localFilter[0].list.length > 1"
 				class="w-[170px]"
 			>
-				<n-button
+				<NButton
 					block
 					type="primary"
 					@click="applyFilter('selected')"
 				>
 					{{ $t('applySelected') }}
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 	</div>

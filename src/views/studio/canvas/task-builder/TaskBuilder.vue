@@ -33,7 +33,7 @@
 											{{ $t('columns') }}
 										</div>
 										<div class="flex items-center gap-1">
-											<n-button
+											<NButton
 												size="tiny"
 												quaternary
 												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
@@ -42,8 +42,8 @@
 												<template #icon>
 													<g-icon name="computed" />
 												</template>
-											</n-button>
-											<n-button
+											</NButton>
+											<NButton
 												quaternary
 												size="tiny"
 												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
@@ -51,7 +51,7 @@
 												<template #icon>
 													<g-icon name="globalComputed" />
 												</template>
-											</n-button>
+											</NButton>
 										</div>
 									</div>
 									<task-builder-fields

@@ -41,7 +41,7 @@
 										<th>{{ $t('type') }}</th>
 										<th>{{ $t('default') }}</th>
 										<th class="w-[25px]">
-											<n-button
+											<NButton
 												type="info"
 												size="tiny"
 												secondary
@@ -49,7 +49,7 @@
 												<template #icon>
 													<g-icon name="plus" />
 												</template>
-											</n-button>
+											</NButton>
 										</th>
 									</tr>
 								</thead>
@@ -131,7 +131,7 @@
 											/>
 										</td>
 										<td class="w-[25px]">
-											<n-button
+											<NButton
 												type="error"
 												size="tiny"
 												secondary
@@ -139,7 +139,7 @@
 												<template #icon>
 													<g-icon name="delete" />
 												</template>
-											</n-button>
+											</NButton>
 										</td>
 									</tr>
 								</drag>
@@ -157,12 +157,12 @@
 					/>
 				</div>
 				<div>
-					<n-button
+					<NButton
 						type="primary"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</template>

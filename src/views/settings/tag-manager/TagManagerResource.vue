@@ -7,7 +7,7 @@
 			<div class="card-header g-bg-400 flex items-center justify-between p-2">
 				{{ $t('resourceTo') }}
 				<div class="flex items-center justify-end gap-2">
-					<n-button
+					<NButton
 						size="tiny"
 						quaternary
 						@click="changeAllEditView()"
@@ -15,8 +15,8 @@
 						<template #icon>
 							<g-icon :name="toggleEditViewIcon" />
 						</template>
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						size="tiny"
 						quaternary
 						@click="useTagStore().resourceTags = []"
@@ -24,7 +24,7 @@
 						<template #icon>
 							<g-icon name="eraser" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<n-scrollbar :style="{ height: '100%' }">

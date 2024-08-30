@@ -10,17 +10,17 @@
 				<span v-if="localTask.schema.join.length">({{ localTask.schema.join.length }})</span>
 			</div>
 			<div class="mb-1 flex gap-1">
-				<n-button
+				<NButton
 					quaternary
 					size="tiny"
 					class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
 					@click="addJoin()"
 				>
 					{{ $t('addJoin') }}
-				</n-button>
+				</NButton>
 				<n-tooltip :delay="1500">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							type="error"
@@ -30,7 +30,7 @@
 							<template #icon>
 								<g-icon name="deleteTag" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
 				</n-tooltip>
@@ -48,19 +48,19 @@
 				<template v-if="item.type === 'raw'">
 					<div class="mb-1 flex w-full items-center overflow-hidden rounded border-elevation-3">
 						<div class="flex w-[30px] items-center justify-center">
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								@click="editJoin(joinKey)"
 							>
 								<g-icon name="edit" />
-							</n-button>
+							</NButton>
 						</div>
 						<div class="min-w-[150px] grow bg-elevation-1 p-1 text-center">
 							{{ $t('computed') }}
 						</div>
 						<div class="w-[60px] text-center">
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								type="error"
@@ -69,7 +69,7 @@
 								<template #icon>
 									<g-icon name="delete" />
 								</template>
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 				</template>
@@ -77,7 +77,7 @@
 				<template v-else>
 					<div class="flex max-w-[50%] grow items-center overflow-hidden rounded border-elevation-3">
 						<div class="flex max-w-[40px] flex-none items-center justify-center px-1">
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								@click="editJoin(joinKey)"
@@ -85,7 +85,7 @@
 								<template #icon>
 									<g-icon name="edit" />
 								</template>
-							</n-button>
+							</NButton>
 						</div>
 						<div class="grow overflow-hidden text-ellipsis bg-elevation-2 p-1 text-center">
 							{{ item.by }}
@@ -94,7 +94,7 @@
 							class="flex max-w-[40px] flex-none items-center justify-center px-1"
 							@click="changeJoinType(joinKey, item.type)"
 						>
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								class="text-base"
@@ -103,7 +103,7 @@
 								<template #icon>
 									<g-icon :name="`${item.type}Join`" />
 								</template>
-							</n-button>
+							</NButton>
 						</div>
 						<div class="grow overflow-hidden text-ellipsis rounded-e bg-elevation-2 p-1 text-center">
 							{{ item.to }}
@@ -125,7 +125,7 @@
 								{{ sub.columnTo }}
 							</div>
 							<div class="flex max-w-[30px] flex-none justify-center px-1">
-								<n-button
+								<NButton
 									size="tiny"
 									quaternary
 									type="error"
@@ -134,7 +134,7 @@
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
-								</n-button>
+								</NButton>
 							</div>
 						</div>
 					</div>

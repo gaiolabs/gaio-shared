@@ -44,14 +44,14 @@
 				</div>
 				<div class="w-[55px]">
 					<div>{{ $t('icon') }}</div>
-					<n-button
+					<NButton
 						type="primary"
 						@click="showIconControl = true"
 					>
 						<template #icon>
 							<g-app-icon :name="localApp.options.icon" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<div class="mt-2">

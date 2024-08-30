@@ -49,7 +49,7 @@
 				</n-grid>
 				<template v-if="edit">
 					<div class="control-secondary my-1 mb-3 flex items-center justify-end gap-2">
-						<n-button
+						<NButton
 							v-if="Object.keys(element.cols).length > 1"
 							text
 							type="error"
@@ -61,8 +61,8 @@
 									:height="18"
 								/>
 							</template>
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							text
 							type="default"
 							@click="addColumn(element.id)"
@@ -70,9 +70,9 @@
 							<template #icon>
 								<g-icon name="addColumn" />
 							</template>
-						</n-button>
-						<n-divider vertical />
-						<n-button
+						</NButton>
+						<NDivider vertical />
+						<NButton
 							text
 							size="large"
 							type="error"
@@ -81,9 +81,9 @@
 							<template #icon>
 								<g-icon name="close" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
-					<n-divider />
+					<NDivider />
 				</template>
 			</div>
 		</vue-draggable>

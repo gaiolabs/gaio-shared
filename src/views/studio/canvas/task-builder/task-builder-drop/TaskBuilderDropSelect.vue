@@ -9,7 +9,7 @@
 			<div class="mb-1">
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							type="error"
@@ -19,7 +19,7 @@
 							<template #icon>
 								<g-icon name="deleteTag" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
 				</n-tooltip>

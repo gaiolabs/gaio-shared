@@ -18,7 +18,7 @@
 						<n-input v-model:value="useReportStore().current.label" />
 					</div>
 					<div class="flex items-center gap-2">
-						<n-button
+						<NButton
 							size="small"
 							@click="refresh()"
 						>
@@ -26,15 +26,15 @@
 								<g-icon name="refresh" />
 							</template>
 							{{ $t('refresh') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							size="small"
 							type="primary"
 							@click="save()"
 						>
 							{{ $t('save') }}
-						</n-button>
-						<n-divider vertical />
+						</NButton>
+						<NDivider vertical />
 					</div>
 				</div>
 			</template>

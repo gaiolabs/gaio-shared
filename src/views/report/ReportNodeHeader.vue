@@ -23,25 +23,25 @@
 						v-html="renderString(task.settings.description)"
 					/>
 					<template #trigger>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 						>
 							<template #icon>
 								<g-icon name="info" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 				</n-popover>
 				<div v-if="showCloseTable">
-					<n-divider vertical />
+					<NDivider vertical />
 					<g-icon
 						name="close"
 						@click="$emit('close')"
 					/>
 				</div>
 				<div v-if="settings.showRows">
-					<n-divider vertical />
+					<NDivider vertical />
 					#{{ tableRows }}
 				</div>
 			</div>
@@ -72,14 +72,14 @@
 							v-html="renderString(task.settings.description)"
 						/>
 						<template #trigger>
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 							>
 								<template #icon>
 									<g-icon name="info" />
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 					</n-popover>
 					<n-tooltip
@@ -88,12 +88,12 @@
 						:show-after="1500"
 					>
 						<template #trigger>
-							<n-button
+							<NButton
 								text
 								@click="showTable = !showTable"
 							>
 								<g-icon name="table" />
-							</n-button>
+							</NButton>
 						</template>
 						{{ $t('showTable') }}
 					</n-tooltip>

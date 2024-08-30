@@ -42,9 +42,9 @@
 			<!--                />-->
 			<!--            </div>-->
 			<div class="flex grow items-end">
-				<n-button @click="runTest">
+				<NButton @click="runTest">
 					{{ $t('runTest') }}
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<p>{{ `You can use parameters in the URL. Ex.: https://restsite.com/?field={\{param}\}` }}</p>

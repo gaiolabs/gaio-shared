@@ -10,10 +10,10 @@
 			</div>
 		</template>
 		<div>
-			<n-space vertical>
-				<n-divider title-placement="left">
+			<NSpace vertical>
+				<NDivider title-placement="left">
 					{{ $t('Todo') }}
-				</n-divider>
+				</NDivider>
 				<n-skeleton
 					:height="30"
 					class="rounded"
@@ -22,7 +22,7 @@
 					:height="90"
 					class="rounded"
 				/>
-			</n-space>
+			</NSpace>
 		</div>
 	</settings-view>
 </template>

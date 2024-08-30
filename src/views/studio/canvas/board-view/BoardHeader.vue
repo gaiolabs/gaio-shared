@@ -4,7 +4,7 @@
 			<div class="flex items-center justify-between gap-1">
 				<!--LEFT ACTIONS-->
 				<div class="flex items-center gap-2">
-					<n-button
+					<NButton
 						secondary
 						size="tiny"
 						@click="$router.push('/apps')"
@@ -12,12 +12,12 @@
 						<template #icon>
 							<g-icon name="arrowLeft" />
 						</template>
-					</n-button>
-					<n-divider
+					</NButton>
+					<NDivider
 						vertical
 						class="m-0 p-0"
 					/>
-					<n-button
+					<NButton
 						v-if="app?.options?.color"
 						size="tiny"
 						ghost
@@ -28,8 +28,8 @@
 								:color="app.options.color"
 							/>
 						</template>
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						size="tiny"
 						secondary
 						block
@@ -41,10 +41,10 @@
 						<div class="flex items-center text-[14px] font-bold">
 							{{ currentFlow?.flowName }}
 						</div>
-					</n-button>
-					<n-divider vertical />
+					</NButton>
+					<NDivider vertical />
 					<!--RUNNERS-->
-					<n-button
+					<NButton
 						size="tiny"
 						quaternary
 						@click="run()"
@@ -53,8 +53,8 @@
 							name="run"
 							:height="16"
 						/>
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						@click="runFromHere()"
@@ -63,8 +63,8 @@
 							name="runFromHere"
 							:height="17"
 						/>
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						@click="runAll()"
@@ -73,12 +73,12 @@
 							name="runAll"
 							:height="19"
 						/>
-					</n-button>
-					<n-divider
+					</NButton>
+					<NDivider
 						vertical
 						class="m-0 p-0"
 					/>
-					<n-button
+					<NButton
 						strong
 						secondary
 						type="success"
@@ -86,16 +86,16 @@
 						@click="$emit('open', { taskLog: true })"
 					>
 						{{ $t('logs') }}
-					</n-button>
+					</NButton>
 				</div>
 				<!--RIGHT ACTIONS-->
 				<div class="flex items-center gap-2">
-					<n-button
+					<NButton
 						size="tiny"
 						@click="$router.push('/preview')"
 					>
 						<g-icon name="addAction" />
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</g-card>

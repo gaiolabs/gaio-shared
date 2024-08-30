@@ -3,7 +3,7 @@
 		<div class="flex w-full items-stretch justify-between px-4 pt-3">
 			<div class="text-lg font-bold">{{ $t('tasks') }}</div>
 			<div class="flex gap-1">
-				<n-button
+				<NButton
 					size="tiny"
 					tertiary
 					:type="showAs === 'grid' ? 'primary' : 'default'"
@@ -12,7 +12,7 @@
 					<template #icon>
 						<g-icon name="grid" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<div class="sidebar-flow-search px-4 pt-1">

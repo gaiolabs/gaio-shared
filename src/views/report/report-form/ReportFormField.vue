@@ -15,7 +15,7 @@
 				</template>
 			</div>
 			<div v-if="edit">
-				<n-button
+				<NButton
 					text
 					type="error"
 					@click="useFormStore().deleteFieldById(localField.id)"
@@ -23,7 +23,7 @@
 					<template #icon>
 						<g-icon name="delete" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<!--DESCRIPTION-->
@@ -35,7 +35,7 @@
 		</template>
 		<!-- DIVIDER -->
 		<template v-else-if="localField.type === 'divider'">
-			<n-divider />
+			<NDivider />
 		</template>
 		<!--INPUT FIELDS-->
 		<template v-else>
@@ -164,8 +164,8 @@
 					:class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }"
 				>
 					<template v-if="localField.isButton">
-						<n-button-group :vertical="localField.isVertical">
-							<n-button
+						<NButton-group :vertical="localField.isVertical">
+							<NButton
 								v-for="(li, liIndex) in localList"
 								:key="liIndex"
 								size="small"
@@ -173,8 +173,8 @@
 								@click="addOrRemoveInList(li.value)"
 							>
 								{{ li.label }}
-							</n-button>
-						</n-button-group>
+							</NButton>
+						</NButton-group>
 						<!--                        <div class="checkbox-grid">-->
 						<!--                            <div>-->
 						<!--                                <n-checkbox-group-->
@@ -231,8 +231,8 @@
 								'flex items-center': !localField.isVertical
 							}"
 						>
-							<n-divider :vertical="!localField.isVertical" />
-							<n-button
+							<NDivider :vertical="!localField.isVertical" />
+							<NButton
 								size="small"
 								type="primary"
 								:block="localField.isVertical && localField.isButton"
@@ -240,7 +240,7 @@
 								@click="executeWhenFilter()"
 							>
 								{{ $t('confirm') }}
-							</n-button>
+							</NButton>
 						</div>
 					</template>
 				</div>

@@ -7,7 +7,7 @@
 		<div class="forms-settings control-secondary mt-2 px-2">
 			<div class="control el-bold">
 				ID: {{ useFormStore().current.formId }}
-				<n-divider />
+				<NDivider />
 			</div>
 			<div class="control">
 				<div class="control-label">{{ $t('title') }}</div>
@@ -44,14 +44,14 @@
 
 			<!-- LOAD FLOW -->
 			<div class="control mt-3">
-				<n-button
+				<NButton
 					text
 					type="primary"
 					@click="showAdvanced = !showAdvanced"
 				>
 					<g-icon name="options" />
 					{{ $t('advanced') }}
-				</n-button>
+				</NButton>
 
 				<div
 					v-if="showAdvanced"

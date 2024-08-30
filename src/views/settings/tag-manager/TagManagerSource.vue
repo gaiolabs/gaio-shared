@@ -7,10 +7,10 @@
 					{{ $t('sources') }}
 				</div>
 				<div class="flex items-center">
-					<n-divider vertical />
+					<NDivider vertical />
 					<n-tooltip>
 						<template #trigger>
-							<n-button
+							<NButton
 								text
 								@click="saveAll"
 							>
@@ -20,7 +20,7 @@
 										@click="saveAll"
 									/>
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						{{ $t('selectAll') }}
 					</n-tooltip>
@@ -78,13 +78,13 @@
 									<div class="flex items-center justify-between">
 										<n-tooltip>
 											<template #trigger>
-												<n-button
+												<NButton
 													text
 													type="primary"
 													@click="filter(item)"
 												>
 													{{ item.name }}
-												</n-button>
+												</NButton>
 											</template>
 											{{ `${$t('source')} ${item.ref}` }}
 										</n-tooltip>

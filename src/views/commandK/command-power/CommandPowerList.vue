@@ -7,7 +7,7 @@
 			:class="item.id === usePowerStore().currentTab ? 'border-[var(--elevation-primary)]' : 'border-transparent'"
 			@click="usePowerStore().currentTab = item.id"
 		>
-			<n-button
+			<NButton
 				size="small"
 				text
 			>
@@ -18,7 +18,7 @@
 					/>
 					{{ item.name }}
 				</span>
-			</n-button>
+			</NButton>
 		</div>
 	</div>
 	<ul class="command-power-result">
@@ -32,7 +32,7 @@
 				<div>
 					<g-icon name="star" />
 				</div>
-				<n-divider vertical />
+				<NDivider vertical />
 				<div
 					class="flex items-center gap-2"
 					:class="{ 'text-primary': usePowerStore().currentIndex === index }"

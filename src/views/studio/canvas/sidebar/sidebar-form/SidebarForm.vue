@@ -8,14 +8,14 @@
 					trigger="click"
 				>
 					<template #trigger>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 						>
 							<template #icon>
 								<g-icon name="createFolder" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					<div>
 						{{ $t('folder') }}
@@ -24,20 +24,20 @@
 							:placeholder="$t('typeHere')"
 						>
 							<template #suffix>
-								<n-button
+								<NButton
 									size="tiny"
 									text
 									@click="addNewFolder"
 								>
 									{{ $t('add') }}
-								</n-button>
+								</NButton>
 							</template>
 						</n-input>
 					</div>
 				</n-popover>
 				<n-tooltip>
 					<template #trigger>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 							@click="selectForm({})"
@@ -45,7 +45,7 @@
 							<template #icon>
 								<g-icon name="add" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('newForm') }}
 				</n-tooltip>

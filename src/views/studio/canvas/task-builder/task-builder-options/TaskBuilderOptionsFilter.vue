@@ -93,13 +93,13 @@
 							:placeholder="$t('typeHere')"
 						>
 							<template #suffix>
-								<n-button
+								<NButton
 									size="tiny"
 									quaternary
 									@click="previewColumn()"
 								>
 									<g-icon name="eye" />
-								</n-button>
+								</NButton>
 							</template>
 						</n-input>
 						<div
@@ -170,7 +170,7 @@
 							>
 								<div class="flex cursor-pointer items-center justify-between">
 									<div class="flex items-center gap-1">
-										<n-button
+										<NButton
 											text
 											size="tiny"
 											@click="defineValue(item.value)"
@@ -178,14 +178,14 @@
 											<template #icon>
 												<g-icon name="plus" />
 											</template>
-										</n-button>
+										</NButton>
 										{{ item.value }}
 									</div>
 									<div
 										v-if="item.qtd"
 										class="italic"
 									>
-										<n-divider
+										<NDivider
 											vertical
 											class="mx-0"
 										/>

@@ -120,14 +120,14 @@
 				:disabled="true"
 			>
 				<template #suffix>
-					<n-button
+					<NButton
 						size="tiny"
 						:loading="loading"
 						text
 						@click="renewFlowKey"
 					>
 						<g-icon name="refresh" />
-					</n-button>
+					</NButton>
 				</template>
 			</n-input>
 		</div>

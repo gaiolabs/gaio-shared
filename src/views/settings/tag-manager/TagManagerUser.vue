@@ -23,78 +23,78 @@
 					>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="tiny"
 									color="#333"
 									style="color: #fff"
 									@click="filterTag = 'admin'"
 								>
 									A
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('admin') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="tiny"
 									color="#1976d2"
 									style="color: #fff"
 									@click="filterTag = 'dev'"
 								>
 									D
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('developer') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="tiny"
 									color="#e91e63"
 									style="color: #fff"
 									@click="filterTag = 'user'"
 								>
 									U
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('user') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="tiny"
 									color="#ccc"
 									style="color: #222"
 									@click="filterTag = ''"
 								>
 									C
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('clear') }}
 						</n-tooltip>
-						<n-divider vertical />
+						<NDivider vertical />
 					</div>
 					<n-tooltip v-if="currentUser.userId && tagType !== 'user'">
 						<template #trigger>
-							<n-button
+							<NButton
 								text
 								@click="showEditUser = true"
 							>
 								<template #icon>
 									<g-icon name="edit" />
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						{{ $t('newGroup') }}
 					</n-tooltip>
-					<n-divider
+					<NDivider
 						v-if="current && current.userId"
 						vertical
 					/>
 					<n-tooltip v-if="tagType !== 'user'">
 						<template #trigger>
-							<n-button
+							<NButton
 								text
 								@click="addNewGroup"
 							>
@@ -104,24 +104,24 @@
 										name="add"
 									/>
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						{{ $t('newGroup') }}
 					</n-tooltip>
-					<n-divider
+					<NDivider
 						v-if="tagType !== 'user'"
 						vertical
 					/>
 					<n-tooltip>
 						<template #trigger>
-							<n-button
+							<NButton
 								text
 								@click="saveAll()"
 							>
 								<template #icon>
 									<g-icon name="checkAll" />
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						{{ $t('selectAll') }}
 					</n-tooltip>
@@ -184,49 +184,49 @@
 									<td class="el-text-center">
 										<n-tooltip v-if="item.role === 'admin'">
 											<template #trigger>
-												<n-button
+												<NButton
 													size="tiny"
 													color="#333"
 													style="color: #fff"
 												>
 													A
-												</n-button>
+												</NButton>
 											</template>
 											{{ $t('admin') }}
 										</n-tooltip>
 										<n-tooltip v-else-if="item.role === 'dev'">
 											<template #trigger>
-												<n-button
+												<NButton
 													size="tiny"
 													color="#1976d2"
 													style="color: #fff"
 												>
 													D
-												</n-button>
+												</NButton>
 											</template>
 											{{ $t('developer') }}
 										</n-tooltip>
 										<n-tooltip v-else>
 											<template #trigger>
-												<n-button
+												<NButton
 													size="tiny"
 													color="#e91e63"
 													style="color: #fff"
 												>
 													U
-												</n-button>
+												</NButton>
 											</template>
 											{{ $t('user') }}
 										</n-tooltip>
 									</td>
 									<td class="el-text-center">{{ item.userId }}</td>
 									<td>
-										<n-button
+										<NButton
 											text
 											@click="filter(item)"
 										>
 											{{ item.name }}
-										</n-button>
+										</NButton>
 									</td>
 									<td>{{ item.email }}</td>
 								</tr>
@@ -287,13 +287,13 @@
 										/>
 									</td>
 									<td>
-										<n-button
+										<NButton
 											text
 											type="primary"
 											@click="filter(item)"
 										>
 											{{ item.name }}
-										</n-button>
+										</NButton>
 									</td>
 								</tr>
 							</tbody>

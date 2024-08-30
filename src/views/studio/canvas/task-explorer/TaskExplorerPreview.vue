@@ -6,7 +6,7 @@
 				{{ currentReportType.label }}
 			</div>
 			<div class="flex items-center justify-end gap-2">
-				<n-button
+				<NButton
 					size="small"
 					quaternary
 					:type="!showHelp ? 'primary' : 'error'"
@@ -18,7 +18,7 @@
 					<span v-else>
 						{{ $t('close') }}
 					</span>
-				</n-button>
+				</NButton>
 			</div>
 			<n-input-number
 				v-model:value="height"

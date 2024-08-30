@@ -12,7 +12,7 @@
 			</template>
 			<template #extra>
 				<div>
-					<n-button
+					<NButton
 						size="tiny"
 						type="error"
 						quaternary
@@ -21,7 +21,7 @@
 						<template #icon>
 							<g-icon name="delete" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</template>
 		</n-page-header>

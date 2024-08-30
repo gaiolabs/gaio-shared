@@ -41,28 +41,28 @@
 		/>
 
 		<div class="mb-2 mt-4 grid grid-cols-2 gap-2">
-			<n-button
+			<NButton
 				size="large"
 				tertiary
 				@click="toggleTheme('light')"
 			>
 				<g-icon name="sun" />
-			</n-button>
-			<n-button
+			</NButton>
+			<NButton
 				size="large"
 				tertiary
 				@click="toggleTheme('dark')"
 			>
 				<g-icon name="moon" />
-			</n-button>
+			</NButton>
 		</div>
 
-		<n-button
+		<NButton
 			tertiary
 			@click="$router.push('/login')"
 		>
 			{{ $t('logout') }}
-		</n-button>
+		</NButton>
 	</div>
 </template>
 <script setup lang="ts">

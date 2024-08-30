@@ -19,20 +19,20 @@
 								<g-select-form v-model="localTask.formId" />
 							</div>
 							<div v-if="localTask.formId">
-								<n-button-group>
-									<n-button
+								<NButton-group>
+									<NButton
 										type="primary"
 										@click="showFormPreview = !showFormPreview"
 									>
 										<g-icon name="eye" />
-									</n-button>
-									<n-button
+									</NButton>
+									<NButton
 										type="primary"
 										@click="editForm"
 									>
 										<g-icon name="edit" />
-									</n-button>
-								</n-button-group>
+									</NButton>
+								</NButton-group>
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 							class="w-full"
 						/>
 					</div>
-					<n-divider />
+					<NDivider />
 					<div class="control-label mt-2">{{ $t('style') }}</div>
 					<div class="control-secondary mb-3 p-2">
 						<div class="flex gap-1">
@@ -118,14 +118,14 @@
 							<div class="preview">
 								<n-tooltip :show-after="1500">
 									<template #trigger>
-										<n-button
+										<NButton
 											class="w-100"
 											:color="localTask.buttonTheme"
 											:size="localTask.buttonSize"
 											style="color: white"
 										>
 											{{ localTask.buttonTitle ? localTask.buttonTitle : $t('preview') }}
-										</n-button>
+										</NButton>
 									</template>
 									<div>
 										{{ $t('preview') }}
@@ -144,12 +144,12 @@
 				<!--                preview here, add later-->
 				<!--            </div>-->
 				<div class="flex justify-end">
-					<n-button
+					<NButton
 						type="primary"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</template>

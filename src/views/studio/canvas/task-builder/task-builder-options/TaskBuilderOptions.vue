@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<div>
-					<n-button
+					<NButton
 						size="tiny"
 						type="error"
 						quaternary
@@ -25,7 +25,7 @@
 						<template #icon>
 							<g-icon name="delete" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<template v-if="!localField?.field?.computedId">

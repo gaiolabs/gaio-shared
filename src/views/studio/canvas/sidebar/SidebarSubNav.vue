@@ -9,7 +9,7 @@
 				{{ localTask.label }}
 			</span>
 		</div>
-		<n-divider
+		<NDivider
 			class="!m-0"
 			vertical
 		/>
@@ -22,13 +22,13 @@
 			<template v-else>
 				<div>{{ $t('missingTable') }}</div>
 			</template>
-			<n-divider
+			<NDivider
 				class="!m-0"
 				vertical
 			/>
 		</template>
 		<div v-if="showWhenTaskIs(['table'])">
-			<n-button
+			<NButton
 				secondary
 				size="tiny"
 			>
@@ -38,10 +38,10 @@
 				<div>
 					{{ $t('table') }}
 				</div>
-			</n-button>
+			</NButton>
 		</div>
 		<div v-if="showWhenTaskIs(['table'])">
-			<n-button
+			<NButton
 				secondary
 				size="tiny"
 			>
@@ -51,10 +51,10 @@
 				<div>
 					{{ $t('builder') }}
 				</div>
-			</n-button>
+			</NButton>
 		</div>
 		<div v-if="showWhenTaskIs(['table'])">
-			<n-button
+			<NButton
 				secondary
 				size="tiny"
 				@click="selectAction('report')"
@@ -65,10 +65,10 @@
 				<div>
 					{{ $t('report') }}
 				</div>
-			</n-button>
+			</NButton>
 		</div>
 		<div class="text-red-600">
-			<n-button
+			<NButton
 				text
 				status="danger"
 				size="tiny"
@@ -79,7 +79,7 @@
 				<div>
 					{{ $t('delete') }}
 				</div>
-			</n-button>
+			</NButton>
 		</div>
 	</div>
 </template>
@@ -89,6 +89,7 @@ import useApi from '@/composables/useApi'
 import useFormatValue from '@/composables/useFormatValue'
 import { useAppStore } from '@/stores'
 import type { TaskType } from '@gaio/shared/types'
+import { NButton } from 'naive-ui'
 import { ref, watch } from 'vue'
 
 type TableDescribeType = {

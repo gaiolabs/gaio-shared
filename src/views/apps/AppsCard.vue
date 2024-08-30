@@ -2,7 +2,7 @@
 	<g-card class="local-card g-bg-1 w-full cursor-pointer rounded-[8px] p-0">
 		<div class="flex justify-between gap-2">
 			<div class="flex items-start gap-1">
-				<n-button
+				<NButton
 					size="tiny"
 					secondary
 				>
@@ -12,7 +12,7 @@
 							:color="app.options.color"
 						/>
 					</template>
-				</n-button>
+				</NButton>
 				<div class="grow">
 					<div class="grow truncate text-left">
 						<div class="truncate">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<n-button
+			<NButton
 				size="tiny"
 				quaternary
 				@click="useAuthStore().toggleFavoriteApp(app.appId)"
@@ -37,7 +37,7 @@
 						:color="generateFavorAppColor"
 					/>
 				</template>
-			</n-button>
+			</NButton>
 		</div>
 		<div class="mt-5 flex items-center justify-between px-1">
 			<div class="grow truncate pe-2">
@@ -46,7 +46,7 @@
 				</a>
 			</div>
 			<div class="flex min-w-[72px] items-center justify-end gap-2">
-				<n-button
+				<NButton
 					size="tiny"
 					text
 					@click="goTo(app, 'dashboard')"
@@ -54,8 +54,8 @@
 					<template #icon>
 						<g-icon name="dashboard" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					v-if="app.role === 'edit'"
 					size="tiny"
 					text
@@ -64,8 +64,8 @@
 					<template #icon>
 						<g-icon name="pencil" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					v-if="app.role === 'edit'"
 					size="tiny"
 					text
@@ -74,7 +74,7 @@
 					<template #icon>
 						<g-icon name="workflow" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 	</g-card>

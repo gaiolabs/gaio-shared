@@ -226,20 +226,20 @@
 											placement="top"
 										>
 											<template #trigger>
-												<n-button
+												<NButton
 													type="primary"
 													:loading="generateInsightLoading"
 													@click="save()"
 												>
 													{{ $t('lang.SAVE_AND_RUN') }}
-												</n-button>
+												</NButton>
 											</template>
 											{{ $t('lang.SCHEDULE_INSIGHTS_ALERTS_INFO') }}
 										</n-tooltip>
 									</div>
 								</div>
 								<div v-if="localMeta.options.schedule">
-									<!--                            <n-divider  />-->
+									<!--                            <NDivider  />-->
 									<!--                            <div class="w-100 d-flex align-items-center">-->
 									<!--                                <cron-element-plus-->
 									<!--                                    v-model="localMeta.cron"-->

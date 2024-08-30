@@ -7,7 +7,7 @@
 			<div class="control w-full">
 				<label class="control-label">{{ $t('logTable') }}</label>
 				<div class="flex w-full gap-1">
-					<n-button>{{ $t('log') }}</n-button>
+					<NButton>{{ $t('log') }}</NButton>
 					<n-input
 						v-model:value="localTask.keepLogTable"
 						placeholder="Enable Value"

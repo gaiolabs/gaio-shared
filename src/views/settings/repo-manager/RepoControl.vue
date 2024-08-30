@@ -18,9 +18,9 @@
 							<n-input v-model:value="source.repoName" />
 						</div>
 
-						<n-divider title-placement="left">
+						<NDivider title-placement="left">
 							{{ $t('credentials') }}
-						</n-divider>
+						</NDivider>
 
 						<div class="control">
 							<div class="control-label">
@@ -74,23 +74,23 @@
 								@positive-click="remove()"
 							>
 								<template #activator>
-									<n-button
+									<NButton
 										quaternary
 										type="error"
 									>
 										{{ $t('remove') }}
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('deleteSource') }}
 							</n-popconfirm>
 						</div>
 						<div></div>
-						<n-button
+						<NButton
 							type="primary"
 							@click="saveRepo"
 						>
 							{{ $t('save') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</n-spin>

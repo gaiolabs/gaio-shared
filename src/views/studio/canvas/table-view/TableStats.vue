@@ -21,7 +21,7 @@
 				<div class="mb-2 flex justify-between">
 					<div>{{ $t('columns') }}</div>
 					<div>
-						<n-button
+						<NButton
 							v-if="isRunning"
 							size="tiny"
 							tertiary
@@ -29,8 +29,8 @@
 							@click="isDestroyed = true"
 						>
 							{{ $t('stop') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							v-else
 							size="tiny"
 							tertiary
@@ -38,7 +38,7 @@
 							@click="runAll"
 						>
 							{{ $t('all') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 

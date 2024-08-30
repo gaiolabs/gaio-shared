@@ -67,14 +67,14 @@
 				/>
 			</div>
 			<div class="control">
-				<n-button
+				<NButton
 					block
 					class="w-full"
 					type="primary"
 					@click="refreshInputsWithList()"
 				>
 					{{ $t('load') }}
-				</n-button>
+				</NButton>
 			</div>
 			<div class="control">
 				<g-alert

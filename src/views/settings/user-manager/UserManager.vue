@@ -14,7 +14,7 @@
 			class="user-manager"
 		>
 			<template v-if="loading">
-				<n-space vertical>
+				<NSpace vertical>
 					<n-skeleton
 						:height="30"
 						class="rounded"
@@ -23,21 +23,21 @@
 						:height="90"
 						class="rounded"
 					/>
-				</n-space>
+				</NSpace>
 			</template>
 			<template v-else>
 				<div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
 					<div class="flex grow items-center justify-start gap-2">
 						<template v-if="numberOfUsers <= userLimit">
-							<n-button
+							<NButton
 								type="primary"
 								@click="addUser()"
 							>
 								<template #icon>
 									<g-icon name="addUser" />
 								</template>
-							</n-button>
-							<n-divider vertical />
+							</NButton>
+							<NDivider vertical />
 						</template>
 						<n-input
 							v-model:value="searchTerm"
@@ -45,52 +45,52 @@
 							clearable
 							style="max-width: 300px"
 						/>
-						<n-divider vertical />
+						<NDivider vertical />
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									color="#333"
 									style="color: #fff"
 									@click="filterRole = 'admin'"
 								>
 									A
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('admin') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									color="#1976d2"
 									style="color: #fff"
 									@click="filterRole = 'dev'"
 								>
 									D
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('developer') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									color="#e91e63"
 									style="color: #fff"
 									@click="filterRole = 'user'"
 								>
 									U
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('user') }}
 						</n-tooltip>
 						<n-tooltip>
 							<template #trigger>
-								<n-button
+								<NButton
 									color="#ccc"
 									style="color: #222"
 									@click="filterRole = ''"
 								>
 									C
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('clear') }}
 						</n-tooltip>
@@ -105,7 +105,7 @@
 							label-field="name"
 							:options="groups"
 						/>
-						<n-divider vertical />
+						<NDivider vertical />
 						<n-select
 							v-if="hasSelected"
 							v-model:value="bulkGroup"
@@ -118,7 +118,7 @@
 							:options="groups"
 							:placeholder="$t('teams')"
 						/>
-						<n-divider
+						<NDivider
 							v-if="hasSelected"
 							vertical
 						/>
@@ -131,9 +131,9 @@
 							>
 								<template #activator>
 									<span>
-										<n-button type="error">
+										<NButton type="error">
 											{{ $t('deleteSelected') }}
-										</n-button>
+										</NButton>
 									</span>
 								</template>
 								<div>
@@ -148,14 +148,14 @@
 						/>
 						<n-tooltip :persistent="false">
 							<template #trigger>
-								<n-button
+								<NButton
 									tertiary
 									@click="downloadUsers()"
 								>
 									<template #icon>
 										<g-icon name="download" />
 									</template>
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('download') }}
 						</n-tooltip>
@@ -215,14 +215,14 @@
 										:show-after="1500"
 									>
 										<template #trigger>
-											<n-button
+											<NButton
 												size="tiny"
 												color="#333"
 												style="color: #fff"
 												@click="changeRole(user)"
 											>
 												A
-											</n-button>
+											</NButton>
 										</template>
 										{{ t('admin') }}
 									</n-tooltip>
@@ -231,14 +231,14 @@
 										:persistent="false"
 									>
 										<template #trigger>
-											<n-button
+											<NButton
 												size="tiny"
 												color="#1976d2"
 												style="color: #fff"
 												@click="changeRole(user)"
 											>
 												D
-											</n-button>
+											</NButton>
 										</template>
 										{{ t('developer') }}
 									</n-tooltip>
@@ -248,27 +248,27 @@
 										:show-after="1500"
 									>
 										<template #trigger>
-											<n-button
+											<NButton
 												size="tiny"
 												color="#e91e63"
 												style="color: #fff"
 												@click="changeRole(user)"
 											>
 												U
-											</n-button>
+											</NButton>
 										</template>
 										{{ t('user') }}
 									</n-tooltip>
 								</td>
 								<td>{{ user.userId }}</td>
 								<td>
-									<n-button
+									<NButton
 										text
 										type="primary"
 										@click="selectAndEditUser(user)"
 									>
 										{{ user.name }}
-									</n-button>
+									</NButton>
 								</td>
 								<td>{{ user.email }}</td>
 								<td>
@@ -303,12 +303,12 @@
 										@positive-click="removeUser(user.userId)"
 									>
 										<template #activator>
-											<n-button
+											<NButton
 												:disabled="currentUser.userId === user.userId"
 												text
 											>
 												<g-icon name="delete" />
-											</n-button>
+											</NButton>
 										</template>
 										<div>
 											{{ `${$t('delete')}: \n #${user.userId} - ${user.name}` }}

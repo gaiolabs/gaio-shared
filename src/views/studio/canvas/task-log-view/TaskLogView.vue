@@ -49,7 +49,7 @@
 									<div class="w-[90px] text-right">
 										{{ timeSpent(job) }}
 									</div>
-									<n-divider
+									<NDivider
 										vertical
 										class="m-0 p-0"
 									/>
@@ -57,14 +57,14 @@
 										v-if="job.status === 'started'"
 										class="w-[90px]"
 									>
-										<n-button
+										<NButton
 											class="w-full"
 											size="small"
 											status="danger"
 											@click="abortWorkflow(job.id)"
 										>
 											{{ $t('stop') }}
-										</n-button>
+										</NButton>
 									</div>
 									<div
 										v-else-if="job.aborted"
@@ -106,7 +106,7 @@
 											<div>
 												{{ timeSpent(value) }}
 											</div>
-											<n-divider
+											<NDivider
 												vertical
 												class="m-0 p-0"
 											/>

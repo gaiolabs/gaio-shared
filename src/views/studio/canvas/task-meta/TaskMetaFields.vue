@@ -14,12 +14,12 @@
 						clearable
 						:placeholder="$t('search')"
 					/>
-					<n-button
+					<NButton
 						type="primary"
 						@click="loadFields"
 					>
 						{{ $t('reset') }}
-					</n-button>
+					</NButton>
 				</div>
 
 				<div class="g-card my-2 p-2">

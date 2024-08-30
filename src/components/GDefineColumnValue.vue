@@ -91,7 +91,7 @@
 								</template>
 							</td>
 							<td>
-								<n-button
+								<NButton
 									size="tiny"
 									quaternary
 									type="error"
@@ -100,7 +100,7 @@
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
-								</n-button>
+								</NButton>
 							</td>
 						</tr>
 					</tbody>

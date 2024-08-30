@@ -9,19 +9,19 @@
 				10 {{ $t('views') }}
 			</div>
 
-			<n-button tertiary>
+			<NButton tertiary>
 				{{ $t('seeAll') }}
-			</n-button>
+			</NButton>
 		</div>
 		<div
 			v-if="collapse"
 			class="animate-fade-in mt-3 w-full px-4 pb-4"
 		>
-			<n-space>
+			<NSpace>
 				<g-card>Test</g-card>
 				<g-card>Test</g-card>
 				<g-card>Test</g-card>
-			</n-space>
+			</NSpace>
 		</div>
 	</div>
 </template>

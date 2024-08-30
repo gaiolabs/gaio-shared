@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="flex items-center justify-center gap-3">
-				<n-button
+				<NButton
 					tertiary
 					size="tiny"
 					@click="gridOptions.editGrid = !gridOptions.editGrid"
@@ -16,9 +16,9 @@
 					<template #icon>
 						<g-icon name="resize" />
 					</template>
-				</n-button>
-				<n-divider vertical />
-				<n-button
+				</NButton>
+				<NDivider vertical />
+				<NButton
 					secondary
 					size="tiny"
 					@click="changeLayoutSize('lg')"
@@ -26,8 +26,8 @@
 					<template #icon>
 						<g-icon name="desktop" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					secondary
 					size="tiny"
 					@click="changeLayoutSize('md')"
@@ -35,8 +35,8 @@
 					<template #icon>
 						<g-icon name="tablet" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					secondary
 					size="tiny"
 					@click="changeLayoutSize('sm')"
@@ -44,10 +44,10 @@
 					<template #icon>
 						<g-icon name="mobile" />
 					</template>
-				</n-button>
+				</NButton>
 
-				<n-divider vertical />
-				<n-button
+				<NDivider vertical />
+				<NButton
 					tertiary
 					@click="showLayoutHideOption = true"
 				>
@@ -55,7 +55,7 @@
 						<g-icon name="eye" />
 					</template>
 					{{ $t('visibility') }}
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 

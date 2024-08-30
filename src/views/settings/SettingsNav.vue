@@ -17,7 +17,7 @@
 							alt="logo"
 						/>
 						<div class="nav-box-inner flex items-center">
-							<n-button
+							<NButton
 								size="small"
 								quaternary
 								@click="useCommandKStore().show = true"
@@ -25,11 +25,11 @@
 								<div class="flex items-center">
 									<g-icon name="search" />
 								</div>
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 					<div class="flex h-full items-center">
-						<n-divider vertical />
+						<NDivider vertical />
 					</div>
 					<div class="mx-3 flex items-center gap-2 py-2">
 						<n-tooltip
@@ -37,7 +37,7 @@
 							:key="item.label"
 						>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="small"
 									tertiary
 									:type="isActive(item.path)"
@@ -47,26 +47,26 @@
 										<g-icon :name="item.icon" />
 									</template>
 									<template v-if="item.showLabel">{{ item.label }}</template>
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t(item.label) }}
 						</n-tooltip>
 					</div>
 					<div class="flex h-full items-center">
-						<n-divider vertical />
+						<NDivider vertical />
 					</div>
 					<div class="flex items-center gap-1 p-2">
-						<n-button
+						<NButton
 							size="small"
 							tertiary
 						>
 							<template #icon>
 								<g-icon name="chat" />
 							</template>
-						</n-button>
+						</NButton>
 						<n-popover trigger="click">
 							<template #trigger>
-								<n-button
+								<NButton
 									size="small"
 									quaternary
 								>
@@ -80,7 +80,7 @@
 										<div class="text-[9px] font-thin lowercase">Seg, 23</div>
 										<div class="text-[11px]">22:22</div>
 									</div>
-								</n-button>
+								</NButton>
 							</template>
 							<div>
 								<home-account />

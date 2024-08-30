@@ -32,21 +32,21 @@
 							@positive-click="removeGroup()"
 						>
 							<template #activator>
-								<n-button text>
+								<NButton text>
 									<g-icon name="delete" />
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('removeGroup') }}
 						</n-popconfirm>
 						<div></div>
-						<n-button
+						<NButton
 							type="primary"
 							:loading="loading"
 							:disabled="!isValid"
 							@click="save"
 						>
 							{{ $t('save') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</div>

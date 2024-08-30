@@ -19,7 +19,7 @@
 					<slot name="title"></slot>
 				</div>
 				<div class="flex items-end">
-					<n-button
+					<NButton
 						secondary
 						size="tiny"
 						@click="closeModal()"
@@ -27,7 +27,7 @@
 						<template #icon>
 							<g-icon name="close" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 			<div class="overflow-hidden rounded-b-[6px]">

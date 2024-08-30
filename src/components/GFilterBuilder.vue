@@ -18,7 +18,7 @@
 								class="el-text-center"
 								style="width: 45px"
 							>
-								<n-button
+								<NButton
 									size="tiny"
 									secondary
 									@click="addCol()"
@@ -26,7 +26,7 @@
 									<template #icon>
 										<g-icon name="add" />
 									</template>
-								</n-button>
+								</NButton>
 							</th>
 							<th>{{ $t('column') }}</th>
 							<th>{{ $t('type') }}</th>
@@ -45,13 +45,13 @@
 								v-if="index > 0"
 								class="text-right"
 							>
-								<n-button
+								<NButton
 									size="tiny"
 									type="primary"
 									@click="item.andOr = item.andOr === 'and' ? 'or' : 'and'"
 								>
 									{{ item.andOr }}
-								</n-button>
+								</NButton>
 							</td>
 							<td v-else></td>
 							<td>
@@ -112,13 +112,13 @@
 													:options="columnValues[item.columnName]"
 												/>
 												<template #trigger>
-													<n-button
+													<NButton
 														:underline="false"
 														class="w-100 h-100"
 														@click="listByField(item)"
 													>
 														<g-icon name="eye" />
-													</n-button>
+													</NButton>
 												</template>
 											</n-popover>
 										</n-input-group>
@@ -163,7 +163,7 @@
 								</span>
 							</td>
 							<td>
-								<n-button
+								<NButton
 									size="tiny"
 									quaternary
 									type="error"
@@ -172,7 +172,7 @@
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
-								</n-button>
+								</NButton>
 							</td>
 						</tr>
 					</tbody>
@@ -187,12 +187,12 @@
 								{{ $t('addFilter') }}
 							</div>
 							<div>
-								<n-button
+								<NButton
 									type="primary"
 									@click="addCol()"
 								>
 									{{ $t('add') }}
-								</n-button>
+								</NButton>
 							</div>
 						</div>
 					</n-alert>

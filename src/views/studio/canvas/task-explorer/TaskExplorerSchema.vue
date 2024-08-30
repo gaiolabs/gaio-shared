@@ -43,7 +43,7 @@
 					</div>
 					<template #trigger>
 						<span>
-							<n-button
+							<NButton
 								quaternary
 								size="tiny"
 								:type="useBrush ? 'primary' : 'default'"
@@ -52,13 +52,13 @@
 								<template #icon>
 									<g-icon name="brush" />
 								</template>
-							</n-button>
+							</NButton>
 						</span>
 					</template>
 				</n-popover>
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							:type="showFilter ? 'primary' : 'default'"
@@ -67,13 +67,13 @@
 							<template #icon>
 								<g-icon name="filter" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('filter') }}
 				</n-tooltip>
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							type="error"
@@ -83,7 +83,7 @@
 							<template #icon>
 								<g-icon name="deleteTag" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
 				</n-tooltip>

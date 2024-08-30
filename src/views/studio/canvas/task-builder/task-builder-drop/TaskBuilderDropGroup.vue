@@ -7,7 +7,7 @@
 				<span v-if="localTask.schema.sort.length">({{ localTask.schema.group.length }})</span>
 			</div>
 			<div class="mb-1 flex items-center gap-1">
-				<n-button
+				<NButton
 					size="tiny"
 					quaternary
 					class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
@@ -17,10 +17,10 @@
 						<g-icon name="addCheck" />
 					</template>
 					{{ $t('addNoAggregationFields') }}
-				</n-button>
+				</NButton>
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							type="error"
@@ -30,7 +30,7 @@
 							<template #icon>
 								<g-icon name="deleteTag" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
 				</n-tooltip>

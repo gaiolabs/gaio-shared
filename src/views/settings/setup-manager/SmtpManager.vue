@@ -62,19 +62,19 @@
 					:label="$t('office365/microsoft')"
 				/>
 			</div>
-			<n-divider />
+			<NDivider />
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
 					<n-switch v-model:checked="smtpData.options.enabled" />
 					{{ $t('enable') }}
 				</div>
 
-				<n-button
+				<NButton
 					type="primary"
 					@click="saveSmtp()"
 				>
 					{{ $t('save') }}
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 	</div>

@@ -5,11 +5,11 @@
 				<div>
 					{{ usePowerStore().selectedContext.label }}
 				</div>
-				<n-button color="#fff">
+				<NButton color="#fff">
 					<span class="text-black">
 						{{ $t('filter') }}
 					</span>
-				</n-button>
+				</NButton>
 			</div>
 			<div
 				v-if="report"

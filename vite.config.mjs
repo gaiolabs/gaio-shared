@@ -23,7 +23,12 @@ export default defineConfig({
 			]
 		}),
 		Components({
-			resolvers: [NaiveUiResolver(), ElementPlusResolver()]
+			resolvers: [
+				NaiveUiResolver({
+					transform: 'PascalCase'
+				}),
+				ElementPlusResolver()
+			]
 		}),
 		vue()
 	],

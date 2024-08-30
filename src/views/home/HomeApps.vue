@@ -9,36 +9,36 @@
 				{{ $t('dataApps') }}
 			</div>
 			<div class="g-bg-1 g-border-400 flex gap-1 rounded p-1">
-				<n-button
+				<NButton
 					:type="currentTab === 'recent' ? 'primary' : 'default'"
 					size="small"
 					:quaternary="currentTab === 'favorites'"
 					@click="currentTab = 'recent'"
 				>
 					{{ $t('recent') }}
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					:type="currentTab === 'favorites' ? 'primary' : 'default'"
 					size="small"
 					:quaternary="currentTab === 'recent'"
 					@click="currentTab = 'favorites'"
 				>
 					{{ $t('favorites') }}
-				</n-button>
+				</NButton>
 			</div>
-			<n-button
+			<NButton
 				size="small"
 				type="primary"
 				@click="$router.push('/apps')"
 			>
 				{{ $t('seeAll') }}
-			</n-button>
+			</NButton>
 		</div>
 		<div
 			v-show="collapse"
 			class="home-apps-body animate-fade-in mt-3"
 		>
-			<n-space>
+			<NSpace>
 				<g-card
 					v-for="app of filteredApps"
 					:key="app.appId"
@@ -68,15 +68,15 @@
 							:options="options"
 							@select="goTo(app, $event)"
 						>
-							<n-button text>
+							<NButton text>
 								<template #icon>
 									<g-icon name="unfold" />
 								</template>
-							</n-button>
+							</NButton>
 						</n-dropdown>
 					</div>
 				</g-card>
-			</n-space>
+			</NSpace>
 		</div>
 		<!--EDIT APP-->
 		<app-control

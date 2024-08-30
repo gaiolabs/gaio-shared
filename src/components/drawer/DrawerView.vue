@@ -12,8 +12,8 @@
 				<div class="flex items-center justify-end gap-2">
 					<slot name="actions" />
 					<div class="flex items-center gap-1">
-						<n-button-group>
-							<n-button
+						<NButton-group>
+							<NButton
 								size="tiny"
 								quaternary
 								@click="changeFullscreen()"
@@ -24,10 +24,10 @@
 										color="gray"
 									/>
 								</template>
-							</n-button>
-						</n-button-group>
-						<n-divider vertical />
-						<n-button
+							</NButton>
+						</NButton-group>
+						<NDivider vertical />
+						<NButton
 							size="tiny"
 							tertiary
 							type="error"
@@ -36,7 +36,7 @@
 							<template #icon>
 								<g-icon name="close" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</div>

@@ -8,7 +8,7 @@
 				{{ $t('query') }}
 			</div>
 			<div>
-				<n-button
+				<NButton
 					size="tiny"
 					secondary
 					type="error"
@@ -17,7 +17,7 @@
 					<template #icon>
 						<g-icon name="close" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<code-editor

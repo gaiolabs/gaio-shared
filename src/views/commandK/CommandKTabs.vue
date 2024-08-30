@@ -8,12 +8,12 @@
 				:class="tab.id === useCommandKStore().tab ? 'border-[var(--elevation-primary)]' : 'border-transparent'"
 				@click="useCommandKStore().tab = tab.id"
 			>
-				<n-button
+				<NButton
 					text
 					class="border-b-2 border-indigo-600 px-4 py-2 text-indigo-600"
 				>
 					{{ tab.name }}
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 	</div>

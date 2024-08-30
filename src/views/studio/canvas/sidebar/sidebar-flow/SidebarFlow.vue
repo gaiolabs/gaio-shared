@@ -3,7 +3,7 @@
 		<div class="flex w-full items-stretch justify-between px-4">
 			<div class="text-lg font-bold">{{ $t('flow') }}</div>
 			<div class="flex">
-				<n-button
+				<NButton
 					size="tiny"
 					quaternary
 					@click="showScheduleBulk = true"
@@ -11,20 +11,20 @@
 					<template #icon>
 						<g-icon name="cronEdit" />
 					</template>
-				</n-button>
+				</NButton>
 				<n-popover
 					placement="bottom"
 					trigger="click"
 				>
 					<template #trigger>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 						>
 							<template #icon>
 								<g-icon name="createFolder" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					<div>
 						{{ $t('folder') }}
@@ -33,18 +33,18 @@
 							:placeholder="$t('typeHere')"
 						>
 							<template #suffix>
-								<n-button
+								<NButton
 									size="tiny"
 									text
 									@click="addNewFolder"
 								>
 									{{ $t('add') }}
-								</n-button>
+								</NButton>
 							</template>
 						</n-input>
 					</div>
 				</n-popover>
-				<n-button
+				<NButton
 					size="tiny"
 					quaternary
 					@click="currentFlow = {}"
@@ -52,7 +52,7 @@
 					<template #icon>
 						<g-icon name="add" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<div class="sidebar-flow-search px-4 pt-1">

@@ -103,7 +103,7 @@
 											>
 												<template v-if="!col.accumulated">
 													<template v-if="col.linkValue">
-														<n-button
+														<NButton
 															text
 															:color="linkColor(col)"
 															@click="setParameters(col.linkType, col.linkValue, row)"
@@ -116,7 +116,7 @@
 															<template v-else>
 																{{ formatRowValue(row, col) }}
 															</template>
-														</n-button>
+														</NButton>
 													</template>
 													<template v-else-if="col.html">
 														<span

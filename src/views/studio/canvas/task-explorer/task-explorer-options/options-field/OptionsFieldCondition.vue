@@ -181,15 +181,15 @@
 							content-style="padding: 10px"
 							class="mt-2"
 						>
-							<n-space>
-								<n-button
+							<NSpace>
+								<NButton
 									size="small"
 									:type="newRule.icon === undefined || newRule.icon === 'none' ? 'primary' : 'default'"
 									@click="newRule.icon = undefined"
 								>
 									{{ $t('none') }}
-								</n-button>
-								<n-button
+								</NButton>
+								<NButton
 									v-for="item of commonIcons"
 									:key="item"
 									size="small"
@@ -199,8 +199,8 @@
 									<template #icon>
 										<g-app-icon :name="item" />
 									</template>
-								</n-button>
-								<n-button
+								</NButton>
+								<NButton
 									v-if="newRule.icon && !commonIcons.includes(newRule.icon)"
 									size="small"
 									type="primary"
@@ -208,14 +208,14 @@
 									<template #icon>
 										<g-app-icon :name="newRule.icon" />
 									</template>
-								</n-button>
-								<n-button
+								</NButton>
+								<NButton
 									size="small"
 									@click="showIcon = !showIcon"
 								>
 									{{ $t('others') }}
-								</n-button>
-							</n-space>
+								</NButton>
+							</NSpace>
 						</n-card>
 
 						<g-icon-finder
@@ -225,12 +225,12 @@
 						/>
 					</div>
 					<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-						<n-button
+						<NButton
 							type="primary"
 							@click="saveNewRule()"
 						>
 							{{ $t('save') }}
-						</n-button>
+						</NButton>
 					</div>
 				</template>
 			</g-dialog>

@@ -13,158 +13,158 @@
 				content-class="border rounded"
 			>
 				<div class="flex items-center gap-1">
-					<n-button
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('bold') }"
 						@click="editor.chain().focus().toggleBold().run()"
 					>
 						<g-app-icon name="icon-bold" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('italic') }"
 						@click="editor.chain().focus().toggleItalic().run()"
 					>
 						<g-app-icon name="icon-italic" />
-					</n-button>
-					<n-divider vertical />
-					<n-button
+					</NButton>
+					<NDivider vertical />
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('strike') }"
 						@click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
 					>
 						H1
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('strike') }"
 						@click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
 					>
 						H2
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('strike') }"
 						@click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
 					>
 						H3
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('heading', { level: 4 }) }"
 						@click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
 					>
 						H4
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('heading', { level: 5 }) }"
 						@click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
 					>
 						H5
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('heading', { level: 6 }) }"
 						@click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
 					>
 						H6
-					</n-button>
+					</NButton>
 
-					<n-divider vertical />
+					<NDivider vertical />
 
-					<n-button
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive({ textAlign: 'left' }) }"
 						@click="editor.chain().focus().setTextAlign('left').run()"
 					>
 						<g-app-icon name="icon-align-left" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
 						@click="editor.chain().focus().setTextAlign('center').run()"
 					>
 						<g-app-icon name="icon-align-center" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
 						@click="editor.chain().focus().setTextAlign('right').run()"
 					>
 						<g-app-icon name="icon-align-right" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
 						@click="editor.chain().focus().setTextAlign('justify').run()"
 					>
 						<g-app-icon name="icon-align-justify" />
-					</n-button>
+					</NButton>
 
-					<n-divider vertical />
+					<NDivider vertical />
 
-					<n-button
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('bulletList') }"
 						@click="editor.chain().focus().toggleBulletList().run()"
 					>
 						<g-app-icon name="icon-list-collapse" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('orderedList') }"
 						@click="editor.chain().focus().toggleOrderedList().run()"
 					>
 						<g-app-icon name="icon-list-ordered" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('blockquote') }"
 						@click="editor.chain().focus().toggleBlockquote().run()"
 					>
 						<g-app-icon name="icon-text-quote" />
-					</n-button>
+					</NButton>
 
-					<n-divider vertical />
-					<n-button
+					<NDivider vertical />
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('codeBlock') }"
 						@click="editor.chain().focus().toggleCodeBlock().run()"
 					>
 						<g-app-icon name="icon-square-dashed-bottom-code" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						:class="{ 'is-active': editor.isActive('highlight') }"
 						@click="editor.chain().focus().toggleHighlight().run()"
 					>
 						<g-app-icon name="icon-highlighter" />
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						quaternary
 						size="tiny"
 						@click="editor.chain().focus().setHorizontalRule().run()"
 					>
 						<g-app-icon name="icon-minus" />
-					</n-button>
+					</NButton>
 				</div>
 			</n-card>
 			<editor-content

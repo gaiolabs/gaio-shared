@@ -47,10 +47,10 @@
 							<n-checkbox :label="$t('rememberMe')" />
 						</div>
 						<div class="">
-							<n-button text>Forget password</n-button>
+							<NButton text>Forget password</NButton>
 						</div>
 					</div>
-					<n-button
+					<NButton
 						type="primary"
 						:loading="credentials.loading"
 						class="w-full"
@@ -58,27 +58,27 @@
 						@click="handleLogin"
 					>
 						{{ $t('login') }}
-					</n-button>
+					</NButton>
 					<div class="my-3">
-						<n-divider>
+						<NDivider>
 							{{ $t('orAccessWith').toLowerCase() }}
-						</n-divider>
+						</NDivider>
 					</div>
 
 					<div class="flex gap-2">
-						<n-button
+						<NButton
 							size="large"
 							class="grow"
 						>
 							{{ $t('google') }}
-						</n-button>
+						</NButton>
 
-						<n-button
+						<NButton
 							size="large"
 							class="grow"
 						>
 							{{ $t('azureAd') }}
-						</n-button>
+						</NButton>
 					</div>
 				</form>
 			</template>

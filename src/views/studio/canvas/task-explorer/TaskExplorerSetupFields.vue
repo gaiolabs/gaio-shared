@@ -12,14 +12,14 @@
 				<div>
 					<n-tooltip>
 						<template #trigger>
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 							>
 								<template #icon>
 									<g-icon name="exchange" />
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						<div>
 							{{ $t('exchangeTableMessage') }}
@@ -28,7 +28,7 @@
 
 					<n-tooltip>
 						<template #trigger>
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								@click="$emit('viewTable')"
@@ -36,7 +36,7 @@
 								<template #icon>
 									<g-icon name="eye" />
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						<div>
 							{{ $t('viewTable') }}
@@ -49,12 +49,12 @@
 			</div>
 		</div>
 		<div class="flex items-center justify-between">
-			<n-button
+			<NButton
 				size="tiny"
 				@click="addAllFields()"
 			>
 				{{ $t('addAll') }}
-			</n-button>
+			</NButton>
 			<div class="flex gap-1">
 				<n-tooltip>
 					<template #trigger>

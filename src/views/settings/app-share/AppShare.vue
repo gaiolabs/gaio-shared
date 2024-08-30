@@ -11,7 +11,7 @@
 		</template>
 		<div class="source-manager">
 			<template v-if="loading">
-				<n-space vertical>
+				<NSpace vertical>
 					<n-skeleton
 						:height="30"
 						class="rounded"
@@ -20,7 +20,7 @@
 						:height="100"
 						class="rounded"
 					/>
-				</n-space>
+				</NSpace>
 			</template>
 			<template v-else>
 				<div class="app-share w-full pb-2">
@@ -38,12 +38,12 @@
 						/>
 
 						<div>
-							<n-button
+							<NButton
 								type="primary"
 								@click="save()"
 							>
 								{{ $t('apply') }}
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 					<div class="g-bg-1 mb-3 flex items-center rounded shadow">

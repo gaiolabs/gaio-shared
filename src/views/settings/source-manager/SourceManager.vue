@@ -12,7 +12,7 @@
 			</template>
 			<div class="source-manager">
 				<template v-if="loading">
-					<n-space vertical>
+					<NSpace vertical>
 						<n-skeleton
 							:height="30"
 							class="rounded"
@@ -21,7 +21,7 @@
 							:height="90"
 							class="rounded"
 						/>
-					</n-space>
+					</NSpace>
 				</template>
 
 				<template v-else>
@@ -30,7 +30,7 @@
 							<div>{{ sources.length }} {{ $t('sources').toLowerCase() }}</div>
 							<n-tooltip :content="$t('addSource')">
 								<template #trigger>
-									<n-button
+									<NButton
 										type="primary"
 										size="small"
 										@click="addSource()"
@@ -39,7 +39,7 @@
 											<g-icon name="add" />
 										</template>
 										{{ $t('new') }}
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('addSource') }}
 							</n-tooltip>
@@ -82,7 +82,7 @@
 										</td>
 										<td>{{ item.client }}</td>
 										<td class="el-text-left">
-											<n-button
+											<NButton
 												quaternary
 												@click="selectSource(item)"
 											>
@@ -90,7 +90,7 @@
 													<g-icon name="edit" />
 												</template>
 												{{ $t('edit') }}
-											</n-button>
+											</NButton>
 										</td>
 									</tr>
 								</tbody>

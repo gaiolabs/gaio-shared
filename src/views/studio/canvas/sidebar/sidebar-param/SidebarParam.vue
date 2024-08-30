@@ -8,14 +8,14 @@
 					trigger="click"
 				>
 					<template #trigger>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 						>
 							<template #icon>
 								<g-icon name="createFolder" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					<div>
 						{{ $t('folder') }}
@@ -24,18 +24,18 @@
 							:placeholder="$t('typeHere')"
 						>
 							<template #suffix>
-								<n-button
+								<NButton
 									size="tiny"
 									text
 									@click="addNewFolder"
 								>
 									{{ $t('add') }}
-								</n-button>
+								</NButton>
 							</template>
 						</n-input>
 					</div>
 				</n-popover>
-				<n-button
+				<NButton
 					size="tiny"
 					quaternary
 					@click="current = {}"
@@ -43,8 +43,8 @@
 					<template #icon>
 						<g-icon name="add" />
 					</template>
-				</n-button>
-				<n-button
+				</NButton>
+				<NButton
 					size="tiny"
 					quaternary
 					@click="useAppStore().saveAppMetadata('params')"
@@ -52,7 +52,7 @@
 					<template #icon>
 						<g-icon name="save" />
 					</template>
-				</n-button>
+				</NButton>
 			</div>
 		</div>
 		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">

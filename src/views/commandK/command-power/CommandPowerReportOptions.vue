@@ -8,7 +8,7 @@
 						v-for="report of reportTypes"
 						:key="report.label"
 					>
-						<n-button
+						<NButton
 							size="tiny"
 							text
 							@click="emit('change', report)"
@@ -16,7 +16,7 @@
 							<template #icon>
 								<g-icon :name="report.icon" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 				<div class="flex-vertical-center gap-3">
@@ -25,7 +25,7 @@
 						:key="action.label"
 						class="flex-vertical-center gap-2"
 					>
-						<n-button
+						<NButton
 							size="tiny"
 							text
 							@click="doAction(action.action)"
@@ -33,7 +33,7 @@
 							<template #icon>
 								<g-icon :name="action.icon" />
 							</template>
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</template>
@@ -51,7 +51,7 @@
 						</n-input-group>
 					</div>
 					<div>
-						<n-button
+						<NButton
 							size="tiny"
 							type="primary"
 							:disabled="!usePowerStore().selectedView.label"
@@ -59,7 +59,7 @@
 							@click="saveView"
 						>
 							{{ $t('save') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</template>

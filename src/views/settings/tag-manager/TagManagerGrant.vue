@@ -9,7 +9,7 @@
 				<div class="flex items-center">
 					<n-tooltip>
 						<template #trigger>
-							<n-button
+							<NButton
 								size="tiny"
 								quaternary
 								@click="useTagStore().grantTags = []"
@@ -20,7 +20,7 @@
 										color="#fff"
 									/>
 								</template>
-							</n-button>
+							</NButton>
 						</template>
 						<div>{{ $t('clear') }}</div>
 					</n-tooltip>

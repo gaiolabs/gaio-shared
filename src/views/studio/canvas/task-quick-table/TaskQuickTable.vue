@@ -26,13 +26,13 @@
 						class="control flex grow justify-center"
 						@click="prepare()"
 					>
-						<n-button
+						<NButton
 							type="primary"
 							:loading="loading"
 							block
 						>
 							{{ $t('prepareData') }}
-						</n-button>
+						</NButton>
 					</div>
 					<div
 						v-if="localData.length && localTask.columns.length"
@@ -183,7 +183,7 @@
 					v-if="localData.length && localTask.columns.length"
 					class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200"
 				>
-					<n-button
+					<NButton
 						:loading="loading"
 						class="w-100"
 						type="primary"
@@ -191,7 +191,7 @@
 						@click="run()"
 					>
 						{{ $t('execute') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</template>

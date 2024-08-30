@@ -30,22 +30,22 @@
 				class="sidebar-sub-nav core-shadow-2 bottom-[10px] flex h-[40px] items-center gap-3 rounded-[10px] border-elevation-2 bg-elevation-1 px-3"
 			>
 				<div class="flex items-center gap-2">
-					<n-button
+					<NButton
 						size="tiny"
 						@click="organizeDagreLayout('LR')"
 					>
 						<template #icon>
 							<g-icon name="flow" />
 						</template>
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						size="tiny"
 						@click="fitView()"
 					>
 						<template #icon>
 							<g-icon name="full" />
 						</template>
-					</n-button>
+					</NButton>
 				</div>
 			</g-card>
 		</div>

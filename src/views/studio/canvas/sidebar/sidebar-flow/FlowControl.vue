@@ -53,7 +53,7 @@
 			</div>
 			<div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 				<div>
-					<n-space
+					<NSpace
 						v-if="localFlow.flowId"
 						size="small"
 					>
@@ -65,7 +65,7 @@
 							@positive-click="remove()"
 						>
 							<template #trigger>
-								<n-button
+								<NButton
 									size="tiny"
 									quaternary
 									type="error"
@@ -73,11 +73,11 @@
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
-								</n-button>
+								</NButton>
 							</template>
 							{{ $t('deletionConfirmation') }}
 						</n-popconfirm>
-						<n-button
+						<NButton
 							size="tiny"
 							quaternary
 							type="primary"
@@ -86,24 +86,24 @@
 							<template #icon>
 								<g-icon name="clone" />
 							</template>
-						</n-button>
-					</n-space>
+						</NButton>
+					</NSpace>
 				</div>
-				<n-space>
-					<n-button
+				<NSpace>
+					<NButton
 						secondary
 						@click="$emit('close')"
 					>
 						{{ $t('cancel') }}
-					</n-button>
-					<n-button
+					</NButton>
+					<NButton
 						:loading="loading"
 						type="primary"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
-				</n-space>
+					</NButton>
+				</NSpace>
 			</div>
 		</template>
 	</g-dialog>

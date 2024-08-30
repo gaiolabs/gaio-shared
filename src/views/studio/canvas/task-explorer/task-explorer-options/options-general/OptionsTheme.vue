@@ -40,14 +40,14 @@
 								:show-after="1500"
 							>
 								<template #trigger>
-									<n-button text>
+									<NButton text>
 										<template #icon>
 											<g-icon
 												name="add"
 												@click="addColor()"
 											/>
 										</template>
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('add') }}
 							</n-tooltip>
@@ -56,14 +56,14 @@
 								:show-after="1500"
 							>
 								<template #trigger>
-									<n-button text>
+									<NButton text>
 										<template #icon>
 											<g-icon
 												name="palette"
 												@click="showPalette = true"
 											/>
 										</template>
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('palette') }}
 							</n-tooltip>
@@ -72,14 +72,14 @@
 								:show-after="1500"
 							>
 								<template #trigger>
-									<n-button text>
+									<NButton text>
 										<template #icon>
 											<g-icon
 												name="save"
 												@click="savePalette"
 											/>
 										</template>
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('savePalette') }}
 							</n-tooltip>
@@ -98,7 +98,7 @@
 								:show-alpha="false"
 								class="grow"
 							/>
-							<n-button
+							<NButton
 								v-if="useReportStore().current.settings.theme.colors.length > 1"
 								type="error"
 								text
@@ -107,7 +107,7 @@
 								<template #icon>
 									<g-icon name="delete" />
 								</template>
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 				</div>

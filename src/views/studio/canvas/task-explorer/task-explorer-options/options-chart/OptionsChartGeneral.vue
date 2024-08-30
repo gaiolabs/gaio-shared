@@ -18,7 +18,7 @@
 		/>
 
 		<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
-			<n-divider class="!my-3" />
+			<NDivider class="!my-3" />
 			<n-checkbox
 				v-model:checked="useReportStore().current.settings.showPoint"
 				:label="$t('showPoint')"

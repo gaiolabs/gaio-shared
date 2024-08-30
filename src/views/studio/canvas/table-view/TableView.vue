@@ -11,51 +11,51 @@
 						<g-icon name="table" />
 						{{ localTask?.label }}
 					</div>
-					<n-divider vertical />
-					<n-button-group size="small">
-						<n-button
+					<NDivider vertical />
+					<NButton-group size="small">
+						<NButton
 							strong
 							secondary
 							:type="showTab === 'data' ? 'primary' : 'default'"
 							@click="showTab = 'data'"
 						>
 							{{ $t('data') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							strong
 							secondary
 							:type="showTab === 'columns' ? 'primary' : 'default'"
 							@click="showTab = 'columns'"
 						>
 							{{ $t('columns') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							strong
 							secondary
 							:type="showTab === 'stats' ? 'primary' : 'default'"
 							@click="showTab = 'stats'"
 						>
 							{{ $t('stats') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							strong
 							secondary
 							:type="showTab === 'frequency' ? 'primary' : 'default'"
 							@click="showTab = 'frequency'"
 						>
 							{{ $t('frequency') }}
-						</n-button>
-					</n-button-group>
+						</NButton>
+					</NButton-group>
 				</div>
 				<div class="me-3 flex gap-3">
-					<n-button
+					<NButton
 						v-if="showTab === 'data'"
 						strong
 						secondary
 						@click="refreshData(true)"
 					>
 						{{ $t('refresh') }}
-					</n-button>
+					</NButton>
 					<div
 						v-if="['data', 'frequency'].includes(showTab)"
 						class="w-[140px]"

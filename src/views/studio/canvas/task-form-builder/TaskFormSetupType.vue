@@ -11,7 +11,7 @@
 			</div>
 		</div>
 
-		<n-divider />
+		<NDivider />
 
 		<n-grid
 			ref="elementBase"

@@ -17,7 +17,7 @@
 							alt="logo"
 						/>
 						<div class="home-nav-box-inner flex items-center">
-							<n-button
+							<NButton
 								tertiary
 								@click="useCommandKStore().show = true"
 							>
@@ -30,14 +30,14 @@
 									<!--                                        </div>-->
 									<!--                                    </div>-->
 								</div>
-							</n-button>
+							</NButton>
 						</div>
 					</div>
 					<div class="flex h-full items-center">
-						<n-divider vertical />
+						<NDivider vertical />
 					</div>
 					<div class="mx-3 flex items-center gap-2 py-3">
-						<n-button
+						<NButton
 							v-for="item of buttons"
 							:key="item.label"
 							tertiary
@@ -48,23 +48,23 @@
 								<g-icon :name="item.icon" />
 							</template>
 							<template v-if="item.showLabel">{{ item.label }}</template>
-						</n-button>
+						</NButton>
 					</div>
 					<div class="flex h-full items-center">
-						<n-divider vertical />
+						<NDivider vertical />
 					</div>
 					<div class="flex items-center gap-2 py-3 pe-2">
-						<n-button
+						<NButton
 							size="small"
 							tertiary
 						>
 							<template #icon>
 								<g-icon name="chat" />
 							</template>
-						</n-button>
+						</NButton>
 						<n-popover trigger="click">
 							<template #trigger>
-								<n-button quaternary>
+								<NButton quaternary>
 									<n-avatar
 										:src="avatar"
 										:alt="avatar"
@@ -75,7 +75,7 @@
 										<div class="text-[9px] font-thin lowercase">Seg, 23</div>
 										<div class="text-[11px]">22:22</div>
 									</div>
-								</n-button>
+								</NButton>
 							</template>
 							<div>
 								<home-account />

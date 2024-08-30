@@ -37,9 +37,9 @@
 						</div>
 						<n-input v-model:value="source.sourceName" />
 					</div>
-					<n-divider title-placement="left">
+					<NDivider title-placement="left">
 						{{ $t('credentials') }}
-					</n-divider>
+					</NDivider>
 					<div v-if="source.client !== 's3'">
 						<template v-if="source.client === 'salesforce'">
 							<div>
@@ -229,16 +229,16 @@
 								@positive-click="remove()"
 							>
 								<template #activator>
-									<n-button
+									<NButton
 										quaternary
 										type="error"
 									>
 										{{ $t('remove') }}
-									</n-button>
+									</NButton>
 								</template>
 								{{ $t('deleteSource') }}
 							</n-popconfirm>
-							<n-button
+							<NButton
 								v-if="source.client !== 's3'"
 								type="success"
 								quaternary
@@ -246,15 +246,15 @@
 								@click="testSource"
 							>
 								{{ $t('test') }}
-							</n-button>
+							</NButton>
 						</div>
 
-						<n-button
+						<NButton
 							type="primary"
 							@click="saveSource"
 						>
 							{{ $t('save') }}
-						</n-button>
+						</NButton>
 					</div>
 				</div>
 			</n-spin>

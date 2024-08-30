@@ -18,20 +18,20 @@
 						<n-input v-model:value="useFormStore().current.formName" />
 					</div>
 					<div class="flex items-center gap-2">
-						<n-button size="small">
+						<NButton size="small">
 							<template #icon>
 								<g-icon name="refresh" />
 							</template>
 							{{ $t('refresh') }}
-						</n-button>
-						<n-button
+						</NButton>
+						<NButton
 							size="small"
 							type="primary"
 							@click="save()"
 						>
 							{{ $t('save') }}
-						</n-button>
-						<n-divider vertical />
+						</NButton>
+						<NDivider vertical />
 					</div>
 				</div>
 			</template>

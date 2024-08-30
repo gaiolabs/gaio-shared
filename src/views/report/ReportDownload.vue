@@ -3,7 +3,7 @@
 		class="report-download"
 		:class="tableReportClass"
 	>
-		<n-button
+		<NButton
 			:size="size"
 			:color="color"
 			:class="tableReportClass"
@@ -27,7 +27,7 @@
 					{{ downloadTitle }}
 				</div>
 			</template>
-		</n-button>
+		</NButton>
 	</div>
 </template>
 

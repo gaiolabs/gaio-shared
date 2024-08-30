@@ -82,13 +82,13 @@
 						{{ $t('inactive') }}
 					</template>
 				</n-switch>
-				<n-button
+				<NButton
 					type="primary"
 					:loading="loading"
 					@click="saveMeta"
 				>
 					{{ $t('save') }}
-				</n-button>
+				</NButton>
 			</div>
 		</template>
 	</g-dialog>

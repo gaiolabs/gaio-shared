@@ -103,7 +103,7 @@
 								{{ $t('columnsValuesToPivot') }}
 							</div>
 							<div>
-								<n-button
+								<NButton
 									type="info"
 									size="tiny"
 									secondary
@@ -112,7 +112,7 @@
 									<template #icon>
 										<g-icon name="refresh" />
 									</template>
-								</n-button>
+								</NButton>
 							</div>
 						</div>
 						<div class="relative overflow-x-auto p-2">
@@ -222,13 +222,13 @@
 					</div>
 				</div>
 				<div class="flex justify-end bg-elevation-0 px-4 py-2">
-					<n-button
+					<NButton
 						type="primary"
 						:disabled="localTask?.tableName ? hasAllFieldsFulfilled : false"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
+					</NButton>
 				</div>
 			</template>
 		</g-dialog>

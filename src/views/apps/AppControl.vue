@@ -65,12 +65,12 @@
 			</n-tabs>
 			<div class="border-t px-2 py-2">
 				<div class="flex justify-end gap-2">
-					<n-button
+					<NButton
 						type="primary"
 						@click="save()"
 					>
 						{{ $t('save') }}
-					</n-button>
+					</NButton>
 				</div>
 			</div>
 		</template>

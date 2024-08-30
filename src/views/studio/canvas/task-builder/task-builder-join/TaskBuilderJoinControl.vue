@@ -67,7 +67,7 @@
 											{{ col.title }}
 										</th>
 										<th class="w-[30px]">
-											<n-button
+											<NButton
 												size="tiny"
 												quaternary
 												type="info"
@@ -82,7 +82,7 @@
 												<template #icon>
 													<g-icon name="addCheck" />
 												</template>
-											</n-button>
+											</NButton>
 										</th>
 									</tr>
 								</thead>
@@ -103,7 +103,7 @@
 											/>
 										</td>
 										<td>
-											<n-button
+											<NButton
 												quaternary
 												size="tiny"
 												type="error"
@@ -117,7 +117,7 @@
 												<template #icon>
 													<g-icon name="delete" />
 												</template>
-											</n-button>
+											</NButton>
 										</td>
 									</tr>
 								</tbody>
@@ -191,7 +191,7 @@
 							<!--TABLES-->
 							<div class="flex items-center gap-2">
 								<div class="flex h-full grow items-end pt-5 text-center">
-									<n-button
+									<NButton
 										size="small"
 										block
 										type="primary"
@@ -200,7 +200,7 @@
 										<template #icon>
 											<g-icon :name="`${joinListTypes[currentType]?.value}Join`" />
 										</template>
-									</n-button>
+									</NButton>
 								</div>
 								<div class="w-[45%] grow">
 									<div>{{ $t('table') }}</div>
@@ -258,14 +258,14 @@
 									/>
 								</div>
 								<div>
-									<n-button
+									<NButton
 										:disabled="!validateAddColumnButton"
 										size="small"
 										type="primary"
 										@click="addNewColumnReference()"
 									>
 										{{ $t('add') }}
-									</n-button>
+									</NButton>
 								</div>
 							</div>
 						</n-card>
@@ -289,26 +289,26 @@
 									{{ sub.columnTo }}
 								</div>
 								<div class="flex max-w-[30px] flex-none justify-center px-1">
-									<n-button
+									<NButton
 										size="tiny"
 										quaternary
 										type="error"
 										@click="localJoin.list.splice(subIndex, 1)"
 									>
 										<g-icon name="delete" />
-									</n-button>
+									</NButton>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-					<n-button
+					<NButton
 						type="primary"
 						@click="save()"
 					>
 						{{ $t('confirm') }}
-					</n-button>
+					</NButton>
 				</div>
 			</template>
 		</g-dialog>

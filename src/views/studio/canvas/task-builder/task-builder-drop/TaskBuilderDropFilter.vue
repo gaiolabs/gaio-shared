@@ -8,7 +8,7 @@
 			<div class="mb-1 flex gap-1">
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
@@ -17,14 +17,14 @@
 							<template #icon>
 								<g-icon name="addFilter" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('addFilter') }}
 				</n-tooltip>
 
 				<n-tooltip :delay="1000">
 					<template #trigger>
-						<n-button
+						<NButton
 							quaternary
 							size="tiny"
 							type="error"
@@ -34,7 +34,7 @@
 							<template #icon>
 								<g-icon name="deleteTag" />
 							</template>
-						</n-button>
+						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
 				</n-tooltip>
@@ -50,14 +50,14 @@
 				v-if="filterIndex > 0"
 				class="flex min-w-[48px] justify-center"
 			>
-				<n-button
+				<NButton
 					class="custom-rounded-button"
 					size="tiny"
 					quaternary
 					@click="interchangeAndOr(filter)"
 				>
 					{{ $t(filter.andOr) }}
-				</n-button>
+				</NButton>
 			</div>
 			<task-builder-drop-tag-filter
 				class="mb-2"

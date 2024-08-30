@@ -173,9 +173,9 @@
 						>
 							<template #trigger>
 								<span>
-									<n-button text>
+									<NButton text>
 										<g-icon name="delete" />
-									</n-button>
+									</NButton>
 								</span>
 							</template>
 							<div>
@@ -183,23 +183,23 @@
 							</div>
 						</n-popconfirm>
 					</div>
-					<n-button
+					<NButton
 						v-if="twoFa === true"
 						class="ms-2"
 						@click="resetTwo2FA()"
 					>
 						{{ $t('resetTwoFactor') }}
-					</n-button>
+					</NButton>
 				</div>
 				<div></div>
-				<n-button
+				<NButton
 					type="primary"
 					:loading="loading"
 					:disabled="disableSave"
 					@click="save"
 				>
 					{{ $t('save') }}
-				</n-button>
+				</NButton>
 			</div>
 		</template>
 	</g-dialog>

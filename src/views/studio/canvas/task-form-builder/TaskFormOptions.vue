@@ -7,7 +7,7 @@
 						<g-icon :name="useFormStore().currentField.type" />
 						{{ $t(useFormStore().currentField.type) }}
 					</div>
-					<n-divider />
+					<NDivider />
 				</div>
 				<!--PARAMETER-->
 				<div class="control g-bg-1 rounded border p-2">

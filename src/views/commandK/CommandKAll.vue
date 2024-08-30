@@ -2,9 +2,9 @@
 	<div class="command-k-all">
 		<div class="flex items-center border-b">
 			<div>
-				<n-button quaternary>
+				<NButton quaternary>
 					<g-icon name="search" />
-				</n-button>
+				</NButton>
 			</div>
 			<div class="flex flex-grow items-center gap-2">
 				<div>

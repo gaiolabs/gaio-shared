@@ -4,17 +4,17 @@
 		class="antialiased"
 	>
 		<transition name="fade">
-			<n-config-provider
+			<NConfigProvider
 				:theme="useDarkTheme"
 				:theme-overrides="themeOverrides"
 				inline-theme-disabled
 				preflight-style-disabled
 				class="size-full"
 			>
-				<n-message-provider>
+				<NMessageProvider>
 					<component :is="Component" />
-				</n-message-provider>
-			</n-config-provider>
+				</NMessageProvider>
+			</NConfigProvider>
 		</transition>
 	</router-view>
 	<command-k
@@ -27,7 +27,7 @@
 import { useAuthStore, useCommandKStore } from '@/stores'
 import CommandK from '@/views/commandK/CommandK.vue'
 import { useColorMode, useMagicKeys } from '@vueuse/core'
-import { darkTheme } from 'naive-ui'
+import { darkTheme, NMessageProvider } from 'naive-ui'
 import { computed, nextTick, onMounted, watch, watchEffect } from 'vue'
 import { RouterView } from 'vue-router'
 
