@@ -54,7 +54,7 @@
 import { convertToDate, isDateLiteral, isDateNumberLiteral, separateNLiteral } from '@gaio/shared/utils'
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash-es'
-import { NDatePicker, NInputNumber } from 'naive-ui'
+import { NDatePicker, NInputNumber, NSpace, NTag } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

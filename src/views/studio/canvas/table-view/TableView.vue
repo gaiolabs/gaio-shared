@@ -12,7 +12,7 @@
 						{{ localTask?.label }}
 					</div>
 					<NDivider vertical />
-					<NButton-group size="small">
+					<NButtonGroup size="small">
 						<NButton
 							strong
 							secondary
@@ -45,7 +45,7 @@
 						>
 							{{ $t('frequency') }}
 						</NButton>
-					</NButton-group>
+					</NButtonGroup>
 				</div>
 				<div class="me-3 flex gap-3">
 					<NButton

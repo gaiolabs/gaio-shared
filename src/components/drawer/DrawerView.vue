@@ -12,20 +12,20 @@
 				<div class="flex items-center justify-end gap-2">
 					<slot name="actions" />
 					<div class="flex items-center gap-1">
-						<NButton-group>
+						<NButtonGroup>
 							<NButton
 								size="tiny"
 								quaternary
 								@click="changeFullscreen()"
 							>
 								<template #icon>
-									<g-icon
+									<GIcon
 										:name="fullscreen ? 'panelBottom' : 'panelFull'"
 										color="gray"
 									/>
 								</template>
 							</NButton>
-						</NButton-group>
+						</NButtonGroup>
 						<NDivider vertical />
 						<NButton
 							size="tiny"
@@ -67,7 +67,9 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores'
 import { useWindowSize } from '@vueuse/core'
+import { NButtonGroup } from 'naive-ui'
 import { computed, useSlots } from 'vue'
+import GIcon from '../GIcon.vue'
 
 const slots = useSlots()
 const windowSize = useWindowSize()

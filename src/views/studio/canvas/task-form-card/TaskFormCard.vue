@@ -19,7 +19,7 @@
 								<g-select-form v-model="localTask.formId" />
 							</div>
 							<div v-if="localTask.formId">
-								<NButton-group>
+								<NButtonGroup>
 									<NButton
 										type="primary"
 										@click="showFormPreview = !showFormPreview"
@@ -32,7 +32,7 @@
 									>
 										<g-icon name="edit" />
 									</NButton>
-								</NButton-group>
+								</NButtonGroup>
 							</div>
 						</div>
 					</div>

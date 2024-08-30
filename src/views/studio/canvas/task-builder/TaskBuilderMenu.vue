@@ -46,7 +46,7 @@
 					{{ $t('saveAndRun') }}
 				</NButton>
 			</div>
-			<NButton-group size="small">
+			<NButtonGroup size="small">
 				<NButton
 					:type="showTab === 'builder' ? 'primary' : 'default'"
 					secondary
@@ -71,7 +71,7 @@
 				>
 					{{ $t('sql') }}
 				</NButton>
-			</NButton-group>
+			</NButtonGroup>
 		</div>
 	</div>
 </template>

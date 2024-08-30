@@ -164,7 +164,7 @@
 					:class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }"
 				>
 					<template v-if="localField.isButton">
-						<NButton-group :vertical="localField.isVertical">
+						<NButtonGroup :vertical="localField.isVertical">
 							<NButton
 								v-for="(li, liIndex) in localList"
 								:key="liIndex"
@@ -174,7 +174,7 @@
 							>
 								{{ li.label }}
 							</NButton>
-						</NButton-group>
+						</NButtonGroup>
 						<!--                        <div class="checkbox-grid">-->
 						<!--                            <div>-->
 						<!--                                <NCheckboxGroup-->
