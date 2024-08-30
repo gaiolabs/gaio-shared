@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
+import GIcon from '@/components/GIcon.vue'
 import useDefaultReport from '@/composables/useDefaultReport'
 import { useAppStore, useReportStore } from '@/stores'
 import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
 import { getId } from '@gaio/shared/utils'
-import { NButton, NCard, NModal, NScrollbar } from 'naive-ui'
+import { NButton, NScrollbar, NCard, NTabs, NTabPane } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, ref } from 'vue'
-import TaskStaticContentMenu from './TaskStaticContentMenu.vue'
+import CodeEditor from './components/CodeEditor.vue'
+import UpBarMenu from './components/UpBarMenu.vue'
+import { STORAGE_NAMES, LANGUAGES, PAYLOAD } from './types/types'
 
 defineEmits(['close'])
 
@@ -57,24 +60,12 @@ onBeforeMount(() => {
 
 <template>
 	<div>
-		<DrawerView
-			tag="task-builder"
-			class="task-builder"
-			@close="$emit('close')"
-		>
+		<DrawerView tag="task-builder" class="task-builder" @close="$emit('close')">
 			<template #header>
-				<task-static-content-menu
-					:show-tab="showTab"
-					:local-task="localTask"
-					@show-tab="showTab = $event"
-					@close="$emit('close')"
-				/>
+				<UpBarMenu :show-tab="showTab" :local-task="localTask" @show-tab="showTab = $event" @close="$emit('close')" />
 			</template>
 			<template #content>
-				<div
-					v-if="true"
-					class="task-builder-drops h-full w-full"
-				>
+				<div v-if="true" class="task-builder-drops h-full w-full">
 					<Splitpanes class="h-full w-full">
 						<Pane :size="16">
 							<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
@@ -91,16 +82,12 @@ onBeforeMount(() => {
 												@click="showTab = 'computed'"
 											>
 												<template #icon>
-													<g-icon name="computed" />
+													<GIcon name="computed" />
 												</template>
 											</NButton>
-											<NButton
-												quaternary
-												size="tiny"
-												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-											>
+											<NButton quaternary size="tiny" class="border-elevation-2 bg-paper-100 dark:bg-carbon-200">
 												<template #icon>
-													<g-icon name="globalComputed" />
+													<GIcon name="globalComputed" />
 												</template>
 											</NButton>
 										</div>
@@ -108,14 +95,34 @@ onBeforeMount(() => {
 								</NScrollbar>
 							</div>
 						</Pane>
-						<Pane :size="84">
+						<Pane :size="84" class="w-full h-full">
 							<Splitpanes class="h-full">
-								<Pane :size="50">
-									<div class="my-2 h-full rounded bg-paper-200 dark:bg-carbon-100">
-										<NScrollbar style="max-height: calc(100vh - 72px)">
-											<div class="mt-3 pb-[60px]"></div>
-										</NScrollbar>
-									</div>
+								<Pane :size="50" class="w-full h-full">
+									<NTabs type="line" animated class="h-full bg-white">
+										<NTabPane class="w-full h-full" name="html">
+											<template #tab>
+												<strong>HTML</strong>
+											</template>
+											<CodeEditor
+												class="w-full h-full"
+												:type="LANGUAGES.CSS"
+												:display-name="LANGUAGES.CSS"
+												@code-change="onChange"
+											/>
+										</NTabPane>
+										<NTabPane name="script">
+											<template #tab>
+												<strong>Script</strong>
+											</template>
+											Hey Jude
+										</NTabPane>
+										<NTabPane name="style">
+											<template #tab>
+												<strong>Style</strong>
+											</template>
+											Qilixiang
+										</NTabPane>
+									</NTabs>
 								</Pane>
 								<Pane :size="50">
 									<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
@@ -123,31 +130,22 @@ onBeforeMount(() => {
 											<div class="flex justify-between px-2 pb-1 pt-2 text-lg font-bold">
 												{{ $t('options') }}
 											</div>
-											<!-- <task-builder-options :local-task="localTask" :local-field="localField" /> -->
 										</NScrollbar>
 									</div>
 								</Pane>
 							</Splitpanes>
-							<!--SQL-->
+
 							<Splitpanes class="h-full">
-								<Pane>
-									<task-builder-sql :local-task="localTask" />
-								</Pane>
+								<Pane></Pane>
 							</Splitpanes>
-							<!--PREVIEW-->
+
 							<Splitpanes class="h-full">
-								<Pane>
-									<task-builder-preview :local-task="localTask" />
-								</Pane>
+								<Pane></Pane>
 							</Splitpanes>
-							<!--COMPUTED-->
+
 							<Splitpanes>
 								<Pane>
-									<div class="my-2 h-full">
-										<!-- <task-builder-edit-computed :key="localField?.field?.computedId"
-                                            :local-field="localField" :local-task="localTask"
-                                            @close="showTab = 'builder'" /> -->
-									</div>
+									<div class="my-2 h-full"></div>
 								</Pane>
 							</Splitpanes>
 						</Pane>

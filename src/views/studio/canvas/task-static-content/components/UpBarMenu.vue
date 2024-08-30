@@ -6,7 +6,7 @@ import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.
 import { getId } from '@gaio/shared/utils'
 import { NInput, NButton, NTooltip, NDivider } from 'naive-ui'
 import { ref, type PropType } from 'vue'
-import PreviewModal from './preview-modal/PreviewModal.vue'
+import PreviewModal from './PreviewModal.vue'
 
 const props = defineProps({
 	localTask: {
@@ -57,7 +57,7 @@ const save = () => {
 	/>
 	<div class="task-builder-menu flex w-full items-center gap-3 p-3 px-0">
 		<div class="flex items-center gap-1 text-lg font-bold">
-			<g-icon name="staticContent" />
+			<GIcon name="staticContent" />
 			{{ $t('content') }}
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
@@ -84,7 +84,7 @@ const save = () => {
 							class="border-elevation-2"
 							@click="() => (openPreviewModal = !openPreviewModal)"
 						>
-							<g-icon name="eye" />
+							<GIcon name="eye" />
 						</NButton>
 					</template>
 					{{ $t('preview') }}
@@ -99,7 +99,7 @@ const save = () => {
 							class="border-elevation-2"
 							@click="() => (openPreviewModal = !openPreviewModal)"
 						>
-							<g-icon name="panelLeft" />
+							<GIcon name="panelLeft" />
 						</NButton>
 					</template>
 					{{ $t('toggleLeftMenu') }}
