@@ -1,12 +1,12 @@
 <template>
 	<div class="report-table-form">
-		<n-dropdown
+		<NDropdown
 			trigger="click"
 			:options="formOptions"
 			@select="handleSelect"
 		>
 			<g-icon name="taskList" />
-		</n-dropdown>
+		</NDropdown>
 		<!--        <report-form-->
 		<!--            form-from="table"-->
 		<!--            :sourceParams="row"-->

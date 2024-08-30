@@ -6,7 +6,7 @@
 		<div class="control-label text-sm">
 			{{ localParam.paramName }}
 		</div>
-		<n-input
+		<NInput
 			v-model:value="localParam.paramValue"
 			size="tiny"
 			@blur="updateParamValue"
@@ -19,7 +19,7 @@
 					name="pencil"
 					@click="$emit('edit', localParam)"
 				/>
-				<n-popconfirm
+				<NPopconfirm
 					:show-icon="false"
 					:positive-button-props="{ type: 'error' }"
 					:positive-text="$t('delete')"
@@ -29,9 +29,9 @@
 						<g-icon name="delete" />
 					</template>
 					{{ $t('deletionConfirmation') }}
-				</n-popconfirm>
+				</NPopconfirm>
 			</template>
-		</n-input>
+		</NInput>
 	</div>
 	<div v-else>
 		{{ option.label }}

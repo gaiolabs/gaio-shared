@@ -1,5 +1,5 @@
 <template>
-	<n-modal
+	<NModal
 		ref="rootRef"
 		v-model:show="showModal"
 		class="g-modal"
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-	</n-modal>
+	</NModal>
 </template>
 
 <script setup lang="ts">

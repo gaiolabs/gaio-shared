@@ -9,7 +9,7 @@
 					<div class="flex items-center justify-between">
 						<div>
 							<div class="control-label">{{ $t('type') }}</div>
-							<n-select
+							<NSelect
 								v-model:value="user.role"
 								filterable
 								:disabled="currentAdmin.userId === user.userId"
@@ -23,7 +23,7 @@
 							/>
 						</div>
 						<div>
-							<n-switch
+							<NSwitch
 								v-if="user.userId"
 								v-model="user.status"
 								:active-text="$t('active')"
@@ -33,14 +33,14 @@
 							>
 								<template #checked>{{ $t('active') }}</template>
 								<template #unchecked>{{ $t('inactive') }}</template>
-							</n-switch>
+							</NSwitch>
 						</div>
 					</div>
 				</div>
 				<div class="flex justify-between">
 					<div class="control grow pe-1">
 						<div class="control-label">{{ $t('name') }}</div>
-						<n-input
+						<NInput
 							v-model:value="user.name"
 							size="small"
 						/>
@@ -63,7 +63,7 @@
 								</div>
 							</div>
 						</div>
-						<n-input
+						<NInput
 							v-model:value="user.email"
 							size="small"
 							@keyup="checkMail()"
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 						<div v-if="user.password">
-							<n-popover
+							<NPopover
 								:width="400"
 								trigger="hover"
 							>
@@ -114,10 +114,10 @@
 								<div>
 									{{ $t('passwordLength') }}
 								</div>
-							</n-popover>
+							</NPopover>
 						</div>
 					</div>
-					<n-input
+					<NInput
 						v-model:value="user.password"
 						type="password"
 						show-password
@@ -132,7 +132,7 @@
 					<div class="control-label">
 						{{ $t('group') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="user.tags"
 						class="w-100"
 						filterable
@@ -148,7 +148,7 @@
 					<div class="control-label">
 						{{ $t('language') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="user.lang"
 						default-value="en-US"
 						:options="[
@@ -165,7 +165,7 @@
 			<div class="flex items-center justify-between">
 				<div>
 					<div v-if="backupCurrentUser.role !== 'admin' && backupCurrentUser.userId">
-						<n-popconfirm
+						<NPopconfirm
 							:width="350"
 							:positive-text="$t('delete')"
 							:negative-text="$t('cancel')"
@@ -181,7 +181,7 @@
 							<div>
 								{{ $t('removeUser') }}
 							</div>
-						</n-popconfirm>
+						</NPopconfirm>
 					</div>
 					<NButton
 						v-if="twoFa === true"

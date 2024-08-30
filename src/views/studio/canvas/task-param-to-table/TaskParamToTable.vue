@@ -8,11 +8,11 @@
 			<div class="task-param-to-table overflow-auto">
 				<div class="control">
 					<div class="control-label">{{ $t('taskLabel') }}</div>
-					<n-input v-model:value="localTask.label" />
+					<NInput v-model:value="localTask.label" />
 				</div>
 				<div class="control">
 					<div class="control-label">{{ $t('resultTable') }}</div>
-					<n-input
+					<NInput
 						v-model:value="localTask.resultTable"
 						v-alpha
 					>
@@ -25,18 +25,18 @@
 								/>
 							</div>
 						</template>
-					</n-input>
+					</NInput>
 				</div>
 				<div class="control">
 					<div class="control-label">{{ $t('params') }}</div>
-					<n-card content-style="padding: 10px">
-						<n-input
+					<NCard content-style="padding: 10px">
+						<NInput
 							v-model:value="searchParam"
 							class="w-100 mb-2"
 							type="text"
 							:placeholder="$t('filter')"
 						/>
-						<n-checkbox-group v-model:value="localTask.params">
+						<NCheckboxGroup v-model:value="localTask.params">
 							<table class="w-full table-auto">
 								<tbody>
 									<tr
@@ -45,7 +45,7 @@
 										class="tr-item border-b *:p-1 odd:bg-paper-200"
 									>
 										<td>
-											<n-checkbox
+											<NCheckbox
 												:value="item.paramName"
 												:label="item.paramName"
 											/>
@@ -53,8 +53,8 @@
 									</tr>
 								</tbody>
 							</table>
-						</n-checkbox-group>
-					</n-card>
+						</NCheckboxGroup>
+					</NCard>
 				</div>
 			</div>
 			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">

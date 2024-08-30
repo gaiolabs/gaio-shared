@@ -1,12 +1,12 @@
 <template>
 	<div class="task-builder-preview flex h-full w-full flex-shrink flex-col overflow-y-auto p-2 pb-4">
 		<template v-if="errorData?.message">
-			<n-alert
+			<NAlert
 				type="error"
 				class="mb-3"
 			>
 				{{ errorData.message }}
-			</n-alert>
+			</NAlert>
 			<code-editor
 				:key="errorData.query"
 				v-model="errorData.query"
@@ -14,7 +14,7 @@
 				readonly
 			/>
 		</template>
-		<n-data-table
+		<NDataTable
 			v-else-if="columns?.length"
 			size="small"
 			fixed-header
@@ -28,6 +28,7 @@
 import useApi from '@/composables/useApi'
 import type { BuilderTaskType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
+import { NDataTable } from 'naive-ui'
 import { format as sqlFormatter } from 'sql-formatter'
 import { onMounted, ref } from 'vue'
 

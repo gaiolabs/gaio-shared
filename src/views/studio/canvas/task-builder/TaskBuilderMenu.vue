@@ -9,7 +9,7 @@
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<n-input
+				<NInput
 					v-model:value="localTask.label"
 					size="small"
 					:placeholder="$t('label')"
@@ -17,8 +17,8 @@
 					<template #prefix>
 						<g-icon name="write" />
 					</template>
-				</n-input>
-				<n-input
+				</NInput>
+				<NInput
 					v-model:value="localTask.resultTable"
 					v-alpha
 					size="small"
@@ -30,7 +30,7 @@
 							:color="(localTask.resultTable || '').startsWith('tmp_') ? 'e32' : '#ccc'"
 						/>
 					</template>
-				</n-input>
+				</NInput>
 
 				<NDivider vertical />
 				<NButton

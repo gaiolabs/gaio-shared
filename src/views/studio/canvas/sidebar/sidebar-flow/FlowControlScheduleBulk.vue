@@ -8,7 +8,7 @@
 			</template>
 			<template #content>
 				{{ $t('flow') }}
-				<n-select
+				<NSelect
 					v-model:value="selectedFlowId"
 					filterable
 					:render-label="renderLabel"

@@ -10,7 +10,7 @@
 			>
 				{{ $t('timeout') }}
 			</label>
-			<n-input-number id="rows" />
+			<NInputNumber id="rows" />
 			<p class="text-xs text-gray-500">{{ $t('rowInfo') }}</p>
 		</div>
 		<div class="divider h-[1px] w-full bg-gray-300" />
@@ -44,11 +44,11 @@
 						:key="index"
 					>
 						<td class="p-2 align-middle [&:has([role=checkbox])]:pr-0">
-							<n-input v-model:value="header.prop" />
+							<NInput v-model:value="header.prop" />
 						</td>
 						<td class="p-2 align-middle [&:has([role=checkbox])]:pr-0">
 							<div class="flex gap-1">
-								<n-input v-model:value="header.value" />
+								<NInput v-model:value="header.value" />
 								<NButton
 									size="tiny"
 									text

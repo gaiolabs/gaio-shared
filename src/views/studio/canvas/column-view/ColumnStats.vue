@@ -1,6 +1,6 @@
 <template>
 	<div class="column-stats pb-3">
-		<n-table striped>
+		<NTable striped>
 			<tbody>
 				<tr
 					v-for="(value, key) of stats"
@@ -12,7 +12,7 @@
 					</td>
 				</tr>
 			</tbody>
-		</n-table>
+		</NTable>
 	</div>
 </template>
 

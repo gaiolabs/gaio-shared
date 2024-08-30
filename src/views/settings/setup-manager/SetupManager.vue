@@ -11,7 +11,7 @@
 		</template>
 		<div class="flex">
 			<aside class="w-full max-w-sm pt-2">
-				<n-menu
+				<NMenu
 					v-model:value="activeKey"
 					:options="menuOptions"
 				/>

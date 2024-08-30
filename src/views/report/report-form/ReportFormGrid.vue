@@ -16,12 +16,12 @@
 				@mouseover="onMove('in')"
 				@mouseout="onMove('out')"
 			>
-				<n-grid
+				<NGrid
 					:cols="Object.keys(element.cols).length"
 					:x-gap="5"
 					:y-gap="5"
 				>
-					<n-grid-item
+					<NGridItem
 						v-for="(fields, colId) in element.cols"
 						:key="colId"
 						class="min-h-[40px]"
@@ -45,8 +45,8 @@
 								@click="selectField(field)"
 							/>
 						</vue-draggable>
-					</n-grid-item>
-				</n-grid>
+					</NGridItem>
+				</NGrid>
 				<template v-if="edit">
 					<div class="control-secondary my-1 mb-3 flex items-center justify-end gap-2">
 						<NButton
@@ -94,6 +94,7 @@ import { useFormStore } from '@/stores'
 import ReportFormField from '@/views/report/report-form/ReportFormField.vue'
 import type { FormFieldType, FormType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
+import { NGrid, NGridItem } from 'naive-ui'
 import { onBeforeMount, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 

@@ -1,6 +1,6 @@
 <template>
 	<div class="table-columns g-bg-1 rounded p-2">
-		<n-table
+		<NTable
 			striped
 			class="w-full"
 			size="small"
@@ -28,7 +28,7 @@
 					<td v-if="localTask.client !== 'clickhouse'">{{ item.pureType }}</td>
 				</tr>
 			</tbody>
-		</n-table>
+		</NTable>
 	</div>
 </template>
 

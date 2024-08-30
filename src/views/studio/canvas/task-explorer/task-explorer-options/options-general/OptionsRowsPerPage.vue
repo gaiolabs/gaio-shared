@@ -1,6 +1,6 @@
 <template>
 	<div class="options-rows-per-page control-secondary">
-		<n-input-number
+		<NInputNumber
 			v-model:value="useReportStore().current.settings.pageSize"
 			:min="0"
 			:step="1"
@@ -9,7 +9,7 @@
 			<template #prefix>
 				<g-icon name="table" />
 			</template>
-		</n-input-number>
+		</NInputNumber>
 	</div>
 </template>
 <script setup lang="ts">

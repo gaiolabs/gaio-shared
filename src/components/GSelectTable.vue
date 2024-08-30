@@ -1,5 +1,5 @@
 <template>
-	<n-select
+	<NSelect
 		v-model:value="selected"
 		:options="tableList"
 		:placeholder="$t('selectTable')"

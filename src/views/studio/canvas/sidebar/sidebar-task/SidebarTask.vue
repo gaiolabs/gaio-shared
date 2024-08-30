@@ -16,13 +16,13 @@
 			</div>
 		</div>
 		<div class="sidebar-flow-search px-4 pt-1">
-			<n-input
+			<NInput
 				v-model:value="searchTerm"
 				size="small"
 				:placeholder="$t('search')"
 			/>
 		</div>
-		<n-scrollbar
+		<NScrollbar
 			style="calc(100% - 20px) overflow: auto"
 			outer-class="h-full overflow-auto"
 		>
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 			</template>
-			<n-tree
+			<NTree
 				v-else
 				class="mx-4 mb-5"
 				block-node
@@ -70,7 +70,7 @@
 				:node-props="nodeProps"
 				@select="select"
 			/>
-		</n-scrollbar>
+		</NScrollbar>
 	</div>
 </template>
 <script setup lang="ts">

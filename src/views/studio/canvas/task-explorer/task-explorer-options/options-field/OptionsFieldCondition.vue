@@ -2,7 +2,7 @@
 	<div class="options-field-condition control-secondary">
 		<div class="control">
 			<div class="control-label">{{ $t('type') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="useReportStore().currentField.condType"
 				:options="[
 					{
@@ -29,7 +29,7 @@
 				<div class="control-label">
 					{{ $t('conditionalColumn') }}
 				</div>
-				<n-select
+				<NSelect
 					v-model:value="useReportStore().currentField.condColumnName"
 					:options="
 						useReportStore().current.schema.select.map((o) => {
@@ -51,7 +51,7 @@
 				</div>
 				<div v-if="useReportStore().currentField.condRules">
 					<div class="control">
-						<n-table bordered>
+						<NTable bordered>
 							<tbody>
 								<tr
 									v-for="(val, index) in useReportStore().currentField.condRules"
@@ -113,7 +113,7 @@
 									</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 					</div>
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 								<div class="control-label">
 									{{ $t('conditional') }}
 								</div>
-								<n-select
+								<NSelect
 									v-model:value="newRule.operator"
 									:options="operators"
 								/>
@@ -144,7 +144,7 @@
 								<div class="control-label">
 									{{ $t('value') }}
 								</div>
-								<n-input
+								<NInput
 									v-model:value="newRule.reference"
 									class="w-100"
 									:placeholder="$t('value')"
@@ -159,25 +159,25 @@
 							<div class="control-label">
 								{{ $t('betweenAnd') }}
 							</div>
-							<n-input
+							<NInput
 								v-model:value="newRule.extraReference"
 								:placeholder="$t('value')"
 							/>
 						</div>
 
-						<n-card content-style="padding: 10px">
+						<NCard content-style="padding: 10px">
 							<div class="control">
 								<div class="control-label">
 									{{ $t('color') }}
 								</div>
-								<n-color-picker
+								<NColorPicker
 									v-model:value="newRule.color"
 									:modes="['hex']"
 								/>
 							</div>
-						</n-card>
+						</NCard>
 
-						<n-card
+						<NCard
 							content-style="padding: 10px"
 							class="mt-2"
 						>
@@ -216,7 +216,7 @@
 									{{ $t('others') }}
 								</NButton>
 							</NSpace>
-						</n-card>
+						</NCard>
 
 						<g-icon-finder
 							v-if="showIcon"

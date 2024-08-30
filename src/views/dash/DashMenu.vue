@@ -18,7 +18,7 @@
 				v-if="flowList.length && activeFlow"
 				class="flex-grow"
 			>
-				<n-menu
+				<NMenu
 					v-model:value="activeFlow"
 					mode="horizontal"
 					label-field="flowName"
@@ -74,6 +74,7 @@
 import { useAppStore } from '@/stores'
 import DashParams from '@/views/dash/DashParams.vue'
 import type { FlowType } from '@gaio/shared/types'
+import { NMenu } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['choose', 'refresh', 'close'])

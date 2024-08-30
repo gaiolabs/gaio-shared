@@ -10,24 +10,24 @@
 					<div class="w-100 flex gap-2">
 						<div class="control grow">
 							<div class="control-label">{{ $t('taskLabel') }}</div>
-							<n-input v-model:value="localTask.label" />
+							<NInput v-model:value="localTask.label" />
 						</div>
 						<div class="control grow">
 							<div class="control-label">{{ $t('table') }}</div>
-							<n-input
+							<NInput
 								v-model:value="localTask.tableName"
 								disabled
 							/>
 						</div>
 					</div>
 
-					<n-card
+					<NCard
 						content-style="padding: 10px"
 						class="mb-2"
 					>
 						<div class="flex flex-col">
 							<div class="align-items-center mb-2 flex">
-								<n-switch
+								<NSwitch
 									v-model:value="localTask.saveAsDefault"
 									class="me-1"
 									size="small"
@@ -35,7 +35,7 @@
 								{{ $t('saveAsDefault') }}
 							</div>
 							<div class="align-items-center flex">
-								<n-switch
+								<NSwitch
 									v-model:value="localTask.byReference"
 									class="me-1"
 									size="small"
@@ -44,8 +44,8 @@
 								{{ $t('referenceColumnNames') }}
 							</div>
 						</div>
-					</n-card>
-					<n-card
+					</NCard>
+					<NCard
 						v-if="localTask.byReference && localTask.fieldToParamList.length"
 						content-style="padding: 10px"
 					>
@@ -67,7 +67,7 @@
 										{{ item.columnName }}
 									</td>
 									<td>
-										<n-select
+										<NSelect
 											v-model:value="item.paramName"
 											:options="paramOptions"
 										/>
@@ -75,14 +75,14 @@
 								</tr>
 							</tbody>
 						</table>
-					</n-card>
+					</NCard>
 				</div>
-				<n-card
+				<NCard
 					v-else
 					content-style="padding: 10px"
 				>
 					{{ $t('noParams') }}
-				</n-card>
+				</NCard>
 			</div>
 			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 				<NButton

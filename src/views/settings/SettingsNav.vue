@@ -32,7 +32,7 @@
 						<NDivider vertical />
 					</div>
 					<div class="mx-3 flex items-center gap-2 py-2">
-						<n-tooltip
+						<NTooltip
 							v-for="item of buttons"
 							:key="item.label"
 						>
@@ -50,7 +50,7 @@
 								</NButton>
 							</template>
 							{{ $t(item.label) }}
-						</n-tooltip>
+						</NTooltip>
 					</div>
 					<div class="flex h-full items-center">
 						<NDivider vertical />
@@ -64,13 +64,13 @@
 								<g-icon name="chat" />
 							</template>
 						</NButton>
-						<n-popover trigger="click">
+						<NPopover trigger="click">
 							<template #trigger>
 								<NButton
 									size="small"
 									quaternary
 								>
-									<n-avatar
+									<NAvatar
 										:src="avatar"
 										:alt="avatar"
 										circle
@@ -85,7 +85,7 @@
 							<div>
 								<home-account />
 							</div>
-						</n-popover>
+						</NPopover>
 					</div>
 				</div>
 			</div>

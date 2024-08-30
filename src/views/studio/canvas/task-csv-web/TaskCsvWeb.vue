@@ -9,11 +9,11 @@
 				<div class="flex items-center gap-2">
 					<div class="control grow">
 						<div class="control-label">{{ $t('taskLabel') }}</div>
-						<n-input v-model:value="localTask.label" />
+						<NInput v-model:value="localTask.label" />
 					</div>
 					<div class="control grow">
 						<div class="control-label">{{ $t('resultTable') }}</div>
-						<n-input
+						<NInput
 							v-model:value="localTask.resultTable"
 							:placeholder="$t('tableName')"
 						/>
@@ -25,7 +25,7 @@
 						<div class="control-label">
 							{{ $t('fileUrl') }}
 						</div>
-						<n-input
+						<NInput
 							v-model:value="localTask.url"
 							:placeholder="$t('paramsApplicable')"
 						/>
@@ -34,7 +34,7 @@
 
 				<div class="control grow">
 					<div class="control-label">{{ $t('fieldsTerminatedBy') }}</div>
-					<n-select
+					<NSelect
 						v-model:value="localTask.fileFormatType"
 						filterable
 						:options="[
@@ -49,7 +49,7 @@
 
 				<div class="control grow">
 					<div class="control-label">{{ $t('options') }}</div>
-					<n-select
+					<NSelect
 						v-model:value="localTask.schemaInference"
 						filterable
 						:options="[
@@ -60,7 +60,7 @@
 				</div>
 
 				<div class="control">
-					<n-checkbox
+					<NCheckbox
 						v-model:checked="localTask.insertMode"
 						:label="$t('insertMode')"
 					/>

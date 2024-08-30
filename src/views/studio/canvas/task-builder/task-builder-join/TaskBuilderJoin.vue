@@ -18,7 +18,7 @@
 				>
 					{{ $t('addJoin') }}
 				</NButton>
-				<n-tooltip :delay="1500">
+				<NTooltip :delay="1500">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -33,7 +33,7 @@
 						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 		<div

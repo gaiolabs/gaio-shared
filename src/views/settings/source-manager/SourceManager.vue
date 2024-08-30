@@ -13,11 +13,11 @@
 			<div class="source-manager">
 				<template v-if="loading">
 					<NSpace vertical>
-						<n-skeleton
+						<NSkeleton
 							:height="30"
 							class="rounded"
 						/>
-						<n-skeleton
+						<NSkeleton
 							:height="90"
 							class="rounded"
 						/>
@@ -28,7 +28,7 @@
 					<div class="source-manager">
 						<div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
 							<div>{{ sources.length }} {{ $t('sources').toLowerCase() }}</div>
-							<n-tooltip :content="$t('addSource')">
+							<NTooltip :content="$t('addSource')">
 								<template #trigger>
 									<NButton
 										type="primary"
@@ -42,14 +42,14 @@
 									</NButton>
 								</template>
 								{{ $t('addSource') }}
-							</n-tooltip>
+							</NTooltip>
 						</div>
 						<div class="g-bg-1 mb-3 flex items-center justify-between rounded p-2 shadow">
 							<g-alert
 								v-if="sources.length <= 0"
 								:title="$t('noResult')"
 							/>
-							<n-table
+							<NTable
 								v-else
 								striped
 								size="small"
@@ -94,7 +94,7 @@
 										</td>
 									</tr>
 								</tbody>
-							</n-table>
+							</NTable>
 						</div>
 						<source-control
 							v-if="showControl"

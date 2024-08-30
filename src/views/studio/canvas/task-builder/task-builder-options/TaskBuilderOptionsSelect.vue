@@ -4,7 +4,7 @@
 			<div class="mx-1 mb-1">
 				{{ $t('alias') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="localField.field.alias"
 				v-alpha
 				size="small"
@@ -13,7 +13,7 @@
 			/>
 			<div class="flex gap-2">
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localField.field.dataType"
 						size="small"
 						:options="dataTypeList"
@@ -23,7 +23,7 @@
 					v-if="dataTypeIsFloat(localField.field.dataType)"
 					class="w-[80px]"
 				>
-					<n-input-number
+					<NInputNumber
 						v-model:value="localField.field.columnLength"
 						size="small"
 						:min="1"
@@ -34,48 +34,48 @@
 			</div>
 		</div>
 		<div class="my-2 rounded-[8px] bg-elevation-1 p-2">
-			<n-radio-group
+			<NRadioGroup
 				v-model:value="localFieldType"
 				@change="defineTypeBasedOnAggregations()"
 			>
-				<n-radio
+				<NRadio
 					v-for="item in fieldValueType"
 					:key="item.value"
 					class="w-full py-1"
 					:value="item.value"
 					:label="$t(item.label)"
 				/>
-			</n-radio-group>
+			</NRadioGroup>
 		</div>
 
 		<div
 			v-if="!localTask.tableView"
 			class="mt-2"
 		>
-			<n-list
+			<NList
 				bordered
 				class="bg-elevation-1"
 			>
-				<n-list-item class="!p-2 font-bold">{{ $t('advanced') }}</n-list-item>
-				<n-list-item class="!p-2">
+				<NListItem class="!p-2 font-bold">{{ $t('advanced') }}</NListItem>
+				<NListItem class="!p-2">
 					<div class="flex items-center justify-between">
 						{{ $t('orderByOnCreation') }}
-						<n-switch
+						<NSwitch
 							v-model:value="localField.field.createOrderBy"
 							size="small"
 						/>
 					</div>
-				</n-list-item>
-				<n-list-item>
+				</NListItem>
+				<NListItem>
 					<div class="flex items-center justify-between">
 						{{ $t('primaryKey') }}
-						<n-switch
+						<NSwitch
 							v-model:value="localField.field.primaryKey"
 							size="small"
 						/>
 					</div>
-				</n-list-item>
-			</n-list>
+				</NListItem>
+			</NList>
 		</div>
 	</div>
 </template>

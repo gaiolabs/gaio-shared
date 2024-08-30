@@ -9,7 +9,7 @@
 				<div class="flex flex-col gap-2 overflow-auto">
 					<div class="flex w-full flex-col gap-1">
 						<label class="control-label">{{ $t('taskLabel') }}</label>
-						<n-input
+						<NInput
 							id="task"
 							v-model:value="localTask.label"
 						/>
@@ -17,7 +17,7 @@
 					<div class="control-label rounded bg-paper-200 p-2 dark:bg-carbon-300">
 						{{ $t('migrateDataByInsert') }}
 					</div>
-					<n-card content-style="padding: 10">
+					<NCard content-style="padding: 10">
 						<div class="flex items-center gap-2">
 							<div class="grow">
 								<div class="control-label">
@@ -38,7 +38,7 @@
 								/>
 							</div>
 						</div>
-					</n-card>
+					</NCard>
 
 					<div
 						v-if="showFinds()"
@@ -64,7 +64,7 @@
 						</NButton>
 					</div>
 
-					<n-card content-style="padding: 10px">
+					<NCard content-style="padding: 10px">
 						<table
 							v-if="columns.resultTable.length && columns.sourceTable.length"
 							class="w-full table-auto"
@@ -88,7 +88,7 @@
 										{{ item.columnName }}
 									</td>
 									<td>
-										<n-select
+										<NSelect
 											:key="item.targetColumn"
 											v-model:value="item.targetColumn"
 											class="w-96"
@@ -102,7 +102,7 @@
 								</tr>
 							</tbody>
 						</table>
-					</n-card>
+					</NCard>
 				</div>
 				<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 					<NButton

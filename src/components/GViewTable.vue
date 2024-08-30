@@ -1,6 +1,6 @@
 <template>
 	<div class="g-view-table">
-		<n-tooltip
+		<NTooltip
 			:persistent="false"
 			:show-after="1500"
 			:content="$t('viewTable')"
@@ -15,7 +15,7 @@
 				</NButton>
 			</template>
 			{{ $t('viewTable') }}
-		</n-tooltip>
+		</NTooltip>
 	</div>
 </template>
 <script setup lang="ts">

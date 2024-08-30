@@ -1,19 +1,19 @@
 <template>
 	<div class="task-builder-options-sort mx-1 mt-2 rounded-[8px] bg-elevation-1 p-2">
-		<n-radio-group
+		<NRadioGroup
 			v-model:value="localField.field.order"
 			size="small"
 			type="button"
 		>
-			<n-radio-button
+			<NRadioButton
 				value="asc"
 				:label="$t('asc')"
 			/>
-			<n-radio-button
+			<NRadioButton
 				value="desc"
 				:label="$t('desc')"
 			/>
-		</n-radio-group>
+		</NRadioGroup>
 	</div>
 </template>
 <script setup lang="ts">

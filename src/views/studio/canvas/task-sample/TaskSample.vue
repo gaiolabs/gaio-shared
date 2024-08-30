@@ -8,11 +8,11 @@
 			<div class="task-sample overflow-auto">
 				<div class="mb-2">
 					<div class="font-semibold text-neutral-500">{{ $t('task') }}</div>
-					<n-input v-model:value="localTask.label" />
+					<NInput v-model:value="localTask.label" />
 				</div>
 				<div class="mb-2">
 					<div class="font-semibold text-neutral-500">{{ $t('resultTable') }}</div>
-					<n-input
+					<NInput
 						v-model:value="localTask.resultTable"
 						v-alpha
 					/>
@@ -21,7 +21,7 @@
 					<div class="font-semibold text-neutral-500">
 						{{ $t('type') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="localTask.calcType"
 						:options="[
 							{ value: 'percent', label: $t('percentage') },
@@ -38,7 +38,7 @@
 							v-if="localTask.calcType === 'percent'"
 							class="grow"
 						>
-							<n-slider
+							<NSlider
 								v-model:value="localTask.calcValue"
 								class="w-full"
 								show-input
@@ -49,7 +49,7 @@
 							/>
 						</div>
 						<div :class="localTask.calcType === 'percent' ? 'max-w-[100px]' : 'grow'">
-							<n-input-number
+							<NInputNumber
 								v-model:value="localTask.calcValue"
 								class="w-100"
 							/>

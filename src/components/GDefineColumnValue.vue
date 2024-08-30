@@ -12,7 +12,7 @@
 				@load-column-list="columns = $event"
 			/>
 		</div>
-		<n-card content-style="padding: 10px">
+		<NCard content-style="padding: 10px">
 			<div
 				v-if="columns"
 				class="control"
@@ -41,7 +41,7 @@
 								{{ item.columnName }}
 							</td>
 							<td>
-								<n-select
+								<NSelect
 									v-model:value="item.valueType"
 									:options="[
 										{
@@ -62,14 +62,14 @@
 							</td>
 							<td>
 								<div v-if="item.valueType === 'value'">
-									<n-input
+									<NInput
 										v-model:value="item.value"
 										:placeholder="$t('value')"
 										type="text"
 									/>
 								</div>
 								<div v-else-if="item.valueType === 'parameter'">
-									<n-select
+									<NSelect
 										v-model:value="item.value"
 										class="w-100"
 										filterable
@@ -106,9 +106,9 @@
 					</tbody>
 				</table>
 			</div>
-		</n-card>
+		</NCard>
 	</div>
-	<n-alert
+	<NAlert
 		v-else
 		:closable="false"
 		:title="$t('addField')"
@@ -120,7 +120,7 @@ import useDataType from '@/composables/useDataType'
 import { useAppStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
-import { NButton } from 'naive-ui'
+import { NAlert, NButton } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 const { dataTypeIcon } = useDataType()

@@ -11,7 +11,7 @@
 						>
 							{{ $t('task') }}
 						</label>
-						<n-input
+						<NInput
 							v-model:value="localTask.label"
 							:placeholder="$t('taskLabel')"
 						/>
@@ -23,14 +23,14 @@
 						>
 							{{ $t('resultTable') }}
 						</label>
-						<n-input
+						<NInput
 							v-model:value="localTask.resultTable"
 							:placeholder="$t('resultTable')"
 						/>
 					</div>
 				</div>
 				<div class="mx-3 mb-3">
-					<n-card content-style="padding: 10px">
+					<NCard content-style="padding: 10px">
 						<div class="relative overflow-x-auto">
 							<table class="w-full table-auto">
 								<thead>
@@ -75,7 +75,7 @@
 											<g-icon :name="dataTypeIcon(col.dataType)" />
 										</td>
 										<td class="grow">
-											<n-input
+											<NInput
 												v-model:value="col.columnName"
 												:placeholder="$t('default')"
 											/>
@@ -83,7 +83,7 @@
 										<td class="grow">
 											<div class="flex gap-2">
 												<div class="grow">
-													<n-select
+													<NSelect
 														:key="col.id"
 														v-model:value="col.dataType"
 														filterable
@@ -94,7 +94,7 @@
 													v-if="col.dataType === 'Nullable(Float64)'"
 													class="w-100"
 												>
-													<n-input-number
+													<NInputNumber
 														v-model:value="col.columnLength"
 														class="w-100"
 														:placeholder="$t('decimal')"
@@ -107,7 +107,7 @@
 													v-if="col.dataType === 'Nullable(Array)'"
 													class="w-100"
 												>
-													<n-select
+													<NSelect
 														v-model:value="col.arrayDataType"
 														class="w-100"
 														:options="[
@@ -125,7 +125,7 @@
 											</div>
 										</td>
 										<td class="grow">
-											<n-input
+											<NInput
 												v-model:value="col.default"
 												:placeholder="$t('default')"
 											/>
@@ -145,12 +145,12 @@
 								</drag>
 							</table>
 						</div>
-					</n-card>
+					</NCard>
 				</div>
 			</div>
 			<div class="flex-between flex bg-paper-100 px-4 py-2">
 				<div>
-					<n-checkbox
+					<NCheckbox
 						v-model:checked="localTask.dropTable"
 						:placeholder="$t('dropTable')"
 						:label="$t('dropTable')"

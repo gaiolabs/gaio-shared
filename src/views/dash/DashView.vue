@@ -3,7 +3,7 @@
 		class="dash-view"
 		:class="{ 'dash-edit': gridOptions.editGrid }"
 	>
-		<n-spin
+		<NSpin
 			v-if="loading"
 			class="h-[400px] w-full"
 		/>
@@ -72,6 +72,7 @@ import DashGridOptions from '@/views/dash/DashGridOptions.vue'
 import type { ActionType, DashFlowItem, GridOptionsType } from '@/views/dash/DashTypes'
 import type { FlowType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
+import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import DashMenu from './DashMenu.vue'

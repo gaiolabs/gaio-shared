@@ -9,7 +9,7 @@
 				>
 					<div class="control">
 						<div class="control-label">{{ $t('label') }}</div>
-						<n-input v-model:value="localTask.label" />
+						<NInput v-model:value="localTask.label" />
 					</div>
 
 					<div class="control">
@@ -40,35 +40,35 @@
 					<div class="control-label">
 						{{ $t('formOnDash') }}
 					</div>
-					<n-card content-style="padding:10px">
+					<NCard content-style="padding:10px">
 						<div class="control">
-							<n-radio-group
+							<NRadioGroup
 								v-model:value="localTask.formLoadType"
 								@update:value="prepareCardEvent()"
 							>
-								<n-radio
+								<NRadio
 									:label="$t('buttonOnDashboard')"
 									value="button"
 									class="w-full"
 								/>
-								<n-radio
+								<NRadio
 									:label="$t('cardOnDashboard')"
 									value="card"
 									class="w-full"
 								/>
-								<n-radio
+								<NRadio
 									:label="$t('formSidebarAside')"
 									value="aside"
 									class="w-full"
 								/>
-							</n-radio-group>
+							</NRadioGroup>
 						</div>
-					</n-card>
+					</NCard>
 					<div
 						v-if="localTask.formLoadType !== 'button'"
 						class="control mx-1 mt-2"
 					>
-						<n-checkbox
+						<NCheckbox
 							v-model:checked="localTask.formFilterBehavior"
 							:label="$t('formFilterBehavior')"
 							class="w-full"
@@ -82,7 +82,7 @@
 								<div class="control-label">
 									{{ $t('buttonTitle') }}
 								</div>
-								<n-input
+								<NInput
 									v-model:value="localTask.buttonTitle"
 									size="small"
 								/>
@@ -90,7 +90,7 @@
 
 							<div class="control grow">
 								<div class="control-label">{{ $t('size') }}</div>
-								<n-select
+								<NSelect
 									v-model:value="localTask.buttonSize"
 									size="small"
 									:options="[
@@ -105,7 +105,7 @@
 							<div class="control-label">
 								{{ $t('buttonTheme') }}
 							</div>
-							<n-color-picker
+							<NColorPicker
 								v-model:value="localTask.buttonTheme"
 								:modes="['hex']"
 							/>
@@ -116,7 +116,7 @@
 								{{ $t('buttonPreview') }}
 							</div>
 							<div class="preview">
-								<n-tooltip :show-after="1500">
+								<NTooltip :show-after="1500">
 									<template #trigger>
 										<NButton
 											class="w-100"
@@ -130,7 +130,7 @@
 									<div>
 										{{ $t('preview') }}
 									</div>
-								</n-tooltip>
+								</NTooltip>
 							</div>
 						</div>
 					</div>

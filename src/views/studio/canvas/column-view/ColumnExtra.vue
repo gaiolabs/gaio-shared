@@ -1,36 +1,36 @@
 <template>
 	<div class="column-extra">
-		<n-list bordered>
-			<n-list-item>
+		<NList bordered>
+			<NListItem>
 				<div class="flex items-center justify-between">
 					{{ $t('emptyOrNull') }}
 					<div>{{ info.totalEmptyRows }}/{{ totalRows }}</div>
 				</div>
-			</n-list-item>
-			<n-list-item>
+			</NListItem>
+			<NListItem>
 				<div class="flex items-center justify-between">
 					{{ $t('countDistinct') }}
 					<div>{{ info.totalDistinctRows }}</div>
 				</div>
-			</n-list-item>
+			</NListItem>
 
-			<n-list-item v-if="isDate">
+			<NListItem v-if="isDate">
 				<div class="flex items-center justify-between">
 					{{ $t('min') }}
 					<div>
 						{{ info.min }}
 					</div>
 				</div>
-			</n-list-item>
-			<n-list-item v-if="isDate">
+			</NListItem>
+			<NListItem v-if="isDate">
 				<div class="flex items-center justify-between">
 					{{ $t('max') }}
 					<div>
 						{{ info.max }}
 					</div>
 				</div>
-			</n-list-item>
-		</n-list>
+			</NListItem>
+		</NList>
 	</div>
 </template>
 

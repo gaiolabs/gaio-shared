@@ -5,7 +5,7 @@
 	>
 		<div class="my-2">
 			<div>{{ $t('firstFlowAtStudio') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="localApp.options.studioFlowStart"
 				:options="flowList"
 			/>
@@ -20,7 +20,7 @@
 			</div>
 
 			<div>
-				<n-list
+				<NList
 					size="small"
 					bordered
 				>
@@ -28,7 +28,7 @@
 						:list="flowList"
 						@change="updateFlowOrder"
 					>
-						<n-list-item
+						<NListItem
 							v-for="flow of flowList"
 							:key="flow.value"
 						>
@@ -45,9 +45,9 @@
 								</div>
 								<div>{{ flow.label }} - {{ flow.value }}</div>
 							</div>
-						</n-list-item>
+						</NListItem>
 					</drag>
-				</n-list>
+				</NList>
 			</div>
 		</div>
 	</div>
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import type { AppType, FlowType } from '@gaio/shared/types'
+import { NList } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 

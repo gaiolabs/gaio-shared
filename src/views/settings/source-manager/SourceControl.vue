@@ -5,14 +5,14 @@
 	>
 		<template #title>{{ $t('source') }}</template>
 		<template #content>
-			<n-spin
+			<NSpin
 				size="small"
 				:show="loading"
 			>
 				<div class="overflow-auto">
 					<div class="control grow">
 						<div class="control-label">{{ $t('client') }}</div>
-						<n-select
+						<NSelect
 							v-model:value="source.client"
 							default-value="mysql"
 							filterable
@@ -35,7 +35,7 @@
 						<div class="control-label">
 							{{ $t('label') }}
 						</div>
-						<n-input v-model:value="source.sourceName" />
+						<NInput v-model:value="source.sourceName" />
 					</div>
 					<NDivider title-placement="left">
 						{{ $t('credentials') }}
@@ -47,7 +47,7 @@
 									<div class="control-label">
 										{{ $t('organizationType') }}
 									</div>
-									<n-select
+									<NSelect
 										v-model:value="source.credentials.loginUrl"
 										:options="[
 											{ value: 'https://login.salesforce.com', label: 'Production' },
@@ -64,7 +64,7 @@
 									<div class="control-label">
 										{{ $t('host') }}
 									</div>
-									<n-input v-model:value="source.credentials.host" />
+									<NInput v-model:value="source.credentials.host" />
 								</div>
 							</div>
 							<div v-if="source.client !== 'salesforce'">
@@ -72,7 +72,7 @@
 									<div class="control-label">
 										{{ $t('port') }}
 									</div>
-									<n-input-number v-model:value="source.credentials.port" />
+									<NInputNumber v-model:value="source.credentials.port" />
 								</div>
 							</div>
 						</template>
@@ -83,14 +83,14 @@
 							<div class="control-label">
 								{{ $t('database') }}
 							</div>
-							<n-input v-model:value="source.credentials.database" />
+							<NInput v-model:value="source.credentials.database" />
 						</div>
 						<div
 							v-if="source.client === 'salesforce'"
 							class="control"
 						>
 							<div class="control-label">Security Token</div>
-							<n-input v-model:value="source.credentials.token" />
+							<NInput v-model:value="source.credentials.token" />
 						</div>
 						<div
 							v-if="source.client === 'pg'"
@@ -99,14 +99,14 @@
 							<div class="control-label">
 								{{ $t('schemaName') }}
 							</div>
-							<n-input v-model:value="source.credentials.schema" />
+							<NInput v-model:value="source.credentials.schema" />
 						</div>
 						<div
 							v-if="source.client === 'oracle'"
 							class="control"
 						>
 							<div class="control-label">SID</div>
-							<n-input
+							<NInput
 								v-model:value="source.credentials.sid"
 								name="sid"
 							/>
@@ -116,7 +116,7 @@
 							class="control"
 						>
 							<div class="control-label">Service Name</div>
-							<n-input
+							<NInput
 								v-model:value="source.credentials.serviceName"
 								name="serviceName"
 							/>
@@ -125,7 +125,7 @@
 							v-if="source.client === 'mssql'"
 							class="control control-secondary"
 						>
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="source.credentials.encrypt"
 								:label="$t('encrypt')"
 							/>
@@ -134,7 +134,7 @@
 							v-if="source.client === 'mssql'"
 							class="control control-secondary"
 						>
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="source.credentials.encryptSource"
 								:label="$t('encryptSource')"
 							/>
@@ -143,7 +143,7 @@
 							v-if="source.client === 'oracle'"
 							class="control control-secondary"
 						>
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="source.credentials.oracleAlternativeDriver"
 								:label="$t('oracleAlternativeDriver')"
 							/>
@@ -152,7 +152,7 @@
 							v-if="source.client === 'oracle'"
 							class="control control-secondary"
 						>
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="source.credentials.oracleCaseSensitive"
 								:label="$t('oracleCaseSensitive')"
 							/>
@@ -164,7 +164,7 @@
 										<div class="control-label">
 											{{ $t('user') }}
 										</div>
-										<n-input
+										<NInput
 											v-model:value="source.credentials.user"
 											autocomplete="off"
 											name="base"
@@ -176,7 +176,7 @@
 										<div class="control-label">
 											{{ $t('password') }}
 										</div>
-										<n-input
+										<NInput
 											v-model:value="source.credentials.password"
 											show-password
 										/>
@@ -184,7 +184,7 @@
 								</div>
 							</div>
 							<div class="control control-secondary">
-								<n-checkbox
+								<NCheckbox
 									v-model:checked="source.credentials.canExecuteRaw"
 									:label="$t('executeRawQuery')"
 									:disabled="disableRaw"
@@ -197,25 +197,25 @@
 							<div class="control-label">
 								{{ $t('host') }}
 							</div>
-							<n-input v-model:value="source.credentials.host" />
+							<NInput v-model:value="source.credentials.host" />
 						</div>
 						<div class="control">
 							<div class="control-label">
 								{{ $t('accessKey') }}
 							</div>
-							<n-input v-model:value="source.credentials.accessKey" />
+							<NInput v-model:value="source.credentials.accessKey" />
 						</div>
 						<div class="control">
 							<div class="control-label">
 								{{ $t('secretKey') }}
 							</div>
-							<n-input v-model:value="source.credentials.secretKey" />
+							<NInput v-model:value="source.credentials.secretKey" />
 						</div>
 						<div class="control">
 							<div class="control-label">
 								{{ $t('bucket') }}
 							</div>
-							<n-input v-model:value="source.credentials.bucketName" />
+							<NInput v-model:value="source.credentials.bucketName" />
 						</div>
 					</div>
 				</div>
@@ -223,7 +223,7 @@
 				<div class="bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 					<div class="flex items-center justify-between gap-2">
 						<div class="flex items-center gap-2">
-							<n-popconfirm
+							<NPopconfirm
 								:positive-text="$t('delete')"
 								:negative-text="$t('cancel')"
 								@positive-click="remove()"
@@ -237,7 +237,7 @@
 									</NButton>
 								</template>
 								{{ $t('deleteSource') }}
-							</n-popconfirm>
+							</NPopconfirm>
 							<NButton
 								v-if="source.client !== 's3'"
 								type="success"
@@ -257,7 +257,7 @@
 						</NButton>
 					</div>
 				</div>
-			</n-spin>
+			</NSpin>
 		</template>
 	</g-dialog>
 </template>

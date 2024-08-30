@@ -50,9 +50,9 @@
 			</template>
 		</template>
 		<template v-else>
-			<n-alert :show-icon="false">
+			<NAlert :show-icon="false">
 				{{ $t('selectField') }}
-			</n-alert>
+			</NAlert>
 		</template>
 	</div>
 </template>

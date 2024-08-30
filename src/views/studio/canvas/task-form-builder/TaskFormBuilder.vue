@@ -15,7 +15,7 @@
 							:local-task="useFormStore().current"
 							class="ms-2 size-[18px]"
 						/>
-						<n-input v-model:value="useFormStore().current.formName" />
+						<NInput v-model:value="useFormStore().current.formName" />
 					</div>
 					<div class="flex items-center gap-2">
 						<NButton size="small">

@@ -7,7 +7,7 @@
 					{{ $t('dataApps') }}
 				</div>
 				<div class="flex max-w-[320px] grow gap-2">
-					<n-input
+					<NInput
 						v-model:value="searchTerm"
 						clearable
 						class="w-full"
@@ -179,7 +179,7 @@
 			</template>
 			<!--PAGINATE-->
 			<div class="mt-5 flex w-full justify-center">
-				<n-pagination
+				<NPagination
 					v-if="appList.length > 12"
 					v-model:page="currentPage"
 					:page-count="Math.round(appList.length / 12)"
@@ -207,6 +207,7 @@ import AppsCard from '@/views/apps/AppsCard.vue'
 import HomeNav from '@/views/home/HomeNav.vue'
 import type { AppType } from '@gaio/shared/types'
 import { useDark } from '@vueuse/core'
+import { NPagination } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 
 const { filteredApps, currentTab, appList, manuallyUpdateApp, listApps, loading, searchTerm } = useApps()

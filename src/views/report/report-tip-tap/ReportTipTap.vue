@@ -8,7 +8,7 @@
 			v-html="contentParse"
 		/>
 		<template v-else>
-			<n-card
+			<NCard
 				content-style="padding:5px"
 				content-class="border rounded"
 			>
@@ -166,7 +166,7 @@
 						<g-app-icon name="icon-minus" />
 					</NButton>
 				</div>
-			</n-card>
+			</NCard>
 			<editor-content
 				ref="editorRef"
 				class="m-1"

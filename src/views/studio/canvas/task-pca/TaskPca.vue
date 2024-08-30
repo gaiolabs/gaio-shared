@@ -13,14 +13,14 @@
 					<div class="control-label">
 						{{ $t('taskLabel') }}
 					</div>
-					<n-input v-model:value="localTask.label" />
+					<NInput v-model:value="localTask.label" />
 				</div>
 				<div class="flex items-center gap-2">
 					<div class="control grow">
 						<div class="control-label">
 							{{ $t('sourceTable') }}
 						</div>
-						<n-input
+						<NInput
 							v-model:value="localTask.tableName"
 							disabled
 							class="w-100"
@@ -30,19 +30,19 @@
 						<div class="control-label">
 							{{ $t('resultTable') }}
 						</div>
-						<n-input
+						<NInput
 							v-model:value="localTask.resultTable"
 							v-alpha
 						/>
 					</div>
 				</div>
-				<n-card
+				<NCard
 					content-style="padding: 10px"
 					class="mb-2"
 				>
 					<div class="control control-secondary">
 						<div class="control-label">{{ $t('qtdComponents') }}</div>
-						<n-input-number
+						<NInputNumber
 							v-model:value="localTask.k"
 							requeried
 							:min="1"
@@ -60,7 +60,7 @@
 							multiple
 						/>
 					</div>
-				</n-card>
+				</NCard>
 				<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 					<NButton
 						type="primary"

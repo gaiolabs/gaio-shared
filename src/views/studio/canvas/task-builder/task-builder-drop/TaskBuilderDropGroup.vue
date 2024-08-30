@@ -18,7 +18,7 @@
 					</template>
 					{{ $t('addNoAggregationFields') }}
 				</NButton>
-				<n-tooltip :delay="1000">
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -33,7 +33,7 @@
 						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 		<task-builder-drop-tag

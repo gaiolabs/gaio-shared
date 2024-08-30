@@ -1,6 +1,6 @@
 <template>
 	<div class="options-general">
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.showHeader"
 			:label="$t('showCardHeader')"
 		/>

@@ -26,7 +26,7 @@
 								<small>{{ $t('twoFactorAuthenticatorDescription') }}</small>
 							</div>
 
-							<n-switch
+							<NSwitch
 								v-model:value="providerDefault.twoFactorAuthenticator"
 								@update:value="updateProviderDefault"
 							/>
@@ -43,13 +43,13 @@
 								<small>{{ $t('sessionTimeoutDescription') }}</small>
 							</div>
 							<div class="flex gap-2">
-								<n-input-number
+								<NInputNumber
 									v-model:value="providerDefault.sessionTimeout"
 									class="text-center"
 									button-placement="both"
 									@update:value="updateProviderDefault"
 								/>
-								<n-select
+								<NSelect
 									v-model:value="providerDefault.sessionTimeoutUnit"
 									:options="timeoutOptions"
 									@update:value="updateProviderDefault"
@@ -68,7 +68,7 @@
                                 {{ $t('userAccessControlDescription') }}
                             </div>
 
-                            <n-switch v-model:value="userAccessControlEnabled" />
+                            <NSwitch v-model:value="userAccessControlEnabled" />
                         </dd>
                     </div> -->
 
@@ -82,7 +82,7 @@
 								{{ $t('conventionalSignInDescription') }}
 							</div>
 
-							<n-switch
+							<NSwitch
 								v-model:value="providerDefault.conventionalSignIn"
 								@update:value="updateProviderDefault"
 							/>

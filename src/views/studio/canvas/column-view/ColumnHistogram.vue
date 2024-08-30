@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="mb-2 flex items-baseline gap-2 px-4">
-			<n-slider
+			<NSlider
 				v-model:value="histogramOption.range"
 				range
 				:min="columnData.min"
@@ -12,7 +12,7 @@
 				}"
 				@dragend="loadHistogramData()"
 			/>
-			<n-select
+			<NSelect
 				v-model:value="histogramOption.bins"
 				:options="binList"
 				size="small"

@@ -3,7 +3,7 @@
 		:key="localKey"
 		class="report-chart m-0 overflow-hidden rounded border bg-paper-100 p-0 dark:bg-carbon-100"
 	>
-		<n-spin
+		<NSpin
 			:show="loading"
 			:style="{ height }"
 		>
@@ -57,7 +57,7 @@
 					/>
 				</div>
 			</template>
-		</n-spin>
+		</NSpin>
 	</div>
 </template>
 <script setup lang="ts">

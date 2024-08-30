@@ -1,17 +1,17 @@
 <template>
 	<div class="options-chart-general control-secondary">
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="useReportStore().current.settings.showHeader"
 			:label="$t('showCardHeader')"
 			class="!w-full"
 		/>
-		<n-checkbox
+		<NCheckbox
 			v-if="useReportStore().current.settings.showHeader"
 			v-model:checked="useReportStore().current.settings.headerBackgroundDark"
 			:label="$t('headerBackgroundDark')"
 			class="w-full"
 		/>
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="useReportStore().current.settings.showTable"
 			:label="$t('showTable')"
 			class="w-full"
@@ -19,12 +19,12 @@
 
 		<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
 			<NDivider class="!my-3" />
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.showPoint"
 				:label="$t('showPoint')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.lineSmooth"
 				:label="$t('lineSmooth')"
 				class="w-full"

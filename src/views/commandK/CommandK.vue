@@ -1,5 +1,5 @@
 <template>
-	<n-modal
+	<NModal
 		ref="commandKRef"
 		v-model:show="showModal"
 		destroy-on-close
@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-	</n-modal>
+	</NModal>
 </template>
 <script setup lang="ts">
 import { useCommandKStore } from '@/stores'

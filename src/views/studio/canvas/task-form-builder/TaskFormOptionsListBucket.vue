@@ -2,7 +2,7 @@
 	<div class="task-form-options-list-bucket mt-2">
 		<!--        <div class="control-label">-->
 		<!--            <div class="control-label">{{ $t('app') }}</div>-->
-		<!--            <n-select-->
+		<!--            <NSelect-->
 		<!--                v-model="useFormStore().currentField.bucketDatabase"-->
 		<!--                filterable-->
 		<!--                :options="apps"-->
@@ -46,7 +46,7 @@
 
 			<div class="control">
 				<div class="control-label">{{ $t('order') }}</div>
-				<n-select
+				<NSelect
 					v-model:value="useFormStore().currentField.bucketFieldOrder"
 					filterable
 					:options="[
@@ -60,7 +60,7 @@
 				<div class="control-label">
 					{{ $t('rows') }}
 				</div>
-				<n-input-number
+				<NInputNumber
 					v-model:value="useFormStore().currentField.bucketFieldLimit"
 					:min="1"
 					:step="1"

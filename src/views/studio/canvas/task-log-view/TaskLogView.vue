@@ -18,18 +18,18 @@
 				class="h-full"
 			>
 				<div v-if="!jobList?.length">
-					<n-alert class="border-elevation-2">
+					<NAlert class="border-elevation-2">
 						<template #title>
 							{{ $t('noData') }}
 						</template>
-					</n-alert>
+					</NAlert>
 				</div>
 				<div
 					v-else
 					class="m-3 pb-3"
 				>
-					<n-collapse>
-						<n-collapse-item
+					<NCollapse>
+						<NCollapseItem
 							v-for="(job, index) of jobList"
 							:key="index"
 							:name="index"
@@ -70,24 +70,24 @@
 										v-else-if="job.aborted"
 										class="w-[90px]"
 									>
-										<n-tag
+										<NTag
 											:bordered="false"
 											:color="tagPurple"
 											class="w-full justify-center"
 										>
 											{{ $t('aborted') }}
-										</n-tag>
+										</NTag>
 									</div>
 									<div
 										v-else
 										class="w-[90px]"
 									>
-										<n-tag
+										<NTag
 											:color="tagGray"
 											class="w-full justify-center"
 										>
 											{{ $t('finished') }}
-										</n-tag>
+										</NTag>
 									</div>
 								</div>
 							</template>
@@ -111,32 +111,32 @@
 												class="m-0 p-0"
 											/>
 											<div class="w-[80px]">
-												<n-tag
+												<NTag
 													class="w-full justify-center"
 													bordered
 													:color="singleTaskJobStatus(value)"
 													@click="activeModalMessage(value['message'])"
 												>
 													{{ $t(value.status) }}
-												</n-tag>
+												</NTag>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</n-collapse-item>
-					</n-collapse>
+						</NCollapseItem>
+					</NCollapse>
 				</div>
-				<n-modal
+				<NModal
 					v-model:visible="showMessage"
 					:ok-text="$t('ok')"
 					hide-cancel
 				>
 					<template #title>{{ $t('message') }}</template>
-					<n-scrollbar style="max-height: 300px; overflow: auto; padding: 10px">
+					<NScrollbar style="max-height: 300px; overflow: auto; padding: 10px">
 						{{ currentMessage }}
-					</n-scrollbar>
-				</n-modal>
+					</NScrollbar>
+				</NModal>
 			</div>
 		</template>
 	</drawer-view>

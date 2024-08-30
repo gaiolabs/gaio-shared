@@ -1,11 +1,11 @@
 <template>
 	<div class="control-secondary">
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.showFilter"
 			:label="$t('showSearch')"
 			class="w-full"
 		/>
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.showPoint"
 			:label="$t('showOrder')"
 			class="w-full"

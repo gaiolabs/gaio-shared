@@ -68,7 +68,7 @@
 			</template>
 			<template #content>
 				<div>
-					<n-input
+					<NInput
 						v-model:value="searchTerm"
 						:placeholder="$t('filter')"
 						clearable
@@ -86,7 +86,7 @@
 									<div class="flex-between flex w-full flex-grow">
 										<div class="flex-grow">{{ item.label }}</div>
 										<div>
-											<n-switch
+											<NSwitch
 												:key="item.id"
 												v-model:value="item.hidden"
 												size="small"

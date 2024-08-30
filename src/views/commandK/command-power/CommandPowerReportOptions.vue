@@ -40,15 +40,15 @@
 			<template v-if="showTab === 'saveView'">
 				<div class="flex w-full gap-2">
 					<div class="flex-grow">
-						<n-input-group size="tiny">
-							<n-input-group-label size="tiny">{{ $t('label') }}</n-input-group-label>
-							<n-input
+						<NInputGroup size="tiny">
+							<NInputGroup-label size="tiny">{{ $t('label') }}</NInputGroup-label>
+							<NInput
 								v-model:value="usePowerStore().selectedView.label"
 								size="tiny"
 								:placeholder="$t('typeHere')"
 								:readonly="loading"
 							/>
-						</n-input-group>
+						</NInputGroup>
 					</div>
 					<div>
 						<NButton

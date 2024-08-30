@@ -15,7 +15,7 @@
 							:local-task="useReportStore().current"
 							class="ms-2 size-[18px]"
 						/>
-						<n-input v-model:value="useReportStore().current.label" />
+						<NInput v-model:value="useReportStore().current.label" />
 					</div>
 					<div class="flex items-center gap-2">
 						<NButton

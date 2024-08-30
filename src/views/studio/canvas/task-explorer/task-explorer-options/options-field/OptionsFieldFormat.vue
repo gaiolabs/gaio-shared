@@ -3,7 +3,7 @@
 		<!-- TYPE -->
 		<div class="control">
 			<div class="control-label">{{ $t('formatType') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="useReportStore().currentField.formatType"
 				:options="[
 					{
@@ -42,7 +42,7 @@
 					<div class="control-label">
 						{{ $t('decimalSize') }}
 					</div>
-					<n-input-number v-model:value="useReportStore().currentField.formatDecimalSize" />
+					<NInputNumber v-model:value="useReportStore().currentField.formatDecimalSize" />
 				</div>
 				<!-- SEPARATORS -->
 				<div
@@ -52,7 +52,7 @@
 					<div class="control-label">
 						{{ $t('separators') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="useReportStore().currentField.separators"
 						:options="[
 							{
@@ -85,7 +85,7 @@
 					<div class="control-label">
 						{{ $t('date') }}
 					</div>
-					<n-input v-model:value="useReportStore().currentField.formatDate">
+					<NInput v-model:value="useReportStore().currentField.formatDate">
 						<!--                        <template #suffix>-->
 						<!--                            <el-popover-->
 						<!--                                placement="top-start"-->
@@ -161,16 +161,16 @@
 						<!--                                </template>-->
 						<!--                            </el-popover>-->
 						<!--                        </template>-->
-					</n-input>
+					</NInput>
 				</div>
 			</div>
 			<div class="control">
 				<div class="control-label">{{ $t('prefix') }}</div>
-				<n-input v-model:value="useReportStore().currentField.formatPrefix" />
+				<NInput v-model:value="useReportStore().currentField.formatPrefix" />
 			</div>
 			<div class="control">
 				<div class="control-label">{{ $t('suffix') }}</div>
-				<n-input v-model:value="useReportStore().currentField.formatSuffix" />
+				<NInput v-model:value="useReportStore().currentField.formatSuffix" />
 			</div>
 		</div>
 	</div>

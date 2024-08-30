@@ -1,23 +1,23 @@
 <template>
 	<div class="home-account min-h-[246px] min-w-[300px] pt-1">
-		<n-tabs
+		<NTabs
 			type="segment"
 			animated
 			size="small"
 		>
-			<n-tab-pane
+			<NTabPane
 				name="account"
 				:tab="$t('account')"
 			>
 				<home-account-profile />
-			</n-tab-pane>
-			<n-tab-pane
+			</NTabPane>
+			<NTabPane
 				name="password"
 				:tab="$t('password')"
 			>
 				<home-account-password />
-			</n-tab-pane>
-		</n-tabs>
+			</NTabPane>
+		</NTabs>
 	</div>
 </template>
 <script setup lang="ts">

@@ -18,7 +18,7 @@
 							>
 								{{ $t('taskLabel') }}
 							</label>
-							<n-input
+							<NInput
 								id="task"
 								v-model:value="localTask.label"
 								:placeholder="$t('taskLocalCsvFolder')"
@@ -28,7 +28,7 @@
 					<div class="flex w-full flex-col gap-2">
 						<div class="w-full">
 							<label class="font-semibold text-neutral-500">{{ $t('separator') }}</label>
-							<n-select
+							<NSelect
 								v-model:value="localTask.separator"
 								filterable
 								:options="[
@@ -41,7 +41,7 @@
 							/>
 						</div>
 						<div class="flex w-full items-center gap-2">
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="localTask.compress"
 								:label="$t('compressFile')"
 							/>

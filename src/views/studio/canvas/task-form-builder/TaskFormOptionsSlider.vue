@@ -2,7 +2,7 @@
 	<div class="task-form-options-slider">
 		<div class="control">
 			<div class="control-label">{{ $t('type') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="useFormStore().currentField.sliderType"
 				filterable
 				:options="[
@@ -22,21 +22,21 @@
 		<div class="control">
 			<div class="control">
 				<div class="control-label">{{ $t('min') }}</div>
-				<n-input-number
+				<NInputNumber
 					v-model:value="useFormStore().currentField.sliderMinValue"
 					:disabled="useFormStore().currentField.sliderType === 'monthly'"
 				/>
 			</div>
 			<div class="control">
 				<div class="control-label">{{ $t('max') }}</div>
-				<n-input-number
+				<NInputNumber
 					v-model:value="useFormStore().currentField.sliderMaxValue"
 					:disabled="useFormStore().currentField.sliderType === 'monthly'"
 				/>
 			</div>
 			<div class="control">
 				<div class="control-label">{{ $t('step') }}</div>
-				<n-input-number
+				<NInputNumber
 					v-model:value="useFormStore().currentField.sliderStepValue"
 					:disabled="useFormStore().currentField.sliderType === 'monthly'"
 				/>

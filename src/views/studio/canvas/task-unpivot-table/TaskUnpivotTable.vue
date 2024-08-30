@@ -9,7 +9,7 @@
 							{{ $t('task') }}
 						</div>
 
-						<n-input
+						<NInput
 							v-model:value="localTask.label"
 							name="task"
 							:placeholder="$t('taskLabel')"
@@ -19,13 +19,13 @@
 						<label class="font-semibold text-neutral-500">
 							{{ $t('resultTable') }}
 						</label>
-						<n-input
+						<NInput
 							v-model:value="localTask.resultTable"
 							v-alpha
 							:placeholder="$t('selectTable')"
 						>
 							<template #prefix>
-								<n-tooltip
+								<NTooltip
 									:arrow-style="{ background: 'white' }"
 									:style="{ background: 'white', color: 'black', maxWidth: '300px' }"
 									trigger="hover"
@@ -43,9 +43,9 @@
 									<template #default>
 										<span v-html="$t('temporaryTableInfo')"></span>
 									</template>
-								</n-tooltip>
+								</NTooltip>
 							</template>
-						</n-input>
+						</NInput>
 						<small>{{ $t('sourceTable') }}: {{ localTask.tableName }}</small>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 						<div class="control-label">
 							{{ $t('pivotSort') }}
 						</div>
-						<n-select
+						<NSelect
 							v-model:value="localTask.orderByType"
 							size="small"
 							:options="[
@@ -111,7 +111,7 @@
 						<div class="control-label">
 							{{ $t('pivotExtraColumnsPosition') }}
 						</div>
-						<n-select
+						<NSelect
 							v-model:value="localTask.extraColumnPosition"
 							:options="[
 								{

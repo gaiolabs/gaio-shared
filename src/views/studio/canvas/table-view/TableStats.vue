@@ -43,7 +43,7 @@
 				</div>
 
 				<div class="g-bg-1 mb-3 rounded p-1">
-					<n-input
+					<NInput
 						v-model:value="searchTerm"
 						:placeholder="$t('filter')"
 						min="1"
@@ -52,7 +52,7 @@
 					/>
 				</div>
 
-				<n-table
+				<NTable
 					size="small"
 					class="g-bg-2"
 				>
@@ -67,7 +67,7 @@
 										<g-data-type-icon :data-type="col.dataType" />
 										{{ col.columnName }}
 									</div>
-									<n-switch
+									<NSwitch
 										v-model:value="selected[col.columnName]"
 										size="small"
 										:round="false"
@@ -77,7 +77,7 @@
 							</td>
 						</tr>
 					</tbody>
-				</n-table>
+				</NTable>
 				<!--                <div-->
 				<!--                    v-for="col of columns"-->
 				<!--                    :key="col.columnName"-->
@@ -87,7 +87,7 @@
 				<!--                        <g-data-type-icon :data-type="col.dataType" />-->
 				<!--                        {{ col.columnName }}-->
 				<!--                    </div>-->
-				<!--                    <n-switch-->
+				<!--                    <NSwitch-->
 				<!--                        v-model:value="selected[col.columnName]"-->
 				<!--                        size="small"-->
 				<!--                        :round="false"-->
@@ -103,7 +103,7 @@
 					class="g-bg-1 rounded p-2"
 					:class="{ 'flex items-center justify-center': localData.length === 0 }"
 				>
-					<n-empty
+					<NEmpty
 						v-if="localData.length === 0"
 						:description="$t('noData')"
 					/>
@@ -111,7 +111,7 @@
 						v-else
 						class="w-fit-content overflow-x-scroll"
 					>
-						<n-table
+						<NTable
 							striped
 							:single-line="false"
 							size="small"
@@ -152,7 +152,7 @@
 									<td>{{ item.empty }}</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 					</div>
 				</div>
 			</div>
@@ -167,6 +167,7 @@ import useFormatValue from '@/composables/useFormatValue'
 import { useTableStore } from '@/stores'
 import TableDataFilter from '@/views/studio/canvas/table-view/TableDataFilter.vue'
 import type { BuilderTaskType, FieldType, GenericType } from '@gaio/shared/types'
+import { NEmpty } from 'naive-ui'
 import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

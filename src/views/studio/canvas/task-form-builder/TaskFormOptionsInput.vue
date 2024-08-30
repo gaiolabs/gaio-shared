@@ -7,7 +7,7 @@
 			<div class="control-label">
 				{{ $t('fieldDataSource') }}
 			</div>
-			<n-select
+			<NSelect
 				v-model:value="useFormStore().currentField.source"
 				class="w-full"
 				:options="[
@@ -46,7 +46,7 @@
 				</template>
 				<template v-if="['checkbox', 'radio'].includes(useFormStore().currentField.type)">
 					<div class="mt-2">
-						<n-checkbox
+						<NCheckbox
 							v-model:checked="useFormStore().currentField.isButton"
 							:label="$t('isButton')"
 						/>
@@ -58,7 +58,7 @@
 						"
 						class="mt-2"
 					>
-						<n-checkbox
+						<NCheckbox
 							v-model:checked="useFormStore().currentField.isVertical"
 							:label="$t('isVertical')"
 						/>
@@ -66,7 +66,7 @@
 				</template>
 				<!-- FORCE NUMBER VALUES-->
 				<div class="mt-2">
-					<n-checkbox
+					<NCheckbox
 						v-model:checked="useFormStore().currentField.valueIsNumber"
 						:label="$t('parseValueAsNumber')"
 					/>

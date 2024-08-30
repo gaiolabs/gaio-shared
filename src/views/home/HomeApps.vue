@@ -63,7 +63,7 @@
 								{{ app.options.creator }}
 							</div>
 						</div>
-						<n-dropdown
+						<NDropdown
 							trigger="hover"
 							:options="options"
 							@select="goTo(app, $event)"
@@ -73,7 +73,7 @@
 									<g-icon name="unfold" />
 								</template>
 							</NButton>
-						</n-dropdown>
+						</NDropdown>
 					</div>
 				</g-card>
 			</NSpace>
@@ -94,6 +94,7 @@ import { useAppStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import type { AppType } from '@gaio/shared/types'
 import { useDark } from '@vueuse/core'
+import { NDropdown } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'

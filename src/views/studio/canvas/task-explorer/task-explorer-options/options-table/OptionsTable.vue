@@ -1,20 +1,20 @@
 <template>
 	<div class="options-table p-2 px-1">
-		<n-tabs
+		<NTabs
 			type="segment"
 			animated
 			size="small"
 		>
-			<n-tab-pane
+			<NTabPane
 				name="properties"
 				:tab="$t('properties')"
 			>
 				<div class="px-1">
-					<n-collapse
+					<NCollapse
 						accordion
 						arrow-placement="right"
 					>
-						<n-collapse-item name="general">
+						<NCollapseItem name="general">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="general" />
@@ -22,8 +22,8 @@
 								</div>
 							</template>
 							<options-table-general />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('title')"
 							name="title"
 						>
@@ -34,8 +34,8 @@
 								</div>
 							</template>
 							<options-title />
-						</n-collapse-item>
-						<n-collapse-item name="forms">
+						</NCollapseItem>
+						<NCollapseItem name="forms">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="formOption" />
@@ -43,8 +43,8 @@
 								</div>
 							</template>
 							<options-forms />
-						</n-collapse-item>
-						<n-collapse-item name="rowsPerPage">
+						</NCollapseItem>
+						<NCollapseItem name="rowsPerPage">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="rowsPerPage" />
@@ -52,8 +52,8 @@
 								</div>
 							</template>
 							<options-rows-per-page />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('filters')"
 							name="filters"
 						>
@@ -64,8 +64,8 @@
 								</div>
 							</template>
 							<options-table-filters />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('download')"
 							name="download"
 						>
@@ -76,8 +76,8 @@
 								</div>
 							</template>
 							<options-download />
-						</n-collapse-item>
-						<n-collapse-item name="message">
+						</NCollapseItem>
+						<NCollapseItem name="message">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="info" />
@@ -85,20 +85,20 @@
 								</div>
 							</template>
 							<options-message />
-						</n-collapse-item>
-					</n-collapse>
+						</NCollapseItem>
+					</NCollapse>
 				</div>
-			</n-tab-pane>
-			<n-tab-pane
+			</NTabPane>
+			<NTabPane
 				name="style"
 				:tab="$t('styles')"
 			>
 				<div class="px-1">
-					<n-collapse
+					<NCollapse
 						:default-expanded-names="['personalize']"
 						arrow-placement="right"
 					>
-						<n-collapse-item
+						<NCollapseItem
 							:title="$t('personalize')"
 							name="personalize"
 						>
@@ -111,49 +111,49 @@
 
 							<div>
 								<div class="control-secondary w-full">
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.headerBackgroundDark"
 										:label="$t('headerBackgroundDark')"
 									/>
 								</div>
 								<div class="control-secondary w-full">
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.tableStriped"
 										:label="$t('tableStriped')"
 										class="w-full"
 									/>
-									<!--                                    <n-checkbox-->
+									<!--                                    <NCheckbox-->
 									<!--                                        v-model:checked="useReportStore().current.settings.tableHover"-->
 									<!--                                        :label="$t('tableHover')"-->
 									<!--                                        class="w-full"-->
 									<!--                                    />-->
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.tableSm"
 										:label="$t('tableSm')"
 										class="w-full"
 									/>
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.tableBordered"
 										:label="$t('tableBordered')"
 										class="w-full"
 									/>
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.tableSingleColumn"
 										:label="$t('tableSingleColumn')"
 										class="w-full"
 									/>
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().current.settings.tableSingleLine"
 										:label="$t('tableSingleLine')"
 										class="w-full"
 									/>
 								</div>
 							</div>
-						</n-collapse-item>
-					</n-collapse>
+						</NCollapseItem>
+					</NCollapse>
 				</div>
-			</n-tab-pane>
-		</n-tabs>
+			</NTabPane>
+		</NTabs>
 	</div>
 </template>
 /template>

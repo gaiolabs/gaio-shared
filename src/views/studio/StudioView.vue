@@ -75,7 +75,7 @@
 				@close-and-refresh="closeTask()"
 			/>
 		</template>
-		<n-spin
+		<NSpin
 			v-else
 			class="h-full w-full"
 		/>

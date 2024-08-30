@@ -6,11 +6,11 @@
 		<div v-else-if="localMeta?.options?.insights">
 			<g-alert :title="$t('taskInsightsHelp')" />
 
-			<n-tabs
+			<NTabs
 				type="line"
 				class="inner-tabs"
 			>
-				<n-tab-pane
+				<NTabPane
 					:tab="$t('general')"
 					name="general"
 				>
@@ -38,7 +38,7 @@
 								{{ $t('measure') }}
 								{{ $t('type') }}
 							</div>
-							<n-select
+							<NSelect
 								v-model:value="localMeta.options.insights.type"
 								:options="[
 									{
@@ -53,7 +53,7 @@
 								@update:value="prepareList()"
 							/>
 						</div>
-						<n-table v-if="localMeta.options.insights.type === 'computed'">
+						<NTable v-if="localMeta.options.insights.type === 'computed'">
 							<thead>
 								<th>#</th>
 								<th>{{ $t('field') }}</th>
@@ -81,7 +81,7 @@
 										/>
 									</td>
 									<td class="el-text-center">
-										<n-select
+										<NSelect
 											v-model:value="item.operator"
 											:options="[
 												{
@@ -103,7 +103,7 @@
 										/>
 									</td>
 									<td>
-										<n-input
+										<NInput
 											v-model:value="item.label"
 											v-alpha
 										/>
@@ -117,7 +117,7 @@
 									</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 						<div
 							v-if="localMeta.options.insights.type === 'field'"
 							class="control"
@@ -131,8 +131,8 @@
 							/>
 						</div>
 					</div>
-				</n-tab-pane>
-				<n-tab-pane
+				</NTabPane>
+				<NTabPane
 					:tab="$t('advanced')"
 					name="advanced"
 				>
@@ -140,7 +140,7 @@
 						<!-- DEFAULTS GENERAL -->
 						<div class="control">
 							{{ $t('default') }} {{ $t('period') }}
-							<n-select
+							<NSelect
 								v-model:value="localMeta.options.period"
 								:options="[
 									{
@@ -160,7 +160,7 @@
 						</div>
 						<div class="control">
 							{{ $t('growthPercentage') }} (%)
-							<n-input-number
+							<NInputNumber
 								v-model:value="temporaryPercentage"
 								:min="1"
 								:max="100"
@@ -170,7 +170,7 @@
 
 						<div class="control">
 							{{ $t('numeric') }}/{{ $t('decimalSize') }}
-							<n-input-number
+							<NInputNumber
 								v-model:value="localMeta.options.numberFormat.formatDecimalSize"
 								:min="1"
 								:step="1"
@@ -179,7 +179,7 @@
 						</div>
 						<div class="control">
 							{{ $t('percent') }}/{{ $t('decimalSize') }}
-							<n-input-number
+							<NInputNumber
 								v-model:value="localMeta.options.percentFormat.formatDecimalSize"
 								:min="1"
 								:step="1"
@@ -189,7 +189,7 @@
 						<div class="control">
 							{{ $t('separator') }}
 							<div class="control-top">
-								<n-switch
+								<NSwitch
 									v-model:value="separator"
 									active-value="dotComma"
 									inactive-value="commaDot"
@@ -201,11 +201,11 @@
 									<template #unchecked>
 										{{ $t('commaDot') }}
 									</template>
-								</n-switch>
+								</NSwitch>
 							</div>
 						</div>
 						<div class="control">
-							<n-checkbox v-model:checked="localMeta.options.inverted" />
+							<NCheckbox v-model:checked="localMeta.options.inverted" />
 							{{ $t('invertColors') }}
 						</div>
 						<!--SCHEDULE INIT-->
@@ -215,13 +215,13 @@
 						>
 							<div class="g-card">
 								<div class="d-flex align-items-center justify-content-between">
-									<n-switch
+									<NSwitch
 										v-model:value="localMeta.options.schedule"
 										:active-text="$t('lang.SCHEDULE_INSIGHTS_ALERTS')"
 									/>
 
 									<div v-if="localMeta.options.schedule && localMeta.id">
-										<n-tooltip
+										<NTooltip
 											:persistent="false"
 											placement="top"
 										>
@@ -235,7 +235,7 @@
 												</NButton>
 											</template>
 											{{ $t('lang.SCHEDULE_INSIGHTS_ALERTS_INFO') }}
-										</n-tooltip>
+										</NTooltip>
 									</div>
 								</div>
 								<div v-if="localMeta.options.schedule">
@@ -252,8 +252,8 @@
 						</div>
 						<!--SCHEDULE END-->
 					</div>
-				</n-tab-pane>
-			</n-tabs>
+				</NTabPane>
+			</NTabs>
 		</div>
 	</div>
 </template>

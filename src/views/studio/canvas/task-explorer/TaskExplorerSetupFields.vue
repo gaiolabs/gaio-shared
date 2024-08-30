@@ -10,7 +10,7 @@
 			>
 				{{ current.tableName }}
 				<div>
-					<n-tooltip>
+					<NTooltip>
 						<template #trigger>
 							<NButton
 								size="tiny"
@@ -24,9 +24,9 @@
 						<div>
 							{{ $t('exchangeTableMessage') }}
 						</div>
-					</n-tooltip>
+					</NTooltip>
 
-					<n-tooltip>
+					<NTooltip>
 						<template #trigger>
 							<NButton
 								size="tiny"
@@ -41,7 +41,7 @@
 						<div>
 							{{ $t('viewTable') }}
 						</div>
-					</n-tooltip>
+					</NTooltip>
 				</div>
 			</div>
 			<div v-else>
@@ -56,7 +56,7 @@
 				{{ $t('addAll') }}
 			</NButton>
 			<div class="flex gap-1">
-				<n-tooltip>
+				<NTooltip>
 					<template #trigger>
 						<div>#{{ columns.length }}</div>
 					</template>
@@ -64,19 +64,19 @@
 					<div>
 						{{ $t('columns') }}
 					</div>
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 
 		<div class="my-2">
-			<n-input
+			<NInput
 				v-model:value="searchTerm"
 				:placeholder="$t('filter')"
 			>
 				<template #prefix>
 					<g-icon name="filter" />
 				</template>
-			</n-input>
+			</NInput>
 		</div>
 
 		<div>

@@ -20,13 +20,13 @@
 					</span>
 				</NButton>
 			</div>
-			<n-input-number
+			<NInputNumber
 				v-model:value="height"
 				:min="60"
 				class="w-[140px]"
 			>
 				<template #prefix>{{ $t('height') }}</template>
-			</n-input-number>
+			</NInputNumber>
 		</div>
 		<report-node
 			v-if="reportState.status && !showHelp"
@@ -35,7 +35,7 @@
 		/>
 		<div v-else>
 			<div v-if="reportState?.rules?.length">
-				<n-table
+				<NTable
 					bordered
 					striped
 				>
@@ -54,17 +54,17 @@
 						>
 							<td>{{ $t(item.name) }}</td>
 							<td>
-								<n-tag type="success">
+								<NTag type="success">
 									{{ $t(item.dimensions) }}
-								</n-tag>
+								</NTag>
 							</td>
 							<td>
-								<n-tag type="success">{{ $t(item.measures) }}</n-tag>
+								<NTag type="success">{{ $t(item.measures) }}</NTag>
 							</td>
 							<td>{{ $t(item.message) }}</td>
 						</tr>
 					</tbody>
-				</n-table>
+				</NTable>
 			</div>
 			<div v-else>Card Not Done</div>
 		</div>

@@ -1,6 +1,6 @@
 <template>
 	<div class="options-field-agg control-secondary">
-		<n-radio-group
+		<NRadioGroup
 			v-model:value="useReportStore().currentField.type"
 			name="options-field-agg"
 			class="w-full"
@@ -10,14 +10,14 @@
 				:key="agg.value"
 				class="w-full"
 			>
-				<n-radio
+				<NRadio
 					:key="agg.value"
 					:value="agg.value"
 					:label="agg.label"
 					class="w-full"
 				/>
 			</div>
-		</n-radio-group>
+		</NRadioGroup>
 	</div>
 </template>
 

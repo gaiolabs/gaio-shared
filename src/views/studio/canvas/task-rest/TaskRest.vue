@@ -18,13 +18,13 @@
 							>
 								{{ $t('task') }}
 							</label>
-							<n-input v-model:value="localTask.label" />
+							<NInput v-model:value="localTask.label" />
 						</div>
 						<div class="flex w-full flex-col gap-1">
 							<label class="control-label">
 								{{ $t('table') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.tableName"
 								v-alpha
 								disabled
@@ -32,44 +32,44 @@
 						</div>
 					</div>
 				</div>
-				<n-tabs
+				<NTabs
 					pane-class="bg-elevation-1"
 					size="small"
 					type="line"
 					:default-value="currentTab"
 				>
-					<n-tab-pane
+					<NTabPane
 						name="general"
 						:tab="$t('general')"
 					>
 						<task-rest-general :local-task="localTask" />
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						name="basicAuth"
 						:tab="$t('basicAuth')"
 						display-directive="show:lazy"
 					>
 						<task-rest-basic-auth :local-task="localTask" />
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						name="headers"
 						:tab="$t('headers')"
 					>
 						<task-rest-headers :local-task="localTask" />
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						name="result"
 						:tab="$t('result')"
 					>
 						<task-rest-result :local-task="localTask" />
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						name="errorLog"
 						:tab="$t('errorLog')"
 					>
 						<task-rest-error-log :local-task="localTask" />
-					</n-tab-pane>
-				</n-tabs>
+					</NTabPane>
+				</NTabs>
 			</div>
 			<div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 				<NButton

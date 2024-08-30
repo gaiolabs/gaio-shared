@@ -5,7 +5,7 @@
 	>
 		<template #title>{{ $t('repository') }}</template>
 		<template #content>
-			<n-spin
+			<NSpin
 				size="small"
 				:show="loading"
 			>
@@ -15,7 +15,7 @@
 							<div class="control-label">
 								{{ $t('name') }}
 							</div>
-							<n-input v-model:value="source.repoName" />
+							<NInput v-model:value="source.repoName" />
 						</div>
 
 						<NDivider title-placement="left">
@@ -26,7 +26,7 @@
 							<div class="control-label">
 								{{ $t('host') }}
 							</div>
-							<n-input v-model:value="source.credentials.host" />
+							<NInput v-model:value="source.credentials.host" />
 						</div>
 
 						<div class="flex gap-2">
@@ -34,30 +34,30 @@
 								<div class="control-label">
 									{{ $t('HTMLInterface') }}
 								</div>
-								<n-input-number v-model:value="source.credentials.port" />
+								<NInputNumber v-model:value="source.credentials.port" />
 							</div>
 							<div class="control grow">
 								<div class="control-label">
 									{{ $t('TCP') }}
 									{{ $t('port') }}
 								</div>
-								<n-input-number v-model:value="source.credentials.extraPort" />
+								<NInputNumber v-model:value="source.credentials.extraPort" />
 							</div>
 						</div>
 						<div class="control">
 							<div class="control-label">
 								{{ $t('user') }}
 							</div>
-							<n-input v-model:value="source.credentials.user" />
+							<NInput v-model:value="source.credentials.user" />
 						</div>
 						<div class="control">
 							<div class="control-label">
 								{{ $t('password') }}
 							</div>
-							<n-input
+							<NInput
 								v-model:value="source.credentials.password"
 								show-password
-							></n-input>
+							></NInput>
 						</div>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 							v-if="source.repoId"
 							class="flex items-center gap-2"
 						>
-							<n-popconfirm
+							<NPopconfirm
 								:positive-text="$t('delete')"
 								:negative-text="$t('cancel')"
 								@positive-click="remove()"
@@ -82,7 +82,7 @@
 									</NButton>
 								</template>
 								{{ $t('deleteSource') }}
-							</n-popconfirm>
+							</NPopconfirm>
 						</div>
 						<div></div>
 						<NButton
@@ -93,7 +93,7 @@
 						</NButton>
 					</div>
 				</div>
-			</n-spin>
+			</NSpin>
 		</template>
 	</g-dialog>
 </template>

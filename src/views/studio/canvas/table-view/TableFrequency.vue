@@ -15,7 +15,7 @@
 		<splitpanes>
 			<pane :size="18">
 				<div class="g-bg-1 mb-3 rounded p-1">
-					<n-input
+					<NInput
 						v-model:value="searchTerm"
 						:placeholder="$t('filter')"
 						min="1"
@@ -23,7 +23,7 @@
 						step="1"
 					/>
 				</div>
-				<n-table
+				<NTable
 					size="small"
 					class="g-bg-2"
 				>
@@ -41,7 +41,7 @@
 							</td>
 						</tr>
 					</tbody>
-				</n-table>
+				</NTable>
 			</pane>
 			<pane>
 				<div class="g-bg-2 g-border-300 rounded">

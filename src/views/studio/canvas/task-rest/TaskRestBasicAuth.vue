@@ -10,7 +10,7 @@
 			>
 				Username
 			</label>
-			<n-input
+			<NInput
 				id="username"
 				v-model:value="localTask.basicUsername"
 				type="text"
@@ -24,7 +24,7 @@
 			>
 				Password
 			</label>
-			<n-input
+			<NInput
 				id="password"
 				v-model="localTask.basicPassword"
 				type="password"

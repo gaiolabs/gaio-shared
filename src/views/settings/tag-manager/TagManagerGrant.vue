@@ -7,7 +7,7 @@
 			<div class="card-header flex items-center justify-between bg-prime-hover p-2 text-white">
 				{{ $t('grantTo') }}
 				<div class="flex items-center">
-					<n-tooltip>
+					<NTooltip>
 						<template #trigger>
 							<NButton
 								size="tiny"
@@ -23,11 +23,11 @@
 							</NButton>
 						</template>
 						<div>{{ $t('clear') }}</div>
-					</n-tooltip>
+					</NTooltip>
 				</div>
 			</div>
-			<n-scrollbar :style="{ height: '100%' }">
-				<n-tag
+			<NScrollbar :style="{ height: '100%' }">
+				<NTag
 					v-for="(item, index) in useTagStore().grantTags"
 					:key="index"
 					size="small"
@@ -47,8 +47,8 @@
 						/>
 						{{ item.name }}
 					</div>
-				</n-tag>
-			</n-scrollbar>
+				</NTag>
+			</NScrollbar>
 		</div>
 	</div>
 </template>

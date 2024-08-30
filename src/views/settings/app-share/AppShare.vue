@@ -12,11 +12,11 @@
 		<div class="source-manager">
 			<template v-if="loading">
 				<NSpace vertical>
-					<n-skeleton
+					<NSkeleton
 						:height="30"
 						class="rounded"
 					/>
-					<n-skeleton
+					<NSkeleton
 						:height="100"
 						class="rounded"
 					/>
@@ -28,7 +28,7 @@
 						<div class="flex grow text-nowrap">
 							{{ $t('grantFrom') }}
 						</div>
-						<n-select
+						<NSelect
 							v-model:value="appId"
 							filterable
 							value-field="appId"
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="g-bg-1 mb-3 flex items-center rounded shadow">
-						<n-transfer
+						<NTransfer
 							ref="transfer"
 							v-model:value="currentApp.sees"
 							source-filterable
@@ -63,16 +63,16 @@
 </template>
 
 <script setup lang="ts">
-import type { AppType } from '@gaio/shared/types'
-import { onMounted, ref } from 'vue'
-
 type PassType = Partial<{
 	sees: string[]
 }> &
 	AppType
-import { difference } from 'lodash-es'
 import useApi from '@/composables/useApi'
 import SettingsView from '@/views/settings/SettingsView.vue'
+import type { AppType } from '@gaio/shared/types'
+import { difference } from 'lodash-es'
+import { NTransfer } from 'naive-ui'
+import { onMounted, ref } from 'vue'
 
 const apps = ref([])
 const currentApp = ref<PassType>({})

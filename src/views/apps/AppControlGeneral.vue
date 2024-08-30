@@ -10,16 +10,16 @@
 			<div class="grid grid-cols-2 gap-2">
 				<div>
 					<div>{{ $t('name') }}</div>
-					<n-input v-model:value="localApp.appName" />
+					<NInput v-model:value="localApp.appName" />
 				</div>
 				<div>
 					<div>{{ $t('description') }}</div>
-					<n-input v-model:value="localApp.appDescription" />
+					<NInput v-model:value="localApp.appDescription" />
 				</div>
 			</div>
 			<div class="mt-2">
 				<div>{{ $t('repository') }}</div>
-				<n-select
+				<NSelect
 					v-model:value="localApp.repoId"
 					:disabled="!!localApp.appId"
 					:options="repoList"
@@ -28,15 +28,15 @@
 			<div class="mt-2 flex gap-2">
 				<div class="grow">
 					<div>{{ $t('creator') }}</div>
-					<n-input v-model:value="localApp.options.creator" />
+					<NInput v-model:value="localApp.options.creator" />
 				</div>
 				<div class="grow">
 					<div>{{ $t('group') }}</div>
-					<n-input v-model:value="localApp.options.group" />
+					<NInput v-model:value="localApp.options.group" />
 				</div>
 				<div class="w-[70px]">
 					<div>{{ $t('color') }}</div>
-					<n-color-picker
+					<NColorPicker
 						v-model:value="localApp.options.color"
 						:render-label="() => ''"
 						:modes="['hex']"
@@ -56,15 +56,15 @@
 			</div>
 			<div class="mt-2">
 				{{ $t('dashboardLink') }}
-				<n-list
+				<NList
 					v-if="localApp.appToken"
 					size="small"
 					bordered
 				>
-					<n-list-item>
+					<NListItem>
 						{{ appUrl }}
-					</n-list-item>
-				</n-list>
+					</NListItem>
+				</NList>
 			</div>
 		</div>
 
@@ -79,6 +79,7 @@
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import type { AppType } from '@gaio/shared/types'
+import { NColorPicker } from 'naive-ui'
 import { ref, onMounted, computed } from 'vue'
 
 const props = withDefaults(

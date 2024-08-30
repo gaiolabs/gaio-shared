@@ -1,20 +1,20 @@
 <template>
 	<div class="options-chart">
-		<n-tabs
+		<NTabs
 			type="segment"
 			animated
 			size="small"
 		>
-			<n-tab-pane
+			<NTabPane
 				name="properties"
 				:tab="$t('properties')"
 			>
 				<div class="px-1">
-					<n-collapse
+					<NCollapse
 						accordion
 						arrow-placement="right"
 					>
-						<n-collapse-item name="general">
+						<NCollapseItem name="general">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="general" />
@@ -22,8 +22,8 @@
 								</div>
 							</template>
 							<options-chart-general />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							v-if="useReportStore().showOnlyIf(['pie']) && !useReportStore().current.settings.pieDonut"
 							name="statistic"
 						>
@@ -34,8 +34,8 @@
 								</div>
 							</template>
 							<options-chart-statistic />
-						</n-collapse-item>
-						<n-collapse-item name="legend">
+						</NCollapseItem>
+						<NCollapseItem name="legend">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="legend" />
@@ -43,8 +43,8 @@
 								</div>
 							</template>
 							<options-chart-legend />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							name="label"
 							:title="$t('label')"
 						>
@@ -55,8 +55,8 @@
 								</div>
 							</template>
 							<options-chart-label />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('title')"
 							name="title"
 						>
@@ -67,7 +67,7 @@
 								</div>
 							</template>
 							<options-title />
-						</n-collapse-item>
+						</NCollapseItem>
 						<template
 							v-if="
 								useReportStore().showOnlyIf([
@@ -86,7 +86,7 @@
 								])
 							"
 						>
-							<n-collapse-item
+							<NCollapseItem
 								:title="$t('xAxis')"
 								name="xAxis"
 							>
@@ -97,8 +97,8 @@
 									</div>
 								</template>
 								<options-chart-x-axis />
-							</n-collapse-item>
-							<n-collapse-item
+							</NCollapseItem>
+							<NCollapseItem
 								v-if="
 									useReportStore().showOnlyIf([
 										'bar',
@@ -125,9 +125,9 @@
 									</div>
 								</template>
 								<options-chart-y-axis />
-							</n-collapse-item>
+							</NCollapseItem>
 						</template>
-						<n-collapse-item
+						<NCollapseItem
 							:title="$t('link')"
 							name="link"
 						>
@@ -138,8 +138,8 @@
 								</div>
 							</template>
 							<options-chart-link />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('margin')"
 							name="margin"
 						>
@@ -150,8 +150,8 @@
 								</div>
 							</template>
 							<options-chart-margin />
-						</n-collapse-item>
-						<n-collapse-item name="limitRows">
+						</NCollapseItem>
+						<NCollapseItem name="limitRows">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="limitRows" />
@@ -159,8 +159,8 @@
 								</div>
 							</template>
 							<options-chart-limit-rows />
-						</n-collapse-item>
-						<n-collapse-item name="rowsPerPage">
+						</NCollapseItem>
+						<NCollapseItem name="rowsPerPage">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="rowsPerPage" />
@@ -168,8 +168,8 @@
 								</div>
 							</template>
 							<options-rows-per-page />
-						</n-collapse-item>
-						<n-collapse-item name="message">
+						</NCollapseItem>
+						<NCollapseItem name="message">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="info" />
@@ -177,20 +177,20 @@
 								</div>
 							</template>
 							<options-message />
-						</n-collapse-item>
-					</n-collapse>
+						</NCollapseItem>
+					</NCollapse>
 				</div>
-			</n-tab-pane>
-			<n-tab-pane
+			</NTabPane>
+			<NTabPane
 				name="theme"
 				:tab="$t('theme')"
 			>
 				<div class="mt-1">
 					<options-theme />
 				</div>
-			</n-tab-pane>
-		</n-tabs>
-		<!--        <n-checkbox-->
+			</NTabPane>
+		</NTabs>
+		<!--        <NCheckbox-->
 		<!--            v-model:checked="useReportStore().current.settings.showLabel"-->
 		<!--            :label="$t('showLabel')"-->
 		<!--        />-->

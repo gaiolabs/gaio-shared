@@ -12,34 +12,34 @@
 				</span>
 			</div>
 			<div class="mb-1 flex gap-2">
-				<n-popover
+				<NPopover
 					v-if="useReportStore().current.schema.select.length"
 					:width="240"
 				>
 					<div class="d-flex align-items-center justify-content-center w-full gap-2">
-						<n-radio-group
+						<NRadioGroup
 							v-model:value="useBrush"
 							size="small"
 						>
-							<n-radio-button
+							<NRadioButton
 								key="all"
 								value="all"
 							>
 								{{ $t('all') }}
-							</n-radio-button>
-							<n-radio-button
+							</NRadioButton>
+							<NRadioButton
 								key="format"
 								value="format"
 							>
 								{{ $t('format') }}
-							</n-radio-button>
-							<n-radio-button
+							</NRadioButton>
+							<NRadioButton
 								key="style"
 								value="style"
 							>
 								{{ $t('style') }}
-							</n-radio-button>
-						</n-radio-group>
+							</NRadioButton>
+						</NRadioGroup>
 					</div>
 					<template #trigger>
 						<span>
@@ -55,8 +55,8 @@
 							</NButton>
 						</span>
 					</template>
-				</n-popover>
-				<n-tooltip :delay="1000">
+				</NPopover>
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -70,8 +70,8 @@
 						</NButton>
 					</template>
 					{{ $t('filter') }}
-				</n-tooltip>
-				<n-tooltip :delay="1000">
+				</NTooltip>
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -86,7 +86,7 @@
 						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 

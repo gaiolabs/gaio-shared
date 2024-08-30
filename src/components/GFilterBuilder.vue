@@ -4,7 +4,7 @@
 			v-if="hasFilter"
 			class="canvas-task-update-body"
 		>
-			<n-card
+			<NCard
 				v-if="columns"
 				content-style="padding: 10px"
 			>
@@ -55,7 +55,7 @@
 							</td>
 							<td v-else></td>
 							<td>
-								<n-select
+								<NSelect
 									v-model:value="item.columnName"
 									filterable
 									:options="columnList"
@@ -65,7 +65,7 @@
 								/>
 							</td>
 							<td>
-								<n-select
+								<NSelect
 									v-model:value="item.valueType"
 									:options="[
 										{
@@ -85,7 +85,7 @@
 								/>
 							</td>
 							<td>
-								<n-select
+								<NSelect
 									v-model:value="item.operator"
 									filterable
 									:options="operators(item)"
@@ -94,17 +94,17 @@
 							<td>
 								<span v-if="!['isNull', 'isNotNull'].includes(item.operator)">
 									<span v-if="item.valueType === 'value'">
-										<n-input-group v-if="!['in', 'notIn'].includes(item.operator)">
-											<n-input
+										<NInputGroup v-if="!['in', 'notIn'].includes(item.operator)">
+											<NInput
 												v-model:value="item.value"
 												:placeholder="$t('value')"
 												type="text"
 											/>
-											<n-popover
+											<NPopover
 												:width="350"
 												trigger="click"
 											>
-												<n-select
+												<NSelect
 													v-model:value="item.value"
 													filterable
 													clearable
@@ -120,10 +120,10 @@
 														<g-icon name="eye" />
 													</NButton>
 												</template>
-											</n-popover>
-										</n-input-group>
+											</NPopover>
+										</NInputGroup>
 										<template v-else>
-											<n-select
+											<NSelect
 												v-model:value="item.value"
 												tag
 												multiple
@@ -136,7 +136,7 @@
 										</template>
 									</span>
 									<template v-else-if="item.valueType === 'parameter'">
-										<n-select
+										<NSelect
 											v-model:value="item.value"
 											class="w-100"
 											filterable
@@ -181,7 +181,7 @@
 					v-else
 					class="w-100"
 				>
-					<n-alert :closable="false">
+					<NAlert :closable="false">
 						<div class="flex w-full items-center justify-between">
 							<div class="grow">
 								{{ $t('addFilter') }}
@@ -195,9 +195,9 @@
 								</NButton>
 							</div>
 						</div>
-					</n-alert>
+					</NAlert>
 				</div>
-			</n-card>
+			</NCard>
 		</div>
 	</div>
 </template>
@@ -209,7 +209,7 @@ import { useAppStore } from '@/stores'
 import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
-import { NButton } from 'naive-ui'
+import { NButton, NInputGroup } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

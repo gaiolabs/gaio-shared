@@ -42,7 +42,7 @@
 			<!-- I::TEXT-->
 			<template v-if="localField.type === 'lineText'">
 				<template v-if="localField.longText">
-					<n-input
+					<NInput
 						:key="localField.paramName"
 						v-model:value="localField.value"
 						:maxlength="localField.max || 255"
@@ -54,7 +54,7 @@
 						@blur="executeWhenFilter"
 					/>
 				</template>
-				<n-input
+				<NInput
 					v-else
 					:key="localField.paramName"
 					v-model:value="localField.value"
@@ -66,7 +66,7 @@
 			</template>
 			<!-- I::NUMBER-->
 			<template v-else-if="localField.type === 'lineNumber'">
-				<n-input-number
+				<NInputNumber
 					v-model:value="localField.value"
 					:placeholder="localField.placeholder"
 					@blur="run()"
@@ -74,7 +74,7 @@
 			</template>
 			<!-- I::DATE RANGE -->
 			<template v-else-if="localField.type === 'date'">
-				<n-date-picker
+				<NDatePicker
 					v-if="!localField.isRange"
 					v-model:formatted-value="localField.value"
 					:readonly="localField.readonly"
@@ -85,7 +85,7 @@
 					value-format="yyyy-MM-dd"
 					@update:value="executeWhenFilter"
 				/>
-				<n-date-picker
+				<NDatePicker
 					v-else
 					v-model:formatted-value="extraListValue"
 					:readonly="localField.readonly"
@@ -99,7 +99,7 @@
 			</template>
 			<!-- I::DATETIME-->
 			<template v-else-if="localField.type === 'datetime'">
-				<n-date-picker
+				<NDatePicker
 					v-model:formatted-value="localField.value"
 					:readonly="localField.readonly"
 					:size="fieldSize"
@@ -112,7 +112,7 @@
 			</template>
 			<!-- I::TIME -->
 			<template v-else-if="localField.type === 'time'">
-				<n-time-picker
+				<NTimePicker
 					v-model:formatted-value="localField.value"
 					:readonly="localField.readonly"
 					:size="fieldSize"
@@ -124,7 +124,7 @@
 			</template>
 			<!-- I::SELECT -->
 			<template v-else-if="localField.type === 'select'">
-				<n-select
+				<NSelect
 					:key="`${localKey}_${localField.paramName || ''}`"
 					v-model:value="localField.value"
 					:options="localList"
@@ -137,7 +137,7 @@
 			</template>
 			<!-- I::SLIDER -->
 			<template v-else-if="localField.type === 'slider'">
-				<n-slider
+				<NSlider
 					v-if="localField.sliderType === 'monthly'"
 					v-model:value="extraListValue"
 					:min="localField.sliderMinValue"
@@ -147,7 +147,7 @@
 					:disabled="localField.readonly"
 					@update:value="executeWhenFilter"
 				/>
-				<n-slider
+				<NSlider
 					v-else
 					v-model:value="extraListValue"
 					:min="localField.sliderMinValue"
@@ -177,7 +177,7 @@
 						</NButton-group>
 						<!--                        <div class="checkbox-grid">-->
 						<!--                            <div>-->
-						<!--                                <n-checkbox-group-->
+						<!--                                <NCheckboxGroup-->
 						<!--                                    :size="localField.buttonSize"-->
 						<!--                                    v-model:value="localField.value"-->
 						<!--                                    @change="clearWhenAllIsSelected(field)"-->
@@ -191,7 +191,7 @@
 						<!--                                    >-->
 						<!--                                        {{ li.label }}-->
 						<!--                                    </el-checkbox-button>-->
-						<!--                                </n-checkbox-group>-->
+						<!--                                </NCheckboxGroup>-->
 						<!--                            </div>-->
 						<!--                            <div-->
 						<!--                                v-show="isFilter"-->
@@ -210,20 +210,20 @@
 						<!--                        </div>-->
 					</template>
 					<template v-else>
-						<n-checkbox-group
+						<NCheckboxGroup
 							v-model:value="extraListValue"
 							class="flex gap-1"
 							:class="{ 'flex-col': localField.isVertical, 'items-center': !localField.isVertical }"
 							@update:value="executeWhenFilter"
 						>
-							<n-checkbox
+							<NCheckbox
 								v-for="(li, liIndex) in localList"
 								:key="liIndex"
 								:readonly="localField.readonly"
 								:label="li.label"
 								:value="li.value"
 							/>
-						</n-checkbox-group>
+						</NCheckboxGroup>
 					</template>
 					<template v-if="!isFilter">
 						<div
@@ -247,25 +247,25 @@
 			</template>
 			<!-- I::RADIO -->
 			<template v-else-if="localField.type === 'radio'">
-				<n-radio-group
+				<NRadioGroup
 					v-if="localField.isButton"
 					v-model:value="localField.value"
 					@update:value="executeWhenFilter"
 				>
-					<n-radio-button
+					<NRadioButton
 						v-for="(li, liIndex) in localList"
 						:key="liIndex"
 						:readonly="localField.readonly"
 						:label="li.label"
 						:value="li.value"
 					/>
-				</n-radio-group>
-				<n-radio-group
+				</NRadioGroup>
+				<NRadioGroup
 					v-else
 					v-model:value="localField.value"
 					@update:value="executeWhenFilter"
 				>
-					<n-radio
+					<NRadio
 						v-for="(li, liIndex) in localList"
 						:key="liIndex"
 						:readonly="localField.readonly"
@@ -273,7 +273,7 @@
 						:label="li.label"
 						:value="li.value"
 					/>
-				</n-radio-group>
+				</NRadioGroup>
 			</template>
 		</template>
 	</div>
@@ -287,6 +287,7 @@ import type { FormFieldType } from '@gaio/shared/types'
 import { definedOrDefault } from '@gaio/shared/utils'
 import { format } from 'date-fns'
 import dayjs from 'dayjs'
+import { NCheckboxGroup, NDatePicker, NRadio, NRadioButton, NRadioGroup, NSlider, NTimePicker } from 'naive-ui'
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 

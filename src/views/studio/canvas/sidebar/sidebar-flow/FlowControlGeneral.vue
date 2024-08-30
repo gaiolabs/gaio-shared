@@ -6,7 +6,7 @@
 		<div class="control">
 			<div class="control-label">{{ $t('processName') }}</div>
 			<div>
-				<n-input
+				<NInput
 					v-model:value="localFlow.flowName"
 					:placeholder="$t('typeHere')"
 				/>
@@ -15,7 +15,7 @@
 		<div class="control">
 			<div class="control-label">{{ $t('description') }}</div>
 			<div>
-				<n-input
+				<NInput
 					v-model:value="localFlow.flowDescription"
 					type="textarea"
 					:placeholder="$t('typeHere')"
@@ -28,32 +28,32 @@
 				<div>
 					{{ $t('type') }}
 				</div>
-				<n-radio-group
+				<NRadioGroup
 					v-model:value="localFlow.flowType"
 					name="flowType"
 				>
-					<n-radio-button
+					<NRadioButton
 						value="infoPub"
 						:label="$t('infoPub')"
 					/>
-					<n-radio-button
+					<NRadioButton
 						value="dataPrep"
 						:label="$t('dataPrep')"
 					/>
-				</n-radio-group>
+				</NRadioGroup>
 			</div>
 
 			<div class="grow">
 				<div>
 					{{ $t('maxTimeExecution') }}
 				</div>
-				<n-input-number v-model:value="localFlow.options.flowTimeout" />
+				<NInputNumber v-model:value="localFlow.options.flowTimeout" />
 			</div>
 			<div>
 				<div>
 					{{ $t('lock') }}
 				</div>
-				<n-switch
+				<NSwitch
 					v-model:value="localFlow.locked"
 					:checked-value="true"
 					:unchecked-value="false"
@@ -67,23 +67,23 @@
 					<div>
 						{{ $t('type') }}
 					</div>
-					<n-radio-group
+					<NRadioGroup
 						v-model:value="localFlow.options.dashboardType"
 						name="dashboardType"
 					>
-						<n-radio-button
+						<NRadioButton
 							value="page"
 							:label="$t('dashboardAsPage')"
 						/>
-						<n-radio-button
+						<NRadioButton
 							value="dialog"
 							:label="$t('dashboardAsDialog')"
 						/>
-					</n-radio-group>
+					</NRadioGroup>
 				</div>
 				<div class="grow">
 					{{ $t('refreshDashboardEach') }}
-					<n-input-number v-model:value="localFlow.options.flowReload" />
+					<NInputNumber v-model:value="localFlow.options.flowReload" />
 				</div>
 			</div>
 
@@ -92,7 +92,7 @@
 				<div class="mb-4 flex gap-2 rounded bg-paper-100 p-2 dark:bg-carbon-200">
 					<div class="grow">
 						{{ $t('dashboardDialogAfterClose') }}
-						<n-select
+						<NSelect
 							v-model:value="localFlow.options.dialogOnDestroy"
 							:options="
 								['none', 'resetFlow', 'resetParams', 'resetParamsAndFlow'].map((o) => {
@@ -104,7 +104,7 @@
 
 					<div class="grow">
 						{{ $t('dialogWidth') }}
-						<n-input-number v-model:value="localFlow.options.dialogWidth" />
+						<NInputNumber v-model:value="localFlow.options.dialogWidth" />
 					</div>
 				</div>
 			</template>
@@ -115,7 +115,7 @@
 			class="mb-4"
 		>
 			{{ $t('processKey') }}
-			<n-input
+			<NInput
 				v-model:value="localFlow.flowKey"
 				:disabled="true"
 			>
@@ -129,7 +129,7 @@
 						<g-icon name="refresh" />
 					</NButton>
 				</template>
-			</n-input>
+			</NInput>
 		</div>
 	</div>
 </template>

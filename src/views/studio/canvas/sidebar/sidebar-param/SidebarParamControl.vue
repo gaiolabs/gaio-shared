@@ -10,7 +10,7 @@
 						{{ $t('paramName') }}
 						<sup>*</sup>
 					</div>
-					<n-input
+					<NInput
 						v-model:value="localParam.paramName"
 						v-alpha
 					/>
@@ -19,7 +19,7 @@
 				<div class="control">
 					<div class="control-label">
 						{{ $t('description') }}
-						<n-input
+						<NInput
 							v-model:value="localParam.paramDescription"
 							type="textarea"
 							rows="2"
@@ -29,7 +29,7 @@
 				<div class="control">
 					<div class="control-label">
 						{{ $t('value') }}
-						<n-input
+						<NInput
 							v-model:value="localParam.paramValue"
 							:placeholder="$t('typeHere')"
 						/>
@@ -39,19 +39,19 @@
 					v-if="isFunction"
 					class="control"
 				>
-					<n-input-group>
+					<NInputGroup>
 						<NButton
 							type="primary"
 							@click="loadFunction()"
 						>
 							{{ $t('test') }}
 						</NButton>
-						<n-input
+						<NInput
 							v-model:value="testedValue"
 							readonly
 							:placeholder="$t('result')"
 						/>
-					</n-input-group>
+					</NInputGroup>
 				</div>
 			</div>
 			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">

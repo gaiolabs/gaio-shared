@@ -8,7 +8,7 @@
 				<label class="control-label">{{ $t('logTable') }}</label>
 				<div class="flex w-full gap-1">
 					<NButton>{{ $t('log') }}</NButton>
-					<n-input
+					<NInput
 						v-model:value="localTask.keepLogTable"
 						placeholder="Enable Value"
 					/>
@@ -19,7 +19,7 @@
 				class="control"
 			>
 				<label class="control-label">{{ $t('keepLogDays') }}</label>
-				<n-input-number
+				<NInputNumber
 					v-model:value="localTask.keepLogDays"
 					:min="0"
 					:step="1"

@@ -18,7 +18,7 @@
 					<div class="mb-1">
 						{{ $t('type') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="currentType"
 						size="small"
 						:options="
@@ -40,19 +40,19 @@
 						v-if="currentType === 4"
 						class="raw-builder-join mt-2"
 					>
-						<n-card content-style="padding: 6px">
+						<NCard content-style="padding: 6px">
 							<code-editor
 								v-model="localJoin.raw"
 								language="sql"
 								class="h-[300px] overflow-hidden rounded-[8px]"
 							/>
-						</n-card>
+						</NCard>
 
-						<n-card
+						<NCard
 							content-style="padding: 6px"
 							class="mt-2"
 						>
-							<n-table
+							<NTable
 								size="small"
 								:columns="columnRefs"
 								:data="localJoin.refs"
@@ -95,7 +95,7 @@
 											v-for="(col, colRefIndex) of columnRefs"
 											:key="colRefIndex"
 										>
-											<n-input
+											<NInput
 												v-model:value="item[col.key]"
 												class="w-full"
 												:placeholder="$t('typeHere')"
@@ -121,8 +121,8 @@
 										</td>
 									</tr>
 								</tbody>
-							</n-table>
-						</n-card>
+							</NTable>
+						</NCard>
 					</div>
 
 					<!--DEFAULT BUILDER JOIN-->
@@ -130,7 +130,7 @@
 						v-else
 						class="default-builder-join"
 					>
-						<n-card
+						<NCard
 							class="my-2"
 							content-style="padding: 10px"
 						>
@@ -138,7 +138,7 @@
 							<div class="mb-2 flex gap-2">
 								<div class="w-[50%] grow">
 									<div class="mb-1">{{ $t('database') }}</div>
-									<n-select
+									<NSelect
 										v-model:value="localJoin.byDatabaseName"
 										:default-active-first-option="true"
 										size="small"
@@ -149,7 +149,7 @@
 							</div>
 							<div class="grow">
 								<div>{{ $t('table') }}</div>
-								<n-select
+								<NSelect
 									v-model:value="localJoin.by"
 									size="small"
 									:placeholder="$t('selectTable')"
@@ -166,15 +166,15 @@
 									@update:value="loadColumnsFrom('tableLeft', 'left')"
 								/>
 							</div>
-						</n-card>
-						<n-card
+						</NCard>
+						<NCard
 							class="my-2"
 							content-style="padding: 10px"
 						>
 							<div>
 								<div class="w-[50%] grow">
 									<div class="mb-1">{{ $t('database') }}</div>
-									<n-select
+									<NSelect
 										v-model:value="localJoin.toDatabaseName"
 										size="small"
 										:options="
@@ -204,7 +204,7 @@
 								</div>
 								<div class="w-[45%] grow">
 									<div>{{ $t('table') }}</div>
-									<n-select
+									<NSelect
 										v-model:value="localJoin.to"
 										:default-active-first-option="true"
 										size="small"
@@ -220,8 +220,8 @@
 									/>
 								</div>
 							</div>
-						</n-card>
-						<n-card
+						</NCard>
+						<NCard
 							v-if="localJoin.by && localJoin.to"
 							class="my-2"
 							content-style="padding: 10px"
@@ -229,7 +229,7 @@
 							<div class="mb-2 flex items-end gap-2">
 								<div class="w-[50%] grow">
 									<div class="mb-1">{{ $t('columns') }}</div>
-									<n-select
+									<NSelect
 										v-model:value="selectedColumns.left"
 										size="small"
 										:placeholder="$t('selectColumn')"
@@ -243,7 +243,7 @@
 								</div>
 								<div class="w-[50%] grow">
 									<div class="mb-1">{{ $t('columns') }}</div>
-									<n-select
+									<NSelect
 										v-model:value="selectedColumns.right"
 										:default-active-first-option="true"
 										size="small"
@@ -268,7 +268,7 @@
 									</NButton>
 								</div>
 							</div>
-						</n-card>
+						</NCard>
 
 						<div
 							v-if="localJoin?.list?.length"

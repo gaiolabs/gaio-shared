@@ -10,7 +10,7 @@
 					{{ columnData.columnName }}
 				</div>
 				<div class="flex items-center justify-between gap-1">
-					<n-select
+					<NSelect
 						v-if="columnData"
 						v-model:value="useAuthStore().user.options.tableFrequencyPageSize"
 						class="min-w-[150px]"
@@ -22,13 +22,13 @@
 		</template>
 		<template #tabs>
 			<div class="column-view w-full">
-				<n-tabs
+				<NTabs
 					pane-class="g-bg-0"
 					size="small"
 					type="line"
 					:default-value="currentTab"
 				>
-					<n-tab-pane
+					<NTabPane
 						name="frequency"
 						:tab="$t('frequency')"
 						display-directive="show:lazy"
@@ -40,24 +40,24 @@
 							/>
 							<column-frequency :key="useAuthStore().user.options.tableFrequencyPageSize" />
 						</div>
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						v-if="isNumeric"
 						display-directive="show:lazy"
 						name="stats"
 						:tab="$t('stats')"
 					>
 						<column-stats class="m-4" />
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						v-if="isNumeric"
 						display-directive="show:lazy"
 						name="histogram"
 						:tab="$t('histogram')"
 					>
 						<column-histogram class="m-4" />
-					</n-tab-pane>
-				</n-tabs>
+					</NTabPane>
+				</NTabs>
 			</div>
 		</template>
 	</g-dialog>

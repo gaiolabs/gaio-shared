@@ -1,25 +1,25 @@
 <template>
 	<div class="task-report-setup h-full p-2">
 		<div class="h-full rounded bg-paper-100 p-2 dark:bg-carbon-100">
-			<n-tabs
+			<NTabs
 				v-model:value="useReportStore().currentSetupActiveTab"
 				type="segment"
 				animated
 				size="small"
 			>
-				<n-tab-pane
+				<NTabPane
 					name="source"
 					:tab="$t('source')"
 				>
 					<task-report-setup-fields />
-				</n-tab-pane>
-				<n-tab-pane
+				</NTabPane>
+				<NTabPane
 					name="reportType"
 					:tab="$t('type')"
 				>
 					<task-report-setup-type />
-				</n-tab-pane>
-			</n-tabs>
+				</NTabPane>
+			</NTabs>
 		</div>
 	</div>
 </template>

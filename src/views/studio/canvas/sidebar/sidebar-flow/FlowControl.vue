@@ -22,13 +22,13 @@
 		</template>
 		<template #tabs>
 			<div class="flow-control">
-				<n-tabs
+				<NTabs
 					pane-class="bg-elevation-1"
 					size="small"
 					type="line"
 					:default-value="currentTab"
 				>
-					<n-tab-pane
+					<NTabPane
 						name="general"
 						:tab="$t('general')"
 						display-directive="show:lazy"
@@ -37,8 +37,8 @@
 							:local-flow="localFlow"
 							class="my-4"
 						/>
-					</n-tab-pane>
-					<n-tab-pane
+					</NTabPane>
+					<NTabPane
 						v-if="localFlow && localFlow.flowId"
 						name="schedule"
 						:tab="$t('schedule')"
@@ -48,8 +48,8 @@
 							:local-flow="localFlow"
 							class="my-4"
 						/>
-					</n-tab-pane>
-				</n-tabs>
+					</NTabPane>
+				</NTabs>
 			</div>
 			<div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 				<div>
@@ -57,7 +57,7 @@
 						v-if="localFlow.flowId"
 						size="small"
 					>
-						<n-popconfirm
+						<NPopconfirm
 							v-if="canDeleteFlow"
 							:show-icon="false"
 							:positive-button-props="{ type: 'error' }"
@@ -76,7 +76,7 @@
 								</NButton>
 							</template>
 							{{ $t('deletionConfirmation') }}
-						</n-popconfirm>
+						</NPopconfirm>
 						<NButton
 							size="tiny"
 							quaternary

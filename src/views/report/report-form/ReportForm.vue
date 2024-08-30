@@ -28,7 +28,7 @@
 					class="card-header border-b bg-paper-200 p-1 dark:bg-carbon-200"
 				>
 					{{ localTask.label }}
-					<n-tooltip
+					<NTooltip
 						v-if="hasHidden"
 						:persistent="false"
 						:show-after="1500"
@@ -41,7 +41,7 @@
 								@click="showHidden = !showHidden"
 							/>
 						</template>
-					</n-tooltip>
+					</NTooltip>
 				</div>
 				<div class="card-body">
 					<div class="card-body-inner">
@@ -57,7 +57,7 @@
 							v-if="!localTask.formFilterBehavior"
 							class="m-2 flex justify-end"
 						>
-							<n-popover
+							<NPopover
 								v-if="localForm?.formConfirm"
 								:visible="localPopoverConfirm"
 								:width="200"
@@ -90,7 +90,7 @@
 										</NButton>
 									</span>
 								</template>
-							</n-popover>
+							</NPopover>
 							<NButton
 								v-else
 								:disabled="invalid"
@@ -122,7 +122,7 @@
 
 					<div class="flex w-full items-center justify-end">
 						<div>
-							<n-tooltip
+							<NTooltip
 								v-if="hasHidden"
 								:persistent="false"
 								:show-after="1500"
@@ -135,10 +135,10 @@
 										@click="showHidden = !showHidden"
 									/>
 								</template>
-							</n-tooltip>
+							</NTooltip>
 						</div>
 						<div class="flex justify-end">
-							<n-popover
+							<NPopover
 								v-if="localForm?.formConfirm"
 								:visible="localPopoverConfirm"
 								:width="200"
@@ -169,7 +169,7 @@
 										{{ $t('lang.CONFIRM') }}
 									</NButton>
 								</template>
-							</n-popover>
+							</NPopover>
 							<NButton
 								v-else
 								size="small"

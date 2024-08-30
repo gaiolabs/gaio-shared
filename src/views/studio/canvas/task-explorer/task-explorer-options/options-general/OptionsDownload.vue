@@ -1,7 +1,7 @@
 <template>
 	<div class="control-secondary">
 		<div>
-			<n-checkbox
+			<NCheckbox
 				v-if="current.reportType === 'table'"
 				v-model:checked="current.settings.downloadData"
 				:label="$t('enable')"
@@ -12,7 +12,7 @@
 			class="control control-label mt-2"
 		>
 			{{ $t('title') }}
-			<n-input
+			<NInput
 				v-model:value="current.settings.downloadLabel"
 				:placeholder="$t('title')"
 			/>
@@ -26,7 +26,7 @@
 			<span>
 				<strong>( {{ $t('zeroNoLimit') }} )</strong>
 			</span>
-			<n-input-number
+			<NInputNumber
 				v-model:value="current.settings.downloadRows"
 				:step="1"
 				:placeholder="$t('rows')"
@@ -37,7 +37,7 @@
 			<div class="control control-label">
 				{{ $t('color') }}
 			</div>
-			<n-color-picker
+			<NColorPicker
 				v-model="current.settings.downloadColor"
 				:modes="['hex']"
 			/>
@@ -47,7 +47,7 @@
 			class="control flex-grow-1"
 		>
 			<div class="control-label">{{ $t('size') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="current.settings.downloadSize"
 				size="small"
 				:options="[

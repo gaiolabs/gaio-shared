@@ -13,14 +13,14 @@
 						</div>
 					</div>
 					<div class="control">
-						<n-card content-style="padding: 10px">
-							<n-input
+						<NCard content-style="padding: 10px">
+							<NInput
 								v-model:value="localContent"
 								type="textarea"
 								:placeholder="$t('csvDataHere')"
 								rows="6"
 							/>
-						</n-card>
+						</NCard>
 					</div>
 					<div
 						class="control flex grow justify-center"
@@ -38,7 +38,7 @@
 						v-if="localData.length && localTask.columns.length"
 						class="control"
 					>
-						<n-card content-style="padding: 10px">
+						<NCard content-style="padding: 10px">
 							<div class="control">
 								<div
 									class="control-label rounded bg-paper-200 p-3 dark:bg-carbon-300"
@@ -55,48 +55,48 @@
 											>
 												<div class="flex items-center justify-between">
 													<div>
-														<n-popover
+														<NPopover
 															placement="right"
 															width="400"
 															trigger="click"
 														>
 															<div>
 																<div>
-																	<n-radio
+																	<NRadio
 																		v-model="col.dataType"
 																		label="Nullable(String)"
 																		class="w-full"
 																	>
 																		{{ dataTypeClickhouseNames('Nullable(String)') }}
-																	</n-radio>
-																	<n-radio
+																	</NRadio>
+																	<NRadio
 																		v-model="col.dataType"
 																		label="Nullable(Int64)"
 																		class="w-full"
 																	>
 																		{{ dataTypeClickhouseNames('Nullable(Int64)') }}
-																	</n-radio>
-																	<n-radio
+																	</NRadio>
+																	<NRadio
 																		v-model="col.dataType"
 																		label="Nullable(Float64)"
 																		class="w-full"
 																	>
 																		{{ dataTypeClickhouseNames('Nullable(Float64)') }}
-																	</n-radio>
-																	<n-radio
+																	</NRadio>
+																	<NRadio
 																		v-model="col.dataType"
 																		label="Nullable(Date)"
 																		class="w-full"
 																	>
 																		{{ dataTypeClickhouseNames('Nullable(Date)') }}
-																	</n-radio>
-																	<n-radio
+																	</NRadio>
+																	<NRadio
 																		v-model="col.dataType"
 																		label="Nullable(DateTime)"
 																		class="w-full"
 																	>
 																		{{ dataTypeClickhouseNames('Nullable(DateTime)') }}
-																	</n-radio>
+																	</NRadio>
 																</div>
 															</div>
 															<template #trigger>
@@ -105,11 +105,11 @@
 																	style="font-size: 11px"
 																/>
 															</template>
-														</n-popover>
+														</NPopover>
 														{{ col.columnName }}
 													</div>
 													<div class="el-text-right">
-														<n-popconfirm
+														<NPopconfirm
 															:width="350"
 															@positive-click="removeColumn(col)"
 														>
@@ -120,7 +120,7 @@
 																/>
 															</template>
 															{{ $t('deleteConfirm') }}
-														</n-popconfirm>
+														</NPopconfirm>
 													</div>
 												</div>
 											</th>
@@ -145,7 +145,7 @@
 								v-if="localData.length > size"
 								class="d-flex justify-content-center w-100"
 							>
-								<n-pagination
+								<NPagination
 									v-model:default-page="page"
 									small
 									background
@@ -153,7 +153,7 @@
 									:total="localData.length"
 								/>
 							</div>
-						</n-card>
+						</NCard>
 					</div>
 					<div
 						v-if="localData.length > 0"
@@ -161,18 +161,18 @@
 					>
 						<div class="control">
 							<div class="control-label">{{ $t('resultTable') }}</div>
-							<n-input
+							<NInput
 								v-model:value="localTask.resultTable"
 								v-alpha
 								class="w-full"
 							/>
 						</div>
 						<div class="control flex flex-col">
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="localTask.dropTable"
 								:label="$t('dropOrCreate')"
 							/>
-							<n-checkbox
+							<NCheckbox
 								v-model:checked="saveReference"
 								:label="$t('createReference')"
 							/>

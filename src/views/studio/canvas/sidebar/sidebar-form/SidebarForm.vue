@@ -3,7 +3,7 @@
 		<div class="flex w-full items-stretch justify-between px-4">
 			<div class="text-lg font-bold">{{ $t('forms') }}</div>
 			<div class="flex">
-				<n-popover
+				<NPopover
 					placement="bottom"
 					trigger="click"
 				>
@@ -19,7 +19,7 @@
 					</template>
 					<div>
 						{{ $t('folder') }}
-						<n-input
+						<NInput
 							v-model:value="newFolderName"
 							:placeholder="$t('typeHere')"
 						>
@@ -32,10 +32,10 @@
 									{{ $t('add') }}
 								</NButton>
 							</template>
-						</n-input>
+						</NInput>
 					</div>
-				</n-popover>
-				<n-tooltip>
+				</NPopover>
+				<NTooltip>
 					<template #trigger>
 						<NButton
 							size="tiny"
@@ -48,18 +48,18 @@
 						</NButton>
 					</template>
 					{{ $t('newForm') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">
 			<div class="control sidebar-flow-search px-3 pt-1">
-				<n-input
+				<NInput
 					v-model:value="searchTerm"
 					size="small"
 					:placeholder="$t('search')"
 				/>
 			</div>
-			<n-scrollbar
+			<NScrollbar
 				style="calc(100% - 20px) overflow: auto"
 				outer-class="h-full overflow-auto"
 			>
@@ -67,7 +67,7 @@
 					v-if="localTreeFiltered(localTree, searchTerm).length"
 					class="px-2"
 				>
-					<n-tree
+					<NTree
 						block-node
 						block-line
 						draggable
@@ -82,7 +82,7 @@
 						@drop="handleDropThenUpdate"
 					/>
 				</div>
-			</n-scrollbar>
+			</NScrollbar>
 		</div>
 	</div>
 </template>

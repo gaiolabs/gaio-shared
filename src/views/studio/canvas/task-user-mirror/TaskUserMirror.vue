@@ -8,36 +8,36 @@
 			<div class="task-user-mirror overflow-auto">
 				<div class="control">
 					<div class="control-label">{{ $t('resultTable') }}</div>
-					<n-input
+					<NInput
 						v-model:value="localTask.resultTable"
 						v-alpha
 					/>
 				</div>
 				<div class="control-label">{{ $t('columns') }}</div>
-				<n-card content-style="padding: 10px">
-					<n-checkbox-group v-model:value="localTask.fields">
-						<n-checkbox
+				<NCard content-style="padding: 10px">
+					<NCheckboxGroup v-model:value="localTask.fields">
+						<NCheckbox
 							:label="$t('name')"
 							value="name"
 						/>
-						<n-checkbox
+						<NCheckbox
 							:label="$t('email')"
 							value="email"
 						/>
-						<n-checkbox
+						<NCheckbox
 							:label="$t('createdAt')"
 							value="createdAt"
 						/>
-						<n-checkbox
+						<NCheckbox
 							:label="$t('group')"
 							value="group"
 						/>
-						<n-checkbox
+						<NCheckbox
 							:label="$t('role')"
 							value="role"
 						/>
-					</n-checkbox-group>
-				</n-card>
+					</NCheckboxGroup>
+				</NCard>
 			</div>
 			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
 				<NButton

@@ -14,11 +14,11 @@
 				<NDivider title-placement="left">
 					{{ $t('Todo') }}
 				</NDivider>
-				<n-skeleton
+				<NSkeleton
 					:height="30"
 					class="rounded"
 				/>
-				<n-skeleton
+				<NSkeleton
 					:height="90"
 					class="rounded"
 				/>
@@ -28,4 +28,5 @@
 </template>
 <script setup lang="ts">
 import SettingsView from '@/views/settings/SettingsView.vue'
+import { NSkeleton } from 'naive-ui'
 </script>

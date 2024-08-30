@@ -62,10 +62,10 @@
 								<g-icon name="chat" />
 							</template>
 						</NButton>
-						<n-popover trigger="click">
+						<NPopover trigger="click">
 							<template #trigger>
 								<NButton quaternary>
-									<n-avatar
+									<NAvatar
 										:src="avatar"
 										:alt="avatar"
 										circle
@@ -80,7 +80,7 @@
 							<div>
 								<home-account />
 							</div>
-						</n-popover>
+						</NPopover>
 					</div>
 				</div>
 			</div>
@@ -100,6 +100,7 @@ import { useCommandKStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import HomeAccount from '@/views/home/HomeAccount.vue'
 import { useDark } from '@vueuse/core'
+import { NAvatar } from 'naive-ui'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 

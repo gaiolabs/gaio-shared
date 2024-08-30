@@ -1,36 +1,36 @@
 <template>
 	<div class="options-chart-x-axis control-secondary">
 		<div class="control-secondary">
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.showXAxis"
 				:label="$t('enable')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="!useReportStore().showOnlyIf(['bullet', 'dual'])"
 				v-model:checked="useReportStore().current.settings.xAxisAutoHideLabel"
 				:label="$t('autoHideLabel')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="!useReportStore().showOnlyIf(['bullet', 'dual'])"
 				v-model:checked="useReportStore().current.settings.xAxisAutoRotateLabel"
 				:label="$t('autoRotateLabel')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="!useReportStore().showOnlyIf(['bullet'])"
 				v-model:checked="useReportStore().current.settings.showXGrid"
 				:label="$t('showGrid')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="!useReportStore().showOnlyIf(['bullet'])"
 				v-model:checked="useReportStore().current.settings.showXLine"
 				:label="$t('showBaseLine')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="!useReportStore().showOnlyIf(['bullet', 'forecast', 'dual'])"
 				v-model:checked="useReportStore().current.settings.showXTitle"
 				:label="$t('showTitle')"
@@ -40,7 +40,7 @@
 				<div class="control-label">
 					{{ $t('tickCount') }}
 				</div>
-				<n-input-number
+				<NInputNumber
 					v-model:value="useReportStore().current.settings.xAxisTickCount"
 					:step="2"
 					:min="0"
@@ -48,14 +48,14 @@
 				/>
 			</div>
 			<div v-if="!useReportStore().showOnlyIf(['bullet', 'forecast'])">
-				<n-checkbox
+				<NCheckbox
 					v-if="useReportStore().showOnlyIf(['combo']) && !useReportStore().isGrouped"
 					v-model:checked="useReportStore().current.settings.comboSyncAxis"
 					:label="$t('syncComboAxis')"
 					class="w-full"
 				/>
 
-				<n-checkbox
+				<NCheckbox
 					v-if="useReportStore().showOnlyIf(['combo']) || !useReportStore().showOnlyIf(['combo', 'dual'])"
 					v-model:checked="useReportStore().current.settings.xAxisChangeScale"
 					:label="$t('changeScale')"
@@ -71,24 +71,24 @@
 					class="control"
 				>
 					<div class="control">
-						<n-input-number
+						<NInputNumber
 							v-model:value="useReportStore().current.settings.xAxisMaxScale"
 							class="w-full"
 						>
 							<template #prefix>
 								<span style="margin: 3px">{{ $t('max') }}</span>
 							</template>
-						</n-input-number>
+						</NInputNumber>
 					</div>
 					<div class="control">
-						<n-input-number
+						<NInputNumber
 							v-model:value="useReportStore().current.settings.xAxisMinScale"
 							class="w-full"
 						>
 							<template #prefix>
 								<span style="margin: 3px">{{ $t('min') }}</span>
 							</template>
-						</n-input-number>
+						</NInputNumber>
 					</div>
 				</div>
 			</div>

@@ -14,11 +14,11 @@
 				<NDivider title-placement="left">
 					{{ $t('Todo') }}
 				</NDivider>
-				<n-skeleton
+				<NSkeleton
 					:height="30"
 					class="rounded"
 				/>
-				<n-skeleton
+				<NSkeleton
 					:height="90"
 					class="rounded"
 				/>

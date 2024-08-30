@@ -13,7 +13,7 @@
 			<div class="control-label">
 				{{ $t('link') }}
 			</div>
-			<n-color-picker
+			<NColorPicker
 				v-if="!hideColor"
 				v-model:value="useReportStore().currentField.linkValueColor"
 				:modes="['hex']"

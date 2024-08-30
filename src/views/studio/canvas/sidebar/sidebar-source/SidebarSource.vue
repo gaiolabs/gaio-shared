@@ -5,20 +5,20 @@
 		</div>
 		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">
 			<div class="mx-3">
-				<n-collapse @item-header-click="loadMetadata">
-					<n-collapse-item
+				<NCollapse @item-header-click="loadMetadata">
+					<NCollapseItem
 						v-for="source in sourceList"
 						:key="source.sourceName"
 						:title="source.sourceName"
 						:name="source.sourceName"
 					>
 						<div class="mx-3">
-							<n-input
+							<NInput
 								v-model:value="searchTerm[source.sourceName]"
 								:placeholder="$t('search')"
 								clearable
 							/>
-							<n-scrollbar style="max-height: 200px">
+							<NScrollbar style="max-height: 200px">
 								<vue-draggable
 									:key="source.items?.length"
 									:model-value="filterBy(source.items, 'tableName', searchTerm[source.sourceName])"
@@ -43,10 +43,10 @@
 										</div>
 									</div>
 								</vue-draggable>
-							</n-scrollbar>
+							</NScrollbar>
 						</div>
-					</n-collapse-item>
-				</n-collapse>
+					</NCollapseItem>
+				</NCollapse>
 			</div>
 		</div>
 	</div>

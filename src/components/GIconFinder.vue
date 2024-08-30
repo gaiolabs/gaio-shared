@@ -8,13 +8,13 @@
 		</template>
 		<template #content>
 			<div class="h-[400px] max-w-[400px]">
-				<n-input
+				<NInput
 					v-model:value="searchTerm"
 					placeholder="Search"
 					class="mb-2"
 				/>
 
-				<n-card content-style="padding: 5px">
+				<NCard content-style="padding: 5px">
 					<div class="app-control-icon flex flex-wrap gap-2">
 						<template
 							v-for="item in iconListFiltered"
@@ -28,7 +28,7 @@
 							/>
 						</template>
 					</div>
-				</n-card>
+				</NCard>
 			</div>
 		</template>
 	</g-dialog>

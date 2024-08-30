@@ -15,7 +15,7 @@
 							>
 								{{ $t('taskLabel') }}
 							</label>
-							<n-input v-model:value="localTask.label" />
+							<NInput v-model:value="localTask.label" />
 						</div>
 					</div>
 					<div class="flex w-full items-center gap-2">
@@ -23,7 +23,7 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('sourceTable') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.tableName"
 								disabled
 								class="w-100"
@@ -33,7 +33,7 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('resultTable') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.resultTable"
 								v-alpha
 							/>
@@ -43,7 +43,7 @@
 						<div class="flex items-center gap-2">
 							<div class="flex w-full flex-col gap-1">
 								<label class="font-semibold text-neutral-500">{{ $t('minSupport') }}</label>
-								<n-input-number
+								<NInputNumber
 									v-model:value="localTask.minSupport"
 									required
 									:min="0.2"
@@ -53,7 +53,7 @@
 							</div>
 							<div class="flex w-full flex-col gap-1">
 								<label class="font-semibold text-neutral-500">{{ $t('minThreshold') }}</label>
-								<n-input-number
+								<NInputNumber
 									v-model:value="localTask.minThreshold"
 									required
 									:min="0.8"

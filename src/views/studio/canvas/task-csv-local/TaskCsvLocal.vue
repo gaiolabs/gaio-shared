@@ -15,7 +15,7 @@
 							>
 								{{ $t('taskLabel') }}
 							</label>
-							<n-input
+							<NInput
 								id="task"
 								v-model:value="localTask.label"
 								:placeholder="$t('taskLocalCsvFolder')"
@@ -23,7 +23,7 @@
 						</div>
 						<div class="flex w-full flex-col gap-1">
 							<label class="font-semibold text-neutral-500">{{ $t('resultTable') }}</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.resultTable"
 								:placeholder="$t('tableName')"
 							/>
@@ -32,7 +32,7 @@
 
 					<div class="w-full">
 						<label class="font-semibold text-neutral-500">{{ $t('separator') }}</label>
-						<n-select
+						<NSelect
 							v-model:value="localTask.fileFormatType"
 							filterable
 							:options="[
@@ -47,7 +47,7 @@
 
 					<div class="w-full">
 						<div class="control-label">{{ $t('options') }}</div>
-						<n-select
+						<NSelect
 							v-model:value="localTask.schemaInference"
 							filterable
 							:options="[
@@ -64,7 +64,7 @@
 						>
 							{{ $t('folder') }}
 						</label>
-						<n-input
+						<NInput
 							id="folder"
 							v-model:value="localTask.folderPath"
 							placeholder=""
@@ -72,11 +72,11 @@
 					</div>
 
 					<div class="flex w-full flex-col">
-						<n-checkbox
+						<NCheckbox
 							v-model:checked="localTask.insertMode"
 							:label="$t('insertMode')"
 						/>
-						<n-checkbox
+						<NCheckbox
 							v-model:checked="localTask.deleteAfterImport"
 							:label="$t('deleteAfterImport')"
 						/>

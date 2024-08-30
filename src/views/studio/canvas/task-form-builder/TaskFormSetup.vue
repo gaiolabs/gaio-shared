@@ -1,24 +1,24 @@
 <template>
 	<div class="task-form-setup h-full p-2">
 		<div class="h-full rounded bg-paper-100 p-2 dark:bg-carbon-100">
-			<n-tabs
+			<NTabs
 				type="segment"
 				animated
 				size="small"
 			>
-				<n-tab-pane
+				<NTabPane
 					name="settings"
 					:tab="$t('settings')"
 				>
 					<task-form-setup-setting />
-				</n-tab-pane>
-				<n-tab-pane
+				</NTabPane>
+				<NTabPane
 					name="types"
 					:tab="$t('types')"
 				>
 					<task-form-setup-type />
-				</n-tab-pane>
-			</n-tabs>
+				</NTabPane>
+			</NTabs>
 		</div>
 	</div>
 </template>

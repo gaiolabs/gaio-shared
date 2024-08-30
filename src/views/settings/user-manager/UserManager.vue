@@ -15,11 +15,11 @@
 		>
 			<template v-if="loading">
 				<NSpace vertical>
-					<n-skeleton
+					<NSkeleton
 						:height="30"
 						class="rounded"
 					/>
-					<n-skeleton
+					<NSkeleton
 						:height="90"
 						class="rounded"
 					/>
@@ -39,14 +39,14 @@
 							</NButton>
 							<NDivider vertical />
 						</template>
-						<n-input
+						<NInput
 							v-model:value="searchTerm"
 							:placeholder="$t('filter')"
 							clearable
 							style="max-width: 300px"
 						/>
 						<NDivider vertical />
-						<n-tooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									color="#333"
@@ -57,8 +57,8 @@
 								</NButton>
 							</template>
 							{{ $t('admin') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									color="#1976d2"
@@ -69,8 +69,8 @@
 								</NButton>
 							</template>
 							{{ $t('developer') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									color="#e91e63"
@@ -81,8 +81,8 @@
 								</NButton>
 							</template>
 							{{ $t('user') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									color="#ccc"
@@ -93,10 +93,10 @@
 								</NButton>
 							</template>
 							{{ $t('clear') }}
-						</n-tooltip>
+						</NTooltip>
 					</div>
 					<div class="flex items-center justify-between gap-2">
-						<n-select
+						<NSelect
 							v-model:value="filterGroup"
 							class="w-[150px]"
 							filterable
@@ -106,7 +106,7 @@
 							:options="groups"
 						/>
 						<NDivider vertical />
-						<n-select
+						<NSelect
 							v-if="hasSelected"
 							v-model:value="bulkGroup"
 							class="w-[210px]"
@@ -123,7 +123,7 @@
 							vertical
 						/>
 						<template v-if="hasSelected">
-							<n-popconfirm
+							<NPopconfirm
 								:width="350"
 								:positive-text="$t('delete')"
 								:negative-text="$t('cancel')"
@@ -139,14 +139,14 @@
 								<div>
 									{{ $t('deleteSelectedMessage') }}
 								</div>
-							</n-popconfirm>
+							</NPopconfirm>
 						</template>
-						<n-input-number
+						<NInputNumber
 							v-model:value="size"
 							:step="5"
 							style="margin-left: 5px; min-width: 90px"
 						/>
-						<n-tooltip :persistent="false">
+						<NTooltip :persistent="false">
 							<template #trigger>
 								<NButton
 									tertiary
@@ -158,7 +158,7 @@
 								</NButton>
 							</template>
 							{{ $t('download') }}
-						</n-tooltip>
+						</NTooltip>
 					</div>
 				</div>
 				<g-alert
@@ -171,14 +171,14 @@
 					v-if="filterApplied"
 					class="g-bg-1 rounded p-2 shadow"
 				>
-					<n-table>
+					<NTable>
 						<thead>
 							<tr>
 								<th
 									style="width: 40px"
 									class="!text-center"
 								>
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="selectAll"
 										@update:checked="onSelectAll()"
 									/>
@@ -203,13 +203,13 @@
 									class="text-center"
 									style="width: 40px"
 								>
-									<n-checkbox v-model="user['selected']" />
+									<NCheckbox v-model="user['selected']" />
 								</td>
 								<td
 									:key="user.role"
 									class="text-center"
 								>
-									<n-tooltip
+									<NTooltip
 										v-if="user.role === 'admin'"
 										:persistent="false"
 										:show-after="1500"
@@ -225,8 +225,8 @@
 											</NButton>
 										</template>
 										{{ t('admin') }}
-									</n-tooltip>
-									<n-tooltip
+									</NTooltip>
+									<NTooltip
 										v-else-if="user.role === 'dev'"
 										:persistent="false"
 									>
@@ -241,8 +241,8 @@
 											</NButton>
 										</template>
 										{{ t('developer') }}
-									</n-tooltip>
-									<n-tooltip
+									</NTooltip>
+									<NTooltip
 										v-else
 										:persistent="false"
 										:show-after="1500"
@@ -258,7 +258,7 @@
 											</NButton>
 										</template>
 										{{ t('user') }}
-									</n-tooltip>
+									</NTooltip>
 								</td>
 								<td>{{ user.userId }}</td>
 								<td>
@@ -272,7 +272,7 @@
 								</td>
 								<td>{{ user.email }}</td>
 								<td>
-									<n-select
+									<NSelect
 										:key="user.userId"
 										v-model:value="users[users.findIndex((o) => o.userId === user.userId)].tags"
 										filterable
@@ -285,7 +285,7 @@
 									/>
 								</td>
 								<td class="text-center">
-									<n-switch
+									<NSwitch
 										v-model:value="users[users.findIndex((o) => o.userId === user.userId)].status"
 										checked-value="active"
 										unchecked-value="inactive"
@@ -293,10 +293,10 @@
 									>
 										<template #checked>{{ $t('active') }}</template>
 										<template #unchecked>{{ $t('inactive') }}</template>
-									</n-switch>
+									</NSwitch>
 								</td>
 								<td class="text-center">
-									<n-popconfirm
+									<NPopconfirm
 										:width="350"
 										:positive-text="$t('delete')"
 										:negative-text="$t('cancel')"
@@ -313,16 +313,16 @@
 										<div>
 											{{ `${$t('delete')}: \n #${user.userId} - ${user.name}` }}
 										</div>
-									</n-popconfirm>
+									</NPopconfirm>
 								</td>
 							</tr>
 						</tbody>
-					</n-table>
+					</NTable>
 					<div
 						v-if="filterBy(users, ['userId', 'name', 'email'], searchTerm).length > size"
 						class="d-flex justify-content-center w-100"
 					>
-						<n-pagination
+						<NPagination
 							v-model:page="page"
 							size="small"
 							:page-count="filterBy(users, ['userId', 'name', 'email'], searchTerm).length"

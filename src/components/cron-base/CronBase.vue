@@ -10,7 +10,7 @@
 					{{ $t('cronEvery') }}
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.every"
 						size="small"
 						filterable
@@ -31,7 +31,7 @@
 					{{ $t('cronOnWeekDay') }}
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.dayValues"
 						size="small"
 						filterable
@@ -53,7 +53,7 @@
 					{{ $t('cronOnTheDay') }}
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.dayOfMonthValues"
 						size="small"
 						filterable
@@ -75,7 +75,7 @@
 					{{ $t('cronOfMonth') }}
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.monthValues"
 						size="small"
 						filterable
@@ -97,7 +97,7 @@
 					{{ $t('cronAtHour') }}
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.hourValues"
 						size="small"
 						filterable
@@ -130,7 +130,7 @@
 					</span>
 				</div>
 				<div class="grow">
-					<n-select
+					<NSelect
 						v-model:value="localCron.minuteValues"
 						size="small"
 						filterable
@@ -159,7 +159,7 @@
 		>
 			<div class="cron-reference">{{ $t('status') }}</div>
 			<div class="grow">
-				<n-select
+				<NSelect
 					v-model:value="localCron.status"
 					size="small"
 					filterable

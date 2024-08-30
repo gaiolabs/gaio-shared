@@ -4,7 +4,7 @@
 			<div class="control-label">
 				{{ $t('messageHelper') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="current.settings.description"
 				type="textarea"
 				:placeholder="$t('defineToEnable')"
@@ -14,7 +14,7 @@
 			<div class="control-label">
 				{{ $t('messageNoData') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="current.settings.noDataSentence"
 				type="textarea"
 				:placeholder="$t('defineToEnable')"

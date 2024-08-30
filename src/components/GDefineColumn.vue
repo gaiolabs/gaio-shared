@@ -5,7 +5,7 @@
 	>
 		<div class="flex gap-2">
 			<div class="grow">
-				<n-input
+				<NInput
 					v-model:value="localValue.columnName"
 					clearable
 					size="small"
@@ -15,7 +15,7 @@
 			</div>
 			<div class="flex gap-2">
 				<div class="min-w-[120px]">
-					<n-select
+					<NSelect
 						v-model:value="localValue.dataType"
 						class="w-full"
 						size="small"
@@ -24,7 +24,7 @@
 					/>
 				</div>
 				<div v-if="dataTypeIsFloat(localValue.dataType)">
-					<n-input-number
+					<NInputNumber
 						v-model:value="localValue.columnLength"
 						size="small"
 						:placeholder="$t('size')"
@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import useDataType from '@/composables/useDataType'
 import type { FieldType, GenericType } from '@gaio/shared/types'
+import { NSelect } from 'naive-ui'
 import { watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

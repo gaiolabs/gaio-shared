@@ -16,14 +16,14 @@
 								{{ $t('group') }}
 								<span v-if="localGroup.userId">#{{ localGroup.userId }}</span>
 							</div>
-							<n-input
+							<NInput
 								v-model:value="localGroup.name"
 								:placeholder="$t('name')"
 							/>
 						</div>
 					</div>
 					<div class="flex items-center justify-between">
-						<n-popconfirm
+						<NPopconfirm
 							v-if="localGroup.userId"
 							:width="350"
 							:positive-text="$t('delete')"
@@ -37,7 +37,7 @@
 								</NButton>
 							</template>
 							{{ $t('removeGroup') }}
-						</n-popconfirm>
+						</NPopconfirm>
 						<div></div>
 						<NButton
 							type="primary"

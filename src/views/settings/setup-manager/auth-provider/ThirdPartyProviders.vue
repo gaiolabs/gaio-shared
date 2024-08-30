@@ -16,8 +16,8 @@
 				:key="provider.name"
 				class="flex justify-between gap-x-6 py-6"
 			>
-				<n-collapse arrow-placement="right">
-					<n-collapse-item>
+				<NCollapse arrow-placement="right">
+					<NCollapseItem>
 						<template #header>
 							<img
 								class="mr-2 h-4 w-4"
@@ -28,47 +28,47 @@
 								{{ provider.name }}
 							</div>
 						</template>
-						<n-form class="mt-4 flex flex-col">
-							<n-form-item
+						<NForm class="mt-4 flex flex-col">
+							<NFormItem
 								label="Client ID"
 								class="w-full"
 							>
-								<n-input
+								<NInput
 									v-model:value="provider.credentials.clientId"
 									size="large"
 									:placeholder="$t('your' + provider.name + 'ClientId')"
 									clearable
 									@blur="updateThirdPartyProviders(provider.key)"
 								/>
-							</n-form-item>
-							<n-form-item
+							</NFormItem>
+							<NFormItem
 								label="Client Secret"
 								class="w-full"
 							>
-								<n-input
+								<NInput
 									v-model:value="provider.credentials.clientSecret"
 									size="large"
 									:placeholder="$t('your' + provider.name + 'ClientSecret')"
 									clearable
 									@blur="updateThirdPartyProviders(provider.key)"
 								/>
-							</n-form-item>
-							<n-form-item
+							</NFormItem>
+							<NFormItem
 								v-if="Object.keys(provider.credentials).includes('tenantId')"
 								label="Tenant ID"
 								class="w-full"
 							>
-								<n-input
+								<NInput
 									v-model:value="provider.credentials.tenantId"
 									size="large"
 									:placeholder="$t('your' + provider.name + 'TenantId')"
 									clearable
 									@blur="updateThirdPartyProviders(provider.key)"
 								/>
-							</n-form-item>
-						</n-form>
-					</n-collapse-item>
-				</n-collapse>
+							</NFormItem>
+						</NForm>
+					</NCollapseItem>
+				</NCollapse>
 			</li>
 		</ul>
 	</div>
@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
+import { NCollapseItem, NFormItem } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 const thirdPartyProviders = ref([

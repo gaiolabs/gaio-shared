@@ -5,7 +5,7 @@
 			class="control"
 		>
 			<div class="control-label">{{ $t('fontSize') }}</div>
-			<n-input-number
+			<NInputNumber
 				v-model:value="useReportStore().current.settings.labelFontSize"
 				:min="11"
 				:max="60"
@@ -14,37 +14,37 @@
 			/>
 		</div>
 		<div v-else>
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.showLabel"
 				:label="$t('enable')"
 				class="w-full"
 			/>
-			<n-checkbox
+			<NCheckbox
 				v-if="useReportStore().showOnlyIf(['combo', 'dual'])"
 				v-model:checked="useReportStore().current.settings.showLabelDualExtra"
 				:label="$t('showLabelDualExtra')"
 				class="w-full"
 			/>
 			<div v-if="useReportStore().current.settings.showLabel && !useReportStore().showOnlyIf(['liquid'])">
-				<n-checkbox
+				<NCheckbox
 					v-if="useReportStore().showOnlyIf(['pie', 'treemap', 'funnel'])"
 					v-model:checked="useReportStore().current.settings.showLabelDimension"
 					class="w-full"
 					:label="$t('dimension')"
 				/>
-				<n-checkbox
+				<NCheckbox
 					v-if="useReportStore().showOnlyIf(['pie', 'treemap', 'funnel'])"
 					v-model:checked="useReportStore().current.settings.showLabelMeasure"
 					class="w-full"
 					:label="$t('measure')"
 				/>
-				<n-checkbox
+				<NCheckbox
 					v-if="useReportStore().showOnlyIf(['column', 'pie'])"
 					v-model:checked="useReportStore().current.settings.showLabelPercent"
 					class="w-full"
 					:label="$t('percent')"
 				/>
-				<n-checkbox
+				<NCheckbox
 					v-if="!useReportStore().showOnlyIf(['histogram'])"
 					v-model:checked="useReportStore().current.settings.compactNumberLabel"
 					class="w-full"
@@ -54,7 +54,7 @@
 					v-if="useReportStore().hideOnlyIf(['gauge', 'bullet', 'funnel', 'calendar', 'line', 'dual'])"
 					class="control"
 				>
-					<n-checkbox
+					<NCheckbox
 						v-if="useReportStore().hideOnlyIf(['pie'])"
 						v-model:checked="useReportStore().current.settings.showTotal"
 						class="w-full"
@@ -68,7 +68,7 @@
 						<div class="control-label">
 							{{ $t('position') }}
 						</div>
-						<n-select
+						<NSelect
 							v-model:value="useReportStore().current.settings.showLabelType"
 							class="w-full"
 							:options="[
@@ -94,8 +94,8 @@
 					class="control"
 				>
 					<div class="control-label">{{ $t('fontSize') }}</div>
-					<n-input-group>
-						<n-input-number
+					<NInputGroup>
+						<NInputNumber
 							v-model:value="useReportStore().current.settings.labelFontSize"
 							:min="9"
 							:max="60"
@@ -103,14 +103,14 @@
 							:placeholder="$t('fontSize')"
 							class="w-full"
 						/>
-					</n-input-group>
+					</NInputGroup>
 					<div class="control">
 						<div class="control-label">{{ $t('color') }}</div>
-						<n-color-picker v-model:value="useReportStore().current.settings.labelFontColor" />
+						<NColorPicker v-model:value="useReportStore().current.settings.labelFontColor" />
 					</div>
 				</div>
 				<div class="control">
-					<n-checkbox
+					<NCheckbox
 						v-if="useReportStore().showOnlyIf(['gauge'])"
 						v-model:checked="useReportStore().current.settings.showLabelPercent"
 						class="w-full"
@@ -122,7 +122,7 @@
 					class="control"
 				>
 					<div class="control-label">{{ $t('statistics') }}/{{ $t('fontSize') }}</div>
-					<n-input-number
+					<NInputNumber
 						v-model:value="useReportStore().current.settings.staticFontSize"
 						:min="9"
 						:max="90"
@@ -131,7 +131,7 @@
 					/>
 				</div>
 
-				<!--                <n-input-number-->
+				<!--                <NInputNumber-->
 				<!--                    v-model:value="useReportStore().current.settings.labelRotate"-->
 				<!--                    :step="1"-->
 				<!--                    :placeholder="$t('rotate')"-->

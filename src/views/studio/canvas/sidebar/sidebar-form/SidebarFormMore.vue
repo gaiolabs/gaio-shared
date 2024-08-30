@@ -1,7 +1,7 @@
 <template>
 	<div class="sidebar-form-more">
 		<div class="flex items-center justify-between">
-			<n-dropdown
+			<NDropdown
 				trigger="hover"
 				:options="options"
 				@select="handleSelect"
@@ -14,7 +14,7 @@
 						<g-icon name="more" />
 					</template>
 				</NButton>
-			</n-dropdown>
+			</NDropdown>
 		</div>
 	</div>
 </template>

@@ -27,7 +27,7 @@
 					<Splitpanes class="h-full w-full">
 						<pane :size="22">
 							<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
-								<n-scrollbar style="max-height: calc(100vh - 72px)">
+								<NScrollbar style="max-height: calc(100vh - 72px)">
 									<div class="flex items-center justify-between p-3 pb-0 pt-2 font-bold">
 										<div class="text-lg">
 											{{ $t('columns') }}
@@ -60,7 +60,7 @@
 										@view-table="viewTable"
 										@edit-computed="editComputed"
 									/>
-								</n-scrollbar>
+								</NScrollbar>
 							</div>
 						</pane>
 						<pane :size="78">
@@ -71,7 +71,7 @@
 							>
 								<pane :size="78">
 									<div class="my-2 h-full rounded bg-paper-200 dark:bg-carbon-100">
-										<n-scrollbar style="max-height: calc(100vh - 72px)">
+										<NScrollbar style="max-height: calc(100vh - 72px)">
 											<div class="mt-3 pb-[60px]">
 												<task-builder-drop-select
 													class="p-3 pt-0"
@@ -107,7 +107,7 @@
 												<div class="flex w-full items-center gap-2 p-3">
 													<div class="grow">
 														<div class="mx-1 mb-1">{{ $t('rows') }}</div>
-														<n-input-number
+														<NInputNumber
 															v-model:value="localTask.schema.limit"
 															:placeholder="$t('limit')"
 															class="grow"
@@ -115,7 +115,7 @@
 													</div>
 													<div class="grow">
 														<div class="mx-1 mb-1">{{ $t('pageOffset') }}</div>
-														<n-input-number
+														<NInputNumber
 															v-model:value="localTask.schema.offset"
 															:placeholder="$t('offset')"
 															class="grow"
@@ -129,12 +129,12 @@
 													@choose="defineLocalField('limitBy', $event)"
 												/>
 											</div>
-										</n-scrollbar>
+										</NScrollbar>
 									</div>
 								</pane>
 								<pane :size="22">
 									<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
-										<n-scrollbar style="max-height: calc(100vh - 72px)">
+										<NScrollbar style="max-height: calc(100vh - 72px)">
 											<div class="flex justify-between px-2 pb-1 pt-2 text-lg font-bold">
 												{{ $t('options') }}
 											</div>
@@ -142,7 +142,7 @@
 												:local-task="localTask"
 												:local-field="localField"
 											/>
-										</n-scrollbar>
+										</NScrollbar>
 									</div>
 								</pane>
 							</splitpanes>

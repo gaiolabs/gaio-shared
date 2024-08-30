@@ -4,7 +4,7 @@
 		class="explorer-settings-global-chart-colors"
 	>
 		<div class="clearfix control">
-			<n-page-header
+			<NPageHeader
 				:subtitle="$t('palette')"
 				@back="$emit('close')"
 			/>

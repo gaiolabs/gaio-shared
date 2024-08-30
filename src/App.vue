@@ -27,7 +27,7 @@
 import { useAuthStore, useCommandKStore } from '@/stores'
 import CommandK from '@/views/commandK/CommandK.vue'
 import { useColorMode, useMagicKeys } from '@vueuse/core'
-import { darkTheme, NMessageProvider } from 'naive-ui'
+import { darkTheme, NMessageProvider, NConfigProvider } from 'naive-ui'
 import { computed, nextTick, onMounted, watch, watchEffect } from 'vue'
 import { RouterView } from 'vue-router'
 

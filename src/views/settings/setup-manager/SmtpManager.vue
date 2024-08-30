@@ -12,11 +12,11 @@
 			<div class="flex gap-2">
 				<div class="flex w-full flex-col">
 					<label class="control-label">{{ $t('host') }}</label>
-					<n-input v-model:value="smtpData.options.host" />
+					<NInput v-model:value="smtpData.options.host" />
 				</div>
 				<div class="flex flex-col">
 					<label class="control-label">{{ $t('port') }}</label>
-					<n-input-number
+					<NInputNumber
 						v-model:value="smtpData.options.port"
 						:placeholder="$t('port')"
 						min="1"
@@ -26,7 +26,7 @@
 				</div>
 				<div class="flex flex-col">
 					<label class="control-label">{{ $t('encryption') }}</label>
-					<n-select
+					<NSelect
 						v-model:value="encryption"
 						:options="encryptionOptions"
 					/>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="flex w-full flex-col">
 				<label class="control-label">{{ $t('name') }}</label>
-				<n-input
+				<NInput
 					v-model:value="smtpData.options.name"
 					placeholder=""
 				/>
@@ -42,14 +42,14 @@
 			<div class="flex gap-2">
 				<div class="flex w-full flex-col">
 					<label class="control-label">{{ $t('userEmail') }}</label>
-					<n-input
+					<NInput
 						v-model:value="smtpData.options.user"
 						placeholder=""
 					/>
 				</div>
 				<div class="flex w-full flex-col">
 					<label class="control-label">{{ $t('password') }}</label>
-					<n-input
+					<NInput
 						v-model:value="smtpData.options.password"
 						type="password"
 					/>
@@ -57,7 +57,7 @@
 			</div>
 
 			<div class="flex w-full flex-col">
-				<n-checkbox
+				<NCheckbox
 					v-model:checked="smtpData.options.useOffice365"
 					:label="$t('office365/microsoft')"
 				/>
@@ -65,7 +65,7 @@
 			<NDivider />
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<n-switch v-model:checked="smtpData.options.enabled" />
+					<NSwitch v-model:checked="smtpData.options.enabled" />
 					{{ $t('enable') }}
 				</div>
 

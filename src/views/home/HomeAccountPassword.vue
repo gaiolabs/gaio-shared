@@ -4,7 +4,7 @@
 			<div class="control-label">
 				{{ $t('current') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="localAuth.currentPassword"
 				type="password"
 				:placeholder="$t('password')"
@@ -14,7 +14,7 @@
 			<div class="control-label">
 				{{ $t('newPassword') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="localAuth.newPassword"
 				type="password"
 				:placeholder="$t('password')"
@@ -24,7 +24,7 @@
 			<div class="control-label">
 				{{ $t('repeatPassword') }}
 			</div>
-			<n-input
+			<NInput
 				v-model:value="localAuth.repeatPassword"
 				type="password"
 				:placeholder="$t('password')"

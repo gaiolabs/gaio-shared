@@ -8,7 +8,7 @@
 				</div>
 				<div class="flex items-center">
 					<NDivider vertical />
-					<n-tooltip>
+					<NTooltip>
 						<template #trigger>
 							<NButton
 								text
@@ -23,11 +23,11 @@
 							</NButton>
 						</template>
 						{{ $t('selectAll') }}
-					</n-tooltip>
+					</NTooltip>
 				</div>
 			</div>
 			<div class="px-2 pt-2">
-				<n-input
+				<NInput
 					v-model:value="term"
 					:placeholder="$t('filter')"
 					@keyup="resetPage()"
@@ -35,7 +35,7 @@
 			</div>
 			<template v-if="hasFilteredTags">
 				<div class="table-responsive mx-1 my-1">
-					<n-table
+					<NTable
 						striped
 						size="small"
 					>
@@ -76,7 +76,7 @@
 								</td>
 								<td>
 									<div class="flex items-center justify-between">
-										<n-tooltip>
+										<NTooltip>
 											<template #trigger>
 												<NButton
 													text
@@ -87,7 +87,7 @@
 												</NButton>
 											</template>
 											{{ item.appId }}
-										</n-tooltip>
+										</NTooltip>
 										<div>
 											{{ item.refId }}
 										</div>
@@ -95,13 +95,13 @@
 								</td>
 							</tr>
 						</tbody>
-					</n-table>
+					</NTable>
 				</div>
 				<div
 					v-if="filterBy(tags, ['name', 'ref'], term).length > size"
 					class="my-2 flex w-full justify-center"
 				>
-					<n-pagination
+					<NPagination
 						v-model:page="page"
 						size="small"
 						:item-count="filterBy(tags, ['name', 'ref'], term).length"

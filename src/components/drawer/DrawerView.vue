@@ -44,21 +44,21 @@
 				v-if="slots.content"
 				class="drawer-content grow"
 			>
-				<n-scrollbar :style="scrollStyle">
+				<NScrollbar :style="scrollStyle">
 					<slot
 						name="content"
 						:min-height="scrollHeight"
 					/>
-				</n-scrollbar>
+				</NScrollbar>
 			</div>
 
 			<div
 				v-if="slots.contentScroll"
 				class="drawer-content-scroll grow"
 			>
-				<n-scrollbar :style="scrollStyle">
+				<NScrollbar :style="scrollStyle">
 					<slot name="contentScroll"></slot>
-				</n-scrollbar>
+				</NScrollbar>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 <template>
 	<div class="date-literal">
-		<n-date-picker
+		<NDatePicker
 			v-if="localType.type"
 			v-model:value="localValue"
 			class="w-full"
@@ -12,20 +12,20 @@
 			<template #footer>
 				<div>
 					<NSpace size="small">
-						<n-tag
+						<NTag
 							v-for="(item, index) of shortcuts"
 							:key="index"
 							size="small"
 							@click="item.value()"
 						>
 							{{ item.text }}
-						</n-tag>
+						</NTag>
 					</NSpace>
 					<div
 						v-if="showInfoNLiteral"
 						class="my-1"
 					>
-						<n-input-number
+						<NInputNumber
 							v-model:value="localNumberDateLiteral"
 							size="tiny"
 							:step="1"
@@ -36,11 +36,11 @@
 							@blur="defneNDays"
 						>
 							<template #prefix>{{ $t('days') }}:</template>
-						</n-input-number>
+						</NInputNumber>
 					</div>
 				</div>
 			</template>
-		</n-date-picker>
+		</NDatePicker>
 
 		<div
 			v-if="showInfo"
@@ -54,6 +54,7 @@
 import { convertToDate, isDateLiteral, isDateNumberLiteral, separateNLiteral } from '@gaio/shared/utils'
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash-es'
+import { NDatePicker, NInputNumber } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

@@ -13,13 +13,13 @@
 
 		<NDivider />
 
-		<n-grid
+		<NGrid
 			ref="elementBase"
 			:cols="2"
 			:x-gap="6"
 			:y-gap="6"
 		>
-			<n-grid-item
+			<NGridItem
 				v-for="item of tools"
 				:key="item.value"
 			>
@@ -31,8 +31,8 @@
 						{{ item.label }}
 					</div>
 				</div>
-			</n-grid-item>
-		</n-grid>
+			</NGridItem>
+		</NGrid>
 	</div>
 </template>
 <script setup lang="ts">

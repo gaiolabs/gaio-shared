@@ -12,7 +12,7 @@
 				{{ task.label }}
 			</div>
 			<div class="flex items-center">
-				<n-popover
+				<NPopover
 					v-if="task.settings.description"
 					:width="300"
 					trigger="hover"
@@ -32,7 +32,7 @@
 							</template>
 						</NButton>
 					</template>
-				</n-popover>
+				</NPopover>
 				<div v-if="showCloseTable">
 					<NDivider vertical />
 					<g-icon
@@ -61,7 +61,7 @@
 					class="mx-1 py-2 text-right"
 					:class="task.settings.title ? 'flex-grow-0' : 'flex-grow-1'"
 				>
-					<n-popover
+					<NPopover
 						v-if="task.settings.description"
 						:width="300"
 						trigger="hover"
@@ -81,8 +81,8 @@
 								</template>
 							</NButton>
 						</template>
-					</n-popover>
-					<n-tooltip
+					</NPopover>
+					<NTooltip
 						v-if="settings.showTable"
 						:persistent="false"
 						:show-after="1500"
@@ -96,7 +96,7 @@
 							</NButton>
 						</template>
 						{{ $t('showTable') }}
-					</n-tooltip>
+					</NTooltip>
 					<div v-if="!settings.showHeader && settings.showRows">#{{ tableRows }}</div>
 					<report-download
 						v-if="task.settings.downloadData && !task.settings.showHeader"

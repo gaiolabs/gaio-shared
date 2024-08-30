@@ -12,7 +12,7 @@
 						<g-icon name="cronEdit" />
 					</template>
 				</NButton>
-				<n-popover
+				<NPopover
 					placement="bottom"
 					trigger="click"
 				>
@@ -28,7 +28,7 @@
 					</template>
 					<div>
 						{{ $t('folder') }}
-						<n-input
+						<NInput
 							v-model:value="newFolderName"
 							:placeholder="$t('typeHere')"
 						>
@@ -41,9 +41,9 @@
 									{{ $t('add') }}
 								</NButton>
 							</template>
-						</n-input>
+						</NInput>
 					</div>
-				</n-popover>
+				</NPopover>
 				<NButton
 					size="tiny"
 					quaternary
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 		<div class="sidebar-flow-search px-4 pt-1">
-			<n-input
+			<NInput
 				v-model:value="searchTerm"
 				size="small"
 				:placeholder="$t('search')"
@@ -73,7 +73,7 @@
 				v-if="showScheduleBulk"
 				@close="showScheduleBulk = false"
 			/>
-			<n-dropdown
+			<NDropdown
 				trigger="manual"
 				:show="showDropdown"
 				:options="optionsRef as any"
@@ -82,12 +82,12 @@
 				@select="handleSelectDelete"
 				@clickoutside="showDropdown = false"
 			/>
-			<n-scrollbar
+			<NScrollbar
 				style="height: 100%; overflow: auto"
 				outer-class="h-full overflow-auto"
 			>
 				<div class="px-2">
-					<n-tree
+					<NTree
 						block-node
 						block-line
 						draggable
@@ -101,7 +101,7 @@
 						@drop="handleDropThenUpdate"
 					/>
 				</div>
-			</n-scrollbar>
+			</NScrollbar>
 		</div>
 	</div>
 </template>

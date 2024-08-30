@@ -6,7 +6,7 @@
 				{{ $t(type) }}
 			</div>
 			<div class="mb-1 flex gap-1">
-				<n-tooltip :delay="1000">
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -20,9 +20,9 @@
 						</NButton>
 					</template>
 					{{ $t('addFilter') }}
-				</n-tooltip>
+				</NTooltip>
 
-				<n-tooltip :delay="1000">
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -37,7 +37,7 @@
 						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 

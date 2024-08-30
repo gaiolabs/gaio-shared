@@ -2,26 +2,26 @@
 	<div class="tag-manager-users">
 		<div class="g-bg-1 card-header-fix card-tags min-h-[410px] rounded shadow">
 			<div class="card-header g-bg-400 flex h-[35px] items-center justify-between gap-2 px-2 py-1">
-				<n-radio-group
+				<NRadioGroup
 					v-model:value="tagType"
 					size="small"
 					@update:value="filterTag = ''"
 				>
-					<n-radio-button
+					<NRadioButton
 						:label="$t('group')"
 						value="group"
 					/>
-					<n-radio-button
+					<NRadioButton
 						:label="$t('user')"
 						value="user"
 					/>
-				</n-radio-group>
+				</NRadioGroup>
 				<div class="flex items-center justify-end gap-2">
 					<div
 						v-if="tagType === 'user'"
 						class="flex items-center gap-1"
 					>
-						<n-tooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									size="tiny"
@@ -33,8 +33,8 @@
 								</NButton>
 							</template>
 							{{ $t('admin') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									size="tiny"
@@ -46,8 +46,8 @@
 								</NButton>
 							</template>
 							{{ $t('developer') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									size="tiny"
@@ -59,8 +59,8 @@
 								</NButton>
 							</template>
 							{{ $t('user') }}
-						</n-tooltip>
-						<n-tooltip>
+						</NTooltip>
+						<NTooltip>
 							<template #trigger>
 								<NButton
 									size="tiny"
@@ -72,10 +72,10 @@
 								</NButton>
 							</template>
 							{{ $t('clear') }}
-						</n-tooltip>
+						</NTooltip>
 						<NDivider vertical />
 					</div>
-					<n-tooltip v-if="currentUser.userId && tagType !== 'user'">
+					<NTooltip v-if="currentUser.userId && tagType !== 'user'">
 						<template #trigger>
 							<NButton
 								text
@@ -87,12 +87,12 @@
 							</NButton>
 						</template>
 						{{ $t('newGroup') }}
-					</n-tooltip>
+					</NTooltip>
 					<NDivider
 						v-if="current && current.userId"
 						vertical
 					/>
-					<n-tooltip v-if="tagType !== 'user'">
+					<NTooltip v-if="tagType !== 'user'">
 						<template #trigger>
 							<NButton
 								text
@@ -107,12 +107,12 @@
 							</NButton>
 						</template>
 						{{ $t('newGroup') }}
-					</n-tooltip>
+					</NTooltip>
 					<NDivider
 						v-if="tagType !== 'user'"
 						vertical
 					/>
-					<n-tooltip>
+					<NTooltip>
 						<template #trigger>
 							<NButton
 								text
@@ -124,11 +124,11 @@
 							</NButton>
 						</template>
 						{{ $t('selectAll') }}
-					</n-tooltip>
+					</NTooltip>
 				</div>
 			</div>
 			<div class="px-2 pt-2">
-				<n-input
+				<NInput
 					v-model:value="term"
 					:disabled="!!currentUser.userId"
 					:placeholder="$t('filter')"
@@ -142,7 +142,7 @@
 			<template v-if="tagType === 'user'">
 				<template v-if="hasFilteredTagsOfOnlyUsers">
 					<div class="table-responsive mx-1 my-1">
-						<n-table
+						<NTable
 							striped
 							size="small"
 						>
@@ -182,7 +182,7 @@
 										/>
 									</td>
 									<td class="el-text-center">
-										<n-tooltip v-if="item.role === 'admin'">
+										<NTooltip v-if="item.role === 'admin'">
 											<template #trigger>
 												<NButton
 													size="tiny"
@@ -193,8 +193,8 @@
 												</NButton>
 											</template>
 											{{ $t('admin') }}
-										</n-tooltip>
-										<n-tooltip v-else-if="item.role === 'dev'">
+										</NTooltip>
+										<NTooltip v-else-if="item.role === 'dev'">
 											<template #trigger>
 												<NButton
 													size="tiny"
@@ -205,8 +205,8 @@
 												</NButton>
 											</template>
 											{{ $t('developer') }}
-										</n-tooltip>
-										<n-tooltip v-else>
+										</NTooltip>
+										<NTooltip v-else>
 											<template #trigger>
 												<NButton
 													size="tiny"
@@ -217,7 +217,7 @@
 												</NButton>
 											</template>
 											{{ $t('user') }}
-										</n-tooltip>
+										</NTooltip>
 									</td>
 									<td class="el-text-center">{{ item.userId }}</td>
 									<td>
@@ -231,13 +231,13 @@
 									<td>{{ item.email }}</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 					</div>
 					<div
 						v-if="filterBy(tags, 'name', term).filter((t) => t.role !== 'group').length > size"
 						class="d-flex justify-content-center w-100"
 					>
-						<n-pagination
+						<NPagination
 							v-model:page="page"
 							size="small"
 							:item-count="filterBy(tags, 'name', term).filter((t) => t.role !== 'group').length"
@@ -254,7 +254,7 @@
 				<!-- TABLE GROUPS-->
 				<template v-if="hasFilteredTags">
 					<div class="table-responsive mx-1 my-1">
-						<n-table
+						<NTable
 							striped
 							size="small"
 						>
@@ -297,13 +297,13 @@
 									</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 					</div>
 					<div
 						v-if="filterBy(tags, 'name', term).filter((t) => t.role === 'group').length > size"
 						class="flex w-full justify-center"
 					>
-						<n-pagination
+						<NPagination
 							v-model:page="page"
 							size="small"
 							:item-count="filterBy(tags, 'name', term).filter((t) => t.role === 'group').length"

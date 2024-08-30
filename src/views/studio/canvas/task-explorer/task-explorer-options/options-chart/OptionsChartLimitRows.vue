@@ -1,6 +1,6 @@
 <template>
 	<div class="options-limit-rows control-secondary">
-		<n-input-number
+		<NInputNumber
 			v-model:value="useReportStore().current.settings.limitRows"
 			:min="0"
 			:step="1"

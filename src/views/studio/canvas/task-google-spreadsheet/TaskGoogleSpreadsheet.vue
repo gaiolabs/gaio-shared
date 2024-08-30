@@ -15,7 +15,7 @@
 							>
 								{{ $t('task') }}
 							</label>
-							<n-input
+							<NInput
 								id="task"
 								v-model:value="localTask.label"
 								name="task"
@@ -29,7 +29,7 @@
 							>
 								{{ $t('resultTable') }}
 							</label>
-							<n-input
+							<NInput
 								id="resultTable"
 								v-model:value="localTask.resultTable"
 								:placeholder="$t('resultTable')"
@@ -43,16 +43,16 @@
 						>
 							Spreadsheet DOC ID
 						</label>
-						<n-input
+						<NInput
 							id="spreadsheetDocId"
 							v-model:value="localTask.url"
 							:placeholder="''"
 						/>
 					</div>
 					<div class="flex w-full flex-col gap-1">
-						<n-checkbox v-model:checked="localTask.insertMode">
+						<NCheckbox v-model:checked="localTask.insertMode">
 							Insertion Mode. If the table already exists, won't be replaced. New values willb added to the table
-						</n-checkbox>
+						</NCheckbox>
 					</div>
 				</div>
 				<div class="flex justify-end bg-elevation-0 px-4 py-2">

@@ -10,7 +10,7 @@
 			>
 				{{ $t('outputTable') }}
 			</label>
-			<n-input
+			<NInput
 				id="result"
 				v-model:value="localTask.resultTable"
 				placeholder=""
@@ -23,7 +23,7 @@
 			>
 				{{ $t('structureId') }}
 			</label>
-			<n-select
+			<NSelect
 				id="structure-id"
 				v-model:value="structureId"
 				:options="structureOptions"
@@ -48,7 +48,7 @@
 				</div>
 			</template>
 		</div>
-		<n-card>
+		<NCard>
 			<div
 				v-if="localTask.tableName"
 				class="flex flex-col gap-1"
@@ -67,7 +67,7 @@
 				/>
 			</div>
 			<div class="my-4 flex items-center gap-1">
-				<n-switch v-model:value="localTask.resultTableTruncate" />
+				<NSwitch v-model:value="localTask.resultTableTruncate" />
 				<span>{{ $t('alwaysDropTable') }}</span>
 			</div>
 			<div class="flex flex-col gap-1">
@@ -77,12 +77,12 @@
 				>
 					{{ $t('objectProperties') }}
 				</label>
-				<n-input
+				<NInput
 					id="object-props"
 					placeholder=""
 				/>
 			</div>
-		</n-card>
+		</NCard>
 	</div>
 </template>
 <script setup lang="ts">

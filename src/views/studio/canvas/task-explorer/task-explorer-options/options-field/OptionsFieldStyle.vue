@@ -4,7 +4,7 @@
 			<div class="control-label">
 				{{ $t('fontWeight') }}
 			</div>
-			<n-select
+			<NSelect
 				v-model:value="useReportStore().currentField.fontWeight"
 				:options="[
 					{
@@ -24,7 +24,7 @@
 		</div>
 		<div class="control">
 			<div class="control-label">{{ $t('align') }}</div>
-			<n-select
+			<NSelect
 				v-model:value="useReportStore().currentField.textAlign"
 				:options="[
 					{
@@ -42,7 +42,7 @@
 				]"
 			/>
 			<div class="control-label">{{ $t('fontSize') }}</div>
-			<n-input-number
+			<NInputNumber
 				v-model:value="useReportStore().currentField.fontSize"
 				:min="6"
 				:max="90"
@@ -52,14 +52,14 @@
 
 		<div class="control">
 			<div class="control-label">{{ $t('fontColor') }}</div>
-			<n-color-picker
+			<NColorPicker
 				v-model:value="useReportStore().currentField.fontColor"
 				:modes="['hex']"
 			/>
 		</div>
 
 		<div class="control">
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().currentField.noHeaderStyle"
 				:label="$t('applyOnHeader')"
 			/>

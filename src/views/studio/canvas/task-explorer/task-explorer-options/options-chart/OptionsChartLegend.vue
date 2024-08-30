@@ -1,6 +1,6 @@
 <template>
 	<div class="options-chart-legend control-secondary">
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="useReportStore().current.settings.showLegend"
 			:label="$t('enable')"
 			class="w-full"
@@ -11,7 +11,7 @@
 					<div class="control-label">
 						{{ $t('position') }}
 					</div>
-					<n-select
+					<NSelect
 						v-model:value="useReportStore().current.settings.legendPosition"
 						class="w-full"
 						:options="[
@@ -36,14 +36,14 @@
 					class="control"
 				>
 					<div class="control-label">{{ $t('color') }}</div>
-					<n-color-picker
+					<NColorPicker
 						v-model:value="useReportStore().current.settings.legendFontColor"
 						:modes="['hex']"
 					/>
 
 					<div class="control-label">{{ $t('fontSize') }}</div>
 
-					<n-input-number
+					<NInputNumber
 						v-model:value="useReportStore().current.settings.legendFontSize"
 						:min="9"
 						:max="60"

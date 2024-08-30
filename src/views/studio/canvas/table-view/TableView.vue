@@ -60,7 +60,7 @@
 						v-if="['data', 'frequency'].includes(showTab)"
 						class="w-[140px]"
 					>
-						<n-select
+						<NSelect
 							v-model:value="itemsPerPage"
 							:options="itemsPerPageList"
 							@update:value="changePageSizeAndRefresh"

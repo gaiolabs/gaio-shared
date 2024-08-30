@@ -1,11 +1,11 @@
 <template>
 	<div class="task-builder-fields overflow-hidden p-1">
 		<div>
-			<n-collapse
+			<NCollapse
 				class="rounded-[4px] bg-paper-100 dark:bg-carbon-200"
 				arrow-placement="right"
 			>
-				<n-collapse-item
+				<NCollapseItem
 					v-for="(table, tableIndex) of tableList"
 					:key="`${table.databaseName}-${table.tableName}`"
 					:title="table.tableName"
@@ -26,7 +26,7 @@
 								{{ $t('addAll') }}
 							</NButton>
 							<div class="flex gap-1">
-								<n-tooltip>
+								<NTooltip>
 									<template #trigger>
 										<NButton
 											size="tiny"
@@ -40,8 +40,8 @@
 									<div>
 										{{ $t('viewTable') }}
 									</div>
-								</n-tooltip>
-								<n-tooltip>
+								</NTooltip>
+								<NTooltip>
 									<template #trigger>
 										<div>#{{ table.fields.length }}</div>
 									</template>
@@ -49,19 +49,19 @@
 									<div>
 										{{ $t('columns') }}
 									</div>
-								</n-tooltip>
+								</NTooltip>
 							</div>
 						</div>
 
 						<div class="my-2">
-							<n-input
+							<NInput
 								v-model:value="searchTerm[table.tableName]"
 								:placeholder="$t('filter')"
 							>
 								<template #prefix>
 									<g-icon name="filter" />
 								</template>
-							</n-input>
+							</NInput>
 						</div>
 
 						<div>
@@ -88,8 +88,8 @@
 							</drag>
 						</div>
 					</div>
-				</n-collapse-item>
-				<n-collapse-item name="computed">
+				</NCollapseItem>
+				<NCollapseItem name="computed">
 					<template #header>
 						<div class="flex items-center gap-1">
 							<g-icon name="computed" />
@@ -98,14 +98,14 @@
 					</template>
 					<div class="mx-2">
 						<div class="mb-2">
-							<n-input
+							<NInput
 								v-model:value="searchTerm['computed']"
 								:placeholder="$t('filter')"
 							>
 								<template #prefix>
 									<g-icon name="filter" />
 								</template>
-							</n-input>
+							</NInput>
 						</div>
 
 						<div>
@@ -133,8 +133,8 @@
 							</drag>
 						</div>
 					</div>
-				</n-collapse-item>
-				<n-collapse-item
+				</NCollapseItem>
+				<NCollapseItem
 					v-if="aggregationList.length"
 					name="aggregation"
 				>
@@ -146,14 +146,14 @@
 					</template>
 					<div class="mx-2">
 						<div class="mb-2">
-							<n-input
+							<NInput
 								v-model:value="searchTerm['aggregated']"
 								:placeholder="$t('filter')"
 							>
 								<template #prefix>
 									<g-icon name="filter" />
 								</template>
-							</n-input>
+							</NInput>
 						</div>
 						<div>
 							<drag
@@ -179,8 +179,8 @@
 							</drag>
 						</div>
 					</div>
-				</n-collapse-item>
-			</n-collapse>
+				</NCollapseItem>
+			</NCollapse>
 		</div>
 	</div>
 </template>

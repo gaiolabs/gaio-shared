@@ -10,7 +10,7 @@
 					<label class="control-label">
 						{{ $t('flow') }}
 					</label>
-					<n-select
+					<NSelect
 						v-model:value="localTask.flowId"
 						:options="flowListOptions"
 						:placeholder="$t('selectFlow')"
@@ -22,7 +22,7 @@
 						{{ $t('task') }}
 					</label>
 
-					<n-input
+					<NInput
 						v-model:value="localTask.label"
 						:placeholder="$t('taskLabel')"
 					/>
@@ -38,7 +38,7 @@
 					>
 						{{ $t('maxRepeat') }}
 					</label>
-					<n-input-number
+					<NInputNumber
 						v-model:value="localTask.loopSize"
 						:placeholder="$t('runFlowLoopWarning')"
 						clearable

@@ -3,7 +3,7 @@
 		<div class="mx-1 mb-2 rounded-[8px] bg-elevation-1 p-2">
 			<div class="mb-2">
 				<div class="">{{ $t('operator') }}</div>
-				<n-select
+				<NSelect
 					v-model:value="localField.field.operator"
 					size="small"
 					default-value="="
@@ -14,7 +14,7 @@
 			</div>
 			<div class="mb-2">
 				<div class="">{{ $t('type') }}</div>
-				<n-select
+				<NSelect
 					v-model:value="localField.field.valueType"
 					size="small"
 					default-value="value"
@@ -28,7 +28,7 @@
 			<template v-if="!['isNull', 'isNotNull'].includes(localField.field.operator)">
 				<!--PARAMETER-->
 				<template v-if="localField.field.valueType === 'parameter'">
-					<n-select
+					<NSelect
 						v-model:value="localField.field.value"
 						size="small"
 						:placeholder="$t('chooseAParameter')"
@@ -41,7 +41,7 @@
 						<div>
 							{{ $t('andValue') }}
 						</div>
-						<n-select
+						<NSelect
 							v-model:value="localField.field.extraValue"
 							size="small"
 							:placeholder="$t('chooseAParameter')"
@@ -87,7 +87,7 @@
 				<template v-if="localField.field.valueType === 'value'">
 					<!--SINGLE VALUE-->
 					<template v-if="!isWhereIn.includes(localField.field.operator)">
-						<n-input
+						<NInput
 							v-model:value="localField.field.value"
 							size="small"
 							:placeholder="$t('typeHere')"
@@ -101,7 +101,7 @@
 									<g-icon name="eye" />
 								</NButton>
 							</template>
-						</n-input>
+						</NInput>
 						<div
 							v-if="hasExtraValue"
 							class="mt-2"
@@ -109,7 +109,7 @@
 							<div>
 								{{ $t('andValue') }}
 							</div>
-							<n-input
+							<NInput
 								v-if="!isWhereIn.includes(localField.field.operator)"
 								v-model:value="localField.field.extraValue"
 								size="small"
@@ -118,7 +118,7 @@
 						</div>
 					</template>
 					<template v-else>
-						<n-select
+						<NSelect
 							v-model:value="localField.field.value"
 							size="small"
 							filterable
@@ -141,7 +141,7 @@
 							<div>
 								{{ $t('andValue') }}
 							</div>
-							<n-select
+							<NSelect
 								v-model:value="localField.field.extraValue"
 								size="small"
 								filterable
@@ -163,8 +163,8 @@
 						v-if="previewList?.length && !isWhereIn.includes(localField.field.operator)"
 						class="my-3"
 					>
-						<n-list bordered>
-							<n-list-item
+						<NList bordered>
+							<NListItem
 								v-for="item in previewList"
 								:key="item.value"
 							>
@@ -192,8 +192,8 @@
 										{{ item.qtd }}
 									</div>
 								</div>
-							</n-list-item>
-						</n-list>
+							</NListItem>
+						</NList>
 					</div>
 				</template>
 			</template>

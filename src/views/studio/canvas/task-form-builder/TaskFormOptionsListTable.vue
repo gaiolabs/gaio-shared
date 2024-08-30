@@ -1,7 +1,7 @@
 <template>
 	<div class="task-form-options-list-table mt-2">
 		<div class="control list-fields">
-			<n-table
+			<NTable
 				class="table-sm table-striped table-bordered table"
 				size="small"
 			>
@@ -63,13 +63,13 @@
 							</NButton>
 						</td>
 						<td>
-							<n-input
+							<NInput
 								v-model:value="item.value"
 								@blur="emitChanges"
 							/>
 						</td>
 						<td>
-							<n-input
+							<NInput
 								v-model:value="item.label"
 								@blur="emitChanges"
 							/>
@@ -86,7 +86,7 @@
 						</td>
 					</tr>
 				</vue-draggable>
-			</n-table>
+			</NTable>
 		</div>
 	</div>
 </template>

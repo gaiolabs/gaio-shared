@@ -12,26 +12,26 @@
 		<div class="tag-manager">
 			<template v-if="useTagStore().loading">
 				<NSpace vertical>
-					<n-skeleton
+					<NSkeleton
 						:height="30"
 						class="rounded"
 					/>
 					<!--                    <div class="flex gap-2">-->
-					<!--                        <n-skeleton-->
+					<!--                        <NSkeleton-->
 					<!--                            :height="60"-->
 					<!--                            class="rounded"-->
 					<!--                        />-->
-					<!--                        <n-skeleton-->
+					<!--                        <NSkeleton-->
 					<!--                            :height="60"-->
 					<!--                            class="rounded"-->
 					<!--                        />-->
 					<!--                    </div>-->
 					<!--                    <div class="flex gap-2">-->
-					<!--                        <n-skeleton-->
+					<!--                        <NSkeleton-->
 					<!--                            :height="110"-->
 					<!--                            class="rounded"-->
 					<!--                        />-->
-					<!--                        <n-skeleton-->
+					<!--                        <NSkeleton-->
 					<!--                            :height="110"-->
 					<!--                            class="rounded"-->
 					<!--                        />-->
@@ -103,7 +103,7 @@
 			<!--            <div class="modal-body">-->
 			<!--                <div>-->
 			<!--                    {{ $t('lang.PYTHON') }} ({{ $t('lang.GROUPS') }})-->
-			<!--                    <n-select-->
+			<!--                    <NSelect-->
 			<!--                        v-model:value="specialPermissions.python"-->
 			<!--                        filterable-->
 			<!--                        class="w-100"-->

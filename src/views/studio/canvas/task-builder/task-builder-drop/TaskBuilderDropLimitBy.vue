@@ -6,7 +6,7 @@
 				<span v-if="localTask.schema.limitBy.length">({{ localTask.schema.limitBy.length }})</span>
 			</div>
 			<div class="mb-1">
-				<n-tooltip :delay="1000">
+				<NTooltip :delay="1000">
 					<template #trigger>
 						<NButton
 							quaternary
@@ -21,7 +21,7 @@
 						</NButton>
 					</template>
 					{{ $t('deleteAllTags') }}
-				</n-tooltip>
+				</NTooltip>
 			</div>
 		</div>
 		<task-builder-drop-tag

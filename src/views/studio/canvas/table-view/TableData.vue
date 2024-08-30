@@ -15,8 +15,8 @@
 				v-if="localColumns.length"
 				class="w-fit-content mb-5 overflow-x-auto"
 			>
-				<n-spin :show="loading">
-					<n-table
+				<NSpin :show="loading">
+					<NTable
 						striped
 						:single-line="false"
 						size="small"
@@ -52,22 +52,22 @@
 								</td>
 							</tr>
 						</tbody>
-					</n-table>
-				</n-spin>
+					</NTable>
+				</NSpin>
 			</div>
 			<div
 				v-else-if="!loading && !list.length"
 				class="w-full"
 			>
-				<n-alert>
+				<NAlert>
 					{{ $t('noData') }}
-				</n-alert>
+				</NAlert>
 			</div>
 			<div
 				v-if="!loading || list.length"
 				class="mt-2 flex items-center justify-center"
 			>
-				<n-pagination
+				<NPagination
 					v-model:page="pagination.current"
 					size="small"
 					:item-count="pagination.total"

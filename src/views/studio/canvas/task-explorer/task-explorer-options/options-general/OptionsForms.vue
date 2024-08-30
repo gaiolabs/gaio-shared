@@ -1,6 +1,6 @@
 <template>
 	<div class="options-forms control-secondary">
-		<n-select
+		<NSelect
 			v-model:value="current.settings.forms"
 			size="small"
 			multiple
@@ -8,7 +8,7 @@
 		/>
 
 		<div class="mt-2">
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.formOnFirstColumn"
 				:label="$t('formAtStart')"
 			/>

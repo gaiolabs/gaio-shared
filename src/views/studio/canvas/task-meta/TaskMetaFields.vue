@@ -9,7 +9,7 @@
 		>
 			<div v-if="localMeta">
 				<div class="flex gap-2">
-					<n-input
+					<NInput
 						v-model:value="searchTerm"
 						clearable
 						:placeholder="$t('search')"
@@ -29,7 +29,7 @@
 						target="tbody"
 						handle=".handle"
 					>
-						<n-table
+						<NTable
 							striped
 							sm
 							class="w-full"
@@ -44,12 +44,12 @@
 										style="width: 20px"
 										class="text-center"
 									>
-										<n-tooltip placement="top">
+										<NTooltip placement="top">
 											<template #trigger>
 												<g-icon name="hidden" />
 											</template>
 											{{ $t('hidden') }}
-										</n-tooltip>
+										</NTooltip>
 									</th>
 									<th>{{ $t('default') }}</th>
 									<th colspan="2">{{ $t('name') }}</th>
@@ -71,10 +71,10 @@
 										/>
 									</td>
 									<td class="text-center">
-										<n-checkbox v-model:checked="field.hidden" />
+										<NCheckbox v-model:checked="field.hidden" />
 									</td>
 									<td style="width: 180px">
-										<n-select
+										<NSelect
 											v-if="!dataTypeIsDate(field.dataType)"
 											v-model:value="field.type"
 											:options="[
@@ -87,7 +87,7 @@
 												{ label: $t('min'), value: 'min' }
 											]"
 										/>
-										<n-select
+										<NSelect
 											v-else
 											v-model:value="field.groupDateBy"
 											:options="dateValues"
@@ -100,13 +100,13 @@
 										{{ field.columnName }}
 									</td>
 									<td style="width: 180px">
-										<n-input
+										<NInput
 											v-model:value="field.title"
 											:placeholder="$t('title')"
 										/>
 									</td>
 									<td>
-										<n-select
+										<NSelect
 											v-model:value="field.formatType"
 											:options="[
 												{ label: $t('none'), value: 'none' },
@@ -117,7 +117,7 @@
 									</td>
 									<td>
 										<span v-if="field.formatType !== 'date'">
-											<n-select
+											<NSelect
 												v-model:value="field.separators"
 												:options="[
 													{ label: $t('none'), value: 'none' },
@@ -131,17 +131,17 @@
 									</td>
 									<td>
 										<span v-if="field.formatType !== 'date'">
-											<n-input-number v-model:value="field.formatDecimalSize" />
+											<NInputNumber v-model:value="field.formatDecimalSize" />
 										</span>
 									</td>
 								</tr>
 							</tbody>
-						</n-table>
+						</NTable>
 					</vue-draggable>
 				</div>
 				<div>
 					<div class="mb-1">{{ $t('user') }} {{ $t('filter').toLowerCase() }} {{ $t('column').toLowerCase() }}</div>
-					<n-select
+					<NSelect
 						v-model="localMeta.userFilter"
 						:options="[{ columnName: $t('none'), value: '' }].concat(localMeta.fields)"
 						value-field="columnName"

@@ -16,7 +16,7 @@
 								<div class="control-label">
 									{{ $t('taskLabel') }}
 								</div>
-								<n-input v-model:value="localTask.label" />
+								<NInput v-model:value="localTask.label" />
 							</div>
 							<div class="grow">
 								<div class="control-label">

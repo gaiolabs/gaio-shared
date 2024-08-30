@@ -14,12 +14,12 @@
 				:key="i"
 				class="flex gap-1"
 			>
-				<n-tag
+				<NTag
 					v-if="field && i > 0"
 					@click="interchangeAndOr(field)"
 				>
 					{{ $t(field.andOr || 'and') }}
-				</n-tag>
+				</NTag>
 				<v-tag
 					v-if="field"
 					:key="i"

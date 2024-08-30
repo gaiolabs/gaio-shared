@@ -33,24 +33,24 @@
 				<template v-if="paramDefined && !isInput.includes(useFormStore().currentField.type)">
 					<div class="task-form-options">
 						<div class="h-full rounded bg-paper-100 dark:bg-carbon-100">
-							<n-tabs
+							<NTabs
 								type="segment"
 								animated
 								size="small"
 							>
-								<n-tab-pane
+								<NTabPane
 									name="settings"
 									:tab="$t('settings')"
 								>
 									<task-form-options-input class="mt-2" />
-								</n-tab-pane>
-								<n-tab-pane
+								</NTabPane>
+								<NTabPane
 									name="general"
 									:tab="$t('general')"
 								>
 									<task-form-options-general class="mt-2" />
-								</n-tab-pane>
-							</n-tabs>
+								</NTabPane>
+							</NTabs>
 						</div>
 					</div>
 				</template>

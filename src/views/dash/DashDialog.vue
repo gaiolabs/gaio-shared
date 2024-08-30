@@ -1,5 +1,5 @@
 <template>
-	<n-modal
+	<NModal
 		ref="rootRef"
 		v-model:show="showModal"
 		class="dash-dialog"
@@ -31,7 +31,7 @@
 				<slot name="content"></slot>
 			</div>
 		</div>
-	</n-modal>
+	</NModal>
 </template>
 
 <script setup lang="ts">

@@ -1,16 +1,16 @@
 <template>
 	<div class="control-secondary">
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.showHeader"
 			:label="$t('showCardHeader')"
 			class="w-full"
 		/>
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.groupEqualCategory"
 			:label="$t('groupDuplicatedDimensions')"
 			class="w-full"
 		/>
-		<n-checkbox
+		<NCheckbox
 			v-model:checked="current.settings.showRows"
 			:label="$t('showRows')"
 			class="w-full"

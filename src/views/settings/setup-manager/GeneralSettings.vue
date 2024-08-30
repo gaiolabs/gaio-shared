@@ -13,7 +13,7 @@
 				<p class="mt-1 text-sm leading-6 text-carbon-500 dark:text-paper-500">{{ $t('yourAccountDetails') }}</p>
 
 				<div class="mt-4">
-					<n-table
+					<NTable
 						striped
 						:bordered="true"
 						:single-line="false"
@@ -27,7 +27,7 @@
 								<td class="text-carbon-700 dark:text-paper-700">{{ item.value }}</td>
 							</tr>
 						</tbody>
-					</n-table>
+					</NTable>
 				</div>
 			</div>
 		</main>

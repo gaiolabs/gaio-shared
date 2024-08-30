@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col gap-2 py-3">
-		<n-input-group>
-			<n-input
+		<NInputGroup>
+			<NInput
 				v-model:value="localUser.name"
 				:placeholder="$t('name')"
 				@blur="updateUser"
@@ -9,9 +9,9 @@
 				<template #prefix>
 					<g-icon name="user" />
 				</template>
-			</n-input>
-		</n-input-group>
-		<n-input
+			</NInput>
+		</NInputGroup>
+		<NInput
 			v-model:value="localUser.email"
 			:placeholder="$t('email')"
 			@blur="updateUser"
@@ -19,8 +19,8 @@
 			<template #prefix>
 				<g-icon name="email" />
 			</template>
-		</n-input>
-		<n-select
+		</NInput>
+		<NSelect
 			v-model:value="localUser.lang"
 			placeholder="$t('lang')"
 			:options="[

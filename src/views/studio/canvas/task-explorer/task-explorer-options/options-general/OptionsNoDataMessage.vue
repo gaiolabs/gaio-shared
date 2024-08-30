@@ -3,7 +3,7 @@
 		<div class="mb-1 rounded bg-paper-200 p-1 dark:bg-carbon-200">
 			{{ $t('noDataSentence') }}
 		</div>
-		<n-input
+		<NInput
 			v-model:value="current.settings.noDataSentence"
 			type="textarea"
 			:placeholder="$t('defineToEnable')"

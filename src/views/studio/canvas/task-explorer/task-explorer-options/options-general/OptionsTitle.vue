@@ -1,6 +1,6 @@
 <template>
 	<div class="options-title control-secondary">
-		<n-input
+		<NInput
 			v-model:value="current.settings.title"
 			type="textarea"
 			:placeholder="`${$t('parameterPermitted')}`"
@@ -9,7 +9,7 @@
 			<div class="control-label">
 				{{ $t('position') }}
 			</div>
-			<n-select
+			<NSelect
 				v-model:value="current.settings.titleAlign"
 				:options="[
 					{
@@ -29,10 +29,10 @@
 		</div>
 		<div class="control">
 			<div class="control-label">{{ $t('fontSize') }}</div>
-			<n-input-number v-model:value="current.settings.titleFontSize" />
+			<NInputNumber v-model:value="current.settings.titleFontSize" />
 		</div>
 		<div class="control">
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="current.settings.titleBold"
 				:label="$t('bold')"
 			/>
@@ -40,7 +40,7 @@
 
 		<div class="control">
 			<div class="control-label">{{ $t('fontColor') }}</div>
-			<n-color-picker
+			<NColorPicker
 				v-model:value="current.settings.titleFontColor"
 				:modes="['hex']"
 			/>

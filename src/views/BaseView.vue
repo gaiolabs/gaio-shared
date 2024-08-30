@@ -24,7 +24,7 @@
 							</div>
 						</div>
 						<div class="m-4 w-full">
-							<n-select
+							<NSelect
 								:options="list"
 								:placeholder="$t('table')"
 							/>

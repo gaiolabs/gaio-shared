@@ -1,5 +1,5 @@
 <template>
-	<n-tag
+	<NTag
 		:class="classBasedOnType"
 		class="v-tag"
 	>
@@ -10,7 +10,7 @@
 			/>
 			{{ title }}
 		</div>
-	</n-tag>
+	</NTag>
 </template>
 
 <script setup lang="ts">

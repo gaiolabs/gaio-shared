@@ -18,7 +18,7 @@
 							>
 								{{ $t('taskLabel') }}
 							</label>
-							<n-input v-model:value="localTask.label" />
+							<NInput v-model:value="localTask.label" />
 						</div>
 					</div>
 					<div class="flex w-full items-center gap-2">
@@ -26,7 +26,7 @@
 							<label class="control-label">
 								{{ $t('sourceTable') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.tableName"
 								disabled
 								class="w-100"
@@ -36,7 +36,7 @@
 							<label class="control-label">
 								{{ $t('resultTable') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.resultTable"
 								v-alpha
 							/>
@@ -79,7 +79,7 @@
 								>
 									{{ $t('frequency') }}
 								</label>
-								<n-select
+								<NSelect
 									id="frequency"
 									v-model:value="localTask.freq"
 									:options="[
@@ -101,7 +101,7 @@
 								>
 									{{ $t('periods') }}
 								</label>
-								<n-input-number
+								<NInputNumber
 									id="periods"
 									v-model:value="localTask.periods"
 									required
@@ -119,7 +119,7 @@
 						>
 							{{ $t('metricsTable') }}
 						</label>
-						<n-input
+						<NInput
 							id="metricsTable"
 							v-model:value="localTask.resultMetricTable"
 							v-alpha

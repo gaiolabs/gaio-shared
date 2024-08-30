@@ -27,8 +27,8 @@
 					</NButton>
 				</div>
 			</div>
-			<n-scrollbar :style="{ height: '100%' }">
-				<n-tag
+			<NScrollbar :style="{ height: '100%' }">
+				<NTag
 					v-for="(item, index) in useTagStore().resourceTags"
 					:key="index"
 					type="success"
@@ -54,8 +54,8 @@
 							{{ item.name }} {{ item.role }}
 						</div>
 					</div>
-				</n-tag>
-			</n-scrollbar>
+				</NTag>
+			</NScrollbar>
 		</div>
 	</div>
 </template>

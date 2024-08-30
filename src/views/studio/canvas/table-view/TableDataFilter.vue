@@ -15,7 +15,7 @@
 						v-if="localFilter[0].list.length > 1"
 						class="flex items-center"
 					>
-						<n-switch
+						<NSwitch
 							v-model:value="item.selected"
 							:round="false"
 						/>
@@ -34,7 +34,7 @@
 						</NButton>
 					</div>
 					<div>
-						<n-select
+						<NSelect
 							v-model:value="item.columnName"
 							filterable
 							:options="columns"
@@ -44,14 +44,14 @@
 						/>
 					</div>
 					<div>
-						<n-select
+						<NSelect
 							v-model:value="item.operator"
 							filterable
 							:options="operators(item)"
 						/>
 					</div>
 					<div class="flex-grow">
-						<n-input
+						<NInput
 							v-model:value="item.value"
 							@update:value="changeFilter()"
 							@keyup.enter="applyFilter('current', itemIndex)"

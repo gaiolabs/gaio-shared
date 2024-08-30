@@ -4,7 +4,7 @@
 		:key="useReportStore().currentField.id"
 		class="options-field"
 	>
-		<n-page-header @back="useReportStore().currentField = null">
+		<NPageHeader @back="useReportStore().currentField = null">
 			<template #subtitle>
 				<div>
 					<div class="text-lg text-prime">{{ useReportStore().currentField.columnName }}</div>
@@ -24,28 +24,28 @@
 					</NButton>
 				</div>
 			</template>
-		</n-page-header>
+		</NPageHeader>
 		<!--        <div class="control-secondary flex items-center justify-between">-->
 		<!--            <div>{{ useReportStore().currentField.columnName }}</div>-->
 		<!--        </div>-->
 
-		<n-tabs
+		<NTabs
 			class="mt-2"
 			type="segment"
 			animated
 			size="small"
 		>
-			<n-tab-pane
+			<NTabPane
 				name="properties"
 				:tab="$t('properties')"
 			>
 				<div class="px-1">
-					<n-collapse
+					<NCollapse
 						accordion
 						:default-expanded-names="['summarize']"
 						arrow-placement="right"
 					>
-						<n-collapse-item name="general">
+						<NCollapseItem name="general">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="general" />
@@ -58,7 +58,7 @@
 									<div class="control-label">
 										{{ $t('title') }}
 									</div>
-									<n-input
+									<NInput
 										v-model:value="useReportStore().currentField.title"
 										:placeholder="$t('typeHere')"
 									/>
@@ -66,7 +66,7 @@
 								<div class="control">
 									<div class="label">
 										{{ $t('alias') }} & {{ $t('parameter') }}
-										<n-select
+										<NSelect
 											v-model:value="useReportStore().currentField.alias"
 											filterable
 											tag
@@ -76,20 +76,20 @@
 									</div>
 								</div>
 								<div class="control">
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().currentField.hidden"
 										:label="$t('hideField')"
 										class="w-full"
 									/>
-									<n-checkbox
+									<NCheckbox
 										v-model:checked="useReportStore().currentField.html"
 										:label="$t('htmlField')"
 										class="w-full"
 									/>
 								</div>
 							</div>
-						</n-collapse-item>
-						<n-collapse-item name="summarize">
+						</NCollapseItem>
+						<NCollapseItem name="summarize">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="summarize" />
@@ -97,8 +97,8 @@
 								</div>
 							</template>
 							<options-field-agg />
-						</n-collapse-item>
-						<n-collapse-item name="format">
+						</NCollapseItem>
+						<NCollapseItem name="format">
 							<template #header>
 								<div class="flex items-center gap-1">
 									<g-icon name="formatValue" />
@@ -106,8 +106,8 @@
 								</div>
 							</template>
 							<options-field-format />
-						</n-collapse-item>
-						<n-collapse-item
+						</NCollapseItem>
+						<NCollapseItem
 							:title="$t('link')"
 							name="link"
 						>
@@ -118,16 +118,16 @@
 								</div>
 							</template>
 							<options-field-link />
-						</n-collapse-item>
-					</n-collapse>
+						</NCollapseItem>
+					</NCollapse>
 				</div>
-			</n-tab-pane>
-			<n-tab-pane
+			</NTabPane>
+			<NTabPane
 				name="style"
 				:tab="$t('styles')"
 			>
-				<n-collapse arrow-placement="right">
-					<n-collapse-item name="fontStyle">
+				<NCollapse arrow-placement="right">
+					<NCollapseItem name="fontStyle">
 						<template #header>
 							<div class="flex items-center gap-1">
 								<g-icon name="style" />
@@ -135,8 +135,8 @@
 							</div>
 						</template>
 						<options-field-style />
-					</n-collapse-item>
-					<n-collapse-item name="dynamic">
+					</NCollapseItem>
+					<NCollapseItem name="dynamic">
 						<template #header>
 							<div class="flex items-center gap-1">
 								<g-icon name="dynamic" />
@@ -144,10 +144,10 @@
 							</div>
 						</template>
 						<options-field-condition />
-					</n-collapse-item>
-				</n-collapse>
-			</n-tab-pane>
-		</n-tabs>
+					</NCollapseItem>
+				</NCollapse>
+			</NTabPane>
+		</NTabs>
 	</div>
 </template>
 
@@ -158,6 +158,7 @@ import OptionsFieldCondition from '@/views/studio/canvas/task-explorer/task-expl
 import OptionsFieldFormat from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldFormat.vue'
 import OptionsFieldLink from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldLink.vue'
 import OptionsFieldStyle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldStyle.vue'
+import { NPageHeader } from 'naive-ui'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 

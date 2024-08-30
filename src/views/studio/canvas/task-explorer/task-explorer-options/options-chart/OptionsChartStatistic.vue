@@ -1,7 +1,7 @@
 <template>
 	<div class="options-chart-statistic control-secondary">
 		<div class="control">
-			<n-checkbox
+			<NCheckbox
 				v-model:checked="useReportStore().current.settings.showStatistic"
 				:label="$t('enable')"
 				class="w-full"
@@ -12,13 +12,13 @@
 				<div class="control-label">
 					{{ $t('statisticLabel') }}
 				</div>
-				<n-input
+				<NInput
 					v-model:value="useReportStore().current.settings.statisticLabel"
 					class="w-full"
 				/>
 			</div>
 			<div class="control">
-				<n-checkbox
+				<NCheckbox
 					v-model:checked="useReportStore().current.settings.compactNumberStatistic"
 					:label="$t('compactNumbersOfStatistic')"
 					class="w-full"

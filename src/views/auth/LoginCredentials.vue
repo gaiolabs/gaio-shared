@@ -23,7 +23,7 @@
 						<label class="control-label">
 							{{ $t('email') }}
 						</label>
-						<n-input
+						<NInput
 							v-model:value="credentials.username"
 							class="mb-2"
 							size="large"
@@ -34,7 +34,7 @@
 						<label class="control-label">
 							{{ $t('password') }}
 						</label>
-						<n-input
+						<NInput
 							v-model:value="credentials.password"
 							type="password"
 							show-password-on="mousedown"
@@ -44,7 +44,7 @@
 					</div>
 					<div class="mb-4 flex justify-between">
 						<div class="">
-							<n-checkbox :label="$t('rememberMe')" />
+							<NCheckbox :label="$t('rememberMe')" />
 						</div>
 						<div class="">
 							<NButton text>Forget password</NButton>
@@ -82,12 +82,12 @@
 					</div>
 				</form>
 			</template>
-			<n-card
+			<NCard
 				v-else
 				class="mb-4 w-screen max-w-[420px]"
 			>
 				{{ $t('errorLogin') }}
-			</n-card>
+			</NCard>
 		</div>
 	</div>
 </template>

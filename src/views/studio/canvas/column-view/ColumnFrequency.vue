@@ -1,7 +1,7 @@
 <template>
 	<div class="g-bg-1 rounded p-1">
-		<n-spin :show="loading">
-			<n-table
+		<NSpin :show="loading">
+			<NTable
 				:single-column="false"
 				:single-line="false"
 				hoverable
@@ -27,8 +27,8 @@
 						<td class="!text-right">{{ item.cumulated }}</td>
 					</tr>
 				</tbody>
-			</n-table>
-		</n-spin>
+			</NTable>
+		</NSpin>
 	</div>
 </template>
 

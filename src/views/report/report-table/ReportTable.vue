@@ -16,9 +16,9 @@
 				class="px-1 pb-2"
 				:style="{ height }"
 			>
-				<n-spin :show="loading">
+				<NSpin :show="loading">
 					<div class="table-responsive mb-2">
-						<n-table
+						<NTable
 							class="table"
 							:bordered="tableStyle.bordered"
 							:bottom-bordered="false"
@@ -177,22 +177,22 @@
 									</tr>
 								</tfoot>
 							</template>
-						</n-table>
+						</NTable>
 					</div>
-				</n-spin>
+				</NSpin>
 
 				<div
 					v-if="tableRows > list.length"
 					class="flex w-full justify-center pb-2"
 				>
-					<n-pagination
+					<NPagination
 						v-model:page="pagination.page"
 						:item-count="tableRows"
 						size="small"
 						@update:page="loadData"
 					>
 						<template #prefix="{ itemCount }">{{ itemCount }} {{ $t('total') }}</template>
-					</n-pagination>
+					</NPagination>
 				</div>
 			</div>
 		</div>

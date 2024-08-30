@@ -9,7 +9,7 @@
 				{{ $t('discovery') }}
 			</div>
 			<div>
-				<n-dropdown
+				<NDropdown
 					trigger="hover"
 					:options="options"
 					@select="handleDropdownSelect"
@@ -22,12 +22,12 @@
 							<g-icon name="add" />
 						</template>
 					</NButton>
-				</n-dropdown>
+				</NDropdown>
 			</div>
 		</div>
 		<div>
 			<div class="sidebar-search mb-2 px-4 pt-1">
-				<n-input
+				<NInput
 					v-model:value="searchTerm"
 					size="small"
 					:placeholder="$t('search')"

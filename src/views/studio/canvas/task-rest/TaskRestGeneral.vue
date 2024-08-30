@@ -11,7 +11,7 @@
 				>
 					{{ $t('endpoint') }}
 				</label>
-				<n-input
+				<NInput
 					id="endpoint"
 					v-model:value="localTask.url"
 				/>
@@ -23,7 +23,7 @@
 				>
 					{{ $t('method') }}
 				</label>
-				<n-select
+				<NSelect
 					id="method"
 					v-model:value="localTask.method"
 					:options="restMethods"
@@ -36,7 +36,7 @@
 			<!--                >-->
 			<!--                    {{ $t('times') }}-->
 			<!--                </label>-->
-			<!--                <n-input-number-->
+			<!--                <NInputNumber-->
 			<!--                    id="times"-->
 			<!--                    v-model:value="times"-->
 			<!--                />-->

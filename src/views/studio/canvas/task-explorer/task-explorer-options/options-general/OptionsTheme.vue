@@ -3,7 +3,7 @@
 		<template v-if="!showPalette">
 			<div class="control">
 				<div class="control-label">{{ $t('background') }}</div>
-				<n-color-picker
+				<NColorPicker
 					v-model:value="useReportStore().current.settings.theme.backgroundColor"
 					:model="['hex']"
 				/>
@@ -13,20 +13,20 @@
 				class="control"
 			>
 				<div class="control-label">{{ $t('color') }}: {{ $t('extra') }}</div>
-				<n-input
+				<NInput
 					v-model:value="useReportStore().current.settings.extraColor"
 					readonly
 					:placeholder="$t('choose')"
 				>
 					<template #prepend>
 						<span>
-							<n-color-picker
+							<NColorPicker
 								v-model:value="useReportStore().current.settings.extraColor"
 								:models="['hex']"
 							/>
 						</span>
 					</template>
-				</n-input>
+				</NInput>
 			</div>
 			<div class="control">
 				<div class="control-label">
@@ -35,7 +35,7 @@
 							{{ $t('palette') }}
 						</div>
 						<div>
-							<n-tooltip
+							<NTooltip
 								:persistent="false"
 								:show-after="1500"
 							>
@@ -50,8 +50,8 @@
 									</NButton>
 								</template>
 								{{ $t('add') }}
-							</n-tooltip>
-							<n-tooltip
+							</NTooltip>
+							<NTooltip
 								:persistent="false"
 								:show-after="1500"
 							>
@@ -66,8 +66,8 @@
 									</NButton>
 								</template>
 								{{ $t('palette') }}
-							</n-tooltip>
-							<n-tooltip
+							</NTooltip>
+							<NTooltip
 								:persistent="false"
 								:show-after="1500"
 							>
@@ -82,7 +82,7 @@
 									</NButton>
 								</template>
 								{{ $t('savePalette') }}
-							</n-tooltip>
+							</NTooltip>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 						class="control"
 					>
 						<div class="flex gap-2">
-							<n-color-picker
+							<NColorPicker
 								v-model:value="useReportStore().current.settings.theme.colors[index]"
 								:show-alpha="false"
 								class="grow"

@@ -1,17 +1,17 @@
 <template>
 	<div class="dash-params">
-		<n-drawer
+		<NDrawer
 			:show="showParameters"
 			:width="400"
 			@update:show="$emit('close')"
 		>
-			<n-drawer-content
+			<NDrawerContent
 				closable
 				:title="$t('parameters')"
 				body-class="!p-1 !m-0"
 				body-content-class="!p-1 !m-0"
 			>
-				<n-table
+				<NTable
 					size="small"
 					striped
 					:bordered="false"
@@ -25,7 +25,7 @@
 							<td>
 								<div>{{ item.paramName }}</div>
 								<div>
-									<n-input
+									<NInput
 										v-model:value="item.paramValue"
 										readonly
 										size="tiny"
@@ -34,13 +34,14 @@
 							</td>
 						</tr>
 					</tbody>
-				</n-table>
-			</n-drawer-content>
-		</n-drawer>
+				</NTable>
+			</NDrawerContent>
+		</NDrawer>
 	</div>
 </template>
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
+import { NDrawer, NDrawerContent, NTable } from 'naive-ui'
 defineProps<{
 	showParameters: boolean
 }>()

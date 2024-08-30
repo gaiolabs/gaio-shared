@@ -8,7 +8,7 @@
 		</template>
 		<template #content>
 			<div class="h-[400px] max-w-[400px]">
-				<n-input
+				<NInput
 					v-model:value="searchTerm"
 					placeholder="Search"
 					class="mb-2"

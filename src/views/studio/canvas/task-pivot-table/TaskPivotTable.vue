@@ -16,7 +16,7 @@
 								{{ $t('task') }}
 							</label>
 
-							<n-input
+							<NInput
 								v-model:value="localTask.label"
 								name="task"
 								:placeholder="$t('taskLabel')"
@@ -26,13 +26,13 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('resultTable') }}
 							</label>
-							<n-input
+							<NInput
 								v-model:value="localTask.resultTable"
 								v-alpha
 								:placeholder="$t('selectTable')"
 							>
 								<template #prefix>
-									<n-tooltip
+									<NTooltip
 										:arrow-style="{ background: 'white' }"
 										:style="{ background: 'white', color: 'black', maxWidth: '300px' }"
 										trigger="hover"
@@ -50,9 +50,9 @@
 										<template #default>
 											<span v-html="$t('temporaryTableInfo')"></span>
 										</template>
-									</n-tooltip>
+									</NTooltip>
 								</template>
-							</n-input>
+							</NInput>
 							<small>{{ $t('sourceTable') }}: {{ localTask.tableName }}</small>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('pivotSort') }}
 							</label>
-							<n-select
+							<NSelect
 								v-model:value="localTask.order"
 								size="small"
 								:options="[
@@ -93,7 +93,7 @@
 						</div>
 					</div>
 
-					<n-card
+					<NCard
 						v-if="localTask?.columns?.length > 0"
 						content-style="padding: 0"
 						class="mt-1"
@@ -133,7 +133,7 @@
 											{{ col.columnName }}
 										</td>
 										<td>
-											<n-input
+											<NInput
 												v-model:value="col.transposeName"
 												:placeholder="$t('value')"
 											/>
@@ -142,7 +142,7 @@
 								</tbody>
 							</table>
 						</div>
-					</n-card>
+					</NCard>
 
 					<div class="flex w-full gap-2">
 						<div class="w-full">
@@ -158,7 +158,7 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('pivotAggregation') }}
 							</label>
-							<n-select
+							<NSelect
 								v-model:value="localTask.transposeAggregator"
 								:options="[
 									{
@@ -205,7 +205,7 @@
 							<label class="font-semibold text-neutral-500">
 								{{ $t('pivotExtraColumnsPosition') }}
 							</label>
-							<n-select
+							<NSelect
 								v-model:value="localTask.extraFieldsPosition"
 								:options="[
 									{
