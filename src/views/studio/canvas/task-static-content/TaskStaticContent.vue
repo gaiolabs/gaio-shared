@@ -1,32 +1,53 @@
+<template>
+	<div class="task-static-content">
+		<DrawerView :only-full-screen="true" @close="$emit('close')">
+			<template #header>
+				<TaskStaticContentMenu :local-task="localTask" @close="$emit('close')" />
+			</template>
+			<template #content>
+				<Splitpanes>
+					<Pane :size="panelsSize.sideBarSize">
+						<TaskStaticContentSideBar />
+					</Pane>
+					<Pane :size="panelsSize.codeFrameSize">
+						<TaskStaticContentCodeFrame />
+					</Pane>
+					<Pane :size="panelsSize.previewSize">
+						<TaskStaticContentCodeResult />
+					</Pane>
+				</Splitpanes>
+			</template>
+		</DrawerView>
+	</div>
+</template>
+
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
-import GIcon from '@/components/GIcon.vue'
 import useDefaultReport from '@/composables/useDefaultReport'
 import { useAppStore, useReportStore } from '@/stores'
 import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
 import { getId } from '@gaio/shared/utils'
-import { NButton, NScrollbar } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
-import { onBeforeMount, ref } from 'vue'
-import CodeEditorContainer from './components/CodeEditorContainer.vue'
-import UpBarMenu from './components/UpBarMenu.vue'
+import { computed, onBeforeMount, ref } from 'vue'
+import TaskStaticContentCodeFrame from './components/TaskStaticContentCodeFrame.vue'
+import TaskStaticContentCodeResult from './components/TaskStaticContentCodeResult.vue'
+import TaskStaticContentMenu from './components/TaskStaticContentMenu.vue'
+import TaskStaticContentSideBar from './components/TaskStaticContentSideBar.vue'
+import { useTaskStaticContentStore } from './store/useTaskStaticContentStore'
 
 defineEmits(['close'])
 
 const localTask = ref<StaticContentType>()
+const viewControlStore = useTaskStaticContentStore()
 
 const localField = ref<{ type: string; field: Partial<FieldType> }>({
 	type: '',
 	field: {} as FieldType
 })
 
-const viewTableData = ref()
-const showTab = ref('staticContainer')
-
 const editComputed = (field: FieldType) => {
 	defineLocalField('computed', field)
-	showTab.value = 'computed'
 }
 
 const defineLocalField = (type: string, field: FieldType) => {
@@ -34,11 +55,6 @@ const defineLocalField = (type: string, field: FieldType) => {
 		type,
 		field
 	}
-}
-
-const viewTable = (table) => {
-	viewTableData.value = table
-	showTab.value = 'table'
 }
 
 onBeforeMount(() => {
@@ -52,54 +68,32 @@ onBeforeMount(() => {
 			id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id
 		} as ReportNodeType
 	})
+})
 
-	console.log('useReportStore().current', useReportStore().current)
+const panelsSize = computed(() => {
+	if (viewControlStore.showPreview && viewControlStore.showSideBar)
+		return {
+			sideBarSize: 16,
+			codeFrameSize: 42,
+			previewSize: 42
+		}
+	else if (viewControlStore.showPreview && !viewControlStore.showSideBar)
+		return {
+			sideBarSize: 0,
+			codeFrameSize: 68,
+			previewSize: 42
+		}
+	else if (!viewControlStore.showPreview && viewControlStore.showSideBar)
+		return {
+			sideBarSize: 16,
+			codeFrameSize: 84,
+			previewSize: 0
+		}
+	else
+		return {
+			sideBarSize: 0,
+			codeFrameSize: 100,
+			previewSize: 0
+		}
 })
 </script>
-
-<template>
-	<div class="task-static-content">
-		<DrawerView tag="task-builder" class="task-builder" @close="$emit('close')">
-			<template #header>
-				<UpBarMenu :show-tab="showTab" :local-task="localTask" @show-tab="showTab = $event" @close="$emit('close')" />
-			</template>
-			<template #content>
-				<div class="task-builder-drops h-full w-full">
-					<Splitpanes>
-						<Pane :size="16">
-							<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
-								<NScrollbar style="max-height: calc(100vh - 72px)">
-									<div class="flex items-center justify-between p-3 pb-0 pt-2 font-bold">
-										<div class="text-lg">
-											{{ $t('general') }}
-										</div>
-										<div class="flex items-center gap-1">
-											<NButton
-												size="tiny"
-												quaternary
-												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-												@click="showTab = 'computed'"
-											>
-												<template #icon>
-													<GIcon name="computed" />
-												</template>
-											</NButton>
-											<NButton quaternary size="tiny" class="border-elevation-2 bg-paper-100 dark:bg-carbon-200">
-												<template #icon>
-													<GIcon name="globalComputed" />
-												</template>
-											</NButton>
-										</div>
-									</div>
-								</NScrollbar>
-							</div>
-						</Pane>
-						<Pane :size="84">
-							<CodeEditorContainer />
-						</Pane>
-					</Splitpanes>
-				</div>
-			</template>
-		</DrawerView>
-	</div>
-</template>

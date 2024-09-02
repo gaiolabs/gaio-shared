@@ -176,5 +176,7 @@ export default {
 	thirdPartyProvidersDescription: 'Conecte sua conta com provedores de autenticação de terceiros.',
 	general: 'Geral',
 	toggleLeftMenu: 'Toggle menu esquerdo',
-	toggleRightMenu: 'Toggle menu direitos'
+	toggleRightMenu: 'Toggle menu direitos',
+	height: 'Altura',
+	width: 'Largura'
 }

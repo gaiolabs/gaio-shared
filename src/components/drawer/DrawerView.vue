@@ -1,61 +1,39 @@
 <template>
-	<div
-		class="drawer absolute"
-		:class="mainWrapper"
-	>
-		<div
-			class="drawer-body flex w-full flex-shrink flex-col overflow-hidden border-elevation-2"
-			:class="secondWrapper"
-		>
+	<div class="drawer absolute" :class="mainWrapper">
+		<div class="drawer-body flex w-full flex-shrink flex-col overflow-hidden border-elevation-2" :class="secondWrapper">
 			<div class="drawer-header flex justify-between p-2 px-3">
 				<slot name="header" />
 				<div class="flex items-center justify-end gap-2">
 					<slot name="actions" />
 					<div class="flex items-center gap-1">
 						<NButtonGroup>
-							<NButton
-								size="tiny"
-								quaternary
-								@click="changeFullscreen()"
-							>
+							<NButton v-if="!onlyFullScreen" size="tiny" quaternary @click="changeFullscreen()">
 								<template #icon>
-									<GIcon
-										:name="fullscreen ? 'panelBottom' : 'panelFull'"
-										color="gray"
-									/>
+									<GIcon :name="fullscreen ? 'panelBottom' : 'panelFull'" color="gray" />
 								</template>
 							</NButton>
 						</NButtonGroup>
-						<NDivider vertical />
-						<NButton
-							size="tiny"
-							tertiary
-							type="error"
-							@click="$emit('close')"
-						>
-							<template #icon>
-								<g-icon name="close" />
+						<NDivider v-if="!onlyFullScreen" vertical />
+						<NTooltip :show-after="1500">
+							<template #trigger>
+								<NButton size="tiny" tertiary type="error" @click="$emit('close')">
+									<template #icon>
+										<GIcon name="close" />
+									</template>
+								</NButton>
 							</template>
-						</NButton>
+							{{ $t('close') }}
+						</NTooltip>
 					</div>
 				</div>
 			</div>
-			<div
-				v-if="slots.content"
-				class="drawer-content grow"
-			>
+			<div v-if="slots.content" class="drawer-content grow">
 				<NScrollbar :style="scrollStyle">
-					<slot
-						name="content"
-						:min-height="scrollHeight"
-					/>
+					<slot name="content" :min-height="scrollHeight" />
 				</NScrollbar>
 			</div>
 
-			<div
-				v-if="slots.contentScroll"
-				class="drawer-content-scroll grow"
-			>
+			<div v-if="slots.contentScroll" class="drawer-content-scroll grow">
 				<NScrollbar :style="scrollStyle">
 					<slot name="contentScroll"></slot>
 				</NScrollbar>
@@ -67,7 +45,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores'
 import { useWindowSize } from '@vueuse/core'
-import { NButtonGroup } from 'naive-ui'
+import { NButtonGroup, NTooltip, NButton, NScrollbar, NDivider } from 'naive-ui'
 import { computed, useSlots } from 'vue'
 import GIcon from '../GIcon.vue'
 
@@ -75,16 +53,20 @@ const slots = useSlots()
 const windowSize = useWindowSize()
 
 defineEmits(['close'])
-defineProps({
+const props = defineProps({
 	tag: {
 		type: String,
 		default: 'drawer-view'
+	},
+	onlyFullScreen: {
+		type: Boolean,
+		default: false
 	}
 })
 
 const scrollStyle = computed(() => `height: ${scrollHeight.value} !important`)
 
-const fullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen)
+const fullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen || props.onlyFullScreen)
 
 const scrollHeight = computed(() => {
 	if (fullscreen.value) {
