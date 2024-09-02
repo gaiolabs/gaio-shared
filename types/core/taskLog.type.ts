@@ -14,8 +14,8 @@ export type TaskLogType = {
     taskLogId: string
     status: 'started' | 'ended' | 'error'
     aborted: boolean
-    startedAt: Date
-    endedAt: Date
+    startedAt: string
+    endedAt: string
     flowId: string
     appId: string
     userId: string
