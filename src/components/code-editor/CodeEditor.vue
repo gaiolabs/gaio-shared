@@ -1,17 +1,13 @@
 <template>
-	<div
-		ref="element"
-		v-height
-		class="sql-model h-full"
-	>
+	<div ref="element" v-height class="sql-model">
 		<codemirror
 			v-if="!loading"
 			v-model="code"
-			v-height
 			class="overflow-hidden rounded"
 			basic
 			:extensions="extensions"
 			:wrap="true"
+			style="min-height: 100% !important"
 			@ready="handleReady"
 			@change="changeState"
 		/>

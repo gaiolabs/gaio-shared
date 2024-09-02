@@ -1,8 +1,5 @@
 <template>
-	<div
-		v-if="localTask.schema && localTask.schema[type] && initPage"
-		class="g-define-column-value"
-	>
+	<div v-if="localTask.schema && localTask.schema[type] && initPage" class="g-define-column-value">
 		<div class="control">
 			<g-select-column
 				v-model="possibles"
@@ -13,14 +10,8 @@
 			/>
 		</div>
 		<NCard content-style="padding: 10px">
-			<div
-				v-if="columns"
-				class="control"
-			>
-				<table
-					v-if="localTask.schema[type].length > 0"
-					class="w-full table-auto"
-				>
+			<div v-if="columns" class="control">
+				<table v-if="localTask.schema[type].length > 0" class="w-full table-auto">
 					<thead>
 						<tr class="vertical-mid border-b text-left *:p-1">
 							<th>{{ $t('column') }}</th>
@@ -30,11 +21,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr
-							v-for="(item, index) in localTask.schema[type]"
-							:key="index"
-							class="border-b *:p-1 odd:bg-paper-200"
-						>
+						<tr v-for="(item, index) in localTask.schema[type]" :key="index" class="border-b *:p-1 odd:bg-paper-200">
 							<td>
 								{{ item.id }}
 								<g-icon :name="dataTypeIcon(item.dataType)" />
@@ -62,11 +49,7 @@
 							</td>
 							<td>
 								<div v-if="item.valueType === 'value'">
-									<NInput
-										v-model:value="item.value"
-										:placeholder="$t('value')"
-										type="text"
-									/>
+									<NInput v-model:value="item.value" :placeholder="$t('value')" type="text" />
 								</div>
 								<div v-else-if="item.valueType === 'parameter'">
 									<NSelect
@@ -79,24 +62,13 @@
 									/>
 								</div>
 								<template v-else-if="item.valueType === 'computed'">
-									<div
-										class="control"
-										style="min-height: 90px"
-									>
-										<code-editor
-											v-model="item.content"
-											class="h-[90px] min-w-[250px] overflow-hidden rounded"
-										/>
+									<div class="control" style="min-height: 90px">
+										<code-editor v-model="item.content" class="h-[90px] min-w-[250px] overflow-hidden rounded" />
 									</div>
 								</template>
 							</td>
 							<td>
-								<NButton
-									size="tiny"
-									quaternary
-									type="error"
-									@click="removeField(item.columnName)"
-								>
+								<NButton size="tiny" quaternary type="error" @click="removeField(item.columnName)">
 									<template #icon>
 										<g-icon name="delete" />
 									</template>
@@ -108,11 +80,7 @@
 			</div>
 		</NCard>
 	</div>
-	<NAlert
-		v-else
-		:closable="false"
-		:title="$t('addField')"
-	/>
+	<NAlert v-else :closable="false" :title="$t('addField')" />
 </template>
 
 <script setup lang="ts">
@@ -120,7 +88,7 @@ import useDataType from '@/composables/useDataType'
 import { useAppStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
-import { NAlert, NButton } from 'naive-ui'
+import { NAlert, NButton, NCard, NInput, NSelect } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 const { dataTypeIcon } = useDataType()

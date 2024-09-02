@@ -1,9 +1,5 @@
 <template>
-	<drawer-view
-		tag="table-view"
-		data-tag="table-view"
-		@close="$emit('close')"
-	>
+	<drawer-view tag="table-view" data-tag="table-view" @close="$emit('close')">
 		<template #header>
 			<div class="flex w-full items-center justify-between gap-3">
 				<div class="flex flex-grow items-center gap-3">
@@ -13,12 +9,7 @@
 					</div>
 					<NDivider vertical />
 					<NButtonGroup size="small">
-						<NButton
-							strong
-							secondary
-							:type="showTab === 'data' ? 'primary' : 'default'"
-							@click="showTab = 'data'"
-						>
+						<NButton strong secondary :type="showTab === 'data' ? 'primary' : 'default'" @click="showTab = 'data'">
 							{{ $t('data') }}
 						</NButton>
 						<NButton
@@ -29,12 +20,7 @@
 						>
 							{{ $t('columns') }}
 						</NButton>
-						<NButton
-							strong
-							secondary
-							:type="showTab === 'stats' ? 'primary' : 'default'"
-							@click="showTab = 'stats'"
-						>
+						<NButton strong secondary :type="showTab === 'stats' ? 'primary' : 'default'" @click="showTab = 'stats'">
 							{{ $t('stats') }}
 						</NButton>
 						<NButton
@@ -48,18 +34,10 @@
 					</NButtonGroup>
 				</div>
 				<div class="me-3 flex gap-3">
-					<NButton
-						v-if="showTab === 'data'"
-						strong
-						secondary
-						@click="refreshData(true)"
-					>
+					<NButton v-if="showTab === 'data'" strong secondary @click="refreshData(true)">
 						{{ $t('refresh') }}
 					</NButton>
-					<div
-						v-if="['data', 'frequency'].includes(showTab)"
-						class="w-[140px]"
-					>
+					<div v-if="['data', 'frequency'].includes(showTab)" class="w-[140px]">
 						<NSelect
 							v-model:value="itemsPerPage"
 							:options="itemsPerPageList"
@@ -70,11 +48,7 @@
 			</div>
 		</template>
 		<template #content>
-			<div
-				v-if="columns.length"
-				ref="content"
-				class="table-view table-view-content w-100 h-full px-3 py-2"
-			>
+			<div v-if="columns.length" ref="content" class="table-view table-view-content w-100 h-full px-3 py-2">
 				<div v-if="showTab === 'data'">
 					<table-data
 						v-if="columns.length"
@@ -107,18 +81,10 @@
 					/>
 				</div>
 				<div v-if="showTab === 'frequency'">
-					<table-frequency
-						:local-task="localTask"
-						:columns="columns"
-						:total-rows="totalRows"
-						:loading="loading"
-					/>
+					<table-frequency :local-task="localTask" :columns="columns" :total-rows="totalRows" :loading="loading" />
 				</div>
 			</div>
-			<g-alert
-				v-else-if="!loading"
-				:title="$t('missingTable')"
-			/>
+			<g-alert v-else-if="!loading" :title="$t('missingTable')" />
 			<template v-if="showTableInfo">
 				<column-view @close="showTableInfo = false" />
 			</template>

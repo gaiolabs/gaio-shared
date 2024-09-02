@@ -1,16 +1,7 @@
 <template>
 	<div>
-		<table-view
-			v-if="showTab === 'table'"
-			:table-name="viewTableData?.tableName"
-			@close="showTab = 'builder'"
-		/>
-		<drawer-view
-			v-else
-			tag="task-builder"
-			class="task-builder"
-			@close="$emit('close')"
-		>
+		<table-view v-if="showTab === 'table'" :table-name="viewTableData?.tableName" @close="showTab = 'builder'" />
+		<drawer-view v-else tag="task-builder" class="task-builder" @close="$emit('close')">
 			<template #header>
 				<task-builder-menu
 					:show-tab="showTab"
@@ -20,10 +11,7 @@
 				/>
 			</template>
 			<template #content>
-				<div
-					v-if="localTask"
-					class="task-builder-drops h-full w-full"
-				>
+				<div v-if="localTask" class="task-builder-drops h-full w-full">
 					<Splitpanes class="h-full w-full">
 						<pane :size="22">
 							<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
@@ -43,11 +31,7 @@
 													<g-icon name="computed" />
 												</template>
 											</NButton>
-											<NButton
-												quaternary
-												size="tiny"
-												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
-											>
+											<NButton quaternary size="tiny" class="border-elevation-2 bg-paper-100 dark:bg-carbon-200">
 												<template #icon>
 													<g-icon name="globalComputed" />
 												</template>
@@ -65,10 +49,7 @@
 						</pane>
 						<pane :size="78">
 							<!--BUILDER-->
-							<splitpanes
-								v-if="showTab === 'builder'"
-								class="h-full"
-							>
+							<splitpanes v-if="showTab === 'builder'" class="h-full">
 								<pane :size="78">
 									<div class="my-2 h-full rounded bg-paper-200 dark:bg-carbon-100">
 										<NScrollbar style="max-height: calc(100vh - 72px)">
@@ -84,10 +65,7 @@
 													:local-task="localTask"
 													@choose="defineLocalField('filter', $event)"
 												/>
-												<task-builder-join
-													class="p-3"
-													:local-task="localTask"
-												/>
+												<task-builder-join class="p-3" :local-task="localTask" />
 												<task-builder-drop-group
 													class="p-3"
 													:local-task="localTask"
@@ -138,28 +116,19 @@
 											<div class="flex justify-between px-2 pb-1 pt-2 text-lg font-bold">
 												{{ $t('options') }}
 											</div>
-											<task-builder-options
-												:local-task="localTask"
-												:local-field="localField"
-											/>
+											<task-builder-options :local-task="localTask" :local-field="localField" />
 										</NScrollbar>
 									</div>
 								</pane>
 							</splitpanes>
 							<!--SQL-->
-							<splitpanes
-								v-else-if="showTab === 'sql'"
-								class="h-full"
-							>
+							<splitpanes v-else-if="showTab === 'sql'" class="h-full">
 								<pane>
 									<task-builder-sql :local-task="localTask" />
 								</pane>
 							</splitpanes>
 							<!--PREVIEW-->
-							<splitpanes
-								v-else-if="showTab === 'preview'"
-								class="h-full"
-							>
+							<splitpanes v-else-if="showTab === 'preview'" class="h-full">
 								<pane>
 									<task-builder-preview :local-task="localTask" />
 								</pane>

@@ -34,10 +34,7 @@
 						:placeholder="$t('chooseAParameter')"
 						:options="parameterList"
 					/>
-					<div
-						v-if="hasExtraValue"
-						class="mt-2"
-					>
+					<div v-if="hasExtraValue" class="mt-2">
 						<div>
 							{{ $t('andValue') }}
 						</div>
@@ -52,31 +49,19 @@
 				<!--COMPUTED-->
 				<template v-else-if="localField.field.valueType === 'computed'">
 					<div class="overflow-hidden rounded-b-[6px]">
-						<code-editor
-							v-model="localField.field.value"
-							style="height: 150px"
-						/>
+						<code-editor v-model="localField.field.value" style="height: 150px" />
 					</div>
-					<div
-						v-if="hasExtraValue"
-						class="mt-2"
-					>
+					<div v-if="hasExtraValue" class="mt-2">
 						<div>
 							{{ $t('andValue') }}
 						</div>
-						<code-editor
-							v-model="localField.field.extraValue"
-							style="height: 150px"
-						/>
+						<code-editor v-model="localField.field.extraValue" style="height: 150px" />
 					</div>
 				</template>
 				<!--DATE & DATE LITERAL-->
 				<template v-else-if="isLocalFieldADateType">
 					<g-data-literal v-model="localField.field.value" />
-					<div
-						v-if="hasExtraValue"
-						class="mt-2"
-					>
+					<div v-if="hasExtraValue" class="mt-2">
 						<div>
 							{{ $t('andValue') }}
 						</div>
@@ -87,25 +72,14 @@
 				<template v-if="localField.field.valueType === 'value'">
 					<!--SINGLE VALUE-->
 					<template v-if="!isWhereIn.includes(localField.field.operator)">
-						<NInput
-							v-model:value="localField.field.value"
-							size="small"
-							:placeholder="$t('typeHere')"
-						>
+						<NInput v-model:value="localField.field.value" size="small" :placeholder="$t('typeHere')">
 							<template #suffix>
-								<NButton
-									size="tiny"
-									quaternary
-									@click="previewColumn()"
-								>
+								<NButton size="tiny" quaternary @click="previewColumn()">
 									<g-icon name="eye" />
 								</NButton>
 							</template>
 						</NInput>
-						<div
-							v-if="hasExtraValue"
-							class="mt-2"
-						>
+						<div v-if="hasExtraValue" class="mt-2">
 							<div>
 								{{ $t('andValue') }}
 							</div>
@@ -134,10 +108,7 @@
 								})
 							"
 						/>
-						<div
-							v-if="hasExtraValue"
-							class="mt-2"
-						>
+						<div v-if="hasExtraValue" class="mt-2">
 							<div>
 								{{ $t('andValue') }}
 							</div>
@@ -159,36 +130,20 @@
 							/>
 						</div>
 					</template>
-					<div
-						v-if="previewList?.length && !isWhereIn.includes(localField.field.operator)"
-						class="my-3"
-					>
+					<div v-if="previewList?.length && !isWhereIn.includes(localField.field.operator)" class="my-3">
 						<NList bordered>
-							<NListItem
-								v-for="item in previewList"
-								:key="item.value"
-							>
+							<NListItem v-for="item in previewList" :key="item.value">
 								<div class="flex cursor-pointer items-center justify-between">
 									<div class="flex items-center gap-1">
-										<NButton
-											text
-											size="tiny"
-											@click="defineValue(item.value)"
-										>
+										<NButton text size="tiny" @click="defineValue(item.value)">
 											<template #icon>
 												<g-icon name="plus" />
 											</template>
 										</NButton>
 										{{ item.value }}
 									</div>
-									<div
-										v-if="item.qtd"
-										class="italic"
-									>
-										<NDivider
-											vertical
-											class="mx-0"
-										/>
+									<div v-if="item.qtd" class="italic">
+										<NDivider vertical class="mx-0" />
 										{{ item.qtd }}
 									</div>
 								</div>
