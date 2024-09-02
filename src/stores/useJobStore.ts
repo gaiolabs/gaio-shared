@@ -50,12 +50,14 @@ export const useJobStore = defineStore('board', () => {
 		}
 	}
 
-	const initJobWatcher = async () => {
-		await loadLogs()
-		source = new EventSource(
-			'http://localhost:3000/api/task/status/?appId=' + useApp.app.appId + '&gaioToken=' + useAuth.token
-		)
-		source.onmessage = function (event) {
+	const channel = computed(() => {
+		return useAppStore().app.appId + '-' + useAuthStore().user.userId
+	})
+
+	const initCanvasWebsockets = async () => {
+		const source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
+
+		source.onmessage = (event) => {
 			const incomingJob = JSON.parse(event.data)
 
 			if (incomingJob?.taskData) {
@@ -85,6 +87,11 @@ export const useJobStore = defineStore('board', () => {
 				}
 			}
 		}
+	}
+
+	const initJobWatcher = async () => {
+		await loadLogs()
+		await initCanvasWebsockets()
 	}
 
 	const lastKey = ref(0)
