@@ -18,7 +18,6 @@ export default ({ type, reportType, base }: { type: string; reportType: string; 
 	}
 
 	sourceProperties.settings = sourceProperties.settings || {}
-
 	const prepare = {
 		table: () => defaultTableReport(sourceProperties),
 		bar: () => defaultReportChartBar(sourceProperties),

@@ -171,6 +171,9 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
 			case 'form':
 				currentElement.value = taskView.TaskFormCard
 				break
+			case 'staticContent':
+				showDrawer.value = 'staticContent'
+				break
 			default:
 				showDrawer.value = 'report'
 				break
@@ -190,7 +193,6 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
 				showDrawer.value = 'form'
 				break
 			case 'staticContent':
-				// currentElement.value = taskView.TaskStaticContent
 				showDrawer.value = 'staticContent'
 				break
 			case 'update':

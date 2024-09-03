@@ -7,7 +7,7 @@ export const defaultStaticContentReport = (base: ReportNodeType) => {
 	return {
 		reportType: 'staticContent',
 		limit: base.limit ?? 100,
-		tables: [base.tableName],
+		tables: base.tables || [],
 		content: base.content ?? '',
 		project: {
 			html: project?.html ?? '',

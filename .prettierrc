@@ -3,7 +3,7 @@
   "useTabs": true,
   "semi": false,
   "singleQuote": true,
-  "singleAttributePerLine": false,
+  "singleAttributePerLine": true,
   "printWidth": 120,
   "trailingComma": "none",
   "bracketSameLine": false,

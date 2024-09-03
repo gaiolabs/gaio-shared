@@ -1,22 +1,28 @@
-<script setup lang="ts">
-import { NCard, NModal } from 'naive-ui'
-import { useTaskStaticContentStore } from '../store/useTaskStaticContentStore'
-
-const viewControlStore = useTaskStaticContentStore()
-</script>
-
 <template>
 	<NModal
-		v-model:show="viewControlStore.showPreviewModal"
+		v-model:show="viewControl.showPreviewModal"
 		style="width: 100vw; height: 100vh; top: 0; left: 0"
 		:mask-closable="false"
 		preset="card"
 		title="Preview"
 	>
-		<div class="flex">
-			<NCard class="h-full w-full" title="Modal" :bordered="true" size="huge" role="dialog" aria-modal="true">
-				Papagaio
-			</NCard>
+		<div class="flex items-center justify-center w-full h-full">
+			<iframe
+				:srcdoc="
+					codeData.localTask.project.html +
+					`<script>${codeData.localTask.project.script}</script>` +
+					`<style>${codeData.localTask.project.style}</style>`
+				"
+				class="w-full h-full border border-black"
+			></iframe>
 		</div>
 	</NModal>
 </template>
+
+<script setup lang="ts">
+import { NModal } from 'naive-ui'
+import { useCodeDataStore, useViewControlStore } from '../store/useTaskStaticContentStore'
+
+const viewControl = useViewControlStore()
+const codeData = useCodeDataStore()
+</script>

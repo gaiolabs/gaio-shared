@@ -1,46 +1,59 @@
 <template>
-	<div class="flex flex-col m-2 rounded bg-paper-100 dark:bg-carbon-200 h-[90vh] p-4">
+	<div
+		style="height: calc(100vh - 75px)"
+		class="flex flex-col items-start justify-start m-2 rounded bg-paper-100 dark:bg-carbon-200 p-4"
+	>
 		<NInputGroup class="flex justify-around">
-			<NInputNumber bordered placeholder="" :update-value-on-input="true" size="large" class="rounded centered-input">
+			<NInputNumber
+				bordered
+				placeholder=""
+				:update-value-on-input="true"
+				size="large"
+				class="rounded centered-input"
+				:validator="(value) => typeof value === 'number'"
+				:value="newWidth"
+				@update:value="(value) => (newWidth = value)"
+			>
 				<template #prefix>{{ $t('width') }}:</template>
 				<template #suffix>px</template>
 			</NInputNumber>
-			<NInputNumber bordered placeholder="" :update-value-on-input="true" size="large" class="rounded centered-input">
+			<NInputNumber
+				bordered
+				placeholder=""
+				:update-value-on-input="true"
+				size="large"
+				class="rounded centered-input"
+				:value="newHeight"
+				@update:value="(value) => (newHeight = value)"
+			>
 				<template #prefix>{{ $t('height') }}:</template>
 				<template #suffix>px</template>
 			</NInputNumber>
 		</NInputGroup>
-		<div class="mt-4"><iframe :srcdoc="randomHMTL + `<script>${script}</script>`"></iframe></div>
+
+		<iframe
+			:srcdoc="
+				codeData.localTask.project.html +
+				`<script>${codeData.localTask.project.script}</script>` +
+				`<style>${codeData.localTask.project.style}</style>`
+			"
+			class="border border-black mt-4"
+			:style="{
+				width: newWidth + 'px',
+				height: newHeight + 'px',
+				['max-height']: 'calc(100vh - 75px)'
+			}"
+		></iframe>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { NInputGroup, NInputNumber } from 'naive-ui'
+import { ref } from 'vue'
+import { useCodeDataStore } from '../store/useTaskStaticContentStore'
 
-const randomHMTL = `
-<html lang="en">
-  <head>
-    <title>getElementById example</title>
-  </head>
-  <body>
-    <p id="para">Some text here</p>
-    <button onclick="changeColor('blue');">blue</button>
-    <button onclick="changeColor('red');">red</button>
-  </body>
-</html>
-`
+const codeData = useCodeDataStore()
 
-const script = `
-function changeColor(newColor) {
-  const elem = document.getElementById("para");
-  elem.style.color = newColor;
-}
-
-`
+const newWidth = ref(500)
+const newHeight = ref(600)
 </script>
-
-<style scoped lang="css">
-.centered-input .n-input__input-el {
-	text-align: center;
-}
-</style>

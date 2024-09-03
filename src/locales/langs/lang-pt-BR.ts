@@ -178,5 +178,11 @@ export default {
 	toggleLeftMenu: 'Toggle menu esquerdo',
 	toggleRightMenu: 'Toggle menu direitos',
 	height: 'Altura',
-	width: 'Largura'
+	width: 'Largura',
+	component: 'Componente',
+	components: 'Componentes',
+	tables: 'Tabelas',
+	files: 'Arquivos',
+	border: 'Border',
+	staticNeverRead: 'Nunca ler o conteúdo (audio)'
 }

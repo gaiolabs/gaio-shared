@@ -751,5 +751,11 @@ export default {
 		'To generate insights, it is essential to prioritize the dimensions (e.g. State -> City). To do this, choose the class (Dimensions), numeric (Metrics) and date (Periods) fields',
 	content: 'Content',
 	toggleLeftMenu: 'Toggle left menu',
-	toggleRightMenu: 'Toggle right menu'
+	toggleRightMenu: 'Toggle right menu',
+	component: 'Component',
+	components: 'Components',
+	tables: 'Tables',
+	files: 'Files',
+	border: 'Border',
+	staticNeverRead: 'Never read text (audio)'
 }

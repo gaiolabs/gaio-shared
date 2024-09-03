@@ -7,9 +7,16 @@
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<NInput v-model:value="localTask.label" size="small" :placeholder="$t('task')" />
+				<NInput
+					v-model:value="codeData.localTask.label"
+					size="small"
+					:placeholder="$t('task')"
+				/>
 				<NDivider vertical />
-				<NButton size="small" @click="save()">
+				<NButton
+					size="small"
+					@click="save()"
+				>
 					{{ $t('save') }}
 				</NButton>
 			</div>
@@ -17,10 +24,10 @@
 				<NTooltip :show-after="1500">
 					<template #trigger>
 						<NButton
-							:type="viewControlStore.showPreviewModal ? 'primary' : 'default'"
+							:type="viewControl.showPreviewModal ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
-							@click="viewControlStore.toggleShowPreviewModal"
+							@click="viewControl.toggleShowPreviewModal"
 						>
 							<GIcon name="eye" />
 						</NButton>
@@ -32,10 +39,10 @@
 					<template #trigger>
 						<NButton
 							title="Tooltip directive content"
-							:type="!viewControlStore.showSideBar ? 'primary' : 'default'"
+							:type="!viewControl.showSideBar ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
-							@click="viewControlStore.toggleShowSideBar"
+							@click="viewControl.toggleShowSideBar"
 						>
 							<GIcon name="panelLeft" />
 						</NButton>
@@ -46,10 +53,10 @@
 				<NTooltip :show-after="1500">
 					<template #trigger>
 						<NButton
-							:type="!viewControlStore.showPreview ? 'primary' : 'default'"
+							:type="!viewControl.showPreview ? 'primary' : 'default'"
 							secondary
 							class="border-elevation-2"
-							@click="viewControlStore.toggleShowPreview"
+							@click="viewControl.toggleShowPreview"
 						>
 							<GIcon name="panelRight" />
 						</NButton>
@@ -64,45 +71,24 @@
 
 <script setup lang="ts">
 import GIcon from '@/components/GIcon.vue'
-import useDefault from '@/composables/useDefault'
+import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
-import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
-import { getId } from '@gaio/shared/utils'
 import { NInput, NButton, NTooltip, NDivider } from 'naive-ui'
-import { type PropType } from 'vue'
-import { useTaskStaticContentStore } from '../store/useTaskStaticContentStore'
+import { useCodeDataStore, useViewControlStore } from '../store/useTaskStaticContentStore'
 import TaskStaticContentPreviewModal from './TaskStaticContentPreviewModal.vue'
 
-const props = defineProps({
-	localTask: {
-		type: Object as PropType<StaticContentType>,
-		required: true,
-		default: () => ({}) as StaticContentType
-	}
-})
-
-const viewControlStore = useTaskStaticContentStore()
+const emit = defineEmits(['close'])
+const viewControl = useViewControlStore()
+const codeData = useCodeDataStore()
 
 const save = () => {
-	const task = props.localTask
-	if (task.id === undefined) task.id = getId()
-	const taskToBeSaved = useDefault({
-		type: 'staticContent',
-		base: {
-			...useAppStore().appInfo,
-			...task
-		}
-	})
-
-	console.log('task', task)
-	console.log('taskToBeSaved', taskToBeSaved)
-	// useFlow(useAppStore().flow.workflow)
-	//     .generate({
-	//         task: taskToBeSaved,
-	//         sources: [],
-	//         targets: []
-	//     })
-	//     .save()
-	//     .then(() => emit('close'))
+	useFlow(useAppStore().flow.workflow)
+		.generate({
+			task: codeData.localTask,
+			sources: [],
+			targets: []
+		})
+		.save()
+		.then(() => emit('close'))
 }
 </script>
