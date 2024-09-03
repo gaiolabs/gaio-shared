@@ -33,12 +33,12 @@
 							</template>
 							<template #header-extra>
 								<div class="item-center flex gap-2 px-1">
-									<div class="w-[90px] text-right">
-										{{ timeSpent(job) }}
-									</div>
+									<div class="w-[90px] text-right">{{ formatTime(job.startedAt) }}</div>
+									<div class="w-[90px] text-right">{{ formatTime(job.endedAt) }}</div>
+									<div class="w-[90px] text-right">{{ timeSpent(job) }}</div>
 									<NDivider vertical class="m-0 p-0" />
 									<div v-if="job.status === 'started'" class="w-[90px]">
-										<NButton class="w-full" size="small" status="danger" @click="abortWorkflow(job.id)">
+										<NButton class="w-full" size="small" status="danger" @click="abortWorkflow(job.taskLogId)">
 											{{ $t('stop') }}
 										</NButton>
 									</div>
@@ -170,18 +170,18 @@ const abortWorkflow = async (id: string) => {
 	})
 }
 
+const formatTime = (dateString) => {
+	return dayjs(dateString).format('HH:mm:ss.SSS')
+}
+
 const timeSpent = (value) => {
-	let startedAt = dayjs(value.startedAt)
-	let endedAt = dayjs(value.endedAt)
-	let diff = endedAt.diff(startedAt) // difference in milliseconds
+	const startTime = dayjs(value.startedAt) // Start time
+	const endTime = dayjs(value.endedAt) // End time
 
-	let hours = Math.floor(diff / 1000 / 60 / 60)
-	let minutes = Math.floor((diff / 1000 / 60) % 60)
-	let seconds = Math.floor((diff / 1000) % 60)
+	const diff = endTime.diff(startTime)
+	const timeSpent = dayjs.duration(diff)
 
-	return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds
-		.toString()
-		.padStart(2, '0')}`
+	return timeSpent.format('HH:mm:ss.SSS')
 }
 
 const getResultSource = (flowId, taskId) => {
@@ -218,7 +218,6 @@ const getTaskMetadata = (task: TaskType & { flowId: string }) => {
 }
 
 const jobList = computed(() => {
-	console.log(useJobStore().jobList, 'jobolist')
 	return useJobStore().jobList.map((job) => {
 		if (job.tasks) {
 			for (const [key, value] of Object.entries(job.tasks)) {

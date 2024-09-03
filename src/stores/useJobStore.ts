@@ -15,7 +15,7 @@ type JobType = {
 	endedAt: string
 }
 type JobListType = {
-	id?: string
+	taskLogId?: string
 	appId?: string
 	flowId: string
 	userId?: string
@@ -55,17 +55,19 @@ export const useJobStore = defineStore('board', () => {
 	})
 
 	const initCanvasWebsockets = async () => {
-		const source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
+		source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
 
+		source.onopen = () => console.log('webscket connected')
 		source.onmessage = (event) => {
 			const incomingJob = JSON.parse(event.data)
+			console.log(incomingJob)
 
 			if (incomingJob?.taskData) {
-				const jobListIndex = jobs.value.findIndex((job) => job.id === incomingJob.id)
+				const jobListIndex = jobs.value.findIndex((job) => job.taskLogId === incomingJob.taskLogId)
 
 				if (jobListIndex === -1) {
 					jobs.value.unshift({
-						id: incomingJob.id,
+						taskLogId: incomingJob.taskLogId,
 						appId: incomingJob.appId,
 						userId: incomingJob.userId,
 						flowId: incomingJob.flowId,
