@@ -18,16 +18,13 @@
 import { useMessage } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
 
-const props = withDefaults(defineProps<{ id: string; showIcon?: boolean }>(), {
-	showIcon: true
-})
-
+const { showIcon = true, id } = defineProps<{ id: string; showIcon?: boolean }>()
 const message = useMessage()
 const { t } = useI18n()
 
 const copyToClipboard = () => {
-	if (props.id) {
-		navigator.clipboard.writeText(props.id)
+	if (id) {
+		navigator.clipboard.writeText(id)
 		message.success(t('copiedToClipboard'))
 	}
 }

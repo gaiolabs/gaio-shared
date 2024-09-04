@@ -17,10 +17,9 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ showIcon?: boolean; title: string; content?: string; shadow?: boolean }>(), {
-	showIcon: false,
-	title: undefined,
-	shadow: false,
-	content: undefined
-})
+const {
+	showIcon = false,
+	title = undefined,
+	shadow = false
+} = defineProps<{ showIcon?: boolean; title: string; content?: string; shadow?: boolean }>()
 </script>

@@ -49,24 +49,18 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const emit = defineEmits(['update:modelValue'])
-const props = withDefaults(
-	defineProps<{
-		modelValue?: FieldType & GenericType
-	}>(),
-	{
-		modelValue: undefined,
-		dataTypeFilter: () => []
-	}
-)
+const { modelValue = undefined } = defineProps<{
+	modelValue?: FieldType & GenericType
+}>()
 
 const { dataTypeIsFloat, dataTypeList, dataTypeLabel } = useDataType()
 const localValue = ref()
 
 watch(
-	() => props.modelValue,
+	() => modelValue,
 	() => {
-		if (localValue.value !== props.modelValue) {
-			localValue.value = props.modelValue
+		if (localValue.value !== modelValue) {
+			localValue.value = modelValue
 		}
 	},
 	{

@@ -82,20 +82,15 @@ import type { AppType } from '@gaio/shared/types'
 import { NColorPicker } from 'naive-ui'
 import { ref, onMounted, computed } from 'vue'
 
-const props = withDefaults(
-	defineProps<{
-		localApp: AppType
-	}>(),
-	{
-		localApp: null
-	}
-)
+const { localApp = null } = defineProps<{
+	localApp: AppType
+}>()
 
 const repoList = ref<{ label: string; value: string }[]>([])
 const showIconControl = ref(false)
 
 const appUrl = computed(() => {
-	return `${window.location.origin}/app/${props.localApp.appToken}`
+	return `${window.location.origin}/app/${localApp.appToken}`
 })
 
 const loadRepository = async () => {

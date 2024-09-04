@@ -38,7 +38,5 @@
 <script setup lang="ts">
 import type { RestTaskType } from '@gaio/shared/types'
 
-const { localTask } = withDefaults(defineProps<{ localTask: RestTaskType }>(), {
-	localTask: null
-})
+const { localTask = null } = defineProps<{ localTask: RestTaskType }>()
 </script>

@@ -23,14 +23,14 @@
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ name: keyof typeof list | string; color?: string; height?: number }>(), {
-	name: undefined,
-	color: undefined,
-	height: 16
-})
+const {
+	name = undefined,
+	color = undefined,
+	height = 16
+} = defineProps<{ name: keyof typeof list; color?: string; height?: number }>()
 
 const fontSize = computed(() => {
-	return props.height ? `${props.height}px` : 'inherit'
+	return height ? `${height}px` : 'inherit'
 })
 
 const list = {

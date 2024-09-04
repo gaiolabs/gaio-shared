@@ -20,21 +20,26 @@ import { computed } from 'vue'
 
 const { dataTypeIsNumeric, dataTypeIcon, dataTypeIsDate } = useDataType()
 
-const props = withDefaults(defineProps<{ field: FieldType; showIcon?: boolean; selected?: boolean }>(), {
-	showIcon: true,
-	selected: false
-})
+const {
+	field,
+	showIcon = true,
+	selected = false
+} = defineProps<{
+	field: FieldType
+	showIcon?: boolean
+	selected?: boolean
+}>()
 
 const iconName = computed(() => {
-	return dataTypeIcon(props.field.dataType)
+	return dataTypeIcon(field.dataType)
 })
 
 const classBasedOnType = computed(() => {
-	if (props.selected) {
+	if (selected) {
 		return 'color-computed'
 	}
 
-	const col = props.field
+	const col = field
 	if (col.content) {
 		return 'color-computed'
 	} else if (dataTypeIsDate(col.dataType)) {
@@ -47,7 +52,7 @@ const classBasedOnType = computed(() => {
 })
 
 const title = computed(() => {
-	return props.field.alias || props.field.columnName
+	return field.alias || field.columnName
 })
 </script>
 

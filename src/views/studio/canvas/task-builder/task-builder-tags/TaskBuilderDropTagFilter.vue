@@ -33,23 +33,21 @@
 
 <script setup lang="ts">
 import { onDragMove } from '@/views/studio/canvas/task-builder/task-builder-tags/TasBuilderDragHelper'
-import type { FieldType } from '@gaio/shared/types'
+import type { FieldType, GenericType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 
 defineEmits(['choose'])
-const props = withDefaults(defineProps<{ fields: FieldType[] }>(), {
-	fields: () => []
-})
+const { fields = [] } = defineProps<{ fields: FieldType[] }>()
 
-const updateFields = (evt) => {
+const updateFields = (evt: GenericType) => {
 	if (evt.added) {
-		props.fields[evt.added.newIndex] = cloneDeep(evt.added.element)
-		onDragMove(props.fields[evt.added.newIndex], 'filter')
+		fields[evt.added.newIndex] = cloneDeep(evt.added.element)
+		onDragMove(fields[evt.added.newIndex], 'filter')
 	}
 }
 
-const interchangeAndOr = (field) => {
+const interchangeAndOr = (field: GenericType) => {
 	field.andOr = field.andOr === 'and' ? 'or' : 'and'
 }
 </script>

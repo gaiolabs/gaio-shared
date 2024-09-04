@@ -60,9 +60,7 @@ import { NList } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 
-const props = withDefaults(defineProps<{ localApp: AppType }>(), {
-	localApp: null
-})
+const { localApp = null } = defineProps<{ localApp: AppType }>()
 
 const loading = ref(false)
 

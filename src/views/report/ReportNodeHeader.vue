@@ -114,16 +114,14 @@ import type { ReportNodeType, ReportTaskSettingsType } from '@gaio/shared/types'
 import { computed, ref } from 'vue'
 
 defineEmits(['close'])
-const props = withDefaults(defineProps<{ task: ReportNodeType; tableRows: number | undefined }>(), {
-	tableRows: undefined,
-	task: undefined
-})
+const { tableRows = undefined, task = undefined } = defineProps<{
+	task: ReportNodeType
+	tableRows: number | undefined
+}>()
 
 const showRightActions = computed(() => {
 	return (
-		props.task.settings.description ||
-		settings.value.showTable ||
-		(!settings.value.showHeader && settings.value.showRows)
+		task.settings.description || settings.value.showTable || (!settings.value.showHeader && settings.value.showRows)
 	)
 })
 
@@ -138,7 +136,7 @@ const showCloseTable = computed(() => {
 })
 
 const headerBackground = computed(() => {
-	return props.task.settings.headerBackgroundDark ? 'bg-paper-200 dark:bg-carbon-200' : ''
+	return task.settings.headerBackgroundDark ? 'bg-paper-200 dark:bg-carbon-200' : ''
 })
 
 const titleStyle = computed(() => {
@@ -153,6 +151,6 @@ const titleStyle = computed(() => {
 })
 
 const settings = computed<ReportTaskSettingsType>(() => {
-	return props.task.settings
+	return task.settings
 })
 </script>

@@ -40,15 +40,10 @@ import SidebarSource from '@/views/studio/canvas/sidebar/sidebar-source/SidebarS
 import SidebarTask from '@/views/studio/canvas/sidebar/sidebar-task/SidebarTask.vue'
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ modelValue: string | undefined }>(), {
-	modelValue: 'discovery'
-})
-
 defineEmits(['update:modelValue', 'choose'])
+const { modelValue = 'discovery' } = defineProps<{ modelValue: string | undefined }>()
 
-const panel = computed(() => {
-	return props.modelValue
-})
+const panel = computed(() => modelValue)
 </script>
 
 <style lang="scss">

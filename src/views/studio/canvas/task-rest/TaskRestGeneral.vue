@@ -59,7 +59,6 @@ import { ref } from 'vue'
 
 async function runTest() {
 	// until we use it
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	await useApi().post('api/task/test-rest', {
 		body: {
 			url: localTask.url,
@@ -89,7 +88,5 @@ const restMethods = ref([
 	}
 ])
 
-const { localTask } = withDefaults(defineProps<{ localTask: RestTaskType }>(), {
-	localTask: null
-})
+const { localTask = null } = defineProps<{ localTask: RestTaskType }>()
 </script>

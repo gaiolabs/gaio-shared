@@ -139,9 +139,7 @@ import useApi from '@/composables/useApi'
 import type { FlowType } from '@gaio/shared/types'
 import { ref } from 'vue'
 
-const props = withDefaults(defineProps<{ localFlow: FlowType }>(), {
-	localFlow: null
-})
+const { localFlow = null } = defineProps<{ localFlow: FlowType }>()
 
 const loading = ref(false)
 
@@ -149,13 +147,13 @@ const renewFlowKey = async () => {
 	loading.value = true
 	const savedFlow = await useApi().post('api/flow/renew-flow-key', {
 		body: {
-			flowId: props.localFlow.flowId,
-			appId: props.localFlow.appId
+			flowId: localFlow.flowId,
+			appId: localFlow.appId
 		}
 	})
 
 	loading.value = false
-	props.localFlow.flowKey = savedFlow.flowKey
+	localFlow.flowKey = savedFlow.flowKey
 }
 
 const capitalizeFirstLetter = (str: string) => {

@@ -11,12 +11,10 @@ import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
 import type { TaskType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ localTask: TaskType }>(), {
-	localTask: null
-})
+const { localTask = null } = defineProps<{ localTask: TaskType }>()
 
 const generateIcon = computed(() => {
-	const image = `../assets${generateBase(props.localTask).image}`
+	const image = `../assets${generateBase(localTask).image}`
 	if (!image) {
 		return ''
 	}

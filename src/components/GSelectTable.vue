@@ -16,24 +16,21 @@ import { useAppStore } from '@/stores'
 import { onMounted, ref, watch } from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
-const props = withDefaults(
-	defineProps<{
-		modelValue?: string | string[]
-		appId?: string
-		clearable?: boolean
-		multiple?: boolean
-		disabled?: boolean
-	}>(),
-	{
-		clearable: true,
-		multiple: false,
-		appId: undefined,
-		modelValue: undefined,
-		disabled: false
-	}
-)
+const {
+	clearable = true,
+	multiple = false,
+	appId = undefined,
+	modelValue = undefined,
+	disabled = false
+} = defineProps<{
+	modelValue?: string | string[]
+	appId?: string
+	clearable?: boolean
+	multiple?: boolean
+	disabled?: boolean
+}>()
 
-const selected = ref(props.modelValue)
+const selected = ref(modelValue)
 const tableList = ref([])
 
 watch(
@@ -48,8 +45,8 @@ const loadTableList = () => {
 		client: 'clickhouse'
 	}
 
-	if (props.appId) {
-		taskData.appId = props.appId
+	if (appId) {
+		taskData.appId = appId
 	}
 
 	useApi()
