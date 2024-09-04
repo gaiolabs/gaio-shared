@@ -53,6 +53,7 @@ export * from './tasks/scoring.task.type'
 export * from './tasks/pca-task.type'
 export * from './tasks/report.task.settings'
 export * from './tasks/report.type'
+export * from './tasks/report.keys.type'
 export * from './tasks/report-preview.task.type'
 export * from './tasks/form-card.type'
 
@@ -60,3 +61,4 @@ export * from './token'
 export * from './insight-card-type'
 export * from './generic.type'
 export * from './generic.value.type'
+
