@@ -9,7 +9,7 @@ export type ProjectType = {
     }>;
     event: string;
     style: string;
-    script: string;
+    scriptCode: string;
   };
   
  export type StaticContentType = Partial<{
