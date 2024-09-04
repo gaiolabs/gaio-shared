@@ -71,14 +71,14 @@
 <script setup lang="ts">
 import type { RestTaskType } from '@gaio/shared/types'
 
-const props = withDefaults(defineProps<{ localTask: RestTaskType }>(), { localTask: null })
+const { localTask = null } = defineProps<{ localTask: RestTaskType }>()
 
 const addProperty = () => {
-	props.localTask.headers.push({ prop: '', value: '' })
+	localTask.headers.push({ prop: '', value: '' })
 }
 
 const removeProperty = (index: number) => {
-	props.localTask.headers = props.localTask.headers.filter((_, i) => {
+	localTask.headers = localTask.headers.filter((_, i) => {
 		return i !== index
 	})
 }

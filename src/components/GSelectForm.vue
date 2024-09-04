@@ -19,27 +19,22 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const emit = defineEmits(['update:modelValue', 'change'])
-const props = withDefaults(
-	defineProps<{
-		modelValue?: string | string[]
-		appId?: string
-		clearable?: boolean
-		multiple?: boolean
-		dataTypeFilter?: string[]
-		required?: boolean
-	}>(),
-	{
-		clearable: true,
-		multiple: false,
-		appId: undefined,
-		modelValue: undefined,
-		required: false,
-		dataTypeFilter: () => []
-	}
-)
+const {
+	clearable = true,
+	multiple = false,
+	modelValue = undefined,
+	required = false
+} = defineProps<{
+	modelValue?: string | string[]
+	appId?: string
+	clearable?: boolean
+	multiple?: boolean
+	dataTypeFilter?: string[]
+	required?: boolean
+}>()
 
 const formList = computed(() => {
-	if (props.required || props.multiple) {
+	if (required || multiple) {
 		return useAppStore().forms || []
 	}
 
@@ -59,10 +54,10 @@ const formList = computed(() => {
 const selected = ref()
 
 watch(
-	() => props.modelValue,
+	() => modelValue,
 	() => {
-		if (selected.value !== props.modelValue) {
-			selected.value = props.modelValue
+		if (selected.value !== modelValue) {
+			selected.value = modelValue
 		}
 	},
 	{

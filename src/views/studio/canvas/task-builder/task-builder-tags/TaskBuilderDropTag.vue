@@ -21,21 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import type { FieldType } from '@gaio/shared/types'
+import type { FieldType, GenericType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'
 import { onDragMove } from './TasBuilderDragHelper'
 
 defineEmits(['choose'])
-const props = withDefaults(defineProps<{ fields: FieldType[]; customClass: string }>(), {
-	fields: () => [],
-	type: () => ''
-})
+const { fields = [] } = defineProps<{ fields: FieldType[]; customClass: string }>()
 
-const updateFields = (evt) => {
+const updateFields = (evt: GenericType) => {
 	if (evt.added) {
-		props.fields[evt.added.newIndex] = cloneDeep(evt.added.element)
-		onDragMove(props.fields[evt.added.newIndex], props.type)
+		fields[evt.added.newIndex] = cloneDeep(evt.added.element)
+		onDragMove(fields[evt.added.newIndex], type)
 	}
 }
 </script>

@@ -13,15 +13,11 @@
 <script setup lang="ts">
 import type { CronBaseType, FlowType } from '@gaio/shared/types'
 
-const props = withDefaults(defineProps<{ localFlow: FlowType }>(), {
-	localFlow: null
-})
+const { localFlow = null } = defineProps<{ localFlow: FlowType }>()
 
 const updateFlow = (cronBase: CronBaseType) => {
-	props.localFlow.cronBase = cronBase
-	props.localFlow.cron = cronBase.current
-	props.localFlow.cronStatus = cronBase.status
-
-	console.log('cronbase', cronBase)
+	localFlow.cronBase = cronBase
+	localFlow.cron = cronBase.current
+	localFlow.cronStatus = cronBase.status
 }
 </script>

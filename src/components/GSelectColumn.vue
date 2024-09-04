@@ -32,23 +32,20 @@ type ColumnListType = {
 type DataTypeFilter = 'text' | 'json' | 'date' | 'array' | 'datatime' | 'uuid' | 'integer' | 'decimal'
 
 const emit = defineEmits(['update:modelValue', 'change', 'loadColumnList'])
-const props = withDefaults(
-	defineProps<{
-		modelValue?: string | string[]
-		appId?: string
-		clearable?: boolean
-		multiple?: boolean
-		dataTypeFilter?: DataTypeFilter[] & string[]
-		tableName: string
-	}>(),
-	{
-		clearable: true,
-		multiple: false,
-		appId: undefined,
-		modelValue: undefined,
-		dataTypeFilter: () => []
-	}
-)
+const {
+	clearable = true,
+	multiple = false,
+	appId = undefined,
+	modelValue = undefined,
+	dataTypeFilter = []
+} = defineProps<{
+	modelValue?: string | string[]
+	appId?: string
+	clearable?: boolean
+	multiple?: boolean
+	dataTypeFilter?: DataTypeFilter[] & string[]
+	tableName: string
+}>()
 
 const { dataTypeIcon, dataTypeName } = useDataType()
 
@@ -67,10 +64,10 @@ const renderLabel = (option: ColumnListType): VNodeChild => {
 }
 
 watch(
-	() => props.modelValue,
+	() => modelValue,
 	() => {
-		if (selected.value !== props.modelValue) {
-			selected.value = props.modelValue
+		if (selected.value !== modelValue) {
+			selected.value = modelValue
 		}
 	},
 	{
@@ -88,13 +85,13 @@ const updateSelected = () => {
 const loadColumnList = () => {
 	const taskData = {
 		...useAppStore().appInfo,
-		tableName: props.tableName,
+		tableName: tableName,
 		sourceType: 'bucket',
 		client: 'clickhouse'
 	}
 
-	if (props.appId) {
-		taskData.appId = props.appId
+	if (appId) {
+		taskData.appId = appId
 	}
 
 	useApi()
@@ -111,7 +108,7 @@ const loadColumnList = () => {
 					dataIcon: dataTypeIcon(item.dataType),
 					type: dataTypeName(item.dataType)
 				}))
-				.filter((item: ColumnListType) => !props.dataTypeFilter.length || props.dataTypeFilter.includes(item.type))
+				.filter((item: ColumnListType) => !dataTypeFilter.length || dataTypeFilter.includes(item.type))
 		})
 }
 

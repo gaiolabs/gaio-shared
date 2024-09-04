@@ -78,16 +78,15 @@ import { NMenu } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(['choose', 'refresh', 'close'])
-withDefaults(
-	defineProps<{
-		isPreviewPage: boolean
-		flowList: FlowType[]
-		toggleFullscreen: () => void
-	}>(),
-	{
-		flowList: () => []
-	}
-)
+const {
+	isPreviewPage,
+	flowList = [],
+	toggleFullscreen
+} = defineProps<{
+	isPreviewPage: boolean
+	flowList: FlowType[]
+	toggleFullscreen: () => void
+}>()
 
 const activeFlow = ref('')
 const showParameters = ref(false)

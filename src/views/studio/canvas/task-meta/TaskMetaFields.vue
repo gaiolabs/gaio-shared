@@ -162,9 +162,7 @@ import { onMounted, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 import { useI18n } from 'vue-i18n'
 
-const props = withDefaults(defineProps<{ localMeta: MetaType }>(), {
-	localMeta: null
-})
+const { localMeta = null } = defineProps<{ localMeta: MetaType }>()
 const { dataTypeIsDate, dataTypeIsNumeric, dataTypeIsFloat } = useDataType()
 const { defaultUserSeparator } = useFormatValue()
 
@@ -194,13 +192,13 @@ const loadFields = () => {
 			body: {
 				taskData: {
 					...useAppStore().appInfo,
-					tableName: props.localMeta.tableName,
+					tableName: localMeta.tableName,
 					client: 'clickhouse'
 				}
 			}
 		})
 		.then((response: { data: FieldType[] }) => {
-			props.localMeta.fields = response.data.map((field) => {
+			localMeta.fields = response.data.map((field) => {
 				field.title = field.columnName
 				if (dataTypeIsDate(field.dataType)) {
 					field.type = 'value'
@@ -225,7 +223,7 @@ const loadFields = () => {
 }
 
 onMounted(() => {
-	if (props.localMeta.fields.length === 0) {
+	if (localMeta.fields.length === 0) {
 		loadFields()
 	}
 })

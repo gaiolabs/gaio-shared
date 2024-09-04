@@ -101,5 +101,5 @@ const structureOptions = ref([
 		value: 'manual'
 	}
 ])
-const { localTask } = withDefaults(defineProps<{ localTask: RestTaskType }>(), { localTask: null })
+const { localTask = null } = defineProps<{ localTask: RestTaskType }>()
 </script>

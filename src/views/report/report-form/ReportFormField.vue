@@ -292,14 +292,14 @@ import { computed, onBeforeMount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits(['run', 'change'])
-const props = withDefaults(defineProps<{ field: FormFieldType; edit: boolean; isFilter?: boolean }>(), {
-	field: null,
-	edit: false,
-	isFilter: false
-})
+const {
+	field = null,
+	edit = false,
+	isFilter = false
+} = defineProps<{ field: FormFieldType; edit: boolean; isFilter?: boolean }>()
 
 const { t } = useI18n()
-const localField = computed<FormFieldType>(() => props.field)
+const localField = computed<FormFieldType>(() => field)
 const localDateFormat = ref()
 const extraListValue = ref([])
 const localKey = ref('any')
@@ -322,7 +322,7 @@ const adjustLabelForm = () => {
 }
 
 const executeWhenFilter = () => {
-	if (props.isFilter) {
+	if (isFilter) {
 		emit('run')
 	}
 }

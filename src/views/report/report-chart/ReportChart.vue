@@ -11,7 +11,7 @@
 				:task="task"
 				:table-rows="tableRows"
 			/>
-			<template v-if="list.length">
+			<template v-if="list?.length">
 				<div class="px-2">
 					<report-chart-bar-bk
 						v-if="['bar'].includes(task.reportType) && !settings.columnBar"

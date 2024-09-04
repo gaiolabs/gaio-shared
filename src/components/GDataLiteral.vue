@@ -63,11 +63,11 @@ const localKey = ref('any')
 const { t } = useI18n()
 const emit = defineEmits(['update:modelValue'])
 
-const props = withDefaults(defineProps<{ modelValue: string; type?: string; placeholder?: string }>(), {
-	modelValue: '',
-	type: 'date',
-	placeholder: ''
-})
+const {
+	modelValue = '',
+	type = 'date',
+	placeholder = ''
+} = defineProps<{ modelValue: string; type?: string; placeholder?: string }>()
 
 const localValue = ref(undefined)
 const localDateLiteral = ref('')
@@ -181,17 +181,17 @@ const showInfo = computed(() => isDateLiteral(localDateLiteral.value))
 const showInfoNLiteral = computed(() => isDateNumberLiteral(localDateLiteral.value))
 
 const prepareValueOnInit = () => {
-	if (isDateLiteral(props.modelValue)) {
-		localValue.value = convertToDate(props.modelValue)
-		localDateLiteral.value = props.modelValue
+	if (isDateLiteral(modelValue)) {
+		localValue.value = convertToDate(modelValue)
+		localDateLiteral.value = modelValue
 
 		const separate = separateNLiteral(localDateLiteral.value)
 		if (separate.n) {
 			localNumberDateLiteral.value = Number(separate.n)
 		}
 	} else {
-		if (dayjs(props.modelValue).isValid()) {
-			localValue.value = dayjs(props.modelValue).valueOf()
+		if (dayjs(modelValue).isValid()) {
+			localValue.value = dayjs(modelValue).valueOf()
 		}
 	}
 }
@@ -204,9 +204,9 @@ const localType = ref({
 const placeholderLabel = ref('')
 
 onMounted(() => {
-	placeholderLabel.value = props.placeholder || t('chooseADate')
+	placeholderLabel.value = placeholder || t('chooseADate')
 
-	if (props.type.includes('DateTime')) {
+	if (type.includes('DateTime')) {
 		localType.value = {
 			type: 'datetime',
 			valueFormat: 'yyyy-MM-dd HH:mm:ss'

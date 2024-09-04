@@ -50,9 +50,7 @@ import type { NodeType, TaskJobType } from '@gaio/shared/types'
 import { Handle, Position } from '@vue-flow/core'
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<{ data: NodeType }>(), {
-	data: null
-})
+const { data = null } = defineProps<{ data: NodeType }>()
 
 const generateIcon = (item: NodeType) => {
 	const image = `../../../../assets${generateBase(item).image}`
@@ -66,7 +64,7 @@ const getCurrentTaskId = computed(() => {
 const { lastJobTasks } = useJobStore()
 
 const nodeStyle = computed(() => {
-	if (getCurrentTaskId.value === props.data.id) {
+	if (getCurrentTaskId.value === data.id) {
 		return 'border border-zinc-500 !bg-[#f2ede7]'
 	}
 	const status = taskJobMeta.value.status
@@ -84,17 +82,17 @@ const nodeStyle = computed(() => {
 
 const taskJobMeta = computed<TaskJobType>(() => {
 	if (lastJobTasks) {
-		return useJobStore().lastJobTasks[props.data.id] || {}
+		return useJobStore().lastJobTasks[data.id] || {}
 	}
 	return {}
 })
 
 const hideRightEdge = computed(() => {
-	return props.data.type === 'reportPreview'
+	return data.type === 'reportPreview'
 })
 
 const minW = computed(() => {
-	return props.data.type === 'reportPreview' ? '' : 'min-w-[120px]'
+	return data.type === 'reportPreview' ? '' : 'min-w-[120px]'
 })
 </script>
 
