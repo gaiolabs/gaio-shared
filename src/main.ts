@@ -5,20 +5,19 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
+import GCard from '@/components/GCard.vue'
+import GDialog from '@/components/GDialog.vue'
+import GIcon from '@/components/GIcon.vue'
+import { mixin } from '@/mixin'
 import mitt from 'mitt' // Import mitt
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-const emitter = mitt()
-
-import GCard from '@/components/GCard.vue'
-import GDialog from '@/components/GDialog.vue'
-import GIcon from '@/components/GIcon.vue'
-import { mixin } from '@/mixin'
 import { i18n } from './locales/i18n'
+import router from './router'
 
+const emitter = mitt()
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -30,27 +29,25 @@ app.directive('height', {
 })
 
 app.directive('alpha', {
-	mounted(el, _, vnode) {
-		el.addEventListener('input', function (e) {
-			if (vnode && vnode['ctx']) {
-				vnode['ctx'].props.value = e.target.value
+	mounted(el) {
+		el.addEventListener('input', (e: { target: { value: string } }) => {
+			const value = e.target?.value
+			if (typeof value === 'string') {
+				const newValue = value
 					.normalize('NFD')
 					.replace(/[\u0300-\u036f]/g, '')
 					.replace(/[^a-zA-Z0-9]/g, '_')
+
+				e.target.value = newValue
+				el.dispatchEvent(new Event('input', { bubbles: true }))
 			}
 		})
 	},
-	beforeUnmount(el, _, vnode) {
-		el.removeEventListener('input', function (e) {
-			if (vnode && vnode['ctx']) {
-				vnode['ctx'].props.value = e.target.value
-					.normalize('NFD')
-					.replace(/[\u0300-\u036f]/g, '')
-					.replace(/[^a-zA-Z0-9]/g, '_')
-			}
-		})
+	beforeUnmount(el) {
+		el.removeEventListener('input', function () {})
 	}
 })
+
 app.provide('bus', emitter)
 
 app.component('GDialog', GDialog)

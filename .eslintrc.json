@@ -26,6 +26,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-this-alias": "off",
+     "@typescript-eslint/no-explicit-any": "off",
     "vue/no-mutating-props": "off",
     "no-console": "warn",
     "prettier/prettier": "error",

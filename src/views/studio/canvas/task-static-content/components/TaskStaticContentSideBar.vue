@@ -44,13 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import GIcon from '@/components/GIcon.vue'
 import GSelectTable from '@/components/GSelectTable.vue'
 import { NScrollbar, NButton, NCollapse, NCollapseItem, NCheckboxGroup, NCheckbox } from 'naive-ui'
-import { ref } from 'vue'
 import { useCodeDataStore } from '../store/useTaskStaticContentStore'
-
-let htmlCode = ref('')
-let cssCode = ref('')
-let jsCode = ref('')
 </script>

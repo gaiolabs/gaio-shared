@@ -69,7 +69,7 @@ onMounted(async () => {
 			keywordCase: 'upper',
 			linesBetweenQueries: 2
 		})
-	} catch (e) {
+	} catch (_: any) {
 		code.value = ''
 	}
 })

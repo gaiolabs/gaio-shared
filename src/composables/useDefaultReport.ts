@@ -10,7 +10,18 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 
-export default ({ type, reportType, base }: { type: string; reportType: string; base: ReportNodeType }) => {
+export type ReportTypeKeys =
+	| 'table'
+	| 'bar'
+	| 'column'
+	| 'line'
+	| 'download'
+	| 'treemap'
+	| 'pie'
+	| 'area'
+	| 'staticContent'
+
+export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
 
 	if (type !== sourceProperties.type) {
@@ -18,6 +29,7 @@ export default ({ type, reportType, base }: { type: string; reportType: string; 
 	}
 
 	sourceProperties.settings = sourceProperties.settings || {}
+
 	const prepare = {
 		table: () => defaultTableReport(sourceProperties),
 		bar: () => defaultReportChartBar(sourceProperties),

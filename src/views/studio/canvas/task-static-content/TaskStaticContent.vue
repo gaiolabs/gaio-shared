@@ -26,10 +26,6 @@
 
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
-import useDefaultReport from '@/composables/useDefaultReport'
-import { useAppStore } from '@/stores'
-import type { ReportNodeType } from '@gaio/shared/types'
-import { getId } from '@gaio/shared/utils'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, onUnmounted } from 'vue'
 import TaskStaticContentCodeFrame from './components/TaskStaticContentCodeFrame.vue'
