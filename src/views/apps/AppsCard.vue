@@ -118,6 +118,8 @@ const updateRecentApps = () => {
 
 	user.options.recentApps = uniq(user.options.recentApps)
 
+	console.log(user.options)
+
 	useAuthStore().updateUserOptions(user.options)
 }
 
