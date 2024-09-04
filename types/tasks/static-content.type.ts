@@ -1,4 +1,5 @@
 import { PositionType } from "../core/flow.type";
+import { ReportTypeKeys } from "./report.keys.type";
 
 export type ProjectType = {
     html: string;
@@ -22,7 +23,7 @@ export type ProjectType = {
     project: ProjectType;
     noSpeech: boolean;
     cardStyle: boolean;
-    reportType: string;
+    reportType: ReportTypeKeys;
     assetsCoverWidth: boolean;
     position: PositionType;
     created: boolean;

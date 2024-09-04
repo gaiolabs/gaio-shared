@@ -39,8 +39,9 @@ import type {
     GenericType,
     PcaTaskType,
     ReportPreviewTaskType,
-    FormCardType
+    FormCardType,
 } from '../'
+import { ReportTypeKeys } from './report.keys.type'
 
 type base = Partial<{
     dropTables: string[]
@@ -62,7 +63,7 @@ type base = Partial<{
     untilParamName: string
     untilOperator: string
     untilParamValue: string
-    reportType: string
+    reportType: ReportTypeKeys
     restType: string
 }> &
     CommonTaskType
