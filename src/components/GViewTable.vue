@@ -11,7 +11,7 @@
 					:underline="false"
 					@click="useBus.emit('openTable', tableName)"
 				>
-					<g-icon name="eye" />
+					<GIcon name="eye" />
 				</NButton>
 			</template>
 			{{ $t('viewTable') }}
@@ -20,6 +20,8 @@
 </template>
 <script setup lang="ts">
 import useBus from '@/composables/useBus'
+import { NButton, NTooltip } from 'naive-ui'
+import GIcon from './GIcon.vue'
 
 defineProps<{ tableName: string }>()
 </script>

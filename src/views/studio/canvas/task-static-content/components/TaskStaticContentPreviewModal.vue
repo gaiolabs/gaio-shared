@@ -8,11 +8,7 @@
 	>
 		<div class="flex items-center justify-center w-full h-full">
 			<iframe
-				:srcdoc="
-					codeData.localTask.project.html +
-					`<script>${codeData.localTask.project.script}</script>` +
-					`<style>${codeData.localTask.project.style}</style>`
-				"
+				:srcdoc="iframeSrcdoc"
 				class="w-full h-full border border-black"
 			></iframe>
 		</div>
@@ -21,8 +17,18 @@
 
 <script setup lang="ts">
 import { NModal } from 'naive-ui'
+import { computed } from 'vue'
 import { useCodeDataStore, useViewControlStore } from '../store/useTaskStaticContentStore'
 
 const viewControl = useViewControlStore()
-const codeData = useCodeDataStore()
+
+const iframeSrcdoc = computed(() => {
+	const store = useCodeDataStore()
+	return (
+		`${store.localTask.project.html}` +
+		`<script>${store.localTask.project.scriptCode}</scr` +
+		`ipt><style>${store.localTask.project.style}</style>
+  `
+	)
+})
 </script>

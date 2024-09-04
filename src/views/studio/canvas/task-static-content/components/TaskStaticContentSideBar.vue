@@ -30,7 +30,9 @@
 					>
 						<GSelectTable
 							v-model="useCodeDataStore().localTask.tables"
+							class="pl-5 h-[40vh]"
 							multiple
+							:is-list-format="true"
 						/>
 					</NCollapseItem>
 					<NCollapseItem

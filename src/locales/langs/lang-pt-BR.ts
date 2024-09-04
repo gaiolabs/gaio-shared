@@ -184,5 +184,6 @@ export default {
 	tables: 'Tabelas',
 	files: 'Arquivos',
 	border: 'Border',
-	staticNeverRead: 'Nunca ler o conteúdo (audio)'
+	staticNeverRead: 'Nunca ler o conteúdo (audio)',
+	openTableData: 'Abrir os dados da tablea'
 }
