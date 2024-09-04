@@ -6,20 +6,9 @@ import { defaultReportChartTreemap } from '@/composables/default-reports/default
 import { defaultReportDownload } from '@/composables/default-reports/defaultReportDownload'
 import { defaultStaticContentReport } from '@/composables/default-reports/defaultStaticContentReport'
 import { defaultTableReport } from '@/composables/default-reports/defaultTableReport'
-import type { ReportNodeType } from '@gaio/shared/types'
+import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
-
-export type ReportTypeKeys =
-	| 'table'
-	| 'bar'
-	| 'column'
-	| 'line'
-	| 'download'
-	| 'treemap'
-	| 'pie'
-	| 'area'
-	| 'staticContent'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)

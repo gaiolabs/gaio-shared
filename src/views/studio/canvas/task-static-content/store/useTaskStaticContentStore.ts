@@ -1,4 +1,4 @@
-import useDefaultReport, { type ReportTypeKeys } from '@/composables/useDefaultReport'
+import useDefaultReport from '@/composables/useDefaultReport'
 import { useAppStore } from '@/stores'
 import type { ReportNodeType } from '@gaio/shared/types'
 import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.type'
@@ -46,7 +46,7 @@ export const useCodeDataStore = defineStore('codeData', () => {
 		useCodeDataStore().localTask = cloneDeep(
 			useDefaultReport({
 				type: 'report',
-				reportType: (useAppStore().cloneTask()?.reportType || 'staticContent') as ReportTypeKeys,
+				reportType: useAppStore().cloneTask()?.reportType || 'staticContent',
 				...useAppStore().cloneTask()?.project,
 				base: {
 					...useAppStore().appInfo,
