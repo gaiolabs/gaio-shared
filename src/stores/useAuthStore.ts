@@ -135,6 +135,7 @@ export const useAuthStore = defineStore(
 		}
 
 		const updateUserOptions = async (definedOptions: UserOptionsType = {}) => {
+			console.log(definedOptions)
 			user.value.options = {
 				...user.value.options,
 				...definedOptions
@@ -170,6 +171,7 @@ export const useAuthStore = defineStore(
 
 		const toggleFavoriteApp = (appId: string) => {
 			const options = user.value.options
+			console.log(user.value, user.value.options, options)
 			if (options.favorApps.includes(appId)) {
 				options.favorApps = options.favorApps.filter((app) => app !== appId)
 			} else {

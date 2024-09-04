@@ -15,7 +15,7 @@ type JobType = {
 	endedAt: string
 }
 type JobListType = {
-	id?: string
+	taskLogId?: string
 	appId?: string
 	flowId: string
 	userId?: string
@@ -50,20 +50,24 @@ export const useJobStore = defineStore('board', () => {
 		}
 	}
 
-	const initJobWatcher = async () => {
-		await loadLogs()
-		source = new EventSource(
-			'http://localhost:3000/api/task/status/?appId=' + useApp.app.appId + '&gaioToken=' + useAuth.token
-		)
-		source.onmessage = function (event) {
+	const channel = computed(() => {
+		return useAppStore().app.appId + '-' + useAuthStore().user.userId
+	})
+
+	const initCanvasWebsockets = async () => {
+		source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
+
+		source.onopen = () => console.log('webscket connected')
+		source.onmessage = (event) => {
 			const incomingJob = JSON.parse(event.data)
+			console.log(incomingJob)
 
 			if (incomingJob?.taskData) {
-				const jobListIndex = jobs.value.findIndex((job) => job.id === incomingJob.id)
+				const jobListIndex = jobs.value.findIndex((job) => job.taskLogId === incomingJob.taskLogId)
 
 				if (jobListIndex === -1) {
 					jobs.value.unshift({
-						id: incomingJob.id,
+						taskLogId: incomingJob.taskLogId,
 						appId: incomingJob.appId,
 						userId: incomingJob.userId,
 						flowId: incomingJob.flowId,
@@ -85,6 +89,11 @@ export const useJobStore = defineStore('board', () => {
 				}
 			}
 		}
+	}
+
+	const initJobWatcher = async () => {
+		await loadLogs()
+		await initCanvasWebsockets()
 	}
 
 	const lastKey = ref(0)

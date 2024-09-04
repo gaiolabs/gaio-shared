@@ -176,6 +176,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CronBaseType } from '@gaio/shared/types'
 import cronstrue from 'cronstrue'
 import 'cronstrue/locales/es'
 import 'cronstrue/locales/en'
@@ -195,9 +196,6 @@ import {
 	dayValues as _dayValues,
 	monthValues as _monthValues
 } from './CronBaseHelper'
-import type { CronBaseType } from '@gaio/shared/types'
-
-const { t } = useI18n()
 
 const emit = defineEmits(['close', 'change'])
 const props = defineProps({
@@ -220,10 +218,11 @@ const props = defineProps({
 	}
 })
 
+const { t } = useI18n()
+
 const localExpression = ref('')
 
 const localCron = ref<CronBaseType>()
-let firstTime = 0
 
 const cronDayName = CronDayName
 const cronNumeral = CronNumeral
@@ -239,12 +238,9 @@ let monthValues = _monthValues
 watch(
 	() => localCron.value,
 	(newValue) => {
-		if (localCron.value.current && `${localCron.value.current || ''}`.length !== 9) {
-			if (firstTime > 0) {
-				emit('change', newValue)
-			}
+		if (localCron.value.current) {
+			emit('change', newValue)
 		}
-		firstTime++
 	},
 	{
 		deep: true
