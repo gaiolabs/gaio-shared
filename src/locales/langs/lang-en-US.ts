@@ -757,5 +757,6 @@ export default {
 	tables: 'Tables',
 	files: 'Files',
 	border: 'Border',
-	staticNeverRead: 'Never read text (audio)'
+	staticNeverRead: 'Never read text (audio)',
+	openTableData: 'Open table data'
 }

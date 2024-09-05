@@ -32,11 +32,7 @@
 		</NInputGroup>
 
 		<iframe
-			:srcdoc="
-				codeData.localTask.project.html +
-				`<script>${codeData.localTask.project.script}</script>` +
-				`<style>${codeData.localTask.project.style}</style>`
-			"
+			:srcdoc="iframeSrcdoc"
 			class="border border-black mt-4"
 			:style="{
 				width: newWidth + 'px',
@@ -49,11 +45,19 @@
 
 <script setup lang="ts">
 import { NInputGroup, NInputNumber } from 'naive-ui'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useCodeDataStore } from '../store/useTaskStaticContentStore'
-
-const codeData = useCodeDataStore()
 
 const newWidth = ref(500)
 const newHeight = ref(600)
+
+const iframeSrcdoc = computed(() => {
+	const store = useCodeDataStore()
+	return (
+		`${store.localTask.project.html}` +
+		`<script>${store.localTask.project.scriptCode}</scr` +
+		`ipt><style>${store.localTask.project.style}</style>
+  `
+	)
+})
 </script>
