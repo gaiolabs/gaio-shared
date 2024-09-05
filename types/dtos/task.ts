@@ -19,9 +19,9 @@ export type RunAllRequestDTO = {
     params: Array<ParamType>
     tasks: Array<NodeType>
 }
-// type LogsRequestDTO = {}
-// type AbortRequestDTO = {}
-// type StatusRequestDTO = {}
+export type LogsRequestDTO = { appId: string }
+export type AbortRequestDTO = { id: string }
+export type StatusRequestDTO = { appId: string }
 // type CustomParamRequestDTO = {}
 
 // type RunResponseDTO = {}
