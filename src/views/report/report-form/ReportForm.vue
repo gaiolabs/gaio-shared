@@ -402,13 +402,9 @@ const loadOrGoToFlow = async () => {
 			.post(`api/task/run-all`, {
 				body: {
 					from: 'studio',
-					meta: {
-						appId: flow.appId,
-						flowId: flow.flowId,
-						flowTimeout: flow.options.flowTimeout
-					},
-					params: forceDefaultWhenEmpty(),
-					tasks: flow.workflow.nodes.map((node) => node)
+					appId: flow.appId,
+					flowId: flow.flowId,
+					params: forceDefaultWhenEmpty()
 				}
 			})
 			.then((res) => {

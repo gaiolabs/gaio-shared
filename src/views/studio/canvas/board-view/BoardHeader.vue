@@ -118,14 +118,9 @@ const runAll = () => {
 	useApi().post(`api/task/run-all`, {
 		body: {
 			from: 'studio',
-			meta: {
-				appId: useAppStore().app.appId,
-				flowId: useAppStore().flow.flowId
-			},
-			params: useAppStore().app.params,
-			tasks: useAppStore().flow.workflow.nodes.filter((node) => {
-				return executablesNodes.includes(node.type)
-			})
+			appId: useAppStore().app.appId,
+			flowId: useAppStore().flow.flowId,
+			params: useAppStore().app.params
 		}
 	})
 	console.log('run all')
