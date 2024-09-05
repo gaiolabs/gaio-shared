@@ -2,7 +2,7 @@ import ParamsType from '../core/param.type'
 
 export type TaskContextType = Partial<{
     from: string
-    userId: number | string
+    userId: string
     userStatus: 'inactive' | 'active'
     userRole: 'user' | 'admin' | 'dev'
     sessionid: string
