@@ -14,6 +14,8 @@ export * from './core/connection-result.type'
 export * from './core/meta.type'
 export * from './core/meta-view.type'
 
+export * from './dtos/task'
+
 export * from './tasks/builder.task.type'
 export * from './tasks/task.type'
 export * from './tasks/flow.task.type'
@@ -61,4 +63,3 @@ export * from './token'
 export * from './insight-card-type'
 export * from './generic.type'
 export * from './generic.value.type'
-
