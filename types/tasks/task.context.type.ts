@@ -1,3 +1,5 @@
+import ParamsType from '../core/param.type'
+
 export type TaskContextType = Partial<{
     from: string
     userId: number | string
@@ -6,4 +8,5 @@ export type TaskContextType = Partial<{
     sessionid: string
     appId: string
     flowId: string
+    params: ParamsType[]
 }>
