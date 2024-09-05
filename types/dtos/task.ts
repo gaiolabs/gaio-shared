@@ -4,7 +4,9 @@ import { ParamType } from '../core/param.type'
 /**
  * @description Request Data Transfer Object for Task routes
  *
- * Basically the object format used in the body of the request
+ * It's basically the object format used in the body of the request
+ * 
+ * @namingConvention ScopeRouteNameRequestDTO
  */
 
 // type RunRequestDTO = {}
