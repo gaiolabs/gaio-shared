@@ -1,12 +1,21 @@
 
 export type ReportTypeKeys =
-	| 'table'
 	| 'bar'
 	| 'column'
 	| 'line'
-	| 'download'
-	| 'treemap'
-	| 'pie'
 	| 'area'
+	| 'pie'
+	| 'donut'
+	| 'scatter'
+	| 'bubble'
+	| 'radar'
+	| 'heatmap'
+	| 'funnel'
+	| 'gauge'
+	| 'sunburst'
+	| 'treemap'
+	| 'table'
+	| 'download'
 	| 'staticContent'
+
 
