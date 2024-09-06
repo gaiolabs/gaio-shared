@@ -5,7 +5,11 @@
 				<NButton @click="$emit('close')">
 					<g-icon name="close" />
 				</NButton>
-				<NButton type="primary" :disabled="!isValid" @click="saveOrCreate()">
+				<NButton
+					type="primary"
+					:disabled="!isValid"
+					@click="saveOrCreate()"
+				>
 					{{ $t('saveComputed') }}
 				</NButton>
 				<NButton>

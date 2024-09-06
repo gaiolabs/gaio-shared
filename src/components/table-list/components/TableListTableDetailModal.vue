@@ -1,15 +1,18 @@
 <template>
-	<drawer-view
-		tag="table-view"
-		data-tag="table-view"
-		@close="$emit('close')"
+	<NModal
+		:show="openModal"
+		class="w-[100vw] h-full min-h-[100vh] top-0 left-0 flex flex-col"
+		preset="card"
+		:mask-closable="false"
+		:block-scroll="true"
+		@update:show="handleModalVisibility"
 	>
 		<template #header>
 			<div class="flex w-full items-center justify-between gap-3">
 				<div class="flex flex-grow items-center gap-3">
 					<div class="flex items-center gap-2 font-semibold">
-						<g-icon name="table" />
-						{{ localTask?.label }}
+						<GIcon name="table" />
+						{{ tableName }}
 					</div>
 					<NDivider vertical />
 					<NButtonGroup size="small">
@@ -69,65 +72,68 @@
 				</div>
 			</div>
 		</template>
-		<template #content>
+		<template #default>
 			<div
 				v-if="columns.length"
 				ref="content"
-				class="table-view table-view-content w-100 h-full px-3 py-2"
+				class="table-view table-view-content w-100 px-3 py-2 flex flex-wrap flex-col"
 			>
-				<div v-if="showTab === 'data'">
-					<table-data
-						v-if="columns.length"
-						:key="localKey"
-						:local-task="localTask"
-						:columns="columns"
-						:loading="loading"
-						:total-rows="totalRows"
-						:items-per-page="itemsPerPage"
-						@load="loading = $event"
-						@select-column="selectColumn"
-					/>
-				</div>
-				<div v-if="showTab === 'columns'">
-					<table-columns
-						:columns="columns"
-						:local-task="localTask"
-						:loading="loading"
-						@load="loading = $event"
-						@select-column="selectColumn"
-					/>
-				</div>
-				<div v-if="showTab === 'stats'">
-					<table-stats
-						:columns="columns"
-						:local-task="localTask"
-						:total-rows="totalRows"
-						:loading="loading"
-						@load="loading = $event"
-					/>
-				</div>
-				<div v-if="showTab === 'frequency'">
-					<table-frequency
-						:local-task="localTask"
-						:columns="columns"
-						:total-rows="totalRows"
-						:loading="loading"
-					/>
-				</div>
+				<NScrollbar>
+					<div v-if="showTab === 'data'">
+						<TableData
+							v-if="columns.length"
+							:key="localKey"
+							:local-task="localTask"
+							:columns="columns"
+							:loading="loading"
+							:total-rows="totalRows"
+							:items-per-page="itemsPerPage"
+							@load="loading = $event"
+							@select-column="selectColumn"
+						/>
+					</div>
+					<div v-if="showTab === 'columns'">
+						<TableColumns
+							:columns="columns"
+							:local-task="localTask"
+							:loading="loading"
+							@load="loading = $event"
+							@select-column="selectColumn"
+						/>
+					</div>
+					<div v-if="showTab === 'stats'">
+						<TableStats
+							:columns="columns"
+							:local-task="localTask"
+							:total-rows="totalRows"
+							:loading="loading"
+							@load="loading = $event"
+						/>
+					</div>
+					<div v-if="showTab === 'frequency'">
+						<TableFrequency
+							:local-task="localTask"
+							:columns="columns"
+							:total-rows="totalRows"
+							:loading="loading"
+						/>
+					</div>
+				</NScrollbar>
 			</div>
-			<g-alert
+			<GAlert
 				v-else-if="!loading"
 				:title="$t('missingTable')"
 			/>
 			<template v-if="showTableInfo">
-				<column-view @close="showTableInfo = false" />
+				<ColumnView @close="showTableInfo = false" />
 			</template>
 		</template>
-	</drawer-view>
+	</NModal>
 </template>
 
 <script setup lang="ts">
-import DrawerView from '@/components/drawer/DrawerView.vue'
+import GAlert from '@/components/GAlert.vue'
+import GIcon from '@/components/GIcon.vue'
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
 import useApi from '@/composables/useApi'
 import useDefault from '@/composables/useDefault'
@@ -139,20 +145,21 @@ import TableData from '@/views/studio/canvas/table-view/TableData.vue'
 import TableFrequency from '@/views/studio/canvas/table-view/TableFrequency.vue'
 import TableStats from '@/views/studio/canvas/table-view/TableStats.vue'
 import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
+import { NButton, NButtonGroup, NDivider, NModal, NScrollbar, NSelect } from 'naive-ui'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 type LocalFieldType = { width?: number } & FieldType
+const { openModal = false, tableName = null } = defineProps<{
+	openModal: boolean
+	tableName: string | null
+}>()
 
-defineEmits(['close'])
+const emit = defineEmits(['close', 'update:show'])
 
-const props = defineProps({
-	tableName: {
-		type: String,
-		required: false,
-		default: null
-	}
-})
+const handleModalVisibility = (value: boolean) => {
+	emit('update:show', value)
+}
 
 const localKey = ref('any')
 const itemsPerPage = ref(useAuthStore().user.options.tableViewPageSize || 10)
@@ -253,8 +260,8 @@ const initTableView = async () => {
 		}
 	}) as BuilderTaskType
 
-	if (props.tableName) {
-		localTask.value.tableName = props.tableName
+	if (tableName) {
+		localTask.value.tableName = tableName
 	}
 
 	loading.value = true
@@ -272,7 +279,7 @@ watch(
 )
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .table-view {
 	table {
 		td,

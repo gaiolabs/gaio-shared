@@ -758,5 +758,7 @@ export default {
 	files: 'Files',
 	border: 'Border',
 	staticNeverRead: 'Never read text (audio)',
-	openTableData: 'Open table data'
+	openTableData: 'Open table data',
+	selectAllFiltered: 'Select all filtered',
+	unselectAllFiltered: 'Unselect all filtered'
 }
