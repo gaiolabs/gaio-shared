@@ -8,6 +8,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	plugins: [
 		AutoImport({
+			dts: true,
+			eslintrc: {
+				enabled: true
+			},
 			include: [
 				/\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
 				/\.vue$/,

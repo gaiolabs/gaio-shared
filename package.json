@@ -98,8 +98,8 @@
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.3.3",
-    "vue-i18n": "^9.13.1",
-    "vue-tsc": "^2.0.26"
+    "vue-i18n": "^9.14.0",
+    "vue-tsc": "^2.1.6"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

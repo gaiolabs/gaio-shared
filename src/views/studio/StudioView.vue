@@ -278,10 +278,12 @@ onMounted(async () => {
 	loading.value = true
 	await useAppStore().loadApp()
 	loading.value = false
+	useAppStore().observeUpdateFlow()
 })
 
 onBeforeUnmount(() => {
 	console.log('close')
+	useAppStore().closeEventSource()
 	useJobStore().closeEventSource()
 })
 </script>

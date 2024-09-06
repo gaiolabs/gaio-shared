@@ -2,7 +2,6 @@ import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores/useAppStore'
 import { useAuthStore } from '@/stores/useAuthStore'
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
 
 type JobType = {
 	jobId: string
@@ -30,9 +29,8 @@ type JobListType = {
 
 export const useJobStore = defineStore('board', () => {
 	const jobs = ref<JobListType[]>([])
-	let source
+	let source: WebSocket
 
-	const useAuth = useAuthStore()
 	const useApp = useAppStore()
 
 	const loadLogs = async () => {
@@ -51,16 +49,16 @@ export const useJobStore = defineStore('board', () => {
 	}
 
 	const channel = computed(() => {
-		return useAppStore().app.appId + '-' + useAuthStore().user.userId
+		return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
 	})
 
 	const initCanvasWebsockets = async () => {
 		source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
 
 		source.onopen = () => console.log('webscket connected')
+
 		source.onmessage = (event) => {
 			const incomingJob = JSON.parse(event.data)
-			console.log(incomingJob)
 
 			if (incomingJob?.taskData) {
 				const jobListIndex = jobs.value.findIndex((job) => job.taskLogId === incomingJob.taskLogId)

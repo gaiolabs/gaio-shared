@@ -85,7 +85,7 @@
 						size="tiny"
 						@click="$emit('open', { taskLog: true })"
 					>
-						{{ $t('logs') }}
+						{{ $t('monitor') }}
 					</NButton>
 				</div>
 				<!--RIGHT ACTIONS-->

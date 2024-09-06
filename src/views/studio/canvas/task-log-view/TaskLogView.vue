@@ -1,5 +1,5 @@
 <template>
-	<drawer-view
+	<DrawerView
 		class="task-log-view"
 		@close="$emit('close')"
 	>
@@ -7,322 +7,56 @@
 			<div class="flex items-center gap-3 p-3">
 				<div class="flex items-center gap-1 font-bold">
 					<g-icon name="logs" />
-					{{ $t('logs') }}
+					{{ $t('monitor') }}
 				</div>
-				<div></div>
+				<div>
+					<NButtonGroup size="small">
+						<NButton
+							strong
+							secondary
+							:type="showTab === 'studio' ? 'primary' : 'default'"
+							@click="showTab = 'studio'"
+						>
+							{{ $t('studio') }}
+						</NButton>
+						<NButton
+							strong
+							secondary
+							:type="showTab === 'schedule' ? 'primary' : 'default'"
+							@click="showTab = 'schedule'"
+						>
+							{{ $t('schedule') }}
+						</NButton>
+						<NButton
+							strong
+							secondary
+							:type="showTab === 'dashboard' ? 'primary' : 'default'"
+							@click="showTab = 'dashboard'"
+						>
+							{{ $t('dashboard') }}
+						</NButton>
+						<NButton
+							strong
+							secondary
+							:type="showTab === 'portal' ? 'primary' : 'default'"
+							@click="showTab = 'portal'"
+						>
+							{{ $t('portal') }}
+						</NButton>
+					</NButtonGroup>
+				</div>
 			</div>
 		</template>
 		<template #contentScroll>
-			<div
-				ref="localContent"
-				class="h-full"
-			>
-				<div v-if="!jobList?.length">
-					<NAlert class="border-elevation-2">
-						<template #title>
-							{{ $t('noData') }}
-						</template>
-					</NAlert>
-				</div>
-				<div
-					v-else
-					class="m-3 pb-3"
-				>
-					<NCollapse>
-						<NCollapseItem
-							v-for="(job, index) of jobList"
-							:key="index"
-							:name="index"
-						>
-							<template #header>
-								<div class="flex w-full items-center justify-between">
-									<div>
-										<div>
-											{{ getFlowName(job.flowId) }}
-										</div>
-									</div>
-									<div></div>
-								</div>
-							</template>
-							<template #header-extra>
-								<div class="item-center flex gap-2 px-1">
-									<div class="w-[90px] text-right">{{ formatTime(job.startedAt) }}</div>
-									<div class="w-[90px] text-right">{{ formatTime(job.endedAt) }}</div>
-									<div class="w-[90px] text-right">{{ timeSpent(job) }}</div>
-									<NDivider
-										vertical
-										class="m-0 p-0"
-									/>
-									<div
-										v-if="job.status === 'started'"
-										class="w-[90px]"
-									>
-										<NButton
-											class="w-full"
-											size="small"
-											status="danger"
-											@click="abortWorkflow(job.taskLogId)"
-										>
-											{{ $t('stop') }}
-										</NButton>
-									</div>
-									<div
-										v-else-if="job.aborted"
-										class="w-[90px]"
-									>
-										<NTag
-											:bordered="false"
-											:color="tagPurple"
-											class="w-full justify-center"
-										>
-											{{ $t('aborted') }}
-										</NTag>
-									</div>
-									<div
-										v-else
-										class="w-[90px]"
-									>
-										<NTag
-											:color="tagGray"
-											class="w-full justify-center"
-										>
-											{{ $t('finished') }}
-										</NTag>
-									</div>
-								</div>
-							</template>
-							<div class="px-2">
-								<div
-									v-for="value of job.tasks"
-									:key="value.taskId"
-									class="mb-1 flex w-full items-center justify-between border-b px-2 pb-1 last:border-none"
-								>
-									<div class="flex">
-										<div>{{ getTaskLabel(value.flowId, value.taskId) }}</div>
-										<div>{{ getResultSource(value.flowId, value.taskId) }}</div>
-									</div>
-									<div class="flex">
-										<div class="flex items-center gap-2">
-											<div>
-												{{ timeSpent(value) }}
-											</div>
-											<NDivider
-												vertical
-												class="m-0 p-0"
-											/>
-											<div class="w-[80px]">
-												<NTag
-													class="w-full justify-center"
-													bordered
-													:color="singleTaskJobStatus(value)"
-													@click="activeModalMessage(value['message'])"
-												>
-													{{ $t(value.status) }}
-												</NTag>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</NCollapseItem>
-					</NCollapse>
-				</div>
-				<NModal
-					v-model:visible="showMessage"
-					:ok-text="$t('ok')"
-					hide-cancel
-				>
-					<template #title>{{ $t('message') }}</template>
-					<NScrollbar style="max-height: 300px; overflow: auto; padding: 10px">
-						{{ currentMessage }}
-					</NScrollbar>
-				</NModal>
-			</div>
+			<TaskLogContent />
 		</template>
-	</drawer-view>
+	</DrawerView>
 </template>
 <script setup lang="ts">
-import useApi from '@/composables/useApi'
-import { useAppStore } from '@/stores'
-import { useJobStore } from '@/stores/useJobStore'
-import type { TaskType } from '@gaio/shared/types'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import { computed, onMounted, ref } from 'vue'
+import DrawerView from '@/components/drawer/DrawerView.vue'
+import TaskLogContent from './TaskLogContent.vue'
 
 defineEmits(['close'])
 
-dayjs.extend(duration)
-dayjs.extend(relativeTime)
-
-const flowBase = ref({})
-
-const tagPurple = {
-	borderColor: 'rgb(222,182,255)',
-	color: 'rgb(245,232,255)',
-	textColor: 'rgb(114,46,209)'
-}
-
-const tagGray = {
-	borderColor: 'rgb(242,243,245)',
-	color: 'rgb(242,243,245)',
-	textColor: 'rgb(134,144,156)'
-}
-
-const tagGreen = {
-	borderColor: 'rgb(185,252,190)',
-	color: 'rgb(232,255,234)',
-	textColor: 'rgb(0,180,42)'
-}
-
-const tagRed = {
-	borderColor: 'rgb(255,184,171)',
-	color: 'rgb(255,236,232)',
-	textColor: 'rgb(245,63,63)'
-}
-
-const tagBlue = {
-	borderColor: 'rgb(167,203,255)',
-	color: 'rgb(232,243,255)',
-	textColor: 'rgb(22,93,255)'
-}
-
-const showMessage = ref(false)
-const currentMessage = ref('')
-
-const activeModalMessage = (message: string) => {
-	if (message) {
-		currentMessage.value = message
-		showMessage.value = true
-	}
-}
-
-const singleTaskJobStatus = (value) => {
-	return (
-		value.status === 'started' ? tagBlue
-		: value.status === 'error' ? tagRed
-		: tagGreen
-	)
-}
-
-const abortWorkflow = async (taskLogId: string) => {
-	await useApi().post('api/task/abort', {
-		body: {
-			taskLogId
-		}
-	})
-}
-
-const formatTime = (dateString) => {
-	return dayjs(dateString).format('HH:mm:ss.SSS')
-}
-
-const timeSpent = (value) => {
-	const startTime = dayjs(value.startedAt) // Start time
-	const endTime = dayjs(value.endedAt) // End time
-
-	const diff = endTime.diff(startTime)
-	const timeSpent = dayjs.duration(diff)
-
-	return timeSpent.format('HH:mm:ss.SSS')
-}
-
-const getResultSource = (flowId, taskId) => {
-	const flow = flowBase.value[flowId]
-	const resultTable = flow?.tasks[taskId]?.resultTable
-
-	if (resultTable) {
-		return ' -> ' + resultTable
-	}
-	return ''
-}
-
-const getFlowName = (flowId: string) => {
-	const flow = flowBase.value[flowId]
-	return flow?.flowName || ''
-}
-
-const getTaskLabel = (flowId: string, taskId: string) => {
-	const flow = flowBase.value[flowId]
-	return flow?.tasks[taskId]?.label || ''
-}
-
-const getTaskMetadata = (task: TaskType & { flowId: string }) => {
-	const flow = flowBase.value[task.flowId]
-	if (flow) {
-		const taskMeta = flow['tasks'][task['taskId']]
-		if (taskMeta) {
-			return taskMeta
-		}
-	}
-	return {
-		flowName: ''
-	}
-}
-
-const jobList = computed(() => {
-	return useJobStore().jobList.map((job) => {
-		if (job.tasks) {
-			for (const [key, value] of Object.entries(job.tasks)) {
-				job.tasks[key] = {
-					...getTaskMetadata({
-						flowId: job.flowId,
-						taskId: key
-					}),
-					...value
-				}
-			}
-		}
-		return job
-	})
-})
-
-onMounted(() => {
-	flowBase.value = useAppStore().flowList.reduce((acc, flow) => {
-		acc[flow.flowId] = {
-			flowName: flow.flowName,
-			tasks: {}
-		}
-
-		acc[flow.flowId].tasks = flow.workflow.nodes.reduce((acc, task) => {
-			acc[task.id] = task
-			return acc
-		}, {})
-
-		return acc
-	}, {})
-})
+const showTab = ref('studio')
 </script>
-
-<style lang="scss">
-.task-log-view {
-	.n-collapse {
-		border-radius: 4px;
-		border: 1px solid var(--elevation-2);
-		overflow: hidden;
-		background: var(--elevation-1);
-	}
-
-	.n-collapse-item__header {
-		background: var(--elevation-0);
-		min-height: 37px;
-	}
-
-	.n-collapse-item--active {
-		.n-collapse-item__header {
-			border-bottom: 1px solid var(--elevation-2);
-			transition: border-color 0s ease 0s;
-		}
-	}
-
-	.n-collapse .n-collapse-item:not(:first-child) {
-		margin-top: 0 !important;
-	}
-
-	.drawer-content {
-		display: grid;
-		height: 293px;
-	}
-}
-</style>

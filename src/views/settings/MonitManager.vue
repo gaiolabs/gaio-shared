@@ -6,7 +6,7 @@
 					name="monit"
 					:height="22"
 				/>
-				{{ $t('monit') }}
+				{{ $t('monitor') }}
 			</div>
 		</template>
 		<div>

@@ -160,7 +160,7 @@ const buttons = [
 		showLabel: false
 	},
 	{
-		label: 'monit',
+		label: 'monitor',
 		icon: 'monit',
 		path: '/settings/monit',
 		showLabel: false

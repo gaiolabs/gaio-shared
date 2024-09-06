@@ -13,7 +13,7 @@ export default {
 	visibility: 'Visibilidade',
 	reportVisibility: 'Visibilidade do relatório na disposição atual',
 	copiedToClipboard: 'Copiado para a área de transferência',
-	monit: 'Monitor',
+	monitor: 'Monitor',
 	grantFrom: 'Conceder de',
 	TCP: 'TCP',
 	HTMLInterface: 'Interface HTTP',
