@@ -17,5 +17,7 @@ export type ReportTypeKeys =
 	| 'table'
 	| 'download'
 	| 'staticContent'
+	| 'card'
+	| 'form'
 
 
