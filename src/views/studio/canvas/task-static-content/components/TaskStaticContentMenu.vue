@@ -32,7 +32,7 @@
 							<GIcon name="eye" />
 						</NButton>
 					</template>
-					{{ $t('preview') }}
+					{{ $t('toggleLeftMenu') }}
 				</NTooltip>
 
 				<NTooltip :show-after="1500">

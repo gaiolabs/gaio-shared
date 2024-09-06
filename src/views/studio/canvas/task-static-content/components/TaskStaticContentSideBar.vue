@@ -4,41 +4,15 @@
 			<div class="flex items-center justify-between p-3 pb-0 pt-2 font-bold">
 				<NCollapse>
 					<NCollapseItem
-						:title="$t('general')"
-						name="1"
-					>
-						<NCheckboxGroup>
-							<NCheckbox
-								value="border"
-								:label="$t('border')"
-							/>
-							<NCheckbox
-								value="staticNeverRead"
-								:label="$t('staticNeverRead')"
-							/>
-						</NCheckboxGroup>
-					</NCollapseItem>
-					<NCollapseItem
-						:title="$t('components')"
-						name="2"
-					>
-						<NButton></NButton>
-					</NCollapseItem>
-					<NCollapseItem
 						:title="$t('table')"
 						name="3"
 					>
-						<GSelectTable
+						<GTableList
 							v-model="useCodeDataStore().localTask.tables"
-							class="pl-5 h-[40vh]"
+							class="pl-5 min-h-[10vh] max-h-[80vh]"
 							multiple
-							:is-list-format="true"
 						/>
 					</NCollapseItem>
-					<NCollapseItem
-						:title="$t('files')"
-						name="4"
-					></NCollapseItem>
 				</NCollapse>
 			</div>
 		</NScrollbar>
@@ -46,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import GSelectTable from '@/components/GSelectTable.vue'
-import { NScrollbar, NButton, NCollapse, NCollapseItem, NCheckboxGroup, NCheckbox } from 'naive-ui'
+import GTableList from '@/components/table-list/GTableList.vue'
+import { NScrollbar, NCollapse, NCollapseItem } from 'naive-ui'
 import { useCodeDataStore } from '../store/useTaskStaticContentStore'
 </script>

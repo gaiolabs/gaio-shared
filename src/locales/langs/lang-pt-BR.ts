@@ -185,5 +185,7 @@ export default {
 	files: 'Arquivos',
 	border: 'Border',
 	staticNeverRead: 'Nunca ler o conteúdo (audio)',
-	openTableData: 'Abrir os dados da tablea'
+	openTableData: 'Abrir os dados da tablea',
+	selectAllFiltered: 'Selecionar todos filtrados',
+	unselectAllFiltered: 'Desmarcar todos filtrados'
 }
