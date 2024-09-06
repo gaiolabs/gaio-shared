@@ -4,7 +4,7 @@
 		class="report-card"
 	>
 		<template v-if="task.reportType === 'table'">
-			<report-table
+			<ReportTable
 				:task="task"
 				:height="height"
 				:card-height="cardHeight"
@@ -12,20 +12,20 @@
 			/>
 		</template>
 		<template v-if="task.reportType === 'card'">
-			<report-card />
+			<ReportCard />
 		</template>
 		<template v-if="task.reportType === 'download'">
-			<report-download :task="task" />
+			<ReportDownload :task="task" />
 		</template>
-		<template v-if="['line', 'bar', 'area', 'pie', 'treemap'].includes(task.reportType)">
-			<report-chart
+		<template v-if="['line', 'bar', 'area', 'pie', 'treemap', 'funnel'].includes(task.reportType)">
+			<ReportChart
 				:task="task"
 				:height="height"
 				:card-height="cardHeight"
 			/>
 		</template>
 		<template v-if="task.reportType === 'form'">
-			<report-form
+			<ReportForm
 				:task="task"
 				:height="height"
 			/>
@@ -47,6 +47,8 @@ const props = defineProps<{ task: ReportNodeType }>()
 const cardHeight = computed(() => {
 	return (props.task?.height || 300) + 'px'
 })
+
+console.log('task', props.task)
 
 const height = computed(() => {
 	if (props.task && props.task && props.task.settings) {

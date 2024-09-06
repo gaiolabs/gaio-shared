@@ -1,10 +1,13 @@
 <template>
-	<div class="task-task-insights">
+	<div
+		v-if="localMeta"
+		class="task-task-insights"
+	>
 		<div v-if="!localMeta?.tableName">
-			<g-alert :title="$t('selectTable')" />
+			<GAlert :title="$t('selectTable')" />
 		</div>
 		<div v-else-if="localMeta?.options?.insights">
-			<g-alert :title="$t('taskInsightsHelp')" />
+			<GAlert :title="$t('taskInsightsHelp')" />
 
 			<NTabs
 				type="line"
@@ -17,7 +20,7 @@
 					<div class="g-card control p-2">
 						<div class="control">
 							<div class="control-label">{{ $t('date', 2) }}</div>
-							<g-select-column
+							<GSelectColumn
 								v-model="localMeta.options.insights.date"
 								:table-name="localMeta.tableName"
 								:data-type-filter="['date', 'datetime']"
@@ -26,7 +29,7 @@
 						</div>
 						<div class="control">
 							<div class="control-label">{{ $t('dimension', 2) }}</div>
-							<g-select-column
+							<GSelectColumn
 								v-model="localMeta.options.insights.dimension"
 								multiple
 								:table-name="localMeta.tableName"
@@ -55,17 +58,19 @@
 						</div>
 						<NTable v-if="localMeta.options.insights.type === 'computed'">
 							<thead>
-								<th>#</th>
-								<th>{{ $t('field') }}</th>
-								<th>{{ $t('operator') }}</th>
-								<th>{{ $t('field') }}</th>
-								<th>{{ $t('name') }}</th>
-								<th style="width: 35px">
-									<g-icon
-										name="add"
-										@click="addComputed"
-									/>
-								</th>
+								<tr>
+									<th>#</th>
+									<th>{{ $t('field') }}</th>
+									<th>{{ $t('operator') }}</th>
+									<th>{{ $t('field') }}</th>
+									<th>{{ $t('name') }}</th>
+									<th style="width: 35px">
+										<GIcon
+											name="add"
+											@click="addComputed"
+										/>
+									</th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr
@@ -74,7 +79,7 @@
 								>
 									<td>{{ index + 1 }}</td>
 									<td>
-										<g-select-column
+										<GSelectColumn
 											v-model="item.left"
 											:table-name="localMeta.tableName"
 											:data-type-filter="['decimal', 'integer']"
@@ -96,7 +101,7 @@
 										/>
 									</td>
 									<td>
-										<g-select-column
+										<GSelectColumn
 											v-model="item.right"
 											:table-name="localMeta.tableName"
 											:data-type-filter="['decimal', 'integer']"
@@ -109,7 +114,7 @@
 										/>
 									</td>
 									<td>
-										<g-icon
+										<GIcon
 											v-if="localMeta.options.insights.list.length > 1"
 											name="delete"
 											@click="removeComputed(index)"
@@ -123,7 +128,7 @@
 							class="control"
 						>
 							<div class="control-label">{{ $t('measure', 2) }}</div>
-							<g-select-column
+							<GSelectColumn
 								v-model="localMeta.options.insights.measure"
 								multiple
 								:table-name="localMeta.tableName"
@@ -259,10 +264,16 @@
 </template>
 
 <script setup lang="ts">
+import GAlert from '@/components/GAlert.vue'
+import GIcon from '@/components/GIcon.vue'
+import GSelectColumn from '@/components/GSelectColumn.vue'
 import type { MetaType } from '@gaio/shared/types'
+import { NInput, NSelect, NTable, NTabPane, NTabs } from 'naive-ui'
 import { computed, onMounted, ref, watch } from 'vue'
 
-const props = defineProps<{ localMeta: MetaType }>()
+// const props = defineProps<{ localMeta: MetaType }>()
+
+const { localMeta } = defineProps<{ localMeta: MetaType }>()
 
 const separator = ref('dotComma')
 const temporaryPercentage = ref(0)
@@ -284,7 +295,7 @@ const showInsightsButton = computed(() => {
 // }
 
 const addComputed = () => {
-	props.localMeta.options.insights.list.push({
+	localMeta.options.insights.list.push({
 		left: '',
 		operator: '=',
 		right: ''
@@ -292,17 +303,17 @@ const addComputed = () => {
 }
 
 const removeComputed = (index: number) => {
-	props.localMeta.options.insights.list.splice(index, 1)
+	localMeta.options.insights.list.splice(index, 1)
 }
 
 const prepareList = () => {
-	switch (props.localMeta.options.insights.type) {
+	switch (localMeta.options.insights.type) {
 		case 'field':
-			props.localMeta.options.insights.list = []
+			localMeta.options.insights.list = []
 			break
 		default:
-			props.localMeta.options.insights.list = [{ left: '', operator: '*', right: '' }]
-			props.localMeta.options.schedule = false
+			localMeta.options.insights.list = [{ left: '', operator: '*', right: '' }]
+			localMeta.options.schedule = false
 			break
 	}
 }
@@ -326,19 +337,19 @@ const save = () => {}
 // }
 
 const defineSeparators = () => {
-	props.localMeta.options.numberFormat.separators = separator.value
-	props.localMeta.options.percentFormat.separators = separator.value
+	localMeta.options.numberFormat.separators = separator.value
+	localMeta.options.percentFormat.separators = separator.value
 }
 
 watch(
 	() => temporaryPercentage.value,
 	(value) => {
-		props.localMeta.options.growthPercentage = value / 100
+		localMeta.options.growthPercentage = value / 100
 	}
 )
 
 onMounted(() => {
-	temporaryPercentage.value = (props.localMeta.options.growthPercentage || 1) * 100
+	temporaryPercentage.value = (localMeta.options.growthPercentage || 1) * 100
 })
 </script>
 

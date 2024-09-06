@@ -20,7 +20,7 @@ import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'
 import { useAppStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
-import type { SelectOption } from 'naive-ui'
+import { NSelect, type SelectOption } from 'naive-ui'
 import { h, onMounted, ref, type VNodeChild, watch } from 'vue'
 
 type ColumnListType = {
@@ -29,7 +29,7 @@ type ColumnListType = {
 } & SelectOption &
 	FieldType
 
-type DataTypeFilter = 'text' | 'json' | 'date' | 'array' | 'datatime' | 'uuid' | 'integer' | 'decimal'
+type DataTypeFilter = 'text' | 'json' | 'date' | 'array' | 'datetime' | 'uuid' | 'integer' | 'decimal'
 
 const emit = defineEmits(['update:modelValue', 'change', 'loadColumnList'])
 const {

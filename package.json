@@ -8,10 +8,11 @@
     "preview": "vite preview",
     "build-only": "bunx --bun vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "lint": "eslint --ext .ts,.vue --fix --max-warnings 0 src"
+    "lint": "eslint --ext .ts,.vue --fix --max-warnings 0 src",
+    "remove-shared": "bun remove @gaio/shared",
+    "reload-shared": "bun add github:gaiolabs/gaio-shared"
   },
   "dependencies": {
-    "@gaio/shared": "github:gaiolabs/gaio-shared",
     "@antv/data-set": "^0.11.8",
     "@antv/g2plot": "^2.4.31",
     "@codemirror/autocomplete": "^6.17.0",
@@ -19,6 +20,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.28.4",
     "@fontsource/roboto": "^5.0.13",
+    "@gaio/shared": "github:gaiolabs/gaio-shared",
     "@iconify/vue": "^4.1.2",
     "@tiptap/extension-bubble-menu": "^2.4.0",
     "@tiptap/extension-floating-menu": "^2.4.0",

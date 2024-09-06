@@ -7,49 +7,56 @@
 			:show="loading"
 			:style="{ height }"
 		>
-			<report-node-header
+			<ReportNodeHeader
 				:task="task"
 				:table-rows="tableRows"
 			/>
 			<template v-if="list?.length">
 				<div class="px-2">
-					<report-chart-bar-bk
+					<ReportChartBarBk
 						v-if="['bar'].includes(task.reportType) && !settings.columnBar"
 						:task="task"
 						:list="list"
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
-					<report-chart-column
+					<ReportChartColumn
 						v-if="['bar'].includes(task.reportType) && settings.columnBar"
 						:task="task"
 						:list="list"
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
-					<report-chart-line
+					<ReportChartLine
 						v-else-if="task.reportType === 'line'"
 						:task="task"
 						:list="list"
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
-					<report-chart-area
+					<ReportChartArea
 						v-else-if="task.reportType === 'area'"
 						:task="task"
 						:list="list"
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
-					<report-chart-pie
+					<ReportChartPie
 						v-else-if="task.reportType === 'pie'"
 						:task="task"
 						:list="list"
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
-					<report-chart-treemap
+					<ReportChartTreemap
 						v-else-if="task.reportType === 'treemap'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
+					<ReportChartFunnel
+						v-else-if="task.reportType === 'funnel'"
 						:task="task"
 						:list="list"
 						:height="height"
@@ -73,17 +80,18 @@ import ReportNodeHeader from '@/views/report/ReportNodeHeader.vue'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep, debounce } from 'lodash-es'
 import { computed, onMounted, ref, watch } from 'vue'
+import ReportChartFunnel from './ReportChartFunnel.vue'
 
 defineEmits(['change'])
-const props = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()
+const { task, height } = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()
 
 const loading = ref(true)
 const localKey = ref('any')
 const list = ref([])
 const tableRows = ref(0)
-const settings = computed(() => props.task.settings)
+const settings = computed(() => task.settings)
 const firstLoad = ref(false)
-
+console.log('task.reportType', task.reportType)
 watch(
 	() => settings.value,
 	debounce(() => {
@@ -101,7 +109,7 @@ watch(
 onMounted(() => {
 	loading.value = true
 
-	const taskData = cloneDeep(props.task)
+	const taskData = cloneDeep(task)
 
 	if (taskData.settings.type === 'crosstab') {
 		taskData.schema.limit = 5000

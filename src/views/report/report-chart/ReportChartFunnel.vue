@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { fold } from '@/views/report/report-chart/fold'
-import { Column, type ColumnOptions } from '@antv/g2plot'
+import { Funnel, type FunnelOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
@@ -63,7 +63,7 @@ const loadChart = () => {
 	}
 	common.padding = appendPadding()
 
-	chart.value = new Column(
+	chart.value = new Funnel(
 		id.value as HTMLElement,
 		{
 			data: localList.value,
@@ -83,7 +83,7 @@ const loadChart = () => {
 						}
 					}
 				:	undefined
-		} as ColumnOptions
+		} as FunnelOptions
 	)
 	chart.value.render()
 }
