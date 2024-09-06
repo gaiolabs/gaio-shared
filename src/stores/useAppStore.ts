@@ -17,6 +17,7 @@ export const useAppStore = defineStore(
 		const params = ref<ParamType[]>([])
 		const forms = ref<FormType[]>([])
 		const sourceList = ref<SourceType[]>()
+		let source: WebSocket
 
 		const cloneTask = <T = TaskType & ReportNodeType>() => cloneDeep<T>(task.value as T)
 		const baseTask = (type: string) => {
@@ -109,6 +110,60 @@ export const useAppStore = defineStore(
 				}
 			})
 		}
+
+		const closeEventSource = () => {
+			if (source) {
+				console.log('close app websocket')
+				source.close()
+				source = null
+			}
+		}
+
+		const observeUpdateFlow = () => {
+			source = new WebSocket(
+				'http://localhost:3000/api/ws/' +
+					'type:app-' +
+					app.value.appId +
+					'-' +
+					useAuthStore().user.userId +
+					'?token=' +
+					useAuthStore().token
+			)
+
+			source.onmessage = (event) => {
+				const incomingData: { type: string; data: FlowType & AppType } = JSON.parse(event.data)
+
+				if (incomingData.type === 'flow') {
+					const { flowData } = incomingData
+					console.log('fasfasfas')
+					if (flowData.flowId === flow.value.flowId) {
+						for (const key in flowData) {
+							console.log(key)
+							if (flow.value[key]) {
+								console.log('save ', key)
+								flow.value[key] = flowData[key]
+							}
+						}
+					}
+
+					flow.value = cloneDeep(flow.value)
+
+					flowList.value.forEach((flowItem, index) => {
+						if (flowItem.flowId === flowData.flowId) {
+							console.log('amigo')
+							for (const key in flowData) {
+								if (flowList.value[index][key]) {
+									flowList.value[index][key] = flowData[key]
+								}
+							}
+						}
+					})
+
+					refreshKey.value = getId()
+				}
+			}
+		}
+
 		// const updateParams = (paramState) => {
 		//     const params = Object.assign([], paramState)
 		//     const userId = useAuthStore().user.userId
@@ -144,7 +199,9 @@ export const useAppStore = defineStore(
 			saveAppOptions,
 			saveAppMetadata,
 			defineCurrentFlow,
-			defineDefaultParams
+			defineDefaultParams,
+			observeUpdateFlow,
+			closeEventSource
 		}
 	},
 	{

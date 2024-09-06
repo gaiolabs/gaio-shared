@@ -14,7 +14,7 @@ export default {
 	visibility: 'Visibility',
 	reportVisibility: 'Report visibility at the current layout',
 	copiedToClipboard: 'Copied to clipboard',
-	monit: 'Monit',
+	monitor: 'Monitor',
 	grantFrom: 'Grant to',
 	TCP: 'TCP',
 	HTMLInterface: 'HTTP Interface',

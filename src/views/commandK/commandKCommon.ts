@@ -41,7 +41,7 @@ export const commandKCommon = (t: Function) => [
 		path: '/settings/app'
 	},
 	{
-		label: t('monit'),
+		label: t('monitor'),
 		type: 'router',
 		icon: 'monit',
 		path: '/settings/monit'
