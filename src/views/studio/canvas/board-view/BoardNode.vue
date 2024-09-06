@@ -68,6 +68,7 @@ const nodeStyle = computed(() => {
 		return 'border border-zinc-500 !bg-[#f2ede7]'
 	}
 	const status = taskJobMeta.value.status
+	console.log('task status', status)
 	if (status === 'started') {
 		return 'border border-yellow-500 !bg-[#f2ede7]'
 	}
@@ -76,6 +77,9 @@ const nodeStyle = computed(() => {
 	}
 	if (status === 'error') {
 		return 'border  border-red-500 !bg-[#f7efef]'
+	}
+	if (status === 'aborted') {
+		return 'border border-[#DEB6FF] !bg-[#F5E8FF]'
 	}
 	return 'border border-transparent'
 })

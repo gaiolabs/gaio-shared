@@ -1,5 +1,8 @@
 <template>
-	<drawer-view class="task-log-view" @close="$emit('close')">
+	<drawer-view
+		class="task-log-view"
+		@close="$emit('close')"
+	>
 		<template #header>
 			<div class="flex items-center gap-3 p-3">
 				<div class="flex items-center gap-1 font-bold">
@@ -10,7 +13,10 @@
 			</div>
 		</template>
 		<template #contentScroll>
-			<div ref="localContent" class="h-full">
+			<div
+				ref="localContent"
+				class="h-full"
+			>
 				<div v-if="!jobList?.length">
 					<NAlert class="border-elevation-2">
 						<template #title>
@@ -18,9 +24,16 @@
 						</template>
 					</NAlert>
 				</div>
-				<div v-else class="m-3 pb-3">
+				<div
+					v-else
+					class="m-3 pb-3"
+				>
 					<NCollapse>
-						<NCollapseItem v-for="(job, index) of jobList" :key="index" :name="index">
+						<NCollapseItem
+							v-for="(job, index) of jobList"
+							:key="index"
+							:name="index"
+						>
 							<template #header>
 								<div class="flex w-full items-center justify-between">
 									<div>
@@ -36,19 +49,43 @@
 									<div class="w-[90px] text-right">{{ formatTime(job.startedAt) }}</div>
 									<div class="w-[90px] text-right">{{ formatTime(job.endedAt) }}</div>
 									<div class="w-[90px] text-right">{{ timeSpent(job) }}</div>
-									<NDivider vertical class="m-0 p-0" />
-									<div v-if="job.status === 'started'" class="w-[90px]">
-										<NButton class="w-full" size="small" status="danger" @click="abortWorkflow(job.taskLogId)">
+									<NDivider
+										vertical
+										class="m-0 p-0"
+									/>
+									<div
+										v-if="job.status === 'started'"
+										class="w-[90px]"
+									>
+										<NButton
+											class="w-full"
+											size="small"
+											status="danger"
+											@click="abortWorkflow(job.taskLogId)"
+										>
 											{{ $t('stop') }}
 										</NButton>
 									</div>
-									<div v-else-if="job.aborted" class="w-[90px]">
-										<NTag :bordered="false" :color="tagPurple" class="w-full justify-center">
+									<div
+										v-else-if="job.aborted"
+										class="w-[90px]"
+									>
+										<NTag
+											:bordered="false"
+											:color="tagPurple"
+											class="w-full justify-center"
+										>
 											{{ $t('aborted') }}
 										</NTag>
 									</div>
-									<div v-else class="w-[90px]">
-										<NTag :color="tagGray" class="w-full justify-center">
+									<div
+										v-else
+										class="w-[90px]"
+									>
+										<NTag
+											:color="tagGray"
+											class="w-full justify-center"
+										>
 											{{ $t('finished') }}
 										</NTag>
 									</div>
@@ -69,7 +106,10 @@
 											<div>
 												{{ timeSpent(value) }}
 											</div>
-											<NDivider vertical class="m-0 p-0" />
+											<NDivider
+												vertical
+												class="m-0 p-0"
+											/>
 											<div class="w-[80px]">
 												<NTag
 													class="w-full justify-center"
@@ -87,7 +127,11 @@
 						</NCollapseItem>
 					</NCollapse>
 				</div>
-				<NModal v-model:visible="showMessage" :ok-text="$t('ok')" hide-cancel>
+				<NModal
+					v-model:visible="showMessage"
+					:ok-text="$t('ok')"
+					hide-cancel
+				>
 					<template #title>{{ $t('message') }}</template>
 					<NScrollbar style="max-height: 300px; overflow: auto; padding: 10px">
 						{{ currentMessage }}
@@ -162,10 +206,10 @@ const singleTaskJobStatus = (value) => {
 	)
 }
 
-const abortWorkflow = async (id: string) => {
+const abortWorkflow = async (taskLogId: string) => {
 	await useApi().post('api/task/abort', {
 		body: {
-			id
+			taskLogId
 		}
 	})
 }
