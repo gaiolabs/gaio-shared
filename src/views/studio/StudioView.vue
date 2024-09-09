@@ -113,10 +113,12 @@ defineComponent({
 })
 
 const currentTable = ref<string>()
-const closeTable = () => {
-	showDrawer.value = undefined
-	currentTable.value = undefined
-}
+
+const items = ref([])
+const loading = ref(true)
+const sidebarPanel = ref()
+const showDrawer = ref()
+const currentElement = shallowRef()
 
 const addDrag = (ev: SortableEvent) => {
 	const element = cloneDeep<TableType>(ev.item[Object.getOwnPropertySymbols(ev.item)[0]])
@@ -137,12 +139,6 @@ const addDrag = (ev: SortableEvent) => {
 		.save()
 		.then(() => closeTask())
 }
-
-const items = ref([])
-const loading = ref(true)
-const sidebarPanel = ref()
-const showDrawer = ref()
-const currentElement = shallowRef()
 
 const closeTask = () => {
 	showDrawer.value = undefined
@@ -269,7 +265,6 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
 }
 
 useBus.on('openTable', (table: string) => {
-	console.log('openTable')
 	currentTable.value = table
 	showDrawer.value = 'tableView'
 })
