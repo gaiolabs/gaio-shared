@@ -9,7 +9,7 @@ import { FlowType } from '../core/flow.type'
  */
 
 export type FlowSaveRequestDTO = { flowData: FlowType }
-export type FlowSaveSchedulesRequestDTO = { schedules: Array<{ appId: string; flowId: string }> }
+export type FlowSaveSchedulesRequestDTO = { schedulesList: Array<{ appId: string; flowId: string }> }
 export type FlowListRequestDTO = { appId: string }
 export type FlowRemoveRequestDTO = { flowId: string; appId: string }
 export type FlowCloneRequestDTO = { flowId: string; appId: string }
