@@ -1,5 +1,7 @@
 import { defaultReportTheme } from '@/composables/default-reports/defaultReportTheme'
 import useFormatValue from '@/composables/useFormatValue'
+import type { ColumnOptions } from '@antv/g2plot'
+import type { Legend } from '@antv/g2plot/lib/types/legend'
 import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import { isNil } from 'lodash-es'
 import { computed } from 'vue'
@@ -49,33 +51,33 @@ export default (task: ReportNodeType) => {
 	})
 
 	const meta = computed(() => {
-		const metadata = {}
+		const metadata: Record<string, any> = {}
 
 		if (firstDimension.value) {
 			metadata[columnName(firstDimension.value)] = {
 				alias: columnTitle(firstDimension.value),
-				formatter: (v) => formatValue(v, firstDimension.value)
+				formatter: (v: string | number | Date) => formatValue(v, firstDimension.value)
 			}
 		}
 
 		if (groupedDimension.value) {
 			metadata[columnName(groupedDimension.value)] = {
 				alias: columnTitle(groupedDimension.value),
-				formatter: (v) => formatValue(v, groupedDimension.value)
+				formatter: (v: string | number | Date) => formatValue(v, groupedDimension.value)
 			}
 		}
 
 		if (firstMeasure.value) {
 			metadata[columnName(firstMeasure.value)] = {
 				alias: columnTitle(firstMeasure.value),
-				formatter: (v) => {
+				formatter: (v: string | number | Date) => {
 					return formatValue(v, firstMeasure.value)
 				}
 			}
 
 			metadata['measure'] = {
 				alias: columnTitle(firstMeasure.value),
-				formatter: (v) => formatValue(v, firstMeasure.value)
+				formatter: (v: string | number | Date) => formatValue(v, firstMeasure.value)
 			}
 		}
 
@@ -83,14 +85,14 @@ export default (task: ReportNodeType) => {
 	})
 
 	const columnName = (col: FieldType) => {
-		return col.alias || col.columnName
+		return (col.alias || col.columnName) as string
 	}
 
 	const columnTitle = (col: FieldType) => {
-		return col.title || columnName(col)
+		return (col.title || columnName(col)) as string
 	}
 
-	const tickCount = (type) => {
+	const tickCount = (type: string) => {
 		let countTicks = 0
 		switch (type) {
 			case 'xAxis':
@@ -124,18 +126,18 @@ export default (task: ReportNodeType) => {
 			:	false
 	}
 
-	const linearLabel = (total) => {
+	const linearLabel = (total: number) => {
 		return label({
-			formatter: (v) => {
-				v = v['measure'] || v[columnName(firstMeasure.value)]
-				let value = formatValue(v, {
+			formatter: (v: Record<string, any>) => {
+				const measure: number = v['measure'] || v[columnName(firstMeasure.value)]
+				let value = formatValue(measure, {
 					...firstMeasure.value,
 					compactNumber: settings.value.compactNumberLabel
 				})
 
 				const breakLine = settings.value.columnBar ? '\n' : ' '
 				if (settings.value.showLabelPercent) {
-					const percent = (v || 0) / total
+					const percent = (measure || 0) / total
 					value = `${value} ${breakLine} ${formatValue(percent, {
 						formatType: 'percentage',
 						formatDecimalSize: 1,
@@ -177,7 +179,7 @@ export default (task: ReportNodeType) => {
 	}
 
 	const xAxis = (more = {}) => {
-		const rangeOptions = {}
+		const rangeOptions: Record<string, number[]> = {}
 
 		if (['line', 'area'].includes(task.reportType)) {
 			rangeOptions['range'] = [0, 1]
@@ -205,7 +207,7 @@ export default (task: ReportNodeType) => {
 						},
 						formatter:
 							settings.value.compactNumberAxis && !settings.value.columnBar && settings.value.type === 'column' ?
-								(v, t) => {
+								(v: string | number | Date, t: Record<string, any>) => {
 									let base = v
 									if (t['id']) {
 										base = t['id']
@@ -335,9 +337,10 @@ export default (task: ReportNodeType) => {
 			:	false
 	}
 
-	const legend = (more = {}) => {
+	const legend = (more: Legend = {}) => {
+		console.log(settings.value.legendPosition)
 		return settings.value.showLegend ?
-				{
+				({
 					enabled: true,
 					position: `${settings.value.legendPosition}`.replace('-center', ''),
 					itemName: {
@@ -348,8 +351,8 @@ export default (task: ReportNodeType) => {
 						}
 					},
 					...more
-				}
-			:	false
+				} as Legend)
+			:	{}
 	}
 
 	const guideLine = computed(() => {
@@ -415,8 +418,8 @@ export default (task: ReportNodeType) => {
 		}
 	}
 
-	const valueFormatter = (value, col) => formatValue(value, col)
-	const legendName = (name) => columnTitle(getColumnReference(name))
+	const valueFormatter = (value: string | number | Date, col: ColumnOptions) => formatValue(value, col)
+	const legendName = (name: string) => columnTitle(getColumnReference(name))
 
 	const seriesLabel = () => {
 		return {

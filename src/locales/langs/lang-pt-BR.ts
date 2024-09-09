@@ -187,5 +187,6 @@ export default {
 	staticNeverRead: 'Nunca ler o conteúdo (audio)',
 	openTableData: 'Abrir os dados da tablea',
 	selectAllFiltered: 'Selecionar todos filtrados',
-	unselectAllFiltered: 'Desmarcar todos filtrados'
+	unselectAllFiltered: 'Desmarcar todos filtrados',
+	transposed: 'Transposto'
 }

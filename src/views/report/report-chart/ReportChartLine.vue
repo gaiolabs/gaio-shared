@@ -21,8 +21,7 @@ defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(props.task))
-const { dimensions, measures, settings, columnName, themeColors, appendPadding, label, firstMeasure, foundation } =
-	chartHelper.value
+const { dimensions, measures, settings, columnName, themeColors, label, firstMeasure, foundation } = chartHelper.value
 
 const { formatValue } = useFormatValue()
 const id = shallowRef()
@@ -51,8 +50,6 @@ const loadChart = () => {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 	}
-
-	common.padding = appendPadding()
 
 	chart.value = new Line(
 		id.value as HTMLElement,

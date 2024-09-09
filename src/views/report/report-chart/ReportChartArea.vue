@@ -62,8 +62,6 @@ const loadChart = () => {
 		common.yField = columnName(measures.value[0])
 	}
 
-	common.padding = appendPadding()
-
 	chart.value = new Area(
 		id.value as HTMLElement,
 		{

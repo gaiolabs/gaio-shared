@@ -16,6 +16,12 @@
 			:label="$t('showTable')"
 			class="w-full"
 		/>
+		<NCheckbox
+			v-if="useReportStore().showOnlyIf(['funnel'])"
+			v-model:checked="useReportStore().current.settings.transposed"
+			:label="$t('transposed')"
+			class="w-full"
+		/>
 
 		<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
 			<NDivider class="!my-3" />

@@ -60,8 +60,6 @@ const loadChart = () => {
 		common.xField = columnName(measures.value[0])
 	}
 
-	common.padding = appendPadding()
-
 	chart.value = new Bar(
 		id.value as HTMLElement,
 		{

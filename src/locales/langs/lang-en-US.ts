@@ -760,5 +760,6 @@ export default {
 	staticNeverRead: 'Never read text (audio)',
 	openTableData: 'Open table data',
 	selectAllFiltered: 'Select all filtered',
-	unselectAllFiltered: 'Unselect all filtered'
+	unselectAllFiltered: 'Unselect all filtered',
+	transposed: 'Transposed'
 }

@@ -9,6 +9,7 @@ import { defaultTableReport } from '@/composables/default-reports/defaultTableRe
 import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
+import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
@@ -19,18 +20,94 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 
 	sourceProperties.settings = sourceProperties.settings || {}
 
-	const prepare = {
-		table: () => defaultTableReport(sourceProperties),
-		bar: () => defaultReportChartBar(sourceProperties),
-		column: () => defaultReportChartBar(sourceProperties),
-		line: () => defaultReportChartLine(sourceProperties),
-		download: () => defaultReportDownload(sourceProperties),
-		treemap: () => defaultReportChartTreemap(sourceProperties),
-		pie: () => defaultReportChartPie(sourceProperties),
-		area: () => defaultReportChartArea(sourceProperties),
-		staticContent: () => defaultStaticContentReport(sourceProperties)
+	// const prepare = {
+	// 	table: () => defaultTableReport(sourceProperties),
+	// 	bar: () => defaultReportChartBar(sourceProperties),
+	// 	column: () => defaultReportChartBar(sourceProperties),
+	// 	line: () => defaultReportChartLine(sourceProperties),
+	// 	download: () => defaultReportDownload(sourceProperties),
+	// 	treemap: () => defaultReportChartTreemap(sourceProperties),
+	// 	pie: () => defaultReportChartPie(sourceProperties),
+	// 	area: () => defaultReportChartArea(sourceProperties),
+	// 	staticContent: () => defaultStaticContentReport(sourceProperties)
+	// }
+
+	let result
+	switch (reportType) {
+		case 'table':
+			result = defaultTableReport(sourceProperties)
+			break
+
+		case 'bar':
+			result = defaultReportChartBar(sourceProperties)
+			break
+
+		case 'column':
+			result = defaultReportChartBar(sourceProperties)
+			break
+
+		case 'line':
+			result = defaultReportChartLine(sourceProperties)
+			break
+
+		case 'area':
+			result = defaultReportChartArea(sourceProperties)
+			break
+
+		case 'pie':
+			result = defaultReportChartPie(sourceProperties)
+			break
+
+		case 'donut':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'scatter':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'bubble':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'radar':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'heatmap':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'funnel':
+			result = defaultReportChartFunnel(sourceProperties)
+			break
+
+		case 'gauge':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'sunburst':
+			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'treemap':
+			result = defaultReportChartTreemap(sourceProperties)
+			break
+
+		case 'download':
+			result = defaultReportDownload(sourceProperties)
+			break
+
+		case 'staticContent':
+			result = defaultStaticContentReport(sourceProperties)
+			break
+
+		default:
+			result = {}
+			break
 	}
 
+	console.log('result', result)
 	return withoutNullProperties({
 		id: base.id || null,
 		type: 'report',
@@ -44,6 +121,6 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 		databaseName: getBucketNameFromAppId(base.appId),
 		tableName: base.tableName,
 		layout: base.layout || {},
-		...prepare[reportType]()
+		...result
 	}) as ReportNodeType
 }

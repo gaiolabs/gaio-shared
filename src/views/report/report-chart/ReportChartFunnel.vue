@@ -2,7 +2,7 @@
 	<div class="report-column">
 		<div
 			ref="id"
-			class="size-full"
+			class="size-full pb-4"
 			:style="{ height }"
 		/>
 	</div>
@@ -24,7 +24,7 @@ const chartHelper = computed(() => useReportChartHelper(task))
 const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
 
 const id = shallowRef()
-const chart = shallowRef()
+const chart = shallowRef<Funnel>()
 const localList = shallowRef([])
 
 const isMultipleMeasure = computed(() => {
@@ -41,6 +41,8 @@ const total = computed(() => {
 	})
 })
 
+console.log('task', task)
+
 const loadChart = () => {
 	let common = {} as Partial<Record<string, unknown>>
 	if (!isGrouped.value && isMultipleMeasure.value) {
@@ -48,33 +50,40 @@ const loadChart = () => {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = 'measure'
 		common.seriesField = 'category'
-		common.dodgePadding = 0
-		common.intervalPadding = 20
+		// common.dodgePadding = 0
+		// common.intervalPadding = 20
 	} else if (isGrouped.value) {
 		common.isGroup = true
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 		common.seriesField = columnName(dimensions.value[1])
-		common.dodgePadding = 0
-		common.intervalPadding = 20
+		// common.dodgePadding = 0
+		// common.intervalPadding = 20
 	} else {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 	}
-	common.padding = appendPadding()
+	// common.padding = appendPadding()
 
 	chart.value = new Funnel(
 		id.value as HTMLElement,
 		{
 			data: localList.value,
+			isTransposed: settings.value.transposed ?? false,
+			dynamicHeight: true,
+			conversionTag: false,
 			...common,
-			color:
-				isGrouped.value || isMultipleMeasure.value ? themeColors.value
-				: settings.value.showLegend ? themeColors.value
-				: themeColors.value[0],
+			// color:
+			// 	isGrouped.value || isMultipleMeasure.value ? themeColors.value
+			// 	: settings.value.showLegend ? themeColors.value
+			// 	: themeColors.value[0],
 
 			...foundation.value,
-			label: chartHelper.value.linearLabel(total),
+			label: chartHelper.value.linearLabel(total.value),
+			// legend: chartHelper.value.legend({
+			// 	offsetY: settings.value.legendPosition === 'bottom' ? 16 : undefined
+			// }),
+			// height: settings.value.legendPosition === 'bottom'? settings.value.legendPosition,
 			columnBackground:
 				settings.value.columnBackground ?
 					{
@@ -92,9 +101,17 @@ onMounted(() => {
 	let data = list
 
 	if (isGrouped.value || !isMultipleMeasure.value) {
-		localList.value = data
+		localList.value = data.sort((a, b) =>
+			a.sum_profitEach > b.sum_profitEach ? -1
+			: a.sum_profitEach < b.sum_profitEach ? 1
+			: 0
+		)
 	} else {
-		localList.value = fold(data, measures.value)
+		localList.value = fold(data, measures.value).sort((a, b) =>
+			a.sum_profitEach > b.sum_profitEach ? -1
+			: a.sum_profitEach < b.sum_profitEach ? 1
+			: 0
+		)
 	}
 
 	nextTick(() => loadChart())

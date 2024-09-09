@@ -19,9 +19,7 @@ import useReportChartHelper from './ReportChartHelper'
 defineEmits(['change'])
 
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
-const { appendPadding, settings, firstMeasure, firstDimension, columnName, columnTitle } = useReportChartHelper(
-	props.task
-)
+const { settings, firstMeasure, firstDimension, columnName, columnTitle } = useReportChartHelper(props.task)
 const { formatValue } = useFormatValue()
 
 const id = shallowRef()
@@ -92,7 +90,6 @@ const init = () => {
 		data: prepareData,
 		autoFit: true,
 		padding: 'auto',
-		appendPadding: appendPadding(),
 		colorField: settings.value.colorFieldType === 'measure' ? 'value' : 'name',
 		openDrillDown: false,
 		hierarchyConfig: {

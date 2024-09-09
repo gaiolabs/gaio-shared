@@ -1,5 +1,9 @@
 <template>
-	<div ref="element" v-height class="sql-model">
+	<div
+		ref="element"
+		v-height
+		class="sql-model"
+	>
 		<codemirror
 			v-if="!loading"
 			v-model="code"
