@@ -38,6 +38,7 @@ export type FlowType = Partial<{
     appId: string
     flowName: string
     cron: string
+    status: 'active' | 'inactive' | string
     cronBase: CronBaseType
     cronStatus: 'active' | 'inactive'
     options: {
