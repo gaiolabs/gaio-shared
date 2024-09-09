@@ -238,9 +238,7 @@ let monthValues = _monthValues
 watch(
 	() => localCron.value,
 	(newValue) => {
-		// if (!localCron.value.current || localCron.value.current.length >= 9) {
 		emit('change', newValue)
-		// }
 	},
 	{
 		deep: true

@@ -127,14 +127,12 @@ const emit = defineEmits(['close', 'save'])
 const localFlow = ref<FlowType | null>()
 const currentTab = ref('general')
 const loading = ref(false)
-let backupSchedule = {
+const backupSchedule: { cron: string | undefined; cronStatus: string | undefined } = {
 	cron: undefined,
 	cronStatus: undefined
 }
 
-const bootstrapSchedule = () => {
-	console.log('fine', localFlow.value.cron)
-	console.log('back', backupSchedule.cron)
+const handleSaveSchedules = () => {
 	if (backupSchedule.cron !== localFlow.value.cron || backupSchedule.cronStatus !== localFlow.value.cronStatus) {
 		useScheduleControl().defineFlowSchedules([
 			{
@@ -163,7 +161,7 @@ const save = async () => {
 		useAppStore().flow = savedFlow
 	}
 
-	bootstrapSchedule()
+	handleSaveSchedules()
 
 	emit('save')
 }
@@ -197,7 +195,7 @@ const remove = async () => {
 		}
 	})
 
-	bootstrapSchedule()
+	handleSaveSchedules()
 
 	useAppStore().flowList = useAppStore().flowList.filter((flow) => flow.flowId !== localFlow.value.flowId)
 	emit('save')
@@ -260,12 +258,7 @@ onMounted(() => {
 		}
 	}
 
-	console.log('back', backupSchedule.cron)
-	console.log('localFlow', localFlow.value.cron)
-
 	backupSchedule.cron = localFlow.value.cron
 	backupSchedule.cronStatus = localFlow.value.cronStatus
-
-	backupSchedule = JSON.parse(JSON.stringify(backupSchedule))
 })
 </script>
