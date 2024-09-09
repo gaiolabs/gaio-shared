@@ -8,8 +8,10 @@ import { FlowType } from '../core/flow.type'
  * @namingConvention ScopeRouteNameRequestDTO
  */
 
+export type SchedulesList = Array<{ appId: string; flowId: string }>
+
 export type FlowSaveRequestDTO = { flowData: FlowType }
-export type FlowSaveSchedulesRequestDTO = { schedulesList: Array<{ appId: string; flowId: string }> }
+export type FlowSaveSchedulesRequestDTO = { schedulesList: SchedulesList }
 export type FlowListRequestDTO = { appId: string }
 export type FlowRemoveRequestDTO = { flowId: string; appId: string }
 export type FlowCloneRequestDTO = { flowId: string; appId: string }
