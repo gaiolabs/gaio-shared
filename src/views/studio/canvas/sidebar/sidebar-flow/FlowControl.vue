@@ -111,6 +111,7 @@
 
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
+import useScheduleControl from '@/composables/useScheduleControl'
 import { useAppStore } from '@/stores'
 import type { FlowType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
@@ -124,6 +125,25 @@ const emit = defineEmits(['close', 'save'])
 const localFlow = ref<FlowType | null>()
 const currentTab = ref('general')
 const loading = ref(false)
+const backupSchedule = ref({
+	cron: null,
+	cronStatus: null
+})
+
+const bootstrapSchedule = () => {
+	if (
+		backupSchedule.value.cron !== localFlow.value.cron ||
+		backupSchedule.value.cronStatus !== localFlow.value.cronStatus
+	) {
+		useScheduleControl().bootstrapSchedule([
+			{
+				appId: localFlow.value.appId,
+				flowId: localFlow.value.flowId,
+				type: 'flow'
+			}
+		])
+	}
+}
 
 const save = async () => {
 	loading.value = true
@@ -136,13 +156,14 @@ const save = async () => {
 	if (savedFlow.flowId) {
 		const index = useAppStore().flowList.findIndex((flow) => flow.flowId === savedFlow.flowId)
 		if (index !== -1) {
-			console.log('updates')
 			useAppStore().flowList[index] = savedFlow
 		} else {
 			useAppStore().flowList.push(savedFlow)
 		}
 		useAppStore().flow = savedFlow
 	}
+
+	bootstrapSchedule()
 
 	emit('save')
 }
@@ -159,6 +180,8 @@ const remove = async () => {
 			appId: localFlow.value.appId
 		}
 	})
+
+	bootstrapSchedule()
 
 	useAppStore().flowList = useAppStore().flowList.filter((flow) => flow.flowId !== localFlow.value.flowId)
 	emit('save')
@@ -220,5 +243,8 @@ onMounted(() => {
 			}
 		}
 	}
+
+	backupSchedule.value.cron = localFlow.value.cron
+	backupSchedule.value.cronStatus = localFlow.value.cronStatus
 })
 </script>
