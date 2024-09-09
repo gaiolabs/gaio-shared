@@ -98,6 +98,7 @@
 					</NButton>
 					<NButton
 						:loading="loading"
+						:disabled="validateFlow"
 						type="primary"
 						@click="save()"
 					>
@@ -114,6 +115,7 @@ import useApi from '@/composables/useApi'
 import useScheduleControl from '@/composables/useScheduleControl'
 import { useAppStore } from '@/stores'
 import type { FlowType } from '@gaio/shared/types'
+import cronstrue from 'cronstrue'
 import { cloneDeep } from 'lodash-es'
 import { NButton } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
@@ -165,6 +167,22 @@ const save = async () => {
 
 	emit('save')
 }
+
+const validateFlow = computed(() => {
+	return !localFlow.value.flowName || !validateCron.value
+})
+
+const validateCron = computed(() => {
+	if (localFlow.value.cron) {
+		try {
+			cronstrue.toString(localFlow.value.cron)
+			return true
+		} catch {
+			return false
+		}
+	}
+	return true
+})
 
 const canDeleteFlow = computed(() => {
 	return useAppStore().flowList.length > 1

@@ -15,7 +15,7 @@
 							strong
 							secondary
 							:type="showTab === 'studio' ? 'primary' : 'default'"
-							@click="showTab = 'studio'"
+							@click="changeShowTab('studio')"
 						>
 							{{ $t('studio') }}
 						</NButton>
@@ -23,7 +23,7 @@
 							strong
 							secondary
 							:type="showTab === 'schedule' ? 'primary' : 'default'"
-							@click="showTab = 'schedule'"
+							@click="changeShowTab('schedule')"
 						>
 							{{ $t('schedule') }}
 						</NButton>
@@ -31,7 +31,7 @@
 							strong
 							secondary
 							:type="showTab === 'dashboard' ? 'primary' : 'default'"
-							@click="showTab = 'dashboard'"
+							@click="changeShowTab('dashboard')"
 						>
 							{{ $t('dashboard') }}
 						</NButton>
@@ -39,7 +39,7 @@
 							strong
 							secondary
 							:type="showTab === 'portal' ? 'primary' : 'default'"
-							@click="showTab = 'portal'"
+							@click="changeShowTab('portal')"
 						>
 							{{ $t('portal') }}
 						</NButton>
@@ -54,9 +54,11 @@
 </template>
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
+import { useJobStore } from '@/stores'
 import TaskLogContent from './TaskLogContent.vue'
 
 defineEmits(['close'])
 
-const showTab = ref<'studio' | 'schedule' | 'dashboard' | 'portal'>('studio')
+const showTab = computed(() => useJobStore().showTab)
+const changeShowTab = (tab: 'studio' | 'schedule' | 'dashboard' | 'portal') => (useJobStore().showTab = tab)
 </script>

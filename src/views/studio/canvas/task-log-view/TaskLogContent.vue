@@ -140,8 +140,6 @@ import { computed, onMounted, ref } from 'vue'
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 
-const { showTab } = defineProps<{ showTab: 'studio' | 'schedule' | 'dashboard' | 'portal' }>()
-
 const flowBase = ref({})
 
 const tagPurple = {

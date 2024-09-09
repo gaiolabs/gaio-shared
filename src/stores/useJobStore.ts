@@ -89,12 +89,20 @@ export const useJobStore = defineStore('board', () => {
 	}
 
 	const initJobWatcher = async () => {
+		closeEventSource()
 		await loadLogs()
 		await initCanvasWebsockets()
 	}
 
 	const channel = computed(() => {
-		return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
+		if (showTab.value === 'studio') {
+			return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
+		} else if (showTab.value === 'schedule') {
+			return 'type:job-' + useAppStore().app.appId + '-' + 'user:cron' + '?token=' + useAuthStore().token
+		} else if (showTab.value === 'portal') {
+			return 'type:job-' + useAppStore().app.appId + '-' + 'user:portal' + '?token=' + useAuthStore().token
+		}
+		return 'type:job-' + useAppStore().app.appId + '?token=' + useAuthStore().token + '&tab=' + showTab.value
 	})
 
 	const lastJobTasks = computed(() => {
@@ -109,5 +117,5 @@ export const useJobStore = defineStore('board', () => {
 		return jobs.value
 	})
 
-	return { initJobWatcher, lastJobTasks, jobList, closeEventSource }
+	return { initJobWatcher, lastJobTasks, jobList, closeEventSource, showTab }
 })
