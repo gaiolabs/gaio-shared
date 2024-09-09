@@ -48,7 +48,7 @@
 			</div>
 		</template>
 		<template #contentScroll>
-			<TaskLogContent />
+			<TaskLogContent :show-tab="showTab" />
 		</template>
 	</DrawerView>
 </template>
@@ -58,5 +58,5 @@ import TaskLogContent from './TaskLogContent.vue'
 
 defineEmits(['close'])
 
-const showTab = ref('studio')
+const showTab = ref<'studio' | 'schedule' | 'dashboard' | 'portal'>('studio')
 </script>

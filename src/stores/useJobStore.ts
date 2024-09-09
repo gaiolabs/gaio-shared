@@ -28,15 +28,18 @@ type JobListType = {
 }
 
 export const useJobStore = defineStore('board', () => {
-	const jobs = ref<JobListType[]>([])
-	let source: WebSocket
-
 	const useApp = useAppStore()
+	const jobs = ref<JobListType[]>([])
+	const showTab = ref<'studio' | 'schedule' | 'dashboard' | 'portal'>('studio')
+	const lastKey = ref(0)
+
+	let source: WebSocket
 
 	const loadLogs = async () => {
 		jobs.value = await useApi().post('api/task/logs', {
 			body: {
-				appId: useApp.app.appId
+				appId: useApp.app.appId,
+				logType: showTab.value
 			}
 		})
 	}
@@ -47,10 +50,6 @@ export const useJobStore = defineStore('board', () => {
 			source = null
 		}
 	}
-
-	const channel = computed(() => {
-		return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
-	})
 
 	const initCanvasWebsockets = async () => {
 		source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
@@ -94,7 +93,9 @@ export const useJobStore = defineStore('board', () => {
 		await initCanvasWebsockets()
 	}
 
-	const lastKey = ref(0)
+	const channel = computed(() => {
+		return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
+	})
 
 	const lastJobTasks = computed(() => {
 		if (jobs.value[lastKey.value]) {

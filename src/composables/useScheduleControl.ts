@@ -1,19 +1,21 @@
 import useApi from '@/composables/useApi'
-
-type ScheduleControl = {
-	appId: string
-	flowId: string
-	type: 'flow'
-}
+import type { ScheduleList } from '@gaio/shared/types/dtos/flow'
 
 export default () => {
-	const bootstrapSchedule = (scheduleControl: ScheduleControl[]) => {
-		useApi().post('/api/schedule/bootstrap', {
-			body: { scheduleControl }
+	const defineInsightSchedules = (scheduleList: ScheduleList) => {
+		useApi().post('/api/insight/save-schedules', {
+			body: { scheduleList }
+		})
+	}
+
+	const defineFlowSchedules = (scheduleList: ScheduleList) => {
+		useApi().post('/api/flow/save-schedules', {
+			body: { scheduleList }
 		})
 	}
 
 	return {
-		bootstrapSchedule
+		defineFlowSchedules,
+		defineInsightSchedules
 	}
 }

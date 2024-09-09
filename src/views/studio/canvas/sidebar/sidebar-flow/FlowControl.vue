@@ -125,21 +125,19 @@ const emit = defineEmits(['close', 'save'])
 const localFlow = ref<FlowType | null>()
 const currentTab = ref('general')
 const loading = ref(false)
-const backupSchedule = ref({
-	cron: null,
-	cronStatus: null
-})
+let backupSchedule = {
+	cron: undefined,
+	cronStatus: undefined
+}
 
 const bootstrapSchedule = () => {
-	if (
-		backupSchedule.value.cron !== localFlow.value.cron ||
-		backupSchedule.value.cronStatus !== localFlow.value.cronStatus
-	) {
-		useScheduleControl().bootstrapSchedule([
+	console.log('fine', localFlow.value.cron)
+	console.log('back', backupSchedule.cron)
+	if (backupSchedule.cron !== localFlow.value.cron || backupSchedule.cronStatus !== localFlow.value.cronStatus) {
+		useScheduleControl().defineFlowSchedules([
 			{
 				appId: localFlow.value.appId,
-				flowId: localFlow.value.flowId,
-				type: 'flow'
+				flowId: localFlow.value.flowId
 			}
 		])
 	}
@@ -244,7 +242,12 @@ onMounted(() => {
 		}
 	}
 
-	backupSchedule.value.cron = localFlow.value.cron
-	backupSchedule.value.cronStatus = localFlow.value.cronStatus
+	console.log('back', backupSchedule.cron)
+	console.log('localFlow', localFlow.value.cron)
+
+	backupSchedule.cron = localFlow.value.cron
+	backupSchedule.cronStatus = localFlow.value.cronStatus
+
+	backupSchedule = JSON.parse(JSON.stringify(backupSchedule))
 })
 </script>
