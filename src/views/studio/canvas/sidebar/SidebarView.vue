@@ -41,7 +41,7 @@ import SidebarTask from '@/views/studio/canvas/sidebar/sidebar-task/SidebarTask.
 import { computed } from 'vue'
 
 defineEmits(['update:modelValue', 'choose'])
-const { modelValue = 'discovery' } = defineProps<{ modelValue: string | undefined }>()
+const { modelValue = 'flow' } = defineProps<{ modelValue: string | undefined }>()
 
 const panel = computed(() => modelValue)
 </script>

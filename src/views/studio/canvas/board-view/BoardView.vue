@@ -155,58 +155,70 @@ const useJob = useJobStore()
 
 const graph = ref()
 
-const currentFlow = computed(() => {
-	return useAppStore().flow
-})
+const currentFlow = computed(() => useAppStore().flow)
 
 const buildBoard = () => {
 	nextTick(() => {
 		localEdges.value = []
 		localNodes.value = []
 		elements.value = []
-		if (useAppStore().flowList) {
-			localEdges.value =
-				currentFlow.value?.workflow.edges.map((edge) => {
-					return {
-						id: edge.id,
-						source: edge.source,
-						target: edge.target
-					}
-				}) || []
-			localNodes.value =
-				currentFlow.value?.workflow.nodes.map((node) => {
-					return {
-						id: node.id,
-						type: 'custom',
-						label: node.label,
-						position: node.position,
-						data: node,
-						sourcePosition: Position.Right,
-						targetPosition: Position.Left
-					}
-				}) || []
-
-			elements.value = [...localNodes.value, ...localEdges.value]
-			showBoard.value = true
-			// const { token } = useAuthStore();
-			// // const a = new EventSource('/api/sse/sse?id=dfs');
-			// const localKey = new Date().getTime();
-			// const a = new EventSource(
-			//     '/api/sse/flow/board?id=' +
-			//         `update:flow:${useAppStore().flow?.flowId}-app:${useAppStore().app?.appId}&localKey=${localKey}`
-			// );
-			//
-			// a.addEventListener('message', (e) => {
-			//     console.log('from back', e);
-			// });
-		}
+		processBoard()
 	})
 }
+
+const processBoard = () => {
+	if (useAppStore().flowList) {
+		localEdges.value =
+			currentFlow.value?.workflow.edges.map((edge) => {
+				return {
+					id: edge.id,
+					source: edge.source,
+					target: edge.target
+				}
+			}) || []
+		localNodes.value =
+			currentFlow.value?.workflow.nodes.map((node) => {
+				return {
+					id: node.id,
+					type: 'custom',
+					label: node.label,
+					position: node.position,
+					data: node,
+					sourcePosition: Position.Right,
+					targetPosition: Position.Left
+				}
+			}) || []
+
+		elements.value = [...localNodes.value, ...localEdges.value]
+		showBoard.value = true
+		// const { token } = useAuthStore();
+		// // const a = new EventSource('/api/sse/sse?id=dfs');
+		// const localKey = new Date().getTime();
+		// const a = new EventSource(
+		//     '/api/sse/flow/board?id=' +
+		//         `update:flow:${useAppStore().flow?.flowId}-app:${useAppStore().app?.appId}&localKey=${localKey}`
+		// );
+		//
+		// a.addEventListener('message', (e) => {
+		//     console.log('from back', e);
+		// });
+	}
+}
+
+const refreshBoard = computed(() => useAppStore().refreshBoard)
 
 watch(
 	() => currentFlowId.value,
 	() => {
 		buildBoard()
+	}
+)
+
+watch(
+	() => refreshBoard.value,
+	() => {
+		console.log('fasfasfasd')
+		processBoard()
 	}
 )
 

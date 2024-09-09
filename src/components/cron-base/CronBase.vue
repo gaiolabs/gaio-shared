@@ -238,9 +238,7 @@ let monthValues = _monthValues
 watch(
 	() => localCron.value,
 	(newValue) => {
-		if (localCron.value.current) {
-			emit('change', newValue)
-		}
+		emit('change', newValue)
 	},
 	{
 		deep: true
@@ -249,7 +247,9 @@ watch(
 
 const onChangeFrequency = () => {
 	const copyLocalCron = cloneDeep(localCron.value)
-	localCron.value.current = new CronBaseHelper().setCron(copyLocalCron)
+	if (copyLocalCron.every !== undefined) {
+		localCron.value.current = new CronBaseHelper().setCron(copyLocalCron)
+	}
 	defineCronExpression()
 }
 
@@ -269,6 +269,7 @@ const onChangeBaseReset = () => {
 		})
 	} else {
 		localCron.value = {
+			current: undefined,
 			every: undefined,
 			status: localCron.value.status || 'inactive'
 		}
@@ -284,7 +285,7 @@ const defineCronExpression = () => {
 				use24HourTimeFormat: true
 			})
 		}
-	} catch (e) {
+	} catch {
 		localExpression.value = ''
 	}
 }

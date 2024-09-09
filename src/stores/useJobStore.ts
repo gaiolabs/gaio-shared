@@ -28,15 +28,18 @@ type JobListType = {
 }
 
 export const useJobStore = defineStore('board', () => {
-	const jobs = ref<JobListType[]>([])
-	let source: WebSocket
-
 	const useApp = useAppStore()
+	const jobs = ref<JobListType[]>([])
+	const showTab = ref<'studio' | 'schedule' | 'dashboard' | 'portal'>('studio')
+	const lastKey = ref(0)
+
+	let source: WebSocket
 
 	const loadLogs = async () => {
 		jobs.value = await useApi().post('api/task/logs', {
 			body: {
-				appId: useApp.app.appId
+				appId: useApp.app.appId,
+				logType: showTab.value
 			}
 		})
 	}
@@ -47,10 +50,6 @@ export const useJobStore = defineStore('board', () => {
 			source = null
 		}
 	}
-
-	const channel = computed(() => {
-		return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
-	})
 
 	const initCanvasWebsockets = async () => {
 		source = new WebSocket('http://localhost:3000/api/ws/' + channel.value)
@@ -90,11 +89,21 @@ export const useJobStore = defineStore('board', () => {
 	}
 
 	const initJobWatcher = async () => {
+		closeEventSource()
 		await loadLogs()
 		await initCanvasWebsockets()
 	}
 
-	const lastKey = ref(0)
+	const channel = computed(() => {
+		if (showTab.value === 'studio') {
+			return 'type:job-' + useAppStore().app.appId + '-' + useAuthStore().user.userId + '?token=' + useAuthStore().token
+		} else if (showTab.value === 'schedule') {
+			return 'type:job-' + useAppStore().app.appId + '-' + 'user:cron' + '?token=' + useAuthStore().token
+		} else if (showTab.value === 'portal') {
+			return 'type:job-' + useAppStore().app.appId + '-' + 'user:portal' + '?token=' + useAuthStore().token
+		}
+		return 'type:job-' + useAppStore().app.appId + '?token=' + useAuthStore().token + '&tab=' + showTab.value
+	})
 
 	const lastJobTasks = computed(() => {
 		if (jobs.value[lastKey.value]) {
@@ -108,5 +117,5 @@ export const useJobStore = defineStore('board', () => {
 		return jobs.value
 	})
 
-	return { initJobWatcher, lastJobTasks, jobList, closeEventSource }
+	return { initJobWatcher, lastJobTasks, jobList, closeEventSource, showTab }
 })

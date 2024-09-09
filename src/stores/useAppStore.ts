@@ -10,6 +10,7 @@ export const useAppStore = defineStore(
 	'app',
 	() => {
 		const refreshKey = ref('any')
+		const refreshBoard = ref('any')
 		const flow = ref<FlowType>()
 		const flowList = ref<FlowType[]>()
 		const app = ref<AppType>()
@@ -146,8 +147,6 @@ export const useAppStore = defineStore(
 						}
 					}
 
-					flow.value = cloneDeep(flow.value)
-
 					flowList.value.forEach((flowItem, index) => {
 						if (flowItem.flowId === flowData.flowId) {
 							console.log('amigo')
@@ -158,8 +157,11 @@ export const useAppStore = defineStore(
 							}
 						}
 					})
+					// flow.value = cloneDeep(flow.value)
 
-					refreshKey.value = getId()
+					console.log('fasdfas')
+
+					refreshBoard.value = getId()
 				}
 			}
 		}
@@ -191,6 +193,7 @@ export const useAppStore = defineStore(
 			appInfo,
 			flowList,
 			refreshKey,
+			refreshBoard,
 			sourceList,
 			loadApp,
 			baseTask,
