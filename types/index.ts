@@ -15,6 +15,7 @@ export * from './core/meta.type'
 export * from './core/meta-view.type'
 
 export * from './dtos/task'
+export * from './dtos/flow'
 
 export * from './entities/app.entity'
 export * from './entities/flow.entity'
