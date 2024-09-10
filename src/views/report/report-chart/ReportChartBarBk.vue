@@ -21,7 +21,7 @@ defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(props.task))
-const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
+const { dimensions, measures, settings, columnName, themeColors, foundation } = chartHelper.value
 
 const total = computed(() => {
 	return sumBy(localList.value, (o) => {
@@ -69,7 +69,7 @@ const loadChart = () => {
 				isGrouped.value || isMultipleMeasure.value ? themeColors.value
 				: settings.value.showLegend ? themeColors.value
 				: themeColors.value[0],
-			label: chartHelper.value.linearLabel(total),
+			label: chartHelper.value.linearLabel(total.value),
 			...foundation.value,
 			yAxis: {
 				title:

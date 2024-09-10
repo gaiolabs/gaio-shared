@@ -761,5 +761,9 @@ export default {
 	openTableData: 'Open table data',
 	selectAllFiltered: 'Select all filtered',
 	unselectAllFiltered: 'Unselect all filtered',
-	transposed: 'Transposed'
+	transposed: 'Transposed',
+	header: 'Header',
+	showTableButton: 'Show table button',
+	typeTitleHere: 'Type the header title here',
+	typeHelpMessageHere: 'Type the help message here'
 }

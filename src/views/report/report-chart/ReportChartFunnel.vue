@@ -50,20 +50,15 @@ const loadChart = () => {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = 'measure'
 		common.seriesField = 'category'
-		// common.dodgePadding = 0
-		// common.intervalPadding = 20
 	} else if (isGrouped.value) {
 		common.isGroup = true
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 		common.seriesField = columnName(dimensions.value[1])
-		// common.dodgePadding = 0
-		// common.intervalPadding = 20
 	} else {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 	}
-	// common.padding = appendPadding()
 
 	chart.value = new Funnel(
 		id.value as HTMLElement,

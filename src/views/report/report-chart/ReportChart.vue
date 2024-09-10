@@ -5,7 +5,7 @@
 	>
 		<NSpin
 			:show="loading"
-			:style="{ minHeight: height, padding: '1rem' }"
+			:style="{ minHeight: height }"
 		>
 			<ReportNodeHeader
 				:task="task"

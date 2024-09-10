@@ -1,28 +1,11 @@
 <template>
 	<div class="options-chart-general control-secondary">
 		<NCheckbox
-			v-model:checked="useReportStore().current.settings.showHeader"
-			:label="$t('showCardHeader')"
-			class="!w-full"
-		/>
-		<NCheckbox
-			v-if="useReportStore().current.settings.showHeader"
-			v-model:checked="useReportStore().current.settings.headerBackgroundDark"
-			:label="$t('headerBackgroundDark')"
-			class="w-full"
-		/>
-		<NCheckbox
-			v-model:checked="useReportStore().current.settings.showTable"
-			:label="$t('showTable')"
-			class="w-full"
-		/>
-		<NCheckbox
 			v-if="useReportStore().showOnlyIf(['funnel'])"
 			v-model:checked="useReportStore().current.settings.transposed"
 			:label="$t('transposed')"
 			class="w-full"
 		/>
-
 		<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
 			<NDivider class="!my-3" />
 			<NCheckbox
@@ -40,6 +23,7 @@
 </template>
 <script setup lang="ts">
 import { useReportStore } from '@/stores'
+import { NCheckbox, NDivider } from 'naive-ui'
 </script>
 
 <style lang="scss">

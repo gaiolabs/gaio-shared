@@ -24,6 +24,19 @@
 							<options-chart-general />
 						</NCollapseItem>
 						<NCollapseItem
+							:title="$t('header')"
+							name="header"
+						>
+							<template #header>
+								<div class="flex items-center gap-1">
+									<g-icon name="cardTitle" />
+									{{ $t('header') }}
+								</div>
+							</template>
+
+							<options-title />
+						</NCollapseItem>
+						<NCollapseItem
 							v-if="useReportStore().showOnlyIf(['pie']) && !useReportStore().current.settings.pieDonut"
 							name="statistic"
 						>
@@ -38,7 +51,7 @@
 						<NCollapseItem name="legend">
 							<template #header>
 								<div class="flex items-center gap-1">
-									<g-icon name="legend" />
+									<GIcon name="legend" />
 									{{ $t('legend') }}
 								</div>
 							</template>
@@ -56,18 +69,7 @@
 							</template>
 							<options-chart-label />
 						</NCollapseItem>
-						<NCollapseItem
-							:title="$t('title')"
-							name="title"
-						>
-							<template #header>
-								<div class="flex items-center gap-1">
-									<g-icon name="cardTitle" />
-									{{ $t('title') }}
-								</div>
-							</template>
-							<options-title />
-						</NCollapseItem>
+
 						<template
 							v-if="
 								useReportStore().showOnlyIf([
@@ -197,6 +199,7 @@
 	</div>
 </template>
 <script setup lang="ts">
+import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores'
 import OptionsChartGeneral from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChartGeneral.vue'
 import OptionsChartLabel from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChartLabel.vue'
@@ -211,4 +214,5 @@ import OptionsMessage from '@/views/studio/canvas/task-explorer/task-explorer-op
 import OptionsRowsPerPage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
 import OptionsTheme from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTheme.vue'
 import OptionsTitle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTitle.vue'
+import { NCollapse, NCollapseItem, NTabPane, NTabs } from 'naive-ui'
 </script>

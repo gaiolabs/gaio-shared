@@ -1,10 +1,37 @@
 <template>
 	<div class="options-title control-secondary">
-		<NInput
-			v-model:value="current.settings.title"
-			type="textarea"
-			:placeholder="`${$t('parameterPermitted')}`"
-		/>
+		<div class="control control-top flex flex-row pt-4">
+			<NCheckbox
+				v-model:checked="useReportStore().current.settings.headerBackgroundDark"
+				:label="$t('headerBackgroundDark')"
+				class="w-full"
+			/>
+			<NCheckbox
+				v-model:checked="useReportStore().current.settings.showTable"
+				:label="$t('showTableButton')"
+				class="w-full"
+			/>
+		</div>
+		<div class="control">
+			<div class="control-label">
+				{{ $t('messageHelper') }}
+			</div>
+			<NInput
+				v-model:value="current.settings.description"
+				type="textarea"
+				:placeholder="$t('typeHelpMessageHere')"
+			/>
+		</div>
+		<div class="control control-top">
+			<div class="control-label">
+				{{ $t('title') }}
+			</div>
+			<NInput
+				v-model:value="current.settings.title"
+				type="textarea"
+				:placeholder="`${$t('typeTitleHere')}`"
+			/>
+		</div>
 		<div class="control control-top">
 			<div class="control-label">
 				{{ $t('position') }}
@@ -50,5 +77,6 @@
 
 <script setup lang="ts">
 import { useReportStore } from '@/stores'
+import { NCheckbox, NInput, NInputNumber, NSelect } from 'naive-ui'
 const { current } = useReportStore()
 </script>

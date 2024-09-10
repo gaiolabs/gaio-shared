@@ -188,5 +188,9 @@ export default {
 	openTableData: 'Abrir os dados da tablea',
 	selectAllFiltered: 'Selecionar todos filtrados',
 	unselectAllFiltered: 'Desmarcar todos filtrados',
-	transposed: 'Transposto'
+	transposed: 'Transposto',
+	header: 'Cabeçalho',
+	showTableButton: 'Mostrar botão da tabela',
+	typeTitleHere: 'Digite o título do cabeçalho aqui',
+	typeHelpMessageHere: 'Digite a mensagem de auxílio aqui'
 }

@@ -9,5 +9,6 @@
 
 <script setup lang="ts">
 import { useReportStore } from '@/stores'
+import { NCheckbox } from 'naive-ui'
 const { current } = useReportStore()
 </script>

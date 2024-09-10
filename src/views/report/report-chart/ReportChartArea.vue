@@ -27,7 +27,6 @@ const {
 	settings,
 	columnName,
 	themeColors,
-	appendPadding,
 	label,
 	firstMeasure,
 	foundation

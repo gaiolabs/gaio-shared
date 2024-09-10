@@ -21,7 +21,7 @@ defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(task))
-const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
+const { dimensions, measures, settings, columnName, themeColors, foundation } = chartHelper.value
 
 const id = shallowRef()
 const chart = shallowRef()

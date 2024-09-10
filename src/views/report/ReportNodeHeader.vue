@@ -4,59 +4,16 @@
 		class="report-node-header p-1"
 	>
 		<div
-			v-if="settings.showHeader"
-			class="flex items-center border-b px-2 py-2"
+			v-if="settings.showTable || settings.description || settings.title"
+			class="flex grow items-center"
 			:class="headerBackground"
 		>
-			<div class="grow text-lg">
-				{{ task.label }}
-			</div>
-			<div class="flex items-center">
-				<NPopover
-					v-if="task.settings.description"
-					:width="300"
-					trigger="hover"
-				>
-					<div
-						v-if="task.settings.description"
-						class="control whitespace-pre-wrap p-2"
-						v-html="renderString(task.settings.description)"
-					/>
-					<template #trigger>
-						<NButton
-							size="tiny"
-							quaternary
-						>
-							<template #icon>
-								<g-icon name="info" />
-							</template>
-						</NButton>
-					</template>
-				</NPopover>
-				<div v-if="showCloseTable">
-					<NDivider vertical />
-					<g-icon
-						name="close"
-						@click="$emit('close')"
-					/>
-				</div>
-				<div v-if="settings.showRows">
-					<NDivider vertical />
-					#{{ tableRows }}
-				</div>
-			</div>
-		</div>
-		<div
-			v-if="task.settings.title"
-			class="flex grow items-center"
-		>
 			<div class="grow whitespace-pre-wrap py-2">
-				<div
-					:style="titleStyle"
-					v-html="renderString(task.settings.title)"
-				/>
+				<div :style="titleStyle">
+					{{ renderString(task.settings.title) }}
+				</div>
 			</div>
-			<template v-if="!task.settings.showHeader && showRightActions">
+			<template v-if="showRightActions">
 				<div
 					class="mx-1 py-2 text-right"
 					:class="task.settings.title ? 'flex-grow-0' : 'flex-grow-1'"
@@ -69,15 +26,16 @@
 						<div
 							v-if="task.settings.description"
 							class="control whitespace-pre-wrap p-2"
-							v-html="renderString(task.settings.description)"
-						/>
+						>
+							{{ renderString(task.settings.description) }}
+						</div>
 						<template #trigger>
 							<NButton
 								size="tiny"
 								quaternary
 							>
 								<template #icon>
-									<g-icon name="info" />
+									<GIcon name="info" />
 								</template>
 							</NButton>
 						</template>
@@ -92,7 +50,7 @@
 								text
 								@click="showTable = !showTable"
 							>
-								<g-icon name="table" />
+								<GIcon name="table" />
 							</NButton>
 						</template>
 						{{ $t('showTable') }}
@@ -109,8 +67,10 @@
 </template>
 
 <script setup lang="ts">
+import GIcon from '@/components/GIcon.vue'
 import ReportDownload from '@/views/report/ReportDownload.vue'
 import type { ReportNodeType, ReportTaskSettingsType } from '@gaio/shared/types'
+import { NButton, NPopover, NTooltip } from 'naive-ui'
 import { computed, ref } from 'vue'
 
 defineEmits(['close'])
@@ -130,10 +90,6 @@ const showTable = ref(false)
 const renderString = (text: string) => {
 	return text
 }
-
-const showCloseTable = computed(() => {
-	return false
-})
 
 const headerBackground = computed(() => {
 	return task.settings.headerBackgroundDark ? 'bg-paper-200 dark:bg-carbon-200' : ''

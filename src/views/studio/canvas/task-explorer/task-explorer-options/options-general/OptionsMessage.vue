@@ -2,16 +2,6 @@
 	<div class="options-message control-secondary">
 		<div class="control">
 			<div class="control-label">
-				{{ $t('messageHelper') }}
-			</div>
-			<NInput
-				v-model:value="current.settings.description"
-				type="textarea"
-				:placeholder="$t('defineToEnable')"
-			/>
-		</div>
-		<div class="control">
-			<div class="control-label">
 				{{ $t('messageNoData') }}
 			</div>
 			<NInput
