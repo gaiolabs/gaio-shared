@@ -4,7 +4,6 @@
 		class="report-node-header p-1"
 	>
 		<div
-			v-if="settings.showTable || settings.description || settings.title"
 			class="flex grow items-center"
 			:class="headerBackground"
 		>

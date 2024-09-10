@@ -33,7 +33,7 @@
 									{{ $t('title') }}
 								</div>
 							</template>
-							<options-title />
+							<OptionsHeader />
 						</NCollapseItem>
 						<NCollapseItem name="forms">
 							<template #header>
@@ -161,9 +161,10 @@
 import { useReportStore } from '@/stores'
 import OptionsDownload from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsDownload.vue'
 import OptionsForms from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsForms.vue'
+import OptionsTitle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
+import OptionsHeader from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
 import OptionsMessage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsMessage.vue'
 import OptionsRowsPerPage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
-import OptionsTitle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTitle.vue'
 import OptionsTableFilters from '@/views/studio/canvas/task-explorer/task-explorer-options/options-table/OptionsTableFilters.vue'
 import OptionsTableGeneral from '@/views/studio/canvas/task-explorer/task-explorer-options/options-table/OptionsTableGeneral.vue'
 </script>

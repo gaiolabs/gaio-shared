@@ -338,7 +338,6 @@ export default (task: ReportNodeType) => {
 	}
 
 	const legend = (more: Legend = {}) => {
-		console.log(settings.value.legendPosition)
 		return settings.value.showLegend ?
 				({
 					enabled: true,
@@ -352,7 +351,7 @@ export default (task: ReportNodeType) => {
 					},
 					...more
 				} as Legend)
-			:	{}
+			:	false
 	}
 
 	const guideLine = computed(() => {

@@ -34,7 +34,7 @@
 								</div>
 							</template>
 
-							<options-title />
+							<OptionsHeader />
 						</NCollapseItem>
 						<NCollapseItem
 							v-if="useReportStore().showOnlyIf(['pie']) && !useReportStore().current.settings.pieDonut"
@@ -210,9 +210,9 @@ import OptionsChartMargin from '@/views/studio/canvas/task-explorer/task-explore
 import OptionsChartStatistic from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChartStatistic.vue'
 import OptionsChartXAxis from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChartXAxis.vue'
 import OptionsChartYAxis from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChartYAxis.vue'
+import OptionsHeader from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
 import OptionsMessage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsMessage.vue'
 import OptionsRowsPerPage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
 import OptionsTheme from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTheme.vue'
-import OptionsTitle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTitle.vue'
 import { NCollapse, NCollapseItem, NTabPane, NTabs } from 'naive-ui'
 </script>

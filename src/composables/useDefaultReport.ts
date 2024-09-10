@@ -107,7 +107,6 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 	}
 
-	console.log('result', result)
 	return withoutNullProperties({
 		id: base.id || null,
 		type: 'report',

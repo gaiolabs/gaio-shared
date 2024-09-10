@@ -21,7 +21,7 @@ defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(task))
-const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
+const { dimensions, measures, settings, columnName, foundation } = chartHelper.value
 
 const id = shallowRef()
 const chart = shallowRef<Funnel>()
@@ -40,8 +40,6 @@ const total = computed(() => {
 		return o[columnName(measures.value[0])] ? o[columnName(measures.value[0])] : 0
 	})
 })
-
-console.log('task', task)
 
 const loadChart = () => {
 	let common = {} as Partial<Record<string, unknown>>
@@ -68,17 +66,8 @@ const loadChart = () => {
 			dynamicHeight: true,
 			conversionTag: false,
 			...common,
-			// color:
-			// 	isGrouped.value || isMultipleMeasure.value ? themeColors.value
-			// 	: settings.value.showLegend ? themeColors.value
-			// 	: themeColors.value[0],
-
 			...foundation.value,
 			label: chartHelper.value.linearLabel(total.value),
-			// legend: chartHelper.value.legend({
-			// 	offsetY: settings.value.legendPosition === 'bottom' ? 16 : undefined
-			// }),
-			// height: settings.value.legendPosition === 'bottom'? settings.value.legendPosition,
 			columnBackground:
 				settings.value.columnBackground ?
 					{

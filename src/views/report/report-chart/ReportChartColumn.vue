@@ -48,26 +48,22 @@ const loadChart = () => {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = 'measure'
 		common.seriesField = 'category'
-		// common.dodgePadding = 0
-		// common.intervalPadding = 20
 	} else if (isGrouped.value) {
 		common.isGroup = true
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 		common.seriesField = columnName(dimensions.value[1])
-		// common.dodgePadding = 0
-		// common.intervalPadding = 20
 	} else {
 		common.xField = columnName(dimensions.value[0])
 		common.yField = columnName(measures.value[0])
 	}
-	// common.padding = appendPadding()
 
 	chart.value = new Column(
 		id.value as HTMLElement,
 		{
 			data: localList.value,
 			...common,
+			appendPadding: [10, 10, 10, 10],
 			color:
 				isGrouped.value || isMultipleMeasure.value ? themeColors.value
 				: settings.value.showLegend ? themeColors.value

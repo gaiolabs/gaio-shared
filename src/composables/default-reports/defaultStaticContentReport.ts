@@ -3,8 +3,7 @@ import type { StaticContentType } from '@gaio/shared/types/tasks/static-content.
 
 export const defaultStaticContentReport = (base: ReportNodeType) => {
 	const { project } = base
-	console.log('project', project)
-	return {
+	const defaultReport: StaticContentType = {
 		reportType: 'staticContent',
 		limit: base.limit ?? 100,
 		tables: base.tables || [],
@@ -14,10 +13,12 @@ export const defaultStaticContentReport = (base: ReportNodeType) => {
 			libs: project?.libs ?? [],
 			event: project?.event ?? '',
 			style: project?.style ?? '',
-			script: project?.script ?? ''
+			scriptCode: project?.scriptCode ?? ''
 		},
 		noSpeech: base.noSpeech ?? true,
 		cardStyle: base.cardStyle ?? true,
 		assetsCoverWidth: base.assetsCoverWidth ?? true
-	} as StaticContentType
+	}
+
+	return defaultReport
 }

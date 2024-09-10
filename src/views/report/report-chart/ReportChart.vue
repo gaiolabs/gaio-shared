@@ -5,14 +5,17 @@
 	>
 		<NSpin
 			:show="loading"
-			:style="{ minHeight: height }"
+			:style="{
+				minHeight: `${Number(height.replace('px', '')) + 10}px`
+			}"
 		>
 			<ReportNodeHeader
+				v-if="(settings.showTable || settings.description || settings.title) && !loading"
 				:task="task"
 				:table-rows="tableRows"
 			/>
 			<template v-if="list?.length">
-				<div class="px-2">
+				<div class="p-2">
 					<ReportChartBarBk
 						v-if="['bar'].includes(task.reportType) && !settings.columnBar"
 						:task="task"
@@ -79,6 +82,7 @@ import ReportChartTreemap from '@/views/report/report-chart/ReportChartTreemap.v
 import ReportNodeHeader from '@/views/report/ReportNodeHeader.vue'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep, debounce } from 'lodash-es'
+import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref, watch } from 'vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 
@@ -91,7 +95,6 @@ const list = ref([])
 const tableRows = ref(0)
 const settings = computed(() => task.settings)
 const firstLoad = ref(false)
-console.log('task.reportType', task.reportType)
 watch(
 	() => settings.value,
 	debounce(() => {
@@ -104,6 +107,10 @@ watch(
 	{
 		deep: true
 	}
+)
+watch(
+	() => height,
+	(newValue) => console.log('newValueHeight', newValue)
 )
 
 onMounted(() => {
