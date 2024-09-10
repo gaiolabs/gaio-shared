@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { fold } from '@/views/report/report-chart/fold'
-import { Funnel, type FunnelOptions } from '@antv/g2plot'
+import { Scatter, type ScatterOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
@@ -21,10 +21,10 @@ defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(task))
-const { dimensions, measures, settings, columnName, foundation } = chartHelper.value
+const { dimensions, measures, settings, columnName, foundation, themeColors } = chartHelper.value
 
 const id = shallowRef()
-const chart = shallowRef<Funnel>()
+const chart = shallowRef<Scatter>()
 const localList = shallowRef([])
 
 const isMultipleMeasure = computed(() => {
@@ -58,14 +58,19 @@ const loadChart = () => {
 		common.yField = columnName(measures.value[0])
 	}
 
-	chart.value = new Funnel(
+	chart.value = new Scatter(
 		id.value as HTMLElement,
 		{
 			data: localList.value,
-			isTransposed: settings.value.transposed ?? false,
-			dynamicHeight: true,
-			conversionTag: false,
 			...common,
+			appendPadding: [10, 10, 10, 10],
+			xField: 'xG conceded',
+			yField: 'Shot conceded',
+			color:
+				isGrouped.value || isMultipleMeasure.value ? themeColors.value
+				: settings.value.showLegend ? themeColors.value
+				: themeColors.value[0],
+
 			...foundation.value,
 			label: chartHelper.value.linearLabel(total.value),
 			columnBackground:
@@ -76,31 +81,26 @@ const loadChart = () => {
 						}
 					}
 				:	undefined
-		} as FunnelOptions
+		} as ScatterOptions
 	)
 	chart.value.render()
 }
 
 onMounted(() => {
 	let data = list
-
-	console.log('data', data)
 	if (isGrouped.value || !isMultipleMeasure.value) {
-		console.log('if')
 		localList.value = data.sort((a, b) =>
 			a.sum_profitEach > b.sum_profitEach ? -1
 			: a.sum_profitEach < b.sum_profitEach ? 1
 			: 0
 		)
 	} else {
-		console.log('else')
 		localList.value = fold(data, measures.value).sort((a, b) =>
-			a.measure > b.measure ? -1
-			: a.measure < b.measure ? 1
+			a.sum_profitEach > b.sum_profitEach ? -1
+			: a.sum_profitEach < b.sum_profitEach ? 1
 			: 0
 		)
 	}
-	console.log('localList.value', localList.value)
 
 	nextTick(() => loadChart())
 })

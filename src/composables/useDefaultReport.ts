@@ -10,6 +10,7 @@ import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
+import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
@@ -63,7 +64,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'scatter':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartScatter(sourceProperties) //TODO: Configurar o correto
 			break
 
 		case 'bubble':

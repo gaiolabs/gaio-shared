@@ -136,7 +136,7 @@ const reportState = computed(() => {
 				}
 			]
 		}
-	} else if (['column', 'line', 'bar', 'area', 'funnel'].includes(reportType)) {
+	} else if (['column', 'line', 'bar', 'area', 'funnel', 'scatter'].includes(reportType)) {
 		return {
 			status: verifyRules(1, 1),
 			rules: [

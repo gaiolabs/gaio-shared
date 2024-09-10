@@ -65,6 +65,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartScatter
+						v-else-if="task.reportType === 'scatter'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -85,6 +92,7 @@ import { cloneDeep, debounce } from 'lodash-es'
 import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref, watch } from 'vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
+import ReportChartScatter from './ReportChartScatter.vue'
 
 defineEmits(['change'])
 const { task, height } = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()

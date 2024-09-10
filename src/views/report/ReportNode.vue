@@ -17,7 +17,7 @@
 		<template v-if="task.reportType === 'download'">
 			<ReportDownload :task="task" />
 		</template>
-		<template v-if="['line', 'bar', 'area', 'pie', 'treemap', 'funnel'].includes(task.reportType)">
+		<template v-if="['line', 'bar', 'area', 'pie', 'treemap', 'funnel', 'scatter'].includes(task.reportType)">
 			<ReportChart
 				:task="task"
 				:height="height"
