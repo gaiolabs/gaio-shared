@@ -1,6 +1,7 @@
 import { defaultReportTheme } from '@/composables/default-reports/defaultReportTheme'
 import useFormatValue from '@/composables/useFormatValue'
 import type { ColumnOptions } from '@antv/g2plot'
+import type { Label } from '@antv/g2plot/lib/types/label'
 import type { Legend } from '@antv/g2plot/lib/types/legend'
 import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import { isNil } from 'lodash-es'
@@ -48,6 +49,10 @@ export default (task: ReportNodeType) => {
 
 	const foundation = computed(() => {
 		return { xAxis: xAxis(), yAxis: yAxis(), legend: legend(), meta: meta.value, animation: false }
+	})
+
+	const isMultipleMeasure = computed(() => {
+		return measures.value.length > 1
 	})
 
 	const meta = computed(() => {
@@ -108,11 +113,11 @@ export default (task: ReportNodeType) => {
 
 	const label = (more = {}) => {
 		return settings.value.showLabel ?
-				{
+				({
 					autoRotate: true,
 					autoHide: false,
 					autoEllipsis: true,
-					rotate: settings.value.labelRotate,
+					rotate: settings.value.labelRotate ? 200 : undefined,
 					position: labelPosition(),
 					style: {
 						lineWidth: 0.8,
@@ -122,8 +127,8 @@ export default (task: ReportNodeType) => {
 					},
 					layout: [{ type: 'interval-hide-overlap' }],
 					...more
-				}
-			:	false
+				} as Label)
+			:	undefined
 	}
 
 	const linearLabel = (total: number) => {
@@ -260,7 +265,7 @@ export default (task: ReportNodeType) => {
 					line: null,
 					text: null
 				}
-			:	false
+			:	undefined
 		)
 	}
 
@@ -334,7 +339,7 @@ export default (task: ReportNodeType) => {
 						:	null,
 					...more
 				}
-			:	false
+			:	undefined
 	}
 
 	const legend = (more: Legend = {}) => {
@@ -444,6 +449,8 @@ export default (task: ReportNodeType) => {
 		legend,
 		label,
 		linearLabel,
+		isMultipleMeasure,
+		isGrouped,
 		guideLine,
 		meta,
 		firstMeasure,

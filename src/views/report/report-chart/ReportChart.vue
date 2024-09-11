@@ -77,6 +77,7 @@
 		</NSpin>
 	</div>
 </template>
+
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
@@ -103,23 +104,16 @@ const list = ref([])
 const tableRows = ref(0)
 const settings = computed(() => task.settings)
 const firstLoad = ref(false)
-watch(
-	() => settings.value,
-	debounce(() => {
-		if (firstLoad.value) {
-			localKey.value = Math.random().toString(36).substring(7)
-		} else {
-			firstLoad.value = true
-		}
-	}, 600),
-	{
-		deep: true
-	}
-)
-watch(
-	() => height,
-	(newValue) => console.log('newValueHeight', newValue)
-)
+
+// watch(
+// 	() => settings.value,
+// 	debounce(() => {
+// 		localKey.value = Math.random().toString(36).substring(7)
+// 	}, 600),
+// 	{
+// 		deep: true
+// 	}
+// )
 
 onMounted(() => {
 	loading.value = true

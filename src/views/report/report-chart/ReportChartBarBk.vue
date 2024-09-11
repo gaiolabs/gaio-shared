@@ -21,7 +21,8 @@ defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(props.task))
-const { dimensions, measures, settings, columnName, themeColors, foundation } = chartHelper.value
+const { dimensions, measures, settings, columnName, themeColors, foundation, isMultipleMeasure, isGrouped } =
+	chartHelper.value
 
 const total = computed(() => {
 	return sumBy(localList.value, (o) => {
@@ -32,14 +33,6 @@ const total = computed(() => {
 const id = shallowRef()
 const chart = shallowRef()
 const localList = shallowRef([])
-
-const isMultipleMeasure = computed(() => {
-	return props.task.schema.select.filter((o) => o.type !== 'value').length > 1
-})
-
-const isGrouped = computed(() => {
-	return props.task.schema.select.filter((o) => o.type === 'value').length > 1
-})
 
 const loadChart = () => {
 	let common = {} as Partial<Record<string, unknown>>
