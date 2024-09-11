@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { fold } from '@/views/report/report-chart/fold'
 import { Funnel, type FunnelOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
@@ -27,14 +26,6 @@ const id = shallowRef()
 const chart = shallowRef<Funnel>()
 const localList = shallowRef([])
 
-const isMultipleMeasure = computed(() => {
-	return task.schema.select.filter((o) => o.type !== 'value').length > 1
-})
-
-const isGrouped = computed(() => {
-	return task.schema.select.filter((o) => o.type === 'value').length > 1
-})
-
 const total = computed(() => {
 	return sumBy(localList.value, (o) => {
 		return o[columnName(measures.value[0])] ? o[columnName(measures.value[0])] : 0
@@ -42,30 +33,15 @@ const total = computed(() => {
 })
 
 const loadChart = () => {
-	let common = {} as Partial<Record<string, unknown>>
-	if (!isGrouped.value && isMultipleMeasure.value) {
-		common.isGroup = true
-		common.xField = columnName(dimensions.value[0])
-		common.yField = 'measure'
-		common.seriesField = 'category'
-	} else if (isGrouped.value) {
-		common.isGroup = true
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
-		common.seriesField = columnName(dimensions.value[1])
-	} else {
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
-	}
-
 	chart.value = new Funnel(
 		id.value as HTMLElement,
 		{
 			data: localList.value,
+			xField: columnName(dimensions.value[0]),
+			yField: columnName(measures.value[0]),
 			isTransposed: settings.value.transposed ?? false,
 			dynamicHeight: true,
 			conversionTag: false,
-			...common,
 			...foundation.value,
 			label: chartHelper.value.linearLabel(total.value),
 			columnBackground:
@@ -81,26 +57,51 @@ const loadChart = () => {
 	chart.value.render()
 }
 
-onMounted(() => {
-	let data = list
+watch([dimensions, measures], ([newDimensions, newMeasures]) => {
+	const dimension = columnName(newDimensions[0])
+	const measure = columnName(newMeasures[0])
+	localList.value = list
+		.map((item) => {
+			return { [dimension]: item[dimension], [measure]: item[measure] }
+		})
+		.sort((a, b) =>
+			a[measure] > b[measure] ? -1
+			: a[measure] < b[measure] ? 1
+			: 0
+		)
 
-	console.log('data', data)
-	if (isGrouped.value || !isMultipleMeasure.value) {
-		console.log('if')
-		localList.value = data.sort((a, b) =>
-			a.sum_profitEach > b.sum_profitEach ? -1
-			: a.sum_profitEach < b.sum_profitEach ? 1
+	return chart.value.update({
+		data: localList.value,
+		xField: columnName(dimensions.value[0]),
+		yField: columnName(measures.value[0]),
+		isTransposed: settings.value.transposed ?? false,
+		dynamicHeight: true,
+		conversionTag: false,
+		...foundation.value,
+		label: chartHelper.value.linearLabel(total.value),
+		columnBackground:
+			settings.value.columnBackground ?
+				{
+					style: {
+						fill: 'rgba(0,0,0,0.08)'
+					}
+				}
+			:	undefined
+	} as FunnelOptions)
+})
+
+onMounted(() => {
+	const dimension = columnName(dimensions.value[0])
+	const measure = columnName(measures.value[0])
+	localList.value = list
+		.map((item) => {
+			return { [dimension]: item[dimension], [measure]: item[measure] }
+		})
+		.sort((a, b) =>
+			a[measure] > b[measure] ? -1
+			: a[measure] < b[measure] ? 1
 			: 0
 		)
-	} else {
-		console.log('else')
-		localList.value = fold(data, measures.value).sort((a, b) =>
-			a.measure > b.measure ? -1
-			: a.measure < b.measure ? 1
-			: 0
-		)
-	}
-	console.log('localList.value', localList.value)
 
 	nextTick(() => loadChart())
 })

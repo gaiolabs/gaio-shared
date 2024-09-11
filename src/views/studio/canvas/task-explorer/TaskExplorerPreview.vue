@@ -136,7 +136,7 @@ const reportState = computed(() => {
 				}
 			]
 		}
-	} else if (['column', 'line', 'bar', 'area', 'funnel', 'scatter'].includes(reportType)) {
+	} else if (['column', 'line', 'bar', 'area', 'scatter'].includes(reportType)) {
 		return {
 			status: verifyRules(1, 1),
 			rules: [
@@ -160,7 +160,7 @@ const reportState = computed(() => {
 				}
 			]
 		}
-	} else if (['pie'].includes(reportType)) {
+	} else if (['pie', 'funnel'].includes(reportType)) {
 		return {
 			status: verifyRules(1, 1),
 			rules: [
