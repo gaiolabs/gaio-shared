@@ -19,6 +19,8 @@ export * from './dtos/flow'
 
 export * from './entities/app.entity'
 export * from './entities/flow.entity'
+export * from './entities/geoMeta.entity'
+export * from './entities/geoData.entity'
 export * from './entities/meta.entity'
 export * from './entities/metaStories.entity'
 export * from './entities/metaView.entity'
