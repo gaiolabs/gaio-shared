@@ -18,9 +18,9 @@ import { onMounted, shallowRef } from 'vue'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
-const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(props.task))
+const chartHelper = computed(() => useReportChartHelper(task))
 const {
 	dimensions,
 	measures,
@@ -29,8 +29,9 @@ const {
 	themeColors,
 	label,
 	firstMeasure,
-	foundation
-	// guideLine
+	foundation,
+	isGrouped,
+	isMultipleMeasure
 } = chartHelper.value
 
 const { formatValue } = useFormatValue()
@@ -38,79 +39,77 @@ const id = shallowRef()
 const chart = shallowRef()
 const localList = shallowRef([])
 
-const isMultipleMeasure = computed(() => {
-	return props.task.schema.select.filter((o) => o.type !== 'value').length > 1
-})
-
-const isGrouped = computed(() => {
-	return props.task.schema.select.filter((o) => o.type === 'value').length > 1
-})
-
-const loadChart = () => {
-	let common = {} as Partial<Record<string, unknown>>
-	if (!isGrouped.value && isMultipleMeasure.value) {
-		common.xField = columnName(dimensions.value[0])
-		common.yField = 'measure'
-		common.seriesField = 'category'
-	} else if (isGrouped.value) {
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
-		common.seriesField = columnName(dimensions.value[1])
-	} else {
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
-	}
-
-	chart.value = new Area(
-		id.value as HTMLElement,
-		{
-			data: localList.value,
-			...common,
-			...foundation.value,
-			line: {
-				size: settings.value.lineWidth || 1
-			},
-			label: label({
-				formatter:
-					!settings.value.compactNumberLabel ?
-						null
-					:	(v: { [x: string]: never }) => {
-							const value = v['measure'] || v[columnName(firstMeasure.value)]
-							return formatValue(value, {
-								compactNumber: settings.value.compactNumberLabel
-							})
-						}
-			}),
-			smooth: settings.value.lineSmooth,
-			point:
-				settings.value.showPoint ?
-					{
-						shape: settings.value.pointType
-					}
-				:	null,
-			color:
-				isGrouped.value || isMultipleMeasure.value ? themeColors.value
-				: settings.value.showLegend ? themeColors.value
-				: themeColors.value[0]
-		} as AreaOptions
-	)
-	chart.value.render()
-}
-
-onMounted(() => {
-	let data = props.list
+const processLocalList = () => {
+	let data = list
 
 	if (isGrouped.value || !isMultipleMeasure.value) {
 		localList.value = data
 	} else {
 		localList.value = fold(data, measures.value)
 	}
+}
 
+const getOptions = (): AreaOptions => {
+	let common = {} as Partial<Record<string, unknown>>
+	const isNotGroupedAndIsMultiple = !isGrouped.value && isMultipleMeasure.value
+	if (isNotGroupedAndIsMultiple) {
+		common.isGroup = true
+		common.seriesField = 'category'
+	} else if (isGrouped.value) {
+		common.isGroup = true
+		common.seriesField = columnName(dimensions.value[1])
+	}
+	return {
+		data: localList.value,
+		xField: columnName(dimensions.value[0]),
+		yField: isNotGroupedAndIsMultiple ? 'measure' : columnName(measures.value[0]),
+		...common,
+		...foundation.value,
+		line: {
+			size: settings.value.lineWidth || 1
+		},
+		label: label({
+			formatter:
+				!settings.value.compactNumberLabel ?
+					null
+				:	(v: { [x: string]: never }) => {
+						const value = v['measure'] || v[columnName(firstMeasure.value)]
+						return formatValue(value, {
+							compactNumber: settings.value.compactNumberLabel
+						})
+					}
+		}),
+		smooth: settings.value.lineSmooth,
+		point:
+			settings.value.showPoint ?
+				{
+					shape: settings.value.pointType
+				}
+			:	null,
+		color:
+			isGrouped.value || isMultipleMeasure.value ? themeColors.value
+			: settings.value.showLegend ? themeColors.value
+			: themeColors.value[0]
+	}
+}
+
+const loadChart = () => {
+	if (!id.value) return
+	chart.value = new Area(id.value as HTMLElement, getOptions())
+	chart.value.render()
+}
+
+watch(
+	[dimensions, measures, list, task.settings],
+	() => {
+		processLocalList()
+		chart.value.update(getOptions())
+	},
+	{ deep: true }
+)
+
+onMounted(() => {
+	processLocalList()
 	nextTick(() => loadChart())
 })
 </script>
-<style scoped>
-.chart {
-	height: 400px;
-}
-</style>
