@@ -103,17 +103,6 @@ const localKey = ref('any')
 const list = ref([])
 const tableRows = ref(0)
 const settings = computed(() => task.settings)
-const firstLoad = ref(false)
-
-// watch(
-// 	() => settings.value,
-// 	debounce(() => {
-// 		localKey.value = Math.random().toString(36).substring(7)
-// 	}, 600),
-// 	{
-// 		deep: true
-// 	}
-// )
 
 onMounted(() => {
 	loading.value = true

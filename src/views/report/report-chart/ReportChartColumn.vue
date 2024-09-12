@@ -45,8 +45,6 @@ const getOptions = (): ColumnOptions => {
 	const isNotGroupedAndIsMultiple = !isGrouped.value && isMultipleMeasure.value
 	if (isNotGroupedAndIsMultiple) {
 		common.isGroup = true
-		common.xField = columnName(dimensions.value[0])
-		common.yField = 'measure'
 		common.seriesField = 'category'
 	} else if (isGrouped.value) {
 		common.isGroup = true

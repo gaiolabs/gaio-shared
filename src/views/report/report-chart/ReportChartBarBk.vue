@@ -18,9 +18,9 @@ import { onMounted, shallowRef } from 'vue'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
-const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(props.task))
+const chartHelper = computed(() => useReportChartHelper(task))
 const { dimensions, measures, settings, columnName, themeColors, foundation, isMultipleMeasure, isGrouped } =
 	chartHelper.value
 
@@ -30,103 +30,109 @@ const total = computed(() => {
 	})
 })
 
-const id = shallowRef()
-const chart = shallowRef()
-const localList = shallowRef([])
-
-const loadChart = () => {
-	let common = {} as Partial<Record<string, unknown>>
-	if (!isGrouped.value && isMultipleMeasure.value) {
-		common.isGroup = true
-		common.yField = columnName(dimensions.value[0])
-		common.xField = 'measure'
-		common.seriesField = 'category'
-		common.dodgePadding = 0
-	} else if (isGrouped.value) {
-		common.isGroup = true
-		common.yField = columnName(dimensions.value[0])
-		common.xField = columnName(measures.value[0])
-		common.seriesField = columnName(dimensions.value[1])
-		common.dodgePadding = 0
-	} else {
-		common.yField = columnName(dimensions.value[0])
-		common.xField = columnName(measures.value[0])
-	}
-
-	chart.value = new Bar(
-		id.value as HTMLElement,
-		{
-			data: localList.value,
-			...common,
-			color:
-				isGrouped.value || isMultipleMeasure.value ? themeColors.value
-				: settings.value.showLegend ? themeColors.value
-				: themeColors.value[0],
-			label: chartHelper.value.linearLabel(total.value),
-			...foundation.value,
-			yAxis: {
-				title:
-					settings.value.showYTitle ?
-						{
-							style: {
-								fill: 'rgba(0,0,0,0.45)'
-							}
-						}
-					:	null,
-				grid:
-					settings.value.showYGrid ?
-						{
-							line: {
-								style: {
-									stroke: 'rgba(0,0,0,0.08)'
-								}
-							}
-						}
-					:	null
-			},
-			xAxis: {
-				title:
-					settings.value.showXTitle ?
-						{
-							style: {
-								lineWidth: 0,
-								fill: 'rgba(0,0,0,0.45)'
-							}
-						}
-					:	null,
-				grid:
-					settings.value.showXGrid ?
-						{
-							line: {
-								style: {
-									stroke: 'rgba(0,0,0,0.08)'
-								}
-							}
-						}
-					:	null
-			},
-			barBackground:
-				settings.value.columnBackground ?
-					{
-						style: {
-							fill: 'rgba(0,0,0,0.08)'
-						}
-					}
-				:	undefined
-		} as BarOptions
-	)
-	chart.value.render()
-}
-
-onMounted(() => {
-	let data = props.list
+const processLocalList = () => {
+	let data = list
 
 	if (isGrouped.value || !isMultipleMeasure.value) {
 		localList.value = data
 	} else {
 		localList.value = fold(data, measures.value)
 	}
+}
 
+const id = shallowRef()
+const chart = shallowRef()
+const localList = shallowRef([])
+
+const getOptions = (): BarOptions => {
+	let common = {} as Partial<Record<string, unknown>>
+	const isNotGroupedAndIsMultiple = !isGrouped.value && isMultipleMeasure.value
+	if (isNotGroupedAndIsMultiple) {
+		common.isGroup = true
+		common.seriesField = 'category'
+	} else if (isGrouped.value) {
+		common.isGroup = true
+		common.seriesField = columnName(dimensions.value[1])
+	}
+	return {
+		data: localList.value,
+		xField: columnName(dimensions.value[0]),
+		yField: isNotGroupedAndIsMultiple ? 'measure' : columnName(measures.value[0]),
+		...common,
+		color:
+			isGrouped.value || isMultipleMeasure.value ? themeColors.value
+			: settings.value.showLegend ? themeColors.value
+			: themeColors.value[0],
+		label: chartHelper.value.linearLabel(total.value),
+		...foundation.value,
+		yAxis: {
+			title:
+				settings.value.showYTitle ?
+					{
+						style: {
+							fill: 'rgba(0,0,0,0.45)'
+						}
+					}
+				:	null,
+			grid:
+				settings.value.showYGrid ?
+					{
+						line: {
+							style: {
+								stroke: 'rgba(0,0,0,0.08)'
+							}
+						}
+					}
+				:	null
+		},
+		xAxis: {
+			title:
+				settings.value.showXTitle ?
+					{
+						style: {
+							lineWidth: 0,
+							fill: 'rgba(0,0,0,0.45)'
+						}
+					}
+				:	null,
+			grid:
+				settings.value.showXGrid ?
+					{
+						line: {
+							style: {
+								stroke: 'rgba(0,0,0,0.08)'
+							}
+						}
+					}
+				:	null
+		},
+		barBackground:
+			settings.value.columnBackground ?
+				{
+					style: {
+						fill: 'rgba(0,0,0,0.08)'
+					}
+				}
+			:	undefined
+	}
+}
+const loadChart = () => {
+	if (!id.value) return
+	chart.value = new Bar(id.value as HTMLElement, getOptions())
+	chart.value.render()
+}
+
+watch(
+	[dimensions, measures, list, task.settings],
+	() => {
+		processLocalList()
+		chart.value.update(getOptions())
+	},
+	{ deep: true }
+)
+
+onMounted(() => {
+	processLocalList()
 	nextTick(() => loadChart())
 })
 </script>
