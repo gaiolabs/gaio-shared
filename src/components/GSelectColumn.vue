@@ -37,6 +37,7 @@ const {
 	multiple = false,
 	appId = undefined,
 	modelValue = undefined,
+	tableName = null,
 	dataTypeFilter = []
 } = defineProps<{
 	modelValue?: string | string[]

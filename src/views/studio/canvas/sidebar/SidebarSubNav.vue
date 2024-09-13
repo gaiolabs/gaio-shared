@@ -13,7 +13,6 @@
 			class="!m-0"
 			vertical
 		/>
-
 		<template v-if="isBucketTable">
 			<template v-if="localInfo.tableDescribe.exists">
 				<div>{{ defaultFormatNumeric(localInfo.tableDescribe.totalRows || 0) }} Rows</div>

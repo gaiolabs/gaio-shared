@@ -62,7 +62,7 @@ const sidebarActions = [
 	},
 	{
 		icon: 'tableThunder',
-		name: 'analysis'
+		name: 'discovery'
 	}
 ]
 

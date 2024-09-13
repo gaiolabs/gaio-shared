@@ -60,5 +60,10 @@ import TaskLogContent from './TaskLogContent.vue'
 defineEmits(['close'])
 
 const showTab = computed(() => useJobStore().showTab)
-const changeShowTab = (tab: 'studio' | 'schedule' | 'dashboard' | 'portal') => (useJobStore().showTab = tab)
+const changeShowTab = (tab: 'studio' | 'schedule' | 'all' | 'portal') => (useJobStore().showTab = tab)
+
+watch(
+	() => showTab.value,
+	() => useJobStore().initJobWatcher()
+)
 </script>

@@ -30,7 +30,7 @@ type JobListType = {
 export const useJobStore = defineStore('board', () => {
 	const useApp = useAppStore()
 	const jobs = ref<JobListType[]>([])
-	const showTab = ref<'studio' | 'schedule' | 'dashboard' | 'portal'>('studio')
+	const showTab = ref<'studio' | 'schedule' | 'all' | 'portal'>('studio')
 	const lastKey = ref(0)
 
 	let source: WebSocket
