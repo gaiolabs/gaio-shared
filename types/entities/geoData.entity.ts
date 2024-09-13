@@ -4,6 +4,7 @@
  */
 export type GeoDataEntity = {
   geoMetaId: string
+  geoDataId: string
   type: string
   properties: string
   geometryType: string
