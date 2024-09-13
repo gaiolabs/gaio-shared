@@ -1,12 +1,12 @@
 
 /**
- * @description Refers to the "Geo Meta" schema from database
+ * @description Refers to the "Maps Meta" schema from database
  */
-export type GeoMetaEntity = {
-  geoMetaId: string
+export type MapMetaEntity = {
+  mapsMetaId: string
   appId: string
-  geoTitle: string
-  geoDescription: string
+  title: string
+  description: string
   zoom: number
   center: [number, number]
   type: string
