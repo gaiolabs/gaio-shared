@@ -107,6 +107,7 @@
 					:selected="useBrushSelected === field"
 					class="me-2"
 					:class="useBrushClasses"
+					:show-icon="true"
 					@click="select(field)"
 				/>
 			</VueDraggable>
