@@ -6,9 +6,9 @@
 		<div v-if="!localMeta?.tableName">
 			<GAlert :title="$t('selectTable')" />
 		</div>
-		<div v-else-if="localMeta?.options?.insights">
+		<div v-else>
+			{{ localMeta }}
 			<GAlert :title="$t('taskInsightsHelp')" />
-
 			<NTabs
 				type="line"
 				class="inner-tabs"
@@ -273,7 +273,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 // const props = defineProps<{ localMeta: MetaType }>()
 
-const { localMeta } = defineProps<{ localMeta: MetaType }>()
+const { localMeta = null } = defineProps<{ localMeta: MetaType }>()
 
 const separator = ref('dotComma')
 const temporaryPercentage = ref(0)

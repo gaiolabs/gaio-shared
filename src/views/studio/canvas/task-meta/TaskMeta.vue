@@ -62,7 +62,10 @@
 						:tab="$t('options')"
 					>
 						<div class="px-5 py-4">
-							<task-meta-insights :local-meta="localMeta" />
+							<task-meta-insights
+								v-if="localMeta.tableName"
+								:local-meta="localMeta"
+							/>
 						</div>
 					</NTabPane>
 				</NTabs>
