@@ -1,10 +1,10 @@
 
 /**
- * @description Refers to the "Maps" schema from database
+ * @description Refers to the "Maps Geometry" schema from database
  */
-export type MapsEntity = {
+export type MapsGeometryEntity = {
   mapsMetaId: string
-  mapsId: string
+  mapsGeometryId: string
   type: string
   properties: string
   geometryType: string

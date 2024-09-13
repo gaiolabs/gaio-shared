@@ -19,7 +19,7 @@ export * from './dtos/flow'
 
 export * from './entities/app.entity'
 export * from './entities/flow.entity'
-export * from './entities/maps.entity'
+export * from './entities/mapsGeometry.entity'
 export * from './entities/mapsMeta.entity'
 export * from './entities/meta.entity'
 export * from './entities/metaStories.entity'
