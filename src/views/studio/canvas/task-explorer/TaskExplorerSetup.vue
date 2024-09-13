@@ -27,4 +27,5 @@
 import { useReportStore } from '@/stores'
 import TaskReportSetupFields from '@/views/studio/canvas/task-explorer/TaskExplorerSetupFields.vue'
 import TaskReportSetupType from '@/views/studio/canvas/task-explorer/TaskExplorerSetupType.vue'
+import { NTabPane, NTabs } from 'naive-ui'
 </script>

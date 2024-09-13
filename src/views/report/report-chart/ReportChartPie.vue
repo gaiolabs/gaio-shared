@@ -19,7 +19,7 @@ import useReportChartHelper from './ReportChartHelper'
 defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const { settings, firstMeasure, firstDimension, meta, columnName } = useReportChartHelper(props.task)
+const { settings, firstMeasure, firstDimension, meta, columnName } = useReportChartHelper(props.task, props.list)
 const { formatValue } = useFormatValue()
 const id = shallowRef()
 const chart = shallowRef()

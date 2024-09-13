@@ -72,6 +72,7 @@ import TaskReportSchema from '@/views/studio/canvas/task-explorer/TaskExplorerSc
 import TaskReportSetup from '@/views/studio/canvas/task-explorer/TaskExplorerSetup.vue'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
+import { NButton, NDivider } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onMounted } from 'vue'
 

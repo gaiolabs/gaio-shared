@@ -109,8 +109,9 @@ export default () => {
 	}
 
 	const formatValue = (rowValue: string | number | Date, columnOptions?: ColumnOptions) => {
-		if (columnOptions.separators) {
-			columnOptions.separators = auth.defaultNumberFormat
+		columnOptions = columnOptions ? columnOptions : {}
+		if (!columnOptions.separators) {
+			columnOptions.separators = userSeparators
 		}
 
 		let value = cloneDeep(rowValue)

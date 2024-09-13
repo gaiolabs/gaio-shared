@@ -14,55 +14,56 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef, watch } from 'vue'
-import { fold } from './fold'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(task))
-const { dimensions, measures, settings, foundation, columnName, themeColors, isGrouped, isMultipleMeasure } =
-	chartHelper.value
+const chartHelper = computed(() => useReportChartHelper(task, list))
+const {
+	dimensions,
+	measures,
+	settings,
+	foundation,
+	columnName,
+	processedList,
+	themeColors,
+	isGrouped,
+	isMultipleMeasure,
+	firstMeasure,
+	firstDimension,
+	secondDimension,
+	linearLabel
+} = chartHelper.value
 
 const id = shallowRef()
-const chart = shallowRef<Column>()
-const localList = shallowRef([])
+let chart = shallowRef<Column>()
 
-const total = computed(() => sumBy(localList.value, columnName(measures.value[0])) || 0)
-
-const processLocalList = () => {
-	let data = list
-
-	if (isGrouped.value || !isMultipleMeasure.value) {
-		localList.value = data
-	} else {
-		localList.value = fold(data, measures.value)
-	}
-}
+const total = computed(() => {
+	return sumBy(processedList('column'), (o) => {
+		return o[columnName(firstMeasure.value)] ? o[columnName(firstMeasure.value)] : 0
+	})
+})
 
 const getOptions = (): ColumnOptions => {
-	let common = {} as Partial<Record<string, unknown>>
-	const isNotGroupedAndIsMultiple = !isGrouped.value && isMultipleMeasure.value
-	if (isNotGroupedAndIsMultiple) {
-		common.isGroup = true
-		common.seriesField = 'category'
-	} else if (isGrouped.value) {
-		common.isGroup = true
-		common.seriesField = columnName(dimensions.value[1])
-	}
 	return {
-		data: localList.value,
-		xField: columnName(dimensions.value[0]),
-		yField: isNotGroupedAndIsMultiple ? 'measure' : columnName(measures.value[0]),
-		...common,
+		data: processedList('column'),
+		xField: columnName(firstDimension.value),
+		yField: !isGrouped.value && isMultipleMeasure.value ? 'measure' : columnName(firstMeasure.value),
+		seriesField:
+			isGrouped.value && !isMultipleMeasure.value ? columnName(secondDimension.value)
+			: isMultipleMeasure.value ? 'category'
+			: settings.value.showLegend ? columnName(firstDimension.value)
+			: undefined,
+		...foundation.value,
+		// isGroup: true,
+		isGroup: isGrouped.value || isMultipleMeasure.value,
 		appendPadding: [10, 10, 10, 10],
 		color:
 			isGrouped.value || isMultipleMeasure.value ? themeColors.value
 			: settings.value.showLegend ? themeColors.value
 			: themeColors.value[0],
-
-		...foundation.value,
-		label: chartHelper.value.linearLabel(total.value),
+		label: linearLabel(total.value),
 		columnBackground:
 			settings.value.columnBackground ?
 				{
@@ -81,16 +82,14 @@ const loadChart = () => {
 }
 
 watch(
-	[dimensions, measures, list, task.settings],
+	[() => task, () => list, dimensions, measures],
 	() => {
-		processLocalList()
 		chart.value.update(getOptions())
 	},
 	{ deep: true }
 )
 
 onMounted(() => {
-	processLocalList()
 	nextTick(() => loadChart())
 })
 </script>

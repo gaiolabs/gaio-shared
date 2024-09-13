@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import useFormatValue from '@/composables/useFormatValue'
-import { fold } from '@/views/report/report-chart/fold'
 import { Area, type AreaOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
@@ -20,50 +19,36 @@ import useReportChartHelper from './ReportChartHelper'
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(task))
+const chartHelper = computed(() => useReportChartHelper(task, list))
 const {
 	dimensions,
 	measures,
 	settings,
-	columnName,
 	themeColors,
 	label,
-	firstMeasure,
+	columnName,
+	processedList,
 	foundation,
 	isGrouped,
-	isMultipleMeasure
+	isMultipleMeasure,
+	firstMeasure,
+	firstDimension,
+	secondDimension
 } = chartHelper.value
 
 const { formatValue } = useFormatValue()
 const id = shallowRef()
 const chart = shallowRef()
-const localList = shallowRef([])
-
-const processLocalList = () => {
-	let data = list
-
-	if (isGrouped.value || !isMultipleMeasure.value) {
-		localList.value = data
-	} else {
-		localList.value = fold(data, measures.value)
-	}
-}
 
 const getOptions = (): AreaOptions => {
-	let common = {} as Partial<Record<string, unknown>>
-	const isNotGroupedAndIsMultiple = !isGrouped.value && isMultipleMeasure.value
-	if (isNotGroupedAndIsMultiple) {
-		common.isGroup = true
-		common.seriesField = 'category'
-	} else if (isGrouped.value) {
-		common.isGroup = true
-		common.seriesField = columnName(dimensions.value[1])
-	}
 	return {
-		data: localList.value,
-		xField: columnName(dimensions.value[0]),
-		yField: isNotGroupedAndIsMultiple ? 'measure' : columnName(measures.value[0]),
-		...common,
+		data: processedList('area'),
+		xField: columnName(firstDimension.value),
+		yField: isGrouped.value || !isMultipleMeasure.value ? columnName(firstMeasure.value) : 'measure',
+		seriesField:
+			isGrouped.value && !isMultipleMeasure.value ? columnName(secondDimension.value)
+			: isMultipleMeasure.value ? 'category'
+			: undefined,
 		...foundation.value,
 		line: {
 			size: settings.value.lineWidth || 1
@@ -100,16 +85,14 @@ const loadChart = () => {
 }
 
 watch(
-	[dimensions, measures, list, task.settings],
+	[() => task, () => list, dimensions, measures],
 	() => {
-		processLocalList()
 		chart.value.update(getOptions())
 	},
 	{ deep: true }
 )
 
 onMounted(() => {
-	processLocalList()
 	nextTick(() => loadChart())
 })
 </script>

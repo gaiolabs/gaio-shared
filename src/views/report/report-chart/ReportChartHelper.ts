@@ -6,8 +6,9 @@ import type { Legend } from '@antv/g2plot/lib/types/legend'
 import type { FieldType, ReportNodeType } from '@gaio/shared/types'
 import { isNil } from 'lodash-es'
 import { computed } from 'vue'
+import { fold } from './fold'
 
-export default (task: ReportNodeType) => {
+export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	const { formatValue } = useFormatValue()
 
 	const settings = computed(() => task.settings || {})
@@ -32,8 +33,16 @@ export default (task: ReportNodeType) => {
 		return measures.value[0]
 	})
 
+	const secondMeasure = computed(() => {
+		return measures.value[1]
+	})
+
 	const firstDimension = computed(() => {
 		return dimensions.value[0]
+	})
+
+	const secondDimension = computed(() => {
+		return dimensions.value[1]
 	})
 
 	const groupedDimension = computed(() => {
@@ -53,6 +62,10 @@ export default (task: ReportNodeType) => {
 
 	const isMultipleMeasure = computed(() => {
 		return measures.value.length > 1
+	})
+
+	const isNotGroupedOrIsMultiple = computed(() => {
+		return !(dimensions.value.length > 1) || measures.value.length > 1
 	})
 
 	const meta = computed(() => {
@@ -90,6 +103,9 @@ export default (task: ReportNodeType) => {
 	})
 
 	const columnName = (col: FieldType) => {
+		// if (col !== undefined)
+		// 	if (col.alias !== undefined) return col.alias as string
+		// 	else return col.columnName as string
 		return (col.alias || col.columnName) as string
 	}
 
@@ -435,8 +451,27 @@ export default (task: ReportNodeType) => {
 		}
 	}
 
+	const processedList = (chart: string) => {
+		const data = list
+		switch (chart) {
+			case 'area':
+			case 'line':
+			case 'column':
+				// data = data.map((o) => {
+				// 	if (o[firstMeasure.value.alias]) {
+				// 		o[firstMeasure.value.alias] = Number(o[firstMeasure.value.alias])
+				// 	}
+				// 	if (o[firstDimension.value.alias]) {
+				// 		o[firstDimension.value.alias] = o[firstDimension.value.alias].toString()
+				// 	}
+				// 	return o
+				// })
+				return !isGrouped.value || !isMultipleMeasure.value ? data : fold(data, measures.value)
+		}
+	}
+
 	return {
-		foundation,
+		processedList,
 		seriesLabel,
 		tooltip,
 		valueFormatter,
@@ -449,12 +484,16 @@ export default (task: ReportNodeType) => {
 		legend,
 		label,
 		linearLabel,
+		foundation,
 		isMultipleMeasure,
 		isGrouped,
+		isNotGroupedOrIsMultiple,
 		guideLine,
 		meta,
 		firstMeasure,
+		secondMeasure,
 		firstDimension,
+		secondDimension,
 		settings,
 		dimensions,
 		measures,

@@ -9,18 +9,18 @@
 </template>
 
 <script setup lang="ts">
-import { fold } from '@/views/report/report-chart/fold'
 import { Scatter, type ScatterOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
+import { fold } from './fold'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(task))
+const chartHelper = computed(() => useReportChartHelper(task, list))
 const { dimensions, measures, settings, columnName, foundation, themeColors } = chartHelper.value
 
 const id = shallowRef()
@@ -72,15 +72,7 @@ const loadChart = () => {
 				: themeColors.value[0],
 
 			...foundation.value,
-			label: chartHelper.value.linearLabel(total.value),
-			columnBackground:
-				settings.value.columnBackground ?
-					{
-						style: {
-							fill: 'rgba(0,0,0,0.08)'
-						}
-					}
-				:	undefined
+			label: chartHelper.value.linearLabel(total.value)
 		} as ScatterOptions
 	)
 	chart.value.render()

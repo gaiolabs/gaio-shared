@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { fold } from '@/views/report/report-chart/fold'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { groupBy, sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
@@ -109,6 +108,7 @@ import {
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { ref, provide } from 'vue'
+import { fold } from './fold'
 
 use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 
@@ -117,7 +117,7 @@ use([CanvasRenderer, BarChart, TitleComponent, TooltipComponent, LegendComponent
 const option = ref({})
 const localList = ref([])
 
-const chartHelper = computed(() => useReportChartHelper(props.task))
+const chartHelper = computed(() => useReportChartHelper(props.task, props.list))
 const { dimensions, measures, settings, columnName, themeColors, appendPadding, foundation } = chartHelper.value
 
 const series = computed(() => {

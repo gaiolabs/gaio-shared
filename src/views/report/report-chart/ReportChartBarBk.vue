@@ -9,18 +9,18 @@
 </template>
 
 <script setup lang="ts">
-import { fold } from '@/views/report/report-chart/fold'
 import { Bar, type BarOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
+import { fold } from './fold'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const chartHelper = computed(() => useReportChartHelper(task))
+const chartHelper = computed(() => useReportChartHelper(task, list))
 const { dimensions, measures, settings, columnName, themeColors, foundation, isMultipleMeasure, isGrouped } =
 	chartHelper.value
 

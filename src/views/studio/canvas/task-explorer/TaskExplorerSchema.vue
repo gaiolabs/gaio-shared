@@ -91,15 +91,16 @@
 		</div>
 
 		<div class="mb-3 min-h-[40px] rounded border bg-paper-100 p-3 dark:bg-carbon-100">
-			<vue-draggable
+			<VueDraggable
 				:key="useReportStore().current.schema.select?.length"
 				v-model="useReportStore().current.schema.select"
 				:sort="true"
 				group="fields"
 				class="drag-table"
 				@add="add"
+				@remove="remove"
 			>
-				<v-tag
+				<VTag
 					v-for="(field, i) in useReportStore().current.schema.select"
 					:key="i"
 					:field="field"
@@ -108,7 +109,7 @@
 					:class="useBrushClasses"
 					@click="select(field)"
 				/>
-			</vue-draggable>
+			</VueDraggable>
 		</div>
 
 		<g-filter-builder
@@ -121,6 +122,7 @@
 </template>
 
 <script setup lang="ts">
+import VTag from '@/components/VTag.vue'
 import { useReportStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
 import { type SortableEvent } from 'sortablejs'
@@ -144,8 +146,11 @@ const add = (ev: SortableEvent) => {
 			useReportStore().current.schema.select[newDraggableIndex] = useReportStore().defineFieldOptions(field)
 		}
 	})
-
 	useReportStore().currentField = useReportStore().current.schema.select[newDraggableIndex]
+	useReportStore().refreshPreview()
+}
+
+const remove = () => {
 	useReportStore().refreshPreview()
 }
 
