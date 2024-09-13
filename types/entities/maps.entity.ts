@@ -2,7 +2,7 @@
 /**
  * @description Refers to the "Maps" schema from database
  */
-export type MapEntity = {
+export type MapsEntity = {
   mapsMetaId: string
   mapsId: string
   type: string

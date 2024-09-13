@@ -2,7 +2,7 @@
 /**
  * @description Refers to the "Maps Meta" schema from database
  */
-export type MapMetaEntity = {
+export type MapsMetaEntity = {
   mapsMetaId: string
   appId: string
   title: string
