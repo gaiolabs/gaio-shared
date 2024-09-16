@@ -19,6 +19,13 @@
 				>
 					{{ $t('save') }}
 				</NButton>
+
+				<NButton
+					size="small"
+					@click="$emit('execute')"
+				>
+					{{ $t('save') }}
+				</NButton>
 			</div>
 			<div class="flex items-center justify-between gap-2">
 				<NTooltip :show-after="1500">
@@ -75,7 +82,7 @@ import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import { NButton, NDivider, NInput, NTooltip } from 'naive-ui'
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'execute'])
 const { localTask = null } = defineProps<{ localTask: GenericType }>()
 
 const save = () => {
