@@ -27,10 +27,12 @@
 							>
 								<pane>
 									<code-editor v-model="localTask.query" />
+									{{ result }}
 								</pane>
 								<pane>
 									<div class="bg-white">
 										<TaskQueryResult
+											v-if="result.length > 0"
 											:result="result"
 											:local-task="localTask"
 										/>
@@ -47,6 +49,7 @@
 
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
+import useApi from '@/composables/useApi'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 import TaskQueryMenu from '@/views/studio/canvas/task-query/TaskQueryMenu.vue'
@@ -57,14 +60,109 @@ import { Pane, Splitpanes } from 'splitpanes'
 defineEmits(['close'])
 
 const localTask = ref()
-const result = ref()
+const result = ref([])
 
 const panels = ref({
 	left: true,
 	right: true
 })
 
-const execute = () => {}
+const execute = () => {
+	console.log('case')
+	useApi()
+		.post('api/task/query', {
+			body: {
+				taskData: localTask.value
+			}
+		})
+		.then((res) => {
+			result.value = [
+				[
+					{
+						name: 'name',
+						type: 'string'
+					},
+					{
+						name: 'age',
+						type: 'number'
+					},
+					{
+						name: 'address',
+						type: 'string'
+					}
+				],
+				[
+					{
+						name: 'John',
+						age: 30,
+						address: 'New York'
+					},
+					{
+						name: 'Doe',
+						age: 25,
+						address: 'California'
+					}
+				],
+				[
+					{
+						name: 'John',
+						age: 30,
+						address: 'New York'
+					},
+					{
+						name: 'Doe',
+						age: 25,
+						address: 'California'
+					}
+				]
+			]
+			// result.value = res.data
+		})
+		.catch((err) => {
+			console.log('jonafdasofasdofasofdo')
+			result.value = [
+				[
+					{
+						name: 'name',
+						type: 'string'
+					},
+					{
+						name: 'age',
+						type: 'number'
+					},
+					{
+						name: 'address',
+						type: 'string'
+					}
+				],
+				[
+					{
+						name: 'John',
+						age: 30,
+						address: 'New York'
+					},
+					{
+						name: 'Doe',
+						age: 25,
+						address: 'California'
+					}
+				],
+				[
+					{
+						name: 'John',
+						age: 30,
+						address: 'New York'
+					},
+					{
+						name: 'Doe',
+						age: 25,
+						address: 'California'
+					}
+				]
+			]
+			console.log(err)
+		})
+}
 
 onBeforeMount(() => {
 	localTask.value = useDefault({
