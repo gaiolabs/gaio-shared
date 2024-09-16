@@ -5,25 +5,32 @@
 			@close="$emit('close')"
 		>
 			<template #header>
-				<TaskQueryMenu @close="$emit('close')" />
+				<TaskQueryMenu
+					:local-task="localTask"
+					@close="$emit('close')"
+				/>
 			</template>
 			<template #content>
-				<div class="bg-red-500 w-full">
+				<div class="w-full">
 					<Splitpanes class="w-full">
 						<Pane
-							:size="viewControl.sideBarSize"
+							:size="20"
 							class="p-2 flex flex-col bg-blue-400"
 						>
 							<div class="bg-white">asd</div>
-							<!-- <TaskQuerySideBar /> -->
 						</Pane>
-						<Pane :size="viewControl.codeFrameSize">
-							codeFrame
-							<!-- <TaskStaticContentCodeFrame /> -->
-						</Pane>
-						<Pane :size="viewControl.previewSize">
-							preview
-							<!-- <TaskStaticContentCodeResult /> -->
+						<Pane :size="80">
+							<Splitpanes
+								class="w-full"
+								horizontal
+							>
+								<pane>
+									<code-editor v-model="localTask.query" />
+								</pane>
+								<pane>
+									<div class="bg-white">result</div>
+								</pane>
+							</Splitpanes>
 						</Pane>
 					</Splitpanes>
 				</div>
@@ -32,13 +39,31 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
-import TaskQueryMenu from '@/views/studio/canvas/task-query/components/TaskQueryMenu.vue'
-import TaskQuerySideBar from '@/views/studio/canvas/task-query/components/TaskQuerySideBar.vue'
+import useDefault from '@/composables/useDefault'
+import { useAppStore } from '@/stores'
+import TaskQueryMenu from '@/views/studio/canvas/task-query/TaskQueryMenu.vue'
+// import TaskQuerySideBar from '@/views/studio/canvas/task-query/components/TaskQuerySideBar.vue'
 import { Pane, Splitpanes } from 'splitpanes'
-import { useCodeDataStore, useViewControlStore } from './store/useTaskQueryStore'
+
+const localTask = ref()
 
 defineEmits(['close'])
-const viewControl = useViewControlStore()
+
+const panels = ref({
+	left: true,
+	right: true
+})
+
+onBeforeMount(() => {
+	localTask.value = useDefault({
+		type: 'query',
+		base: {
+			...useAppStore().appInfo,
+			...useAppStore().cloneTask()
+		}
+	})
+	// viewControl.init()
+})
 </script>

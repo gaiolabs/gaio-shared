@@ -123,7 +123,7 @@ const currentTable = ref<string>()
 const items = ref([])
 const loading = ref(true)
 const sidebarPanel = ref()
-const showDrawer = ref('query') // TODO: go back to empty
+const showDrawer = ref('')
 const currentElement = shallowRef()
 
 const addDrag = (ev: SortableEvent) => {

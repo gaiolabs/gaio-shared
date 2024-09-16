@@ -14,6 +14,7 @@ import { defaultMeta } from '@/composables/default-task/defaultMeta'
 import { defaultParamToTable } from '@/composables/default-task/defaultParamToTable'
 import { defaultPca } from '@/composables/default-task/defaultPca'
 import { defaultPivot } from '@/composables/default-task/defaultPivot'
+import { defaultQuery } from '@/composables/default-task/defaultQuery'
 import { defaultQuickTable } from '@/composables/default-task/defaultQuickTable'
 import { defaultReportPreview } from '@/composables/default-task/defaultReportPreview'
 import { defaultRest } from '@/composables/default-task/defaultRest'
@@ -65,7 +66,8 @@ export default ({ type, base }: { type: string; base: TaskType }) => {
 		reportPreview: () => defaultReportPreview(sourceProperties),
 		form: () => defaultFormCard(sourceProperties),
 		rest: () => defaultRest(sourceProperties),
-		discovery: () => defaultMeta(sourceProperties)
+		discovery: () => defaultMeta(sourceProperties),
+		query: () => defaultQuery(sourceProperties)
 	}
 
 	return withoutNullProperties(prepare[type]())

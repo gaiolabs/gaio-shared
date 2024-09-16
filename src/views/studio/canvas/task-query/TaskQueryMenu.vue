@@ -1,18 +1,19 @@
 <template>
-	<nav class="task-query-menu flex w-full items-center gap-3 p-3 px-0">
+	<nav class="task-query-menu flex w-full items-center gap-3 px-0">
 		<div class="flex items-center gap-1 text-lg font-bold">
 			<div class="w-5 h-5 bg-black/10 border-2 border-black"></div>
 			{{ $t('query') }}
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<!-- v-model:value="codeData.localTask.label" -->
 				<NInput
+					v-model:value="localTask.label"
 					size="small"
 					:placeholder="$t('sqlQuery')"
 				/>
 				<NDivider vertical />
 				<NButton
+					:disabled="!localTask.label"
 					size="small"
 					@click="save()"
 				>
@@ -68,10 +69,24 @@
 	</nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import GIcon from '@/components/GIcon.vue'
+import useFlow from '@/composables/useFlow'
+import { useAppStore } from '@/stores'
 import { NButton, NDivider, NInput, NTooltip } from 'naive-ui'
 
-defineEmits(['close'])
+const emit = defineEmits(['close'])
+const { localTask = null } = defineProps<{ localTask: GenericType }>()
+
+const save = () => {
+	useFlow(useAppStore().flow.workflow)
+		.generate({
+			task: localTask,
+			sources: [],
+			targets: []
+		})
+		.save()
+		.then(() => emit('close'))
+}
 </script>
 stati
