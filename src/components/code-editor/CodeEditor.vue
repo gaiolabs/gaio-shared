@@ -63,9 +63,7 @@ watch(
 	}
 )
 
-const changeState = (ev) => {
-	console.log(ev)
-}
+const changeState = (ev) => {}
 
 const view = shallowRef()
 const handleReady = (payload) => {

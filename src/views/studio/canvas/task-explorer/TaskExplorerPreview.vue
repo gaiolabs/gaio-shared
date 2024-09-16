@@ -160,7 +160,7 @@ const reportState = computed(() => {
 				}
 			]
 		}
-	} else if (['pie', 'funnel'].includes(reportType)) {
+	} else if (['pie', 'funnel', 'donut'].includes(reportType)) {
 		return {
 			status: verifyRules(1, 1),
 			rules: [
@@ -186,5 +186,9 @@ const reportState = computed(() => {
 		}
 	}
 	return {}
+})
+
+watch(reportState, () => {
+	console.log('reportState.status', reportState)
 })
 </script>

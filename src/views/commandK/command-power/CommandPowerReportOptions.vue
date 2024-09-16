@@ -177,10 +177,13 @@ const reportTypes = [
 		label: t('pie'),
 		type: 'reportPreview',
 		reportType: 'pie',
-		icon: 'pie',
-		settings: {
-			pieDonut: false
-		}
+		icon: 'pie'
+	},
+	{
+		label: t('donut'),
+		type: 'reportPreview',
+		reportType: 'donut',
+		icon: 'donut'
 	},
 	{
 		label: t('heatmap'),

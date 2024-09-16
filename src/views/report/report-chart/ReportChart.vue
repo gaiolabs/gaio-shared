@@ -51,6 +51,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartDonut
+						v-else-if="task.reportType === 'donut'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 					<ReportChartTreemap
 						v-else-if="task.reportType === 'treemap'"
 						:task="task"
@@ -92,6 +99,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
+import ReportChartDonut from './ReportChartDonut.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
 
@@ -104,6 +112,13 @@ const list = ref([])
 const tableRows = ref(0)
 const settings = computed(() => task.settings)
 
+watch(
+	() => task,
+	() => {
+		console.log('task', task)
+	}
+)
+
 onMounted(() => {
 	loading.value = true
 
@@ -114,6 +129,8 @@ onMounted(() => {
 	} else {
 		taskData.schema.limit = taskData.settings && taskData.settings.limitRows ? taskData.settings.limitRows : 10
 	}
+
+	console.log('taskData', taskData)
 
 	useApi()
 		.post('api/table/report', {

@@ -171,7 +171,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	}
 
 	const labelPosition = () => {
-		if (task.reportType === 'pie') {
+		if (task.reportType === 'pie' || task.reportType === 'donut') {
 			switch (settings.value.showLabelType) {
 				case 'top':
 					return 'outer'
@@ -452,11 +452,22 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	}
 
 	const processedList = (chart: string) => {
-		const data = list
+		console.log('Chart', chart)
+		console.log('list', list)
+
+		if (!isGrouped.value || !isMultipleMeasure.value) console.log('Não fold')
+		else console.log('É fold')
+
+		const dimension = columnName(dimensions.value[0])
+		const measure = columnName(measures.value[0])
+		let data = list
 		switch (chart) {
 			case 'area':
 			case 'line':
 			case 'column':
+			case 'bar':
+			case 'pie':
+			case 'donut':
 				// data = data.map((o) => {
 				// 	if (o[firstMeasure.value.alias]) {
 				// 		o[firstMeasure.value.alias] = Number(o[firstMeasure.value.alias])
@@ -467,6 +478,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 				// 	return o
 				// })
 				return !isGrouped.value || !isMultipleMeasure.value ? data : fold(data, measures.value)
+
+			case 'papagaio':
+				data = list.map((item) => ({ [dimension]: item[dimension], [measure]: item[measure] }))
+				return data
 		}
 	}
 

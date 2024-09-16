@@ -9,6 +9,7 @@ import { defaultTableReport } from '@/composables/default-reports/defaultTableRe
 import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
+import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 
@@ -20,18 +21,6 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 	}
 
 	sourceProperties.settings = sourceProperties.settings || {}
-
-	// const prepare = {
-	// 	table: () => defaultTableReport(sourceProperties),
-	// 	bar: () => defaultReportChartBar(sourceProperties),
-	// 	column: () => defaultReportChartBar(sourceProperties),
-	// 	line: () => defaultReportChartLine(sourceProperties),
-	// 	download: () => defaultReportDownload(sourceProperties),
-	// 	treemap: () => defaultReportChartTreemap(sourceProperties),
-	// 	pie: () => defaultReportChartPie(sourceProperties),
-	// 	area: () => defaultReportChartArea(sourceProperties),
-	// 	staticContent: () => defaultStaticContentReport(sourceProperties)
-	// }
 
 	let result
 	switch (reportType) {
@@ -60,7 +49,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'donut':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartDonut(sourceProperties)
 			break
 
 		case 'scatter':
