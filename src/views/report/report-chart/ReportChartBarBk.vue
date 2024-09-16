@@ -14,7 +14,6 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import { fold } from './fold'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
@@ -33,8 +32,7 @@ const {
 	isMultipleMeasure,
 	firstMeasure,
 	firstDimension,
-	secondDimension,
-	linearLabel
+	secondDimension
 } = chartHelper.value
 
 const total = computed(() => {
@@ -48,7 +46,7 @@ const chart = shallowRef()
 
 const getOptions = (): BarOptions => {
 	return {
-		data: processedList('column'),
+		data: processedList('bar'),
 		yField: columnName(firstDimension.value),
 		xField: !isGrouped.value && isMultipleMeasure.value ? 'measure' : columnName(firstMeasure.value),
 		seriesField:
@@ -57,7 +55,6 @@ const getOptions = (): BarOptions => {
 			: settings.value.showLegend ? columnName(firstDimension.value)
 			: undefined,
 		...foundation.value,
-		// isGroup: true,
 		isGroup: isGrouped.value || isMultipleMeasure.value,
 		color:
 			isGrouped.value || isMultipleMeasure.value ? themeColors.value

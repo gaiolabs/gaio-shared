@@ -17,7 +17,7 @@
 		<template v-if="task.reportType === 'download'">
 			<ReportDownload :task="task" />
 		</template>
-		<template v-if="['line', 'bar', 'area', 'pie', 'treemap', 'funnel', 'scatter'].includes(task.reportType)">
+		<template v-if="['line', 'bar', 'area', 'pie', 'donut', 'treemap', 'funnel', 'scatter'].includes(task.reportType)">
 			<ReportChart
 				:task="task"
 				:height="height"
@@ -46,6 +46,10 @@ const props = defineProps<{ task: ReportNodeType }>()
 
 const cardHeight = computed(() => {
 	return (props.task?.height || 300) + 'px'
+})
+
+watch(props, () => {
+	console.log('props', props.task)
 })
 
 const height = computed(() => {

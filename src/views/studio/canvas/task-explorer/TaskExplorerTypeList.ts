@@ -71,19 +71,13 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					label: t('pie'),
 					type: 'reportPreview',
 					reportType: 'pie',
-					icon: 'pie',
-					settings: {
-						pieDonut: true
-					}
+					icon: 'pie'
 				},
 				{
 					label: t('donut'),
 					type: 'reportPreview',
-					reportType: 'pie',
-					icon: 'donut',
-					settings: {
-						pieDonut: false
-					}
+					reportType: 'donut',
+					icon: 'donut'
 				},
 				{
 					label: t('scatter'),

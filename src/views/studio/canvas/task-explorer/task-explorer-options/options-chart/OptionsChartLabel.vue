@@ -27,19 +27,19 @@
 			/>
 			<div v-if="useReportStore().current.settings.showLabel && !useReportStore().showOnlyIf(['liquid'])">
 				<NCheckbox
-					v-if="useReportStore().showOnlyIf(['pie', 'treemap', 'funnel'])"
+					v-if="useReportStore().showOnlyIf(['pie', 'donut', 'treemap', 'funnel'])"
 					v-model:checked="useReportStore().current.settings.showLabelDimension"
 					class="w-full"
 					:label="$t('dimension')"
 				/>
 				<NCheckbox
-					v-if="useReportStore().showOnlyIf(['pie', 'treemap', 'funnel'])"
+					v-if="useReportStore().showOnlyIf(['pie', 'treemap', 'funnel', 'donut'])"
 					v-model:checked="useReportStore().current.settings.showLabelMeasure"
 					class="w-full"
 					:label="$t('measure')"
 				/>
 				<NCheckbox
-					v-if="useReportStore().showOnlyIf(['column', 'pie'])"
+					v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut'])"
 					v-model:checked="useReportStore().current.settings.showLabelPercent"
 					class="w-full"
 					:label="$t('percent')"
@@ -55,7 +55,7 @@
 					class="control"
 				>
 					<NCheckbox
-						v-if="useReportStore().hideOnlyIf(['pie'])"
+						v-if="useReportStore().hideOnlyIf(['pie', 'donut'])"
 						v-model:checked="useReportStore().current.settings.showTotal"
 						class="w-full"
 						:label="$t('showTotal')"

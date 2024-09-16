@@ -37,7 +37,7 @@
 							<OptionsHeader />
 						</NCollapseItem>
 						<NCollapseItem
-							v-if="useReportStore().showOnlyIf(['pie']) && !useReportStore().current.settings.pieDonut"
+							v-if="useReportStore().showOnlyIf(['pie'])"
 							name="statistic"
 						>
 							<template #header>

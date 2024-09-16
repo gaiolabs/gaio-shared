@@ -56,7 +56,6 @@ const getOptions = (): ColumnOptions => {
 			: settings.value.showLegend ? columnName(firstDimension.value)
 			: undefined,
 		...foundation.value,
-		// isGroup: true,
 		isGroup: isGrouped.value || isMultipleMeasure.value,
 		appendPadding: [10, 10, 10, 10],
 		color:

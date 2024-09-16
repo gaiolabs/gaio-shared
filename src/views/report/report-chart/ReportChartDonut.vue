@@ -1,5 +1,5 @@
 <template>
-	<div class="report-pie">
+	<div class="report-donut">
 		<div
 			ref="id"
 			class="size-full"
@@ -49,11 +49,11 @@ const labelPosition = computed(() => {
 const getOptions = (): PieOptions => {
 	return {
 		animation: false,
-		data: processedList('pie'),
+		data: processedList('donut'),
 		colorField: columnName(firstDimension.value),
 		angleField: columnName(firstMeasure.value),
 		radius: 1,
-		innerRadius: null,
+		innerRadius: settings.value.innerRadius || 0.72,
 		meta: meta.value,
 		autoFit: true,
 		padding: 'auto',
@@ -97,7 +97,50 @@ const getOptions = (): PieOptions => {
 					}
 				}
 			:	null,
-		statistic: null,
+		statistic:
+			settings.value.showStatistic ?
+				{
+					title:
+						settings.value.statisticLabel ?
+							{
+								offsetY: -4,
+								customHtml: () => {
+									return settings.value.statisticLabel
+								},
+								style: {
+									fontSize: Number(settings.value.statisticFontSize || 20) + 'px',
+									fill: settings.value.statisticFontColor || '#333',
+									whiteSpace: 'pre-wrap',
+									overflow: 'hidden',
+									textOverflow: 'ellipsis'
+								}
+							}
+						:	false,
+					content: {
+						offsetY: 4,
+						style: {
+							fontSize: Number(settings.value.statisticFontSize || 20) + 'px',
+							fill: settings.value.statisticFontColor || '#333',
+							whiteSpace: 'pre-wrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis'
+						},
+						formatter: (datum, data) =>
+							datum ?
+								`${formatValue(datum[columnName(firstMeasure.value)], {
+									...firstMeasure.value,
+									compactNumber: settings.value.compactNumberStatistic
+								})}`
+							:	`${formatValue(
+									data.reduce((r, d) => r + d[columnName(firstMeasure.value)], 0),
+									{
+										...firstMeasure.value,
+										compactNumber: settings.value.compactNumberStatistic
+									}
+								)}`
+					}
+				}
+			:	null,
 		interactions: [{ type: 'element-selected' }]
 	}
 }
