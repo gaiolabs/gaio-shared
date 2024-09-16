@@ -7,6 +7,7 @@
 			<template #header>
 				<TaskQueryMenu
 					:local-task="localTask"
+					@execute="execute()"
 					@close="$emit('close')"
 				/>
 			</template>
@@ -28,7 +29,12 @@
 									<code-editor v-model="localTask.query" />
 								</pane>
 								<pane>
-									<div class="bg-white">result</div>
+									<div class="bg-white">
+										<TaskQueryResult
+											:result="result"
+											:local-task="localTask"
+										/>
+									</div>
 								</pane>
 							</Splitpanes>
 						</Pane>
@@ -45,16 +51,20 @@ import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 import TaskQueryMenu from '@/views/studio/canvas/task-query/TaskQueryMenu.vue'
 // import TaskQuerySideBar from '@/views/studio/canvas/task-query/components/TaskQuerySideBar.vue'
+import TaskQueryResult from '@/views/studio/canvas/task-query/TaskQueryResult.vue'
 import { Pane, Splitpanes } from 'splitpanes'
 
-const localTask = ref()
-
 defineEmits(['close'])
+
+const localTask = ref()
+const result = ref()
 
 const panels = ref({
 	left: true,
 	right: true
 })
+
+const execute = () => {}
 
 onBeforeMount(() => {
 	localTask.value = useDefault({
