@@ -36,6 +36,9 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	const secondMeasure = computed(() => {
 		return measures.value[1]
 	})
+	const thirdMeasure = computed(() => {
+		return measures.value[2]
+	})
 
 	const firstDimension = computed(() => {
 		return dimensions.value[0]
@@ -43,6 +46,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 
 	const secondDimension = computed(() => {
 		return dimensions.value[1]
+	})
+
+	const thirdDimension = computed(() => {
+		return dimensions.value[2]
 	})
 
 	const groupedDimension = computed(() => {
@@ -93,6 +100,24 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 				}
 			}
 
+			if (secondMeasure.value) {
+				metadata[columnName(secondMeasure.value)] = {
+					alias: columnTitle(secondMeasure.value),
+					formatter: (v: string | number | Date) => {
+						return formatValue(v, secondMeasure.value)
+					}
+				}
+			}
+
+			if (thirdMeasure.value) {
+				metadata[columnName(thirdMeasure.value)] = {
+					alias: columnTitle(thirdMeasure.value),
+					formatter: (v: string | number | Date) => {
+						return formatValue(v, thirdMeasure.value)
+					}
+				}
+			}
+
 			metadata['measure'] = {
 				alias: columnTitle(firstMeasure.value),
 				formatter: (v: string | number | Date) => formatValue(v, firstMeasure.value)
@@ -103,10 +128,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	})
 
 	const columnName = (col: FieldType) => {
-		// if (col !== undefined)
-		// 	if (col.alias !== undefined) return col.alias as string
-		// 	else return col.columnName as string
-		return (col.alias || col.columnName) as string
+		if (col !== undefined)
+			if (col.alias !== undefined) return col.alias as string
+			else return col.columnName as string
+		// return (col.alias || col.columnName) as string
 	}
 
 	const columnTitle = (col: FieldType) => {
@@ -468,6 +493,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 			case 'bar':
 			case 'pie':
 			case 'donut':
+			case 'scatter':
 				// data = data.map((o) => {
 				// 	if (o[firstMeasure.value.alias]) {
 				// 		o[firstMeasure.value.alias] = Number(o[firstMeasure.value.alias])
@@ -478,6 +504,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 				// 	return o
 				// })
 				return !isGrouped.value || !isMultipleMeasure.value ? data : fold(data, measures.value)
+			// return data
 
 			case 'papagaio':
 				data = list.map((item) => ({ [dimension]: item[dimension], [measure]: item[measure] }))
@@ -509,6 +536,8 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 		secondMeasure,
 		firstDimension,
 		secondDimension,
+		thirdMeasure,
+		thirdDimension,
 		settings,
 		dimensions,
 		measures,

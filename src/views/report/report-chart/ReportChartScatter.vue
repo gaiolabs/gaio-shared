@@ -9,91 +9,141 @@
 </template>
 
 <script setup lang="ts">
+import useFormatValue from '@/composables/useFormatValue'
 import { Scatter, type ScatterOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import { fold } from './fold'
 import useReportChartHelper from './ReportChartHelper'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const chartHelper = computed(() => useReportChartHelper(task, list))
-const { dimensions, measures, settings, columnName, foundation, themeColors } = chartHelper.value
+const {
+	dimensions,
+	measures,
+	settings,
+	foundation,
+	columnName,
+	processedList,
+	themeColors,
+	isGrouped,
+	isMultipleMeasure,
+	firstMeasure,
+	firstDimension,
+	secondDimension,
+	thirdMeasure,
+	thirdDimension,
+	secondMeasure,
+	linearLabel,
+	label
+} = chartHelper.value
 
 const id = shallowRef()
 const chart = shallowRef<Scatter>()
-const localList = shallowRef([])
+const { formatValue } = useFormatValue()
 
-const isMultipleMeasure = computed(() => {
-	return task.schema.select.filter((o) => o.type !== 'value').length > 1
-})
+const xBaseline = () => {
+	const quadrantX = Number(settings.value.quadrantX)
 
-const isGrouped = computed(() => {
-	return task.schema.select.filter((o) => o.type === 'value').length > 1
-})
-
-const total = computed(() => {
-	return sumBy(localList.value, (o) => {
-		return o[columnName(measures.value[0])] ? o[columnName(measures.value[0])] : 0
-	})
-})
-
-const loadChart = () => {
-	let common = {} as Partial<Record<string, unknown>>
-	if (!isGrouped.value && isMultipleMeasure.value) {
-		common.isGroup = true
-		common.xField = columnName(dimensions.value[0])
-		common.yField = 'measure'
-		common.seriesField = 'category'
-	} else if (isGrouped.value) {
-		common.isGroup = true
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
-		common.seriesField = columnName(dimensions.value[1])
-	} else {
-		common.xField = columnName(dimensions.value[0])
-		common.yField = columnName(measures.value[0])
+	if (!isNaN(quadrantX) && quadrantX !== 0) {
+		return quadrantX
 	}
 
-	chart.value = new Scatter(
-		id.value as HTMLElement,
-		{
-			data: localList.value,
-			...common,
-			appendPadding: [10, 10, 10, 10],
-			xField: 'xG conceded',
-			yField: 'Shot conceded',
-			color:
-				isGrouped.value || isMultipleMeasure.value ? themeColors.value
-				: settings.value.showLegend ? themeColors.value
-				: themeColors.value[0],
+	const xMax = Math.max(...processedList('scatter').map((o) => o[columnName(firstMeasure.value)]))
+	const xMin = Math.min(...processedList('scatter').map((o) => o[columnName(firstMeasure.value)]))
+	return (xMax + xMin) / 2
+}
 
-			...foundation.value,
-			label: chartHelper.value.linearLabel(total.value)
-		} as ScatterOptions
-	)
+const yBaseline = () => {
+	const quadrantY = Number(settings.value.quadrantY)
+	if (!isNaN(quadrantY) && quadrantY !== 0) {
+		return quadrantY
+	}
+	const yMax = Math.max(...processedList('scatter').map((o) => o[columnName(secondMeasure.value)]))
+	const yMin = Math.min(...processedList('scatter').map((o) => o[columnName(secondMeasure.value)]))
+	return (yMax + yMin) / 2
+}
+
+const getOptions = (): ScatterOptions => {
+	return {
+		data: processedList('scatter'),
+		xField: columnName(firstMeasure.value),
+		yField: columnName(secondMeasure.value),
+		color: settings.value.theme.colors,
+
+		size: columnName(thirdMeasure.value) ? [4, 30] : [5, 5],
+		shape: 'circle',
+		quadrant:
+			settings.value.showQuadrant ?
+				{
+					xBaseline: xBaseline() ?? 0,
+					yBaseline: yBaseline() ?? 0,
+					labels: settings.value.quadrantContent
+						.split('\n')
+						.filter((i) => i)
+						.map((content) => {
+							return {
+								content,
+								style: {
+									fill: '#444'
+								}
+							}
+						}),
+					regionStyle: settings.value.regionStyle
+				}
+			:	undefined,
+		pointStyle:
+			columnName(thirdMeasure.value) ?
+				{
+					fillOpacity: 0.7,
+					stroke: '#bbb'
+				}
+			:	null,
+		regressionLine:
+			settings.value.guideScatterType && settings.value.guideScatterType !== 'none' ?
+				{
+					type: settings.value.guideScatterType
+				}
+			:	null,
+
+		label: label({
+			formatter: (v: any) => {
+				v = v[columnName(firstMeasure.value)]
+				return [
+					formatValue(v, {
+						...firstMeasure,
+						compactNumber: settings.value.compactNumberLabel
+					})
+				]
+			}
+		}),
+
+		tooltip: {
+			showTitle: true,
+			title: columnName(firstDimension.value),
+			fields: measures.value.map((col) => columnName(col))
+		}
+	}
+}
+
+const loadChart = () => {
+	if (!id.value) return
+	chart.value = new Scatter(id.value as HTMLElement, getOptions())
 	chart.value.render()
 }
 
-onMounted(() => {
-	let data = list
-	if (isGrouped.value || !isMultipleMeasure.value) {
-		localList.value = data.sort((a, b) =>
-			a.sum_profitEach > b.sum_profitEach ? -1
-			: a.sum_profitEach < b.sum_profitEach ? 1
-			: 0
-		)
-	} else {
-		localList.value = fold(data, measures.value).sort((a, b) =>
-			a.sum_profitEach > b.sum_profitEach ? -1
-			: a.sum_profitEach < b.sum_profitEach ? 1
-			: 0
-		)
-	}
+watch(
+	[() => task, () => list, dimensions, measures],
+	() => {
+		chart.value.update(getOptions())
+	},
+	{ deep: true }
+)
 
+onMounted(() => {
 	nextTick(() => loadChart())
 })
 </script>
