@@ -62,6 +62,11 @@
 				class="z-30"
 				@close="closeTask()"
 			/>
+			<TaskQuery
+				v-if="showDrawer === 'query'"
+				class="z-30"
+				@close="closeTask()"
+			/>
 			<sidebar-sub-nav
 				class="z-40"
 				:is-bucket-table="isBucketTable"
@@ -96,6 +101,7 @@ import TaskBuilder from '@/views/studio/canvas/task-builder/TaskBuilder.vue'
 import TaskExplorerView from '@/views/studio/canvas/task-explorer/TaskExplorerView.vue'
 import TaskFormBuilder from '@/views/studio/canvas/task-form-builder/TaskFormBuilder.vue'
 import TaskLogView from '@/views/studio/canvas/task-log-view/TaskLogView.vue'
+import TaskQuery from '@/views/studio/canvas/task-query/TaskQuery.vue'
 import TaskStaticContent from '@/views/studio/canvas/task-static-content/TaskStaticContent.vue'
 import { taskView } from '@/views/studio/StudioViewTask'
 import type { TableType } from '@gaio/shared/types'
@@ -117,7 +123,7 @@ const currentTable = ref<string>()
 const items = ref([])
 const loading = ref(true)
 const sidebarPanel = ref()
-const showDrawer = ref()
+const showDrawer = ref('query') // TODO: go back to empty
 const currentElement = shallowRef()
 
 const addDrag = (ev: SortableEvent) => {
@@ -190,6 +196,9 @@ const selectElement = (item: { taskLog: string; type: string; reportType: string
 				break
 			case 'staticContent':
 				showDrawer.value = 'staticContent'
+				break
+			case 'query':
+				showDrawer.value = 'query'
 				break
 			case 'update':
 				currentElement.value = taskView.TaskUpdate
