@@ -36,6 +36,7 @@ export const useJobStore = defineStore('board', () => {
 	let source: WebSocket
 
 	const loadLogs = async () => {
+		jobs.value = []
 		jobs.value = await useApi().post('api/task/logs', {
 			body: {
 				appId: useApp.app.appId,
@@ -89,6 +90,7 @@ export const useJobStore = defineStore('board', () => {
 	}
 
 	const initJobWatcher = async () => {
+		console.log('initJobWatcher')
 		closeEventSource()
 		await loadLogs()
 		await initCanvasWebsockets()
