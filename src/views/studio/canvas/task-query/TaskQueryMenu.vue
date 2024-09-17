@@ -1,5 +1,5 @@
 <template>
-	<nav class="task-query-menu flex w-full items-center gap-3 px-0">
+	<nav class="task-query-menu flex w-full items-center gap-3 px-0 py-2">
 		<div class="flex items-center gap-1 text-lg font-bold">
 			<div class="w-5 h-5 bg-black/10 border-2 border-black"></div>
 			{{ $t('query') }}
@@ -96,4 +96,3 @@ const save = () => {
 		.then(() => emit('close'))
 }
 </script>
-stati
