@@ -1,5 +1,3 @@
-import { ScatterQuadrant } from "./scatterQuadrant.type"
-
 export type ReportTaskSettingsType = Partial<{
     forms: string[]
     noDataSentence: string
@@ -66,14 +64,10 @@ export type ReportTaskSettingsType = Partial<{
     titleHeight: number
     titleAlign: 'center' | 'left' | 'right'
     showQuadrant: boolean
+    regionStyle: Array<{ fill: string }>
     quadrantX: number
     quadrantY: number
-    quadrantContent: {
-        firstQuadrant: ScatterQuadrant;
-        secondQuadrant: ScatterQuadrant;
-        thirdQuadrant: ScatterQuadrant;
-        fourthQuadrant: ScatterQuadrant;
-    }
+    quadrantContent: string
     titleFontSize: number
     titleFontColor: string
     titleBold: boolean
