@@ -15,9 +15,13 @@ export * from './core/meta.type'
 export * from './core/meta-view.type'
 
 export * from './dtos/task'
+export * from './dtos/flow'
 
 export * from './entities/app.entity'
 export * from './entities/flow.entity'
+export * from './entities/mapsGeometry.entity'
+export * from './entities/codeSnippets.entity'
+export * from './entities/mapsMeta.entity'
 export * from './entities/meta.entity'
 export * from './entities/metaStories.entity'
 export * from './entities/metaView.entity'
