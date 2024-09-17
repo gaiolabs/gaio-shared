@@ -9,6 +9,7 @@ import { defaultTableReport } from '@/composables/default-reports/defaultTableRe
 import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
+import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
@@ -53,11 +54,11 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'scatter':
-			result = defaultReportChartScatter(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartScatter(sourceProperties)
 			break
 
 		case 'bubble':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartBubble(sourceProperties)
 			break
 
 		case 'radar':

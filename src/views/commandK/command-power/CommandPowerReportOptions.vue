@@ -5,16 +5,16 @@
 			<template v-if="showTab === 'main'">
 				<div class="flex-vertical-center gap-3">
 					<div
-						v-for="report of reportTypes"
-						:key="report.label"
+						v-for="reportType of reportTypes"
+						:key="reportType.label"
 					>
 						<NButton
 							size="tiny"
 							text
-							@click="emit('change', report)"
+							@click="emit('change', reportType)"
 						>
 							<template #icon>
-								<g-icon :name="report.icon" />
+								<g-icon :name="reportType.icon" />
 							</template>
 						</NButton>
 					</div>

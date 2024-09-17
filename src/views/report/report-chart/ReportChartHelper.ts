@@ -494,18 +494,9 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 			case 'pie':
 			case 'donut':
 			case 'scatter':
-				// data = data.map((o) => {
-				// 	if (o[firstMeasure.value.alias]) {
-				// 		o[firstMeasure.value.alias] = Number(o[firstMeasure.value.alias])
-				// 	}
-				// 	if (o[firstDimension.value.alias]) {
-				// 		o[firstDimension.value.alias] = o[firstDimension.value.alias].toString()
-				// 	}
-				// 	return o
-				// })
 				return !isGrouped.value || !isMultipleMeasure.value ? data : fold(data, measures.value)
-			// return data
-
+			case 'bubble':
+				return data
 			case 'papagaio':
 				data = list.map((item) => ({ [dimension]: item[dimension], [measure]: item[measure] }))
 				return data

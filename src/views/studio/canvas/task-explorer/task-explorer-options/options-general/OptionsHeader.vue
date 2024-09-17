@@ -71,7 +71,7 @@
 			<div class="control">
 				<NCheckbox
 					v-model:checked="current.settings.titleBold"
-					:label="$t('bold')"
+					:label="$t('fontBold')"
 				/>
 			</div>
 

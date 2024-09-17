@@ -79,6 +79,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartBubble
+						v-else-if="task.reportType === 'bubble'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -99,6 +106,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
+import ReportChartBubble from './ReportChartBubble.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
@@ -116,6 +124,7 @@ watch(
 	() => task,
 	() => {
 		console.log('task', task)
+		console.log('task.reporttype', task.reportType)
 	}
 )
 
@@ -130,8 +139,6 @@ onMounted(() => {
 		taskData.schema.limit = taskData.settings && taskData.settings.limitRows ? taskData.settings.limitRows : 10
 	}
 
-	console.log('taskData', taskData)
-
 	useApi()
 		.post('api/table/report', {
 			body: {
@@ -141,7 +148,6 @@ onMounted(() => {
 		})
 		.then((res) => {
 			list.value = res.data
-
 			tableRows.value = res.rows_before_limit_at_least
 			loading.value = false
 		})

@@ -770,5 +770,6 @@ export default {
 	quadrant: 'Quadrant',
 	showQuadrant: 'Show quadrant',
 	quadrantContent: 'References (4 - 1 per line)',
-	typeHelpMessageHere: 'Type the help message here'
+	typeHelpMessageHere: 'Type the help message here',
+	guideline: 'Guideline'
 }

@@ -231,7 +231,8 @@ const list = {
 	share: 'ph:share-network',
 	panelRight: 'fluent:panel-right-32-filled',
 	panelLeft: 'fluent:panel-left-32-filled',
-	action: 'hugeicons:touch-interaction-02'
+	action: 'hugeicons:touch-interaction-02',
+	guideline: 'jam:directions-f'
 }
 </script>
 

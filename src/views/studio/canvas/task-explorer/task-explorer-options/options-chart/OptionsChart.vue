@@ -21,6 +21,7 @@
 					<OptionsChartLabel />
 					<OptionsChartXAxis v-if="showShowAxisOptions" />
 					<OptionsChartYAxis v-if="showShowAxisOptions" />
+					<OptionsChartGuideline v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
 					<OptionsChartQuadrant v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
 					<OptionsChartLink />
 					<OptionsChartMargin />
@@ -54,6 +55,7 @@ import OptionsMessage from '@/views/studio/canvas/task-explorer/task-explorer-op
 import OptionsRowsPerPage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
 import OptionsTheme from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsTheme.vue'
 import { NCollapse, NTabPane, NTabs } from 'naive-ui'
+import OptionsChartGuideline from './OptionsChartGuideline.vue'
 import OptionsChartQuadrant from './OptionsChartQuadrant.vue'
 
 const showGeneralOptions = computed(() => useReportStore().showOnlyIf(['funnel', 'line', 'area']))

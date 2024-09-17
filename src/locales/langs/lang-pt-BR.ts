@@ -196,5 +196,6 @@ export default {
 	showQuadrant: 'Mostrar quadrante',
 	quadrantContent: 'Conteúdos (4 - 1 por linha)',
 	typeHelpMessageHere: 'Digite a mensagem de auxílio aqui',
-	chooseAColor: 'Escolha uma cor'
+	chooseAColor: 'Escolha uma cor',
+	guideline: 'Guideline'
 }
