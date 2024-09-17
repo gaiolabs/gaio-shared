@@ -28,7 +28,8 @@ const {
 	dimensions,
 	measures,
 	columnName,
-	processedList
+	processedList,
+	legend
 } = useReportChartHelper(task, list)
 
 const { formatValue } = useFormatValue()
@@ -58,6 +59,7 @@ const getOptions = (): PieOptions => {
 		autoFit: true,
 		padding: 'auto',
 		color: settings.value.theme.colors,
+		legend: legend(),
 		label:
 			settings.value.showLabel ?
 				{
