@@ -145,5 +145,7 @@
 	</NCollapseItem>
 </template>
 <script setup lang="ts">
+import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores'
+import { NCheckbox, NInputNumber } from 'naive-ui'
 </script>

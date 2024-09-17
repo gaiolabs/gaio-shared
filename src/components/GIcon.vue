@@ -230,7 +230,8 @@ const list = {
 	dynamic: 'material-symbols:dynamic-feed',
 	share: 'ph:share-network',
 	panelRight: 'fluent:panel-right-32-filled',
-	panelLeft: 'fluent:panel-left-32-filled'
+	panelLeft: 'fluent:panel-left-32-filled',
+	action: 'hugeicons:touch-interaction-02'
 }
 </script>
 

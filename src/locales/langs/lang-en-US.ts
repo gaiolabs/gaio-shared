@@ -765,5 +765,8 @@ export default {
 	header: 'Header',
 	showTableButton: 'Show table button',
 	typeTitleHere: 'Type the header title here',
+	quadrant: 'Quadrant',
+	showQuadrant: 'Show quadrant',
+	quadrantContent: 'References (4 - 1 per line)',
 	typeHelpMessageHere: 'Type the help message here'
 }

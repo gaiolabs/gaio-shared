@@ -192,5 +192,8 @@ export default {
 	header: 'Cabeçalho',
 	showTableButton: 'Mostrar botão da tabela',
 	typeTitleHere: 'Digite o título do cabeçalho aqui',
+	quadrant: 'Quadrante',
+	showQuadrant: 'Mostrar quadrante',
+	quadrantContent: 'Conteúdos (4 - 1 por linha)',
 	typeHelpMessageHere: 'Digite a mensagem de auxílio aqui'
 }
