@@ -64,7 +64,7 @@ export type ReportTaskSettingsType = Partial<{
     titleHeight: number
     titleAlign: 'center' | 'left' | 'right'
     showQuadrant: boolean
-    regionStyle: Array<{ fill: string }>
+    regionStyle: Array<{ fill: string, start:{ x: number, y: number }, end:{ x: number, y: number } }>
     quadrantX: number
     quadrantY: number
     quadrantContent: string
