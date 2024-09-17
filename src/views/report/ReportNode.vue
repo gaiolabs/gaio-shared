@@ -48,10 +48,6 @@ const cardHeight = computed(() => {
 	return (props.task?.height || 300) + 'px'
 })
 
-watch(props, () => {
-	console.log('props', props.task)
-})
-
 const height = computed(() => {
 	if (props.task && props.task && props.task.settings) {
 		if (props.task && props.task.settings && props.task.settings.showHeader && props.task.settings.title) {

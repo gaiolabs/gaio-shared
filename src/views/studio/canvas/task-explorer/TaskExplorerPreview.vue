@@ -136,7 +136,7 @@ const reportState = computed(() => {
 				}
 			]
 		}
-	} else if (['column', 'line', 'bar', 'area', 'scatter'].includes(reportType)) {
+	} else if (['column', 'line', 'bar', 'area'].includes(reportType)) {
 		return {
 			status: verifyRules(1, 1),
 			rules: [
@@ -184,11 +184,31 @@ const reportState = computed(() => {
 				}
 			]
 		}
+	} else if (['scatter'].includes(reportType)) {
+		return {
+			status: verifyRules(1, 2),
+			rules: [
+				{
+					name: 'scatter',
+					dimensions: 'oneFieldOnly',
+					measures: 'twoFieldOnly',
+					message: 'oneMeasureIsFormed'
+				}
+			]
+		}
+	} else if (['bubble'].includes(reportType)) {
+		return {
+			status: verifyRules(2, 3),
+			rules: [
+				{
+					name: 'bubble',
+					dimensions: 'twoFieldOnly',
+					measures: 'threeFieldOnly',
+					message: 'oneMeasureIsFormed'
+				}
+			]
+		}
 	}
 	return {}
-})
-
-watch(reportState, () => {
-	console.log('reportState.status', reportState)
 })
 </script>

@@ -15,6 +15,8 @@ export const defaultReportChartScatter = (base: ReportNodeType) => {
 			...defaultReportHeader(settings),
 			...defaultReportChartAxis(settings),
 			...defaultReportChartLegend(settings),
+			regionStyle: [{ fill: '#119561' }, { fill: '#667796' }, { fill: '#d5cece' }, { fill: '#933b2b' }],
+			quadrantContent: '',
 			theme: settings.theme || defaultReportTheme()
 		}
 	}

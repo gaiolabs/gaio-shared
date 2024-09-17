@@ -40,6 +40,18 @@
 						:placeholder="$t('defineToEnable')"
 					/>
 				</div>
+				<div class="control control-label">{{ $t('chooseAColor') }}</div>
+				<div
+					v-for="(item, index) of useReportStore().current.settings.regionStyle"
+					:key="index"
+					class="control"
+				>
+					<NColorPicker
+						:key="index"
+						v-model:value="item.fill"
+						:models="['hex']"
+					/>
+				</div>
 			</template>
 		</div>
 	</NCollapseItem>
@@ -47,5 +59,7 @@
 <script setup lang="ts">
 import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores'
-import { NCheckbox, NInput, NInputNumber } from 'naive-ui'
+import { NCheckbox, NColorPicker, NInput, NInputNumber } from 'naive-ui'
+
+console.log('useReportStore().current.settings  ', useReportStore().current.settings)
 </script>

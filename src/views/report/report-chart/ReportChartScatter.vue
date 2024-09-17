@@ -12,7 +12,6 @@
 import useFormatValue from '@/composables/useFormatValue'
 import { Scatter, type ScatterOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
-import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
 import useReportChartHelper from './ReportChartHelper'
@@ -25,19 +24,12 @@ const {
 	dimensions,
 	measures,
 	settings,
-	foundation,
 	columnName,
 	processedList,
-	themeColors,
-	isGrouped,
-	isMultipleMeasure,
 	firstMeasure,
 	firstDimension,
-	secondDimension,
 	thirdMeasure,
-	thirdDimension,
 	secondMeasure,
-	linearLabel,
 	label
 } = chartHelper.value
 
@@ -73,7 +65,6 @@ const getOptions = (): ScatterOptions => {
 		xField: columnName(firstMeasure.value),
 		yField: columnName(secondMeasure.value),
 		color: settings.value.theme.colors,
-
 		size: columnName(thirdMeasure.value) ? [4, 30] : [5, 5],
 		shape: 'circle',
 		quadrant:
@@ -88,11 +79,17 @@ const getOptions = (): ScatterOptions => {
 							return {
 								content,
 								style: {
-									fill: '#444'
+									fill: '#999'
 								}
 							}
 						}),
-					regionStyle: settings.value.regionStyle
+					regionStyle: settings.value.regionStyle.map((item) => {
+						return {
+							fill: item.fill,
+							start: undefined,
+							end: undefined
+						}
+					})
 				}
 			:	undefined,
 		pointStyle:
