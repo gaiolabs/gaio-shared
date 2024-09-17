@@ -66,15 +66,14 @@ export type ReportTaskSettingsType = Partial<{
     titleHeight: number
     titleAlign: 'center' | 'left' | 'right'
     showQuadrant: boolean
-    regionStyle: {
+    quadrantX: number
+    quadrantY: number
+    quadrantContent: {
         firstQuadrant: ScatterQuadrant;
         secondQuadrant: ScatterQuadrant;
         thirdQuadrant: ScatterQuadrant;
         fourthQuadrant: ScatterQuadrant;
     }
-    quadrantX: number
-    quadrantY: number
-    quadrantContent: string
     titleFontSize: number
     titleFontColor: string
     titleBold: boolean

@@ -4,4 +4,5 @@ export type ScatterQuadrant = {
     fill: string;
     start: Point;
     end: Point;
+    content: string;
 };
