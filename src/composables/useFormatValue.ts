@@ -96,7 +96,7 @@ export default () => {
 		return formatValue(value, {
 			formatType: 'decimal',
 			formatDecimalSize: 0,
-			separators: userSeparators
+			separators: userSeparators,
 		})
 	}
 
@@ -104,7 +104,7 @@ export default () => {
 		return formatValue(value, {
 			formatType: 'decimal',
 			formatDecimalSize: dec || 2,
-			separators: userSeparators
+			separators: userSeparators,
 		})
 	}
 
@@ -133,19 +133,19 @@ export default () => {
 							...col,
 							formatType: 'decimal',
 							separators: 'noneDot',
-							formatDecimalSize: Number(col.columnLength) || 2
+							formatDecimalSize: Number(col.columnLength) || 2,
 						}
 					} else if (col.dataType && col.dataType.includes('DateTime')) {
 						col = {
 							...col,
 							formatType: 'date',
-							formatDate: 'YYYY-MM-DD H:mm:ss'
+							formatDate: 'YYYY-MM-DD H:mm:ss',
 						}
 					} else if (col.dataType && col.dataType.includes('Date')) {
 						col = {
 							...col,
 							formatType: 'date',
-							formatDate: 'YYYY-MM-DD'
+							formatDate: 'YYYY-MM-DD',
 						}
 					}
 				}
@@ -157,7 +157,7 @@ export default () => {
 								Number(value),
 								col.formatDecimalSize || 0,
 								getDecimalSeparator(col),
-								getThousandSeparator(col)
+								getThousandSeparator(col),
 							)
 						}
 						break
@@ -167,7 +167,7 @@ export default () => {
 								Number(value) * 100,
 								col.formatDecimalSize || 0,
 								getDecimalSeparator(col),
-								getThousandSeparator(col)
+								getThousandSeparator(col),
 							)}%`
 						}
 						break
@@ -194,7 +194,7 @@ export default () => {
 					Number(value) ?
 						Intl.NumberFormat(localeLanguageName, {
 							notation: 'compact',
-							maximumFractionDigits: 2
+							maximumFractionDigits: 2,
 						}).format(value)
 					:	value
 			}
@@ -214,7 +214,7 @@ export default () => {
 	const yearMonthToNames = (year: number, month: number, locale: string) => {
 		const monthNames = {
 			'en-US': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-			'pt-BR': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+			'pt-BR': ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
 		}
 
 		return `${monthNames[locale || 'pt-BR'][month - 1]}/${year}`
@@ -224,6 +224,6 @@ export default () => {
 		defaultUserSeparator: userSeparators,
 		formatValue,
 		defaultFormatNumeric,
-		defaultFormatDecimal
+		defaultFormatDecimal,
 	}
 }

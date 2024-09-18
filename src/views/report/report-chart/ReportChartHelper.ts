@@ -81,14 +81,14 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 		if (firstDimension.value) {
 			metadata[columnName(firstDimension.value)] = {
 				alias: columnTitle(firstDimension.value),
-				formatter: (v: string | number | Date) => formatValue(v, firstDimension.value)
+				formatter: (v: string | number | Date) => formatValue(v, firstDimension.value),
 			}
 		}
 
 		if (groupedDimension.value) {
 			metadata[columnName(groupedDimension.value)] = {
 				alias: columnTitle(groupedDimension.value),
-				formatter: (v: string | number | Date) => formatValue(v, groupedDimension.value)
+				formatter: (v: string | number | Date) => formatValue(v, groupedDimension.value),
 			}
 		}
 
@@ -97,7 +97,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 				alias: columnTitle(firstMeasure.value),
 				formatter: (v: string | number | Date) => {
 					return formatValue(v, firstMeasure.value)
-				}
+				},
 			}
 
 			if (secondMeasure.value) {
@@ -105,7 +105,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 					alias: columnTitle(secondMeasure.value),
 					formatter: (v: string | number | Date) => {
 						return formatValue(v, secondMeasure.value)
-					}
+					},
 				}
 			}
 
@@ -114,13 +114,13 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 					alias: columnTitle(thirdMeasure.value),
 					formatter: (v: string | number | Date) => {
 						return formatValue(v, thirdMeasure.value)
-					}
+					},
 				}
 			}
 
 			metadata['measure'] = {
 				alias: columnTitle(firstMeasure.value),
-				formatter: (v: string | number | Date) => formatValue(v, firstMeasure.value)
+				formatter: (v: string | number | Date) => formatValue(v, firstMeasure.value),
 			}
 		}
 
@@ -164,10 +164,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 						lineWidth: 0.8,
 						stroke: 'white',
 						fontSize: Number(settings.value.labelFontSize || 12),
-						fill: settings.value.labelFontColor
+						fill: settings.value.labelFontColor,
 					},
 					layout: [{ type: 'interval-hide-overlap' }],
-					...more
+					...more,
 				} as Label)
 			:	undefined
 	}
@@ -178,7 +178,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 				const measure: number = v['measure'] || v[columnName(firstMeasure.value)]
 				let value = formatValue(measure, {
 					...firstMeasure.value,
-					compactNumber: settings.value.compactNumberLabel
+					compactNumber: settings.value.compactNumberLabel,
 				})
 
 				const breakLine = settings.value.columnBar ? '\n' : ' '
@@ -187,11 +187,11 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 					value = `${value} ${breakLine} ${formatValue(percent, {
 						formatType: 'percentage',
 						formatDecimalSize: 1,
-						separators: firstMeasure.value.separators || 'noneComma'
+						separators: firstMeasure.value.separators || 'noneComma',
 					})}`
 				}
 				return [value]
-			}
+			},
 		})
 	}
 
@@ -249,7 +249,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 							fill: settings.value.axisFontColor,
 							whiteSpace: 'pre-wrap',
 							overflow: 'hidden',
-							textOverflow: 'ellipsis'
+							textOverflow: 'ellipsis',
 						},
 						formatter:
 							settings.value.compactNumberAxis && !settings.value.columnBar && settings.value.type === 'column' ?
@@ -259,10 +259,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 										base = t['id']
 									}
 									return formatValue(base, {
-										compactNumber: settings.value.compactNumberAxis
+										compactNumber: settings.value.compactNumberAxis,
 									})
 								}
-							:	null
+							:	null,
 					},
 					grid:
 						settings.value.showXGrid ?
@@ -272,9 +272,9 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 										stroke: '#eee',
 										lineDash: [1],
 										lineWidth: 1,
-										cursor: 'pointer'
-									}
-								}
+										cursor: 'pointer',
+									},
+								},
 							}
 						:	null,
 					line:
@@ -282,8 +282,8 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 							{
 								style: {
 									stroke: '#ccc',
-									lineWidth: 1
-								}
+									lineWidth: 1,
+								},
 							}
 						:	null,
 					text:
@@ -292,11 +292,11 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 								style: {
 									lineWidth: 0,
 									fontSize: Number(settings.value.axisFontSize || 11),
-									fill: settings.value.axisFontColor
-								}
+									fill: settings.value.axisFontColor,
+								},
 							}
 						:	null,
-					...more
+					...more,
 				}
 			: ['line', 'area'].includes(task.reportType) ?
 				{
@@ -304,7 +304,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 					label: null,
 					grid: null,
 					line: null,
-					text: null
+					text: null,
 				}
 			:	undefined
 		)
@@ -328,7 +328,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 							fill: settings.value.axisFontColor,
 							whiteSpace: 'pre-wrap',
 							overflow: 'hidden',
-							textOverflow: 'ellipsis'
+							textOverflow: 'ellipsis',
 						},
 						formatter:
 							(
@@ -341,10 +341,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 										base = t['id']
 									}
 									return formatValue(base, {
-										compactNumber: settings.value.compactNumberAxis
+										compactNumber: settings.value.compactNumberAxis,
 									})
 								}
-							:	null
+							:	null,
 					},
 					grid:
 						settings.value.showYGrid ?
@@ -354,9 +354,9 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 										stroke: '#ddd',
 										lineDash: [1],
 										lineWidth: 1,
-										cursor: 'pointer'
-									}
-								}
+										cursor: 'pointer',
+									},
+								},
 							}
 						:	null,
 					line:
@@ -364,8 +364,8 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 							{
 								style: {
 									stroke: '#ccc',
-									lineWidth: 1
-								}
+									lineWidth: 1,
+								},
 							}
 						:	null,
 					text:
@@ -374,11 +374,11 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 								style: {
 									lineWidth: 0,
 									fontSize: Number(settings.value.axisFontSize || 11),
-									fill: settings.value.axisFontColor
-								}
+									fill: settings.value.axisFontColor,
+								},
 							}
 						:	null,
-					...more
+					...more,
 				}
 			:	undefined
 	}
@@ -392,10 +392,10 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 						style: {
 							lineWidth: 0,
 							fontSize: Number(settings.value.legendFontSize || 11),
-							fill: settings.value.legendFontColor
-						}
+							fill: settings.value.legendFontColor,
+						},
 					},
-					...more
+					...more,
 				} as Legend)
 			:	false
 	}
@@ -409,15 +409,15 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 					end: ['max', settings.value.guidelineType],
 					text: {
 						position: settings.value.guidelineTextPosition || 'start',
-						content: settings.value.guidelineText
+						content: settings.value.guidelineText,
 					},
 					autoAdjust: true,
 					color: '#222',
 					style: {
 						color: '#222',
-						fill: 'black'
-					}
-				}
+						fill: 'black',
+					},
+				},
 			]
 		} else {
 			return []
@@ -438,7 +438,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 			Number(settings.value.appendPaddingTop || 0),
 			Number(settings.value.appendPaddingRight || 0),
 			Number(settings.value.appendPaddingBottom || 0),
-			Number(settings.value.appendPaddingLeft || 0)
+			Number(settings.value.appendPaddingLeft || 0),
 		]
 	}
 
@@ -472,7 +472,7 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 			position: 'top',
 			formatter: function (params) {
 				return formatValue(params.value[params.seriesName], getColumnReference(params.seriesName))
-			}
+			},
 		}
 	}
 
@@ -532,6 +532,6 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 		settings,
 		dimensions,
 		measures,
-		themeColors
+		themeColors,
 	}
 }

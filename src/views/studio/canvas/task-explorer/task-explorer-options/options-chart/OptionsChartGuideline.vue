@@ -29,39 +29,35 @@ import { NSelect } from 'naive-ui'
 const options = [
 	{
 		label: 'NONE',
-		value: 'none'
+		value: 'none',
 	},
 	{
 		label: 'quad',
-		value: 'quad'
+		value: 'quad',
 	},
 	{
 		label: 'linear',
-		value: 'linear'
+		value: 'linear',
 	},
 	{
 		label: 'exp',
-		value: 'exp'
+		value: 'exp',
 	},
 	{
 		label: 'loess',
-		value: 'loess'
+		value: 'loess',
 	},
 	{
 		label: 'log',
-		value: 'log'
+		value: 'log',
 	},
 	{
 		label: 'poly',
-		value: 'poly'
+		value: 'poly',
 	},
 	{
 		label: 'pow',
-		value: 'pow'
+		value: 'pow',
 	},
-	{
-		label: 'quad',
-		value: 'quad'
-	}
 ]
 </script>

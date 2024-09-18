@@ -30,7 +30,7 @@ const {
 	firstDimension,
 	thirdMeasure,
 	secondMeasure,
-	label
+	label,
 } = chartHelper.value
 
 const id = shallowRef()
@@ -82,50 +82,51 @@ const getOptions = (): ScatterOptions => {
 							return {
 								content,
 								style: {
-									fill: '#999'
-								}
+									fill: '#999',
+								},
 							}
 						}),
 					regionStyle: settings.value.regionStyle.map((item) => {
 						return {
 							fill: item.fill,
 							start: undefined,
-							end: undefined
+							end: undefined,
 						}
-					})
+					}),
 				}
 			:	undefined,
 		pointStyle:
 			columnName(thirdMeasure.value) ?
 				{
 					fillOpacity: 0.7,
-					stroke: '#bbb'
+					stroke: '#bbb',
 				}
 			:	null,
 		regressionLine:
 			settings.value.guideScatterType && settings.value.guideScatterType !== 'none' ?
 				{
-					type: settings.value.guideScatterType
+					type: settings.value.guideScatterType,
 				}
 			:	null,
 
+		// label: label(),
 		label: label({
 			formatter: (v: any) => {
-				v = v[columnName(firstMeasure.value)]
+				const valueOfV = v[columnName(firstMeasure.value)]
 				return [
-					formatValue(v, {
-						...firstMeasure,
-						compactNumber: settings.value.compactNumberLabel
-					})
+					formatValue(valueOfV, {
+						...firstMeasure.value,
+						compactNumber: settings.value.compactNumberLabel,
+					}),
 				]
-			}
+			},
 		}),
 
 		tooltip: {
 			showTitle: true,
 			title: columnName(firstDimension.value),
-			fields: measures.value.map((col) => columnName(col))
-		}
+			fields: measures.value.map((col) => columnName(col)),
+		},
 	}
 }
 
@@ -140,7 +141,7 @@ watch(
 	() => {
 		chart.value.update(getOptions())
 	},
-	{ deep: true }
+	{ deep: true },
 )
 
 onMounted(() => {

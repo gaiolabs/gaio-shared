@@ -6,7 +6,7 @@
 		<NSpin
 			:show="loading"
 			:style="{
-				minHeight: `${Number(height.replace('px', '')) + 10}px`
+				minHeight: `${Number(height.replace('px', '')) + 10}px`,
 			}"
 		>
 			<ReportNodeHeader
@@ -125,7 +125,7 @@ watch(
 	() => {
 		console.log('task', task)
 		console.log('task.reporttype', task.reportType)
-	}
+	},
 )
 
 onMounted(() => {
@@ -143,8 +143,8 @@ onMounted(() => {
 		.post('api/table/report', {
 			body: {
 				taskData,
-				params: useAppStore().params
-			}
+				params: useAppStore().params,
+			},
 		})
 		.then((res) => {
 			list.value = res.data
