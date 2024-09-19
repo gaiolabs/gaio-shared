@@ -13,21 +13,41 @@
 			<div class="space-between flex gap-2">
 				<div>
 					<div class="control-label">{{ $t('top') }}</div>
-					<NInputNumber v-model:value="useReportStore().current.settings.appendPaddingTop" />
+					<NInputNumber
+						v-model:value="useReportStore().current.settings.appendPaddingTop"
+						:min="0"
+						:step="1"
+						:max="100"
+					/>
 				</div>
 				<div>
 					<div class="control-label">{{ $t('right') }}</div>
-					<NInputNumber v-model:value="useReportStore().current.settings.appendPaddingRight" />
+					<NInputNumber
+						v-model:value="useReportStore().current.settings.appendPaddingRight"
+						:step="1"
+						:min="0"
+						:max="100"
+					/>
 				</div>
 			</div>
 			<div class="space-between flex gap-2">
 				<div>
 					<div class="control-label">{{ $t('left') }}</div>
-					<NInputNumber v-model:value="useReportStore().current.settings.appendPaddingLeft" />
+					<NInputNumber
+						v-model:value="useReportStore().current.settings.appendPaddingLeft"
+						:step="1"
+						:min="0"
+						:max="100"
+					/>
 				</div>
 				<div>
 					<div class="control-label">{{ $t('bottom') }}</div>
-					<NInputNumber v-model:value="useReportStore().current.settings.appendPaddingBottom" />
+					<NInputNumber
+						v-model:value="useReportStore().current.settings.appendPaddingBottom"
+						:step="1"
+						:min="0"
+						:max="100"
+					/>
 				</div>
 			</div>
 		</div>

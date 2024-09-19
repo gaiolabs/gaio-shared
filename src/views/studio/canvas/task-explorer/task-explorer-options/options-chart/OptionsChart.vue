@@ -73,7 +73,7 @@ const showShowAxisOptions = computed(() =>
 		'scatter',
 		'bubble',
 		'histogram',
-		'dual'
-	])
+		'dual',
+	]),
 )
 </script>

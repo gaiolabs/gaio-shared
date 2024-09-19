@@ -33,7 +33,7 @@ const {
 	isMultipleMeasure,
 	firstMeasure,
 	firstDimension,
-	secondDimension
+	secondDimension,
 } = chartHelper.value
 
 const { formatValue } = useFormatValue()
@@ -51,7 +51,7 @@ const getOptions = (): AreaOptions => {
 			: undefined,
 		...foundation.value,
 		line: {
-			size: settings.value.lineWidth || 1
+			size: settings.value.lineWidth || 1,
 		},
 		label: label({
 			formatter:
@@ -60,21 +60,21 @@ const getOptions = (): AreaOptions => {
 				:	(v: { [x: string]: never }) => {
 						const value = v['measure'] || v[columnName(firstMeasure.value)]
 						return formatValue(value, {
-							compactNumber: settings.value.compactNumberLabel
+							compactNumber: settings.value.compactNumberLabel,
 						})
-					}
+					},
 		}),
 		smooth: settings.value.lineSmooth,
 		point:
 			settings.value.showPoint ?
 				{
-					shape: settings.value.pointType
+					shape: settings.value.pointType,
 				}
 			:	null,
 		color:
 			isGrouped.value || isMultipleMeasure.value ? themeColors.value
 			: settings.value.showLegend ? themeColors.value
-			: themeColors.value[0]
+			: themeColors.value[0],
 	}
 }
 
@@ -89,7 +89,7 @@ watch(
 	() => {
 		chart.value.update(getOptions())
 	},
-	{ deep: true }
+	{ deep: true },
 )
 
 onMounted(() => {

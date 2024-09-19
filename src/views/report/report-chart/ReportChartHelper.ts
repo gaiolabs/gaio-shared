@@ -477,12 +477,6 @@ export default (task: ReportNodeType, list: Record<string, unknown>[]) => {
 	}
 
 	const processedList = (chart: string) => {
-		console.log('Chart', chart)
-		console.log('list', list)
-
-		if (!isGrouped.value || !isMultipleMeasure.value) console.log('Não fold')
-		else console.log('É fold')
-
 		const dimension = columnName(dimensions.value[0])
 		const measure = columnName(measures.value[0])
 		let data = list

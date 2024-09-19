@@ -18,7 +18,7 @@ export const useReportStore = defineStore('report', () => {
 	const defineFieldOptions = (field: FieldType) => {
 		const newField = {
 			...field,
-			type: 'value'
+			type: 'value',
 		}
 
 		const localType = dataTypeName(newField.dataType)
@@ -57,6 +57,6 @@ export const useReportStore = defineStore('report', () => {
 		hideOnlyIf,
 		resetReport,
 		refreshPreview,
-		defineFieldOptions
+		defineFieldOptions,
 	}
 })

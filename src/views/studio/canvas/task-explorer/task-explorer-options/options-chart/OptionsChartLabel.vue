@@ -84,16 +84,40 @@
 								:options="[
 									{
 										value: 'top',
-										label: $t('top')
+										label: $t('top'),
 									},
 									{
-										value: 'middle',
-										label: $t('middle')
+										value: 'right',
+										label: $t('right'),
 									},
 									{
 										value: 'bottom',
-										label: $t('bottom')
-									}
+										label: $t('bottom'),
+									},
+									{
+										value: 'left',
+										label: $t('left'),
+									},
+									{
+										value: 'inside',
+										label: $t('inside'),
+									},
+									{
+										value: 'insideTop',
+										label: $t('insideTop'),
+									},
+									{
+										value: 'insideRight',
+										label: $t('insideRight'),
+									},
+									{
+										value: 'insideBottom',
+										label: $t('insideBottom'),
+									},
+									{
+										value: 'insideLeft',
+										label: $t('insideLeft'),
+									},
 								]"
 							/>
 						</div>

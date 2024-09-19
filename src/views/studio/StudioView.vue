@@ -114,8 +114,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 
 defineComponent({
 	components: {
-		...taskView
-	}
+		...taskView,
+	},
 })
 
 const currentTable = ref<string>()
@@ -136,11 +136,11 @@ const addDrag = (ev: SortableEvent) => {
 				base: {
 					...useAppStore().appInfo,
 					...element,
-					label: element.tableName
-				}
+					label: element.tableName,
+				},
 			}),
 			sources: [],
-			targets: []
+			targets: [],
 		})
 		.save()
 		.then(() => closeTask())
@@ -163,7 +163,6 @@ const selectAndClose = (ev) => {
 }
 
 const selectElement = (item: { taskLog: string; type: string; reportType: string }) => {
-	console.log('choose', item)
 	if (item.taskLog) {
 		showDrawer.value = 'taskLogView'
 	} else if (item.type === 'reportPreview') {

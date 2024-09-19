@@ -77,7 +77,6 @@ const isSidebarActive = ref(false)
 const selectMany = ref([])
 
 const onOpenNode = (ev) => {
-	console.log('casa, amiga')
 	emit('open', ev.node.data)
 }
 
@@ -87,7 +86,6 @@ const onSelectMany = () => {
 }
 
 const onSelectNode = (ev) => {
-	console.log('fasfas', ev.node.data)
 	useAppStore().task = ev.node.data
 }
 
@@ -98,7 +96,7 @@ const updateFlow = debounce(() => {
 		nodes: nodes.value.map((node) => {
 			return {
 				...node.data,
-				position: node.position
+				position: node.position,
 			}
 		}),
 		edges: edges.value.map((edge) => {
@@ -106,18 +104,18 @@ const updateFlow = debounce(() => {
 				...edge.data,
 				id: useHelper().generateId(),
 				source: edge.source,
-				target: edge.target
+				target: edge.target,
 			}
-		})
+		}),
 	}
 
 	useApi('boardUpdateFlow').post('api/flow/save', {
 		body: {
 			flowData: {
 				...useAppStore().flow,
-				workflow
-			}
-		}
+				workflow,
+			},
+		},
 	})
 }, 600)
 
@@ -173,7 +171,7 @@ const processBoard = () => {
 				return {
 					id: edge.id,
 					source: edge.source,
-					target: edge.target
+					target: edge.target,
 				}
 			}) || []
 		localNodes.value =
@@ -185,7 +183,7 @@ const processBoard = () => {
 					position: node.position,
 					data: node,
 					sourcePosition: Position.Right,
-					targetPosition: Position.Left
+					targetPosition: Position.Left,
 				}
 			}) || []
 
@@ -211,7 +209,7 @@ watch(
 	() => currentFlowId.value,
 	() => {
 		buildBoard()
-	}
+	},
 )
 
 watch(
@@ -219,7 +217,7 @@ watch(
 	() => {
 		console.log('fasfasfasd')
 		processBoard()
-	}
+	},
 )
 
 onMounted(async () => {

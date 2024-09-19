@@ -33,7 +33,7 @@
 								{ value: 'left-bottom', label: $t('left') + ' ' + $t('bottom') },
 								{ value: 'bottom', label: $t('bottom') },
 								{ value: 'bottom-left', label: $t('bottom') + ' ' + $t('left') },
-								{ value: 'bottom-right', label: $t('bottom') + ' ' + $t('right') }
+								{ value: 'bottom-right', label: $t('bottom') + ' ' + $t('right') },
 							]"
 						/>
 					</div>
@@ -48,7 +48,7 @@
 							:modes="['hex']"
 						/>
 
-						<div class="control-label">{{ $t('fontSize') }}</div>
+						<!-- <div class="control-label">{{ $t('fontSize') }}</div>
 
 						<NInputNumber
 							v-model:value="useReportStore().current.settings.legendFontSize"
@@ -56,7 +56,7 @@
 							:max="60"
 							:step="1"
 							:placeholder="$t('fontSize')"
-						/>
+						/> -->
 					</div>
 				</div>
 			</div>

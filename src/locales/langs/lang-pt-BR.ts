@@ -197,5 +197,10 @@ export default {
 	quadrantContent: 'Conteúdos (4 - 1 por linha)',
 	typeHelpMessageHere: 'Digite a mensagem de auxílio aqui',
 	chooseAColor: 'Escolha uma cor',
-	guideline: 'Guideline'
+	guideline: 'Guideline',
+	inside: 'Dentro',
+	insideTop: 'Dentro no topo',
+	insideRight: 'Dentro à direita',
+	insideBottom: 'Dentro na parte inferior',
+	insideLeft: 'Dentro à esquerda',
 }
