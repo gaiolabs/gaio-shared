@@ -1,17 +1,11 @@
 <template>
-	<nav class="task-query-menu flex w-full items-center gap-3 px-0 py-2">
+	<nav class="task-query-menu flex w-full items-center gap-3 px-0">
 		<div class="flex items-center gap-1 text-lg font-bold">
 			<div class="w-5 h-5 bg-black/10 border-2 border-black"></div>
 			{{ $t('query') }}
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<NInput
-					v-model:value="localTask.label"
-					size="small"
-					:placeholder="$t('sqlQuery')"
-				/>
-				<NDivider vertical />
 				<NButton
 					:disabled="!localTask.label"
 					size="small"
@@ -20,11 +14,22 @@
 					{{ $t('save') }}
 				</NButton>
 
+				<NDivider vertical />
+				<NInput
+					v-model:value="localTask.label"
+					size="small"
+					:placeholder="$t('sqlQuery')"
+				/>
+				<NDivider vertical />
+
 				<NButton
 					size="small"
+					strong
+					secondary
+					type="primary"
 					@click="$emit('execute')"
 				>
-					{{ $t('save') }}
+					{{ $t('run') }}
 				</NButton>
 			</div>
 			<div class="flex items-center justify-between gap-2">
