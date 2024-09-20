@@ -53,27 +53,23 @@
 					</div>
 				</div>
 			</header>
-			<NScrollbar
-				content-class="min-h-full flex"
-				class="bg-gray-100 flex flex-col"
-				style="max-height: 100%"
-			>
+			<main class="bg-gray-100 h-full">
 				<slot
 					name="content"
-					class="min-h-full"
+					class="min-h-full bg-gray-100"
 				/>
 				<slot
 					name="contentScroll"
-					class="min-h-full"
+					class="min-h-full bg-gray-100"
 				/>
-			</NScrollbar>
+			</main>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores'
-import { NButtonGroup, NTooltip, NButton, NScrollbar, NDivider } from 'naive-ui'
+import { NButtonGroup, NTooltip, NButton, NDivider } from 'naive-ui'
 import { computed } from 'vue'
 import GIcon from '../GIcon.vue'
 
