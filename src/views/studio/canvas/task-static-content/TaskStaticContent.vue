@@ -1,9 +1,7 @@
 <template>
 	<div class="task-static-content">
-		<DrawerView
-			:only-full-screen="true"
-			@close="$emit('close')"
-		>
+		<!-- :only-full-screen="true" -->
+		<DrawerView @close="$emit('close')">
 			<template #header>
 				<TaskStaticContentMenu @close="$emit('close')" />
 			</template>
