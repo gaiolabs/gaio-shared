@@ -208,6 +208,7 @@ import ReportTableForm from '@/views/report/report-table/ReportTableForm.vue'
 import ReportNodeHeader from '@/views/report/ReportNodeHeader.vue'
 import { type FieldType, type ReportNodeType, type SchemaSortType } from '@gaio/shared/types'
 import { cloneDeep, take } from 'lodash-es'
+import { NTable } from 'naive-ui'
 import { computed, type CSSProperties, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['trigger'])
@@ -223,7 +224,7 @@ const settings = computed(() => props.task.settings)
 
 const pagination = ref({
 	page: 1,
-	pageCount: 100
+	pageCount: 100,
 })
 
 // const formatColumnStyle = (col: FieldType): CSSProperties => {
@@ -261,7 +262,7 @@ const generateStyle = (row, col) => {
 		...preFormatStyle(col),
 		...formatStyleByRules(row, col),
 		...fontFamily,
-		...whiteSpace
+		...whiteSpace,
 	} as Partial<CSSProperties>
 }
 
@@ -271,7 +272,7 @@ const tableStyle = computed(() => {
 		striped: settings.value.tableStriped,
 		size: settings.value.tableSm ? 'small' : 'medium',
 		singleLine: !settings.value.tableSingleLine,
-		singleColumn: !settings.value.tableSingleColumn
+		singleColumn: !settings.value.tableSingleColumn,
 	}
 })
 
@@ -343,8 +344,8 @@ const loadData = async () => {
 		.post('api/table/report', {
 			body: {
 				taskData,
-				params: useAppStore().params
-			}
+				params: useAppStore().params,
+			},
 		})
 		.then((res) => {
 			tableRows.value = res.rows_before_limit_at_least
@@ -362,7 +363,7 @@ const formatStyle = (col: FieldType) => {
 		fontSize: col.fontSize ? col.fontSize + 'px' : 'inherit',
 		textAlign: col.textAlign || 'left',
 		fontWeight: col.fontWeight || '400',
-		whiteSpace: col.wordBreak ? 'normal !important' : null
+		whiteSpace: col.wordBreak ? 'normal !important' : null,
 	}
 }
 
@@ -416,7 +417,7 @@ const summarize = (col) => {
 			list.value.reduce((acc, curr) => {
 				return acc + Number(curr[col.alias || col.columnName])
 			}, 0),
-			col
+			col,
 		)
 	}
 
@@ -434,7 +435,7 @@ const totalColumns = computed(() => {
 const formPosition = computed(() => {
 	return {
 		atStart: settings.value.forms.length && settings.value.formOnFirstColumn,
-		atEnd: settings.value.forms.length && !settings.value.formOnFirstColumn
+		atEnd: settings.value.forms.length && !settings.value.formOnFirstColumn,
 	}
 })
 

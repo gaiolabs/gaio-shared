@@ -14,7 +14,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
@@ -32,7 +32,7 @@ const {
 	isMultipleMeasure,
 	firstMeasure,
 	firstDimension,
-	secondDimension
+	secondDimension,
 } = chartHelper.value
 
 const total = computed(() => {
@@ -67,8 +67,8 @@ const getOptions = (): BarOptions => {
 				settings.value.showYTitle ?
 					{
 						style: {
-							fill: 'rgba(0,0,0,0.45)'
-						}
+							fill: 'rgba(0,0,0,0.45)',
+						},
 					}
 				:	null,
 			grid:
@@ -76,11 +76,11 @@ const getOptions = (): BarOptions => {
 					{
 						line: {
 							style: {
-								stroke: 'rgba(0,0,0,0.08)'
-							}
-						}
+								stroke: 'rgba(0,0,0,0.08)',
+							},
+						},
 					}
-				:	null
+				:	null,
 		},
 		xAxis: {
 			title:
@@ -88,8 +88,8 @@ const getOptions = (): BarOptions => {
 					{
 						style: {
 							lineWidth: 0,
-							fill: 'rgba(0,0,0,0.45)'
-						}
+							fill: 'rgba(0,0,0,0.45)',
+						},
 					}
 				:	null,
 			grid:
@@ -97,20 +97,20 @@ const getOptions = (): BarOptions => {
 					{
 						line: {
 							style: {
-								stroke: 'rgba(0,0,0,0.08)'
-							}
-						}
+								stroke: 'rgba(0,0,0,0.08)',
+							},
+						},
 					}
-				:	null
+				:	null,
 		},
 		barBackground:
 			settings.value.columnBackground ?
 				{
 					style: {
-						fill: 'rgba(0,0,0,0.08)'
-					}
+						fill: 'rgba(0,0,0,0.08)',
+					},
 				}
-			:	undefined
+			:	undefined,
 	}
 }
 const loadChart = () => {
@@ -124,7 +124,7 @@ watch(
 	() => {
 		chart.value.update(getOptions())
 	},
-	{ deep: true }
+	{ deep: true },
 )
 
 onMounted(() => {

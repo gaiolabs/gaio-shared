@@ -14,7 +14,7 @@ import { Area, type AreaOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
