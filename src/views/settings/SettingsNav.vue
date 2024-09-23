@@ -2,7 +2,10 @@
 	<div class="absolute bottom-0 m-0 flex w-full justify-center text-center">
 		<div class="w-full max-w-[1440px]">
 			<div class="settings-nav flex w-full flex-row justify-center">
-				<div class="nav-box g-bg-1 g-border-400 m-2 flex gap-1 rounded-[10px]">
+				<nav
+					id="nav-box"
+					class="g-bg-1 g-border-400 m-2 flex gap-1 rounded-[10px]"
+				>
 					<div class="flex items-center gap-2 py-3 ps-4">
 						<img
 							v-if="isDark"
@@ -16,7 +19,10 @@
 							style="height: 30px"
 							alt="logo"
 						/>
-						<div class="nav-box-inner flex items-center">
+						<div
+							id="nav-box-inner"
+							class="flex items-center"
+						>
 							<NButton
 								size="small"
 								quaternary
@@ -44,7 +50,7 @@
 									@click="goToPath(item)"
 								>
 									<template #icon>
-										<g-icon :name="item.icon" />
+										<IconComponent :name="item.icon" />
 									</template>
 									<template v-if="item.showLabel">{{ item.label }}</template>
 								</NButton>
@@ -61,24 +67,25 @@
 							tertiary
 						>
 							<template #icon>
-								<g-icon name="chat" />
+								<IconComponent name="Chat" />
 							</template>
 						</NButton>
 						<NPopover trigger="click">
 							<template #trigger>
-								<NButton
-									size="small"
-									quaternary
-								>
+								<NButton quaternary>
 									<NAvatar
 										:src="avatar"
 										:alt="avatar"
 										circle
-										size="tiny"
+										size="small"
 									/>
 									<div class="ms-2">
-										<div class="text-[9px] font-thin lowercase">Seg, 23</div>
-										<div class="text-[11px]">22:22</div>
+										<div class="text-xs lowercase">
+											{{ formattedDate }}
+										</div>
+										<div class="">
+											{{ formattedTime }}
+										</div>
 									</div>
 								</NButton>
 							</template>
@@ -87,7 +94,7 @@
 							</div>
 						</NPopover>
 					</div>
-				</div>
+				</nav>
 			</div>
 		</div>
 		<app-control
@@ -124,87 +131,90 @@ const goToPath = (item: Record<string, unknown>) => {
 const buttons = [
 	{
 		label: 'Home',
-		icon: 'home',
+		icon: 'Home',
 		path: '/home',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'tags',
-		icon: 'shieldAccount',
+		icon: 'Tags',
 		path: '/settings/tags',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'user',
-		icon: 'user',
+		icon: 'User',
 		path: '/settings/users',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'sources',
-		icon: 'source',
+		icon: 'DataSources',
 		path: '/settings/sources',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'bucket',
-		icon: 'bucket',
+		icon: 'Bucket',
 		path: '/settings/bucket',
-		showLabel: false
+		showLabel: false,
 	},
 
 	{
 		label: 'logs',
-		icon: 'settingsLogs',
+		icon: 'Logs',
 		path: '/settings/logs',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'monitor',
-		icon: 'monit',
+		icon: 'Monitor',
 		path: '/settings/monit',
-		showLabel: false
+		showLabel: false,
 	},
 
 	{
 		label: 'appShare',
-		icon: 'appShare',
+		icon: 'AppShare',
 		path: '/settings/app',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'setup',
-		icon: 'setupSettings',
+		icon: 'SetupSettings',
 		path: '/settings/setup',
-		showLabel: false
-	}
+		showLabel: false,
+	},
 ]
 
 const isActive = (path: string) => {
 	return path === router.currentRoute.value.path ? 'primary' : 'default'
 }
+
+const currentDate = ref(new Date())
+
+const formattedDate = computed(() => {
+	// Format date as "Tues, 28"
+	return new Intl.DateTimeFormat('en-US', {
+		weekday: 'short',
+		day: 'numeric',
+	}).format(currentDate.value)
+})
+
+const formattedTime = computed(() => {
+	// Format time as "22:22"
+	return new Intl.DateTimeFormat('en-US', {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false,
+	}).format(currentDate.value)
+})
+
+const interval = setInterval(() => {
+	currentDate.value = new Date()
+}, 60000)
+
+onBeforeUnmount(() => {
+	clearInterval(interval)
+})
 </script>
-
-<style lang="scss" scoped>
-.nav-box {
-	border-radius: 16px;
-
-	.nav-box-inner {
-		border-radius: 14px;
-
-		.nav-box-inner-icon {
-			border-radius: 6px;
-			min-width: 30px;
-			font-size: 12px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background: rgba(255, 255, 255, 0.07);
-		}
-
-		.nav-box-inner-icon:hover {
-			background-color: var(--color-fill-2);
-		}
-	}
-}
-</style>

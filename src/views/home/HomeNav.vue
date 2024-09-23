@@ -208,27 +208,3 @@ onBeforeUnmount(() => {
 	clearInterval(interval)
 })
 </script>
-
-<style lang="scss" scoped>
-#home-nav-box {
-	border-radius: 16px;
-
-	#home-nav-box-inner {
-		border-radius: 14px;
-
-		#home-nav-box-inner-icon {
-			border-radius: 6px;
-			min-width: 30px;
-			font-size: 12px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background: rgba(255, 255, 255, 0.07);
-		}
-
-		#home-nav-box-inner-icon:hover {
-			background-color: var(--color-fill-2);
-		}
-	}
-}
-</style>
