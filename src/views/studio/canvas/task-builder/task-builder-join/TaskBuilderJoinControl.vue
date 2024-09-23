@@ -115,7 +115,7 @@
 												"
 											>
 												<template #icon>
-													<g-icon name="delete" />
+													<IconComponent name="Delete" />
 												</template>
 											</NButton>
 										</td>
@@ -295,7 +295,7 @@
 										type="error"
 										@click="localJoin.list.splice(subIndex, 1)"
 									>
-										<g-icon name="delete" />
+										<IconComponent name="Delete" />
 									</NButton>
 								</div>
 							</div>

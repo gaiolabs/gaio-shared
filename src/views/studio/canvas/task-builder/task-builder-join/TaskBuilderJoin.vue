@@ -67,7 +67,7 @@
 								@click="removeJoinItem(joinKey)"
 							>
 								<template #icon>
-									<g-icon name="delete" />
+									<IconComponent name="Delete" />
 								</template>
 							</NButton>
 						</div>
@@ -132,7 +132,7 @@
 									@click="removeJoinItem(joinKey, subIndex)"
 								>
 									<template #icon>
-										<g-icon name="delete" />
+										<IconComponent name="Delete" />
 									</template>
 								</NButton>
 							</div>

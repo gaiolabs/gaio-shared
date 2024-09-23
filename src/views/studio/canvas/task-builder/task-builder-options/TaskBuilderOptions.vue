@@ -23,7 +23,7 @@
 						@click="removeItem()"
 					>
 						<template #icon>
-							<g-icon name="delete" />
+							<IconComponent name="Delete" />
 						</template>
 					</NButton>
 				</div>

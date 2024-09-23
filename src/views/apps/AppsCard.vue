@@ -90,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
+
 import { useAppStore, useAuthStore } from '@/stores'
 import type { AppType } from '@gaio/shared/types'
 import { cloneDeep, uniq } from 'lodash-es'

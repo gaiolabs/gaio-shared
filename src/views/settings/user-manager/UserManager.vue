@@ -307,7 +307,7 @@
 												:disabled="currentUser.userId === user.userId"
 												text
 											>
-												<g-icon name="delete" />
+												<IconComponent name="Delete" />
 											</NButton>
 										</template>
 										<div>

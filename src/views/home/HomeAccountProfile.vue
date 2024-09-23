@@ -66,7 +66,6 @@
 	</div>
 </template>
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import useValidate from '@/composables/useValidate'
 import { useAuthStore } from '@/stores'

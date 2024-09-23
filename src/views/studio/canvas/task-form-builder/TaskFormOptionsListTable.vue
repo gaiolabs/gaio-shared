@@ -81,7 +81,7 @@
 								type="error"
 								@click="deleteRow(index)"
 							>
-								<g-icon name="delete" />
+								<IconComponent name="Delete" />
 							</NButton>
 						</td>
 					</tr>

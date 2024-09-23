@@ -33,7 +33,7 @@
 						>
 							<template #activator>
 								<NButton text>
-									<g-icon name="delete" />
+									<IconComponent name="Delete" />
 								</NButton>
 							</template>
 							{{ $t('removeGroup') }}

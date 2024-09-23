@@ -35,7 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])

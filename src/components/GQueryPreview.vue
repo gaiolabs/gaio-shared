@@ -31,7 +31,6 @@
 	</div>
 </template>
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
 import { format as prettySQL } from 'sql-formatter'

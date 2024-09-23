@@ -90,7 +90,6 @@
 	</div>
 </template>
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import { useFormStore } from '@/stores'
 import ReportFormField from '@/views/report/report-form/ReportFormField.vue'
 import type { FormFieldType, FormType } from '@gaio/shared/types'

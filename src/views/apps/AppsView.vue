@@ -243,7 +243,7 @@
 </template>
 
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
+
 import useApps from '@/composables/useApps'
 import useHelper from '@/composables/useHelper'
 import { useAuthStore } from '@/stores'

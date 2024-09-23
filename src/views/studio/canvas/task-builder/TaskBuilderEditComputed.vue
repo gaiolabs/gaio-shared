@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import useValidate from '@/composables/useValidate'
 import { type BuilderTaskType, type FieldType, type SchemaComputedType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'

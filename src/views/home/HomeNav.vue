@@ -110,7 +110,6 @@
 import avatar from '@/assets/images/avatar.png'
 import gaioMiniDark from '@/assets/images/gaio-mini-dark.png'
 import gaioMini from '@/assets/images/gaio-mini.png'
-import IconComponent from '@/components/icons/IconComponent.vue'
 import { useCommandKStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import HomeAccount from '@/views/home/HomeAccount.vue'

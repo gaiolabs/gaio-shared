@@ -117,7 +117,6 @@
 	</div>
 </template>
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
 import useDataType from '@/composables/useDataType'
 import useFormatValue from '@/composables/useFormatValue'
 import useHelper from '@/composables/useHelper'
