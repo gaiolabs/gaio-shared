@@ -53,7 +53,7 @@
 								quaternary
 								@click="editJoin(joinKey)"
 							>
-								<g-icon name="edit" />
+								<IconComponent name="Edit" />
 							</NButton>
 						</div>
 						<div class="min-w-[150px] grow bg-elevation-1 p-1 text-center">
@@ -83,7 +83,7 @@
 								@click="editJoin(joinKey)"
 							>
 								<template #icon>
-									<g-icon name="edit" />
+									<IconComponent name="Edit" />
 								</template>
 							</NButton>
 						</div>

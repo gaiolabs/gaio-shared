@@ -87,7 +87,7 @@
 												@click="selectSource(item)"
 											>
 												<template #icon>
-													<g-icon name="edit" />
+													<IconComponent name="Edit" />
 												</template>
 												{{ $t('edit') }}
 											</NButton>

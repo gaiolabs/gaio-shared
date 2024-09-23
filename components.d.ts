@@ -28,6 +28,7 @@ declare module 'vue' {
     DiscoveryIcon: typeof import('./src/components/icons/DiscoveryIcon.vue')['default']
     DrawerView: typeof import('./src/components/drawer/DrawerView.vue')['default']
     DrawerViewOld: typeof import('./src/components/drawer/DrawerViewOld.vue')['default']
+    EditIcon: typeof import('./src/components/icons/EditIcon.vue')['default']
     ElAlert: (typeof import('element-plus/es'))['ElAlert']
     ElCheckbox: (typeof import('element-plus/es'))['ElCheckbox']
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']

@@ -203,7 +203,7 @@
 								@click="editApp(app)"
 							>
 								<template #icon>
-									<IconComponent name="Pencil" />
+									<IconComponent name="Edit" />
 								</template>
 							</NButton>
 							<NButton

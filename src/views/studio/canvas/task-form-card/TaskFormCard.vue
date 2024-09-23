@@ -30,7 +30,7 @@
 										type="primary"
 										@click="editForm"
 									>
-										<g-icon name="edit" />
+										<IconComponent name="Edit" />
 									</NButton>
 								</NButtonGroup>
 							</div>
