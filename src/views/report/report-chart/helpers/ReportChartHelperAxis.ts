@@ -8,7 +8,7 @@ export default (task: ReportNodeType) => {
 		return {
 			axisTick: {
 				alignWithLabel: true,
-				customValues: ticksLabels,
+				customValues: settings.value.xAxisTickCount === 0 ? undefined : ticksLabels,
 			},
 			axisLine: {
 				show: settings.value.showXLine,
@@ -24,13 +24,17 @@ export default (task: ReportNodeType) => {
 			},
 			axisLabel: {
 				show: settings.value.showXAxis,
-				customValues: ticksLabels,
+				customValues: settings.value.xAxisTickCount === 0 ? undefined : ticksLabels,
 			},
 		} as XAXisOption | XAXisOption[]
 	}
 
 	const commonYAxisConfigs = (ticksLabels: (string | number | Date)[], name: string) => {
 		return {
+			axisTick: {
+				alignWithLabel: true,
+				customValues: settings.value.yAxisTickCount === 0 ? undefined : ticksLabels,
+			},
 			axisLine: {
 				show: settings.value.showYLine,
 			},
@@ -45,10 +49,6 @@ export default (task: ReportNodeType) => {
 			},
 			axisLabel: {
 				show: settings.value.showYAxis,
-				customValues: settings.value.yAxisTickCount === 0 ? undefined : ticksLabels,
-			},
-			axisTick: {
-				alignWithLabel: false,
 				customValues: settings.value.yAxisTickCount === 0 ? undefined : ticksLabels,
 			},
 		} as YAXisOption | YAXisOption[]

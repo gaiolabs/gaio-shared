@@ -35,18 +35,24 @@ const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
 use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
 const xAxis = () => {
-	const xValues = list.map((item) => item[columnName(dimensions.value.first)]) as Array<number | string | Date>
-	const ticksLabels = treatLabelsTicks(xValues, settings.value.xAxisTickCount)
+	const values = list.map((item) => item[columnName(dimensions.value.first)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
 	return {
 		type: 'category',
-		data: xValues,
+		data: values,
 		...commonXAxisConfigs(ticksLabels, columnName(dimensions.value.first)),
 	} as XAXisOption | XAXisOption[]
 }
 
 const yAxis = () => {
-	const yValues = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
-	const ticksLabels = treatLabelsTicks(yValues, settings.value.yAxisTickCount)
+	const values = measures.value.measures
+		.map((measure) => {
+			return list.map((item) => {
+				return item[columnName(measure)]
+			})
+		})
+		.flat(Infinity) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
 	return {
 		type: 'value',
 		...commonYAxisConfigs(ticksLabels, columnName(measures.value.first)),
@@ -55,14 +61,14 @@ const yAxis = () => {
 
 const series = () => {
 	return measures.value.measures.map((measure) => {
-		const yValues = list.map((item) => item[columnName(measure)])
+		const values = list.map((item) => item[columnName(measure)])
 		return {
 			name: columnName(measure),
 			type: 'bar',
 			emphasis: {
 				focus: 'series',
 			},
-			data: yValues,
+			data: values,
 		}
 	}) as SeriesOption | SeriesOption[]
 }
