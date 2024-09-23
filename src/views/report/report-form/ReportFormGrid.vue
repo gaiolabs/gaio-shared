@@ -30,7 +30,7 @@
 							:key="colId"
 							v-model="props.formData.formElements[elementIndex].cols[colId]"
 							:group="{
-								name: 'fields'
+								name: 'fields',
 							}"
 							class="h-full w-full"
 						>
@@ -79,7 +79,7 @@
 							@click="removeContainer(element.id)"
 						>
 							<template #icon>
-								<g-icon name="close" />
+								<IconComponent name="Close" />
 							</template>
 						</NButton>
 					</div>
@@ -90,6 +90,7 @@
 	</div>
 </template>
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { useFormStore } from '@/stores'
 import ReportFormField from '@/views/report/report-form/ReportFormField.vue'
 import type { FormFieldType, FormType } from '@gaio/shared/types'

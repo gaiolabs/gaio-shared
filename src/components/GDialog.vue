@@ -25,7 +25,7 @@
 						@click="closeModal()"
 					>
 						<template #icon>
-							<g-icon name="close" />
+							<IconComponent name="Close" />
 						</template>
 					</NButton>
 				</div>
@@ -55,14 +55,15 @@
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])
 const props = defineProps({
 	width: {
 		type: String,
-		default: () => undefined
-	}
+		default: () => undefined,
+	},
 })
 
 const dialogSize = computed(() => {
