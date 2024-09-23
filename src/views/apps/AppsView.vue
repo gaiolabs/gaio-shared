@@ -5,7 +5,7 @@
 				<h3 class="inline-flex gap-2 items-center text-lg font-bold">
 					<IconComponent
 						class="h-6 w-6"
-						name="DataApps"
+						name="Apps"
 					/>
 					<span>
 						{{ $t('dataApps') }}

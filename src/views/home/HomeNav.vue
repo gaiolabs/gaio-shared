@@ -1,8 +1,14 @@
 <template>
 	<div class="absolute bottom-0 m-0 flex w-full justify-center text-center">
 		<div class="w-full max-w-[1440px]">
-			<div class="home-nav flex w-full flex-row justify-center">
-				<div class="home-nav-box g-bg-100 g-border-400 m-2 flex gap-1 rounded-[10px]">
+			<nav
+				id="home-nav"
+				class="flex w-full flex-row justify-center"
+			>
+				<div
+					id="home-nav-box"
+					class="g-bg-100 g-border-400 m-2 flex gap-1 rounded-xl"
+				>
 					<div class="flex items-center gap-2 py-3 ps-4">
 						<img
 							v-if="isDark"
@@ -22,7 +28,8 @@
 								@click="useCommandKStore().show = true"
 							>
 								<div class="flex items-center">
-									<g-icon name="search" />
+									<IconComponent name="Search" />
+
 									<!--                                    <div class="ms-1 flex flex-row gap-1 rounded-[4px]">-->
 									<!--                                        <div class="home-nav-box-inner-icon px-3 flex flex-row gap-2 h-[25px]">-->
 									<!--                                            <g-icon name="command" />-->
@@ -45,7 +52,10 @@
 							@click="goToPath(item)"
 						>
 							<template #icon>
-								<g-icon :name="item.icon" />
+								<IconComponent
+									:name="item.icon"
+									:class="item.class"
+								/>
 							</template>
 							<template v-if="item.showLabel">{{ item.label }}</template>
 						</NButton>
@@ -59,7 +69,7 @@
 							tertiary
 						>
 							<template #icon>
-								<g-icon name="chat" />
+								<IconComponent name="Chat" />
 							</template>
 						</NButton>
 						<NPopover trigger="click">
@@ -69,11 +79,15 @@
 										:src="avatar"
 										:alt="avatar"
 										circle
-										size="tiny"
+										size="small"
 									/>
 									<div class="ms-2">
-										<div class="text-[9px] font-thin lowercase">Seg, 23</div>
-										<div class="text-[11px]">22:22</div>
+										<div class="text-xs lowercase">
+											{{ formattedDate }}
+										</div>
+										<div class="">
+											{{ formattedTime }}
+										</div>
 									</div>
 								</NButton>
 							</template>
@@ -83,7 +97,7 @@
 						</NPopover>
 					</div>
 				</div>
-			</div>
+			</nav>
 		</div>
 		<app-control
 			v-if="showAppControl"
@@ -96,6 +110,7 @@
 import avatar from '@/assets/images/avatar.png'
 import gaioMiniDark from '@/assets/images/gaio-mini-dark.png'
 import gaioMini from '@/assets/images/gaio-mini.png'
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { useCommandKStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import HomeAccount from '@/views/home/HomeAccount.vue'
@@ -110,7 +125,7 @@ const isDark = useDark()
 const showAppControl = ref(false)
 
 const goToPath = (item: Record<string, unknown>) => {
-	if (item.path === '/plusRound') {
+	if (item.path === '#new') {
 		showAppControl.value = !showAppControl.value
 		return
 	}
@@ -120,61 +135,89 @@ const goToPath = (item: Record<string, unknown>) => {
 const buttons = [
 	{
 		label: 'Home',
-		icon: 'home',
+		icon: 'Home',
 		path: '/home',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'Apps',
-		icon: 'apps',
+		icon: 'Apps',
 		path: '/apps',
-		showLabel: false
+		showLabel: false,
 	},
 	{
-		label: 'Flow',
-		icon: 'flow',
+		label: 'Studio',
+		icon: 'Studio',
 		path: '/workflow',
-		showLabel: false
+		class: 'rotate-[-90deg]',
+		showLabel: false,
 	},
 	{
 		label: 'New',
-		icon: 'plusRound',
-		path: '/plusRound',
-		showLabel: true
+		icon: 'CirclePlus',
+		path: '#new',
+		showLabel: true,
 	},
 	{
 		label: 'Settings',
-		icon: 'settings',
+		icon: 'Settings',
 		path: '/settings',
-		showLabel: false
+		showLabel: false,
 	},
 	{
 		label: 'Star',
-		icon: 'star',
+		icon: 'Star',
 		path: '/star',
-		showLabel: false
+		showLabel: false,
 	},
 	{
-		label: 'Settings',
-		icon: 'settings',
+		label: 'Tags',
+		icon: 'Tags',
 		path: '/settings/tags',
-		showLabel: false
-	}
+		showLabel: false,
+	},
 ]
 
 const isActive = (path: string) => {
 	return path === router.currentRoute.value.path ? 'primary' : 'default'
 }
+
+const currentDate = ref(new Date())
+
+const formattedDate = computed(() => {
+	// Format date as "Tues, 28"
+	return new Intl.DateTimeFormat('en-US', {
+		weekday: 'short',
+		day: 'numeric',
+	}).format(currentDate.value)
+})
+
+const formattedTime = computed(() => {
+	// Format time as "22:22"
+	return new Intl.DateTimeFormat('en-US', {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false,
+	}).format(currentDate.value)
+})
+
+const interval = setInterval(() => {
+	currentDate.value = new Date()
+}, 60000)
+
+onBeforeUnmount(() => {
+	clearInterval(interval)
+})
 </script>
 
 <style lang="scss" scoped>
-.home-nav-box {
+#home-nav-box {
 	border-radius: 16px;
 
-	.home-nav-box-inner {
+	#home-nav-box-inner {
 		border-radius: 14px;
 
-		.home-nav-box-inner-icon {
+		#home-nav-box-inner-icon {
 			border-radius: 6px;
 			min-width: 30px;
 			font-size: 12px;
@@ -184,7 +227,7 @@ const isActive = (path: string) => {
 			background: rgba(255, 255, 255, 0.07);
 		}
 
-		.home-nav-box-inner-icon:hover {
+		#home-nav-box-inner-icon:hover {
 			background-color: var(--color-fill-2);
 		}
 	}
