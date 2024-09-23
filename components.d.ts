@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddItemIcon: typeof import('./src/components/icons/AddItemIcon.vue')['default']
     AllAppsIcon: typeof import('./src/components/icons/AllAppsIcon.vue')['default']
     AppShareIcon: typeof import('./src/components/icons/AppShareIcon.vue')['default']
     AppsIcon: typeof import('./src/components/icons/AppsIcon.vue')['default']
@@ -16,6 +17,7 @@ declare module 'vue' {
     CirclePlusIcon: typeof import('./src/components/icons/CirclePlusIcon.vue')['default']
     CloseIcon: typeof import('./src/components/icons/CloseIcon.vue')['default']
     CodeEditor: typeof import('./src/components/code-editor/CodeEditor.vue')['default']
+    CreateFolderIcon: typeof import('./src/components/icons/CreateFolderIcon.vue')['default']
     CronBase: typeof import('./src/components/cron-base/CronBase.vue')['default']
     DarkModeIcon: typeof import('./src/components/icons/DarkModeIcon.vue')['default']
     DashboardIcon: typeof import('./src/components/icons/DashboardIcon.vue')['default']
