@@ -1,11 +1,12 @@
 <template>
-	<g-card class="local-card group g-bg-1 w-full cursor-pointer rounded-[8px] p-0">
+	<g-card class="local-card group g-bg-1 w-full cursor-pointer rounded-xl p-0">
 		<div class="flex justify-between gap-2">
 			<header class="flex items-start gap-2 w-full">
 				<div class="relative w-10 h-10 flex items-center justify-center">
 					<IconComponent
 						class="z-10"
 						:fill="app.options.color"
+						:secondaryfill="app.options.color"
 						:name="
 							app.options.icon === 'icon-shield-alert' ? 'ShieldAlert'
 							: app.options.icon === 'icon-square-dashed-bottom' ? 'SquarePointer'
@@ -49,7 +50,7 @@
 				</a>
 			</div>
 			<footer
-				class="flex opacity-50 group-hover:opacity-100 transition-opacity duration-300 items-center justify-end gap-2"
+				class="flex opacity-25 group-hover:opacity-100 transition-opacity duration-300 items-center justify-end gap-2"
 			>
 				<NButton
 					size="small"

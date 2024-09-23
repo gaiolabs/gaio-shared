@@ -7,9 +7,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AllAppsIcon: typeof import('./src/components/icons/AllAppsIcon.vue')['default']
     CodeEditor: typeof import('./src/components/code-editor/CodeEditor.vue')['default']
     CronBase: typeof import('./src/components/cron-base/CronBase.vue')['default']
     DashboardIcon: typeof import('./src/components/icons/DashboardIcon.vue')['default']
+    DataAppsIcon: typeof import('./src/components/icons/DataAppsIcon.vue')['default']
     DrawerView: typeof import('./src/components/drawer/DrawerView.vue')['default']
     DrawerViewOld: typeof import('./src/components/drawer/DrawerViewOld.vue')['default']
     ElAlert: (typeof import('element-plus/es'))['ElAlert']
@@ -38,6 +40,7 @@ declare module 'vue' {
     GId: typeof import('./src/components/GId.vue')['default']
     GPasswordInput: typeof import('./src/components/inputs/GPasswordInput.vue')['default']
     GQueryPreview: typeof import('./src/components/GQueryPreview.vue')['default']
+    GridIcon: typeof import('./src/components/icons/GridIcon.vue')['default']
     GSelectColumn: typeof import('./src/components/GSelectColumn.vue')['default']
     GSelectFlow: typeof import('./src/components/GSelectFlow.vue')['default']
     GSelectForm: typeof import('./src/components/GSelectForm.vue')['default']
@@ -55,6 +58,7 @@ declare module 'vue' {
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     ImageMountainIcon: typeof import('./src/components/icons/ImageMountainIcon.vue')['default']
+    ListIcon: typeof import('./src/components/icons/ListIcon.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NButton: typeof import('naive-ui')['NButton']
