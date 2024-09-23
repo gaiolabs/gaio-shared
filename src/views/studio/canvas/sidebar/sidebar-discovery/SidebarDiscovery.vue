@@ -1,13 +1,12 @@
 <template>
 	<div class="sidebar-discovery flex h-[100%] flex-col items-stretch pt-3">
 		<div class="flex w-full items-stretch justify-between px-4">
-			<div class="text-lg font-bold">
-				<g-icon
-					name="tableThunder"
-					:height="18"
-				/>
-				{{ $t('discovery') }}
-			</div>
+			<h2 class="text-lg font-bold inline-flex gap-1 items-center">
+				<IconComponent name="Discovery" />
+				<span>
+					{{ $t('discovery') }}
+				</span>
+			</h2>
 			<div>
 				<NDropdown
 					trigger="hover"
@@ -19,7 +18,7 @@
 						size="tiny"
 					>
 						<template #icon>
-							<g-icon name="add" />
+							<IconComponent name="AddItem" />
 						</template>
 					</NButton>
 				</NDropdown>
@@ -51,6 +50,7 @@
 	</div>
 </template>
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
 import TaskMeta from '@/views/studio/canvas/task-meta/TaskMeta.vue'
@@ -67,7 +67,7 @@ const searchTerm = ref('')
 const showPanel = ref(false)
 const options = [
 	{ label: t('powerSearch'), key: 'powerSearch' },
-	{ label: t('insights'), key: 'insights' }
+	{ label: t('insights'), key: 'insights' },
 ]
 
 const choose = (metaData: MetaType) => {
@@ -91,28 +91,28 @@ const handleDropdownSelect = (ev: string) => {
 					formatDecimalSize: 2,
 					separators: 'commaDot',
 					formatPrefix: '',
-					formatSuffix: ''
+					formatSuffix: '',
 				},
 				percentFormat: {
 					formatType: 'decimal',
 					formatDecimalSize: 2,
 					separators: 'commaDot',
 					formatPrefix: '',
-					formatSuffix: ''
+					formatSuffix: '',
 				},
 				insights: {
 					dimension: [],
 					measure: [],
 					date: [],
 					list: [],
-					type: 'field'
+					type: 'field',
 				},
 				inverted: false,
 				schedule: false,
 				cron: '',
 				growthPercentage: 0.5,
-				period: 'monthly'
-			}
+				period: 'monthly',
+			},
 		}
 	} else {
 		useAppStore().task = {
@@ -124,8 +124,8 @@ const handleDropdownSelect = (ev: string) => {
 			repoId: useAppStore().app.repoId,
 			fields: [],
 			options: {
-				userFilter: ''
-			}
+				userFilter: '',
+			},
 		}
 	}
 	showPanel.value = true
@@ -135,8 +135,8 @@ const getDiscoveryList = async () => {
 	showPanel.value = false
 	discoveryList.value = await useApi().post('api/discovery/list', {
 		body: {
-			appId: useAppStore().app.appId
-		}
+			appId: useAppStore().app.appId,
+		},
 	})
 }
 
