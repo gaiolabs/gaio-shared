@@ -1,7 +1,18 @@
 <template>
-	<div class="sidebar-flow flex h-[100%] flex-col items-stretch pt-3">
+	<aside
+		id="sidebar-flow"
+		class="flex h-full flex-col items-stretch pt-3"
+	>
 		<div class="flex w-full items-stretch justify-between px-4">
-			<div class="text-lg font-bold">{{ $t('flow') }}</div>
+			<h2 class="text-lg font-bold inline-flex items-center gap-1">
+				<IconComponent
+					name="Studio"
+					class="rotate-[-90deg]"
+				/>
+				<span>
+					{{ $t('flow') }}
+				</span>
+			</h2>
 			<div class="flex">
 				<NButton
 					size="tiny"
@@ -9,7 +20,7 @@
 					@click="showScheduleBulk = true"
 				>
 					<template #icon>
-						<g-icon name="cronEdit" />
+						<IconComponent name="CronEdit" />
 					</template>
 				</NButton>
 				<NPopover
@@ -22,7 +33,7 @@
 							quaternary
 						>
 							<template #icon>
-								<g-icon name="createFolder" />
+								<IconComponent name="CreateFolder" />
 							</template>
 						</NButton>
 					</template>
@@ -50,7 +61,7 @@
 					@click="currentFlow = {}"
 				>
 					<template #icon>
-						<g-icon name="add" />
+						<IconComponent name="AddItem" />
 					</template>
 				</NButton>
 			</div>
@@ -103,10 +114,11 @@
 				</div>
 			</NScrollbar>
 		</div>
-	</div>
+	</aside>
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'
@@ -194,7 +206,7 @@ const updateAppFolderOptions = () => {
 		return tree.map((node) => {
 			const appFolder: AppFolderOption = {
 				label: node.isLeaf ? `${node.key}` : node.label,
-				isLeaf: !!node.isLeaf
+				isLeaf: !!node.isLeaf,
 			}
 			if (node.children) {
 				appFolder.children = buildAppFolder(node.children)
@@ -209,10 +221,10 @@ const updateAppFolderOptions = () => {
 		body: {
 			options: {
 				...useAppStore().app.options,
-				folderFlow: appFolderList
+				folderFlow: appFolderList,
 			},
-			appId: useAppStore().app.appId
-		}
+			appId: useAppStore().app.appId,
+		},
 	})
 }
 
@@ -234,14 +246,14 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
 					{
 						label: t('delete') + ': ' + option.label,
 						key: 'delete',
-						reference: option.key
-					}
+						reference: option.key,
+					},
 				]
 				showDropdown.value = true
 				x.value = e.clientX
 				y.value = e.clientY
 			}
-		}
+		},
 	}
 }
 

@@ -19,6 +19,7 @@ declare module 'vue' {
     CodeEditor: typeof import('./src/components/code-editor/CodeEditor.vue')['default']
     CreateFolderIcon: typeof import('./src/components/icons/CreateFolderIcon.vue')['default']
     CronBase: typeof import('./src/components/cron-base/CronBase.vue')['default']
+    CronEditIcon: typeof import('./src/components/icons/CronEditIcon.vue')['default']
     DarkModeIcon: typeof import('./src/components/icons/DarkModeIcon.vue')['default']
     DashboardIcon: typeof import('./src/components/icons/DashboardIcon.vue')['default']
     DataAppsIcon: typeof import('./src/components/icons/DataAppsIcon.vue')['default']
