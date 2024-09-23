@@ -24,7 +24,7 @@
 										type="primary"
 										@click="showFormPreview = !showFormPreview"
 									>
-										<g-icon name="eye" />
+										<IconComponent name="Eye" />
 									</NButton>
 									<NButton
 										type="primary"

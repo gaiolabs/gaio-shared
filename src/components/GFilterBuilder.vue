@@ -117,7 +117,7 @@
 														class="w-100 h-100"
 														@click="listByField(item)"
 													>
-														<g-icon name="eye" />
+														<IconComponent name="Eye" />
 													</NButton>
 												</template>
 											</NPopover>

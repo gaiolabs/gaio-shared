@@ -52,7 +52,7 @@
 					@click="showLayoutHideOption = true"
 				>
 					<template #icon>
-						<g-icon name="eye" />
+						<IconComponent name="Eye" />
 					</template>
 					{{ $t('visibility') }}
 				</NButton>

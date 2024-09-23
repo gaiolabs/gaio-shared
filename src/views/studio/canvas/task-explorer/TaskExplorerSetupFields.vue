@@ -34,7 +34,7 @@
 								@click="$emit('viewTable')"
 							>
 								<template #icon>
-									<g-icon name="eye" />
+									<IconComponent name="Eye" />
 								</template>
 							</NButton>
 						</template>
