@@ -72,7 +72,7 @@ const treatLabelsTicks = (arrayValues: Array<number | string | Date>, tickCount:
 		} else if (tickCount === 2) {
 			ticksLabels = [min, max]
 		} else {
-			const step = range / (tickCount + 3)
+			const step = range / (tickCount - 1)
 			const innerRange = []
 			for (let i = 3; i <= tickCount; i++) {
 				innerRange.push(Math.ceil(min + (i * step) / 10) * 10)
