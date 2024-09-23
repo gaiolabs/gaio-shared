@@ -6,12 +6,6 @@
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
 			<div class="flex items-center gap-2">
-				<NInput
-					v-model:value="localTask.label"
-					size="small"
-					:placeholder="$t('sqlQuery')"
-				/>
-				<NDivider vertical />
 				<NButton
 					:disabled="!localTask.label"
 					size="small"
@@ -20,11 +14,22 @@
 					{{ $t('save') }}
 				</NButton>
 
+				<NDivider vertical />
+				<NInput
+					v-model:value="localTask.label"
+					size="small"
+					:placeholder="$t('sqlQuery')"
+				/>
+				<NDivider vertical />
+
 				<NButton
 					size="small"
+					strong
+					secondary
+					type="primary"
 					@click="$emit('execute')"
 				>
-					{{ $t('save') }}
+					{{ $t('run') }}
 				</NButton>
 			</div>
 			<div class="flex items-center justify-between gap-2">
@@ -96,4 +101,3 @@ const save = () => {
 		.then(() => emit('close'))
 }
 </script>
-stati

@@ -17,6 +17,10 @@
 			<template #node-custom="{ data }">
 				<board-node :data="data" />
 			</template>
+			<Background
+				:gap="20"
+				:size="1.2"
+			/>
 		</VueFlow>
 		<!--        @update:model-value="updateFlow()"-->
 
@@ -51,6 +55,7 @@
 		</div>
 	</div>
 </template>
+
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import useHelper from '@/composables/useHelper'
@@ -58,6 +63,7 @@ import { useAppStore } from '@/stores'
 import { useJobStore } from '@/stores/useJobStore'
 import BoardHeader from '@/views/studio/canvas/board-view/BoardHeader.vue'
 import BoardNode from '@/views/studio/canvas/board-view/BoardNode.vue'
+import { Background } from '@vue-flow/background'
 import { isNode, Position, useVueFlow, VueFlow } from '@vue-flow/core'
 import type { Elements } from '@vue-flow/core'
 import dagre from 'dagre'
@@ -96,7 +102,7 @@ const updateFlow = debounce(() => {
 		nodes: nodes.value.map((node) => {
 			return {
 				...node.data,
-				position: node.position,
+				position: node.position
 			}
 		}),
 		edges: edges.value.map((edge) => {
@@ -104,18 +110,18 @@ const updateFlow = debounce(() => {
 				...edge.data,
 				id: useHelper().generateId(),
 				source: edge.source,
-				target: edge.target,
+				target: edge.target
 			}
-		}),
+		})
 	}
 
 	useApi('boardUpdateFlow').post('api/flow/save', {
 		body: {
 			flowData: {
 				...useAppStore().flow,
-				workflow,
-			},
-		},
+				workflow
+			}
+		}
 	})
 }, 600)
 
@@ -171,7 +177,7 @@ const processBoard = () => {
 				return {
 					id: edge.id,
 					source: edge.source,
-					target: edge.target,
+					target: edge.target
 				}
 			}) || []
 		localNodes.value =
@@ -183,7 +189,7 @@ const processBoard = () => {
 					position: node.position,
 					data: node,
 					sourcePosition: Position.Right,
-					targetPosition: Position.Left,
+					targetPosition: Position.Left
 				}
 			}) || []
 
@@ -209,7 +215,7 @@ watch(
 	() => currentFlowId.value,
 	() => {
 		buildBoard()
-	},
+	}
 )
 
 watch(
@@ -217,7 +223,7 @@ watch(
 	() => {
 		console.log('fasfasfasd')
 		processBoard()
-	},
+	}
 )
 
 onMounted(async () => {

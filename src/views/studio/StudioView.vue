@@ -1,6 +1,6 @@
 <template>
 	<div class="studio relative flex h-full grow bg-elevation-1">
-		<board-background />
+		<!-- <board-background /> -->
 		<template v-if="!loading">
 			<sidebar
 				v-model="sidebarPanel"
@@ -91,7 +91,6 @@ import useBus from '@/composables/useBus'
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore, useJobStore } from '@/stores'
-import BoardBackground from '@/views/studio/canvas/board-view/BoardBackground.vue'
 import BoardView from '@/views/studio/canvas/board-view/BoardView.vue'
 import SidebarNav from '@/views/studio/canvas/sidebar/SidebarNav.vue'
 import SidebarSubNav from '@/views/studio/canvas/sidebar/SidebarSubNav.vue'
@@ -114,8 +113,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 
 defineComponent({
 	components: {
-		...taskView,
-	},
+		...taskView
+	}
 })
 
 const currentTable = ref<string>()
@@ -136,11 +135,11 @@ const addDrag = (ev: SortableEvent) => {
 				base: {
 					...useAppStore().appInfo,
 					...element,
-					label: element.tableName,
-				},
+					label: element.tableName
+				}
 			}),
 			sources: [],
-			targets: [],
+			targets: []
 		})
 		.save()
 		.then(() => closeTask())

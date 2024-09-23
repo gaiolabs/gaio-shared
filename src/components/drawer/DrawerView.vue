@@ -1,13 +1,17 @@
 <template>
 	<div
-		class="drawer absolute"
-		:class="mainWrapper"
+		class="fixed inset-0 w-svw h-svh drop-shadow-2xl flex flex-col justify-end transition-all duration-100 pointer-events-none"
+		:class="isFullscreen ? '' : 'p-6 pb-8'"
 	>
 		<div
-			class="drawer-body flex w-full flex-shrink flex-col overflow-hidden border-elevation-2"
-			:class="secondWrapper"
+			id="DrawerBody"
+			class="bg-white pointer-events-auto min-h-[420px] transition-all duration-[75ms] flex w-full flex-shrink flex-col overflow-hidden border-elevation-2"
+			:class="isFullscreen ? 'h-screen' : 'shadow-2xl rounded-2xl h-[420px]'"
 		>
-			<div class="drawer-header flex justify-between p-2 px-3">
+			<header
+				id="DrawerHeader"
+				class="drawer-header flex justify-between p-2 px-3 border-b border-gray-200"
+			>
 				<slot name="header" />
 				<div class="flex items-center justify-end gap-2">
 					<slot name="actions" />
@@ -21,7 +25,7 @@
 							>
 								<template #icon>
 									<GIcon
-										:name="fullscreen ? 'panelBottom' : 'panelFull'"
+										:name="isFullscreen ? 'panelBottom' : 'panelFull'"
 										color="gray"
 									/>
 								</template>
@@ -48,40 +52,26 @@
 						</NTooltip>
 					</div>
 				</div>
-			</div>
-			<div
-				v-if="slots.content"
-				class="drawer-content grow"
-			>
-				<NScrollbar :style="scrollStyle">
-					<slot
-						name="content"
-						:min-height="scrollHeight"
-					/>
-				</NScrollbar>
-			</div>
-
-			<div
-				v-if="slots.contentScroll"
-				class="drawer-content-scroll grow"
-			>
-				<NScrollbar :style="scrollStyle">
-					<slot name="contentScroll"></slot>
-				</NScrollbar>
-			</div>
+			</header>
+			<main class="bg-gray-100 h-full">
+				<slot
+					name="content"
+					class="min-h-full bg-gray-100"
+				/>
+				<slot
+					name="contentScroll"
+					class="min-h-full bg-gray-100"
+				/>
+			</main>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores'
-import { useWindowSize } from '@vueuse/core'
-import { NButtonGroup, NTooltip, NButton, NScrollbar, NDivider } from 'naive-ui'
-import { computed, useSlots } from 'vue'
+import { NButtonGroup, NTooltip, NButton, NDivider } from 'naive-ui'
+import { computed } from 'vue'
 import GIcon from '../GIcon.vue'
-
-const slots = useSlots()
-const windowSize = useWindowSize()
 
 defineEmits(['close'])
 const props = defineProps({
@@ -95,73 +85,11 @@ const props = defineProps({
 	}
 })
 
-const scrollStyle = computed(() => `height: ${scrollHeight.value} !important`)
-
-const fullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen || props.onlyFullScreen)
-
-const scrollHeight = computed(() => {
-	if (fullscreen.value) {
-		return `${windowSize.height.value - 44}px `
-	}
-	return '386px'
-})
+const isFullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen || props.onlyFullScreen)
 
 const changeFullscreen = () => {
 	useAuthStore().updateUserOptions({
-		studioDrawerFullscreen: !fullscreen.value
+		studioDrawerFullscreen: !isFullscreen.value
 	})
 }
-
-const mainWrapper = computed(() => {
-	if (fullscreen.value) {
-		return ' left-0 right-0 bottom-0 top-0 z-10 p-0 m-0'
-	}
-	return ' left-0 right-0 bottom-[30px]  pt-0 z-10 p-[10px] py-[5px] flex flex-col justify-end'
-})
-
-const secondWrapper = computed(() => {
-	if (fullscreen.value) {
-		return 'h-full rounded-0'
-	}
-
-	return 'h-[430px] rounded-[10px]'
-})
 </script>
-
-<style lang="scss">
-.drawer {
-	.drawer-body {
-		box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.12);
-	}
-
-	.n-scrollbar .n-scrollbar-container .n-scrollbar-content {
-		min-height: v-bind(scrollHeight);
-	}
-}
-
-.light {
-	.drawer {
-		.drawer-body {
-			background: var(--elevation-1);
-
-			.drawer-header {
-				background: var(--elevation-0);
-				border-bottom: 1px solid var(--elevation-2);
-			}
-		}
-	}
-}
-
-.dark {
-	.drawer {
-		.drawer-body {
-			background: var(--elevation-1);
-
-			.drawer-header {
-				background: var(--elevation-0);
-				border-bottom: 1px solid var(--elevation-2);
-			}
-		}
-	}
-}
-</style>

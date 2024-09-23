@@ -1,9 +1,11 @@
-.splitpanes__splitter, .splitpanes--vertical>.splitpanes__splitter {
-  width: 3px !important;
+.splitpanes__splitter{
+  @apply bg-gray-300/0 hover:bg-gray-300 transition-colors duration-[75ms];
 }
 
- .splitpanes__pane, .splitpanes__splitter {
-  transition: none !important;
+.splitpanes--vertical>.splitpanes__splitter{
+  width: 4px;
 }
 
-
+.splitpanes--horizontal>.splitpanes__splitter{
+  height: 4px;
+}
