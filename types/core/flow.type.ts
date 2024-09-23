@@ -7,6 +7,8 @@ export type NodeType = Partial<{
     type: string
     label: string
     position: PositionType
+    keyList?: string[]
+    paramReferences?: Array<{ paramName: string; reference: string }>
     [key: string]: any
 }>
 
