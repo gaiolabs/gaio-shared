@@ -1,0 +1,24 @@
+<template><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" height="18" width="18"><g :fill="fill"><path d="M2.75,4.75c0-1.105,.895-2,2-2" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></path><path d="M13.25,2.75c1.105,0,2,.895,2,2" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></path><path d="M15.25,13.25c0,1.105-.895,2-2,2" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></path><path d="M4.75,15.25c-1.105,0-2-.895-2-2" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></path><line x1="7.75" y1="2.75" x2="10.25" y2="2.75" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></line><line x1="7.75" y1="15.25" x2="10.25" y2="15.25" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></line><line x1="15.25" y1="7.75" x2="15.25" y2="10.25" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></line><line x1="2.75" y1="7.75" x2="2.75" y2="10.25" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="fill"></line><rect x="5.75" y="5.75" width="6.5" height="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round" :stroke-width="strokewidth" :stroke="_secondaryfill"></rect></g></svg></template>
+
+<script>
+export default {
+	props: {
+		strokewidth: {
+			type: [Number, String],
+			default: 1
+		},
+		fill: {
+			type: String,
+			default: "currentColor"
+		},
+		secondaryfill: {
+			type: String
+		}
+	},
+	computed: {
+		_secondaryfill: function () {
+			return this.secondaryfill || this.fill
+		}
+	}
+}
+</script>
