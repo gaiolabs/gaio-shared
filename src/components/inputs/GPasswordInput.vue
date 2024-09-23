@@ -9,7 +9,7 @@
 			<IconComponent name="EyeSlash" />
 		</template>
 		<template #password-invisible-icon>
-			<IconComponent name="Eyeasd" />
+			<IconComponent name="Eye" />
 		</template>
 	</NInput>
 </template>
