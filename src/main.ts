@@ -8,6 +8,7 @@ import '@fontsource/roboto/700.css'
 import GCard from '@/components/GCard.vue'
 import GDialog from '@/components/GDialog.vue'
 import GIcon from '@/components/GIcon.vue'
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { mixin } from '@/mixin'
 import mitt from 'mitt' // Import mitt
 import { createPinia } from 'pinia'
@@ -25,7 +26,7 @@ pinia.use(piniaPluginPersistedstate)
 app.directive('height', {
 	mounted(el) {
 		el.style.height = el.parentNode.offsetHeight - 5 + 'px'
-	}
+	},
 })
 
 app.directive('alpha', {
@@ -45,13 +46,14 @@ app.directive('alpha', {
 	},
 	beforeUnmount(el) {
 		el.removeEventListener('input', function () {})
-	}
+	},
 })
 
 app.provide('bus', emitter)
 
 app.component('GDialog', GDialog)
 app.component('GIcon', GIcon)
+app.component('IconComponent', IconComponent)
 app.component('GCard', GCard)
 
 app.mixin(mixin)
