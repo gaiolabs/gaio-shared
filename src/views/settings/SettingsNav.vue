@@ -23,7 +23,7 @@
 								@click="useCommandKStore().show = true"
 							>
 								<div class="flex items-center">
-									<g-icon name="search" />
+									<IconComponent name="Search" />
 								</div>
 							</NButton>
 						</div>

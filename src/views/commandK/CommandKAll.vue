@@ -3,7 +3,7 @@
 		<div class="flex items-center border-b">
 			<div>
 				<NButton quaternary>
-					<g-icon name="search" />
+					<IconComponent name="Search" />
 				</NButton>
 			</div>
 			<div class="flex flex-grow items-center gap-2">
@@ -86,7 +86,7 @@ const actionHolder = (action) => {
 		router.push(action.path)
 	} else if (['app', 'dashboard'].includes(action.type)) {
 		useAppStore().app = {
-			appId: action.id
+			appId: action.id,
 		}
 		if (action.type === 'app') {
 			router.push(`/studio`)
@@ -107,8 +107,8 @@ const searchData = () => {
 			body: {
 				searchItems: serverSearchIReferences.value,
 				searchTerm: useCommandKStore().searchTerm,
-				appInfo: appInfo.value
-			}
+				appInfo: appInfo.value,
+			},
 		})
 		.then((res) => {
 			useCommandKStore().serverResult = res
@@ -176,7 +176,7 @@ watch(
 		console.log('casa')
 		processBreadcrumb()
 		nextTick(() => inputRef.value.focus())
-	}
+	},
 )
 
 onMounted(() => nextTick(() => inputRef.value.focus()))
