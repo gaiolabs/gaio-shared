@@ -9,6 +9,9 @@
 			v-model="elements"
 			:min-zoom="0.2"
 			:max-zoom="4"
+			:snap-to-grid="true"
+			:snap-grid="[5, 5]"
+			selection-mode="partial"
 			@selection-end="onSelectMany()"
 			@node-click="onSelectNode($event)"
 			@node-double-click="onOpenNode($event)"
@@ -18,8 +21,9 @@
 				<board-node :data="data" />
 			</template>
 			<Background
-				:gap="20"
-				:size="1.2"
+				pattern-color="#a3a3a3"
+				:gap="15"
+				:size="1.3"
 			/>
 		</VueFlow>
 		<!--        @update:model-value="updateFlow()"-->
@@ -87,6 +91,7 @@ const onOpenNode = (ev) => {
 }
 
 const onSelectMany = () => {
+	console.log(JSON.stringify(getSelectedNodes.value, null, 2))
 	useAppStore().task = null
 	selectMany.value = getSelectedNodes.value
 }
@@ -95,14 +100,19 @@ const onSelectNode = (ev) => {
 	useAppStore().task = ev.node.data
 }
 
-onConnect((params) => addEdges(params))
+onConnect((params) =>
+	addEdges({
+		...params,
+		type: 'smoothstep',
+	}),
+)
 
 const updateFlow = debounce(() => {
 	const workflow = {
 		nodes: nodes.value.map((node) => {
 			return {
 				...node.data,
-				position: node.position
+				position: node.position,
 			}
 		}),
 		edges: edges.value.map((edge) => {
@@ -110,18 +120,19 @@ const updateFlow = debounce(() => {
 				...edge.data,
 				id: useHelper().generateId(),
 				source: edge.source,
-				target: edge.target
+				target: edge.target,
+				type: 'smoothstep',
 			}
-		})
+		}),
 	}
 
 	useApi('boardUpdateFlow').post('api/flow/save', {
 		body: {
 			flowData: {
 				...useAppStore().flow,
-				workflow
-			}
-		}
+				workflow,
+			},
+		},
 	})
 }, 600)
 
@@ -177,7 +188,8 @@ const processBoard = () => {
 				return {
 					id: edge.id,
 					source: edge.source,
-					target: edge.target
+					target: edge.target,
+					type: 'smoothstep',
 				}
 			}) || []
 		localNodes.value =
@@ -189,7 +201,7 @@ const processBoard = () => {
 					position: node.position,
 					data: node,
 					sourcePosition: Position.Right,
-					targetPosition: Position.Left
+					targetPosition: Position.Left,
 				}
 			}) || []
 
@@ -215,7 +227,7 @@ watch(
 	() => currentFlowId.value,
 	() => {
 		buildBoard()
-	}
+	},
 )
 
 watch(
@@ -223,7 +235,7 @@ watch(
 	() => {
 		console.log('fasfasfasd')
 		processBoard()
-	}
+	},
 )
 
 onMounted(async () => {
@@ -327,6 +339,7 @@ onMounted(async () => {
 
 .vue-flow__nodesselection-rect,
 .vue-flow__selection {
-	border-radius: 4px;
+	background-color: hsla(26, 91%, 71%, 0.15);
+	@apply border rounded border-prime border-dashed;
 }
 </style>
