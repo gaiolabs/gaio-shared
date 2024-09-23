@@ -21,6 +21,7 @@ import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
 import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
 import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
 import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
@@ -29,59 +30,9 @@ const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChart
 const { grid } = computed(() => useReportChartHelperGrid(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
 const { label } = computed(() => useReportChartHelperLabel(task)).value
+const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
 
 use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
-
-const treatLabelsTicks = (arrayValues: Array<number | string | Date>, tickCount: number) => {
-	let ticksLabels: Array<number | string | Date> = []
-	if (typeof arrayValues[0] === 'string') {
-		const tickLabelLength = Math.ceil(arrayValues.length / (tickCount !== 0 ? tickCount : arrayValues.length))
-		let i = 0
-		arrayValues.forEach((value, index) => {
-			if (index === 0) ticksLabels.push(value)
-			if (tickLabelLength === i) {
-				ticksLabels.push(value)
-				i = 1
-			} else i++
-		})
-	}
-
-	if (typeof arrayValues[0] === 'number') {
-		const minData = Math.min(...(arrayValues as number[]))
-		const maxData = Math.max(...(arrayValues as number[]))
-
-		const magnitudeMin = Math.pow(10, Math.floor(Math.log10(Math.abs(minData))))
-		const magnitudeMax = Math.pow(10, Math.floor(Math.log10(Math.abs(maxData))))
-
-		let min = Math.ceil(minData / magnitudeMin) * magnitudeMin
-		let max = Math.ceil(maxData / magnitudeMax) * magnitudeMax
-
-		min = Math.floor(min / 10) * 10
-		max = Math.ceil(max / 10) * 10
-
-		if (min >= 0 && max >= 0) min = 0
-		if (min < 0 && max >= 0)
-			if (Math.abs(min) > max) max = Math.abs(min)
-			else min = max * -1
-		if (min < 0 && max < 0) max = 0
-
-		const range = max - min
-
-		if (tickCount === 1) {
-			ticksLabels = [min]
-		} else if (tickCount === 2) {
-			ticksLabels = [min, max]
-		} else {
-			const step = range / (tickCount - 1)
-			const innerRange = []
-			for (let i = 3; i <= tickCount; i++) {
-				innerRange.push(Math.ceil(min + (i * step) / 10) * 10)
-			}
-			ticksLabels = [min, ...innerRange, max]
-		}
-	}
-	return ticksLabels
-}
 
 const xAxis = () => {
 	const xValues = list.map((item) => item[columnName(dimensions.value.first)]) as Array<number | string | Date>
