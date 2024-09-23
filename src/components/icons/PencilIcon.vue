@@ -6,19 +6,11 @@
 		width="18"
 	>
 		<g :fill="fill">
-			<path
-				d="M7.638,3.495L2.213,12.891c-.605,1.048,.151,2.359,1.362,2.359H14.425c1.211,0,1.967-1.31,1.362-2.359L10.362,3.495c-.605-1.048-2.119-1.048-2.724,0Z"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></path>
 			<line
-				x1="9"
-				y1="6.5"
-				x2="9"
-				y2="10"
+				x1="10.547"
+				y1="4.422"
+				x2="13.578"
+				y2="7.453"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -26,9 +18,12 @@
 				:stroke="_secondaryfill"
 			></line>
 			<path
-				d="M9,13.569c-.552,0-1-.449-1-1s.448-1,1-1,1,.449,1,1-.448,1-1,1Z"
-				stroke="none"
-				:fill="_secondaryfill"
+				d="M2.75,15.25s3.599-.568,4.546-1.515c.947-.947,7.327-7.327,7.327-7.327,.837-.837,.837-2.194,0-3.03-.837-.837-2.194-.837-3.03,0,0,0-6.38,6.38-7.327,7.327s-1.515,4.546-1.515,4.546h0Z"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
 			></path>
 		</g>
 	</svg>

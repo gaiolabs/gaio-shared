@@ -1,34 +1,36 @@
 <template>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 18 18"
-		height="18"
-		width="18"
+		viewBox="0 0 12 12"
+		height="12"
+		width="12"
 	>
 		<g :fill="fill">
-			<path
-				d="M7.638,3.495L2.213,12.891c-.605,1.048,.151,2.359,1.362,2.359H14.425c1.211,0,1.967-1.31,1.362-2.359L10.362,3.495c-.605-1.048-2.119-1.048-2.724,0Z"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></path>
+			<circle
+				cx="6"
+				cy="10.125"
+				r=".875"
+				stroke-width="0"
+				:fill="_secondaryfill"
+			></circle>
 			<line
-				x1="9"
-				y1="6.5"
-				x2="9"
-				y2="10"
+				x1="6"
+				y1="4.75"
+				x2="6"
+				y2="7.75"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				:stroke-width="strokewidth"
+				stroke-width="1.1"
 				:stroke="_secondaryfill"
 			></line>
 			<path
-				d="M9,13.569c-.552,0-1-.449-1-1s.448-1,1-1,1,.449,1,1-.448,1-1,1Z"
-				stroke="none"
-				:fill="_secondaryfill"
+				d="m8.625,10.25h1.164c1.123,0,1.826-1.216,1.265-2.189L7.265,1.484c-.562-.975-1.969-.975-2.53,0L.946,8.061c-.561.973.142,2.189,1.265,2.189h1.164"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="1.1"
+				:stroke="fill"
 			></path>
 		</g>
 	</svg>

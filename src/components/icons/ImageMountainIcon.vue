@@ -7,29 +7,23 @@
 	>
 		<g :fill="fill">
 			<path
-				d="M7.638,3.495L2.213,12.891c-.605,1.048,.151,2.359,1.362,2.359H14.425c1.211,0,1.967-1.31,1.362-2.359L10.362,3.495c-.605-1.048-2.119-1.048-2.724,0Z"
+				d="M16.329,12.658l-4.273-5.812c-.4-.543-1.212-.543-1.611,0l-3.319,4.514-1.444-1.964c-.4-.544-1.212-.544-1.611,0l-2.398,3.262c-.486,.66-.014,1.592,.806,1.592H15.523c.82,0,1.291-.932,.806-1.592Z"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
 			></path>
-			<line
-				x1="9"
-				y1="6.5"
-				x2="9"
-				y2="10"
+			<circle
+				cx="5.5"
+				cy="4"
+				r="1.75"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="_secondaryfill"
-			></line>
-			<path
-				d="M9,13.569c-.552,0-1-.449-1-1s.448-1,1-1,1,.449,1,1-.448,1-1,1Z"
-				stroke="none"
-				:fill="_secondaryfill"
-			></path>
+			></circle>
 		</g>
 	</svg>
 </template>

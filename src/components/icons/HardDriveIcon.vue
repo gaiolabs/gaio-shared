@@ -6,43 +6,32 @@
 		width="18"
 	>
 		<g :fill="fill">
-			<path
-				d="M14.938,6.597c.401,.45,.725,.891,.974,1.27,.45,.683,.45,1.582,0,2.265-1.018,1.543-3.262,4.118-6.912,4.118-.549,0-1.066-.058-1.552-.162"
+			<rect
+				x="1.75"
+				y="9.75"
+				width="14.5"
+				height="5"
+				rx="1.5"
+				ry="1.5"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
+			></rect>
 			<path
-				d="M4.956,13.044c-1.356-.876-2.302-2.053-2.868-2.912-.45-.683-.45-1.582,0-2.265,1.018-1.543,3.262-4.118,6.912-4.118,1.62,0,2.963,.507,4.044,1.206"
+				d="M1.841,10.739l2.204-6.621c.272-.817,1.036-1.368,1.898-1.368h6.116c.861,0,1.626,.551,1.898,1.368l2.204,6.621"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
-			<path
-				d="M11.579,9.956c-.278,.75-.873,1.345-1.623,1.623"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></path>
-			<path
-				d="M7.055,10.945c-.498-.498-.805-1.185-.805-1.945,0-1.519,1.231-2.75,2.75-2.75,.759,0,1.447,.308,1.945,.805"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
 			></path>
 			<line
-				x1="2"
-				y1="16"
-				x2="16"
-				y2="2"
+				x1="4.25"
+				y1="12.25"
+				x2="7"
+				y2="12.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"

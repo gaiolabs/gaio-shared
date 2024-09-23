@@ -1,29 +1,19 @@
 <template>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 18 18"
-		height="18"
-		width="18"
+		viewBox="0 0 12 12"
+		height="12"
+		width="12"
 	>
 		<g :fill="fill">
 			<path
-				d="M2.088,10.132c-.45-.683-.45-1.582,0-2.265,1.018-1.543,3.262-4.118,6.912-4.118s5.895,2.574,6.912,4.118c.45,.683,.45,1.582,0,2.265-1.018,1.543-3.262,4.118-6.912,4.118s-5.895-2.574-6.912-4.118Z"
+				d="m6.237.897l1.479,2.996,3.307.481c.217.032.304.298.147.451l-2.393,2.333.565,3.294c.037.216-.19.381-.384.279l-2.958-1.555-2.958,1.555c-.194.102-.421-.063-.384-.279l.565-3.294L.83,4.825c-.157-.153-.07-.42.147-.451l3.307-.481,1.479-2.996c.097-.197.377-.197.474,0Z"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				:stroke-width="strokewidth"
+				stroke-width="1.1"
 				:stroke="fill"
 			></path>
-			<circle
-				cx="9"
-				cy="9"
-				r="2.75"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></circle>
 		</g>
 	</svg>
 </template>

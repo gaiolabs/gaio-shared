@@ -6,49 +6,62 @@
 		width="18"
 	>
 		<g :fill="fill">
-			<path
-				d="M14.938,6.597c.401,.45,.725,.891,.974,1.27,.45,.683,.45,1.582,0,2.265-1.018,1.543-3.262,4.118-6.912,4.118-.549,0-1.066-.058-1.552-.162"
+			<rect
+				x="2"
+				y="11"
+				width="5"
+				height="3.5"
+				rx="1"
+				ry="1"
+				transform="translate(-8.25 17.25) rotate(-90)"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></rect>
+			<rect
+				x="9.5"
+				y="9.5"
+				width="5"
+				height="6.5"
+				rx="1"
+				ry="1"
+				transform="translate(-.75 24.75) rotate(-90)"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
-			<path
-				d="M4.956,13.044c-1.356-.876-2.302-2.053-2.868-2.912-.45-.683-.45-1.582,0-2.265,1.018-1.543,3.262-4.118,6.912-4.118,1.62,0,2.963,.507,4.044,1.206"
+			></rect>
+			<rect
+				x="11"
+				y="3.5"
+				width="5"
+				height="3.5"
+				rx="1"
+				ry="1"
+				transform="translate(18.75 -8.25) rotate(90)"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></rect>
+			<rect
+				x="3.5"
+				y="2"
+				width="5"
+				height="6.5"
+				rx="1"
+				ry="1"
+				transform="translate(11.25 -.75) rotate(90)"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
-			<path
-				d="M11.579,9.956c-.278,.75-.873,1.345-1.623,1.623"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></path>
-			<path
-				d="M7.055,10.945c-.498-.498-.805-1.185-.805-1.945,0-1.519,1.231-2.75,2.75-2.75,.759,0,1.447,.308,1.945,.805"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></path>
-			<line
-				x1="2"
-				y1="16"
-				x2="16"
-				y2="2"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></line>
+			></rect>
 		</g>
 	</svg>
 </template>

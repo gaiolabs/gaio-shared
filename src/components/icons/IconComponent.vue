@@ -4,6 +4,7 @@
 		<component
 			:is="iconComponent"
 			v-bind="attrs"
+			:strokewidth="1.25"
 		/>
 	</template>
 	<template v-else>

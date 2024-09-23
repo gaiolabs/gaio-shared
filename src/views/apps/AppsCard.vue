@@ -1,43 +1,46 @@
 <template>
-	<g-card class="local-card g-bg-1 w-full cursor-pointer rounded-[8px] p-0">
+	<g-card class="local-card group g-bg-1 w-full cursor-pointer rounded-[8px] p-0">
 		<div class="flex justify-between gap-2">
-			<div class="flex items-start gap-1">
+			<header class="flex items-start gap-2 w-full">
+				<div class="relative w-10 h-10 flex items-center justify-center">
+					<IconComponent
+						class="z-10"
+						:fill="app.options.color"
+						:name="
+							app.options.icon === 'icon-shield-alert' ? 'ShieldAlert'
+							: app.options.icon === 'icon-square-dashed-bottom' ? 'SquarePointer'
+							: app.options.icon === 'icon-hop-off' ? 'Seedling'
+							: app.options.icon === 'icon-mountain' ? 'ImageMountain'
+							: app.options.icon === 'box-seam' ? 'SquareDashedContent'
+							: app.options.icon === 'icon-hard-drive' ? 'HardDrive'
+							: app.options.icon === 'icon-martini' ? 'WineGlass'
+							: app.options.icon
+						"
+					/>
+					<div
+						class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
+						:style="{
+							backgroundColor: app.options.color,
+						}"
+					></div>
+				</div>
+				<div class="flex flex-1 flex-col">
+					<h6 class="flex flex-1 font-medium">{{ app.appName }}</h6>
+
+					<small class="text-gray-500 text-xs">
+						{{ app.options.creator }}
+					</small>
+				</div>
 				<NButton
 					size="tiny"
-					secondary
+					quaternary
+					@click="useAuthStore().toggleFavoriteApp(app.appId)"
 				>
 					<template #icon>
-						<g-app-icon
-							:name="app.options.icon"
-							:color="app.options.color"
-						/>
+						<IconComponent name="StarTiny" />
 					</template>
 				</NButton>
-				<div class="grow">
-					<div class="grow truncate text-left">
-						<div class="truncate">
-							{{ app.appName }}
-						</div>
-					</div>
-					<div class="text-gray text-[14px]">
-						<small>
-							{{ app.options.creator }}
-						</small>
-					</div>
-				</div>
-			</div>
-			<NButton
-				size="tiny"
-				quaternary
-				@click="useAuthStore().toggleFavoriteApp(app.appId)"
-			>
-				<template #icon>
-					<g-icon
-						name="star"
-						:color="generateFavorAppColor"
-					/>
-				</template>
-			</NButton>
+			</header>
 		</div>
 		<div class="mt-5 flex items-center justify-between px-1">
 			<div class="grow truncate pe-2">
@@ -45,42 +48,48 @@
 					{{ app.options.group }}
 				</a>
 			</div>
-			<div class="flex min-w-[72px] items-center justify-end gap-2">
+			<footer
+				class="flex opacity-50 group-hover:opacity-100 transition-opacity duration-300 items-center justify-end gap-2"
+			>
 				<NButton
-					size="tiny"
+					size="small"
 					text
 					@click="goTo(app, 'dashboard')"
 				>
 					<template #icon>
-						<g-icon name="dashboard" />
+						<IconComponent name="Dashboard" />
 					</template>
 				</NButton>
 				<NButton
 					v-if="app.role === 'edit'"
-					size="tiny"
+					size="small"
 					text
 					@click="$emit('edit', app)"
 				>
 					<template #icon>
-						<g-icon name="pencil" />
+						<IconComponent name="Pencil" />
 					</template>
 				</NButton>
 				<NButton
 					v-if="app.role === 'edit'"
-					size="tiny"
+					size="small"
 					text
 					@click="goTo(app, 'studio')"
 				>
 					<template #icon>
-						<g-icon name="workflow" />
+						<IconComponent
+							name="Studio"
+							class="rotate-[-90deg]"
+						/>
 					</template>
 				</NButton>
-			</div>
+			</footer>
 		</div>
 	</g-card>
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { useAppStore, useAuthStore } from '@/stores'
 import type { AppType } from '@gaio/shared/types'
 import { cloneDeep, uniq } from 'lodash-es'
