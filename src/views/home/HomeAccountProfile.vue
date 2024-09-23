@@ -7,7 +7,7 @@
 				@blur="updateUser"
 			>
 				<template #prefix>
-					<g-icon name="user" />
+					<IconComponent name="User" />
 				</template>
 			</NInput>
 		</NInputGroup>
@@ -17,7 +17,7 @@
 			@blur="updateUser"
 		>
 			<template #prefix>
-				<g-icon name="email" />
+				<IconComponent name="Mail" />
 			</template>
 		</NInput>
 		<NSelect
@@ -26,16 +26,16 @@
 			:options="[
 				{
 					label: $t('english'),
-					value: 'en-US'
+					value: 'en-US',
 				},
 				{
 					label: $t('portuguese'),
-					value: 'pt-BR'
+					value: 'pt-BR',
 				},
 				{
 					label: $t('spanish'),
-					value: 'es-ES'
-				}
+					value: 'es-ES',
+				},
 			]"
 			@update:value="updateUser"
 		/>
@@ -46,14 +46,14 @@
 				tertiary
 				@click="toggleTheme('light')"
 			>
-				<g-icon name="sun" />
+				<IconComponent name="LightMode" />
 			</NButton>
 			<NButton
 				size="large"
 				tertiary
 				@click="toggleTheme('dark')"
 			>
-				<g-icon name="moon" />
+				<IconComponent name="DarkMode" />
 			</NButton>
 		</div>
 
@@ -66,6 +66,7 @@
 	</div>
 </template>
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import useValidate from '@/composables/useValidate'
 import { useAuthStore } from '@/stores'
@@ -90,8 +91,8 @@ const updateUser = async () => {
 		if (localUser.value.email !== useAuthStore().user.email) {
 			const data = await useApi().post('api/user/check-email', {
 				body: {
-					email: localUser.value.email
-				}
+					email: localUser.value.email,
+				},
 			})
 
 			if (data.valid) {
@@ -113,7 +114,7 @@ const isValid = computed(() => {
 	return useValidate().isValid(localUser.value, {
 		name: 'string|min:1',
 		email: 'string|min:1|email',
-		lang: 'string|min:1'
+		lang: 'string|min:1',
 	})
 })
 

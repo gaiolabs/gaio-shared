@@ -6,14 +6,34 @@
 		width="18"
 	>
 		<g :fill="fill">
+			<circle
+				cx="9"
+				cy="7.75"
+				r="2"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></circle>
 			<path
-				d="M13,11.75c-3.452,0-6.25-2.798-6.25-6.25,0-1.352,.433-2.599,1.162-3.622-3.364,.628-5.912,3.575-5.912,7.122,0,4.004,3.246,7.25,7.25,7.25,3.372,0,6.198-2.306,7.009-5.424-.95,.583-2.063,.924-3.259,.924Z"
+				d="M5.154,15.147c.479-1.673,2.019-2.897,3.846-2.897s3.367,1.224,3.846,2.897"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></path>
+			<circle
+				cx="9"
+				cy="9"
+				r="7.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
+			></circle>
 		</g>
 	</svg>
 </template>

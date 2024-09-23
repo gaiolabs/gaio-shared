@@ -7,13 +7,27 @@
 	>
 		<g :fill="fill">
 			<path
-				d="M13,11.75c-3.452,0-6.25-2.798-6.25-6.25,0-1.352,.433-2.599,1.162-3.622-3.364,.628-5.912,3.575-5.912,7.122,0,4.004,3.246,7.25,7.25,7.25,3.372,0,6.198-2.306,7.009-5.424-.95,.583-2.063,.924-3.259,.924Z"
+				d="M1.75,5.75l6.767,3.733c.301,.166,.665,.166,.966,0l6.767-3.733"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></path>
+			<rect
+				x="1.75"
+				y="3.25"
+				width="14.5"
+				height="11.5"
+				rx="2"
+				ry="2"
+				transform="translate(18 18) rotate(180)"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
+			></rect>
 		</g>
 	</svg>
 </template>
