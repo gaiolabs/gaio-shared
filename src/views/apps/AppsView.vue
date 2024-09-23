@@ -186,9 +186,9 @@
 				/>
 			</div>
 			<!--EDIT APP-->
-			<app-control
+			<AppControl
 				v-if="show"
-				:app="currentApp as AppType"
+				:app="currentApp"
 				@save="manuallyUpdateApp"
 				@close="show = false"
 			/>
@@ -225,7 +225,7 @@ const show = ref(false)
 const changeUserViewType = (type: string) => {
 	listType.value = type
 	useAuthStore().updateUserOptions({
-		appViewType: type
+		appViewType: type,
 	})
 }
 
