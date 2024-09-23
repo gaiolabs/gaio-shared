@@ -142,6 +142,7 @@ declare module 'vue' {
     PencilIcon: typeof import('./src/components/icons/PencilIcon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SaveIcon: typeof import('./src/components/icons/SaveIcon.vue')['default']
     SearchIcon: typeof import('./src/components/icons/SearchIcon.vue')['default']
     SeedlingIcon: typeof import('./src/components/icons/SeedlingIcon.vue')['default']
     SettingsIcon: typeof import('./src/components/icons/SettingsIcon.vue')['default']
