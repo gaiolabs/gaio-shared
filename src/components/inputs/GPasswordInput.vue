@@ -6,22 +6,14 @@
 		:maxlength="8"
 	>
 		<template #password-visible-icon>
-			<NIcon
-				:size="16"
-				:component="GlassesOutline"
-			/>
+			<IconComponent name="EyeSlash" />
 		</template>
 		<template #password-invisible-icon>
-			<NIcon
-				:size="16"
-				:component="Glasses"
-			/>
+			<IconComponent name="Eyeasd" />
 		</template>
 	</NInput>
 </template>
 
 <script setup lang="ts">
-import { NIcon } from 'naive-ui'
-
-// import { Eye, EyeSlash } from '
+import IconComponent from '@/components/icons/IconComponent.vue'
 </script>
