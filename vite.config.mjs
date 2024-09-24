@@ -8,42 +8,42 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	server: {
 		watch: {
-			usePolling: true
-		}
+			usePolling: true,
+		},
 	},
 	plugins: [
 		AutoImport({
 			dts: true,
 			eslintrc: {
-				enabled: true
+				enabled: true,
 			},
 			include: [
 				/\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
 				/\.vue$/,
 				/\.vue\?vue/, // .vue
-				/\.md$/ // .md
+				/\.md$/, // .md
 			],
 			imports: [
 				'vue',
 				'vue-router',
 				{
-					'naive-ui': ['useDialog', 'useNotification', 'useLoadingBar']
-				}
-			]
+					'naive-ui': ['useDialog', 'useNotification', 'useLoadingBar'],
+				},
+			],
 		}),
 		Components({
 			resolvers: [
 				NaiveUiResolver({
-					transform: 'PascalCase'
+					transform: 'PascalCase',
 				}),
-				ElementPlusResolver()
-			]
+				ElementPlusResolver(),
+			],
 		}),
-		vue()
+		vue(),
 	],
 	resolve: {
 		alias: {
-			'@': fileURLToPath(new URL('./src', import.meta.url))
-		}
-	}
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
+		},
+	},
 })
