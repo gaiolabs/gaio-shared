@@ -50,6 +50,19 @@ module.exports = {
 				'elevation-4': 'var(--elevation-4)',
 				'elevation-invert': 'var(--elevation-invert)',
 			},
+			animation: {
+				'vertical-bounce': 'vertical-bounce 0.6s ease-in-out infinite',
+			},
+			keyframes: {
+				'vertical-bounce': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+					},
+					'50%': {
+						transform: 'translateY(-20px)',
+					},
+				},
+			},
 		},
 	},
 	plugins: [],
