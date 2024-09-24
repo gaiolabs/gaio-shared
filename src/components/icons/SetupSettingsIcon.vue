@@ -6,11 +6,27 @@
 		width="18"
 	>
 		<g :fill="fill">
+			<path
+				d="M9,5.5c0-1.537-.927-2.854-2.25-3.433v3.683H3.75V2.067c-1.323,.579-2.25,1.896-2.25,3.433s.927,2.854,2.25,3.433v6.317c0,.552,.448,1,1,1h1c.552,0,1-.448,1-1v-6.317c1.323-.579,2.25-1.896,2.25-3.433Z"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></path>
+			<path
+				d="M15.25,9.25v6c0,.552-.448,1-1,1h-1c-.552,0-1-.448-1-1v-6"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></path>
 			<line
-				x1="6.25"
-				y1="4.237"
-				x2="9"
-				y2="9"
+				x1="11.25"
+				y1="9.25"
+				x2="16.25"
+				y2="9.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -18,169 +34,24 @@
 				:stroke="_secondaryfill"
 			></line>
 			<line
-				x1="6.25"
-				y1="13.764"
-				x2="9"
-				y2="9"
+				x1="13.75"
+				y1="9.25"
+				x2="13.75"
+				y2="2.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="_secondaryfill"
 			></line>
-			<line
-				x1="14.5"
-				y1="9"
-				x2="9"
-				y2="9"
-				fill="none"
+			<polygon
+				points="13.75 5.25 14.75 3.5 14.25 1.75 13.25 1.75 12.75 3.5 13.75 5.25"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
+				:fill="_secondaryfill"
 				:stroke="_secondaryfill"
-			></line>
-			<circle
-				cx="9"
-				cy="9"
-				r="5.5"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></circle>
-			<line
-				x1="9"
-				y1="1.75"
-				x2="9"
-				y2="3.5"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="2.721"
-				y1="5.375"
-				x2="4.237"
-				y2="6.25"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="1.75"
-				y1="9"
-				x2="3.5"
-				y2="9"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="16.25"
-				y1="9"
-				x2="14.5"
-				y2="9"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="2.721"
-				y1="12.625"
-				x2="4.237"
-				y2="11.75"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="9"
-				y1="16.25"
-				x2="9"
-				y2="14.5"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="12.625"
-				y1="15.279"
-				x2="11.75"
-				y2="13.763"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="5.375"
-				y1="15.279"
-				x2="6.25"
-				y2="13.763"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="15.279"
-				y1="12.625"
-				x2="13.763"
-				y2="11.75"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="15.279"
-				y1="5.375"
-				x2="13.763"
-				y2="6.25"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="12.625"
-				y1="2.721"
-				x2="11.75"
-				y2="4.237"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
-			<line
-				x1="5.375"
-				y1="2.721"
-				x2="6.25"
-				y2="4.237"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></line>
+			></polygon>
 		</g>
 	</svg>
 </template>

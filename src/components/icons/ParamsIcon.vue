@@ -6,84 +6,101 @@
 		width="18"
 	>
 		<g :fill="fill">
-			<rect
-				x="2.75"
-				y="2.75"
-				width="12.5"
-				height="12.5"
-				rx="2"
-				ry="2"
+			<circle
+				cx="9"
+				cy="11"
+				r="1.75"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></circle>
+			<line
+				x1="9"
+				y1="15.25"
+				x2="9"
+				y2="16.25"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></line>
+			<line
+				x1="9"
+				y1="1.75"
+				x2="9"
+				y2="9"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></line>
+			<circle
+				cx="14.25"
+				cy="6.75"
+				r="1.75"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></rect>
+			></circle>
 			<line
-				x1="9.75"
-				y1="6.75"
-				x2="12.75"
-				y2="6.75"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></line>
-			<line
-				x1="5.25"
-				y1="6.75"
-				x2="7.25"
-				y2="6.75"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></line>
-			<line
-				x1="7.25"
+				x1="14.25"
 				y1="5"
-				x2="7.25"
-				y2="8.5"
+				x2="14.25"
+				y2="1.75"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
+				:stroke="fill"
 			></line>
 			<line
-				x1="10.75"
-				y1="11.25"
-				x2="12.75"
+				x1="14.25"
+				y1="16.25"
+				x2="14.25"
 				y2="11.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
+				:stroke="fill"
+			></line>
+			<circle
+				cx="3.75"
+				cy="6.75"
+				r="1.75"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></circle>
+			<line
+				x1="3.75"
+				y1="5"
+				x2="3.75"
+				y2="1.75"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
 			></line>
 			<line
-				x1="5.25"
-				y1="11.25"
-				x2="8.25"
+				x1="3.75"
+				y1="16.25"
+				x2="3.75"
 				y2="11.25"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></line>
-			<line
-				x1="10.75"
-				y1="9.5"
-				x2="10.75"
-				y2="13"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
+				:stroke="fill"
 			></line>
 		</g>
 	</svg>

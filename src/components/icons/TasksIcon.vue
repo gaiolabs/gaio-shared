@@ -6,34 +6,8 @@
 		width="18"
 	>
 		<g :fill="fill">
-			<rect
-				x="2.25"
-				y="2.25"
-				width="4.5"
-				height="4.5"
-				rx="1"
-				ry="1"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></rect>
-			<rect
-				x="11.25"
-				y="11.25"
-				width="4.5"
-				height="4.5"
-				rx="1"
-				ry="1"
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></rect>
 			<path
-				d="M9.75,4.25h2c1.105,0,2,.895,2,2v2"
+				d="M10.998,3.826c2.054,.693,3.63,2.424,4.104,4.569"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -41,13 +15,51 @@
 				:stroke="_secondaryfill"
 			></path>
 			<path
-				d="M8.25,13.75h-2c-1.105,0-2-.895-2-2v-2"
+				d="M2.871,10.981c-.427-2.125,.284-4.356,1.905-5.839"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="_secondaryfill"
 			></path>
+			<path
+				d="M13.131,14.443c-1.627,1.433-3.914,1.932-6.009,1.27"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></path>
+			<circle
+				cx="9"
+				cy="3.75"
+				r="2"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></circle>
+			<circle
+				cx="3.804"
+				cy="12.75"
+				r="2"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></circle>
+			<circle
+				cx="14.196"
+				cy="12.75"
+				r="2"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></circle>
 		</g>
 	</svg>
 </template>
