@@ -3,7 +3,7 @@
 		<div class="g-bg-1 card-header-fix card-tags min-h-[410px] rounded shadow">
 			<div class="card-header g-bg-400 flex items-center justify-between gap-2 p-2">
 				<div>
-					<g-icon name="apps" />
+					<IconComponent name="Apps" />
 					{{ $t('apps') }}
 				</div>
 				<div class="flex items-center">

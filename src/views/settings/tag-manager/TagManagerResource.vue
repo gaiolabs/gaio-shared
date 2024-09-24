@@ -45,7 +45,7 @@
 							<g-icon :name="item.role === 'edit' ? 'edit' : 'eye'" />
 						</div>
 						<div v-if="item.type === 'source'">
-							<g-icon name="database" />
+							<IconComponent name="DataSources" />
 						</div>
 						<div
 							class="tag-inner"

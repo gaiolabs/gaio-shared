@@ -36,7 +36,7 @@
 										@click="addSource()"
 									>
 										<template #icon>
-											<g-icon name="add" />
+											<IconComponent name="AddItem" />
 										</template>
 										{{ $t('new') }}
 									</NButton>

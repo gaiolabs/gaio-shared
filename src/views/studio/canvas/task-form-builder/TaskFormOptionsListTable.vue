@@ -22,7 +22,7 @@
 								size="tiny"
 								@click="addRow()"
 							>
-								<g-icon name="add" />
+								<IconComponent name="AddItem" />
 							</NButton>
 						</th>
 					</tr>

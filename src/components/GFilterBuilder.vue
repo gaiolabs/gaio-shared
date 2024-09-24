@@ -24,7 +24,7 @@
 									@click="addCol()"
 								>
 									<template #icon>
-										<g-icon name="add" />
+										<IconComponent name="AddItem" />
 									</template>
 								</NButton>
 							</th>

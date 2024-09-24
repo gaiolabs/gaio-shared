@@ -9,9 +9,13 @@
 	</template>
 	<template v-else>
 		<WarningIcon
+			:id="props.name"
 			title="Icon not found"
 			class="text-yellow-400 rounded-full bg-red-700 p-1 w-7 h-7 animate-pulse"
 		/>
+		<span>
+			{{ props.name }}
+		</span>
 	</template>
 </template>
 
