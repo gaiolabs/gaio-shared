@@ -6,7 +6,7 @@
 		<div class="flex items-center gap-1 text-lg font-bold">
 			<IconComponent
 				class="rotate-[-90deg]"
-				name="studio"
+				name="Studio"
 			/>
 			{{ $t('builder') }}
 		</div>

@@ -5,7 +5,10 @@
 	>
 		<div class="mx-1 flex items-center justify-between gap-1">
 			<div class="flex items-center gap-1 font-bold">
-				<IconComponent class="rotate-[-90deg]" name="studio" />
+				<IconComponent
+					class="rotate-[-90deg]"
+					name="Studio"
+				/>
 				{{ $t('join') }}
 				<span v-if="localTask.schema.join.length">({{ localTask.schema.join.length }})</span>
 			</div>
@@ -162,8 +165,8 @@ const props = defineProps({
 	localTask: {
 		type: Object as PropType<BuilderTaskType>,
 		required: true,
-		default: () => null as BuilderTaskType
-	}
+		default: () => null as BuilderTaskType,
+	},
 })
 
 const removeJoinItem = (schemaJoinIndex: number, subIndex: number = null) => {
@@ -196,7 +199,7 @@ const addJoin = () => {
 		type: 'inner',
 		raw: '',
 		byDatabaseName: currentDatabase,
-		toDatabaseName: currentDatabase
+		toDatabaseName: currentDatabase,
 	}
 }
 

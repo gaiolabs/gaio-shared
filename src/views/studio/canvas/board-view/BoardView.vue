@@ -43,7 +43,10 @@
 						@click="organizeDagreLayout('LR')"
 					>
 						<template #icon>
-							<IconComponent class="rotate-[-90deg]" name="studio" />
+							<IconComponent
+								class="rotate-[-90deg]"
+								name="Studio"
+							/>
 						</template>
 					</NButton>
 					<NButton

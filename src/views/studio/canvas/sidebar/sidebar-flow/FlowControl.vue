@@ -7,11 +7,17 @@
 			<div class="flex w-full items-center justify-between">
 				<div class="flex items-center gap-2">
 					<div v-if="localFlow.appId">
-						<IconComponent class="rotate-[-90deg]" name="studio" />
+						<IconComponent
+							class="rotate-[-90deg]"
+							name="Studio"
+						/>
 						{{ localFlow.flowName ? localFlow.flowName : $t('flow') }}
 					</div>
 					<div v-else>
-						<IconComponent class="rotate-[-90deg]" name="studio" />
+						<IconComponent
+							class="rotate-[-90deg]"
+							name="Studio"
+						/>
 						{{ $t('newFlow') }}
 					</div>
 				</div>
@@ -129,7 +135,7 @@ const currentTab = ref('general')
 const loading = ref(false)
 const backupSchedule: { cron: string | undefined; cronStatus: string | undefined } = {
 	cron: undefined,
-	cronStatus: undefined
+	cronStatus: undefined,
 }
 
 const handleSaveSchedules = () => {
@@ -137,8 +143,8 @@ const handleSaveSchedules = () => {
 		useScheduleControl().defineFlowSchedules([
 			{
 				appId: localFlow.value.appId,
-				flowId: localFlow.value.flowId
-			}
+				flowId: localFlow.value.flowId,
+			},
 		])
 	}
 }
@@ -147,8 +153,8 @@ const save = async () => {
 	loading.value = true
 	const savedFlow = await useApi('flowControl').post('api/flow/save', {
 		body: {
-			flowData: localFlow.value
-		}
+			flowData: localFlow.value,
+		},
 	})
 
 	if (savedFlow.flowId) {
@@ -191,8 +197,8 @@ const remove = async () => {
 	await useApi().post('api/flow/remove', {
 		body: {
 			flowId: localFlow.value.flowId,
-			appId: localFlow.value.appId
-		}
+			appId: localFlow.value.appId,
+		},
 	})
 
 	handleSaveSchedules()
@@ -206,8 +212,8 @@ const replicateFlow = async () => {
 	const savedFlow = await useApi().post('api/flow/clone', {
 		body: {
 			flowId: localFlow.value.flowId,
-			appId: localFlow.value.appId
-		}
+			appId: localFlow.value.appId,
+		},
 	})
 
 	if (savedFlow && savedFlow.flowId) {
@@ -236,14 +242,14 @@ onMounted(() => {
 			flowType: 'dataPrep',
 			workflow: {
 				nodes: [],
-				edges: []
+				edges: [],
 			},
 			options: {
 				flowTimeout: 0,
 				dashboardType: 'page',
 				flowReload: undefined,
 				dialogWidth: undefined,
-				dialogOnDestroy: 'none'
+				dialogOnDestroy: 'none',
 			},
 			cronBase: {
 				status: 'active',
@@ -253,8 +259,8 @@ onMounted(() => {
 				hourValues: [],
 				dayValues: [],
 				dayOfMonthValues: [],
-				monthValues: []
-			}
+				monthValues: [],
+			},
 		}
 	}
 
