@@ -7,188 +7,70 @@
 </template>
 
 <script setup lang="ts">
-import useFormatValue from '@/composables/useFormatValue'
 import type { ReportNodeType } from '@gaio/shared/types'
-import { LineChart, FunnelChart, BarChart } from 'echarts/charts'
+import { BarChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import type {
-	EChartsOption,
-	XAXisOption,
-	SeriesOption,
-	LegendComponentOption,
-	GridOption,
-	YAXisOption,
-} from 'echarts/types/dist/shared'
+import type { EChartsOption, XAXisOption, SeriesOption, YAXisOption } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const { formatValue } = useFormatValue()
-const chartHelper = computed(() => useReportChartHelper(task, list))
-const { dimensions, measures, settings, columnName, themeColors, firstMeasure, firstDimension } = chartHelper.value
+const { dimensions, measures, settings, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
+const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { label } = computed(() => useReportChartHelperLabel(task)).value
+const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
 
-use([
-	CanvasRenderer,
-	GridComponent,
-	BarChart,
-	FunnelChart,
-	LineChart,
-	TitleComponent,
-	TooltipComponent,
-	LegendComponent,
-])
-
-const treatLabelsTicks = (arrayValues: Array<number | string | Date>, tickCount: number) => {
-	let ticksLabels: Array<number | string | Date> = []
-	const tickLabelLength = Math.ceil(arrayValues.length / (tickCount !== 0 ? tickCount : arrayValues.length))
-	let i = 0
-	arrayValues.forEach((value, index) => {
-		if (index === 0) ticksLabels.push(value)
-		if (tickLabelLength === i) {
-			ticksLabels.push(value)
-			i = 1
-		} else i++
-	})
-	return ticksLabels
-}
+use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
 const xAxis = () => {
-	const xValues = list.map((item) => item[columnName(firstDimension.value)]) as Array<number | string | Date>
-	const ticksLabels = treatLabelsTicks(xValues, settings.value.xAxisTickCount)
+	const values = list.map((item) => item[columnName(dimensions.value.first)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
 	return {
 		type: 'category',
-		data: xValues,
-		axisTick: {
-			alignWithLabel: true,
-			customValues: ticksLabels,
-		},
-		axisLine: {
-			show: settings.value.showXLine,
-		},
-		splitLine: {
-			show: settings.value.showXGrid,
-		},
-		name: settings.value.showXTitle ? columnName(firstDimension.value) : undefined,
-		nameLocation: 'middle',
-		nameTextStyle: {
-			align: 'center',
-			padding: [16, 0, 0, 0],
-		},
-		axisLabel: {
-			show: settings.value.showXAxis,
-			customValues: ticksLabels,
-		},
+		data: values,
+		...commonXAxisConfigs(ticksLabels, columnName(dimensions.value.first)),
 	} as XAXisOption | XAXisOption[]
 }
 
 const yAxis = () => {
-	const yValues = list.map((item) => item[columnName(firstMeasure.value)]) as Array<number | string | Date>
-	const ticksLabels = treatLabelsTicks(yValues, settings.value.yAxisTickCount)
-
-	return [
-		{
-			type: 'value',
-			axisLine: {
-				show: settings.value.showYLine,
-			},
-			splitLine: {
-				show: settings.value.showYGrid,
-			},
-			name: settings.value.showYTitle ? columnName(firstMeasure.value) : undefined,
-			nameLocation: 'center',
-			nameTextStyle: {
-				align: 'center',
-				padding: [0, 0, 80, 0],
-			},
-			axisLabel: {
-				show: settings.value.showYAxis,
-				customValues: settings.value.yAxisTickCount === 0 ? undefined : ticksLabels,
-			},
-			axisTick: {
-				alignWithLabel: false,
-				customValues: settings.value.yAxisTickCount === 0 ? undefined : ticksLabels,
-			},
-		},
-	] as YAXisOption | YAXisOption[]
+	const values = measures.value.measures
+		.map((measure) => {
+			return list.map((item) => {
+				return item[columnName(measure)]
+			})
+		})
+		.flat(Infinity) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
+	return {
+		type: 'value',
+		...commonYAxisConfigs(ticksLabels, columnName(measures.value.first)),
+	} as YAXisOption | YAXisOption[]
 }
 
 const series = () => {
-	return measures.value.map((measure) => {
-		const yValues = list.map((item) => item[columnName(measure)])
+	return measures.value.measures.map((measure) => {
+		const values = list.map((item) => item[columnName(measure)])
 		return {
 			name: columnName(measure),
 			type: 'bar',
 			emphasis: {
 				focus: 'series',
 			},
-			data: yValues,
+			data: values,
 		}
 	}) as SeriesOption | SeriesOption[]
-}
-
-const legend = () => {
-	const positions = settings.value.legendPosition.split('-')
-	return {
-		show: settings.value.showLegend,
-		type: 'scroll',
-		orient: positions.includes('top') || positions.includes('bottom') ? 'horizontal' : 'vertical',
-		align: 'auto',
-		top:
-			positions.includes('top') ? 'top'
-			: positions.includes('bottom') ? 'bottom'
-			: 'center',
-		left:
-			positions.includes('left') ? 'left'
-			: positions.includes('right') ? 'right'
-			: 'center',
-		textStyle: {
-			color: settings.value.legendFontColor,
-			fontSize: Number(settings.value.legendFontSize || 13),
-		},
-	} as LegendComponentOption | LegendComponentOption[]
-}
-
-const label = () => {
-	return {
-		show: settings.value.showLabel,
-		position: settings.value.showLabelType,
-		color: settings.value.labelFontColor,
-		fontSize: settings.value.labelFontSize || 13,
-		rotate: settings.value.labelRotate ? 90 : undefined,
-		formatter: (v: Record<string, string | number | Date>) => {
-			return formatValue(v['data'], {
-				...firstMeasure.value,
-				compactNumber: settings.value.compactNumberLabel,
-			})
-		},
-	}
-}
-
-const grid = () => {
-	const positions = settings.value.legendPosition.split('-')
-	const isTopOrBottom = positions.includes('top') || positions.includes('bottom')
-
-	const plusLegendTop = settings.value.showLegend && positions.includes('top') ? 10 : 0
-	const plusLegendBottom = settings.value.showLegend && positions.includes('bottom') ? 10 : 0
-	const plusLegendLeft = settings.value.showLegend && positions.includes('left') && !isTopOrBottom ? 15 : 0
-	const plusLegendRight = settings.value.showLegend && positions.includes('right') && !isTopOrBottom ? 15 : 0
-
-	const plusTitleBottom = settings.value.showXTitle ? 5 : 0
-	// const plusTitleLeft = 0
-	const plusTitleLeft = settings.value.showYTitle ? 3 : 0
-
-	return {
-		top: `${(settings.value.appendPaddingTop ?? 0) + plusLegendTop + 3}%`,
-		bottom: `${(settings.value.appendPaddingBottom ?? 0) + plusLegendBottom + plusTitleBottom + 3}%`,
-		left: `${(settings.value.appendPaddingLeft ?? 0) + plusLegendLeft + plusTitleLeft + 3}%`,
-		right: `${(settings.value.appendPaddingRight ?? 0) + plusLegendRight + 3}%`,
-		containLabel: true,
-	} as GridOption | GridOption[]
 }
 
 const option = ref<EChartsOption>({
@@ -198,26 +80,27 @@ const option = ref<EChartsOption>({
 			type: 'shadow',
 		},
 	},
+	color: themeColors.value,
 	legend: legend(),
-	label: label(),
+	label: label(measures.value.measures),
 	grid: grid(),
-	// xAxis: yAxis(),
-	// yAxis: xAxis(),
 	xAxis: xAxis(),
 	yAxis: yAxis(),
 	series: series(),
+	areaStyle: {},
 })
 
 watch(
-	[() => task, () => list, dimensions, measures],
+	[() => task, () => list, dimensions, measures, themeColors],
 	() => {
 		option.value = {
 			...option.value,
+			color: themeColors.value,
 			xAxis: xAxis(),
 			yAxis: yAxis(),
 			series: series(),
 			legend: legend(),
-			label: label(),
+			label: label(measures.value.measures),
 			grid: grid(),
 		}
 	},

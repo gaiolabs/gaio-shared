@@ -13,7 +13,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { groupBy, sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()

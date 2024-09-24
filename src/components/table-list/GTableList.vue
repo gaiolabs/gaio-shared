@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<TableListTableDetailModal
+		<TableDetailModal
 			:open-modal="shouldOpenTableView"
 			:table-name="selectTableView"
 			@update:show="shouldOpenTableView = $event"
@@ -113,7 +113,7 @@ import { useAppStore } from '@/stores'
 import { NButton, NCheckbox, NCheckboxGroup, NInput, NSkeleton, NTooltip, NVirtualList } from 'naive-ui'
 import { onMounted, ref, watch } from 'vue'
 import GIcon from '../GIcon.vue'
-import TableListTableDetailModal from './components/TableListTableDetailModal.vue'
+import TableDetailModal from '../tabel-detail-modal/TableDetailModal.vue'
 
 type TableDataType = {
 	label: string
@@ -124,7 +124,7 @@ const emit = defineEmits(['update:modelValue', 'update:show'])
 const {
 	appId = undefined,
 	modelValue = undefined,
-	disabled = false
+	disabled = false,
 } = defineProps<{
 	appId?: string
 	modelValue?: string[]
@@ -141,12 +141,12 @@ const loading = ref(true)
 
 watch(
 	() => selected.value,
-	() => emit('update:modelValue', selected.value)
+	() => emit('update:modelValue', selected.value),
 )
 
 watch(filteredName, (newValue) => {
 	const filteredList = tableList.value.filter((item) =>
-		item.label.toLocaleLowerCase().includes(newValue.toLocaleLowerCase())
+		item.label.toLocaleLowerCase().includes(newValue.toLocaleLowerCase()),
 	)
 	filteredTableList.value = filteredList.length > 0 ? filteredList : null
 })
@@ -170,7 +170,7 @@ const loadTableList = () => {
 	const taskData = {
 		...useAppStore().appInfo,
 		sourceType: 'bucket',
-		client: 'clickhouse'
+		client: 'clickhouse',
 	}
 
 	if (appId) {
@@ -180,14 +180,14 @@ const loadTableList = () => {
 	useApi()
 		.post('api/table/list', {
 			body: {
-				taskData
-			}
+				taskData,
+			},
 		})
 		.then((res) => {
 			loading.value = false
 			const listTable = res.data.map((item: any) => ({
 				label: item.tableName,
-				value: item.tableName
+				value: item.tableName,
 			})) as TableDataType[]
 
 			const [newSelectList, newNotSelectList]: TableDataType[][] = listTable.reduce(
@@ -199,7 +199,7 @@ const loadTableList = () => {
 					}
 					return [select, notSelect]
 				},
-				[[], []]
+				[[], []],
 			)
 
 			newSelectList.sort((a, b) => a.value.localeCompare(b.value))

@@ -14,7 +14,7 @@ import { Treemap, type TreemapOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { orderBy } from 'lodash-es'
 import { computed, nextTick, onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 

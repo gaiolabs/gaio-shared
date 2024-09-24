@@ -203,4 +203,6 @@ export default {
 	insideRight: 'Dentro à direita',
 	insideBottom: 'Dentro na parte inferior',
 	insideLeft: 'Dentro à esquerda',
+	showPoint: 'Mostrar pontos',
+	lineSmooth: 'Linha suave',
 }

@@ -34,13 +34,14 @@
 						<label class="control-label">
 							{{ $t('password') }}
 						</label>
-						<NInput
+						<GPasswordInput v-model:value="credentials.password" />
+						<!-- <NInput
 							v-model:value="credentials.password"
 							type="password"
 							show-password-on="mousedown"
 							:placeholder="$t('yourPassword')"
 							class="mb-4 w-full bg-white"
-						/>
+						/> -->
 					</div>
 					<div class="mb-4 flex justify-between">
 						<div class="">
@@ -93,6 +94,7 @@
 </template>
 
 <script setup lang="ts">
+import GPasswordInput from '@/components/inputs/GPasswordInput.vue'
 import useApi from '@/composables/useApi'
 import { useAuthStore } from '@/stores'
 import { useDark } from '@vueuse/core'
@@ -107,7 +109,7 @@ const gaioLogoDark = new URL('@/assets/images/gaio-logo-dark.png', import.meta.u
 const credentials = reactive({
 	username: 'contact@gaio.io',
 	password: '@Gaio123',
-	loading: false
+	loading: false,
 })
 
 const errorLogin = ref<string | null>(null)
@@ -119,8 +121,8 @@ const handleLogin = async () => {
 	const { token, user } = await useApi().post('api/auth/sign-in', {
 		body: {
 			email: credentials.username,
-			password: credentials.password
-		}
+			password: credentials.password,
+		},
 	})
 
 	console.log(user)
