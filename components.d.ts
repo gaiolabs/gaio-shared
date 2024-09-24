@@ -164,6 +164,7 @@ declare module 'vue' {
     Star2: typeof import('./src/components/icons/star-2.vue')['default']
     StarIcon: typeof import('./src/components/icons/StarIcon.vue')['default']
     StarTiny: typeof import('./src/components/icons/StarTiny.vue')['default']
+    StarTinyFilledIcon: typeof import('./src/components/icons/StarTinyFilledIcon.vue')['default']
     StarTinyIcon: typeof import('./src/components/icons/StarTinyIcon.vue')['default']
     Studio: typeof import('./src/components/icons/Studio.vue')['default']
     StudioIcon: typeof import('./src/components/icons/StudioIcon.vue')['default']

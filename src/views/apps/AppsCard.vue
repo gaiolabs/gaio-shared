@@ -7,16 +7,7 @@
 						class="z-10"
 						:fill="app.options.color"
 						:secondaryfill="app.options.color"
-						:name="
-							app.options.icon === 'icon-shield-alert' ? 'ShieldAlert'
-							: app.options.icon === 'icon-square-dashed-bottom' ? 'SquarePointer'
-							: app.options.icon === 'icon-hop-off' ? 'Seedling'
-							: app.options.icon === 'icon-mountain' ? 'ImageMountain'
-							: app.options.icon === 'box-seam' ? 'SquareDashedContent'
-							: app.options.icon === 'icon-hard-drive' ? 'HardDrive'
-							: app.options.icon === 'icon-martini' ? 'WineGlass'
-							: app.options.icon
-						"
+						:name="app.options.icon"
 					/>
 					<div
 						class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
@@ -32,15 +23,12 @@
 						{{ app.options.creator }}
 					</small>
 				</div>
-				<NButton
-					size="tiny"
-					quaternary
+				<button
+					:class="isFavorited ? 'text-yellow-500' : 'text-gray-300 hover:text-gray-600 transition-colors duration-150'"
 					@click="useAuthStore().toggleFavoriteApp(app.appId)"
 				>
-					<template #icon>
-						<IconComponent name="StarTiny" />
-					</template>
-				</NButton>
+					<IconComponent :name="isFavorited ? 'StarTinyFilled' : 'StarTiny'" />
+				</button>
 			</header>
 		</div>
 		<div class="mt-5 flex items-center justify-between px-1">
@@ -90,7 +78,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { useAppStore, useAuthStore } from '@/stores'
 import type { AppType } from '@gaio/shared/types'
 import { cloneDeep, uniq } from 'lodash-es'
@@ -108,8 +95,8 @@ const router = useRouter()
 const currentApp = ref<Partial<AppType>>({})
 const user = useAuthStore().user
 
-const generateFavorAppColor = computed(() => {
-	return user?.options?.favorApps?.includes(props.app.appId) ? '#ceb51b' : ''
+const isFavorited = computed(() => {
+	return user?.options?.favorApps?.includes(props.app.appId)
 })
 
 const goTo = async (app: AppType, type: string) => {
