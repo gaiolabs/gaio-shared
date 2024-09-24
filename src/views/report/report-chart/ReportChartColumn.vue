@@ -25,7 +25,7 @@ import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const { dimensions, measures, settings, columnName } = computed(() => useReportChartHelper(task)).value
+const { dimensions, measures, settings, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
 const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
 const { grid } = computed(() => useReportChartHelperGrid(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
@@ -80,19 +80,22 @@ const option = ref<EChartsOption>({
 			type: 'shadow',
 		},
 	},
+	color: themeColors.value,
 	legend: legend(),
 	label: label(measures.value.measures),
 	grid: grid(),
 	xAxis: xAxis(),
 	yAxis: yAxis(),
 	series: series(),
+	areaStyle: {},
 })
 
 watch(
-	[() => task, () => list, dimensions, measures],
+	[() => task, () => list, dimensions, measures, themeColors],
 	() => {
 		option.value = {
 			...option.value,
+			color: themeColors.value,
 			xAxis: xAxis(),
 			yAxis: yAxis(),
 			series: series(),

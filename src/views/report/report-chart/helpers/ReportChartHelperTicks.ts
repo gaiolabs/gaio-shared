@@ -41,6 +41,20 @@ export default () => {
 		return ticksLabels
 	}
 
+	const getMinMaxValues = (arrayValues: Array<number | string | Date>) => {
+		let min = roundToNearest(Math.min(...(arrayValues as number[])))
+		let max = roundToNearest(Math.max(...(arrayValues as number[])))
+
+		if (min >= 0 && max >= 0) min = 0
+		if (min < 0 && max >= 0)
+			if (Math.abs(min) > max) max = Math.abs(min)
+			else min = max * -1
+		if (min < 0 && max < 0) max = 0
+
+		const middle = (max - min) / 2
+		return { min, middle, max }
+	}
+
 	const roundToNearest = (value: number) => {
 		const isNegative = value < 0
 		const absolute = Math.abs(value)
@@ -53,5 +67,5 @@ export default () => {
 		}
 		return isNegative ? -1 * rounded * magnitude : rounded * magnitude
 	}
-	return { treatLabelsTicks, roundToNearest }
+	return { treatLabelsTicks, roundToNearest, getMinMaxValues }
 }
