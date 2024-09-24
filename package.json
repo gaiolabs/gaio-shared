@@ -38,6 +38,7 @@
     "dagre": "^0.8.5",
     "dayjs": "^1.11.11",
     "echarts": "^5.5.1",
+    "echarts-stat": "^1.2.0",
     "fastest-validator": "^1.18.0",
     "flexsearch": "^0.7.43",
     "grid-layout-plus": "^1.0.5",

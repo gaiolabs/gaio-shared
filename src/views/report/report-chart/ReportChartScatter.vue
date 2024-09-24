@@ -9,7 +9,9 @@
 <script setup lang="ts">
 import useFormatValue from '@/composables/useFormatValue'
 import type { ReportNodeType } from '@gaio/shared/types'
-import { ScatterChart } from 'echarts/charts'
+import { registerTransform } from 'echarts'
+import ecStat from 'echarts-stat'
+import { ScatterChart, LineChart } from 'echarts/charts'
 import {
 	TitleComponent,
 	TooltipComponent,
@@ -26,6 +28,7 @@ import type {
 	SeriesOption,
 	YAXisOption,
 	TopLevelFormatterParams,
+	DatasetOption,
 } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
@@ -52,10 +55,14 @@ use([
 	MarkAreaComponent,
 	MarkLineComponent,
 	ScatterChart,
+	LineChart,
 	TitleComponent,
 	TooltipComponent,
 	LegendComponent,
 ])
+
+const ecStatLocal: any = ecStat
+registerTransform(ecStatLocal.transform.regression)
 
 const xAxis = () => {
 	const values = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
@@ -73,27 +80,25 @@ const yAxis = () => {
 	} as YAXisOption | YAXisOption[]
 }
 
-const series = () => {
-	const data = list.map((item) => {
-		return [
-			item[columnName(measures.value.first)],
-			item[columnName(measures.value.second)],
-			item[columnName(dimensions.value.first)],
-		]
-	})
+const data = list.map((item) => {
+	return [
+		item[columnName(measures.value.first)],
+		item[columnName(measures.value.second)],
+		item[columnName(dimensions.value.first)],
+	] as DatasetOption
+})
 
+const series = () => {
 	const labels = settings.value.quadrantContent.split('\n')
 	const valuesX = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
 	const xMinMax = getMinMaxValues(valuesX)
 	const valuesY = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
 	const yMinMax = getMinMaxValues(valuesY)
 
-	console.log('settings.value.showQuadrant', settings.value.showQuadrant)
-
 	return [
 		{
-			symbolSize: 20,
-			data: data,
+			name: 'scatter',
+			symbolSize: 10,
 			colorBy: 'data',
 			type: 'scatter',
 			markLine:
@@ -186,18 +191,44 @@ const series = () => {
 			datasetIndex: 1,
 			symbolSize: 0.1,
 			symbol: 'circle',
-			label: { show: true, fontSize: 16 },
+			label: { show: false, fontSize: 10 },
 			labelLayout: { dx: -20 },
 			encode: { label: 2, tooltip: 1 },
 		},
 	] as SeriesOption | SeriesOption[]
 }
 
+const dataset = () => {
+	return [
+		{
+			source: list.map((item) => {
+				return [
+					item[columnName(measures.value.first)],
+					item[columnName(measures.value.second)],
+					item[columnName(dimensions.value.first)],
+				] as DatasetOption
+			}),
+		},
+		settings.value.guideScatterType && settings.value.guideScatterType !== 'none' ?
+			{
+				transform: {
+					type: 'ecStat:regression',
+					config: {
+						method: settings.value.guideScatterType ?? 'linear',
+						formulaOn: 'start',
+					},
+				},
+			}
+		:	null,
+	]
+}
+
 const option = ref<EChartsOption>({
+	dataset: dataset(),
 	tooltip: {
 		trigger: 'item',
-		formatter: (params: TopLevelFormatterParams) => {
-			console.log('params', params)
+		formatter: (v: TopLevelFormatterParams) => {
+			const params: any = v
 			const category = params.data[2]
 			return `${category}<br/>X: ${formatValue(params.data[0], {
 				compactNumber: true,
@@ -225,6 +256,7 @@ watch(
 			legend: legend(),
 			label: label(measures.value.measures),
 			grid: grid(),
+			dataset: dataset(),
 		}
 	},
 	{ deep: true },
