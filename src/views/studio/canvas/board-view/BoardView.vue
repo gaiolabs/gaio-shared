@@ -43,7 +43,7 @@
 						@click="organizeDagreLayout('LR')"
 					>
 						<template #icon>
-							<g-icon name="flow" />
+							<IconComponent class="rotate-[-90deg]" name="studio" />
 						</template>
 					</NButton>
 					<NButton

@@ -3,7 +3,7 @@
 		<div class="g-card flex w-full items-center justify-between p-2">
 			<div class="flex items-center justify-center">
 				<div>
-					<g-icon name="flow" />
+					<IconComponent class="rotate-[-90deg]" name="studio" />
 					{{ useAppStore().flow.flowName }}
 				</div>
 			</div>

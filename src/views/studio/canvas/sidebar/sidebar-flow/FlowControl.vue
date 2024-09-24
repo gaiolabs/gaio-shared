@@ -7,11 +7,11 @@
 			<div class="flex w-full items-center justify-between">
 				<div class="flex items-center gap-2">
 					<div v-if="localFlow.appId">
-						<g-icon name="flow" />
+						<IconComponent class="rotate-[-90deg]" name="studio" />
 						{{ localFlow.flowName ? localFlow.flowName : $t('flow') }}
 					</div>
 					<div v-else>
-						<g-icon name="flow" />
+						<IconComponent class="rotate-[-90deg]" name="studio" />
 						{{ $t('newFlow') }}
 					</div>
 				</div>
