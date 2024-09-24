@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddActionIcon: typeof import('./src/components/icons/AddActionIcon.vue')['default']
     AddItemIcon: typeof import('./src/components/icons/AddItemIcon.vue')['default']
     AllAppsIcon: typeof import('./src/components/icons/AllAppsIcon.vue')['default']
     AppShareIcon: typeof import('./src/components/icons/AppShareIcon.vue')['default']
@@ -14,6 +15,7 @@ declare module 'vue' {
     Bucket: typeof import('./src/components/icons/Bucket.vue')['default']
     BucketIcon: typeof import('./src/components/icons/BucketIcon.vue')['default']
     ChatIcon: typeof import('./src/components/icons/ChatIcon.vue')['default']
+    ChevronLeftIcon: typeof import('./src/components/icons/ChevronLeftIcon.vue')['default']
     CirclePlusIcon: typeof import('./src/components/icons/CirclePlusIcon.vue')['default']
     CloseIcon: typeof import('./src/components/icons/CloseIcon.vue')['default']
     CodeEditor: typeof import('./src/components/code-editor/CodeEditor.vue')['default']
@@ -144,6 +146,10 @@ declare module 'vue' {
     PencilIcon: typeof import('./src/components/icons/PencilIcon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    RunAll: typeof import('./src/components/icons/RunAll.vue')['default']
+    RunAllIcon: typeof import('./src/components/icons/RunAllIcon.vue')['default']
+    RunFromHereIcon: typeof import('./src/components/icons/RunFromHereIcon.vue')['default']
+    RunIcon: typeof import('./src/components/icons/RunIcon.vue')['default']
     SaveIcon: typeof import('./src/components/icons/SaveIcon.vue')['default']
     SearchIcon: typeof import('./src/components/icons/SearchIcon.vue')['default']
     SeedlingIcon: typeof import('./src/components/icons/SeedlingIcon.vue')['default']
