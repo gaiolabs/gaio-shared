@@ -173,6 +173,7 @@ declare module 'vue' {
     TaskIcon: typeof import('./src/components/TaskIcon.vue')['default']
     TasksIcon: typeof import('./src/components/icons/TasksIcon.vue')['default']
     TaskStaticContentPreviewModal: typeof import('./src/components/table-list/components/TaskStaticContentPreviewModal.vue')['default']
+    TestView: typeof import('./src/components/TestView.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
     TriangleWarning: typeof import('./src/components/icons/triangle-warning.vue')['default']
     UserIcon: typeof import('./src/components/icons/UserIcon.vue')['default']
