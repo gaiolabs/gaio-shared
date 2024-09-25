@@ -8,6 +8,6 @@ export const defaultReportHeader = (settings: ReportTaskSettingsType) => {
 		titleAlign: settings.titleAlign || 'left',
 		titleFontColor: settings.titleFontColor || '#000000',
 		titleFontWeight: !!settings.titleBold,
-		titleFontSize: settings.titleFontSize || '18'
+		titleFontSize: Number(settings.titleFontSize) || 18,
 	}
 }

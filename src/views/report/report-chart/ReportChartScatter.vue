@@ -133,23 +133,17 @@ const dataset = () => {
 
 const option = ref<EChartsOption>({
 	dataset: dataset(),
-	// tooltip: {
-	// 	trigger: 'item',
-	// 	formatter: (v: TopLevelFormatterParams) => {
-	// 		const params: any = v
-	// 		const category = params.data[2]
-	// 		return `${category}<br/>X: ${formatValue(params.data[0], {
-	// 			compactNumber: true,
-	// 		})}<br/>Y: ${params.data[1]}`
-	// 	},
-	// },
-
 	tooltip: {
-		trigger: 'axis',
-		axisPointer: {
-			type: 'cross',
+		trigger: 'item',
+		formatter: (v: any) => {
+			const params: any = v
+			const category = params.data[2]
+			return `${category}<br/>X: ${formatValue(params.data[0], {
+				compactNumber: true,
+			})}<br/>Y: ${params.data[1]}`
 		},
 	},
+
 	toolbox: {
 		feature: {
 			dataView: { show: true, readOnly: false },

@@ -99,9 +99,9 @@ const titleStyle = computed(() => {
 		paddingLeft: '6px',
 		paddingRight: '4px',
 		textAlign: settings.value.titleAlign || 'left',
-		fontSize: (settings.value.titleFontSize || '14') + 'px',
+		fontSize: (Number(settings.value.titleFontSize) || 14) + 'px',
 		color: settings.value.titleFontColor || 'inherit',
-		fontWeight: settings.value.titleBold ? 'bold' : 'normal'
+		fontWeight: settings.value.titleBold ? 'bold' : 'normal',
 	}
 })
 

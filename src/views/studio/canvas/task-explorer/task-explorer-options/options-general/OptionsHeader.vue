@@ -51,16 +51,16 @@
 					:options="[
 						{
 							label: $t('left'),
-							value: 'left'
+							value: 'left',
 						},
 						{
 							label: $t('center'),
-							value: 'center'
+							value: 'center',
 						},
 						{
 							label: $t('right'),
-							value: 'right'
-						}
+							value: 'right',
+						},
 					]"
 				/>
 			</div>
@@ -90,4 +90,6 @@
 import { useReportStore } from '@/stores'
 import { NCheckbox, NInput, NInputNumber, NSelect } from 'naive-ui'
 const { current } = useReportStore()
+
+console.log('current.settings.titleFontSize', current.settings.titleFontSize)
 </script>
