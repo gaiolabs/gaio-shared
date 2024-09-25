@@ -11,7 +11,7 @@
 				v-model="sidebarPanel"
 				class="z-20"
 			/>
-			<vue-draggable
+			<VueDraggable
 				v-model="items"
 				class="drag-table h-full w-full"
 				ghost-class="drag-hide"
@@ -19,12 +19,12 @@
 				handle=".handle-board"
 				@add="addDrag"
 			>
-				<board-view
+				<BoardView
 					:key="useAppStore().refreshKey"
 					@choose="selectElement"
 					@open="selectElement"
 				/>
-			</vue-draggable>
+			</VueDraggable>
 			<!--            <table-view-->
 			<!--                v-if="showDrawer === 'tableView'"-->
 			<!--                class="z-30"-->
@@ -113,8 +113,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 
 defineComponent({
 	components: {
-		...taskView
-	}
+		...taskView,
+	},
 })
 
 const currentTable = ref<string>()
@@ -135,11 +135,11 @@ const addDrag = (ev: SortableEvent) => {
 				base: {
 					...useAppStore().appInfo,
 					...element,
-					label: element.tableName
-				}
+					label: element.tableName,
+				},
 			}),
 			sources: [],
-			targets: []
+			targets: [],
 		})
 		.save()
 		.then(() => closeTask())

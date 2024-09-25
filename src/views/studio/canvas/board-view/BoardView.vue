@@ -103,12 +103,18 @@ const onSelectNode = (ev) => {
 	useAppStore().task = ev.node.data
 }
 
-onConnect((params) =>
+onConnect((params) => {
+	// avoid forbidden edge connection
+	if (params.sourceHandle === params.targetHandle) return
+
+	// avoid duplicated edges
+	if (edges.value.some((edge) => edge.source === params.source && edge.target === params.target)) return
+
 	addEdges({
 		...params,
 		type: 'smoothstep',
-	}),
-)
+	})
+})
 
 const updateFlow = debounce(() => {
 	const workflow = {
