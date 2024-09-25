@@ -17,7 +17,6 @@ export type BuilderTaskType = Partial<{
     resultDatabase: string
     schema: SchemaType // assuming corresponding type for SchemaModelZod
     schemaName: string
-    sourceType: string
     tableName: string
     tableView: boolean
     temporary: boolean
