@@ -1,4 +1,228 @@
 <template>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
+</template>
+
+<script setup lang="ts">
+import useFormatValue from '@/composables/useFormatValue'
+import type { ReportNodeType } from '@gaio/shared/types'
+import { registerTransform } from 'echarts'
+import ecStat from 'echarts-stat'
+import { ScatterChart, LineChart } from 'echarts/charts'
+import {
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent,
+	MarkAreaComponent,
+	MarkLineComponent,
+} from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type {
+	EChartsOption,
+	XAXisOption,
+	SeriesOption,
+	YAXisOption,
+	TopLevelFormatterParams,
+	DatasetOption,
+} from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperMarkArea from './helpers/ReportChartHelperMarkArea'
+import useReportChartHelperMarkLine from './helpers/ReportChartHelperMarkLine'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
+
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+
+const { dimensions, measures, settings, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
+const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { label } = computed(() => useReportChartHelperLabel(task)).value
+const { treatLabelsTicks, getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+const { markArea } = computed(() => useReportChartHelperMarkArea(task)).value
+const { markLine } = computed(() => useReportChartHelperMarkLine(task)).value
+const { formatValue } = useFormatValue()
+
+use([
+	CanvasRenderer,
+	GridComponent,
+	MarkAreaComponent,
+	MarkLineComponent,
+	ScatterChart,
+	LineChart,
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent,
+])
+
+const ecStatLocal: any = ecStat
+registerTransform(ecStatLocal.transform.regression)
+
+const xAxis = () => {
+	const values = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
+	return {
+		...commonXAxisConfigs(ticksLabels, columnName(measures.value.first)),
+	} as XAXisOption | XAXisOption[]
+}
+
+const yAxis = () => {
+	const values = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
+	return {
+		...commonYAxisConfigs(ticksLabels, columnName(measures.value.second)),
+	} as YAXisOption | YAXisOption[]
+}
+
+const firstDimensionsData = [
+	...new Set(
+		list.map((item) => {
+			return item[columnName(dimensions.value.first)]
+		}),
+	),
+]
+
+const treatedData = firstDimensionsData.map((value) => {
+	return list
+		.map((item) => {
+			if (value === item[columnName(dimensions.value.first)]) return item
+		})
+		.filter((item) => item !== undefined)
+})
+
+console.log('firstDimensionsData', firstDimensionsData)
+console.log('treatedData', treatedData)
+
+const series = () => {
+	const serieData = firstDimensionsData.map((item, index) => {
+		return {
+			name: item,
+			type: 'scatter',
+			datasetIndex: index,
+		}
+	})
+	const valuesX = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
+	const xMinMax = getMinMaxValues(valuesX)
+	const valuesY = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
+	const yMinMax = getMinMaxValues(valuesY)
+
+	console.log('serieData', serieData)
+	return [
+		// {
+		// 	colorBy: 'data',
+		// 	markLine: markLine(xMinMax, yMinMax),
+		// 	markArea: markArea(xMinMax, yMinMax),
+		// },
+		...serieData,
+		{
+			name: 'line',
+			type: 'line',
+			smooth: true,
+			datasetIndex: 1,
+			symbolSize: 0.1,
+			symbol: 'circle',
+			label: { show: false, fontSize: 10 },
+			labelLayout: { dx: -20 },
+			encode: { label: 2, tooltip: 1 },
+		},
+	] as SeriesOption | SeriesOption[]
+}
+
+const dataset = () => {
+	const transformData = firstDimensionsData.map((item) => {
+		return {
+			transform: {
+				type: 'filter',
+				config: {
+					dimension: 1,
+					eq: item,
+				},
+			},
+		}
+	})
+
+	return [
+		{
+			source: treatedData,
+		},
+		...transformData,
+		settings.value.guideScatterType && settings.value.guideScatterType !== 'none' ?
+			{
+				transform: {
+					type: 'ecStat:regression',
+					config: {
+						method: settings.value.guideScatterType ?? 'linear',
+						formulaOn: 'start',
+					},
+				},
+			}
+		:	null,
+	] as DatasetOption
+}
+
+console.log('dataset', dataset)
+
+const option = ref<EChartsOption>({
+	dataset: dataset(),
+	tooltip: {
+		trigger: 'item',
+		formatter: (v: TopLevelFormatterParams) => {
+			const params: any = v
+			const category = params.data[2]
+			return `${category}<br/>X: ${formatValue(params.data[0], {
+				compactNumber: true,
+			})}<br/>Y: ${params.data[1]}`
+		},
+	},
+	color: themeColors.value,
+	legend: legend(),
+	label: label(measures.value.measures),
+	grid: grid(),
+	xAxis: xAxis(),
+	yAxis: yAxis(),
+	series: series(),
+	visualMap: {
+		show: false,
+		dimension: 2,
+		min: 20000,
+		max: 1500000000,
+		seriesIndex: [0, 1],
+		inRange: {
+			symbolSize: [10, 70],
+		},
+	},
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			series: series(),
+			legend: legend(),
+			label: label(measures.value.measures),
+			grid: grid(),
+			dataset: dataset(),
+		}
+	},
+	{ deep: true },
+)
+</script>
+
+<!-- <template>
 	<div class="report-column">
 		<div
 			ref="id"
@@ -147,4 +371,4 @@ watch(
 onMounted(() => {
 	nextTick(() => loadChart())
 })
-</script>
+</script> -->

@@ -37,6 +37,8 @@ import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
 import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
 import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
 import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperMarkArea from './helpers/ReportChartHelperMarkArea'
+import useReportChartHelperMarkLine from './helpers/ReportChartHelperMarkLine'
 import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
@@ -47,6 +49,8 @@ const { grid } = computed(() => useReportChartHelperGrid(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
 const { label } = computed(() => useReportChartHelperLabel(task)).value
 const { treatLabelsTicks, getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+const { markArea } = computed(() => useReportChartHelperMarkArea(task)).value
+const { markLine } = computed(() => useReportChartHelperMarkLine(task)).value
 const { formatValue } = useFormatValue()
 
 use([
@@ -80,16 +84,7 @@ const yAxis = () => {
 	} as YAXisOption | YAXisOption[]
 }
 
-const data = list.map((item) => {
-	return [
-		item[columnName(measures.value.first)],
-		item[columnName(measures.value.second)],
-		item[columnName(dimensions.value.first)],
-	] as DatasetOption
-})
-
 const series = () => {
-	const labels = settings.value.quadrantContent.split('\n')
 	const valuesX = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
 	const xMinMax = getMinMaxValues(valuesX)
 	const valuesY = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
@@ -101,88 +96,8 @@ const series = () => {
 			symbolSize: 10,
 			colorBy: 'data',
 			type: 'scatter',
-			markLine:
-				settings.value.showQuadrant ?
-					{
-						animation: false,
-						silent: true,
-						data: [
-							{ xAxis: settings.value.quadrantX ?? xMinMax.middle },
-							{ yAxis: settings.value.quadrantY ?? yMinMax.middle },
-						],
-					}
-				:	undefined,
-			markArea:
-				settings.value.showQuadrant ?
-					{
-						silent: true,
-						label: {
-							show: true,
-							color: '#000',
-							position: 'inside',
-							fontSize: 14,
-						},
-						data: [
-							[
-								{
-									show: settings.value.showQuadrant,
-									label: {
-										formatter: labels[3] ?? '',
-									},
-									itemStyle: { color: settings.value.regionStyle[3].fill },
-									xAxis: settings.value.quadrantX ?? xMinMax.middle,
-									yAxis: settings.value.quadrantY ?? yMinMax.middle,
-								},
-								{
-									xAxis: xMinMax.min,
-									yAxis: yMinMax.min,
-								},
-							],
-							[
-								{
-									label: {
-										formatter: labels[2] ?? '',
-									},
-									itemStyle: { color: settings.value.regionStyle[2].fill },
-									xAxis: settings.value.quadrantX ?? xMinMax.middle,
-									yAxis: settings.value.quadrantY ?? yMinMax.middle,
-								},
-								{
-									xAxis: xMinMax.min,
-									yAxis: yMinMax.max,
-								},
-							],
-							[
-								{
-									label: {
-										formatter: labels[1] ?? '',
-									},
-									itemStyle: { color: settings.value.regionStyle[1].fill },
-									xAxis: settings.value.quadrantX ?? xMinMax.middle,
-									yAxis: settings.value.quadrantY ?? yMinMax.middle,
-								},
-								{
-									xAxis: xMinMax.max,
-									yAxis: yMinMax.max,
-								},
-							],
-							[
-								{
-									label: {
-										formatter: labels[0] ?? '',
-									},
-									itemStyle: { color: settings.value.regionStyle[0].fill },
-									xAxis: settings.value.quadrantX ?? xMinMax.middle,
-									yAxis: settings.value.quadrantY ?? yMinMax.middle,
-								},
-								{
-									xAxis: xMinMax.max,
-									yAxis: yMinMax.min,
-								},
-							],
-						],
-					}
-				:	undefined,
+			markLine: markLine(xMinMax, yMinMax),
+			markArea: markArea(xMinMax, yMinMax),
 		},
 		{
 			name: 'line',
@@ -225,16 +140,31 @@ const dataset = () => {
 
 const option = ref<EChartsOption>({
 	dataset: dataset(),
+	// tooltip: {
+	// 	trigger: 'item',
+	// 	formatter: (v: TopLevelFormatterParams) => {
+	// 		const params: any = v
+	// 		const category = params.data[2]
+	// 		return `${category}<br/>X: ${formatValue(params.data[0], {
+	// 			compactNumber: true,
+	// 		})}<br/>Y: ${params.data[1]}`
+	// 	},
+	// },
+
 	tooltip: {
-		trigger: 'item',
-		formatter: (v: TopLevelFormatterParams) => {
-			const params: any = v
-			const category = params.data[2]
-			return `${category}<br/>X: ${formatValue(params.data[0], {
-				compactNumber: true,
-			})}<br/>Y: ${params.data[1]}`
+		trigger: 'axis',
+		axisPointer: {
+			type: 'cross',
 		},
 	},
+	toolbox: {
+		feature: {
+			dataView: { show: true, readOnly: false },
+			restore: { show: true },
+			saveAsImage: { show: true },
+		},
+	},
+
 	color: themeColors.value,
 	legend: legend(),
 	label: label(measures.value.measures),
