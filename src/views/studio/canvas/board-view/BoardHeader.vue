@@ -16,23 +16,20 @@
 							<IconComponent name="ChevronLeft" />
 						</template>
 					</NButton>
-					<NDivider
-						vertical
-						class="m-0 p-0"
-					/>
-					<NButton
-						v-if="app?.options?.color"
-						size="tiny"
-						ghost
-					>
-						<template #icon>
-							<IconComponent
-								name="Apps"
-								:fill="app?.options?.color"
-								:secondaryfill="app?.options?.color"
-							/>
-						</template>
-					</NButton>
+
+					<div class="relative px-2 flex items-center justify-center">
+						<GAppIcon
+							class="text-xl"
+							:name="app.options.icon"
+							:color="app.options.color"
+						/>
+						<div
+							class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
+							:style="{
+								backgroundColor: app.options.color,
+							}"
+						></div>
+					</div>
 					<NButton
 						size="tiny"
 						secondary

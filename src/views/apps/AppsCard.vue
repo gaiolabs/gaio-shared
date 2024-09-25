@@ -3,11 +3,10 @@
 		<div class="flex justify-between gap-2">
 			<header class="flex items-start gap-2 w-full">
 				<div class="relative w-10 h-10 flex items-center justify-center">
-					<IconComponent
-						class="z-10"
-						:fill="app.options.color"
-						:secondaryfill="app.options.color"
+					<GAppIcon
+						class="text-xl"
 						:name="app.options.icon"
+						:color="app.options.color"
 					/>
 					<div
 						class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
@@ -78,6 +77,7 @@
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import { useAppStore, useAuthStore } from '@/stores'
 import type { AppType } from '@gaio/shared/types'
 import { cloneDeep, uniq } from 'lodash-es'
