@@ -46,6 +46,7 @@ declare module 'vue' {
     FilesIcon: typeof import('./src/components/icons/FilesIcon.vue')['default']
     FormsIcon: typeof import('./src/components/icons/FormsIcon.vue')['default']
     GAlert: typeof import('./src/components/GAlert.vue')['default']
+    GAnimatedBackground: typeof import('./src/components/GAnimatedBackground.vue')['default']
     GAppIcon: typeof import('./src/components/GAppIcon.vue')['default']
     GCard: typeof import('./src/components/GCard.vue')['default']
     GDataLiteral: typeof import('./src/components/GDataLiteral.vue')['default']
