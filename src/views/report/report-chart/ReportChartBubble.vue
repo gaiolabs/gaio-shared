@@ -18,6 +18,7 @@ import {
 	LegendComponent,
 	MarkAreaComponent,
 	MarkLineComponent,
+	VisualMapComponent,
 } from 'echarts/components'
 import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
@@ -27,8 +28,8 @@ import type {
 	XAXisOption,
 	SeriesOption,
 	YAXisOption,
-	TopLevelFormatterParams,
 	DatasetOption,
+	VisualMapComponentOption,
 } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
@@ -92,23 +93,37 @@ const firstDimensionsData = [
 	),
 ]
 
-const treatedData = firstDimensionsData.map((value) => {
-	return list
-		.map((item) => {
-			if (value === item[columnName(dimensions.value.first)]) return item
-		})
-		.filter((item) => item !== undefined)
+const treatedData = list.map((item) => {
+	return [
+		item[columnName(measures.value.first)],
+		item[columnName(measures.value.second)],
+		item[columnName(measures.value.third)],
+		item[columnName(dimensions.value.second)],
+		item[columnName(dimensions.value.first)],
+	]
 })
 
-console.log('firstDimensionsData', firstDimensionsData)
-console.log('treatedData', treatedData)
+const visualMap = () => {
+	return {
+		show: false,
+		dimension: 2,
+		min: 20000,
+		max: 1500000000,
+		seriesIndex: [0, 1],
+		inRange: {
+			symbolSize: [100, 1000],
+		},
+	} as VisualMapComponentOption
+}
 
 const series = () => {
 	const serieData = firstDimensionsData.map((item, index) => {
 		return {
 			name: item,
 			type: 'scatter',
-			datasetIndex: index,
+			datasetIndex: index + 1,
+			markLine: markLine(xMinMax, yMinMax),
+			markArea: markArea(xMinMax, yMinMax),
 		}
 	})
 	const valuesX = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
@@ -118,20 +133,20 @@ const series = () => {
 
 	console.log('serieData', serieData)
 	return [
-		// {
-		// 	colorBy: 'data',
-		// 	markLine: markLine(xMinMax, yMinMax),
-		// 	markArea: markArea(xMinMax, yMinMax),
-		// },
 		...serieData,
+		{
+			// colorBy: 'data',
+			markLine: markLine(xMinMax, yMinMax),
+			markArea: markArea(xMinMax, yMinMax),
+		},
 		{
 			name: 'line',
 			type: 'line',
 			smooth: true,
-			datasetIndex: 1,
+			datasetIndex: 3,
 			symbolSize: 0.1,
 			symbol: 'circle',
-			label: { show: false, fontSize: 10 },
+			label: { show: false, fontSize: 16 },
 			labelLayout: { dx: -20 },
 			encode: { label: 2, tooltip: 1 },
 		},
@@ -144,9 +159,10 @@ const dataset = () => {
 			transform: {
 				type: 'filter',
 				config: {
-					dimension: 1,
+					dimension: 4,
 					eq: item,
 				},
+				// print: true,
 			},
 		}
 	})
@@ -170,37 +186,27 @@ const dataset = () => {
 	] as DatasetOption
 }
 
-console.log('dataset', dataset)
-
-const option = ref<EChartsOption>({
-	dataset: dataset(),
-	tooltip: {
-		trigger: 'item',
-		formatter: (v: TopLevelFormatterParams) => {
-			const params: any = v
-			const category = params.data[2]
-			return `${category}<br/>X: ${formatValue(params.data[0], {
-				compactNumber: true,
-			})}<br/>Y: ${params.data[1]}`
-		},
-	},
-	color: themeColors.value,
-	legend: legend(),
-	label: label(measures.value.measures),
-	grid: grid(),
-	xAxis: xAxis(),
-	yAxis: yAxis(),
-	series: series(),
-	visualMap: {
-		show: false,
-		dimension: 2,
-		min: 20000,
-		max: 1500000000,
-		seriesIndex: [0, 1],
-		inRange: {
-			symbolSize: [10, 70],
-		},
-	},
+const option = ref<EChartsOption>(null)
+onMounted(() => {
+	nextTick(() => {
+		option.value = {
+			dataset: dataset(),
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross',
+				},
+			},
+			color: themeColors.value,
+			legend: legend(),
+			label: label(measures.value.measures),
+			grid: grid(),
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			series: series(),
+			visualMap: visualMap(),
+		}
+	})
 })
 
 watch(
