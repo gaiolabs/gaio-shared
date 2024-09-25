@@ -22,14 +22,7 @@ import {
 import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import type {
-	EChartsOption,
-	XAXisOption,
-	SeriesOption,
-	YAXisOption,
-	TopLevelFormatterParams,
-	DatasetOption,
-} from 'echarts/types/dist/shared'
+import type { EChartsOption, XAXisOption, SeriesOption, YAXisOption, DatasetOption } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
 import useReportChartHelper from './helpers/ReportChartHelper'
