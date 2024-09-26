@@ -174,6 +174,7 @@ const saveBuilder = (saveType: string) => {
 				...task,
 				tableName: task.resultTable,
 				sourceType: 'bucket',
+				client: 'clickhouse',
 				databaseName: getBucketNameFromAppId(task.appId),
 			},
 		}),

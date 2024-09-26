@@ -180,7 +180,7 @@ const itemsPerPageList = computed(() => {
 		const value = (i + 1) * 10
 		return {
 			label: value.toString() + ' ' + (showTab.value === 'data' ? t('rows').toLowerCase() : t('categories')),
-			value
+			value,
 		}
 	})
 })
@@ -217,9 +217,9 @@ const countTableRows = async () => {
 	const { totalRows: qtd } = await useApi().post(`api/table/count`, {
 		body: {
 			taskData: {
-				...localTask.value
-			}
-		}
+				...localTask.value,
+			},
+		},
 	})
 
 	totalRows.value = qtd
@@ -229,9 +229,9 @@ const listFieldNames = async () => {
 	const { data } = await useApi().post(`api/table/field`, {
 		body: {
 			taskData: {
-				...localTask.value
-			}
-		}
+				...localTask.value,
+			},
+		},
 	})
 
 	columns.value = data
@@ -256,8 +256,8 @@ const initTableView = async () => {
 		base: {
 			...useAppStore().appInfo,
 			...(useAppStore().cloneTask() || {}),
-			schema
-		}
+			schema,
+		},
 	}) as BuilderTaskType
 
 	if (tableName) {
@@ -275,7 +275,7 @@ const tableReference = computed(() => useAppStore().task.tableName)
 watch(
 	() => tableReference.value,
 	() => initTableView(),
-	{ immediate: true }
+	{ immediate: true },
 )
 </script>
 

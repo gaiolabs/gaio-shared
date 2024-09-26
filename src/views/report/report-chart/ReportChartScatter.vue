@@ -1,4 +1,237 @@
 <template>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
+</template>
+
+<script setup lang="ts">
+import useFormatValue from '@/composables/useFormatValue'
+import type { ReportNodeType } from '@gaio/shared/types'
+import { ScatterChart } from 'echarts/charts'
+import {
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent,
+	MarkAreaComponent,
+	MarkLineComponent,
+} from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type {
+	EChartsOption,
+	XAXisOption,
+	SeriesOption,
+	YAXisOption,
+	TopLevelFormatterParams,
+} from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
+
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+
+const { dimensions, measures, settings, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
+const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { label } = computed(() => useReportChartHelperLabel(task)).value
+const { treatLabelsTicks, getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+const { formatValue } = useFormatValue()
+
+use([
+	CanvasRenderer,
+	GridComponent,
+	MarkAreaComponent,
+	MarkLineComponent,
+	ScatterChart,
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent,
+])
+
+const xAxis = () => {
+	const values = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
+	return {
+		...commonXAxisConfigs(ticksLabels, columnName(measures.value.first)),
+	} as XAXisOption | XAXisOption[]
+}
+
+const yAxis = () => {
+	const values = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
+	return {
+		...commonYAxisConfigs(ticksLabels, columnName(measures.value.second)),
+	} as YAXisOption | YAXisOption[]
+}
+
+const series = () => {
+	const data = list.map((item) => {
+		return [
+			item[columnName(measures.value.first)],
+			item[columnName(measures.value.second)],
+			item[columnName(dimensions.value.first)],
+		]
+	})
+
+	const labels = settings.value.quadrantContent.split('\n')
+	const valuesX = list.map((item) => item[columnName(measures.value.first)]) as Array<number | string | Date>
+	const xMinMax = getMinMaxValues(valuesX)
+	const valuesY = list.map((item) => item[columnName(measures.value.second)]) as Array<number | string | Date>
+	const yMinMax = getMinMaxValues(valuesY)
+
+	console.log('settings.value.showQuadrant', settings.value.showQuadrant)
+
+	return [
+		{
+			symbolSize: 20,
+			data: data,
+			colorBy: 'data',
+			type: 'scatter',
+			markLine:
+				settings.value.showQuadrant ?
+					{
+						animation: false,
+						silent: true,
+						data: [
+							{ xAxis: settings.value.quadrantX ?? xMinMax.middle },
+							{ yAxis: settings.value.quadrantY ?? yMinMax.middle },
+						],
+					}
+				:	undefined,
+			markArea:
+				settings.value.showQuadrant ?
+					{
+						silent: true,
+						label: {
+							show: true,
+							color: '#000',
+							position: 'inside',
+							fontSize: 14,
+						},
+						data: [
+							[
+								{
+									show: settings.value.showQuadrant,
+									label: {
+										formatter: labels[3] ?? '',
+									},
+									itemStyle: { color: settings.value.regionStyle[3].fill },
+									xAxis: settings.value.quadrantX ?? xMinMax.middle,
+									yAxis: settings.value.quadrantY ?? yMinMax.middle,
+								},
+								{
+									xAxis: xMinMax.min,
+									yAxis: yMinMax.min,
+								},
+							],
+							[
+								{
+									label: {
+										formatter: labels[2] ?? '',
+									},
+									itemStyle: { color: settings.value.regionStyle[2].fill },
+									xAxis: settings.value.quadrantX ?? xMinMax.middle,
+									yAxis: settings.value.quadrantY ?? yMinMax.middle,
+								},
+								{
+									xAxis: xMinMax.min,
+									yAxis: yMinMax.max,
+								},
+							],
+							[
+								{
+									label: {
+										formatter: labels[1] ?? '',
+									},
+									itemStyle: { color: settings.value.regionStyle[1].fill },
+									xAxis: settings.value.quadrantX ?? xMinMax.middle,
+									yAxis: settings.value.quadrantY ?? yMinMax.middle,
+								},
+								{
+									xAxis: xMinMax.max,
+									yAxis: yMinMax.max,
+								},
+							],
+							[
+								{
+									label: {
+										formatter: labels[0] ?? '',
+									},
+									itemStyle: { color: settings.value.regionStyle[0].fill },
+									xAxis: settings.value.quadrantX ?? xMinMax.middle,
+									yAxis: settings.value.quadrantY ?? yMinMax.middle,
+								},
+								{
+									xAxis: xMinMax.max,
+									yAxis: yMinMax.min,
+								},
+							],
+						],
+					}
+				:	undefined,
+		},
+		{
+			name: 'line',
+			type: 'line',
+			smooth: true,
+			datasetIndex: 1,
+			symbolSize: 0.1,
+			symbol: 'circle',
+			label: { show: true, fontSize: 16 },
+			labelLayout: { dx: -20 },
+			encode: { label: 2, tooltip: 1 },
+		},
+	] as SeriesOption | SeriesOption[]
+}
+
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'item',
+		formatter: (params: TopLevelFormatterParams) => {
+			console.log('params', params)
+			const category = params.data[2]
+			return `${category}<br/>X: ${formatValue(params.data[0], {
+				compactNumber: true,
+			})}<br/>Y: ${params.data[1]}`
+		},
+	},
+	color: themeColors.value,
+	legend: legend(),
+	label: label(measures.value.measures),
+	grid: grid(),
+	xAxis: xAxis(),
+	yAxis: yAxis(),
+	series: series(),
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			series: series(),
+			legend: legend(),
+			label: label(measures.value.measures),
+			grid: grid(),
+		}
+	},
+	{ deep: true },
+)
+</script>
+
+<!-- <template>
 	<div class="report-column">
 		<div
 			ref="id"
@@ -14,7 +247,7 @@ import { Scatter, type ScatterOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
@@ -144,4 +377,4 @@ watch(
 onMounted(() => {
 	nextTick(() => loadChart())
 })
-</script>
+</script> -->

@@ -1,4 +1,118 @@
 <template>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
+</template>
+
+<script setup lang="ts">
+import type { ReportNodeType } from '@gaio/shared/types'
+import { BarChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsOption, XAXisOption, SeriesOption, YAXisOption } from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
+
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+
+const { dimensions, measures, settings, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
+const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { label } = computed(() => useReportChartHelperLabel(task)).value
+const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
+
+use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
+
+const xAxis = () => {
+	const values = measures.value.measures
+		.map((measure) => {
+			return list.map((item) => {
+				return item[columnName(measure)]
+			})
+		})
+		.flat(Infinity) as Array<number | string | Date>
+
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
+	return {
+		type: 'value',
+		...commonXAxisConfigs(ticksLabels, columnName(measures.value.first)),
+	} as XAXisOption | XAXisOption[]
+}
+
+const yAxis = () => {
+	const values = list.map((item) => {
+		return item[columnName(dimensions.value.first)]
+	}) as Array<number | string | Date>
+
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
+	return {
+		type: 'category',
+		data: values,
+		...commonYAxisConfigs(ticksLabels, columnName(dimensions.value.first)),
+	} as YAXisOption | YAXisOption[]
+}
+
+const series = () => {
+	return measures.value.measures.map((measure) => {
+		const values = list.map((item) => item[columnName(measure)])
+		return {
+			name: columnName(measure),
+			type: 'bar',
+			emphasis: {
+				focus: 'series',
+			},
+			data: values,
+		}
+	}) as SeriesOption | SeriesOption[]
+}
+
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'axis',
+		axisPointer: {
+			type: 'shadow',
+		},
+	},
+	color: themeColors.value,
+	legend: legend(),
+	label: label(measures.value.measures),
+	grid: grid(),
+	xAxis: xAxis(),
+	yAxis: yAxis(),
+	series: series(),
+	areaStyle: {},
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			series: series(),
+			legend: legend(),
+			label: label(measures.value.measures),
+			grid: grid(),
+		}
+	},
+	{ deep: true },
+)
+</script>
+
+<!-- <template>
 	<div class="report-bar">
 		<div
 			ref="id"
@@ -14,7 +128,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 import { sumBy } from 'lodash-es'
 import { computed, nextTick } from 'vue'
 import { onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
+import useReportChartHelper from './ReportChartHelperGplot'
 
 defineEmits(['change'])
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
@@ -32,7 +146,7 @@ const {
 	isMultipleMeasure,
 	firstMeasure,
 	firstDimension,
-	secondDimension
+	secondDimension,
 } = chartHelper.value
 
 const total = computed(() => {
@@ -67,8 +181,8 @@ const getOptions = (): BarOptions => {
 				settings.value.showYTitle ?
 					{
 						style: {
-							fill: 'rgba(0,0,0,0.45)'
-						}
+							fill: 'rgba(0,0,0,0.45)',
+						},
 					}
 				:	null,
 			grid:
@@ -76,11 +190,11 @@ const getOptions = (): BarOptions => {
 					{
 						line: {
 							style: {
-								stroke: 'rgba(0,0,0,0.08)'
-							}
-						}
+								stroke: 'rgba(0,0,0,0.08)',
+							},
+						},
 					}
-				:	null
+				:	null,
 		},
 		xAxis: {
 			title:
@@ -88,8 +202,8 @@ const getOptions = (): BarOptions => {
 					{
 						style: {
 							lineWidth: 0,
-							fill: 'rgba(0,0,0,0.45)'
-						}
+							fill: 'rgba(0,0,0,0.45)',
+						},
 					}
 				:	null,
 			grid:
@@ -97,20 +211,20 @@ const getOptions = (): BarOptions => {
 					{
 						line: {
 							style: {
-								stroke: 'rgba(0,0,0,0.08)'
-							}
-						}
+								stroke: 'rgba(0,0,0,0.08)',
+							},
+						},
 					}
-				:	null
+				:	null,
 		},
 		barBackground:
 			settings.value.columnBackground ?
 				{
 					style: {
-						fill: 'rgba(0,0,0,0.08)'
-					}
+						fill: 'rgba(0,0,0,0.08)',
+					},
 				}
-			:	undefined
+			:	undefined,
 	}
 }
 const loadChart = () => {
@@ -124,10 +238,10 @@ watch(
 	() => {
 		chart.value.update(getOptions())
 	},
-	{ deep: true }
+	{ deep: true },
 )
 
 onMounted(() => {
 	nextTick(() => loadChart())
 })
-</script>
+</script> -->

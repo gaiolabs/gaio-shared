@@ -52,7 +52,7 @@
 					</div>
 					<NInputNumber
 						v-model:value="useReportStore().current.settings.xAxisTickCount"
-						:step="2"
+						:step="1"
 						:min="0"
 						class="w-full"
 					/>
