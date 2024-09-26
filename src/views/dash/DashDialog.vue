@@ -22,7 +22,7 @@
 						@click="closeModal()"
 					>
 						<template #icon>
-							<g-icon name="close" />
+							<IconComponent name="Close" />
 						</template>
 					</NButton>
 				</div>
@@ -41,18 +41,18 @@ const emit = defineEmits(['close'])
 const props = defineProps({
 	width: {
 		type: String,
-		default: () => undefined
-	}
+		default: () => undefined,
+	},
 })
 
 const dialogSize = computed(() => {
 	if (props.width) {
 		return {
-			width: `${props.width}%`
+			width: `${props.width}%`,
 		}
 	}
 	return {
-		width: '100vh'
+		width: '100vh',
 	}
 })
 

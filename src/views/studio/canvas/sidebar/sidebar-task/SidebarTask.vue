@@ -1,7 +1,15 @@
 <template>
-	<div class="sidebar-task flex h-full flex-col items-stretch">
+	<aside
+		id="sidebar-task"
+		class="flex h-full flex-col items-stretch"
+	>
 		<div class="flex w-full items-stretch justify-between px-4 pt-3">
-			<div class="text-lg font-bold">{{ $t('tasks') }}</div>
+			<h2 class="text-lg font-bold inline-flex items-center gap-1">
+				<IconComponent name="Tasks" />
+				<span>
+					{{ $t('tasks') }}
+				</span>
+			</h2>
 			<div class="flex gap-1">
 				<NButton
 					size="tiny"
@@ -10,7 +18,7 @@
 					@click="() => (showAs = showAs === 'grid' ? 'tree' : 'grid')"
 				>
 					<template #icon>
-						<g-icon name="grid" />
+						<IconComponent name="Grid" />
 					</template>
 				</NButton>
 			</div>
@@ -71,9 +79,10 @@
 				@select="select"
 			/>
 		</NScrollbar>
-	</div>
+	</aside>
 </template>
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'
 import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
@@ -95,7 +104,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
 	return {
 		onClick() {
 			select(option)
-		}
+		},
 	}
 }
 
@@ -109,7 +118,7 @@ const select = (item: TreeOption) => {
 		} else {
 			console.log(task)
 			emit('choose', {
-				type: key
+				type: key,
 			})
 		}
 	}
@@ -127,8 +136,8 @@ const getByCategory = (cat: string) =>
 				prefix: () =>
 					h('img', {
 						src: generateIcon(o),
-						style: 'width: 20px; height: 20px;'
-					})
+						style: 'width: 20px; height: 20px;',
+					}),
 			}
 		})
 
@@ -137,7 +146,7 @@ const generateIcon = (item) => {
 		generateBase({
 			...item,
 			client: 'clickhouse',
-			sourceType: 'bucket'
+			sourceType: 'bucket',
 		}).image
 	}`
 	return new URL(image, import.meta.url).href
@@ -148,20 +157,20 @@ const taskTree: TreeOption[] = [
 		label: t('etl'),
 		key: 'etl',
 		isLeaf: false,
-		children: getByCategory('DATAPREP')
+		children: getByCategory('DATAPREP'),
 	},
 	{
 		label: t('analytics'),
 		key: 'analytics',
 		isLeaf: false,
-		children: getByCategory('ANALYTICS')
+		children: getByCategory('ANALYTICS'),
 	},
 	{
 		label: t('delivery'),
 		key: 'delivery',
 		isLeaf: false,
-		children: getByCategory('DELIVERY')
-	}
+		children: getByCategory('DELIVERY'),
+	},
 ]
 
 const localTreeFiltered = computed(() => {

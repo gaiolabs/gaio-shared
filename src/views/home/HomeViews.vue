@@ -5,7 +5,7 @@
 				class="flex flex-row items-center gap-1 text-lg font-bold"
 				@click="collapse = !collapse"
 			>
-				<g-icon name="imageSearch" />
+				<IconComponent name="Views" />
 				10 {{ $t('views') }}
 			</div>
 

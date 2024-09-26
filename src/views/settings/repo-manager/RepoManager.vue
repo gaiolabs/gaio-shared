@@ -36,7 +36,7 @@
 										@click="addSource()"
 									>
 										<template #icon>
-											<g-icon name="add" />
+											<IconComponent name="AddItem" />
 										</template>
 										{{ $t('new') }}
 									</NButton>
@@ -87,7 +87,7 @@
 												@click="selectSource(item)"
 											>
 												<template #icon>
-													<g-icon name="edit" />
+													<IconComponent name="Edit" />
 												</template>
 												{{ $t('edit') }}
 											</NButton>
@@ -135,7 +135,7 @@ const selectSource = (item: SourceType) => {
 const addSource = () => {
 	current.value = {
 		client: 'clickhouse',
-		credentials: { port: 8123, extraPort: 9000, host: 'localhost', user: 'default' }
+		credentials: { port: 8123, extraPort: 9000, host: 'localhost', user: 'default' },
 	} as SourceType
 	showControl.value = true
 }

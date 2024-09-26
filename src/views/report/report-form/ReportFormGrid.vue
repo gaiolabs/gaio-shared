@@ -30,7 +30,7 @@
 							:key="colId"
 							v-model="props.formData.formElements[elementIndex].cols[colId]"
 							:group="{
-								name: 'fields'
+								name: 'fields',
 							}"
 							class="h-full w-full"
 						>
@@ -79,7 +79,7 @@
 							@click="removeContainer(element.id)"
 						>
 							<template #icon>
-								<g-icon name="close" />
+								<IconComponent name="Close" />
 							</template>
 						</NButton>
 					</div>

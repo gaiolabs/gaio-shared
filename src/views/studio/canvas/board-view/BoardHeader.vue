@@ -1,5 +1,8 @@
 <template>
-	<div class="board-header absolute left-0 right-0 top-0 z-30 w-full pt-2">
+	<header
+		id="board-header"
+		class="absolute left-0 right-0 top-0 z-30 w-full pt-2"
+	>
 		<g-card class="mx-[36px] rounded-[5px] border-elevation-2 bg-paper-100 dark:bg-carbon-200">
 			<div class="flex items-center justify-between gap-1">
 				<!--LEFT ACTIONS-->
@@ -10,25 +13,23 @@
 						@click="$router.push('/apps')"
 					>
 						<template #icon>
-							<g-icon name="arrowLeft" />
+							<IconComponent name="ChevronLeft" />
 						</template>
 					</NButton>
-					<NDivider
-						vertical
-						class="m-0 p-0"
-					/>
-					<NButton
-						v-if="app?.options?.color"
-						size="tiny"
-						ghost
-					>
-						<template #icon>
-							<g-icon
-								name="apps"
-								:color="app.options.color"
-							/>
-						</template>
-					</NButton>
+
+					<div class="relative px-2 flex items-center justify-center">
+						<GAppIcon
+							class="text-xl"
+							:name="app.options.icon"
+							:color="app.options.color"
+						/>
+						<div
+							class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
+							:style="{
+								backgroundColor: app.options.color,
+							}"
+						></div>
+					</div>
 					<NButton
 						size="tiny"
 						secondary
@@ -36,7 +37,10 @@
 						class="max-w-[150px] truncate"
 					>
 						<template #icon>
-							<g-icon name="flow" />
+							<IconComponent
+								name="Studio"
+								class="rotate-[-90deg]"
+							/>
 						</template>
 						<div class="flex items-center text-[14px] font-bold">
 							{{ currentFlow?.flowName }}
@@ -49,9 +53,9 @@
 						quaternary
 						@click="run()"
 					>
-						<g-icon
-							name="run"
-							:height="16"
+						<IconComponent
+							class="w-4 h-4"
+							name="Run"
 						/>
 					</NButton>
 					<NButton
@@ -59,9 +63,9 @@
 						size="tiny"
 						@click="runFromHere()"
 					>
-						<g-icon
-							name="runFromHere"
-							:height="17"
+						<IconComponent
+							class="w-4 h-4"
+							name="RunFromHere"
 						/>
 					</NButton>
 					<NButton
@@ -69,9 +73,9 @@
 						size="tiny"
 						@click="runAll()"
 					>
-						<g-icon
-							name="runAll"
-							:height="19"
+						<IconComponent
+							class="w-4 h-4"
+							name="RunAll"
 						/>
 					</NButton>
 					<NDivider
@@ -94,15 +98,18 @@
 						size="tiny"
 						@click="$router.push('/preview')"
 					>
-						<g-icon name="addAction" />
+						<template #icon>
+							<IconComponent name="AddAction" />
+						</template>
 					</NButton>
 				</div>
 			</div>
 		</g-card>
-	</div>
+	</header>
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
@@ -120,8 +127,8 @@ const runAll = () => {
 			from: 'studio',
 			appId: useAppStore().app.appId,
 			flowId: useAppStore().flow.flowId,
-			params: useAppStore().app.params
-		}
+			params: useAppStore().app.params,
+		},
 	})
 	console.log('run all')
 }

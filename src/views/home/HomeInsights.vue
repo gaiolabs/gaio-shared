@@ -5,7 +5,7 @@
 				class="flex flex-row items-center gap-1 text-lg font-bold"
 				@click="collapse = !collapse"
 			>
-				<g-icon name="magic" />
+				<IconComponent name="NewInsights" />
 				10 {{ $t('new') }} {{ $t('insights') }}
 			</div>
 
@@ -45,7 +45,7 @@ const insightsList = ref<InsightCardType[]>([
 		currenMeasureValue: 2000,
 		previousMeasureValue: 12345,
 		tableName: 'Source',
-		created: '23/09/2022 00:23'
+		created: '23/09/2022 00:23',
 	},
 	{
 		reference: 'down',
@@ -57,7 +57,7 @@ const insightsList = ref<InsightCardType[]>([
 		currenMeasureValue: 2000,
 		previousMeasureValue: 12345,
 		tableName: 'Source',
-		created: '23/09/2022 00:23'
+		created: '23/09/2022 00:23',
 	},
 	{
 		reference: 'down',
@@ -69,7 +69,7 @@ const insightsList = ref<InsightCardType[]>([
 		currenMeasureValue: 2000,
 		previousMeasureValue: 12345,
 		tableName: 'Source',
-		created: '23/09/2022 00:23'
+		created: '23/09/2022 00:23',
 	},
 	{
 		reference: 'up',
@@ -81,7 +81,7 @@ const insightsList = ref<InsightCardType[]>([
 		currenMeasureValue: 2000,
 		previousMeasureValue: 12345,
 		tableName: 'Source',
-		created: '23/09/2022 00:23'
-	}
+		created: '23/09/2022 00:23',
+	},
 ])
 </script>

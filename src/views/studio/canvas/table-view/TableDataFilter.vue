@@ -69,7 +69,7 @@
 							@click="removeFilter(itemIndex)"
 						>
 							<template #icon>
-								<g-icon name="close" />
+								<IconComponent name="Close" />
 							</template>
 						</NButton>
 						<NButton
@@ -149,8 +149,8 @@ const removeFilter = (itemIndex: number) => {
 			{
 				list: [],
 				operator: '=',
-				andOr: 'and'
-			}
+				andOr: 'and',
+			},
 		]
 		applyFilter('selected')
 		addFilter(0)
@@ -163,8 +163,8 @@ const localFilter = ref<SchemaFilterType[]>([
 	{
 		list: [],
 		operator: '=',
-		andOr: 'and'
-	}
+		andOr: 'and',
+	},
 ])
 
 const changeFilter = () => {}
@@ -201,7 +201,7 @@ const addFilter = (atIndex: number) => {
 		type: 'value',
 		selected: true,
 		value: null,
-		id: getId()
+		id: getId(),
 	})
 }
 
@@ -213,7 +213,7 @@ const operators = (item) => {
 	return (operatorsFilters[op].filter((o) => !['between', 'notBetween'].includes(o.operator)) || []).map((o) => {
 		return {
 			value: o.operator,
-			label: t(o.name)
+			label: t(o.name),
 		}
 	})
 }

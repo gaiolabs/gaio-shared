@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="board size-full"
-		:class="{ 'ms-[250px]': isSidebarActive }"
+		id="board-view"
+		class="w-full h-full"
 	>
 		<VueFlow
 			v-if="showBoard"
@@ -9,28 +9,35 @@
 			v-model="elements"
 			:min-zoom="0.2"
 			:max-zoom="4"
+			:snap-to-grid="true"
+			:snap-grid="[5, 5]"
+			selection-mode="partial"
 			@selection-end="onSelectMany()"
 			@node-click="onSelectNode($event)"
 			@node-double-click="onOpenNode($event)"
-			@node-drag-stop="updateFlow"
+			@node-drag-stop="(e) => (e.node.data.position = e.node.position)"
 		>
+			<!-- NOTE: Please only work in multiples of 15px -->
 			<template #node-custom="{ data }">
-				<board-node :data="data" />
+				<BoardNode :data="data" />
 			</template>
 			<Background
-				:gap="20"
-				:size="1.2"
+				id="board-background"
+				class="relative"
+				pattern-color="#a3a3a3"
+				:gap="15"
+				:size="1.25"
+				patternTransform="translate(1,0)"
 			/>
 		</VueFlow>
-		<!--        @update:model-value="updateFlow()"-->
 
-		<board-header
+		<BoardHeader
 			v-if="elements"
 			:elements="elements"
 			@open="$emit('choose', $event)"
 		/>
 		<div class="z-1 absolute bottom-0 right-0 p-2 py-3">
-			<g-card
+			<GCard
 				class="sidebar-sub-nav core-shadow-2 bottom-[10px] flex h-[40px] items-center gap-3 rounded-[10px] border-elevation-2 bg-elevation-1 px-3"
 			>
 				<div class="flex items-center gap-2">
@@ -39,7 +46,10 @@
 						@click="organizeDagreLayout('LR')"
 					>
 						<template #icon>
-							<g-icon name="flow" />
+							<IconComponent
+								class="rotate-[-90deg]"
+								name="Studio"
+							/>
 						</template>
 					</NButton>
 					<NButton
@@ -47,11 +57,11 @@
 						@click="fitView()"
 					>
 						<template #icon>
-							<g-icon name="full" />
+							<GIcon name="full" />
 						</template>
 					</NButton>
 				</div>
-			</g-card>
+			</GCard>
 		</div>
 	</div>
 </template>
@@ -78,7 +88,6 @@ dagreGraph.setDefaultEdgeLabel(() => ({}))
 let elements = ref<Elements>([])
 const localNodes = ref()
 const localEdges = ref()
-const isSidebarActive = ref(false)
 
 const selectMany = ref([])
 
@@ -87,6 +96,7 @@ const onOpenNode = (ev) => {
 }
 
 const onSelectMany = () => {
+	console.log(JSON.stringify(getSelectedNodes.value, null, 2))
 	useAppStore().task = null
 	selectMany.value = getSelectedNodes.value
 }
@@ -95,14 +105,28 @@ const onSelectNode = (ev) => {
 	useAppStore().task = ev.node.data
 }
 
-onConnect((params) => addEdges(params))
+onConnect((params) => {
+	// avoid self connection
+	if (params.source === params.target) return
+
+	// avoid forbidden edge connection
+	if (params.sourceHandle === params.targetHandle) return
+
+	// avoid duplicated edges
+	if (edges.value.some((edge) => edge.source === params.source && edge.target === params.target)) return
+
+	addEdges({
+		...params,
+		type: 'smoothstep',
+	})
+})
 
 const updateFlow = debounce(() => {
 	const workflow = {
 		nodes: nodes.value.map((node) => {
 			return {
 				...node.data,
-				position: node.position
+				position: node.position,
 			}
 		}),
 		edges: edges.value.map((edge) => {
@@ -110,18 +134,19 @@ const updateFlow = debounce(() => {
 				...edge.data,
 				id: useHelper().generateId(),
 				source: edge.source,
-				target: edge.target
+				target: edge.target,
+				type: 'smoothstep',
 			}
-		})
+		}),
 	}
 
 	useApi('boardUpdateFlow').post('api/flow/save', {
 		body: {
 			flowData: {
 				...useAppStore().flow,
-				workflow
-			}
-		}
+				workflow,
+			},
+		},
 	})
 }, 600)
 
@@ -149,7 +174,6 @@ const organizeDagreLayout = (direction: string) => {
 		}
 	})
 	showBoard.value = true
-	updateFlow()
 }
 
 const currentFlowId = computed(() => {
@@ -177,7 +201,8 @@ const processBoard = () => {
 				return {
 					id: edge.id,
 					source: edge.source,
-					target: edge.target
+					target: edge.target,
+					type: 'smoothstep',
 				}
 			}) || []
 		localNodes.value =
@@ -189,12 +214,13 @@ const processBoard = () => {
 					position: node.position,
 					data: node,
 					sourcePosition: Position.Right,
-					targetPosition: Position.Left
+					targetPosition: Position.Left,
 				}
 			}) || []
 
 		elements.value = [...localNodes.value, ...localEdges.value]
 		showBoard.value = true
+
 		// const { token } = useAuthStore();
 		// // const a = new EventSource('/api/sse/sse?id=dfs');
 		// const localKey = new Date().getTime();
@@ -215,15 +241,22 @@ watch(
 	() => currentFlowId.value,
 	() => {
 		buildBoard()
-	}
+	},
 )
 
 watch(
 	() => refreshBoard.value,
 	() => {
-		console.log('fasfasfasd')
 		processBoard()
-	}
+	},
+)
+
+watch(
+	elements,
+	() => {
+		updateFlow()
+	},
+	{ deep: true },
 )
 
 onMounted(async () => {
@@ -235,6 +268,10 @@ onMounted(async () => {
 <style lang="scss">
 @import '@vue-flow/core/dist/style.css';
 @import '@vue-flow/core/dist/theme-default.css';
+
+.vue-flow__background pattern {
+	transform: translate3d(1.25px, 1.25px, 0px);
+}
 
 .vue-flow__minimap {
 	transform: scale(75%);
@@ -327,6 +364,7 @@ onMounted(async () => {
 
 .vue-flow__nodesselection-rect,
 .vue-flow__selection {
-	border-radius: 4px;
+	background-color: hsla(26, 91%, 71%, 0.15);
+	@apply border rounded border-prime border-dashed;
 }
 </style>

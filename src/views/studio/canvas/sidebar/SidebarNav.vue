@@ -1,5 +1,8 @@
 <template>
-	<div class="sidebar-nav z-1 absolute top-[50%] flex min-w-[52px] items-center">
+	<nav
+		id="sidebar-nav"
+		class="z-1 absolute top-[50%] flex min-w-[52px] items-center"
+	>
 		<div
 			class="absolute z-0 ms-3 flex w-[40px] flex-col items-center justify-center rounded-[10px] border-elevation-2 bg-elevation-1 py-2 shadow-2xl"
 		>
@@ -15,16 +18,15 @@
 					@click="workWithPanel(item.name)"
 				>
 					<template #icon>
-						<g-icon
-							:height="18"
+						<IconComponent
 							:name="item.icon"
-							class="text-[20px]"
+							:class="item.class + ' text-lg'"
 						/>
 					</template>
 				</NButton>
 			</div>
 		</div>
-	</div>
+	</nav>
 </template>
 
 <script setup lang="ts">
@@ -37,33 +39,34 @@ const panel = ref('')
 
 const sidebarActions = [
 	{
-		icon: 'flow',
-		name: 'flow'
+		name: 'flow',
+		icon: 'Studio',
+		class: 'rotate-[-90deg]',
 	},
 	{
-		icon: 'database',
-		name: 'source'
+		name: 'database',
+		icon: 'DataSources',
 	},
 	{
-		icon: 'tasks',
-		name: 'tasks'
+		name: 'tasks',
+		icon: 'Tasks',
 	},
 	{
-		icon: 'params',
-		name: 'params'
+		name: 'params',
+		icon: 'Params',
 	},
 	{
-		icon: 'forms',
-		name: 'forms'
+		name: 'forms',
+		icon: 'Forms',
 	},
 	{
-		icon: 'files',
-		name: 'files'
+		name: 'files',
+		icon: 'Files',
 	},
 	{
-		icon: 'tableThunder',
-		name: 'discovery'
-	}
+		name: 'discovery',
+		icon: 'Discovery',
+	},
 ]
 
 const isPaneActive = (type: string) => {
@@ -84,7 +87,7 @@ watch(
 	() => showPanel.value,
 	() => {
 		emit('update:modelValue', panel.value)
-	}
+	},
 )
 
 onMounted(() => {

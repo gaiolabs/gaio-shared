@@ -5,7 +5,7 @@
 				<h3 class="inline-flex gap-2 items-center text-lg font-bold">
 					<IconComponent
 						class="h-6 w-6"
-						name="DataApps"
+						name="Apps"
 					/>
 					<span>
 						{{ $t('dataApps') }}
@@ -203,7 +203,7 @@
 								@click="editApp(app)"
 							>
 								<template #icon>
-									<IconComponent name="Pencil" />
+									<IconComponent name="Edit" />
 								</template>
 							</NButton>
 							<NButton
@@ -243,7 +243,7 @@
 </template>
 
 <script setup lang="ts">
-import IconComponent from '@/components/icons/IconComponent.vue'
+
 import useApps from '@/composables/useApps'
 import useHelper from '@/composables/useHelper'
 import { useAuthStore } from '@/stores'

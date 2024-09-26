@@ -1,4 +1,3 @@
-<!-- TODO: rename NucleoIcons to GIcon -->
 <template>
 	<template v-if="iconComponent">
 		<component
@@ -8,10 +7,23 @@
 		/>
 	</template>
 	<template v-else>
-		<WarningIcon
-			title="Icon not found"
-			class="text-yellow-400 rounded-full bg-red-700 p-1 w-7 h-7 animate-pulse"
-		/>
+		<div class="absolute rotate-[-90deg]">
+			<div class="rotate-90 absolute left-0 top-0 translate-x-[-50%] translate-y-[-50%]">
+				<div class="bg-red-700 text-yellow-400 p-1 rounded-full relative z-20">
+					<WarningIcon
+						:id="props.name"
+						title="Icon not found"
+						class="w-7 h-7"
+					/>
+				</div>
+				<div class="absolute bg-red-700 inset-0 rounded-full z-10 animate-ping"></div>
+			</div>
+			<div
+				class="bg-red-900 animate-rubber-band text-yellow-300 px-1 py-0.5 text-xs absolute left-12 top-0 translate-x-[-50%] translate-y-[-50%]"
+			>
+				{{ props.name }}
+			</div>
+		</div>
 	</template>
 </template>
 

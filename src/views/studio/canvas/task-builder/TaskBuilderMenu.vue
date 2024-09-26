@@ -4,7 +4,10 @@
 		class="task-builder-menu flex w-full items-center gap-3 p-3 px-0"
 	>
 		<div class="flex items-center gap-1 text-lg font-bold">
-			<g-icon name="flow" />
+			<IconComponent
+				class="rotate-[-90deg]"
+				name="Studio"
+			/>
 			{{ $t('builder') }}
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">

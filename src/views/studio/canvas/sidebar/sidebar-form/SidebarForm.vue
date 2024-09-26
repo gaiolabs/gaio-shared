@@ -13,7 +13,7 @@
 							quaternary
 						>
 							<template #icon>
-								<g-icon name="createFolder" />
+								<IconComponent name="CreateFolder" />
 							</template>
 						</NButton>
 					</template>
@@ -43,7 +43,7 @@
 							@click="selectForm({})"
 						>
 							<template #icon>
-								<g-icon name="add" />
+								<IconComponent name="AddItem" />
 							</template>
 						</NButton>
 					</template>
@@ -104,7 +104,7 @@ const {
 	constructLocalTree,
 	localTreeFiltered,
 	updateAppFolderOptions,
-	baseFolderTreeSchema
+	baseFolderTreeSchema,
 } = useTree()
 
 const selectForm = (item: FormType) => {
@@ -151,8 +151,8 @@ const baseFormTreeSchema = (data) => {
 			h(SidebarFormMore, {
 				onChoose: (ev) => emit('choose', ev),
 				onEdit: (ev) => selectForm(ev),
-				formId: data.formId
-			})
+				formId: data.formId,
+			}),
 	} as TreeOption
 }
 
@@ -160,7 +160,7 @@ const treeNodeActions = () => {
 	return {
 		onClick() {
 			// console.log('select param', option)
-		}
+		},
 	}
 }
 
@@ -172,8 +172,8 @@ onMounted(
 			folderName: 'folderForm',
 			localTree: localTree.value,
 			baseTreeSchema: baseFormTreeSchema,
-			openControl
-		}))
+			openControl,
+		})),
 )
 </script>
 

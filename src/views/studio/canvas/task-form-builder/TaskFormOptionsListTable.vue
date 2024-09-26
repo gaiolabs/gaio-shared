@@ -22,7 +22,7 @@
 								size="tiny"
 								@click="addRow()"
 							>
-								<g-icon name="add" />
+								<IconComponent name="AddItem" />
 							</NButton>
 						</th>
 					</tr>
@@ -81,7 +81,7 @@
 								type="error"
 								@click="deleteRow(index)"
 							>
-								<g-icon name="delete" />
+								<IconComponent name="Delete" />
 							</NButton>
 						</td>
 					</tr>

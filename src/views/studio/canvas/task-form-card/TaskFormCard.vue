@@ -24,13 +24,13 @@
 										type="primary"
 										@click="showFormPreview = !showFormPreview"
 									>
-										<g-icon name="eye" />
+										<IconComponent name="Eye" />
 									</NButton>
 									<NButton
 										type="primary"
 										@click="editForm"
 									>
-										<g-icon name="edit" />
+										<IconComponent name="Edit" />
 									</NButton>
 								</NButtonGroup>
 							</div>

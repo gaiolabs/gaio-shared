@@ -174,7 +174,7 @@
 							<template #trigger>
 								<span>
 									<NButton text>
-										<g-icon name="delete" />
+										<IconComponent name="Delete" />
 									</NButton>
 								</span>
 							</template>
