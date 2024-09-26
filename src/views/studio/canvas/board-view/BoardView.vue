@@ -1,7 +1,7 @@
 <template>
 	<div
-		class="board size-full"
-		:class="{ 'ms-[250px]': isSidebarActive }"
+		id="board-view"
+		class="w-full h-full"
 	>
 		<VueFlow
 			v-if="showBoard"
@@ -15,26 +15,29 @@
 			@selection-end="onSelectMany()"
 			@node-click="onSelectNode($event)"
 			@node-double-click="onOpenNode($event)"
-			@node-drag-stop="updateFlow"
+			@node-drag-stop="(e) => (e.node.data.position = e.node.position)"
 		>
+			<!-- NOTE: Please only work in multiples of 15px -->
 			<template #node-custom="{ data }">
-				<board-node :data="data" />
+				<BoardNode :data="data" />
 			</template>
 			<Background
+				id="board-background"
+				class="relative"
 				pattern-color="#a3a3a3"
 				:gap="15"
-				:size="1.3"
+				:size="1.25"
+				patternTransform="translate(1,0)"
 			/>
 		</VueFlow>
-		<!--        @update:model-value="updateFlow()"-->
 
-		<board-header
+		<BoardHeader
 			v-if="elements"
 			:elements="elements"
 			@open="$emit('choose', $event)"
 		/>
 		<div class="z-1 absolute bottom-0 right-0 p-2 py-3">
-			<g-card
+			<GCard
 				class="sidebar-sub-nav core-shadow-2 bottom-[10px] flex h-[40px] items-center gap-3 rounded-[10px] border-elevation-2 bg-elevation-1 px-3"
 			>
 				<div class="flex items-center gap-2">
@@ -54,11 +57,11 @@
 						@click="fitView()"
 					>
 						<template #icon>
-							<g-icon name="full" />
+							<GIcon name="full" />
 						</template>
 					</NButton>
 				</div>
-			</g-card>
+			</GCard>
 		</div>
 	</div>
 </template>
@@ -85,7 +88,6 @@ dagreGraph.setDefaultEdgeLabel(() => ({}))
 let elements = ref<Elements>([])
 const localNodes = ref()
 const localEdges = ref()
-const isSidebarActive = ref(false)
 
 const selectMany = ref([])
 
@@ -104,6 +106,9 @@ const onSelectNode = (ev) => {
 }
 
 onConnect((params) => {
+	// avoid self connection
+	if (params.source === params.target) return
+
 	// avoid forbidden edge connection
 	if (params.sourceHandle === params.targetHandle) return
 
@@ -169,7 +174,6 @@ const organizeDagreLayout = (direction: string) => {
 		}
 	})
 	showBoard.value = true
-	updateFlow()
 }
 
 const currentFlowId = computed(() => {
@@ -216,6 +220,7 @@ const processBoard = () => {
 
 		elements.value = [...localNodes.value, ...localEdges.value]
 		showBoard.value = true
+
 		// const { token } = useAuthStore();
 		// // const a = new EventSource('/api/sse/sse?id=dfs');
 		// const localKey = new Date().getTime();
@@ -242,9 +247,16 @@ watch(
 watch(
 	() => refreshBoard.value,
 	() => {
-		console.log('fasfasfasd')
 		processBoard()
 	},
+)
+
+watch(
+	elements,
+	() => {
+		updateFlow()
+	},
+	{ deep: true },
 )
 
 onMounted(async () => {
@@ -256,6 +268,10 @@ onMounted(async () => {
 <style lang="scss">
 @import '@vue-flow/core/dist/style.css';
 @import '@vue-flow/core/dist/theme-default.css';
+
+.vue-flow__background pattern {
+	transform: translate3d(1.25px, 1.25px, 0px);
+}
 
 .vue-flow__minimap {
 	transform: scale(75%);
