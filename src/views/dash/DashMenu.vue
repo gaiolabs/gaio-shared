@@ -7,7 +7,7 @@
 				@click="emit('close')"
 			>
 				<template #icon>
-					<g-icon name="arrowLeft" />
+					<IconComponent name="ChevronLeft" />
 				</template>
 			</NButton>
 			<NDivider

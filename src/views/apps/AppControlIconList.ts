@@ -4924,5 +4924,5 @@ export const iconList = [
 	'zoom-reset',
 	'zoom-scan',
 	'zzz-off',
-	'zzz'
+	'zzz',
 ]

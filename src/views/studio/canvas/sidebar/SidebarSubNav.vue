@@ -73,7 +73,7 @@
 				size="tiny"
 			>
 				<template #icon>
-					<g-icon name="delete" />
+					<IconComponent name="Delete" />
 				</template>
 				<div>
 					{{ $t('delete') }}

@@ -2,10 +2,15 @@
 	<div class="apps flex h-full justify-center">
 		<div class="apps-wrapper w-full max-w-[1440px] overflow-auto p-4 pb-[70px]">
 			<div class="flex items-center justify-between">
-				<div class="flex grow flex-row items-center gap-1 truncate text-2xl font-bold">
-					<g-icon name="apps" />
-					{{ $t('dataApps') }}
-				</div>
+				<h3 class="inline-flex gap-2 items-center text-lg font-bold">
+					<IconComponent
+						class="h-6 w-6"
+						name="Apps"
+					/>
+					<span>
+						{{ $t('dataApps') }}
+					</span>
+				</h3>
 				<div class="flex max-w-[320px] grow gap-2">
 					<NInput
 						v-model:value="searchTerm"
@@ -24,7 +29,10 @@
 				</div>
 			</div>
 			<!--RECENT AND FAVORITES-->
-			<div class="my-3 flex">
+			<section
+				id="recent-and-favorites"
+				class="my-3 flex"
+			>
 				<div class="g-bg-1 flex gap-1 rounded bg-paper-100 p-1 shadow">
 					<NButton
 						:type="currentTab === 'recent' ? 'primary' : 'default'"
@@ -43,8 +51,11 @@
 						{{ $t('favorites') }}
 					</NButton>
 				</div>
-			</div>
-			<div class="apps-filtered-by-user my-3">
+			</section>
+			<section
+				id="apps-filtered-by-user"
+				class="my-3"
+			>
 				<template v-if="loading">
 					<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 						<div
@@ -72,14 +83,22 @@
 				<div v-else-if="currentTab === 'favorites'">
 					<g-alert :title="$t('noFavoriteApps')" />
 				</div>
-			</div>
+			</section>
 
 			<!--ALL APPS-->
-			<div class="mb-2 mt-2 flex items-center justify-between gap-1 text-lg font-bold">
-				<div>
-					<g-icon name="allApps" />
-					{{ $t('allApps') }}
-				</div>
+			<section
+				id="all-apps"
+				class="mb-2 mt-2 flex items-center justify-between gap-1"
+			>
+				<h3 class="inline-flex gap-2 items-center text-lg font-bold">
+					<IconComponent
+						class="h-6 w-6"
+						name="AllApps"
+					/>
+					<span>
+						{{ $t('allApps') }}
+					</span>
+				</h3>
 				<div class="my-3 flex">
 					<div
 						class="core-shadow flex gap-1 rounded-[8px] bg-paper-100 p-1 dark:border dark:border-gray-800 dark:bg-carbon-200"
@@ -91,7 +110,7 @@
 							@click="changeUserViewType('grid')"
 						>
 							<template #icon>
-								<g-icon name="grid" />
+								<IconComponent name="Grid" />
 							</template>
 						</NButton>
 						<NButton
@@ -101,12 +120,12 @@
 							@click="changeUserViewType('list')"
 						>
 							<template #icon>
-								<g-icon name="list" />
+								<IconComponent name="List" />
 							</template>
 						</NButton>
 					</div>
 				</div>
-			</div>
+			</section>
 			<!-- GRID CARD -->
 			<template v-if="listType === 'grid'">
 				<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -135,45 +154,71 @@
 					<li
 						v-for="app of listLocalApps"
 						:key="app.appId"
-						class="g-bg-1 g-border-500 -mt-px inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0"
+						class="g-bg-1 group g-border-500 -mt-px gap-3 inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0"
 					>
-						<div class="flex min-w-[80px] items-center gap-4">
+						<header class="flex gap-2 items-center flex-1">
+							<div class="relative w-8 h-8 flex items-center justify-center">
+								<IconComponent
+									class="z-10"
+									:fill="app.options.color"
+									:secondaryfill="app.options.color"
+									:name="
+										app.options.icon === 'icon-shield-alert' ? 'ShieldAlert'
+										: app.options.icon === 'icon-square-dashed-bottom' ? 'SquarePointer'
+										: app.options.icon === 'icon-hop-off' ? 'Seedling'
+										: app.options.icon === 'icon-mountain' ? 'ImageMountain'
+										: app.options.icon === 'box-seam' ? 'SquareDashedContent'
+										: app.options.icon === 'icon-hard-drive' ? 'HardDrive'
+										: app.options.icon === 'icon-martini' ? 'WineGlass'
+										: app.options.icon
+									"
+								/>
+								<div
+									class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
+									:style="{
+										backgroundColor: app.options.color,
+									}"
+								></div>
+							</div>
+							<h6 class="font-medium">
+								{{ app.appName }}
+							</h6>
+						</header>
+
+						<footer
+							class="flex opacity-25 group-hover:opacity-100 transition-opacity duration-300 min-w-[80px] items-center gap-4"
+						>
 							<NButton
 								text
-								size="tiny"
+								size="small"
 							>
 								<template #icon>
-									<g-icon name="dashboard" />
+									<IconComponent name="Dashboard" />
 								</template>
 							</NButton>
 							<NButton
 								v-if="app.role === 'edit'"
 								text
-								size="tiny"
+								size="small"
 								@click="editApp(app)"
 							>
 								<template #icon>
-									<g-icon name="pencil" />
+									<IconComponent name="Edit" />
 								</template>
 							</NButton>
 							<NButton
 								v-if="app.role === 'edit'"
 								text
-								size="tiny"
+								size="small"
 							>
 								<template #icon>
-									<g-icon name="workflow" />
+									<IconComponent
+										name="Studio"
+										class="rotate-[-90deg]"
+									/>
 								</template>
 							</NButton>
-						</div>
-						<NDivider vertical />
-						<div class="ms-3 flex gap-2">
-							<g-app-icon
-								:name="app.options.icon"
-								:color="app.options.color"
-							/>
-							{{ app.appName }}
-						</div>
+						</footer>
 					</li>
 				</ul>
 			</template>
@@ -186,9 +231,9 @@
 				/>
 			</div>
 			<!--EDIT APP-->
-			<app-control
+			<AppControl
 				v-if="show"
-				:app="currentApp as AppType"
+				:app="currentApp"
 				@save="manuallyUpdateApp"
 				@close="show = false"
 			/>
@@ -198,9 +243,9 @@
 </template>
 
 <script setup lang="ts">
+
 import useApps from '@/composables/useApps'
 import useHelper from '@/composables/useHelper'
-import MainScroll from '@/layouts/main-scroll.vue'
 import { useAuthStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import AppsCard from '@/views/apps/AppsCard.vue'
@@ -225,7 +270,7 @@ const show = ref(false)
 const changeUserViewType = (type: string) => {
 	listType.value = type
 	useAuthStore().updateUserOptions({
-		appViewType: type
+		appViewType: type,
 	})
 }
 

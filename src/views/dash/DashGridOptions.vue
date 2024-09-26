@@ -3,7 +3,10 @@
 		<div class="g-card flex w-full items-center justify-between p-2">
 			<div class="flex items-center justify-center">
 				<div>
-					<g-icon name="flow" />
+					<IconComponent
+						class="rotate-[-90deg]"
+						name="Studio"
+					/>
 					{{ useAppStore().flow.flowName }}
 				</div>
 			</div>
@@ -52,7 +55,7 @@
 					@click="showLayoutHideOption = true"
 				>
 					<template #icon>
-						<g-icon name="eye" />
+						<IconComponent name="Eye" />
 					</template>
 					{{ $t('visibility') }}
 				</NButton>
@@ -144,20 +147,20 @@ const changeLayoutSize = (size: 'lg' | 'md' | 'sm') => {
 		props.gridOptions.viewPortSize = {
 			width: '100%',
 			border: '2px solid #e6e6e6',
-			margin: '10px 0 0'
+			margin: '10px 0 0',
 		}
 	} else if (size === 'md') {
 		props.gridOptions.viewPortSize = {
 			width: '773px',
 			border: '2px solid #e6e6e6',
-			margin: '10px 0 0'
+			margin: '10px 0 0',
 		}
 	} else if (size === 'sm') {
 		props.gridOptions.viewPortSize = {
 			width: '485px',
 
 			border: '2px solid #e6e6e6',
-			margin: '10px 0 0'
+			margin: '10px 0 0',
 		}
 	}
 }

@@ -4,7 +4,10 @@
 		class="task-builder-menu flex w-full items-center gap-3 p-3 px-0"
 	>
 		<div class="flex items-center gap-1 text-lg font-bold">
-			<g-icon name="flow" />
+			<IconComponent
+				class="rotate-[-90deg]"
+				name="Studio"
+			/>
 			{{ $t('builder') }}
 		</div>
 		<div class="flex grow items-center justify-between gap-2 px-3">
@@ -88,12 +91,12 @@ const props = defineProps({
 	localTask: {
 		type: Object as PropType<BuilderTaskType>,
 		required: true,
-		default: () => ({}) as BuilderTaskType
+		default: () => ({}) as BuilderTaskType,
 	},
 	showTab: {
 		type: String,
-		required: true
-	}
+		required: true,
+	},
 })
 const emit = defineEmits(['showTab', 'close'])
 
@@ -111,17 +114,17 @@ const saveBuilder = (saveType: string) => {
 		sourceType: useAppStore().cloneTask().sourceType,
 		tableName: task.tableName,
 		databaseName: useAppStore().cloneTask().databaseName,
-		type: 'table'
+		type: 'table',
 	}
 	const tableList = [
 		useDefault({
 			type: 'table',
-			base: baseSourceMetadata
-		})
+			base: baseSourceMetadata,
+		}),
 	]
 	const joinTables = flatMap(
 		task.schema.join.filter((o) => o.type !== 'raw'),
-		(o) => [`${o.toDatabaseName || bucket}.${o.to}`, `${o.byDatabaseName || bucket}.${o.by}`]
+		(o) => [`${o.toDatabaseName || bucket}.${o.to}`, `${o.byDatabaseName || bucket}.${o.by}`],
 	).map((tableReference) => {
 		const ref = tableReference.split('.')
 		const [databaseName, tableName] = ref
@@ -137,8 +140,8 @@ const saveBuilder = (saveType: string) => {
 				sourceType: useAppStore().cloneTask().sourceType,
 				type: 'table',
 				tableName,
-				databaseName
-			}
+				databaseName,
+			},
 		})
 	})
 	const joinListTables = task.schema.join.filter((o) => o.type === 'raw')
@@ -152,8 +155,8 @@ const saveBuilder = (saveType: string) => {
 						...task,
 						label: refTable.tableName,
 						tableName: refTable.tableName,
-						databaseName: refTable.databaseName
-					}
+						databaseName: refTable.databaseName,
+					},
 				})
 				joinTables.push(table)
 			}
@@ -171,16 +174,17 @@ const saveBuilder = (saveType: string) => {
 				...task,
 				tableName: task.resultTable,
 				sourceType: 'bucket',
-				databaseName: getBucketNameFromAppId(task.appId)
-			}
-		})
+				client: 'clickhouse',
+				databaseName: getBucketNameFromAppId(task.appId),
+			},
+		}),
 	]
 
 	useFlow(useAppStore().flow.workflow)
 		.generate({
 			task,
 			sources,
-			targets
+			targets,
 		})
 		.save()
 		.then(() => emit('close'))

@@ -26,7 +26,7 @@
 					@positive-click="remove()"
 				>
 					<template #trigger>
-						<g-icon name="delete" />
+						<IconComponent name="Delete" />
 					</template>
 					{{ $t('deletionConfirmation') }}
 				</NPopconfirm>

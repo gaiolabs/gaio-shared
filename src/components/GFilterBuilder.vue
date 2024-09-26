@@ -24,7 +24,7 @@
 									@click="addCol()"
 								>
 									<template #icon>
-										<g-icon name="add" />
+										<IconComponent name="AddItem" />
 									</template>
 								</NButton>
 							</th>
@@ -70,16 +70,16 @@
 									:options="[
 										{
 											value: 'value',
-											label: $t('value')
+											label: $t('value'),
 										},
 										{
 											value: 'parameter',
-											label: $t('parameter')
+											label: $t('parameter'),
 										},
 										{
 											value: 'computed',
-											label: $t('computed')
-										}
+											label: $t('computed'),
+										},
 									]"
 									class="min-w-[100px]"
 								/>
@@ -117,7 +117,7 @@
 														class="w-100 h-100"
 														@click="listByField(item)"
 													>
-														<g-icon name="eye" />
+														<IconComponent name="Eye" />
 													</NButton>
 												</template>
 											</NPopover>
@@ -170,7 +170,7 @@
 									@click="deleteFilter(item.id)"
 								>
 									<template #icon>
-										<g-icon name="delete" />
+										<IconComponent name="Delete" />
 									</template>
 								</NButton>
 							</td>
@@ -219,12 +219,12 @@ const props = defineProps({
 	localTask: {
 		type: Object as () => BuilderTaskType,
 		required: true,
-		default: () => ({}) as BuilderTaskType
+		default: () => ({}) as BuilderTaskType,
 	},
 	tableName: {
 		type: String,
-		required: true
-	}
+		required: true,
+	},
 })
 
 const { dataTypeName } = useDataType()
@@ -245,21 +245,21 @@ const listByField = (col: FieldType) => {
 							{
 								...col,
 								type: 'value',
-								distinct: true
-							}
+								distinct: true,
+							},
 						],
 						sort: [{ ...col, alias: col.columnName, order: 'asc' }],
-						limit: 100
-					}
-				}
-			}
+						limit: 100,
+					},
+				},
+			},
 		})
 		.then(
 			(res) =>
 				(columnValues.value[col.columnName] = res.data.map((item) => ({
 					label: item[col.columnName],
-					value: item[col.columnName]
-				})))
+					value: item[col.columnName],
+				}))),
 		)
 }
 
@@ -298,7 +298,7 @@ const operators = (item) => {
 	return (operatorsFilters[op].filter((o) => !['between', 'notBetween'].includes(o.operator)) || []).map((o) => {
 		return {
 			value: o.operator,
-			label: t(o.name)
+			label: t(o.name),
 		}
 	})
 }
@@ -310,7 +310,7 @@ const addCol = () => {
 		valueType: 'value',
 		andOr: 'and',
 		operator: '=',
-		id: getId(6)
+		id: getId(6),
 	})
 
 	props.localTask.schema.filter = cloneDeep(lt.schema.filter)
@@ -321,14 +321,14 @@ const loadColumnList = () => {
 		...useAppStore().appInfo,
 		tableName: props.tableName,
 		sourceType: 'bucket',
-		client: 'clickhouse'
+		client: 'clickhouse',
 	}
 
 	useApi()
 		.post('api/table/field', {
 			body: {
-				taskData
-			}
+				taskData,
+			},
 		})
 		.then((res) => (columns.value = res.data))
 }

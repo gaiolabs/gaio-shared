@@ -5,7 +5,7 @@
 				class="flex flex-row items-center gap-1 text-xl font-bold"
 				@click="collapse = !collapse"
 			>
-				<g-icon name="apps" />
+				<IconComponent name="Apps" />
 				{{ $t('dataApps') }}
 			</div>
 			<div class="g-bg-1 g-border-400 flex gap-1 rounded p-1">

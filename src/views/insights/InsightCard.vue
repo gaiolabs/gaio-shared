@@ -30,7 +30,7 @@
 			</div>
 			<div class="row mb-2 flex items-center justify-between gap-3 text-xs text-gray-500">
 				<div>
-					<g-icon name="database" />
+					<IconComponent name="DataSources" />
 					{{ insight.tableName }}
 				</div>
 				<div>

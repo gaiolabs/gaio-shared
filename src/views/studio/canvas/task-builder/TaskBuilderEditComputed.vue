@@ -3,7 +3,7 @@
 		<div class="flex gap-2">
 			<div class="flex gap-2">
 				<NButton @click="$emit('close')">
-					<g-icon name="close" />
+					<IconComponent name="Close" />
 				</NButton>
 				<NButton
 					type="primary"
@@ -41,13 +41,13 @@ const emit = defineEmits(['close'])
 const props = defineProps({
 	localField: {
 		type: Object as PropType<{ type: string; field: Partial<FieldType> }>,
-		required: true
+		required: true,
 	},
 	localTask: {
 		type: Object as PropType<BuilderTaskType>,
 		required: true,
-		default: () => null as BuilderTaskType
-	}
+		default: () => null as BuilderTaskType,
+	},
 })
 
 const localComputed = ref<SchemaComputedType>({
@@ -59,14 +59,14 @@ const localComputed = ref<SchemaComputedType>({
 	global: false,
 	dataType: 'Nullable(String)',
 	columnLength: undefined,
-	type: 'computed'
+	type: 'computed',
 })
 
 const isValid = computed(() => {
 	return useValidate().isValid(localComputed.value, {
 		columnName: 'string|min:1',
 		content: 'string|min:1',
-		dataType: 'string'
+		dataType: 'string',
 	})
 })
 

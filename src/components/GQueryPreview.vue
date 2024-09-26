@@ -15,7 +15,7 @@
 					@click="$emit('close')"
 				>
 					<template #icon>
-						<g-icon name="close" />
+						<IconComponent name="Close" />
 					</template>
 				</NButton>
 			</div>
@@ -41,12 +41,12 @@ defineEmits(['close'])
 const props = defineProps({
 	showHeader: {
 		type: Boolean,
-		default: true
+		default: true,
 	},
 	localTask: {
 		type: Object,
-		required: true
-	}
+		required: true,
+	},
 })
 
 const loading = ref(false)
@@ -58,8 +58,8 @@ onMounted(async () => {
 	const { query } = await useApi().post('api/builder/sql', {
 		body: {
 			taskData: props.localTask,
-			params: useAppStore().params
-		}
+			params: useAppStore().params,
+		},
 	})
 
 	try {
@@ -67,7 +67,7 @@ onMounted(async () => {
 			language: 'mysql',
 			tabWidth: 2,
 			keywordCase: 'upper',
-			linesBetweenQueries: 2
+			linesBetweenQueries: 2,
 		})
 	} catch (_: any) {
 		code.value = ''

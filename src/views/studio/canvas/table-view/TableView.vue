@@ -71,7 +71,7 @@
 		</template>
 		<template #content>
 			<div
-				v-if="columns.length"
+				v-if="columns?.length"
 				ref="content"
 				class="table-view table-view-content w-100 h-full px-3 py-2"
 			>
@@ -150,8 +150,8 @@ const props = defineProps({
 	tableName: {
 		type: String,
 		required: false,
-		default: null
-	}
+		default: null,
+	},
 })
 
 const localKey = ref('any')
@@ -173,7 +173,7 @@ const itemsPerPageList = computed(() => {
 		const value = (i + 1) * 10
 		return {
 			label: value.toString() + ' ' + (showTab.value === 'data' ? t('rows').toLowerCase() : t('categories')),
-			value
+			value,
 		}
 	})
 })
@@ -210,9 +210,9 @@ const countTableRows = async () => {
 	const { totalRows: qtd } = await useApi().post(`api/table/count`, {
 		body: {
 			taskData: {
-				...localTask.value
-			}
-		}
+				...localTask.value,
+			},
+		},
 	})
 
 	totalRows.value = qtd
@@ -222,9 +222,9 @@ const listFieldNames = async () => {
 	const { data } = await useApi().post(`api/table/field`, {
 		body: {
 			taskData: {
-				...localTask.value
-			}
-		}
+				...localTask.value,
+			},
+		},
 	})
 
 	columns.value = data
@@ -249,8 +249,8 @@ const initTableView = async () => {
 		base: {
 			...useAppStore().appInfo,
 			...(useAppStore().cloneTask() || {}),
-			schema
-		}
+			schema,
+		},
 	}) as BuilderTaskType
 
 	if (props.tableName) {
@@ -268,7 +268,7 @@ const tableReference = computed(() => useAppStore().task.tableName)
 watch(
 	() => tableReference.value,
 	() => initTableView(),
-	{ immediate: true }
+	{ immediate: true },
 )
 </script>
 

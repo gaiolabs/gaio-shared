@@ -75,7 +75,7 @@
 						<NInput v-model:value="localField.field.value" size="small" :placeholder="$t('typeHere')">
 							<template #suffix>
 								<NButton size="tiny" quaternary @click="previewColumn()">
-									<g-icon name="eye" />
+									<IconComponent name="Eye" />
 								</NButton>
 							</template>
 						</NInput>

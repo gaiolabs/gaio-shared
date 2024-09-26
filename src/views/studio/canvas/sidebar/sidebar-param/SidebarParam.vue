@@ -1,7 +1,12 @@
 <template>
 	<div class="sidebar-param flex h-[100%] flex-col items-stretch pt-3">
 		<div class="flex w-full items-stretch justify-between px-4">
-			<div class="text-lg font-bold">{{ $t('parameters') }}</div>
+			<h2 class="text-lg font-bold inline-flex gap-1 items-center">
+				<IconComponent name="Params" />
+				<span>
+					{{ $t('parameters') }}
+				</span>
+			</h2>
 			<div class="flex">
 				<NPopover
 					placement="bottom"
@@ -13,7 +18,7 @@
 							quaternary
 						>
 							<template #icon>
-								<g-icon name="createFolder" />
+								<IconComponent name="CreateFolder" />
 							</template>
 						</NButton>
 					</template>
@@ -41,7 +46,7 @@
 					@click="current = {}"
 				>
 					<template #icon>
-						<g-icon name="add" />
+						<IconComponent name="AddItem" />
 					</template>
 				</NButton>
 				<NButton
@@ -50,7 +55,7 @@
 					@click="useAppStore().saveAppMetadata('params')"
 				>
 					<template #icon>
-						<g-icon name="save" />
+						<IconComponent name="Save" />
 					</template>
 				</NButton>
 			</div>
@@ -92,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'
@@ -107,7 +113,7 @@ const {
 	removeRenderSwitcherIcon,
 	baseParamTreeSchema,
 	baseFolderTreeSchema,
-	localTreeFiltered
+	localTreeFiltered,
 } = useTree()
 
 const newFolderName = ref('')
@@ -139,7 +145,7 @@ const renderLabel = ({ option }) => {
 		option,
 		onEdit: (param) => {
 			current.value = param
-		}
+		},
 	})
 }
 
@@ -147,7 +153,7 @@ const treeNodeActions = () => {
 	return {
 		onClick() {
 			// openControl(useAppStore().params.find((o) => o.paramName === option.key))
-		}
+		},
 		// onContextmenu(e: MouseEvent) {
 		//     e.preventDefault()
 		//     e.stopPropagation()
@@ -225,7 +231,7 @@ const updateAppFolderOptions = () => {
 		return tree.map((node) => {
 			const appFolder: AppFolderOption = {
 				label: node.isLeaf ? `${node.key}` : node.label,
-				isLeaf: !!node.isLeaf
+				isLeaf: !!node.isLeaf,
 			}
 			if (node.children) {
 				appFolder.children = buildAppFolder(node.children)
@@ -240,10 +246,10 @@ const updateAppFolderOptions = () => {
 		body: {
 			options: {
 				...useAppStore().app.options,
-				folderParam: appFolderList
+				folderParam: appFolderList,
 			},
-			appId: useAppStore().app.appId
-		}
+			appId: useAppStore().app.appId,
+		},
 	})
 }
 

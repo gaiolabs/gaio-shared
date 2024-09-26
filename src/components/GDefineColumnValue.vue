@@ -46,16 +46,16 @@
 									:options="[
 										{
 											value: 'value',
-											label: $t('value')
+											label: $t('value'),
 										},
 										{
 											value: 'parameter',
-											label: $t('parameter')
+											label: $t('parameter'),
 										},
 										{
 											value: 'computed',
-											label: $t('computed')
-										}
+											label: $t('computed'),
+										},
 									]"
 									class="min-w-[100px]"
 								/>
@@ -98,7 +98,7 @@
 									@click="removeField(item.columnName)"
 								>
 									<template #icon>
-										<g-icon name="delete" />
+										<IconComponent name="Delete" />
 									</template>
 								</NButton>
 							</td>
@@ -131,12 +131,12 @@ const props = defineProps({
 	type: {
 		type: String,
 		required: true,
-		default: 'update'
+		default: 'update',
 	},
 	localTask: {
 		type: Object,
-		required: true
-	}
+		required: true,
+	},
 })
 
 const columns = ref<FieldType[]>([])
@@ -160,14 +160,14 @@ const changeUpdates = () => {
 				props.localTask.schema[props.type].push({
 					...col,
 					valueType: 'value',
-					value: ''
+					value: '',
 				})
 			}
 		}
 	})
 
 	props.localTask.schema[props.type] = props.localTask.schema[props.type].filter((o) =>
-		possibles.value.includes(o.columnName)
+		possibles.value.includes(o.columnName),
 	)
 }
 

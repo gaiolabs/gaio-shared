@@ -82,7 +82,7 @@
 								@click="showEditUser = true"
 							>
 								<template #icon>
-									<g-icon name="edit" />
+									<IconComponent name="Edit" />
 								</template>
 							</NButton>
 						</template>

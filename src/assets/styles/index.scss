@@ -99,10 +99,10 @@ html.light {
   --elevation-3: #CCCCCC;
   --elevation-4: #B3B3B3;
   --elevation-invert: #282828;
-  --prime: #AB612B;
-  --prime-hover: #bb692c;
-  --prime-pressed: #a45d29;
-  --prime-additional: #cf7a41;
+  --prime: hsl(25, 60%, 42%);
+  --prime-hover: hsl(26, 62%, 45%);
+  --prime-pressed: hsl(25, 60%, 40%);
+  --prime-additional: hsl(25, 60%, 53%);
 }
 
 html.dark {
@@ -112,10 +112,10 @@ html.dark {
   --elevation-3: #2F2F2F;
   --elevation-4: #393939;
   --elevation-invert: #E6E6E6;
-  --prime: rgb(230, 159, 105);
-  --prime-hover: rgb(230, 159, 105);
-  --prime-pressed: rgb(210, 139, 85);
-  --prime-additional: rgb(250, 179, 125);
+  --prime: hsl(25, 71%, 66%);
+  --prime-hover: hsl(25, 71%, 66%);
+  --prime-pressed: hsl(25, 58%, 58%);
+  --prime-additional: hsl(25, 93%, 74%);
 }
 
 .n-button--primary-type.border-elevation-2 {
