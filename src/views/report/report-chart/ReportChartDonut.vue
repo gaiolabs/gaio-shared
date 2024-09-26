@@ -1,4 +1,76 @@
 <template>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
+</template>
+
+<script setup lang="ts">
+import type { ReportNodeType } from '@gaio/shared/types'
+import { BarChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsOption, PieSeriesOption } from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+
+const { dimensions, measures, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { labelPie } = computed(() => useReportChartHelperLabel(task)).value
+
+use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
+
+const series = () => {
+	const values = list.map((item) => {
+		return {
+			value: item[columnName(measures.value.first)],
+			name: item[columnName(dimensions.value.first)],
+		}
+	})
+	return {
+		name: columnName(measures.value.first),
+		type: 'pie',
+		data: values,
+		label: labelPie(),
+		radius: ['70%', '100%'],
+		...grid(),
+	} as PieSeriesOption | PieSeriesOption[]
+}
+
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'item',
+	},
+	color: themeColors.value,
+	series: series(),
+	legend: legend(),
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			series: series(),
+			legend: legend(),
+		}
+	},
+	{ deep: true },
+)
+</script>
+
+<!-- <template>
 	<div class="report-donut">
 		<div
 			ref="id"
@@ -164,4 +236,4 @@ watch(
 onMounted(() => {
 	nextTick(() => loadChart())
 })
-</script>
+</script> -->

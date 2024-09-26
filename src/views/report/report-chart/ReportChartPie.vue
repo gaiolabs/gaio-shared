@@ -42,6 +42,8 @@ const series = () => {
 		type: 'pie',
 		data: values,
 		label: labelPie(),
+		radius: ['0%', '100%'],
+		...grid(),
 	} as PieSeriesOption | PieSeriesOption[]
 }
 
@@ -52,7 +54,6 @@ const option = ref<EChartsOption>({
 	color: themeColors.value,
 	series: series(),
 	legend: legend(),
-	grid: grid(),
 })
 
 watch(
@@ -63,7 +64,6 @@ watch(
 			color: themeColors.value,
 			series: series(),
 			legend: legend(),
-			grid: grid(),
 		}
 	},
 	{ deep: true },

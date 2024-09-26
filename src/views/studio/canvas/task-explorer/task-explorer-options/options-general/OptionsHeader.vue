@@ -90,6 +90,4 @@
 import { useReportStore } from '@/stores'
 import { NCheckbox, NInput, NInputNumber, NSelect } from 'naive-ui'
 const { current } = useReportStore()
-
-console.log('current.settings.titleFontSize', current.settings.titleFontSize)
 </script>
