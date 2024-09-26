@@ -79,6 +79,26 @@
 								{{ $t('position') }}
 							</div>
 							<NSelect
+								v-if="useReportStore().showOnlyIf(['pie'])"
+								v-model:value="useReportStore().current.settings.showLabelType"
+								class="w-full"
+								:options="[
+									{
+										value: 'outside',
+										label: $t('outside'),
+									},
+									{
+										value: 'inside',
+										label: $t('inside'),
+									},
+									{
+										value: 'center',
+										label: $t('center'),
+									},
+								]"
+							/>
+							<NSelect
+								v-if="!useReportStore().showOnlyIf(['pie'])"
 								v-model:value="useReportStore().current.settings.showLabelType"
 								class="w-full"
 								:options="[

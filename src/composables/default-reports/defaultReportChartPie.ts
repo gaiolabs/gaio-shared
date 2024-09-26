@@ -26,10 +26,10 @@ export const defaultReportChartPie = (base: ReportNodeType) => {
 			showLabelMeasure: definedOrDefault(settings.showLabelMeasure, true),
 			showLabelDimension: definedOrDefault(settings.showLabelDimension, true),
 			showLabelPercent: definedOrDefault(settings.showLabelPercent, false),
-			appendPaddingTop: definedOrDefault(settings.appendPaddingTop, 10),
-			appendPaddingBottom: definedOrDefault(settings.appendPaddingBottom, 10),
+			appendPaddingTop: definedOrDefault(settings.appendPaddingTop, 0),
+			appendPaddingBottom: definedOrDefault(settings.appendPaddingBottom, 0),
 			appendPaddingLeft: definedOrDefault(settings.appendPaddingLeft, 0),
-			appendPaddingRight: definedOrDefault(settings.appendPaddingRight, 0)
-		}
+			appendPaddingRight: definedOrDefault(settings.appendPaddingRight, 0),
+		},
 	}
 }

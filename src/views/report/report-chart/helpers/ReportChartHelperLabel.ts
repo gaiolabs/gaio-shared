@@ -20,5 +20,28 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label }
+
+	const labelPie = () => {
+		return {
+			show: settings.value.showLabel,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: object | Array<object>) => {
+				const params = v as any
+				console.log('params', params)
+				let labelString = formatValue(params.data.value, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				if (settings.value.showLabelDimension) {
+					labelString = `${params.data.name}\n${labelString} `
+				}
+				if (settings.value.showLabelPercent) {
+					labelString += `\n${params.percent.toFixed(2)}% `
+				}
+				return labelString
+			},
+		}
+	}
+	return { label, labelPie }
 }

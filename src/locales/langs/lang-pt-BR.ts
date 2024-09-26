@@ -205,4 +205,5 @@ export default {
 	insideLeft: 'Dentro à esquerda',
 	showPoint: 'Mostrar pontos',
 	lineSmooth: 'Linha suave',
+	outside: 'Fora',
 }

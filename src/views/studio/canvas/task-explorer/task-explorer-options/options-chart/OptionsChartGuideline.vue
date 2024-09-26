@@ -31,33 +31,33 @@ const options = [
 		label: 'NONE',
 		value: 'none',
 	},
-	{
-		label: 'quad',
-		value: 'quad',
-	},
+	// {
+	// 	label: 'quad',
+	// 	value: 'quad',
+	// },
 	{
 		label: 'linear',
 		value: 'linear',
 	},
 	{
 		label: 'exp',
-		value: 'exp',
+		value: 'exponential',
 	},
-	{
-		label: 'loess',
-		value: 'loess',
-	},
+	// {
+	// 	label: 'loess',
+	// 	value: 'loess',
+	// },
 	{
 		label: 'log',
-		value: 'log',
+		value: 'logarithmic',
 	},
 	{
 		label: 'poly',
-		value: 'poly',
+		value: 'polynomial',
 	},
-	{
-		label: 'pow',
-		value: 'pow',
-	},
+	// {
+	// 	label: 'pow',
+	// 	value: 'power',
+	// },
 ]
 </script>

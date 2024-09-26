@@ -74,12 +74,27 @@ const series = () => {
 }
 
 const option = ref<EChartsOption>({
+	// tooltip: {
+	// 	trigger: 'axis',
+	// 	axisPointer: {
+	// 		type: 'shadow',
+	// 	},
+	// },
+
 	tooltip: {
 		trigger: 'axis',
 		axisPointer: {
-			type: 'shadow',
+			type: 'cross',
 		},
 	},
+	toolbox: {
+		feature: {
+			dataView: { show: true, readOnly: false },
+			restore: { show: true },
+			saveAsImage: { show: true },
+		},
+	},
+
 	color: themeColors.value,
 	legend: legend(),
 	label: label(measures.value.measures),

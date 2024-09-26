@@ -60,6 +60,4 @@
 import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores'
 import { NCheckbox, NColorPicker, NInput, NInputNumber } from 'naive-ui'
-
-console.log('useReportStore().current.settings  ', useReportStore().current.settings)
 </script>
