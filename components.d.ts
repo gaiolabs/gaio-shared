@@ -169,6 +169,7 @@ declare module 'vue' {
     StarTinyIcon: typeof import('./src/components/icons/StarTinyIcon.vue')['default']
     Studio: typeof import('./src/components/icons/Studio.vue')['default']
     StudioIcon: typeof import('./src/components/icons/StudioIcon.vue')['default']
+    TableDetailModal: typeof import('./src/components/tabel-detail-modal/TableDetailModal.vue')['default']
     TableListTableDetailModal: typeof import('./src/components/table-list/components/TableListTableDetailModal.vue')['default']
     TagsIcon: typeof import('./src/components/icons/TagsIcon.vue')['default']
     TaskIcon: typeof import('./src/components/TaskIcon.vue')['default']
