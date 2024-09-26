@@ -17,6 +17,50 @@
 			</NConfigProvider>
 		</transition>
 	</router-view>
+	<div
+		v-if="debugMode"
+		class="flex flex-col gap-1 fixed bottom-0 right-0 z-50"
+	>
+		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">Mode: {{ mode }}</pre>
+		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">Is Dark: {{ isDark }}</pre>
+		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">User: {{ user }}</pre>
+	</div>
+	<div
+		v-if="debugMode"
+		class="fixed font-mono right-0 top-0 bg-black text-[#0f0] p-1"
+	>
+		<h1 class="font-bol">App.vue</h1>
+		<div class="flex gap-1">
+			<div
+				class="p-1"
+				:class="{ 'bg-[#0f0] text-black': F2 }"
+			>
+				F2
+			</div>
+			<div
+				class="p-1"
+				:class="{ 'bg-[#0f0] text-black': F4 }"
+			>
+				F4
+			</div>
+		</div>
+		<div class="flex gap-1">
+			<button
+				v-if="!isDark"
+				class="bg-[#0f0] px-2 text-black"
+				@click="toggleDark()"
+			>
+				Set Dark Mode
+			</button>
+			<button
+				v-else
+				class="bg-[#0f0] px-2 text-black"
+				@click="toggleDark()"
+			>
+				Set Light Mode
+			</button>
+		</div>
+	</div>
 	<command-k
 		v-if="useCommandKStore().show"
 		@close="useCommandKStore().show = false"
@@ -27,31 +71,47 @@
 import { useAuthStore, useCommandKStore } from '@/stores'
 import CommandK from '@/views/commandK/CommandK.vue'
 import { useColorMode, useMagicKeys } from '@vueuse/core'
+import { useDark, useToggle } from '@vueuse/core'
 import { darkTheme, NMessageProvider, NConfigProvider } from 'naive-ui'
 import { computed, nextTick, onMounted, watch, watchEffect } from 'vue'
 import { RouterView } from 'vue-router'
-
 const mode = useColorMode()
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+// const mode = useColorMode()
 const user = computed(() => useAuthStore().user)
+const debugMode = ref(false)
+const toggleDebugMode = useToggle(debugMode)
+// watch(
+// 	() => user.value,
+// 	() => {
+// 		if (user.value?.options.userThemeMode) {
+// 			mode.value = user.value.options.userThemeMode as 'dark' | 'light' | 'auto'
+// 		} else {
+// 			mode.value = 'auto'
+// 		}
+// 	},
+// 	{
+// 		deep: true,
+// 		immediate: true,
+// 	},
+// )
 
-watch(
-	() => user.value,
-	() => {
-		if (mode) {
-			if (user.value?.options.userThemeMode) {
-				mode.value = user.value.options.userThemeMode as 'dark' | 'light' | 'auto'
-			} else {
-				mode.value = 'auto'
-			}
-		}
-	},
-	{
-		deep: true,
-		immediate: true
+const { k, p, i, a, t, shift, meta, tab, F2, F4 } = useMagicKeys({
+	passive: true,
+})
+
+watch(F2, (value) => {
+	if (value) {
+		toggleDark()
 	}
-)
+})
 
-const { k, p, i, a, t, shift, meta, tab } = useMagicKeys()
+watch(F4, (value) => {
+	if (value) {
+		toggleDebugMode()
+	}
+})
 
 watchEffect(() => {
 	if (tab.value) {
@@ -108,21 +168,21 @@ const themeOverridesLight = {
 		popoverColor: '#FEFDFB',
 		tableColorHover: '#F9F9F8',
 		tableColorStriped: '#F9F9F8',
-		tableHeaderColor: '#F9F9F8'
+		tableHeaderColor: '#F9F9F8',
 	},
 	Button: {
 		textColorPrimary: '#FEFDFB',
 		textColorHoverPrimary: '#FEFDFB',
 		textColorPressedPrimary: '#FEFDFB',
 		textColorFocusPrimary: '#FEFDFB',
-		textColorDisabledPrimary: '#FEFDFB'
+		textColorDisabledPrimary: '#FEFDFB',
 	},
 	Table: {
 		thPaddingSmall: '3px',
 		tdPaddingSmall: '3px',
 		thPaddingMedium: '5px',
-		tdPaddingMedium: '5px'
-	}
+		tdPaddingMedium: '5px',
+	},
 }
 
 const themeOverridesDark = {
@@ -144,10 +204,10 @@ const themeOverridesDark = {
 		bodyColor: '#1D1D1D',
 		tagColor: '#262727',
 		invertedColor: '#FEFDFB',
-		inputColor: 'rgb(0,0,0, 28%)'
+		inputColor: 'rgb(0,0,0, 28%)',
 	},
 	Modal: {
-		boxShadow: 'rgb(0,0,0, 90%)'
+		boxShadow: 'rgb(0,0,0, 90%)',
 	},
 	Button: {
 		// textColorPrimary: '#444',
@@ -163,8 +223,8 @@ const themeOverridesDark = {
 		tdPaddingMedium: '5px',
 		tdColor: '#1D1D1D',
 		thColor: '#1D1D1D',
-		tdColorStriped: '#262727'
-	}
+		tdColorStriped: '#262727',
+	},
 }
 
 const themeOverrides = computed(() => (mode.value === 'dark' ? themeOverridesDark : themeOverridesLight))

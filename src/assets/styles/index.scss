@@ -14,6 +14,7 @@
 /* Works on Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
   width: 5px; /* width of the entire scrollbar */
+  height: 5px;
   border-radius: 5px;
 }
 
@@ -22,11 +23,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3); /* color of the scroll thumb */
+  border-radius: 999px;
+  background: hsla(0, 0%, 100%, 0.3); /* color of the scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFFFFF4C; /* color of the scroll thumb on hover*/
+  background: hsla(0, 0%, 100%, 0.4); /* color of the scroll thumb on hover*/
 }
 
 .bg-g-first {
@@ -80,6 +82,9 @@
   color: var(--gaio-three)
 }
 
+body{
+  transition: all 50ms !important;
+}
 
 
 html {
