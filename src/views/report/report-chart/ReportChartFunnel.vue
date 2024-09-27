@@ -57,10 +57,6 @@ const series = () => {
 		right: gridForChart.right,
 		label: labelFunnel(),
 		orient: settings.value.transposed ? 'horizontal' : 'vertical',
-
-		width: '100%', // Defina a largura para 100%
-		minSize: '0%', // Garante que o menor valor será zero para formar a ponta
-		maxSize: '100%', // Garante que o maior valor ocupará a largura total
 		min: minMax.min,
 		max: minMax.max,
 		// min: minMax.min,
