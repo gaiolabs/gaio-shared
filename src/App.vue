@@ -6,7 +6,7 @@
 		<transition name="fade">
 			<NConfigProvider
 				:theme="useDarkTheme"
-				:theme-overrides="themeOverrides"
+				:theme-overrides="themeOverrides(isDark)"
 				inline-theme-disabled
 				preflight-style-disabled
 				class="size-full"
@@ -153,81 +153,59 @@ watchEffect(() => {
 	}
 })
 
-const themeOverridesLight = {
+const themeOverrides = (isDark: boolean) => ({
 	common: {
-		primaryColor: '#AB612B',
-		primaryColorHover: '#bb692c', // 'rgb( 210, 139, 85)'
-		primaryColorPressed: '#a45d29', //  'rgb( 190, 119, 65)',
-		primaryColorSuppl: '#cf7a41',
+		primaryColor: isDark ? 'rgb(230, 159, 105)' : '#AB612B',
+		primaryColorHover: isDark ? 'rgb(230, 159, 105)' : '#bb692c', // 'rgb(210, 139, 85)'
+		primaryColorPressed: isDark ? 'rgb(210, 139, 85)' : '#a45d29', // 'rgb(190, 119, 65)'
+		primaryColorSuppl: isDark ? 'rgb(250, 179, 125)' : '#cf7a41',
 		borderRadius: '4px',
 		borderRadiusSmall: '2px',
-		heightTiny: '22px',
+		popoverColor: isDark ? '#262727' : '#FEFDFB',
+		tableColor: isDark ? '#262727' : undefined,
+		tableColorHover: isDark ? undefined : '#F9F9F8',
+		tableColorStriped: isDark ? '#262727' : '#F9F9F8',
+		tableHeaderColor: isDark ? '#1D1D1D' : '#F9F9F8',
+		cardColor: isDark ? '#262727' : undefined,
+		modalColor: isDark ? '#262727' : undefined,
+		bodyColor: isDark ? '#1D1D1D' : undefined,
+		tagColor: isDark ? '#262727' : undefined,
+		invertedColor: isDark ? '#FEFDFB' : undefined,
+		inputColor: isDark ? 'hsla(24, 6%, 83%, 5%)' : undefined,
+		heightTiny: '24px',
 		heightSmall: '26px',
-		heightMedium: '26px',
-		heightLarge: '28px',
-		popoverColor: '#FEFDFB',
-		tableColorHover: '#F9F9F8',
-		tableColorStriped: '#F9F9F8',
-		tableHeaderColor: '#F9F9F8',
+		heightMedium: '30px',
+		heightLarge: '36px',
 	},
-	Button: {
-		textColorPrimary: '#FEFDFB',
-		textColorHoverPrimary: '#FEFDFB',
-		textColorPressedPrimary: '#FEFDFB',
-		textColorFocusPrimary: '#FEFDFB',
-		textColorDisabledPrimary: '#FEFDFB',
-	},
-	Table: {
-		thPaddingSmall: '3px',
-		tdPaddingSmall: '3px',
-		thPaddingMedium: '5px',
-		tdPaddingMedium: '5px',
-	},
-}
-
-const themeOverridesDark = {
-	common: {
-		primaryColor: 'rgb( 230, 159, 105)',
-		primaryColorHover: 'rgb( 230, 159, 105)', // 'rgb( 210, 139, 85)'
-		primaryColorPressed: 'rgb( 210, 139, 85)', //  'rgb( 190, 119, 65)',
-		primaryColorSuppl: 'rgb( 250, 179, 125)',
-		borderRadius: '4px',
-		borderRadiusSmall: '2px',
-		heightTiny: '22px',
-		heightSmall: '26px',
-		heightMedium: '26px',
-		heightLarge: '28px',
-		tableColor: '#262727',
-		popoverColor: '#262727',
-		cardColor: '#262727',
-		modalColor: '#262727',
-		bodyColor: '#1D1D1D',
-		tagColor: '#262727',
-		invertedColor: '#FEFDFB',
-		inputColor: 'rgb(0,0,0, 28%)',
+	Input: {
+		borderRadius: '6px',
+		border: isDark ? '1px solid hsla(24, 6%, 83%, 10%)' : '1px solid hsl(24, 6%, 83%)',
 	},
 	Modal: {
-		boxShadow: 'rgb(0,0,0, 90%)',
+		boxShadow: isDark ? 'rgba(0, 0, 0, 0.9)' : undefined,
+	},
+	Divider: {
+		fontWeight: '400',
+		textColor: isDark ? '#57534e' : '#78716c',
 	},
 	Button: {
-		// textColorPrimary: '#444',
-		// textColorHoverPrimary: '#444',
-		// textColorPressedPrimary: '#444',
-		// textColorFocusPrimary: '#444',
-		// textColorDisabledPrimary: '#444'
+		textColorPrimary: isDark ? '#444' : '#FEFDFB',
+		textColorHoverPrimary: isDark ? '#444' : '#FEFDFB',
+		textColorPressedPrimary: isDark ? '#444' : '#FEFDFB',
+		textColorFocusPrimary: isDark ? '#444' : '#FEFDFB',
+		textColorDisabledPrimary: isDark ? '#444' : '#FEFDFB',
 	},
 	Table: {
 		thPaddingSmall: '3px',
 		tdPaddingSmall: '3px',
 		thPaddingMedium: '5px',
 		tdPaddingMedium: '5px',
-		tdColor: '#1D1D1D',
-		thColor: '#1D1D1D',
-		tdColorStriped: '#262727',
+		tdColor: isDark ? '#1D1D1D' : undefined,
+		thColor: isDark ? '#1D1D1D' : undefined,
+		tdColorStriped: isDark ? '#262727' : undefined,
 	},
-}
+})
 
-const themeOverrides = computed(() => (mode.value === 'dark' ? themeOverridesDark : themeOverridesLight))
 const useDarkTheme = computed(() => (mode.value === 'dark' ? darkTheme : null))
 
 onMounted(() => {

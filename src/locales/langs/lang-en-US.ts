@@ -779,4 +779,5 @@ export default {
 	insideLeft: 'Inside left',
 	showPoint: 'Show point',
 	lineSmooth: 'Line smooth',
+	invalidCredentials: 'Invalid credentials',
 }
