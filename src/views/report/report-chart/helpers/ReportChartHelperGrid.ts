@@ -23,7 +23,8 @@ export default (task: ReportNodeType) => {
 			left: `${(settings.value.appendPaddingLeft ?? 0) + plusLegendLeft + plusTitleLeft + 3}%`,
 			right: `${(settings.value.appendPaddingRight ?? 0) + plusLegendRight + 3}%`,
 			containLabel: true,
-		} as GridOption | GridOption[]
+		}
+		// } as GridOption | GridOption[]
 	}
 	return { grid }
 }

@@ -1,4 +1,117 @@
 <template>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
+</template>
+
+<script setup lang="ts">
+import type { ReportNodeType } from '@gaio/shared/types'
+import { BarChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsOption, FunnelSeriesOption } from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
+import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
+import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
+
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
+
+const { dimensions, measures, themeColors, settings, columnName } = computed(() => useReportChartHelper(task)).value
+const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { labelFunnel } = computed(() => useReportChartHelperLabel(task)).value
+const { getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+
+use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
+
+const series = () => {
+	const values = list.map((item) => {
+		return {
+			value: item[columnName(measures.value.first)],
+			name: item[columnName(dimensions.value.first)],
+		}
+	})
+
+	const allMeasures = list.map((item) => {
+		return item[columnName(measures.value.first)]
+	}) as number[]
+
+	const minMax = getMinMaxValues(allMeasures)
+
+	const gridForChart = grid()
+	return {
+		name: columnName(measures.value.first),
+		type: 'funnel',
+		data: values,
+		top: gridForChart.top,
+		bottom: gridForChart.bottom,
+		left: gridForChart.left,
+		right: gridForChart.right,
+		label: labelFunnel(),
+		orient: settings.value.transposed ? 'horizontal' : 'vertical',
+
+		width: '100%', // Defina a largura para 100%
+		minSize: '0%', // Garante que o menor valor será zero para formar a ponta
+		maxSize: '100%', // Garante que o maior valor ocupará a largura total
+		min: minMax.min,
+		max: minMax.max,
+		// min: minMax.min,
+		// max: minMax.max,
+
+		sort: 'descending',
+		gap: 0,
+		labelLine: {
+			length: 10,
+			lineStyle: {
+				width: 1,
+				type: 'solid',
+			},
+		},
+		itemStyle: {
+			borderColor: '#fff',
+			borderWidth: 1,
+		},
+		emphasis: {
+			label: {
+				fontSize: 20,
+			},
+		},
+		// ...grid(),
+	} as FunnelSeriesOption | FunnelSeriesOption[]
+}
+
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'item',
+	},
+	color: themeColors.value,
+	series: series(),
+	legend: legend(),
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			series: series(),
+			legend: legend(),
+		}
+	},
+	{ deep: true },
+)
+</script>
+
+<!-- <template>
 	<div class="report-column">
 		<div
 			ref="id"
@@ -68,4 +181,4 @@ onMounted(() => {
 	processLocalList()
 	nextTick(() => loadChart())
 })
-</script>
+</script> -->

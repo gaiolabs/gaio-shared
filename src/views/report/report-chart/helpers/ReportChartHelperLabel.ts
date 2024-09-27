@@ -42,6 +42,32 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
+
+	const labelFunnel = () => {
+		return {
+			show: settings.value.showLabel,
+			position: 'inside',
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: object | Array<object>) => {
+				const params = v as any
+				let labelString = ''
+				if (settings.value.showLabelMeasure) {
+					labelString = formatValue(params.data.value, {
+						compactNumber: settings.value.compactNumberLabel,
+					}).toString()
+				}
+				if (settings.value.showLabelDimension) {
+					labelString = `${params.data.name}\n${labelString} `
+				}
+				if (settings.value.showLabelPercent) {
+					labelString += `\n${params.percent.toFixed(2)}% `
+				}
+				return labelString
+			},
+		}
+	}
+
 	const labelRadar = () => {
 		return {
 			show: settings.value.showLabel,
@@ -57,5 +83,5 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label, labelPie, labelRadar }
+	return { label, labelPie, labelRadar, labelFunnel }
 }
