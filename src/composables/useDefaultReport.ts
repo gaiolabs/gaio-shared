@@ -12,6 +12,7 @@ import { cloneDeep } from 'lodash-es'
 import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
+import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
@@ -62,7 +63,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'radar':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartRadar(sourceProperties)
 			break
 
 		case 'heatmap':
@@ -111,6 +112,6 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 		databaseName: getBucketNameFromAppId(base.appId),
 		tableName: base.tableName,
 		layout: base.layout || {},
-		...result
+		...result,
 	}) as ReportNodeType
 }

@@ -86,6 +86,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartRadar
+						v-else-if="task.reportType === 'radar'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -109,6 +116,7 @@ import { computed, onMounted, ref } from 'vue'
 import ReportChartBubble from './ReportChartBubble.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
+import ReportChartRadar from './ReportChartRadar.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
 
 defineEmits(['change'])
