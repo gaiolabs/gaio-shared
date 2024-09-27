@@ -29,7 +29,6 @@ export default (task: ReportNodeType) => {
 			fontSize: settings.value.labelFontSize || 13,
 			formatter: (v: object | Array<object>) => {
 				const params = v as any
-				console.log('params', params)
 				let labelString = formatValue(params.data.value, {
 					compactNumber: settings.value.compactNumberLabel,
 				})
@@ -43,5 +42,20 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label, labelPie }
+	const labelRadar = () => {
+		return {
+			show: settings.value.showLabel,
+			alignTicks: false,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: Record<string, string | number | Date>) => {
+				const formatedValue = formatValue(v.value, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				return formatedValue
+			},
+		}
+	}
+	return { label, labelPie, labelRadar }
 }

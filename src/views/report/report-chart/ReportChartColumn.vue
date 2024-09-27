@@ -87,13 +87,6 @@ const option = ref<EChartsOption>({
 			type: 'cross',
 		},
 	},
-	toolbox: {
-		feature: {
-			dataView: { show: true, readOnly: false },
-			restore: { show: true },
-			saveAsImage: { show: true },
-		},
-	},
 
 	color: themeColors.value,
 	legend: legend(),
