@@ -1,10 +1,11 @@
 <template>
 	<a
 		id="powered-by"
+		target="_blank"
 		href="https://gaio.io"
 		class="relative block group -ml-8 pl-8 pr-14 -mb-8 pb-8"
 	>
-		<small class="text-xs font-medium ml-1 dark:text-paper-900 text-carbon-900 z-10">Powered by</small>
+		<small class="text-xs ml-1 dark:text-gray-500 text-gray-500 z-10">Powered by</small>
 
 		<img
 			class="w-[100px] h-[42px] object-contain object-left bg-red-blue-500 z-10"
@@ -12,12 +13,15 @@
 			:alt="whiteLabelAlt"
 		/>
 		<div
+			id="powered-by-box-backdrop"
+			class="block transition-all duration-300 ease-in-out group-hover:rotate-[2deg] rotate-[-6deg] -translate-x-12 translate-y-12 fixed w-64 h-44 bottom-0 left-0 z-[-1] rounded-[2rem] backdrop-blur-lg"
+		></div>
+		<div
 			id="powered-by-box"
-			style="--tw-drop-shadow: drop-shadow(0 15px 25px rgb(0 0 0 / 0.075))"
-			class="block transition-all duration-300 ease-in-out group-hover:rotate-[182deg] bg-gradient-to-bl rotate-[174deg] dark:via-[#2e251f] dark:from-[#2e251f] dark:to-[#4d372c] from-[#E9C9B5] -translate-x-12 translate-y-8 drop-shadow-2xl via-[#E9C9B5] to-[#ffe6d6] fixed w-64 h-40 bottom-0 left-0 z-[-1] p-[2px] rounded-2xl"
+			class="block transition-all duration-300 ease-in-out group-hover:rotate-[2deg] rotate-[-6deg] g-gradient-border -translate-x-12 translate-y-12 filter fixed w-64 h-44 bottom-0 left-0 z-[-1] p-[3px] rounded-[2rem]"
 		>
 			<div
-				class="bg-gradient-to-bl from-paper-400 to-paper-100 dark:from-carbon-400 dark:to-carbon-100 w-full h-full rounded-[13px]"
+				class="bg-gradient-to-tr from-gray-100 to-gray-50 dark:from-gray-900 dark:to-gray-950 w-full h-full rounded-[26px]"
 			></div>
 		</div>
 	</a>
