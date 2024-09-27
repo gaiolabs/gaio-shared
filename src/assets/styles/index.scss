@@ -168,3 +168,15 @@ html.dark {
 .fade-leave-to {
   opacity: 0;
 }
+
+
+label {
+  &:has(span) {
+    @apply flex flex-col gap-1.5;    
+    span {
+      &:first-child {
+        @apply mb-[2px];
+      }
+    }
+  }
+}

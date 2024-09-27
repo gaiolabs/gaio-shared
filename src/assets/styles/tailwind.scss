@@ -129,5 +129,13 @@
   .g-text-600 {
     @apply text-paper-600 dark:text-carbon-600;
   }
+
+  .g-gradient {
+    @apply bg-gradient-to-r dark:from-ochre-400 from-sepia-400 to-sepia-800 dark:to-ochre-800;
+  }
+
+  .g-gradient-border {
+    @apply bg-gradient-to-br from-sepia-500 via-sepia-800 dark:from-ochre-800 dark:via-ochre-200 to-sepia-300 dark:to-ochre-600;
+  }
 }
 
