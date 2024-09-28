@@ -9,6 +9,22 @@ export const useAuthStore = defineStore(
 		const token = ref<string>('')
 		const user = ref<UserType>()
 
+		watch(
+			user,
+			(oldUser, newUser) => {
+				const hasCurrentUser = !!user.value?.userId
+				const hasCurrentUserIdChanged = oldUser?.userId !== newUser?.userId
+				const doesNotAlreadyHasLastLogin = !user.value?.lastLogin
+				if (hasCurrentUser && hasCurrentUserIdChanged) {
+					const now = new Date()
+					if (doesNotAlreadyHasLastLogin) user.value.lastLogin = now
+					user.value.sessionStart = now
+					user.value.sessionCount = user.value.sessionCount ? user.value.sessionCount + 1 : 1
+				}
+			},
+			{ deep: true },
+		)
+
 		// set token state
 		// const setToken = (newToken: Token) => {
 		//     if (newToken) {
@@ -132,18 +148,22 @@ export const useAuthStore = defineStore(
 			//         setIsLoading(false);
 			//     }
 			// });
+
+			// for now let's just clear all data
+			user.value = null
+			token.value = null
 		}
 
 		const updateUserOptions = async (definedOptions: UserOptionsType = {}) => {
 			console.log(definedOptions)
 			user.value.options = {
 				...user.value.options,
-				...definedOptions
+				...definedOptions,
 			}
 			return await useApi().post('api/user/update-options', {
 				body: {
-					options: user.value.options
-				}
+					options: user.value.options,
+				},
 			})
 		}
 
@@ -155,16 +175,16 @@ export const useAuthStore = defineStore(
 							userId: user.value.userId,
 							name: userData.name,
 							email: userData.email,
-							lang: userData.lang
-						}
-					}
+							lang: userData.lang,
+						},
+					},
 				})
 				.then(() => {
 					user.value = {
 						...user.value,
 						name: userData.name,
 						email: userData.email,
-						lang: userData.lang
+						lang: userData.lang,
 					}
 				})
 		}
@@ -205,10 +225,10 @@ export const useAuthStore = defineStore(
 			addAppToRecent,
 			toggleFavoriteApp,
 			updateUserOptions,
-			updateUserMetadata
+			updateUserMetadata,
 		}
 	},
 	{
-		persist: true
-	}
+		persist: true,
+	},
 )
