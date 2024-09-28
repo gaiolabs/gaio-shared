@@ -21,9 +21,33 @@
 		v-if="debugMode"
 		class="flex flex-col gap-1 fixed bottom-0 right-0 z-50"
 	>
-		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">Mode: {{ mode }}</pre>
-		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">Is Dark: {{ isDark }}</pre>
-		<pre class="bg-black w-96 max-h-[75vh] overflow-auto text-xs text-[#0f0] font-mono p-1">User: {{ user }}</pre>
+		<pre class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1">
+ Mode: {{ mode }} | Is Dark: {{ isDark }}</pre
+		>
+		<pre
+			v-if="user"
+			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+		>
+ Last login: {{ timeSinceLastLogin }} </pre
+		>
+		<pre
+			v-if="user"
+			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+		>
+ Session Start: {{ timeSinceSessionStart }} </pre
+		>
+		<pre
+			v-if="user"
+			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+		>
+ Sessions Count: {{ user.sessionCount }} </pre
+		>
+		<pre
+			v-if="user"
+			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+		>
+User: {{ user }}</pre
+		>
 	</div>
 	<div
 		v-if="debugMode"
@@ -96,6 +120,17 @@ const toggleDebugMode = useToggle(debugMode)
 // 		immediate: true,
 // 	},
 // )
+const now = ref(new Date())
+function updateNow() {
+	nextTick(() => {
+		now.value = new Date()
+		setTimeout(updateNow, 1000)
+	})
+}
+
+onMounted(() => {
+	updateNow()
+})
 
 const { k, p, i, a, t, shift, meta, tab, F2, F4 } = useMagicKeys({
 	passive: true,
@@ -152,6 +187,41 @@ watchEffect(() => {
 		}
 	}
 })
+
+const timeSinceLastLogin = computed(() => {
+	if (user.value) {
+		return calcTimeSince(user.value.lastLogin, now.value)
+	}
+	return ''
+})
+
+const timeSinceSessionStart = computed(() => {
+	if (user.value) {
+		return calcTimeSince(user.value.sessionStart, now.value)
+	}
+	return ''
+})
+
+function calcTimeSince(date: Date | string, now: Date) {
+	const when = typeof date === 'string' ? new Date(date) : date
+	const diff = now.getTime() - when.getTime()
+	return msToClock(diff)
+}
+function msToClock(ms: number) {
+	if (ms < 0) return '0:00:00'
+
+	const days = Math.floor(ms / 86400000)
+	const hours = Math.floor((ms % 86400000) / 3600000)
+	const minutes = Math.floor(((ms % 86400000) % 3600000) / 60000)
+	const seconds = Math.floor((((ms % 86400000) % 3600000) % 60000) / 1000)
+
+	let clockString = ''
+	if (days > 0) clockString += `${days}d `
+	clockString += String(hours) + ':'
+	clockString += String(minutes).padStart(2, '0') + ':'
+	clockString += String(seconds).padStart(2, '0')
+	return clockString
+}
 
 const themeOverrides = (isDark: boolean) => ({
 	common: {
