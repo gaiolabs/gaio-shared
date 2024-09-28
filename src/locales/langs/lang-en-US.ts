@@ -780,4 +780,6 @@ export default {
 	showPoint: 'Show point',
 	lineSmooth: 'Line smooth',
 	invalidCredentials: 'Invalid credentials',
+	problemsToLogin: 'Problems to login?',
+	profilePictureOf: 'Profile picture of {name}',
 }
