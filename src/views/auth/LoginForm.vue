@@ -144,6 +144,14 @@ const user = computed(() => useAuthStore().user)
 
 const mode = ref('login')
 
+// watch mode, if its welcome wait 2 seconds and redirect to /apps
+watch(mode, async () => {
+	if (mode.value === 'welcome') {
+		await new Promise((resolve) => setTimeout(resolve, 2000))
+		await router.push('/apps')
+	}
+})
+
 async function doLogin() {
 	credentials.loading = true
 	credentials.hasError = false
