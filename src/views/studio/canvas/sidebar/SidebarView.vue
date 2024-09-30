@@ -12,7 +12,7 @@
 				<template v-if="panel === 'flow'">
 					<sidebar-flow />
 				</template>
-				<template v-else-if="panel === 'source'">
+				<template v-else-if="panel === 'database'">
 					<sidebar-source />
 				</template>
 				<template v-else-if="panel === 'params'">
