@@ -25,8 +25,8 @@ import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const { dimensions, measures, themeColors, settings, columnName } = computed(() => useReportChartHelper(task)).value
-const { grid } = computed(() => useReportChartHelperGrid(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
+const { gridWithoutAxis } = computed(() => useReportChartHelperGrid(task)).value
 const { labelFunnel } = computed(() => useReportChartHelperLabel(task)).value
 const { getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
 
@@ -46,7 +46,7 @@ const series = () => {
 
 	const minMax = getMinMaxValues(allMeasures)
 
-	const gridForChart = grid()
+	const gridForChart = gridWithoutAxis()
 	return {
 		name: columnName(measures.value.first),
 		type: 'funnel',
@@ -59,9 +59,6 @@ const series = () => {
 		orient: settings.value.transposed ? 'horizontal' : 'vertical',
 		min: minMax.min,
 		max: minMax.max,
-		// min: minMax.min,
-		// max: minMax.max,
-
 		sort: 'descending',
 		gap: 0,
 		labelLine: {

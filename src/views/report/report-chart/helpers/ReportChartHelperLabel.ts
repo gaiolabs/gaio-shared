@@ -83,5 +83,21 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label, labelPie, labelRadar, labelFunnel }
+
+	const labelGauge = () => {
+		return {
+			show: settings.value.showLabel,
+			alignTicks: false,
+			color: settings.value.labelFontColor ?? '#000000FF',
+			distance: 40,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: number) => {
+				const formatedValue = formatValue(v, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				return formatedValue.toString()
+			},
+		}
+	}
+	return { label, labelPie, labelRadar, labelFunnel, labelGauge }
 }

@@ -23,11 +23,17 @@ const { dataTypeIsNumeric, dataTypeIcon, dataTypeIsDate } = useDataType()
 const {
 	field,
 	showIcon = true,
-	selected = false
+	selected = false,
+	isForGaugeChart = false,
+	isMeasure = false,
+	position = 0,
 } = defineProps<{
 	field: FieldType
 	showIcon?: boolean
 	selected?: boolean
+	isForGaugeChart?: boolean
+	isMeasure?: boolean
+	position?: number
 }>()
 
 const iconName = computed(() => {
@@ -52,7 +58,10 @@ const classBasedOnType = computed(() => {
 })
 
 const title = computed(() => {
-	return field.alias || field.columnName
+	let tagTitle = field.alias || field.columnName
+	if (isForGaugeChart) if (isMeasure) console.log('position', position)
+	tagTitle = isForGaugeChart ? null : tagTitle
+	return tagTitle
 })
 </script>
 

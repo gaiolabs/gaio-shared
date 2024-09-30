@@ -108,8 +108,13 @@
 					class="me-2"
 					:class="useBrushClasses"
 					:show-icon="true"
+					:is-for-gauge-chart="useReportStore().current.reportType.includes('gauge')"
+					:position="field.type !== 'value' ? measuresCount++ : 0"
+					:is-measure="field.type !== 'value'"
 					@click="select(field)"
-				/>
+				>
+					papagaio
+				</VTag>
 			</VueDraggable>
 		</div>
 
@@ -131,6 +136,7 @@ import { ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 const useBrush = ref()
+let measuresCount = 0
 const useBrushSelected = ref()
 
 const showFilter = ref(false)
@@ -181,7 +187,7 @@ const select = (item: FieldType) => {
 						separators: useBrushSelected.value.separators,
 						formatDate: useBrushSelected.value.formatDate,
 						formatPrefix: useBrushSelected.value.formatPrefix,
-						formatSuffix: useBrushSelected.value.formatSuffix
+						formatSuffix: useBrushSelected.value.formatSuffix,
 					}
 				}
 
@@ -196,14 +202,14 @@ const select = (item: FieldType) => {
 
 						condType: useBrushSelected.value.condType,
 						condRules: useBrushSelected.value.condRules,
-						condColumnName: useBrushSelected.value.condColumnName
+						condColumnName: useBrushSelected.value.condColumnName,
 					}
 				}
 
 				field = {
 					...field,
 					...format,
-					...styleBase
+					...styleBase,
 				}
 			}
 			return field
