@@ -126,8 +126,8 @@ const save = () => {
 			sources: [
 				useDefault({
 					type: 'table',
-					base: localTask.value
-				})
+					base: localTask.value,
+				}),
 			],
 			targets: [
 				useDefault({
@@ -135,10 +135,10 @@ const save = () => {
 					base: {
 						...localTask.value,
 						tableName: localTask.value.resultTable,
-						databaseName: getBucketNameFromAppId(localTask.value.appId)
-					}
-				})
-			]
+						databaseName: getBucketNameFromAppId(localTask.value.appId),
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
@@ -149,8 +149,8 @@ onMounted(() => {
 		type: 'basket',
 		base: {
 			...useAppStore().appInfo,
-			...useAppStore().cloneTask()
-		}
+			...useAppStore().cloneTask(),
+		},
 	})
 	console.log('mounted')
 })
