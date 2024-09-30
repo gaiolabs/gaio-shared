@@ -35,4 +35,5 @@ pnpm-lock.yaml
 bun.lockb
 
 .env
+.env.*
 components.d.ts
