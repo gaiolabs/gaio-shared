@@ -241,7 +241,7 @@ const themeOverrides = (isDark: boolean) => ({
 		bodyColor: isDark ? '#1D1D1D' : undefined,
 		tagColor: isDark ? '#262727' : undefined,
 		invertedColor: isDark ? '#FEFDFB' : undefined,
-		inputColor: isDark ? 'hsla(24, 6%, 83%, 5%)' : undefined,
+		inputColor: isDark ? 'hsla(24, 6%, 83%, 5%)' : 'rgba(255, 255, 255, 0.6)',
 		heightTiny: '24px',
 		heightSmall: '26px',
 		heightMedium: '30px',

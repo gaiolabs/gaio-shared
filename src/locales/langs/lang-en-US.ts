@@ -782,4 +782,5 @@ export default {
 	invalidCredentials: 'Invalid credentials',
 	problemsToLogin: 'Problems to login?',
 	profilePictureOf: 'Profile picture of {name}',
+	welcome: 'Welcome',
 }

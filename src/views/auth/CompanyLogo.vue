@@ -1,12 +1,10 @@
 <template>
 	<header class="flex justify-center">
-		<div
-			class="bg-gray-300/[2.5%] relative size-36 rounded-2xl border border-gray-300 !transition-all duration-600 dark:border-gray-300/10"
-		>
+		<div class="relative size-36 rounded-2xl !transition-all duration-600">
 			<img
 				:src="logoSrc"
 				alt="Company Profile Image"
-				class="w-full h-full bg-white dark:bg-white/[2.5%] object-contain object-center rounded-2xl !transition-all duration-600"
+				class="g-base g-border w-full h-full object-contain object-center rounded-2xl !transition-all duration-600"
 			/>
 			<transition
 				enter-active-class="duration-300 ease-out"
@@ -17,10 +15,10 @@
 				leave-to-class="transform opacity-0 translate-y-2"
 			>
 				<div
-					v-if="user"
+					v-if="user || true"
 					class="w-full absolute bottom-0 translate-y-[50%] flex justify-center !transition-all duration-600"
 				>
-					<div class="!transition-all duration-600 size-16 rounded-full overflow-hidden">
+					<div class="!transition-all g-base g-border duration-600 size-16 rounded-full overflow-hidden">
 						<img
 							:src="profilePicture"
 							class="w-full h-full"
@@ -46,5 +44,5 @@ const isDark = useDark()
 
 // TODO: load company logo via API
 const logoSrc = computed(() => (isDark.value ? logoDark : logo))
-const profilePicture = import.meta.env.VITE_APP_API + `api/content/user/${user.value.userId}.png`
+const profilePicture = import.meta.env.VITE_APP_API + `api/content/user/${user.value?.userId}.png`
 </script>
