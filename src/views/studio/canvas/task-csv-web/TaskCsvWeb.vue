@@ -5,7 +5,10 @@
 	>
 		<template #title>{{ $t('taskCsvWeb') }}</template>
 		<template #content>
-			<div class="canvas-task-url-body overflow-auto">
+			<div
+				v-if="localTask"
+				class="canvas-task-url-body overflow-auto"
+			>
 				<div class="flex items-center gap-2">
 					<div class="control grow">
 						<div class="control-label">{{ $t('taskLabel') }}</div>
@@ -42,7 +45,7 @@
 							{ value: 'CSVWithNames', label: $t('comma') },
 							{ value: '|', label: '|' },
 							{ value: '||', label: '||' },
-							{ value: ';', label: ';' }
+							{ value: ';', label: ';' },
 						]"
 					/>
 				</div>
@@ -54,7 +57,7 @@
 						filterable
 						:options="[
 							{ value: 'schemaInference', label: $t('withSchemaInference') },
-							{ value: 'noSchemaInference', label: $t('noSchemaInference') }
+							{ value: 'noSchemaInference', label: $t('noSchemaInference') },
 						]"
 					/>
 				</div>
@@ -100,10 +103,10 @@ const save = () => {
 					base: {
 						...localTask.value,
 						label: localTask.value.resultTable,
-						resultTable: localTask.value.resultTable
-					}
-				})
-			]
+						resultTable: localTask.value.resultTable,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
@@ -114,8 +117,8 @@ onMounted(() => {
 		type: 'csvUrl',
 		base: {
 			...useAppStore().appInfo,
-			...(useAppStore().cloneTask() || {})
-		}
+			...(useAppStore().cloneTask() || {}),
+		},
 	})
 })
 </script>
