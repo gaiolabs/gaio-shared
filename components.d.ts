@@ -52,6 +52,7 @@ declare module 'vue' {
     GAlert: typeof import('./src/components/GAlert.vue')['default']
     GAnimatedBackground: typeof import('./src/components/GAnimatedBackground.vue')['default']
     GAppIcon: typeof import('./src/components/GAppIcon.vue')['default']
+    GButton: typeof import('./src/components/inputs/GButton.vue')['default']
     GCard: typeof import('./src/components/GCard.vue')['default']
     GDataLiteral: typeof import('./src/components/GDataLiteral.vue')['default']
     GDataTypeIcon: typeof import('./src/components/GDataTypeIcon.vue')['default']
