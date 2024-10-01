@@ -87,11 +87,11 @@ body{
 }
 
 .g-base {
-  @apply bg-white/20 backdrop-brightness-[1.05] dark:backdrop-brightness-100 backdrop-blur-[5px] dark:bg-white/[2.5%];
+  @apply bg-white/25 backdrop-blur-[5px] dark:bg-white/5;
 }
 
 .g-border {
-  @apply dark:bg-gray-300/5 dark:border-gray-300/10 border-gray-300 border;
+  @apply  dark:border-gray-300/10 border-gray-250 border;
 }
 
 div:has(> .n-input-wrapper) {

@@ -128,18 +128,18 @@ const options = [
 	{
 		label: t('dashboard'),
 		value: 'dashboard',
-		key: 'dashboard'
+		key: 'dashboard',
 	},
 	{
 		label: t('edit'),
 		value: 'edit',
-		key: 'edit'
+		key: 'edit',
 	},
 	{
 		label: t('studio'),
 		value: 'studio',
-		key: 'studio'
-	}
+		key: 'studio',
+	},
 ]
 
 onMounted(async () => {

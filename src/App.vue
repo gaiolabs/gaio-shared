@@ -1,4 +1,6 @@
 <template>
+	<BackgroundElements />
+
 	<router-view
 		v-slot="{ Component }"
 		class="antialiased"
@@ -92,7 +94,10 @@ User: {{ user }}</pre
 </template>
 
 <script setup lang="ts">
+import bgDark from '@/assets/images/bg-dark.png'
+import bg from '@/assets/images/bg-light.png'
 import { useAuthStore, useCommandKStore } from '@/stores'
+import BackgroundElements from '@/views/auth/BackgroundElements.vue'
 import CommandK from '@/views/commandK/CommandK.vue'
 import { useColorMode, useMagicKeys } from '@vueuse/core'
 import { useDark, useToggle } from '@vueuse/core'

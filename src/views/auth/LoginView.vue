@@ -3,7 +3,7 @@
 		id="login-view"
 		class="flex relative flex-col realtive z-10 justify-between items-center h-full overflow-hidden"
 	>
-		<BackgroundElements />
+		<!-- <BackgroundElements /> -->
 		<LoginHeaderComponent />
 		<main class="flex flex-col gap-6 lg:w-[28rem] pt-16">
 			<CompanyLogo />
