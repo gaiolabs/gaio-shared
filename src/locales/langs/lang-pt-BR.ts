@@ -209,4 +209,6 @@ export default {
 	threeFields: '3 Medidas',
 	showPointer: 'Mostrar Ponteiro',
 	threeMeasuresMinMaxTarget: 'A primeira medida é o mínimo, a segunda é o máximo e a terceira é a meta',
+	sunburstMessage:
+		'Organiza as dimensões em dados hierárquicos em camadas circulares concêntricas, onde cada nível da hierarquia é representado por fatias proporcionais ao seu valor.',
 }

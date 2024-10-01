@@ -15,6 +15,7 @@ import { defaultReportChartFunnel } from './default-reports/defaultReportChartFu
 import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
 import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
+import { defaultReportChartSunburst } from './default-reports/defaultReportChartSunburst'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
@@ -80,7 +81,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'sunburst':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartSunburst(sourceProperties) //TODO: Configurar o correto
 			break
 
 		case 'treemap':
