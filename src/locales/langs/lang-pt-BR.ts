@@ -206,4 +206,7 @@ export default {
 	showPoint: 'Mostrar pontos',
 	lineSmooth: 'Linha suave',
 	outside: 'Fora',
+	threeFields: '3 Medidas',
+	showPointer: 'Mostrar Ponteiro',
+	threeMeasuresMinMaxTarget: 'A primeira medida é o mínimo, a segunda é o máximo e a terceira é a meta',
 }

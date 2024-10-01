@@ -4,7 +4,7 @@
 		class="v-tag"
 	>
 		<div class="flex w-full items-center justify-center gap-1">
-			<g-icon
+			<GIcon
 				v-if="showIcon"
 				:name="iconName"
 			/>
@@ -16,18 +16,26 @@
 <script setup lang="ts">
 import useDataType from '@/composables/useDataType'
 import type { FieldType } from '@gaio/shared/types'
+import { NTag } from 'naive-ui'
 import { computed } from 'vue'
+import GIcon from './GIcon.vue'
 
 const { dataTypeIsNumeric, dataTypeIcon, dataTypeIsDate } = useDataType()
 
 const {
 	field,
 	showIcon = true,
-	selected = false
+	selected = false,
+	isForGaugeChart = false,
+	isMeasure = false,
+	position = 0,
 } = defineProps<{
 	field: FieldType
 	showIcon?: boolean
 	selected?: boolean
+	isForGaugeChart?: boolean
+	isMeasure?: boolean
+	position?: number
 }>()
 
 const iconName = computed(() => {
@@ -52,7 +60,15 @@ const classBasedOnType = computed(() => {
 })
 
 const title = computed(() => {
-	return field.alias || field.columnName
+	let tagTitle = field.alias || field.columnName
+	if (isForGaugeChart) {
+		if (isMeasure) {
+			if (position === 0) tagTitle = 'Min: ' + tagTitle
+			else if (position === 1) tagTitle = 'Max: ' + tagTitle
+			else if (position === 2) tagTitle = 'Target: ' + tagTitle
+		}
+	}
+	return tagTitle
 })
 </script>
 

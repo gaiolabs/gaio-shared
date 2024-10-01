@@ -780,4 +780,7 @@ export default {
 	showPoint: 'Show point',
 	lineSmooth: 'Line smooth',
 	outside: 'Outside',
+	threeFields: '3 Fields',
+	showPointer: 'Show Pointer',
+	threeMeasuresMinMaxTarget: 'The first measure is the minimum, the second is the maximum, and the third is the target',
 }

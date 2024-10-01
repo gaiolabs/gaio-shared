@@ -12,6 +12,7 @@ import { cloneDeep } from 'lodash-es'
 import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
+import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
 import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 
@@ -75,7 +76,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'gauge':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartGauge(sourceProperties)
 			break
 
 		case 'sunburst':

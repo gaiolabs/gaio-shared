@@ -19,7 +19,7 @@
 		</template>
 		<template
 			v-if="
-				['line', 'bar', 'area', 'pie', 'donut', 'treemap', 'funnel', 'scatter', 'bubble', 'radar'].includes(
+				['line', 'bar', 'area', 'pie', 'donut', 'treemap', 'funnel', 'scatter', 'bubble', 'radar', 'gauge'].includes(
 					task.reportType,
 				)
 			"
@@ -49,6 +49,11 @@ import { computed } from 'vue'
 
 defineEmits(['trigger'])
 const props = defineProps<{ task: ReportNodeType }>()
+
+watch(
+	() => props.task,
+	() => console.log('props.task', props.task),
+)
 
 const cardHeight = computed(() => {
 	return (props.task?.height || 300) + 'px'
