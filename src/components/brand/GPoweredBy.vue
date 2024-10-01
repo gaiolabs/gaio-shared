@@ -18,7 +18,7 @@
 			alt="Gaio Data OS"
 		/>
 
-		<div
+		<!-- <div
 			id="powered-by-box-backdrop"
 			class="block transition-all duration-300 ease-in-out group-hover:rotate-[2deg] rotate-[-6deg] -translate-x-12 translate-y-12 fixed w-64 h-44 bottom-0 left-0 z-[-1] rounded-[2rem] backdrop-blur-lg"
 		></div>
@@ -27,7 +27,7 @@
 			class="block transition-all duration-300 ease-in-out group-hover:rotate-[2deg] rotate-[-6deg] g-gradient-border -translate-x-12 translate-y-12 filter fixed w-64 h-44 bottom-0 left-0 z-[-1] p-[3px] rounded-[2rem]"
 		>
 			<div class="bg-white dark:bg-gray-900 !transition-all !duration-[600ms] w-full h-full rounded-[26px]"></div>
-		</div>
+		</div> -->
 	</a>
 </template>
 
