@@ -1,7 +1,7 @@
 <template>
-	<pre class="fixed text-xs text-[#0f0] top-0 left-0 p-1 bg-black z-50">
+	<!-- <pre class="fixed text-xs text-[#0f0] top-0 left-0 p-1 bg-black z-50">
 		{{ route }}
-	</pre
+	</pre -->
 	>
 	<div
 		id="background-elements"
