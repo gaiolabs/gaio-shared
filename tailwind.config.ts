@@ -1,17 +1,10 @@
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config = {
 	darkMode: 'class',
 	content: ['./index.html', './src/**/*.{vue,js,ts}'],
 	theme: {
 		extend: {
-			rounded: {
-				DEFAULT: '0.5rem',
-			},
-			borderRadius: {
-				DEFAULT: '0.35rem',
-			},
-			screens: {
-				xm: '440px',
-			},
 			colors: {
 				gray: {
 					'50': '#fafaf9',
@@ -97,6 +90,26 @@ module.exports = {
 				'elevation-4': 'var(--elevation-4)',
 				'elevation-invert': 'var(--elevation-invert)',
 			},
+			screens: {
+				// Named screen breakpoints
+				mobile: '360px',
+				tablet: '480px',
+				laptop: '768px',
+				desktop: '1024px',
+				'large-desktop': '1280px',
+				'full-hd': '1536px',
+				ultrawide: '1921px',
+				'4k': '2560px',
+				'8k': '3840px',
+
+				// Utility media queries
+				touch: { raw: '(hover: none) and (pointer: coarse)' },
+				mouse: { raw: '(hover: hover) and (pointer: fine)' },
+				print: { raw: 'print' },
+				'reduced-motion': { raw: '(prefers-reduced-motion: reduce)' },
+				portrait: { raw: '(orientation: portrait)' },
+				landscape: { raw: '(orientation: landscape)' },
+			},
 			animation: {
 				'vertical-bounce': 'vertical-bounce 0.6s ease-in-out infinite',
 			},
@@ -112,5 +125,7 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
-}
+	plugins: [require('@tailwindcss/container-queries')],
+} satisfies Config
+
+export default config
