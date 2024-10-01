@@ -1,4 +1,5 @@
 import type { CsvUrlTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultCsvWeb = (base: CsvUrlTaskType) => {
 	return {
@@ -16,11 +17,11 @@ export const defaultCsvWeb = (base: CsvUrlTaskType) => {
 		databaseName: base.resultDatabase || null,
 
 		resultTable: base.resultTable || null,
-		resultDatabase: base.resultDatabase || null,
+		resultDatabase: base.resultDatabase || getBucketNameFromAppId(base.appId) || null,
 
 		url: base.url || '',
 		fileFormatType: base.fileFormatType || 'CSVWithNames',
 		insertMode: base.insertMode,
-		schemaInference: base.schemaInference || 'noSchemaInference'
+		schemaInference: base.schemaInference || 'noSchemaInference',
 	}
 }

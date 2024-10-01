@@ -85,6 +85,7 @@ import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import type { CsvUrlTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 import { onMounted, ref } from 'vue'
 
 const loading = ref(false)
@@ -103,7 +104,6 @@ const save = () => {
 					base: {
 						...localTask.value,
 						label: localTask.value.resultTable,
-						resultTable: localTask.value.resultTable,
 					},
 				}),
 			],

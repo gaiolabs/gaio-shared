@@ -125,6 +125,7 @@ import { useAppStore } from '@/stores'
 import FlowControl from '@/views/studio/canvas/sidebar/sidebar-flow/FlowControl.vue'
 import FlowControlScheduleBulk from '@/views/studio/canvas/sidebar/sidebar-flow/FlowControlScheduleBulk.vue'
 import type { AppFolderOption, FlowType } from '@gaio/shared/types'
+import { intersection } from 'lodash-es'
 import { type DropdownOption, NButton, type TreeOption, useMessage } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -273,6 +274,7 @@ const constructLocalTree = () => {
 		return acc
 	}, {})
 
+	// todo - need to remove label build tree reference when a flow is deleted
 	const buildTree = (appFolderOptions: AppFolderOption[]): TreeOption[] => {
 		return appFolderOptions
 			.map((appFolderOption) => {
@@ -280,7 +282,9 @@ const constructLocalTree = () => {
 
 				if (appFolderOption.isLeaf) {
 					const flow = flowItems[appFolderOption.label]
-					treeOption = baseFlowTreeSchema(flow, openFlowControl)
+					if (!flow) {
+						treeOption = baseFlowTreeSchema(flow, openFlowControl)
+					}
 				} else {
 					treeOption = baseFolderTreeSchema(appFolderOption.label)
 				}
