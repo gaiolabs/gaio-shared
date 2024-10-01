@@ -227,11 +227,19 @@ const reportState = computed(() => {
 				},
 			],
 		}
+	} else if (['gauge'].includes(reportType)) {
+		return {
+			status: verifyRules(1, 3),
+			rules: [
+				{
+					name: 'gauge',
+					dimensions: 'oneFieldOnly',
+					measures: 'threeFields',
+					message: 'threeMeasuresMinMaxTarget',
+				},
+			],
+		}
 	}
 	return {}
-})
-
-watch(reportState, () => {
-	console.log('reportState', reportState)
 })
 </script>

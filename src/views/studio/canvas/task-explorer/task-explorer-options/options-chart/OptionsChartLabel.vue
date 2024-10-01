@@ -49,7 +49,7 @@
 						:label="$t('measure')"
 					/>
 					<NCheckbox
-						v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut'])"
+						v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut', 'gauge'])"
 						v-model:checked="useReportStore().current.settings.showLabelPercent"
 						class="w-full"
 						:label="$t('percent')"
@@ -59,6 +59,12 @@
 						v-model:checked="useReportStore().current.settings.compactNumberLabel"
 						class="w-full"
 						:label="$t('compactNumbersOfLabel')"
+					/>
+					<NCheckbox
+						v-if="useReportStore().showOnlyIf(['gauge'])"
+						v-model:checked="useReportStore().current.settings.showPoint"
+						class="w-full"
+						:label="$t('showPointer')"
 					/>
 					<div
 						v-if="useReportStore().hideOnlyIf(['gauge', 'bullet', 'funnel', 'calendar', 'line', 'dual'])"
@@ -161,27 +167,6 @@
 							<div class="control-label">{{ $t('color') }}</div>
 							<NColorPicker v-model:value="useReportStore().current.settings.labelFontColor" />
 						</div>
-					</div>
-					<div class="control">
-						<NCheckbox
-							v-if="useReportStore().showOnlyIf(['gauge'])"
-							v-model:checked="useReportStore().current.settings.showLabelPercent"
-							class="w-full"
-							:label="$t('statisticPercent')"
-						/>
-					</div>
-					<div
-						v-if="useReportStore().showOnlyIf(['gauge'])"
-						class="control"
-					>
-						<div class="control-label">{{ $t('statistics') }}/{{ $t('fontSize') }}</div>
-						<NInputNumber
-							v-model:value="useReportStore().current.settings.staticFontSize"
-							:min="9"
-							:max="90"
-							:step="1"
-							:placeholder="$t('fontSize')"
-						/>
 					</div>
 				</div>
 			</div>
