@@ -67,7 +67,7 @@ export default ({ type, base }: { type: string; base: TaskType }) => {
 		form: () => defaultFormCard(sourceProperties),
 		rest: () => defaultRest(sourceProperties),
 		discovery: () => defaultMeta(sourceProperties),
-		query: () => defaultQuery(sourceProperties)
+		query: () => defaultQuery(sourceProperties),
 	}
 
 	return withoutNullProperties(prepare[type]())

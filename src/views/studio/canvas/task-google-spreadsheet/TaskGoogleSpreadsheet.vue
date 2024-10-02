@@ -83,8 +83,8 @@ const save = async (): Promise<void> => {
 		type: 'googleSpreadsheet',
 		base: {
 			...useAppStore().appInfo,
-			...localTask.value
-		}
+			...localTask.value,
+		},
 	})
 
 	await useFlow(useAppStore().flow.workflow)
@@ -96,22 +96,21 @@ const save = async (): Promise<void> => {
 					base: {
 						...taskToBeSaved,
 						label: taskToBeSaved.resultTable,
-						tableName: taskToBeSaved.resultTable
-					}
-				})
-			]
+						tableName: taskToBeSaved.resultTable,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
 }
 onMounted(() => {
-	console.log('casa')
 	localTask.value = useDefault({
 		type: 'googleSpreadsheet',
 		base: {
 			...useAppStore().appInfo,
-			...(useAppStore().cloneTask() || {})
-		}
+			...(useAppStore().cloneTask() || {}),
+		},
 	})
 })
 </script>

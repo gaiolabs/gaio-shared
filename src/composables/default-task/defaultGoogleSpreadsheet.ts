@@ -1,4 +1,5 @@
 import type { TaskType, GoogleSpreadsheetTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultGoogleSpreadsheet = (base: GoogleSpreadsheetTaskType & TaskType) => {
 	return {
@@ -9,12 +10,12 @@ export const defaultGoogleSpreadsheet = (base: GoogleSpreadsheetTaskType & TaskT
 		client: base.client || 'clickhouse',
 		repoId: base.repoId || null,
 		position: base.position || { x: 63, y: 381.25 },
-		tableName: base.tableName || '',
-		sourceType: base.sourceType || '',
+		tableName: null,
+		databaseName: null,
+		sourceType: base.sourceType || 'bucket',
 		resultTable: base.resultTable || null,
-		databaseName: base.databaseName || '',
-		resultDatabase: base.resultDatabase || '',
+		resultDatabase: getBucketNameFromAppId(base.appId),
 		insertMode: base.insertMode || false,
-		url: base.url || ''
+		url: base.url || '',
 	}
 }
