@@ -27,7 +27,7 @@
 	</template>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import WarningIcon from '@/components/icons/WarningIcon.vue'
 import { computed, useAttrs } from 'vue'
 
@@ -38,7 +38,7 @@ const props = defineProps({
 	},
 })
 
-// Dynamically import all icons from the icons folder
+// @ts-expect-error Yes, glob does exists in meta! Don't know why it says it doesn't
 const iconModules = import.meta.glob('./*.vue', { eager: true })
 
 const attrs = useAttrs()

@@ -11,22 +11,23 @@
 //  overflow: initial !important;
 //}
 //
+
+*{ // custom selection colors
+  @apply selection:bg-sepia-700/25 selection:dark:bg-ochre-300/15 selection:text-sepia-950 selection:dark:text-ochre-200;
+}
+
 /* Works on Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
-  width: 5px; /* width of the entire scrollbar */
-  border-radius: 5px;
+  @apply rounded-full w-[5px] h-[5px];
 }
-
 ::-webkit-scrollbar-track {
-  background: transparent; /* color of the tracking area */
+  @apply bg-white/0 dark:bg-white/0 rounded-full;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3); /* color of the scroll thumb */
+  @apply bg-gray-500/10 dark:bg-white/5 rounded-full hover:bg-gray-500/20 hover:dark:bg-white/10;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #FFFFFF4C; /* color of the scroll thumb on hover*/
+.overflow-auto {  // applies a "padding" to the element that will have a scrollbar to avoid layout shift 
+  scrollbar-gutter: stable both-edges; 
 }
 
 .bg-g-first {
@@ -80,6 +81,25 @@
   color: var(--gaio-three)
 }
 
+body{
+  transition: background-color 600ms;
+}
+
+.g-wrapper {
+  @apply bg-white/15 backdrop-brightness-105 dark:backdrop-brightness-100 backdrop-blur-[5px] dark:bg-white/5;
+}
+
+.g-base {
+  @apply bg-white/25 backdrop-blur-[5px] dark:bg-white/5;
+}
+
+.g-border {
+  @apply  dark:border-gray-300/10 border-gray-250 border;
+}
+
+div:has(> .n-input-wrapper) {
+  @apply backdrop-blur-[5px] ;
+}
 
 
 html {
@@ -162,4 +182,16 @@ html.dark {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+
+label {
+  &:has(span) {
+    @apply flex flex-col gap-1.5;    
+    span {
+      &:first-child {
+        @apply mb-[2px];
+      }
+    }
+  }
 }
