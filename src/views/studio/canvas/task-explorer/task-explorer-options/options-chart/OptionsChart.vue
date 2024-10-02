@@ -18,7 +18,7 @@
 						<OptionsChartGeneral v-if="showGeneralOptions" />
 						<OptionsHeader />
 						<OptionsChartStatistic v-if="useReportStore().showOnlyIf(['pie'])" />
-						<OptionsChartLegend v-if="!useReportStore().showOnlyIf(['gauge'])" />
+						<OptionsChartLegend v-if="useReportStore().hideOnlyIf(['gauge', 'sunburst'])" />
 						<OptionsChartLabel />
 						<OptionsChartXAxis v-if="showShowAxisOptions" />
 						<OptionsChartYAxis v-if="showShowAxisOptions" />

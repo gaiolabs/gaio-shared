@@ -19,9 +19,20 @@
 		</template>
 		<template
 			v-if="
-				['line', 'bar', 'area', 'pie', 'donut', 'treemap', 'funnel', 'scatter', 'bubble', 'radar', 'gauge'].includes(
-					task.reportType,
-				)
+				[
+					'line',
+					'bar',
+					'area',
+					'pie',
+					'donut',
+					'treemap',
+					'funnel',
+					'scatter',
+					'bubble',
+					'radar',
+					'gauge',
+					'sunburst',
+				].includes(task.reportType)
 			"
 		>
 			<ReportChart

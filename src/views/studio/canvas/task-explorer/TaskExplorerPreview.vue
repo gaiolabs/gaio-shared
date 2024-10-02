@@ -239,6 +239,18 @@ const reportState = computed(() => {
 				},
 			],
 		}
+	} else if (['sunburst'].includes(reportType)) {
+		return {
+			status: verifyRules(2, 1),
+			rules: [
+				{
+					name: 'sunburst',
+					dimensions: 'multipleFields',
+					measures: 'oneFieldOnly',
+					message: 'sunburstMessage',
+				},
+			],
+		}
 	}
 	return {}
 })

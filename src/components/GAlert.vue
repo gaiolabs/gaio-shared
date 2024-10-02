@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="g-bg-2 g-border-400 w-full rounded px-2 py-2"
-		:class="{ 'border-0 shadow': shadow }"
-	>
+	<div class="g-base g-border p-4 rounded-xl">
 		<i
 			v-if="showIcon"
 			class="me-2 font-bold text-prime"
@@ -17,9 +14,5 @@
 </template>
 
 <script setup lang="ts">
-const {
-	showIcon = false,
-	title = undefined,
-	shadow = false
-} = defineProps<{ showIcon?: boolean; title: string; content?: string; shadow?: boolean }>()
+defineProps<{ showIcon?: boolean; title: string; content?: string; shadow?: boolean }>()
 </script>

@@ -1,18 +1,58 @@
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config = {
 	darkMode: 'class',
 	content: ['./index.html', './src/**/*.{vue,js,ts}'],
 	theme: {
 		extend: {
-			rounded: {
-				DEFAULT: '0.5rem',
-			},
-			borderRadius: {
-				DEFAULT: '0.35rem',
-			},
-			screens: {
-				xm: '440px',
-			},
 			colors: {
+				gray: {
+					'50': '#fafaf9',
+					'100': '#f5f5f4',
+					'150': '#efeeec',
+					'200': '#e7e5e4',
+					'250': '#dedbd9',
+					'300': '#d6d3d1',
+					'350': '#c3beba',
+					'400': '#a8a29e',
+					'450': '#939088',
+					'500': '#78716c',
+					'550': '#6c6661',
+					'600': '#57534e',
+					'650': '#4e4a46',
+					'700': '#44403c',
+					'750': '#383432',
+					'800': '#292524',
+					'850': '#22201e',
+					'900': '#1c1917',
+					'950': '#0c0a09',
+				},
+				ochre: {
+					'50': '#fdf7f0',
+					'100': '#fde8d4',
+					'200': '#fddab7',
+					'300': '#fccb9b',
+					'400': '#f3ba82',
+					'500': '#eaa869',
+					'600': '#d99554',
+					'700': '#c7813e',
+					'800': '#b56d29',
+					'900': '#8f551b',
+					'950': '#683d0c',
+				},
+				sepia: {
+					'50': '#fdf4ef',
+					'100': '#fde4d1',
+					'200': '#fcd3b2',
+					'300': '#fcc394',
+					'400': '#f5b47d',
+					'500': '#eea565',
+					'600': '#e09153',
+					'700': '#d27c40',
+					'800': '#c4682d',
+					'900': '#a55523',
+					'950': '#864218',
+				},
 				paper: {
 					100: '#ffffff',
 					200: '#f9f9f8',
@@ -50,6 +90,26 @@ module.exports = {
 				'elevation-4': 'var(--elevation-4)',
 				'elevation-invert': 'var(--elevation-invert)',
 			},
+			screens: {
+				// Named screen breakpoints
+				mobile: '360px',
+				tablet: '480px',
+				laptop: '768px',
+				desktop: '1024px',
+				'large-desktop': '1280px',
+				'full-hd': '1536px',
+				ultrawide: '1921px',
+				'4k': '2560px',
+				'8k': '3840px',
+
+				// Utility media queries
+				touch: { raw: '(hover: none) and (pointer: coarse)' },
+				mouse: { raw: '(hover: hover) and (pointer: fine)' },
+				print: { raw: 'print' },
+				'reduced-motion': { raw: '(prefers-reduced-motion: reduce)' },
+				portrait: { raw: '(orientation: portrait)' },
+				landscape: { raw: '(orientation: landscape)' },
+			},
 			animation: {
 				'vertical-bounce': 'vertical-bounce 0.6s ease-in-out infinite',
 			},
@@ -65,5 +125,7 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
-}
+	plugins: [require('@tailwindcss/container-queries')],
+} satisfies Config
+
+export default config

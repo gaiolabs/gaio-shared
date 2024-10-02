@@ -779,8 +779,14 @@ export default {
 	insideLeft: 'Inside left',
 	showPoint: 'Show point',
 	lineSmooth: 'Line smooth',
+	invalidCredentials: 'Invalid credentials',
+	problemsToLogin: 'Problems to login?',
+	profilePictureOf: 'Profile picture of {name}',
+	welcome: 'Welcome',
 	outside: 'Outside',
 	threeFields: '3 Fields',
 	showPointer: 'Show Pointer',
 	threeMeasuresMinMaxTarget: 'The first measure is the minimum, the second is the maximum, and the third is the target',
+	sunburstMessage:
+		'Organize the dimensions in hierarchical data into concentric circular layers, where each level of the hierarchy is represented by slices proportional to its value.',
 }

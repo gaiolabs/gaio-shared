@@ -35,7 +35,7 @@
 					:label="$t('showLabelDualExtra')"
 					class="w-full"
 				/>
-				<div v-if="useReportStore().current.settings.showLabel && !useReportStore().showOnlyIf(['liquid'])">
+				<div v-if="useReportStore().current.settings.showLabel && useReportStore().hideOnlyIf(['liquid'])">
 					<NCheckbox
 						v-if="useReportStore().showOnlyIf(['pie', 'donut', 'treemap', 'funnel'])"
 						v-model:checked="useReportStore().current.settings.showLabelDimension"
@@ -55,7 +55,7 @@
 						:label="$t('percent')"
 					/>
 					<NCheckbox
-						v-if="!useReportStore().showOnlyIf(['histogram'])"
+						v-if="useReportStore().hideOnlyIf(['histogram', 'sunburst'])"
 						v-model:checked="useReportStore().current.settings.compactNumberLabel"
 						class="w-full"
 						:label="$t('compactNumbersOfLabel')"
@@ -71,7 +71,7 @@
 						class="control"
 					>
 						<NCheckbox
-							v-if="useReportStore().hideOnlyIf(['pie', 'donut'])"
+							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst'])"
 							v-model:checked="useReportStore().current.settings.showTotal"
 							class="w-full"
 							:label="$t('showTotal')"
@@ -85,7 +85,7 @@
 								{{ $t('position') }}
 							</div>
 							<NSelect
-								v-if="useReportStore().showOnlyIf(['pie'])"
+								v-if="useReportStore().showOnlyIf(['pie', 'sunburst'])"
 								v-model:value="useReportStore().current.settings.showLabelType"
 								class="w-full"
 								:options="[
@@ -104,7 +104,7 @@
 								]"
 							/>
 							<NSelect
-								v-if="!useReportStore().showOnlyIf(['pie'])"
+								v-if="!useReportStore().showOnlyIf(['pie', 'sunburst'])"
 								v-model:value="useReportStore().current.settings.showLabelType"
 								class="w-full"
 								:options="[

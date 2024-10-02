@@ -99,5 +99,16 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label, labelPie, labelRadar, labelFunnel, labelGauge }
+
+	const labelSunburst = () => {
+		return {
+			show: settings.value.showLabel,
+			align: 'center',
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor ?? '#000000FF',
+			distance: 40,
+			fontSize: settings.value.labelFontSize || 13,
+		}
+	}
+	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst }
 }

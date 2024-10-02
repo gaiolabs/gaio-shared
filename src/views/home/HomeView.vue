@@ -1,13 +1,19 @@
 <template>
-	<div class="home flex h-full justify-center">
-		<div class="home-wrapper flex size-full max-w-[1440px] flex-col justify-between overflow-auto p-2 pb-[70px]">
+	<div
+		id="home"
+		class="flex h-full justify-center"
+	>
+		<div
+			id="home-wrapper"
+			class="flex size-full max-w-[1440px] flex-col justify-between overflow-auto p-2 pb-[70px]"
+		>
 			<div class="main px-3">
-				<home-insights />
-				<home-views />
-				<home-apps />
+				<HomeInsights />
+				<HomeViews />
+				<HomeApps />
 			</div>
 		</div>
-		<home-nav />
+		<HomeNav />
 	</div>
 </template>
 
@@ -30,8 +36,8 @@ watchEffect(() => {
 onMounted(() => {
 	useApi().post('api/user/prepare', {
 		body: {
-			userId: useAuthStore().user?.userId
-		}
+			userId: useAuthStore().user?.userId,
+		},
 	})
 })
 </script>

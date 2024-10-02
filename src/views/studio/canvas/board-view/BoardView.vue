@@ -17,14 +17,14 @@
 			@node-double-click="onOpenNode($event)"
 			@node-drag-stop="(e) => (e.node.data.position = e.node.position)"
 		>
-			<!-- NOTE: Please only work in multiples of 15px -->
 			<template #node-custom="{ data }">
 				<BoardNode :data="data" />
 			</template>
+			<!-- <BoardBackground /> -->
 			<Background
 				id="board-background"
 				class="relative"
-				pattern-color="#a3a3a3"
+				:pattern-color="isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0,0,0,0.15)'"
 				:gap="15"
 				:size="1.25"
 				patternTransform="translate(1,0)"
@@ -71,11 +71,13 @@ import useApi from '@/composables/useApi'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
 import { useJobStore } from '@/stores/useJobStore'
+import BoardBackground from '@/views/studio/canvas/background/BoardBackground.vue'
 import BoardHeader from '@/views/studio/canvas/board-view/BoardHeader.vue'
 import BoardNode from '@/views/studio/canvas/board-view/BoardNode.vue'
 import { Background } from '@vue-flow/background'
 import { isNode, Position, useVueFlow, VueFlow } from '@vue-flow/core'
 import type { Elements } from '@vue-flow/core'
+import { useDark } from '@vueuse/core'
 import dagre from 'dagre'
 import { debounce } from 'lodash-es'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
@@ -88,6 +90,7 @@ dagreGraph.setDefaultEdgeLabel(() => ({}))
 let elements = ref<Elements>([])
 const localNodes = ref()
 const localEdges = ref()
+const isDark = useDark()
 
 const selectMany = ref([])
 

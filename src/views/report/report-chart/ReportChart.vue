@@ -100,6 +100,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartSunburst
+						v-else-if="task.reportType === 'sunburst'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -126,6 +133,7 @@ import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartGauge from './ReportChartGauge.vue'
 import ReportChartRadar from './ReportChartRadar.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
+import ReportChartSunburst from './ReportChartSunburst.vue'
 
 defineEmits(['change'])
 const { task, height } = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()
@@ -135,14 +143,6 @@ const localKey = ref('any')
 const list = ref([])
 const tableRows = ref(0)
 const settings = computed(() => task.settings)
-
-watch(
-	() => task,
-	() => {
-		console.log('task', task)
-		console.log('task.reporttype', task.reportType)
-	},
-)
 
 onMounted(() => {
 	loading.value = true
