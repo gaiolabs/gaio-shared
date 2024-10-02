@@ -19,6 +19,8 @@ import type {
 	HeatmapSeriesOption,
 	VisualMapComponentOption,
 	HeatmapDataItemOption,
+	CallbackDataParams,
+	TopLevelFormatterParams,
 } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
@@ -123,7 +125,17 @@ const series = () => {
 
 const option = ref<EChartsOption>({
 	tooltip: {
-		trigger: 'item',
+		formatter: (params: Record<string, any>) => {
+			const date = params['value'][0]
+			const value = params['value'][1]
+
+			const dateObj = new Date(date)
+			const day = String(dateObj.getDate()).padStart(2, '0')
+			const month = String(dateObj.getMonth() + 1).padStart(2, '0')
+			const year = dateObj.getFullYear()
+
+			return day + '/' + month + '/' + year + `<br/>${value}`
+		},
 	},
 	visualMap: visualMap(),
 	calendar: calendar(),
