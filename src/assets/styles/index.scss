@@ -11,24 +11,23 @@
 //  overflow: initial !important;
 //}
 //
+
+*{ // custom selection colors
+  @apply selection:bg-sepia-700/25 selection:dark:bg-ochre-300/15 selection:text-sepia-950 selection:dark:text-ochre-200;
+}
+
 /* Works on Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
-  width: 5px; /* width of the entire scrollbar */
-  height: 5px;
-  border-radius: 5px;
+  @apply rounded-full w-[5px] h-[5px];
 }
-
 ::-webkit-scrollbar-track {
-  background: transparent; /* color of the tracking area */
+  @apply bg-white/0 dark:bg-white/0 rounded-full;
 }
-
 ::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: hsla(0, 0%, 100%, 0.3); /* color of the scroll thumb */
+  @apply bg-gray-500/10 dark:bg-white/5 rounded-full hover:bg-gray-500/20 hover:dark:bg-white/10;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsla(0, 0%, 100%, 0.4); /* color of the scroll thumb on hover*/
+.overflow-auto {  // applies a "padding" to the element that will have a scrollbar to avoid layout shift 
+  scrollbar-gutter: stable both-edges; 
 }
 
 .bg-g-first {
@@ -83,7 +82,11 @@
 }
 
 body{
-  transition: all 600ms;
+  transition: background-color 600ms;
+}
+
+.g-wrapper {
+  @apply bg-white/15 backdrop-brightness-105 dark:backdrop-brightness-100 backdrop-blur-[5px] dark:bg-white/5;
 }
 
 .g-base {
