@@ -15,7 +15,7 @@
 				leave-to-class="transform opacity-0 translate-y-2"
 			>
 				<div
-					v-if="user || true"
+					v-if="user"
 					class="w-full absolute bottom-0 translate-y-[50%] flex justify-center !transition-all duration-600"
 				>
 					<div class="!transition-all g-base g-border duration-600 size-16 rounded-full overflow-hidden">
