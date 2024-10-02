@@ -9,32 +9,17 @@
 			['bg-white/35 hover:bg-white/55'], // background
 			['dark:bg-white/5 hover:dark:bg-white/[7.5%]'], // background dark
 
-			['shadow-none hover:shadow-md dark:shadow-md'], // shadow
+			['shadow shadow-gray-800/5 hover:shadow-md dark:shadow-md'], // shadow
 			['transition-all duration-300'], // transition
 		]"
 	>
 		<div class="flex flex-col gap-5 p-2">
 			<header class="flex items-start gap-2 w-full">
-				<div class="relative w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden">
-					<GAppIcon
-						class="text-xl z-10"
-						:name="app.options.icon"
-						:color="app.options.color"
-					/>
-					<div
-						class="absolute inset-0 opacity-10 z-0 m-[px]"
-						:style="{
-							backgroundColor: app.options.color,
-						}"
-					></div>
-					<div
-						class="absolute inset-0 border rounded-lg opacity-40 z-0"
-						:style="{
-							borderColor: app.options.color,
-						}"
-					></div>
-					<div class="absolute inset-0 bg-white dark:bg-transparent z-[-1]"></div>
-				</div>
+				<GAppIcon
+					class="text-xl size-10"
+					:name="app.options.icon"
+					:color="app.options.color"
+				/>
 				<div class="flex flex-1 flex-col">
 					<h6 class="flex flex-1">{{ app.appName }}</h6>
 
@@ -63,25 +48,37 @@
 				<footer class="flex items-center justify-end gap-0">
 					<GButton
 						type="text"
+						size="small"
+						class="size-6"
 						@click="goTo(app, 'dashboard')"
 					>
-						<IconComponent name="Dashboard" />
+						<IconComponent
+							class="size-5"
+							name="Dashboard"
+						/>
 					</GButton>
 					<GButton
 						v-if="app.role === 'edit'"
 						type="text"
+						size="small"
+						class="size-6"
 						@click="$emit('edit', app)"
 					>
-						<IconComponent name="Edit" />
+						<IconComponent
+							class="size-5"
+							name="Edit"
+						/>
 					</GButton>
 					<GButton
 						v-if="app.role === 'edit'"
 						type="text"
+						size="small"
+						class="size-6"
 						@click="goTo(app, 'studio')"
 					>
 						<IconComponent
 							name="Studio"
-							class="rotate-[-90deg]"
+							class="rotate-[-90deg] size-5"
 						/>
 					</GButton>
 				</footer>
