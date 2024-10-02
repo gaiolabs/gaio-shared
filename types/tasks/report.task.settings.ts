@@ -155,4 +155,5 @@ export type ReportTaskSettingsType = Partial<{
     cardType: 'freeStyle' | 'basic'
     cardHtml: boolean
     cardHtmlCode: string
+    showFullYear: boolean
 }>
