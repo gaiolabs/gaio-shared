@@ -55,7 +55,7 @@
 						:label="$t('percent')"
 					/>
 					<NCheckbox
-						v-if="useReportStore().hideOnlyIf(['histogram', 'sunburst'])"
+						v-if="useReportStore().hideOnlyIf(['histogram', 'sunburst', 'calendar'])"
 						v-model:checked="useReportStore().current.settings.compactNumberLabel"
 						class="w-full"
 						:label="$t('compactNumbersOfLabel')"

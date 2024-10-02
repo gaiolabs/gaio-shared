@@ -60,7 +60,7 @@ import { NCollapse, NScrollbar, NTabPane, NTabs } from 'naive-ui'
 import OptionsChartGuideline from './OptionsChartGuideline.vue'
 import OptionsChartQuadrant from './OptionsChartQuadrant.vue'
 
-const showGeneralOptions = computed(() => useReportStore().showOnlyIf(['funnel', 'line', 'area']))
+const showGeneralOptions = computed(() => useReportStore().showOnlyIf(['funnel', 'line', 'area', 'calendar']))
 
 const showShowAxisOptions = computed(() =>
 	useReportStore().showOnlyIf([

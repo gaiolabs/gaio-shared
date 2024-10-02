@@ -16,6 +16,12 @@
 				:label="$t('transposed')"
 				class="w-full"
 			/>
+			<NCheckbox
+				v-if="useReportStore().showOnlyIf(['calendar'])"
+				v-model:checked="useReportStore().current.settings.showFullYear"
+				:label="$t('showFullYear')"
+				class="w-full"
+			/>
 			<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
 				<NCheckbox
 					v-model:checked="useReportStore().current.settings.showPoint"
