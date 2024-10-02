@@ -1,26 +1,32 @@
 <template>
-	<div
+	<article
 		v-if="data"
+		id="board-node-wrapper"
 		class="board-node"
 		:class="minW"
 	>
 		<div
-			class="g-bg-100 rounded-[10px] p-0"
+			class=""
 			:class="nodeStyle"
 		>
-			<div class="flex items-center gap-2 leading-3">
-				<div class="flex size-[45px] items-center justify-center gap-2 rounded-[8px] text-white">
+			<div
+				style="--tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.075), 0 2px 4px -2px rgb(0 0 0 / 0.075)"
+				class="flex items-center gap-3 rounded-lg p-1 bg-gray-100 dark:bg-gray-900 dar:bg-gray-800"
+			>
+				<div
+					class="flex size-[45px] items-center justify-center gap-2 text-white rounded-md border border-white shadow dark:border-white/[7.5%] bg-white/50 backdrop-blur-[5px] dark:bg-gray-800/40 mb-px"
+				>
 					<img
-						class="size-[30px]"
+						class="size-[28px]"
 						:src="generateIcon(data)"
 						alt="Board Icon"
 					/>
 				</div>
 				<div
 					v-if="data.type !== 'reportPreview'"
-					class="flex max-w-[150px] items-center"
+					class="flex w-28 items-center"
 				>
-					<div class="max-w-[160px] pe-3">
+					<div class="pe-3">
 						<small class="text-gray text-xs font-light">{{ data.type }}</small>
 						<div class="truncate text-sm">
 							{{ data.label || 'label' }}
@@ -40,7 +46,7 @@
 				:position="Position.Left"
 			/>
 		</div>
-	</div>
+	</article>
 </template>
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
@@ -104,10 +110,6 @@ const minW = computed(() => {
 .board-node {
 	.board-node.start {
 		background: #e32;
-	}
-
-	.dark .board-node-box {
-		background: #f9f9f9;
 	}
 }
 </style>
