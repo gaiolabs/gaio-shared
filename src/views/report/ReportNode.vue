@@ -18,7 +18,22 @@
 			<ReportDownload :task="task" />
 		</template>
 		<template
-			v-if="['line', 'bar', 'area', 'pie', 'donut', 'treemap', 'funnel', 'scatter', 'bubble'].includes(task.reportType)"
+			v-if="
+				[
+					'line',
+					'bar',
+					'area',
+					'pie',
+					'donut',
+					'treemap',
+					'funnel',
+					'scatter',
+					'bubble',
+					'radar',
+					'gauge',
+					'sunburst',
+				].includes(task.reportType)
+			"
 		>
 			<ReportChart
 				:task="task"
@@ -45,6 +60,11 @@ import { computed } from 'vue'
 
 defineEmits(['trigger'])
 const props = defineProps<{ task: ReportNodeType }>()
+
+watch(
+	() => props.task,
+	() => console.log('props.task', props.task),
+)
 
 const cardHeight = computed(() => {
 	return (props.task?.height || 300) + 'px'

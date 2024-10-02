@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import WarningIcon from '@/components/icons/WarningIcon.vue'
-import { computed, defineProps, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 
 const props = defineProps({
 	name: {

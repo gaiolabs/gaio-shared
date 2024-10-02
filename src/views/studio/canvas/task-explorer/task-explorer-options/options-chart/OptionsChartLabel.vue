@@ -35,7 +35,7 @@
 					:label="$t('showLabelDualExtra')"
 					class="w-full"
 				/>
-				<div v-if="useReportStore().current.settings.showLabel && !useReportStore().showOnlyIf(['liquid'])">
+				<div v-if="useReportStore().current.settings.showLabel && useReportStore().hideOnlyIf(['liquid'])">
 					<NCheckbox
 						v-if="useReportStore().showOnlyIf(['pie', 'donut', 'treemap', 'funnel'])"
 						v-model:checked="useReportStore().current.settings.showLabelDimension"
@@ -49,23 +49,29 @@
 						:label="$t('measure')"
 					/>
 					<NCheckbox
-						v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut'])"
+						v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut', 'gauge'])"
 						v-model:checked="useReportStore().current.settings.showLabelPercent"
 						class="w-full"
 						:label="$t('percent')"
 					/>
 					<NCheckbox
-						v-if="!useReportStore().showOnlyIf(['histogram'])"
+						v-if="useReportStore().hideOnlyIf(['histogram', 'sunburst'])"
 						v-model:checked="useReportStore().current.settings.compactNumberLabel"
 						class="w-full"
 						:label="$t('compactNumbersOfLabel')"
+					/>
+					<NCheckbox
+						v-if="useReportStore().showOnlyIf(['gauge'])"
+						v-model:checked="useReportStore().current.settings.showPoint"
+						class="w-full"
+						:label="$t('showPointer')"
 					/>
 					<div
 						v-if="useReportStore().hideOnlyIf(['gauge', 'bullet', 'funnel', 'calendar', 'line', 'dual'])"
 						class="control"
 					>
 						<NCheckbox
-							v-if="useReportStore().hideOnlyIf(['pie', 'donut'])"
+							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst'])"
 							v-model:checked="useReportStore().current.settings.showTotal"
 							class="w-full"
 							:label="$t('showTotal')"
@@ -79,6 +85,26 @@
 								{{ $t('position') }}
 							</div>
 							<NSelect
+								v-if="useReportStore().showOnlyIf(['pie', 'sunburst'])"
+								v-model:value="useReportStore().current.settings.showLabelType"
+								class="w-full"
+								:options="[
+									{
+										value: 'outside',
+										label: $t('outside'),
+									},
+									{
+										value: 'inside',
+										label: $t('inside'),
+									},
+									{
+										value: 'center',
+										label: $t('center'),
+									},
+								]"
+							/>
+							<NSelect
+								v-if="!useReportStore().showOnlyIf(['pie', 'sunburst'])"
 								v-model:value="useReportStore().current.settings.showLabelType"
 								class="w-full"
 								:options="[
@@ -141,27 +167,6 @@
 							<div class="control-label">{{ $t('color') }}</div>
 							<NColorPicker v-model:value="useReportStore().current.settings.labelFontColor" />
 						</div>
-					</div>
-					<div class="control">
-						<NCheckbox
-							v-if="useReportStore().showOnlyIf(['gauge'])"
-							v-model:checked="useReportStore().current.settings.showLabelPercent"
-							class="w-full"
-							:label="$t('statisticPercent')"
-						/>
-					</div>
-					<div
-						v-if="useReportStore().showOnlyIf(['gauge'])"
-						class="control"
-					>
-						<div class="control-label">{{ $t('statistics') }}/{{ $t('fontSize') }}</div>
-						<NInputNumber
-							v-model:value="useReportStore().current.settings.staticFontSize"
-							:min="9"
-							:max="90"
-							:step="1"
-							:placeholder="$t('fontSize')"
-						/>
 					</div>
 				</div>
 			</div>

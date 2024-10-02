@@ -51,16 +51,16 @@
 					:options="[
 						{
 							label: $t('left'),
-							value: 'left'
+							value: 'left',
 						},
 						{
 							label: $t('center'),
-							value: 'center'
+							value: 'center',
 						},
 						{
 							label: $t('right'),
-							value: 'right'
-						}
+							value: 'right',
+						},
 					]"
 				/>
 			</div>

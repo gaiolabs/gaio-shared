@@ -7,51 +7,122 @@
 </template>
 
 <script setup lang="ts">
+import useFormatValue from '@/composables/useFormatValue'
 import type { ReportNodeType } from '@gaio/shared/types'
-import { BarChart } from 'echarts/charts'
+import { GaugeChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
 import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import type { EChartsOption, PieSeriesOption } from 'echarts/types/dist/shared'
+import type { EChartsOption, GaugeSeriesOption } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
 import useReportChartHelper from './helpers/ReportChartHelper'
-import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
 import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
 import useReportChartHelperLegend from './helpers/ReportChartHelperLegend'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const { dimensions, measures, themeColors, columnName } = computed(() => useReportChartHelper(task)).value
-const { grid } = computed(() => useReportChartHelperGrid(task)).value
+const { formatValue } = useFormatValue()
+const { dimensions, measures, themeColors, settings, columnName } = computed(() => useReportChartHelper(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
-const { labelPie } = computed(() => useReportChartHelperLabel(task)).value
+const { labelGauge } = computed(() => useReportChartHelperLabel(task)).value
 
-use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
+use([CanvasRenderer, GridComponent, GaugeChart, TitleComponent, TooltipComponent, LegendComponent])
+
+const grid = () => {
+	return {
+		top: (settings.value.appendPaddingTop ?? 0) + 3,
+		bottom: (settings.value.appendPaddingBottom ?? 0) + 3,
+		left: (settings.value.appendPaddingLeft ?? 0) + 3,
+		right: (settings.value.appendPaddingRight ?? 0) + 3,
+		containLabel: true,
+	}
+}
+
+const calculateCenter = () => {
+	const x = grid().left - grid().right
+	const y = grid().top - grid().bottom
+	return [`${x + 50}%`, `${y + 70}%`]
+}
+
+const calculateRadius = () => {
+	const radius = 140 - grid().top - grid().bottom - grid().left - grid().right
+	return radius.toString() + '%'
+}
 
 const series = () => {
 	const values = list.map((item) => {
 		return {
-			value: item[columnName(measures.value.first)],
-			name: item[columnName(dimensions.value.first)],
+			min: item[columnName(measures.value.first)] as number,
+			max: item[columnName(measures.value.second)] as number,
+			target: item[columnName(measures.value.third)] as number,
+			name: item[columnName(dimensions.value.first)] as string,
 		}
 	})
-	return {
-		name: columnName(measures.value.first),
-		type: 'pie',
-		data: values,
-		label: labelPie(),
-		radius: ['70%', '100%'],
-		...grid(),
-	} as PieSeriesOption | PieSeriesOption[]
+
+	const seriesOptions: GaugeSeriesOption | GaugeSeriesOption[] = [
+		{
+			type: 'gauge',
+			center: calculateCenter(),
+			radius: calculateRadius(),
+			startAngle: 200,
+			endAngle: -20,
+			min: settings.value.showLabelPercent ? 0 : values[0].min,
+			max: settings.value.showLabelPercent ? 100 : values[0].max,
+			progress: {
+				show: true,
+				width: 30,
+			},
+			pointer: {
+				show: settings.value.showPoint,
+			},
+			animation: false,
+			color: themeColors.value,
+			axisLabel: labelGauge(),
+			anchor: {
+				show: false,
+			},
+			title: {
+				show: true,
+				offsetCenter: settings.value.showPoint ? [0, '20%'] : [0, '-20%'],
+				fontSize: 20,
+				color: '#000',
+			},
+			detail: {
+				valueAnimation: true,
+				width: '60%',
+				lineHeight: 40,
+				borderRadius: 8,
+				offsetCenter: settings.value.showPoint ? [0, '30%'] : [0, '0%'],
+				fontSize: 20,
+				fontWeight: 'bolder',
+				color: 'inherit',
+				formatter: (v: number) => {
+					const formatedValue = formatValue(v, {
+						compactNumber: settings.value.compactNumberLabel,
+					})
+					return settings.value.showLabelPercent ? formatedValue.toString() + '%' : formatedValue.toString()
+				},
+			},
+			data: [
+				{
+					value:
+						settings.value.showLabelPercent ?
+							(Math.abs(values[0].target) / Math.abs(values[0].max)) * 100
+						:	values[0].target,
+					name: values[0].name,
+				},
+			],
+		},
+	]
+	return seriesOptions
 }
 
 const option = ref<EChartsOption>({
-	tooltip: {
-		trigger: 'item',
-	},
-	color: themeColors.value,
+	// tooltip: {
+	// 	trigger: 'item',
+	// },
 	series: series(),
 	legend: legend(),
 })
@@ -61,7 +132,6 @@ watch(
 	() => {
 		option.value = {
 			...option.value,
-			color: themeColors.value,
 			series: series(),
 			legend: legend(),
 		}
@@ -71,7 +141,7 @@ watch(
 </script>
 
 <!-- <template>
-	<div class="report-donut">
+	<div class="report-pie">
 		<div
 			ref="id"
 			class="size-full"
@@ -122,11 +192,11 @@ const labelPosition = computed(() => {
 const getOptions = (): PieOptions => {
 	return {
 		animation: false,
-		data: processedList('donut'),
+		data: processedList('pie'),
 		colorField: columnName(firstDimension.value),
 		angleField: columnName(firstMeasure.value),
 		radius: 1,
-		innerRadius: settings.value.innerRadius || 0.72,
+		innerRadius: null,
 		meta: meta.value,
 		autoFit: true,
 		padding: 'auto',
@@ -171,50 +241,7 @@ const getOptions = (): PieOptions => {
 					}
 				}
 			:	null,
-		statistic:
-			settings.value.showStatistic ?
-				{
-					title:
-						settings.value.statisticLabel ?
-							{
-								offsetY: -4,
-								customHtml: () => {
-									return settings.value.statisticLabel
-								},
-								style: {
-									fontSize: Number(settings.value.statisticFontSize || 20) + 'px',
-									fill: settings.value.statisticFontColor || '#333',
-									whiteSpace: 'pre-wrap',
-									overflow: 'hidden',
-									textOverflow: 'ellipsis'
-								}
-							}
-						:	false,
-					content: {
-						offsetY: 4,
-						style: {
-							fontSize: Number(settings.value.statisticFontSize || 20) + 'px',
-							fill: settings.value.statisticFontColor || '#333',
-							whiteSpace: 'pre-wrap',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis'
-						},
-						formatter: (datum, data) =>
-							datum ?
-								`${formatValue(datum[columnName(firstMeasure.value)], {
-									...firstMeasure.value,
-									compactNumber: settings.value.compactNumberStatistic
-								})}`
-							:	`${formatValue(
-									data.reduce((r, d) => r + d[columnName(firstMeasure.value)], 0),
-									{
-										...firstMeasure.value,
-										compactNumber: settings.value.compactNumberStatistic
-									}
-								)}`
-					}
-				}
-			:	null,
+		statistic: null,
 		interactions: [{ type: 'element-selected' }]
 	}
 }

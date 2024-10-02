@@ -5,10 +5,10 @@ import { defaultSchema } from '@/composables/default-task/defaultSchema'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { definedOrDefault } from '@gaio/shared/utils'
 
-export const defaultReportChartPie = (base: ReportNodeType) => {
+export const defaultReportChartGauge = (base: ReportNodeType) => {
 	const { settings } = base
 	return {
-		reportType: 'pie',
+		reportType: 'gauge',
 		schema: base.schema || defaultSchema,
 		settings: {
 			...settings,

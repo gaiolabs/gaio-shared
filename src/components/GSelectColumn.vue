@@ -1,5 +1,6 @@
 <template>
 	<NSelect
+		v-if="tableName"
 		v-model:value="selected"
 		size="small"
 		:options="columnList"
@@ -38,7 +39,7 @@ const {
 	appId = undefined,
 	modelValue = undefined,
 	tableName = null,
-	dataTypeFilter = []
+	dataTypeFilter = [],
 } = defineProps<{
 	modelValue?: string | string[]
 	appId?: string
@@ -56,11 +57,11 @@ const renderLabel = (option: ColumnListType): VNodeChild => {
 		option.dataIcon ?
 			h(VIcon, {
 				name: option.dataIcon,
-				class: 'text-primary'
+				class: 'text-primary',
 			})
 		:	'',
 		' ',
-		option.columnName
+		option.columnName,
 	]
 }
 
@@ -72,8 +73,8 @@ watch(
 		}
 	},
 	{
-		immediate: true
-	}
+		immediate: true,
+	},
 )
 
 const columnList = ref<ColumnListType[]>([])
@@ -88,7 +89,7 @@ const loadColumnList = () => {
 		...useAppStore().appInfo,
 		tableName: tableName,
 		sourceType: 'bucket',
-		client: 'clickhouse'
+		client: 'clickhouse',
 	}
 
 	if (appId) {
@@ -98,8 +99,8 @@ const loadColumnList = () => {
 	useApi()
 		.post('api/table/field', {
 			body: {
-				taskData
-			}
+				taskData,
+			},
 		})
 		.then((res) => {
 			emit('loadColumnList', res.data)
@@ -107,7 +108,7 @@ const loadColumnList = () => {
 				.map((item: FieldType) => ({
 					...item,
 					dataIcon: dataTypeIcon(item.dataType),
-					type: dataTypeName(item.dataType)
+					type: dataTypeName(item.dataType),
 				}))
 				.filter((item: ColumnListType) => !dataTypeFilter.length || dataTypeFilter.includes(item.type))
 		})

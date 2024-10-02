@@ -28,7 +28,7 @@
 				<template #prefix>{{ $t('height') }}</template>
 			</NInputNumber>
 		</div>
-		<report-node
+		<ReportNode
 			v-if="reportState.status && !showHelp"
 			:key="useReportStore().refreshPreviewKey"
 			:task="task"
@@ -74,6 +74,7 @@
 import { useReportStore } from '@/stores/useReportStore'
 import ReportNode from '@/views/report/ReportNode.vue'
 import { taskExplorerTypeList } from '@/views/studio/canvas/task-explorer/TaskExplorerTypeList'
+import { NButton, NInputNumber, NTable } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -81,7 +82,7 @@ const { t } = useI18n()
 const task = computed(() => {
 	return {
 		...useReportStore().current,
-		height: height.value
+		height: height.value,
 	}
 })
 
@@ -132,9 +133,9 @@ const reportState = computed(() => {
 					name: 'general',
 					dimensions: 'multipleFields',
 					measures: 'multipleFields',
-					message: 'tableOfContent'
-				}
-			]
+					message: 'tableOfContent',
+				},
+			],
 		}
 	} else if (['column', 'line', 'bar', 'area'].includes(reportType)) {
 		return {
@@ -144,21 +145,21 @@ const reportState = computed(() => {
 					name: 'simple',
 					dimensions: 'oneFieldOnly',
 					measures: 'oneFieldOnly',
-					message: 'oneMeasureIsFormed'
+					message: 'oneMeasureIsFormed',
 				},
 				{
 					name: 'groupedByMeasure',
 					dimensions: 'oneFieldOnly',
 					measures: 'multipleFields',
-					message: 'measuresAreFoldedIntoCategory'
+					message: 'measuresAreFoldedIntoCategory',
 				},
 				{
 					name: 'grouped',
 					dimensions: 'twoFieldOnly',
 					measures: 'oneFieldOnly',
-					message: 'measureIsGroupedByTheSecondDimension'
-				}
-			]
+					message: 'measureIsGroupedByTheSecondDimension',
+				},
+			],
 		}
 	} else if (['pie', 'funnel', 'donut'].includes(reportType)) {
 		return {
@@ -168,9 +169,9 @@ const reportState = computed(() => {
 					name: 'simple',
 					dimensions: 'oneFieldOnly',
 					measures: 'oneFieldOnly',
-					message: 'oneMeasureIsFormed'
-				}
-			]
+					message: 'oneMeasureIsFormed',
+				},
+			],
 		}
 	} else if (['treemap'].includes(reportType)) {
 		return {
@@ -180,9 +181,9 @@ const reportState = computed(() => {
 					name: 'simple',
 					dimensions: 'oneFieldOnly',
 					measures: 'oneFieldOnly',
-					message: 'oneMeasureIsFormed'
-				}
-			]
+					message: 'oneMeasureIsFormed',
+				},
+			],
 		}
 	} else if (['scatter'].includes(reportType)) {
 		return {
@@ -192,9 +193,9 @@ const reportState = computed(() => {
 					name: 'scatter',
 					dimensions: 'oneFieldOnly',
 					measures: 'twoFieldOnly',
-					message: 'oneMeasureIsFormed'
-				}
-			]
+					message: 'oneMeasureIsFormed',
+				},
+			],
 		}
 	} else if (['bubble'].includes(reportType)) {
 		return {
@@ -204,9 +205,51 @@ const reportState = computed(() => {
 					name: 'bubble',
 					dimensions: 'twoFieldOnly',
 					measures: 'threeFieldOnly',
-					message: 'oneMeasureIsFormed'
-				}
-			]
+					message: 'oneMeasureIsFormed',
+				},
+			],
+		}
+	} else if (['radar'].includes(reportType)) {
+		return {
+			status: verifyRules('n', 'n'),
+			rules: [
+				{
+					name: 'radar',
+					dimensions: 'oneFieldOnly',
+					measures: 'multipleFields',
+					message: 'measuresAreFoldedIntoCategory',
+				},
+				{
+					name: 'radar',
+					dimensions: 'twoFieldOnly',
+					measures: 'multipleFields',
+					message: 'measuresAreFoldedIntoCategory',
+				},
+			],
+		}
+	} else if (['gauge'].includes(reportType)) {
+		return {
+			status: verifyRules(1, 3),
+			rules: [
+				{
+					name: 'gauge',
+					dimensions: 'oneFieldOnly',
+					measures: 'threeFields',
+					message: 'threeMeasuresMinMaxTarget',
+				},
+			],
+		}
+	} else if (['sunburst'].includes(reportType)) {
+		return {
+			status: verifyRules(2, 1),
+			rules: [
+				{
+					name: 'sunburst',
+					dimensions: 'multipleFields',
+					measures: 'oneFieldOnly',
+					message: 'sunburstMessage',
+				},
+			],
 		}
 	}
 	return {}

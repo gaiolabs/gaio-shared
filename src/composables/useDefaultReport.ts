@@ -12,7 +12,10 @@ import { cloneDeep } from 'lodash-es'
 import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
+import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
+import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
+import { defaultReportChartSunburst } from './default-reports/defaultReportChartSunburst'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
@@ -62,7 +65,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'radar':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartRadar(sourceProperties)
 			break
 
 		case 'heatmap':
@@ -74,11 +77,11 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'gauge':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartGauge(sourceProperties)
 			break
 
 		case 'sunburst':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartSunburst(sourceProperties) //TODO: Configurar o correto
 			break
 
 		case 'treemap':
@@ -111,6 +114,6 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 		databaseName: getBucketNameFromAppId(base.appId),
 		tableName: base.tableName,
 		layout: base.layout || {},
-		...result
+		...result,
 	}) as ReportNodeType
 }

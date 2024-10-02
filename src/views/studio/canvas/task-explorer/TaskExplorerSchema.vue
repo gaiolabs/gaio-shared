@@ -5,7 +5,7 @@
 			class="mx-1 flex items-center justify-between gap-1"
 		>
 			<div class="flex items-center gap-1 font-bold">
-				<g-icon name="columns" />
+				<GIcon name="columns" />
 				{{ $t('columns') }}
 				<span v-if="useReportStore().current.schema.select.length">
 					({{ useReportStore().current.schema.select.length }})
@@ -50,7 +50,7 @@
 								@click="activeBrush"
 							>
 								<template #icon>
-									<g-icon name="brush" />
+									<GIcon name="brush" />
 								</template>
 							</NButton>
 						</span>
@@ -65,7 +65,7 @@
 							@click="showFilter = !showFilter"
 						>
 							<template #icon>
-								<g-icon name="filter" />
+								<GIcon name="filter" />
 							</template>
 						</NButton>
 					</template>
@@ -81,7 +81,7 @@
 							@click="removeAll()"
 						>
 							<template #icon>
-								<g-icon name="deleteTag" />
+								<GIcon name="deleteTag" />
 							</template>
 						</NButton>
 					</template>
@@ -108,12 +108,15 @@
 					class="me-2"
 					:class="useBrushClasses"
 					:show-icon="true"
+					:is-for-gauge-chart="useReportStore().current.reportType.includes('gauge')"
+					:position="position(field, i)"
+					:is-measure="field.type !== 'value'"
 					@click="select(field)"
 				/>
 			</VueDraggable>
 		</div>
 
-		<g-filter-builder
+		<GFilterBuilder
 			v-if="showFilter"
 			class="mb-3"
 			:local-task="useReportStore().current"
@@ -123,20 +126,35 @@
 </template>
 
 <script setup lang="ts">
+import GFilterBuilder from '@/components/GFilterBuilder.vue'
+import GIcon from '@/components/GIcon.vue'
 import VTag from '@/components/VTag.vue'
 import { useReportStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
+import { NButton, NPopover, NRadioButton, NRadioGroup, NTooltip } from 'naive-ui'
 import { type SortableEvent } from 'sortablejs'
 import { ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 const useBrush = ref()
+let measuresCount = 0
 const useBrushSelected = ref()
 
 const showFilter = ref(false)
 
 const removeAll = () => {
 	useReportStore().current.schema.select = []
+}
+
+const position = (field: FieldType, index: number) => {
+	let value = 0
+	if (field.type !== 'value') {
+		value = measuresCount++
+	}
+	if (useReportStore().current.schema.select.length - 1 === index) {
+		measuresCount = 0
+	}
+	return value
 }
 
 const add = (ev: SortableEvent) => {
@@ -181,7 +199,7 @@ const select = (item: FieldType) => {
 						separators: useBrushSelected.value.separators,
 						formatDate: useBrushSelected.value.formatDate,
 						formatPrefix: useBrushSelected.value.formatPrefix,
-						formatSuffix: useBrushSelected.value.formatSuffix
+						formatSuffix: useBrushSelected.value.formatSuffix,
 					}
 				}
 
@@ -196,14 +214,14 @@ const select = (item: FieldType) => {
 
 						condType: useBrushSelected.value.condType,
 						condRules: useBrushSelected.value.condRules,
-						condColumnName: useBrushSelected.value.condColumnName
+						condColumnName: useBrushSelected.value.condColumnName,
 					}
 				}
 
 				field = {
 					...field,
 					...format,
-					...styleBase
+					...styleBase,
 				}
 			}
 			return field

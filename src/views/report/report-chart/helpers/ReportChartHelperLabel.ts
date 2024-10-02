@@ -20,5 +20,95 @@ export default (task: ReportNodeType) => {
 			},
 		}
 	}
-	return { label }
+
+	const labelPie = () => {
+		return {
+			show: settings.value.showLabel,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: object | Array<object>) => {
+				const params = v as any
+				let labelString = formatValue(params.data.value, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				if (settings.value.showLabelDimension) {
+					labelString = `${params.data.name}\n${labelString} `
+				}
+				if (settings.value.showLabelPercent) {
+					labelString += `\n${params.percent.toFixed(2)}% `
+				}
+				return labelString
+			},
+		}
+	}
+
+	const labelFunnel = () => {
+		return {
+			show: settings.value.showLabel,
+			position: 'inside',
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: object | Array<object>) => {
+				const params = v as any
+				let labelString = ''
+				if (settings.value.showLabelMeasure) {
+					labelString = formatValue(params.data.value, {
+						compactNumber: settings.value.compactNumberLabel,
+					}).toString()
+				}
+				if (settings.value.showLabelDimension) {
+					labelString = `${params.data.name}\n${labelString} `
+				}
+				if (settings.value.showLabelPercent) {
+					labelString += `\n${params.percent.toFixed(2)}% `
+				}
+				return labelString
+			},
+		}
+	}
+
+	const labelRadar = () => {
+		return {
+			show: settings.value.showLabel,
+			alignTicks: false,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: Record<string, string | number | Date>) => {
+				const formatedValue = formatValue(v.value, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				return formatedValue
+			},
+		}
+	}
+
+	const labelGauge = () => {
+		return {
+			show: settings.value.showLabel,
+			alignTicks: false,
+			color: settings.value.labelFontColor ?? '#000000FF',
+			distance: 40,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: number) => {
+				const formatedValue = formatValue(v, {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				return formatedValue.toString()
+			},
+		}
+	}
+
+	const labelSunburst = () => {
+		return {
+			show: settings.value.showLabel,
+			align: 'center',
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor ?? '#000000FF',
+			distance: 40,
+			fontSize: settings.value.labelFontSize || 13,
+		}
+	}
+	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst }
 }
