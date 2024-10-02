@@ -5,7 +5,7 @@ export type CommonTaskType = Partial<{
     label: string | null
     appId: string
     repoId: string | null
-    sourceType: string | null
+    sourceType: 'source' | 'bucket'
     sourceId: string | null
     resultTable: string | null
     resultDatabase: string | null
@@ -22,4 +22,5 @@ export type CommonTaskType = Partial<{
     shared: boolean
     created: boolean
     temporary: boolean
+    admin?: unknown
 }>
