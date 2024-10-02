@@ -1,12 +1,8 @@
 <template>
-	<!-- <pre class="fixed text-xs text-[#0f0] top-0 left-0 p-1 bg-black z-50">
-		{{ route }}
-	</pre
-	> -->
 	<div
 		id="background-elements"
 		:style="{ opacity: opacity }"
-		class="absolute inset-0 z-[-1] overflow-hidden absolute !transition-all !duration-300 w-screen h-screen"
+		class="absolute inset-0 z-[-1] overflow-hidden absolute !transition-opacity !duration-300 w-screen h-screen"
 	>
 		<div
 			id="bg-dark"
@@ -25,8 +21,8 @@
 			<div
 				id="bg-pattern"
 				:style="{ backgroundImage: `url(${pattern})` }"
-				:class="opacity === 1 ? 'dark:opacity-10 opacity-15' : 'dark:opacity-25 opacity-35'"
-				class="bg-cover w-[400vh] h-[400vh] bg"
+				:class="opacity === 1 ? 'dark:opacity-10 opacity-15' : 'opacity-0'"
+				class="bg-cover w-[400vh] h-[400vh] !transition-all !duration-[900ms]"
 			></div>
 		</div>
 	</div>
@@ -44,8 +40,8 @@ const route = useRoute()
 const opacity = computed(() => {
 	return (
 		route.path.startsWith('/auth') ? 1
-		: isDark ? 0.4
-		: 0.3
+		: isDark.value ? 0.3
+		: 0.4
 	)
 })
 </script>
