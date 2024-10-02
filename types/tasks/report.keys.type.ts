@@ -19,5 +19,6 @@ export type ReportTypeKeys =
 	| 'staticContent'
 	| 'card'
 	| 'form'
+	| 'calendar'
 
 
