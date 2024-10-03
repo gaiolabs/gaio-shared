@@ -157,4 +157,6 @@ export type ReportTaskSettingsType = Partial<{
     cardHtmlCode: string
     showFullYear: boolean
     showPathTreemap: boolean
+    enableTreemapZoom: boolean
+    treemapLeafDepth: number
 }>
