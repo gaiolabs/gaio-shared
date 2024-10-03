@@ -35,8 +35,6 @@
 									{ value: 'TabSeparatedWithNames', label: $t('tab') },
 									{ value: 'CSVWithNames', label: $t('comma') },
 									{ value: '|', label: '|' },
-									{ value: '||', label: '||' },
-									{ value: ';', label: ';' }
 								]"
 							/>
 						</div>
@@ -52,7 +50,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
+		</template>
+		<template #footer>
+			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
 				<NButton
 					type="primary"
 					@click="save()"
@@ -68,7 +68,7 @@ import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import type { ExportToFileType } from '@gaio/shared/types'
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 
 const loading = ref(false)
 const emit = defineEmits(['close'])
@@ -82,22 +82,22 @@ const save = () => {
 			sources: [
 				useDefault({
 					type: 'table',
-					base: localTask.value
-				})
+					base: localTask.value,
+				}),
 			],
-			targets: []
+			targets: [],
 		})
 		.save()
 		.then(() => emit('close'))
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'export',
 		base: {
 			...useAppStore().appInfo,
-			...(useAppStore().cloneTask() || {})
-		}
+			...(useAppStore().cloneTask() || {}),
+		},
 	})
 	console.log(localTask.value)
 })
