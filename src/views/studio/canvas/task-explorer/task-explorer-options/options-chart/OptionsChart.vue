@@ -18,7 +18,7 @@
 						<OptionsChartGeneral v-if="showGeneralOptions" />
 						<OptionsHeader />
 						<OptionsChartStatistic v-if="useReportStore().showOnlyIf(['pie'])" />
-						<OptionsChartLegend v-if="useReportStore().hideOnlyIf(['gauge', 'sunburst'])" />
+						<OptionsChartLegend v-if="useReportStore().hideOnlyIf(['gauge', 'sunburst', 'treemap'])" />
 						<OptionsChartLabel />
 						<OptionsChartXAxis v-if="showShowAxisOptions" />
 						<OptionsChartYAxis v-if="showShowAxisOptions" />
@@ -60,7 +60,9 @@ import { NCollapse, NScrollbar, NTabPane, NTabs } from 'naive-ui'
 import OptionsChartGuideline from './OptionsChartGuideline.vue'
 import OptionsChartQuadrant from './OptionsChartQuadrant.vue'
 
-const showGeneralOptions = computed(() => useReportStore().showOnlyIf(['funnel', 'line', 'area', 'calendar']))
+const showGeneralOptions = computed(() =>
+	useReportStore().showOnlyIf(['funnel', 'line', 'area', 'calendar', 'treemap']),
+)
 
 const showShowAxisOptions = computed(() =>
 	useReportStore().showOnlyIf([

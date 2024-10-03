@@ -789,4 +789,7 @@ export default {
 	calendarChartMessage:
 		'A calendar chart visually represents daily data over time, using color-coded cells arranged in a calendar grid to show trends and patterns.',
 	showFullYear: 'Show full year',
+	path: 'Path',
+	enableZoom: 'Enable zoom',
+	leafDepth: 'Leaf depth',
 }

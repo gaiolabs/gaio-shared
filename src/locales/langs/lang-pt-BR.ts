@@ -215,4 +215,7 @@ export default {
 	calendarChartMessage:
 		'Um gráfico de calendário representa visualmente dados diários ao longo do tempo, usando células codificadas por cores organizadas em uma grade de calendário para mostrar tendências e padrões.',
 	showFullYear: 'Mostrar o ano todo',
+	path: 'Caminho',
+	enableZoom: 'Habilitar zoom',
+	leafDepth: 'Profundidade das folhas',
 }

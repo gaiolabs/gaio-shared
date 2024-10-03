@@ -49,6 +49,12 @@
 						:label="$t('measure')"
 					/>
 					<NCheckbox
+						v-if="useReportStore().showOnlyIf(['treemap'])"
+						v-model:checked="useReportStore().current.settings.showPathTreemap"
+						class="w-full"
+						:label="$t('path')"
+					/>
+					<NCheckbox
 						v-if="useReportStore().showOnlyIf(['column', 'pie', 'donut', 'gauge'])"
 						v-model:checked="useReportStore().current.settings.showLabelPercent"
 						class="w-full"
@@ -71,7 +77,7 @@
 						class="control"
 					>
 						<NCheckbox
-							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst'])"
+							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst', 'treemap'])"
 							v-model:checked="useReportStore().current.settings.showTotal"
 							class="w-full"
 							:label="$t('showTotal')"
