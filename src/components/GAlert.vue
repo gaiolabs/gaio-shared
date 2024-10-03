@@ -1,5 +1,5 @@
 <template>
-	<div class="g-base g-border p-4 rounded-xl">
+	<div class="g-base p-4 rounded-xl">
 		<i
 			v-if="showIcon"
 			class="me-2 font-bold text-prime"

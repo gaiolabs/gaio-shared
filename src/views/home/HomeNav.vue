@@ -29,13 +29,6 @@
 							>
 								<div class="flex items-center">
 									<IconComponent name="Search" />
-
-									<!--                                    <div class="ms-1 flex flex-row gap-1 rounded-[4px]">-->
-									<!--                                        <div class="home-nav-box-inner-icon px-3 flex flex-row gap-2 h-[25px]">-->
-									<!--                                            <g-icon name="command" />-->
-									<!--                                            k-->
-									<!--                                        </div>-->
-									<!--                                    </div>-->
 								</div>
 							</NButton>
 						</div>

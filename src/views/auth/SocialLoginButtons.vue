@@ -6,7 +6,7 @@
 		<!-- Google Login Button -->
 		<button
 			id="google-login-button"
-			class="g-base g-border flex shadow-none dark:hover:backdrop-brightness-125 h-10 !transition-all duration-300 hover:shadow-md items-center gap-2 rounded-lg px-4"
+			class="g-base flex shadow-none dark:hover:backdrop-brightness-125 h-10 !transition-all duration-300 hover:shadow-md items-center gap-2 rounded-lg px-4"
 			@click.prevent="loginWithGoogle"
 		>
 			<img
@@ -22,7 +22,7 @@
 		<!-- Microsoft Login Button -->
 		<button
 			id="microsoft-login-button"
-			class="g-base g-border flex shadow-none dark:hover:backdrop-brightness-125 h-10 !transition-all duration-300 hover:shadow-md items-center gap-2 rounded-lg px-4"
+			class="g-base flex shadow-none dark:hover:backdrop-brightness-125 h-10 !transition-all duration-300 hover:shadow-md items-center gap-2 rounded-lg px-4"
 			@click.prevent="loginWithMicrosoft"
 		>
 			<img

@@ -4,7 +4,7 @@
 			<img
 				:src="logoSrc"
 				alt="Company Profile Image"
-				class="g-base g-border w-full h-full object-contain object-center rounded-2xl !transition-all duration-600"
+				class="g-base w-full h-full object-contain object-center rounded-2xl !transition-all duration-600"
 			/>
 			<transition
 				enter-active-class="duration-300 ease-out"
@@ -18,7 +18,7 @@
 					v-if="user"
 					class="w-full absolute bottom-0 translate-y-[50%] flex justify-center !transition-all duration-600"
 				>
-					<div class="!transition-all g-base g-border duration-600 size-16 rounded-full overflow-hidden">
+					<div class="!transition-all g-base duration-600 size-16 rounded-full overflow-hidden">
 						<img
 							:src="profilePicture"
 							class="w-full h-full"
