@@ -26,7 +26,7 @@ import { computed } from 'vue'
 const {
 	name = undefined,
 	color = undefined,
-	height = 16
+	height = 16,
 } = defineProps<{ name: keyof typeof list; color?: string; height?: number }>()
 
 const fontSize = computed(() => {
@@ -232,7 +232,8 @@ const list = {
 	panelRight: 'fluent:panel-right-32-filled',
 	panelLeft: 'fluent:panel-left-32-filled',
 	action: 'hugeicons:touch-interaction-02',
-	guideline: 'jam:directions-f'
+	guideline: 'jam:directions-f',
+	calendar: 'radix-icons:calendar',
 }
 </script>
 

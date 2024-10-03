@@ -2,7 +2,7 @@
 	<div class="task-report-preview">
 		<div class="control flex items-center justify-between gap-2 rounded bg-paper-200 p-1 px-2 dark:bg-carbon-200">
 			<div class="flex grow items-center gap-1">
-				<g-icon :name="currentReportType.icon" />
+				<GIcon :name="currentReportType.icon" />
 				{{ currentReportType.label }}
 			</div>
 			<div class="flex items-center justify-end gap-2">
@@ -71,6 +71,7 @@
 	</div>
 </template>
 <script setup lang="ts">
+import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores/useReportStore'
 import ReportNode from '@/views/report/ReportNode.vue'
 import { taskExplorerTypeList } from '@/views/studio/canvas/task-explorer/TaskExplorerTypeList'
@@ -248,6 +249,18 @@ const reportState = computed(() => {
 					dimensions: 'multipleFields',
 					measures: 'oneFieldOnly',
 					message: 'sunburstMessage',
+				},
+			],
+		}
+	} else if (['calendar'].includes(reportType)) {
+		return {
+			status: verifyRules(1, 1),
+			rules: [
+				{
+					name: 'calendar',
+					dimensions: 'dateType',
+					measures: 'oneFieldOnly',
+					message: 'calendarChartMessage',
 				},
 			],
 		}

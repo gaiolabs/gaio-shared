@@ -32,6 +32,7 @@
 					'radar',
 					'gauge',
 					'sunburst',
+					'calendar',
 				].includes(task.reportType)
 			"
 		>
