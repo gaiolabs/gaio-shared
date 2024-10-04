@@ -83,11 +83,10 @@
 							v-else-if="filteredApps.length"
 							class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
 						>
-							<apps-card
+							<AppsCard
 								v-for="app of filteredApps"
 								:key="app.appId"
-								:shadow="!isDark"
-								gradient
+								mode="list"
 								:app="app"
 							/>
 						</div>
@@ -156,7 +155,7 @@
 									></div>
 								</template>
 								<template v-else>
-									<apps-card
+									<AppsCard
 										v-for="app of listLocalApps"
 										:key="app.appId"
 										:app="app"
@@ -175,7 +174,7 @@
 									></div>
 								</template>
 								<template v-else>
-									<apps-card
+									<AppsCard
 										v-for="app of listLocalApps"
 										:key="app.appId"
 										mode="list"
