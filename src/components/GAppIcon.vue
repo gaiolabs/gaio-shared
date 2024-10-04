@@ -1,5 +1,5 @@
 <template>
-	<div class="relative flex items-center justify-center rounded-lg overflow-hidden">
+	<div class="relative flex items-center justify-center rounded-lg overflow-hidden g-base">
 		<span
 			v-if="name"
 			:data-icon="name"
@@ -9,14 +9,10 @@
 			<i :class="iconName" />
 		</span>
 		<div
-			class="absolute inset-0 opacity-10 z-0 m-[px]"
+			class="absolute inset-0 opacity-[7.5%] dark:opacity-[3%] z-0 m-[px]"
 			:style="{ backgroundColor: color }"
 		></div>
-		<div
-			class="absolute inset-0 border rounded-lg opacity-40 z-0"
-			:style="{ borderColor: color }"
-		></div>
-		<div class="absolute inset-0 bg-white dark:bg-transparent z-[-1]"></div>
+		<!-- <div class="absolute inset-0 bg-red-500 z-[-1]"></div> -->
 	</div>
 </template>
 

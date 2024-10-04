@@ -107,6 +107,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartCalendar
+						v-else-if="task.reportType === 'calendar'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -128,6 +135,7 @@ import { cloneDeep } from 'lodash-es'
 import { NSpin } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import ReportChartBubble from './ReportChartBubble.vue'
+import ReportChartCalendar from './ReportChartCalendar.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartGauge from './ReportChartGauge.vue'

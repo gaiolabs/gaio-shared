@@ -24,7 +24,7 @@
 			<Background
 				id="board-background"
 				class="relative"
-				:pattern-color="isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0,0,0,0.15)'"
+				:pattern-color="isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.15)'"
 				:gap="15"
 				:size="1.25"
 				patternTransform="translate(1,0)"
