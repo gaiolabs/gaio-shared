@@ -20,5 +20,6 @@ export type ReportTypeKeys =
 	| 'card'
 	| 'form'
 	| 'calendar'
+	| 'wordCloud'
 
 
