@@ -211,4 +211,11 @@ export default {
 	threeMeasuresMinMaxTarget: 'A primeira medida é o mínimo, a segunda é o máximo e a terceira é a meta',
 	sunburstMessage:
 		'Organiza as dimensões em dados hierárquicos em camadas circulares concêntricas, onde cada nível da hierarquia é representado por fatias proporcionais ao seu valor.',
+	calendar: 'Calendário',
+	calendarChartMessage:
+		'Um gráfico de calendário representa visualmente dados diários ao longo do tempo, usando células codificadas por cores organizadas em uma grade de calendário para mostrar tendências e padrões.',
+	showFullYear: 'Mostrar o ano todo',
+	path: 'Caminho',
+	enableZoom: 'Habilitar zoom',
+	leafDepth: 'Profundidade das folhas',
 }
