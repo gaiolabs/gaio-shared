@@ -10,6 +10,7 @@ import type { ReportNodeType, ReportTypeKeys } from '@gaio/shared/types'
 import { getBucketNameFromAppId, withoutNullProperties } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
+import { defaultReportChartCalendar } from './default-reports/defaultReportChartCalendar'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
@@ -70,6 +71,10 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 
 		case 'heatmap':
 			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			break
+
+		case 'calendar':
+			result = defaultReportChartCalendar(sourceProperties) //TODO: Configurar o correto
 			break
 
 		case 'funnel':

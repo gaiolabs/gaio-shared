@@ -23,15 +23,15 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					label: t('table'),
 					type: 'reportPreview',
 					reportType: 'table',
-					icon: 'table'
+					icon: 'table',
 				},
 				{
 					label: t('pivotTable'),
 					type: 'reportPreview',
 					reportType: 'crossTable',
-					icon: 'crossTable'
-				}
-			]
+					icon: 'crossTable',
+				},
+			],
 		},
 		{
 			label: t('charts'),
@@ -43,8 +43,8 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					reportType: 'bar',
 					icon: 'bar',
 					settings: {
-						columnBar: false
-					}
+						columnBar: false,
+					},
 				},
 				{
 					label: t('column'),
@@ -52,68 +52,74 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					reportType: 'bar',
 					icon: 'column',
 					settings: {
-						columnBar: true
-					}
+						columnBar: true,
+					},
 				},
 				{
 					label: t('line'),
 					type: 'reportPreview',
 					reportType: 'line',
-					icon: 'line'
+					icon: 'line',
 				},
 				{
 					label: t('area'),
 					type: 'reportPreview',
 					reportType: 'area',
-					icon: 'area'
+					icon: 'area',
 				},
 				{
 					label: t('pie'),
 					type: 'reportPreview',
 					reportType: 'pie',
-					icon: 'pie'
+					icon: 'pie',
 				},
 				{
 					label: t('donut'),
 					type: 'reportPreview',
 					reportType: 'donut',
-					icon: 'donut'
+					icon: 'donut',
 				},
 				{
 					label: t('scatter'),
 					type: 'reportPreview',
 					reportType: 'scatter',
-					icon: 'scatter'
+					icon: 'scatter',
 				},
 				{
 					label: t('bubble'),
 					type: 'reportPreview',
 					reportType: 'bubble',
-					icon: 'bubble'
+					icon: 'bubble',
 				},
 				{
 					label: t('radar'),
 					type: 'reportPreview',
 					reportType: 'radar',
-					icon: 'radar'
+					icon: 'radar',
 				},
 				{
 					label: t('heatmap'),
 					type: 'reportPreview',
 					reportType: 'heatmap',
-					icon: 'heatmap'
+					icon: 'heatmap',
+				},
+				{
+					label: t('calendar'),
+					type: 'reportPreview',
+					reportType: 'calendar',
+					icon: 'calendar',
 				},
 				{
 					label: t('funnel'),
 					type: 'reportPreview',
 					reportType: 'funnel',
-					icon: 'funnel'
+					icon: 'funnel',
 				},
 				{
 					label: t('gauge'),
 					type: 'reportPreview',
 					reportType: 'gauge',
-					icon: 'gauge'
+					icon: 'gauge',
 				},
 				// {
 				//     label: t('boxplot'),
@@ -136,14 +142,14 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					label: t('sunburst'),
 					type: 'reportPreview',
 					reportType: 'sunburst',
-					icon: 'sunburst'
+					icon: 'sunburst',
 				},
 				{
 					label: t('treemap'),
 					type: 'reportPreview',
 					reportType: 'treemap',
-					icon: 'treemap'
-				}
+					icon: 'treemap',
+				},
 				// {
 				//     label: t('parallel'),
 				//     type: 'reportPreview',
@@ -159,7 +165,7 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 				//     type: 'reportPreview',
 				//     reportType: 'pictorialBar'
 				// }
-			]
+			],
 		},
 
 		{
@@ -170,15 +176,15 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					label: t('simple'),
 					type: 'reportPreview',
 					reportType: 'card',
-					icon: 'cardStats'
+					icon: 'cardStats',
 				},
 				{
 					label: t('download'),
 					type: 'reportPreview',
 					reportType: 'download',
-					icon: 'downloadFile'
-				}
-			]
-		}
+					icon: 'downloadFile',
+				},
+			],
+		},
 	]
 }

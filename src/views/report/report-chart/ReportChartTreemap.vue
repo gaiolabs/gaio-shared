@@ -1,159 +1,117 @@
 <template>
-	<div class="report-treemap">
-		<div
-			ref="id"
-			class="size-full"
-			:style="{ height }"
-		/>
-	</div>
+	<VChart
+		:style="{ height }"
+		:option="option"
+		autoresize
+	/>
 </template>
 
 <script setup lang="ts">
-import useFormatValue from '@/composables/useFormatValue'
-import { Treemap, type TreemapOptions } from '@antv/g2plot'
 import type { ReportNodeType } from '@gaio/shared/types'
-import { orderBy } from 'lodash-es'
-import { computed, nextTick, onMounted, shallowRef } from 'vue'
-import useReportChartHelper from './ReportChartHelperGplot'
+import { BarChart } from 'echarts/charts'
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+import { GridComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { EChartsOption, TreemapSeriesOption } from 'echarts/types/dist/shared'
+import { ref } from 'vue'
+import VChart from 'vue-echarts'
+import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
 
-defineEmits(['change'])
+const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
-const props = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
-const { settings, firstMeasure, firstDimension, columnName, columnTitle } = useReportChartHelper(props.task, props.list)
-const { formatValue } = useFormatValue()
+const { dimensions, measures, themeColors, settings, columnName } = computed(() => useReportChartHelper(task)).value
+const { labelTreemap } = computed(() => useReportChartHelperLabel(task)).value
 
-const id = shallowRef()
-const chart = shallowRef()
-const localList = shallowRef([])
+use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
-const measureTitle = computed(() => {
-	return columnTitle(firstMeasure.value)
-})
+const data = () => {
+	const root = { name: 'root', children: [] }
 
-const measure = computed(() => {
-	return props.task.schema.select.find((o) => o.type !== 'value')
-})
+	list.forEach((item) => {
+		let currentLevel = root
+		let previousDimensionValue = ''
+		dimensions.value.dimensions.forEach((dim, index) => {
+			const dimensionValue = item[columnName(dim)] as string
 
-const measureName = computed(() => {
-	return columnName(firstMeasure.value)
-})
+			let existingDimension = currentLevel.children.find((child) => child.name === dimensionValue)
 
-const dimensionName = computed(() => {
-	return columnName(firstDimension.value)
-})
-
-const dimensionTitle = computed(() => {
-	return columnTitle(firstDimension.value)
-})
-
-const meta = computed(() => {
-	const metadata = {}
-	metadata[dimensionName.value] = {
-		alias: dimensionTitle.value
-	}
-	metadata['name'] = {
-		alias: dimensionTitle.value
-	}
-	metadata['value'] = {
-		alias: measureTitle.value,
-		formatter: (v: any) => {
-			return formatValue(v, measure.value)
-		}
-	}
-	metadata[measureName.value] = {
-		alias: measureTitle.value,
-		formatter: (v: any) => {
-			return formatValue(v, measure.value)
-		}
-	}
-	return metadata
-})
-
-const init = () => {
-	const processData = () => {
-		let sumValue = 0
-		for (let d of localList.value) {
-			sumValue += d[measureName.value]
-			d.value = d[measureName.value]
-			d.name = d[dimensionName.value]
-		}
-		return {
-			name: 'root',
-			value: sumValue,
-			children: orderBy(localList.value, ['value'], ['desc'])
-		}
-	}
-	const prepareData = processData()
-
-	const options: TreemapOptions | any = {
-		// ...helper.generic(prepareData),
-		data: prepareData,
-		autoFit: true,
-		padding: 'auto',
-		colorField: settings.value.colorFieldType === 'measure' ? 'value' : 'name',
-		openDrillDown: false,
-		hierarchyConfig: {
-			sort: (a, b) => {
-				return b - a
-			}
-		},
-		label: {
-			autoRotate: true,
-			autoHide: true,
-			rotate: settings.value.labelRotate,
-			// position: settings.value.showLabelType,
-			formatter: (v) => {
-				v.measure = v['value']
-				const value = formatValue(v['value'], {
-					...measure,
-					compactNumber: settings.value.compactNumberLabel
-				})
-
-				let text = []
-
-				if (settings.value.showLabelDimension) {
-					text.push(v[dimensionName.value])
+			if (previousDimensionValue === '') previousDimensionValue = dimensionValue
+			else previousDimensionValue += '/' + dimensionValue
+			if (!existingDimension) {
+				if (dimensions.value.dimensions.length - 1 > index) {
+					existingDimension = {
+						name: dimensionValue,
+						path: previousDimensionValue,
+						children: [],
+					}
+				} else {
+					existingDimension = {
+						name: dimensionValue,
+						path: previousDimensionValue,
+						value: item[columnName(measures.value.first)],
+					}
 				}
-
-				if (settings.value.showLabelMeasure) {
-					text.push(value)
-				}
-
-				return text.join('\n')
+				currentLevel.children.push(existingDimension)
 			}
-		},
-		meta: meta.value,
-		color: settings.value.theme.colors,
-		tooltip: {
-			formatter: (v) => {
-				v.measure = v['value']
-				v.value = formatValue(v['value'], measure.value)
-				return v
-			}
-		}
-		// legend: helper.legend()
-	}
-
-	chart.value = new Treemap(id.value as HTMLElement, options)
-
-	chart.value.render()
-	// g.on('element:click', (ev) => helper.clickEvent(ev, this))
-}
-
-onMounted(() => {
-	localList.value = props.list
-	localList.value.map((o) => {
-		const size =
-			measure.value.dataType && measure.value.dataType.includes('Float') ? measure.value.columnLength || 2 : 2
-		o[measureName.value] = Number(Number(o[measureName.value] || 0).toFixed(size))
-		return o
+			currentLevel = existingDimension
+		})
 	})
-	nextTick(() => init())
-})
-</script>
-
-<style lang="scss">
-span.ring-guide-value {
-	font-size: 1.3em !important;
+	return root
 }
-</style>
+
+const grid = () => {
+	const positions = settings.value.legendPosition.split('-')
+	const isTopOrBottom = positions.includes('top') || positions.includes('bottom')
+
+	const plusLegendTop = settings.value.showLegend && positions.includes('top') ? 10 : 0
+	const plusLegendBottom = settings.value.showLegend && positions.includes('bottom') ? 10 : 0
+	const plusLegendLeft = settings.value.showLegend && positions.includes('left') && !isTopOrBottom ? 15 : 0
+	const plusLegendRight = settings.value.showLegend && positions.includes('right') && !isTopOrBottom ? 15 : 0
+
+	const plusTitleBottom = settings.value.showXTitle ? 5 : 0
+	const plusTitleLeft = settings.value.showYTitle ? 3 : 0
+
+	return {
+		top: (settings.value.appendPaddingTop ?? 0) + plusLegendTop + 3,
+		bottom: (settings.value.appendPaddingBottom ?? 0) + plusLegendBottom + plusTitleBottom + 3,
+		left: (settings.value.appendPaddingLeft ?? 0) + plusLegendLeft + plusTitleLeft + 3,
+		right: (settings.value.appendPaddingRight ?? 0) + plusLegendRight + 3,
+	}
+}
+
+const series = () => {
+	return {
+		type: 'treemap',
+		data: data().children,
+		top: grid().top + '%',
+		bottom: grid().bottom + '%',
+		left: grid().left + '%',
+		right: grid().right + '%',
+		label: labelTreemap(),
+		leafDepth: settings.value.treemapLeafDepth <= 0 ? undefined : settings.value.treemapLeafDepth,
+		roam: settings.value.enableTreemapZoom ? 'zoom' : 'pan',
+	} as TreemapSeriesOption | TreemapSeriesOption[]
+}
+
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'item',
+	},
+	color: themeColors.value,
+	series: series(),
+})
+
+watch(
+	[() => task, () => list, dimensions, measures, themeColors, settings.value],
+	() => {
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			series: series(),
+		}
+	},
+	{ deep: true },
+)
+</script>

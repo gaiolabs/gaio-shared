@@ -110,5 +110,33 @@ export default (task: ReportNodeType) => {
 			fontSize: settings.value.labelFontSize || 13,
 		}
 	}
-	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst }
+
+	const labelTreemap = () => {
+		const label = {
+			show: settings.value.showLabel,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (v: object | Array<object>) => {
+				const params = v as any
+				let labelString = ''
+				if (settings.value.showLabelMeasure) {
+					labelString = formatValue(params.data.value, {
+						compactNumber: settings.value.compactNumberLabel,
+					}).toString()
+				}
+				if (settings.value.showLabelDimension) {
+					labelString = `${params.data.name}\n${labelString}`
+				}
+				if (settings.value.showPathTreemap) {
+					let path = ''
+					params.data.path.split('/').forEach((item) => (path += item + '\n'))
+					labelString = `${path}\n${labelString}`
+				}
+				return labelString
+			},
+		}
+		return label
+	}
+	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst, labelTreemap }
 }

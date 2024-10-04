@@ -69,7 +69,9 @@
 					/>
 				</div>
 			</div>
-			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
+		</template>
+		<template #footer>
+			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
 				<NButton
 					type="primary"
 					@click="save()"
