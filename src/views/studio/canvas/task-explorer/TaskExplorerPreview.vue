@@ -264,6 +264,18 @@ const reportState = computed(() => {
 				},
 			],
 		}
+	} else if (['wordCloud'].includes(reportType)) {
+		return {
+			status: verifyRules(1, 1),
+			rules: [
+				{
+					name: 'wordCloud',
+					dimensions: 'oneFieldOnly',
+					measures: 'oneFieldOnly',
+					message: 'wordCloudCharMessage',
+				},
+			],
+		}
 	}
 	return {}
 })

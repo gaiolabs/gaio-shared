@@ -218,4 +218,7 @@ export default {
 	path: 'Caminho',
 	enableZoom: 'Habilitar zoom',
 	leafDepth: 'Profundidade das folhas',
+	wordCloudCharMessage:
+		'Representação visual de dados textuais onde o tamanho de cada palavra reflete sua frequência ou importância.',
+	wordCloud: 'Nuvem de palavras',
 }

@@ -13,7 +13,6 @@
     "reload-shared": "bun add github:gaiolabs/gaio-shared"
   },
   "dependencies": {
-    "@gaio/shared": "github:gaiolabs/gaio-shared",
     "@antv/data-set": "^0.11.8",
     "@antv/g2plot": "^2.4.31",
     "@codemirror/autocomplete": "^6.17.0",
@@ -21,6 +20,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.28.4",
     "@fontsource/roboto": "^5.0.13",
+    "@gaio/shared": "github:gaiolabs/gaio-shared",
     "@iconify/vue": "^4.1.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tiptap/extension-bubble-menu": "^2.4.0",
@@ -40,6 +40,7 @@
     "dayjs": "^1.11.11",
     "echarts": "^5.5.1",
     "echarts-stat": "^1.2.0",
+    "echarts-wordcloud": "^2.1.0",
     "fastest-validator": "^1.18.0",
     "flexsearch": "^0.7.43",
     "grid-layout-plus": "^1.0.5",

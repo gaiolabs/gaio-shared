@@ -16,7 +16,7 @@
 						@click="select(report)"
 					>
 						<div>
-							<g-icon
+							<GIcon
 								v-if="report?.icon"
 								class="h-8 w-8"
 								:height="26"
@@ -55,13 +55,13 @@ const select = (item) => {
 	useReportStore().current = useDefaultReport({
 		type: useAppStore().cloneTask().type,
 		reportType: item.reportType,
-		base: useReportStore().current as ReportNodeType
+		base: useReportStore().current as ReportNodeType,
 	})
 
 	if (item.settings) {
 		useReportStore().current.settings = {
 			...useReportStore().current.settings,
-			...item.settings
+			...item.settings,
 		}
 	}
 }
@@ -71,7 +71,7 @@ const generateIcon = (item) => {
 		generateBase({
 			...item,
 			client: 'clickhouse',
-			sourceType: 'bucket'
+			sourceType: 'bucket',
 		}).image
 	}`
 	return new URL(image, import.meta.url).href

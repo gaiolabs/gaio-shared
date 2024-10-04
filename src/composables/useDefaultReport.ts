@@ -17,6 +17,7 @@ import { defaultReportChartGauge } from './default-reports/defaultReportChartGau
 import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 import { defaultReportChartSunburst } from './default-reports/defaultReportChartSunburst'
+import { defaultWordCloudReport } from './default-reports/defaultWordCloudReport'
 
 export default ({ type, reportType, base }: { type: string; reportType: ReportTypeKeys; base: ReportNodeType }) => {
 	const sourceProperties = cloneDeep(base)
@@ -99,6 +100,10 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 
 		case 'staticContent':
 			result = defaultStaticContentReport(sourceProperties)
+			break
+
+		case 'wordCloud':
+			result = defaultWordCloudReport(sourceProperties)
 			break
 
 		default:

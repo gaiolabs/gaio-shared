@@ -11,13 +11,13 @@
 					name="source"
 					:tab="$t('source')"
 				>
-					<task-report-setup-fields />
+					<TaskReportSetupFields />
 				</NTabPane>
 				<NTabPane
 					name="reportType"
 					:tab="$t('type')"
 				>
-					<task-report-setup-type />
+					<TaskReportSetupType />
 				</NTabPane>
 			</NTabs>
 		</div>

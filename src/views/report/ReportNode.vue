@@ -33,6 +33,7 @@
 					'gauge',
 					'sunburst',
 					'calendar',
+					'wordCloud',
 				].includes(task.reportType)
 			"
 		>
