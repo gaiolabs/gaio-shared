@@ -1,24 +1,26 @@
 <template>
-	<nav
-		id="sidebar-nav"
-		class="z-1 absolute top-[50%] flex min-w-[52px] items-center"
-	>
-		<div class="absolute z-0 ms-3 flex w-[40px] flex-col items-center justify-center rounded-2xl g-base">
-			<div
-				v-for="item of sidebarActions"
-				:key="item.name"
-				class="flex h-[50px] w-full items-center justify-center"
-			>
-				<button @click="workWithPanel(item.name)">
-					<IconComponent
-						:name="item.icon"
-						class="text-lg text-gray-700 dark:text-gray-500 hover:dark:text-white hover:text-sepia-600 transition-colors duration-150"
-						:class="item.class"
-					/>
-				</button>
+	<div class="pt-[74px] p-4 absolute left-0 top-0 bottom-0">
+		<nav
+			id="sidebar-nav"
+			class="z-1 flex items-center h-full"
+		>
+			<div class="z-0 flex w-[40px] flex-col items-center justify-center rounded-2xl g-base">
+				<div
+					v-for="item of sidebarActions"
+					:key="item.name"
+					class="flex h-[50px] w-full items-center justify-center"
+				>
+					<button @click="workWithPanel(item.name)">
+						<IconComponent
+							:name="item.icon"
+							class="text-lg text-gray-700 dark:text-gray-500 hover:dark:text-white hover:text-sepia-600 transition-colors duration-150"
+							:class="item.class"
+						/>
+					</button>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 </template>
 
 <script setup lang="ts">

@@ -5,7 +5,7 @@
 	>
 		<div
 			id="home-nav-inner"
-			class="w-full max-w-[1440px] gap-16 flex flex-row justify-center p-4 items-end"
+			class="w-full max-w-[1440px] gap-16 flex flex-row justify-center p-4 items-center"
 		>
 			<LeftNav />
 			<CenterNav @toggle-app-control="toggleAppControl" />
