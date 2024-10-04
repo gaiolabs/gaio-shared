@@ -75,6 +75,7 @@ import useFlow from '@/composables/useFlow'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
 import type { ParamToTableTaskType } from '@gaio/shared/types'
+import { onBeforeMount, computed, ref } from 'vue'
 
 const emit = defineEmits(['close'])
 const localTask = ref<ParamToTableTaskType>()
@@ -121,7 +122,7 @@ onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'paramToTable',
 		base: {
-			...(useAppStore().appInfo || {}),
+			...useAppStore().appInfo,
 			...(useAppStore().cloneTask() || {}),
 		},
 	})
