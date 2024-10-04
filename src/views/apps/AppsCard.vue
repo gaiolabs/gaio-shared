@@ -36,13 +36,13 @@
 				</div>
 				<button
 					class=""
-					@click="toggleFavorite"
+					@click.stop="toggleFavorite"
 				>
 					<Transition
 						enter-active-class="transition-transform duration-150"
 						enter-from-class="scale-125"
 						enter-to-class="scale-100"
-						leave-active-class="transition-transform duration-1000"
+						leave-active-class="transition-transform duration-150"
 						leave-from-class="scale-100"
 						leave-to-class="scale-125"
 						mode="out-in"
@@ -119,7 +119,16 @@ type UserAppsType = {
 	role: 'view' | 'edit'
 } & AppType
 
-const { app, mode = 'card' } = defineProps<{ app: UserAppsType; mode: 'card' | 'list' }>()
+const { app, mode = 'card' } = defineProps({
+	app: {
+		type: Object as PropType<UserAppsType>,
+		required: true,
+	},
+	mode: {
+		type: String as PropType<'card' | 'list'>,
+		default: 'card',
+	},
+})
 
 const emit = defineEmits(['edit'])
 

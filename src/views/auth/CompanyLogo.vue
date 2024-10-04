@@ -32,17 +32,19 @@
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error TODO: load company logo via API
 import logoDark from '@/assets/images/gaio-mini-dark.png'
+// @ts-expect-error TODO: load company logo via API
 import logo from '@/assets/images/gaio-mini-light.png'
 import { useAuthStore } from '@/stores'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 
 const user = computed(() => useAuthStore().user)
-
 const isDark = useDark()
 
 // TODO: load company logo via API
 const logoSrc = computed(() => (isDark.value ? logoDark : logo))
+// @ts-expect-error TODO: fix type
 const profilePicture = import.meta.env.VITE_APP_API + `api/content/user/${user.value?.userId}.png`
 </script>

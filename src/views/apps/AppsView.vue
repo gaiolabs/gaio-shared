@@ -5,7 +5,7 @@
 	>
 		<div
 			id="apps-wrapper"
-			class="w-full p-4 pb-20 flex flex-col gap-4"
+			class="w-full p-4 flex flex-col gap-4"
 		>
 			<GPageHeader
 				:title="$t('dataApps')"
@@ -42,7 +42,7 @@
 				</GButton> -->
 			</GPageHeader>
 
-			<article class="p-2 flex flex-col gap-8 flex-1 overflow-auto w-full">
+			<article class="p-2 pb-[88px] flex flex-col gap-8 flex-1 overflow-auto w-full">
 				<!--RECENT AND FAVORITES-->
 				<section
 					id="recent-and-favorites"
@@ -215,12 +215,12 @@
 import GPageHeader from '@/components/GPageHeader.vue'
 import IconComponent from '@/components/icons/IconComponent.vue'
 import GButton from '@/components/inputs/GButton.vue'
+import HomeNav from '@/components/main-nav/GMainNav.vue'
 import useApps from '@/composables/useApps'
 import useHelper from '@/composables/useHelper'
 import { useAuthStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import AppsCard from '@/views/apps/AppsCard.vue'
-import HomeNav from '@/views/home/HomeNav.vue'
 import type { AppType } from '@gaio/shared/types'
 import { useDark } from '@vueuse/core'
 import { NPagination } from 'naive-ui'
@@ -251,7 +251,7 @@ const editApp = (app: AppType): void => {
 }
 
 const listType = ref(`${useAuthStore().user?.options?.appViewType || 'grid'}`)
-
+const user = computed(() => useAuthStore().user)
 onMounted(async () => {
 	await listApps('all')
 })
