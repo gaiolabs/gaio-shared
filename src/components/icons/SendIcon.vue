@@ -1,0 +1,62 @@
+<template>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 18 18"
+		height="18"
+		width="18"
+	>
+		<g :fill="fill">
+			<path
+				d="M5.75,10.022v4.246c0,.409,.464,.645,.794,.404l.74-.539"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></path>
+			<line
+				x1="15.58"
+				y1="2.569"
+				x2="5.75"
+				y2="10.022"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></line>
+			<path
+				d="M2.883,6.935L15.182,2.542c.363-.13,.73,.183,.66,.562l-2.196,11.86c-.067,.363-.492,.531-.789,.311L2.754,7.807c-.322-.238-.248-.738,.129-.873Z"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="fill"
+			></path>
+		</g>
+	</svg>
+</template>
+
+<script>
+export default {
+	props: {
+		strokewidth: {
+			type: [Number, String],
+			default: 1,
+		},
+		fill: {
+			type: String,
+			default: 'currentColor',
+		},
+		secondaryfill: {
+			type: String,
+			default: 'currentColor',
+		},
+	},
+	computed: {
+		_secondaryfill: function () {
+			return this.secondaryfill || this.fill
+		},
+	},
+}
+</script>
