@@ -20,9 +20,8 @@
 				>
 					<div class="!transition-all g-base duration-600 size-16 rounded-full overflow-hidden">
 						<img
-							:src="profilePicture"
+							:src="user.options.profilePic || '/src/assets/images/gaio-default-profile.png'"
 							class="w-full h-full"
-							onerror="this.onerror=null; this.src='/src/assets/images/gaio-default-profile.png';"
 						/>
 					</div>
 				</div>

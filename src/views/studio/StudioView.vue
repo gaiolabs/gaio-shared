@@ -1,5 +1,5 @@
 <template>
-	<div class="studio relative flex h-full grow dark:bg-gray-900 bg-gray-100">
+	<div class="studio relative flex h-full grow dark:bg-gray-850/50 bg-gray-200/25">
 		<template v-if="!loading">
 			<Sidebar
 				v-model="sidebarPanel"

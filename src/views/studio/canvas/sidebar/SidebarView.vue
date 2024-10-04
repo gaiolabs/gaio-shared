@@ -1,7 +1,7 @@
 <template>
 	<div
 		id="sidebar-view"
-		class="flex h-full w-[450px] max-w-[450px] items-center p-4 pl-8 pr-0 pt-[74px]"
+		class="flex h-full w-[450px] max-w-[450px] items-center p-4 pl-8 pr-0 pt-[74px] pointer-events-none"
 	>
 		<!--SIDEBAR PANEL-->
 		<Transition
@@ -18,7 +18,10 @@
 				id="sidebar-panel"
 				class="flex size-full flex-col"
 			>
-				<div class="h-full grow overflow-hidden rounded-xl g-base">
+				<GCard
+					type="wrapper"
+					class="h-full overflow-hidden rounded-3xl"
+				>
 					<Transition
 						enter-active-class="transition-opacity absolute top-0 left-0 duration-300"
 						enter-from-class="opacity-0"
@@ -55,12 +58,13 @@
 							/>
 						</template>
 					</Transition>
-				</div>
+				</GCard>
 			</div>
 		</Transition>
 	</div>
 </template>
 <script setup lang="ts">
+import GCard from '@/components/GCard.vue'
 import SidebarDiscovery from '@/views/studio/canvas/sidebar/sidebar-discovery/SidebarDiscovery.vue'
 import SidebarFlow from '@/views/studio/canvas/sidebar/sidebar-flow/SidebarFlow.vue'
 import SidebarForm from '@/views/studio/canvas/sidebar/sidebar-form/SidebarForm.vue'

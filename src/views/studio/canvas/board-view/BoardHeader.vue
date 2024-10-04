@@ -1,12 +1,16 @@
 <template>
 	<header
 		id="board-header"
-		class="absolute left-0 right-0 top-0 z-30 w-full p-4 px-8"
+		class="absolute left-0 right-0 top-0 z-30 w-full p-4 px-8 pointer-events-none"
 	>
-		<GCard class="rounded-2xl flex items-center justify-between gap-1 p-2">
-			<!--LEFT ACTIONS-->
-			<div class="flex items-center gap-2">
+		<GCard
+			type="wrapper"
+			class="rounded-2xl flex items-center justify-between gap-4 px-3"
+		>
+			<div class="flex items-center gap-4">
+				<!-- Back Button -->
 				<NButton
+					id="back-button"
 					secondary
 					size="tiny"
 					@click="$router.push('/apps')"
@@ -16,65 +20,58 @@
 					</template>
 				</NButton>
 
-				<div class="flex items-center justify-center -my-1">
-					<GAppIcon
-						class="text-xl size-10"
-						:name="app.options.icon"
-						:color="app.options.color"
-					/>
-				</div>
-				<NButton
-					size="tiny"
-					secondary
-					block
-					class="max-w-[150px] truncate"
+				<!-- App identifier -->
+				<div
+					id="app-name"
+					class="flex gap-2 px-4 border-x border-gray-200 dark:border-white/10"
 				>
-					<template #icon>
+					<div class="flex items-center justify-center -my-1">
+						<GAppIcon
+							class="text-xl size-8"
+							:name="app.options.icon"
+							:color="app.options.color"
+						/>
+					</div>
+					<GCard class="max-w-[150px] truncate flex gap-2 g-base p-1 px-2 rounded-lg">
 						<IconComponent
 							name="Studio"
 							class="rotate-[-90deg]"
 						/>
-					</template>
-					<div class="flex items-center text-[14px] font-bold">
-						{{ currentFlow?.flowName }}
-					</div>
-				</NButton>
-				<NDivider vertical />
-				<!--RUNNERS-->
-				<NButton
-					size="tiny"
-					quaternary
-					@click="run()"
+
+						<div class="flex items-center text-[14px] font-bold">
+							{{ currentFlow?.flowName }}
+						</div>
+					</GCard>
+				</div>
+
+				<!-- Actions -->
+				<nav
+					id="actions"
+					class="flex"
 				>
-					<IconComponent
-						class="w-4 h-4"
-						name="Run"
-					/>
-				</NButton>
-				<NButton
-					quaternary
-					size="tiny"
-					@click="runFromHere()"
-				>
-					<IconComponent
-						class="w-4 h-4"
-						name="RunFromHere"
-					/>
-				</NButton>
-				<NButton
-					quaternary
-					size="tiny"
-					@click="runAll()"
-				>
-					<IconComponent
-						class="w-4 h-4"
-						name="RunAll"
-					/>
-				</NButton>
-				<NDivider
-					vertical
-					class="m-0 p-0"
-				/>
+					<GButton
+						type="tertiary"
+						class="!p-4 -ml-3"
+						@click="run()"
+					>
+						<IconComponent name="Run" />
+					</GButton>
+					<GButton
+						type="tertiary"
+						class="!p-4 -ml-3"
+						@click="runFromHere()"
+					>
+						<IconComponent name="RunFromHere" />
+					</GButton>
+					<GButton
+						type="tertiary"
+						class="!p-4 -ml-3"
+						@click="runAll()"
+					>
+						<IconComponent name="RunAll" />
+					</GButton>
+				</nav>
+
 				<NButton
 					strong
 					secondary
@@ -85,16 +82,25 @@
 					{{ $t('monitor') }}
 				</NButton>
 			</div>
-			<!--RIGHT ACTIONS-->
-			<div class="flex items-center gap-2">
-				<NButton
-					size="tiny"
+
+			<div class="flex items-center gap-2 border-l border-gray-200 dark:border-white/10 pl-4">
+				<GButton
+					size="small"
+					type="secondary"
+					square
 					@click="$router.push('/preview')"
 				>
-					<template #icon>
-						<IconComponent name="AddAction" />
-					</template>
-				</NButton>
+					<IconComponent name="AddAction" />
+				</GButton>
+				<GButton
+					size="small"
+					type="secondary"
+					square
+					@click="$router.push('/preview')"
+				>
+					<IconComponent name="AddAction" />
+				</GButton>
+				<div class="size-9 rounded-full bg-gray-500"></div>
 			</div>
 		</GCard>
 	</header>
@@ -103,6 +109,7 @@
 <script setup lang="ts">
 import GCard from '@/components/GCard.vue'
 import IconComponent from '@/components/icons/IconComponent.vue'
+import GButton from '@/components/inputs/GButton.vue'
 import useApi from '@/composables/useApi'
 // import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'

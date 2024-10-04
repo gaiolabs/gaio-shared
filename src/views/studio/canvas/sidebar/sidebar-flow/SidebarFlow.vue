@@ -1,79 +1,81 @@
 <template>
 	<aside
 		id="sidebar-flow"
-		class="flex h-full flex-col items-stretch pt-3"
+		class="flex h-full flex-col items-stretch p-3 gap-3"
 	>
-		<div class="flex w-full items-stretch justify-between px-4">
-			<h2 class="text-lg font-bold inline-flex items-center gap-1">
-				<IconComponent
-					name="Studio"
-					class="rotate-[-90deg]"
+		<header class="flex flex-col gap-3">
+			<nav class="flex w-full items-stretch justify-between">
+				<h2 class="text-lg font-bold inline-flex items-center gap-1">
+					<IconComponent
+						name="Studio"
+						class="rotate-[-90deg]"
+					/>
+					<span>
+						{{ $t('flow') }}
+					</span>
+				</h2>
+				<div class="flex">
+					<NButton
+						size="tiny"
+						quaternary
+						@click="showScheduleBulk = true"
+					>
+						<template #icon>
+							<IconComponent name="CronEdit" />
+						</template>
+					</NButton>
+					<NPopover
+						placement="bottom"
+						trigger="click"
+					>
+						<template #trigger>
+							<NButton
+								size="tiny"
+								quaternary
+							>
+								<template #icon>
+									<IconComponent name="CreateFolder" />
+								</template>
+							</NButton>
+						</template>
+						<div>
+							{{ $t('folder') }}
+							<NInput
+								v-model:value="newFolderName"
+								:placeholder="$t('typeHere')"
+							>
+								<template #suffix>
+									<NButton
+										size="tiny"
+										text
+										@click="addNewFolder"
+									>
+										{{ $t('add') }}
+									</NButton>
+								</template>
+							</NInput>
+						</div>
+					</NPopover>
+					<NButton
+						size="tiny"
+						quaternary
+						@click="currentFlow = {}"
+					>
+						<template #icon>
+							<IconComponent name="AddItem" />
+						</template>
+					</NButton>
+				</div>
+			</nav>
+			<div class="sidebar-flow-search">
+				<NInput
+					v-model:value="searchTerm"
+					size="small"
+					:placeholder="$t('search')"
 				/>
-				<span>
-					{{ $t('flow') }}
-				</span>
-			</h2>
-			<div class="flex">
-				<NButton
-					size="tiny"
-					quaternary
-					@click="showScheduleBulk = true"
-				>
-					<template #icon>
-						<IconComponent name="CronEdit" />
-					</template>
-				</NButton>
-				<NPopover
-					placement="bottom"
-					trigger="click"
-				>
-					<template #trigger>
-						<NButton
-							size="tiny"
-							quaternary
-						>
-							<template #icon>
-								<IconComponent name="CreateFolder" />
-							</template>
-						</NButton>
-					</template>
-					<div>
-						{{ $t('folder') }}
-						<NInput
-							v-model:value="newFolderName"
-							:placeholder="$t('typeHere')"
-						>
-							<template #suffix>
-								<NButton
-									size="tiny"
-									text
-									@click="addNewFolder"
-								>
-									{{ $t('add') }}
-								</NButton>
-							</template>
-						</NInput>
-					</div>
-				</NPopover>
-				<NButton
-					size="tiny"
-					quaternary
-					@click="currentFlow = {}"
-				>
-					<template #icon>
-						<IconComponent name="AddItem" />
-					</template>
-				</NButton>
 			</div>
-		</div>
-		<div class="sidebar-flow-search px-4 pt-1">
-			<NInput
-				v-model:value="searchTerm"
-				size="small"
-				:placeholder="$t('search')"
-			/>
-		</div>
-		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">
+		</header>
+		<GCard class="flex grow flex-col overflow-hidden rounded-2xl">
 			<flow-control
 				v-if="currentFlow"
 				:flow="currentFlow"
@@ -113,7 +115,7 @@
 					/>
 				</div>
 			</NScrollbar>
-		</div>
+		</GCard>
 	</aside>
 </template>
 
