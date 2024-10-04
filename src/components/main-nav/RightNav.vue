@@ -30,11 +30,11 @@
 						<!-- <img
 							:src="profilePicture"
 							class="w-full h-full"
-							onerror="this.onerror=null; this.src='/src/assets/images/gaio-default-profile.png';"
-						/> -->
+							/> -->
 						<img
 							src="/src/assets/images/avatar.png"
 							class="w-full h-full"
+							onerror="this.onerror=null; this.src='/src/assets/images/gaio-default-profile.png';"
 						/>
 					</div>
 					<div class="flex flex-col pr-2 select-none gap-1">
@@ -181,8 +181,6 @@ import { NWatermark } from 'naive-ui'
 import { ref, computed, onBeforeUnmount } from 'vue'
 
 const user = computed(() => useAuthStore().user)
-// @ts-expect-error TODO: fix type
-const profilePicture = import.meta.env.VITE_APP_API + `api/content/user/${user.value?.userId}.png`
 
 const isChatBoxOpen = ref(false)
 
