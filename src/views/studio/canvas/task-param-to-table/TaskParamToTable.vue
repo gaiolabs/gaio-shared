@@ -75,7 +75,6 @@ import useFlow from '@/composables/useFlow'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
 import type { ParamToTableTaskType } from '@gaio/shared/types'
-import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])
 const localTask = ref<ParamToTableTaskType>()
@@ -94,8 +93,8 @@ const save = () => {
 		type: 'paramToTable',
 		base: {
 			...useAppStore().appInfo,
-			...localTask.value
-		}
+			...localTask.value,
+		},
 	})
 
 	useFlow(useAppStore().flow.workflow)
@@ -108,23 +107,23 @@ const save = () => {
 						...useAppStore().appInfo,
 						...taskToBeSaved,
 						tableName: localTask.value.resultTable,
-						label: localTask.value.resultTable
-					}
-				})
+						label: localTask.value.resultTable,
+					},
+				}),
 			],
-			sources: []
+			sources: [],
 		})
 		.save()
 		.then(() => emit('close'))
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'paramToTable',
 		base: {
 			...(useAppStore().appInfo || {}),
-			...(useAppStore().cloneTask() || {})
-		}
+			...(useAppStore().cloneTask() || {}),
+		},
 	})
 
 	console.log('localTask', localTask.value)
