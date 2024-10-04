@@ -5,7 +5,7 @@
 	>
 		<div
 			id="apps-wrapper"
-			class="w-full p-4 pb-20 flex flex-col gap-4"
+			class="w-full p-4 flex flex-col gap-4"
 		>
 			<GPageHeader
 				:title="$t('dataApps')"
@@ -42,7 +42,7 @@
 				</GButton> -->
 			</GPageHeader>
 
-			<article class="p-2 flex flex-col gap-8 flex-1 overflow-auto w-full">
+			<article class="p-2 pb-[88px] flex flex-col gap-8 flex-1 overflow-auto w-full">
 				<!--RECENT AND FAVORITES-->
 				<section
 					id="recent-and-favorites"
@@ -68,7 +68,7 @@
 
 					<div
 						id="apps-filtered-by-user"
-						class="w-full rounded-2xl g-wrapper p-4"
+						class="w-full rounded-3xl g-wrapper p-4"
 					>
 						<template v-if="loading">
 							<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -146,7 +146,7 @@
 					>
 						<template v-if="listType === 'grid'">
 							<div
-								class="grid g-wrapper dark:bg-white/[7.5%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ultrawide:grid-cols-6 p-4 rounded-3xl gap-4 lg:grid-cols-4"
+								class="grid g-wrapper grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ultrawide:grid-cols-6 p-4 rounded-3xl gap-4 lg:grid-cols-4"
 							>
 								<template v-if="loading">
 									<div
@@ -159,78 +159,31 @@
 									<apps-card
 										v-for="app of listLocalApps"
 										:key="app.appId"
-										gradient
-										:shadow="!isDark"
 										:app="app"
 										@edit="editApp"
 									/>
 								</template>
 							</div>
 						</template>
-
-						<!-- LIST CARD -->
 						<template v-else>
-							<ul class="flex w-full flex-col">
-								<li
-									v-for="app of listLocalApps"
-									:key="app.appId"
-									class="g-bg-1 group g-border-500 -mt-px gap-3 inline-flex grow items-center border-b border-e-0 border-s-0 px-4 py-3 font-medium shadow first:mt-0 first:rounded-t-lg first:border-0 last:rounded-b-lg last:border-b-0"
-								>
-									<header class="flex gap-2 items-center flex-1">
-										<div class="relative w-8 h-8 flex items-center justify-center">
-											<GAppIcon
-												class="size-8"
-												:name="app.options.icon"
-												:color="app.options.color"
-											/>
-											<div
-												class="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 z-0 rounded"
-												:style="{
-													backgroundColor: app.options.color,
-												}"
-											></div>
-										</div>
-										<h6 class="font-medium">
-											{{ app.appName }}
-										</h6>
-									</header>
-
-									<footer
-										class="flex opacity-25 group-hover:opacity-100 transition-opacity duration-300 min-w-[80px] items-center gap-4"
-									>
-										<NButton
-											text
-											size="small"
-										>
-											<template #icon>
-												<IconComponent name="Dashboard" />
-											</template>
-										</NButton>
-										<NButton
-											v-if="app.role === 'edit'"
-											text
-											size="small"
-											@click="editApp(app)"
-										>
-											<template #icon>
-												<IconComponent name="Edit" />
-											</template>
-										</NButton>
-										<NButton
-											v-if="app.role === 'edit'"
-											text
-											size="small"
-										>
-											<template #icon>
-												<IconComponent
-													name="Studio"
-													class="rotate-[-90deg]"
-												/>
-											</template>
-										</NButton>
-									</footer>
-								</li>
-							</ul>
+							<div class="grid g-wrapper grid-cols-1 p-4 rounded-3xl gap-4">
+								<template v-if="loading">
+									<div
+										v-for="n in 8"
+										:key="n"
+										class="core-gradient h-[108px] animate-pulse rounded-[8px] border bg-gray-200 dark:border-gray-800 dark:bg-gray-700"
+									></div>
+								</template>
+								<template v-else>
+									<apps-card
+										v-for="app of listLocalApps"
+										:key="app.appId"
+										mode="list"
+										:app="app"
+										@edit="editApp"
+									/>
+								</template>
+							</div>
 						</template>
 					</Transition>
 
@@ -262,12 +215,12 @@
 import GPageHeader from '@/components/GPageHeader.vue'
 import IconComponent from '@/components/icons/IconComponent.vue'
 import GButton from '@/components/inputs/GButton.vue'
+import HomeNav from '@/components/main-nav/GMainNav.vue'
 import useApps from '@/composables/useApps'
 import useHelper from '@/composables/useHelper'
 import { useAuthStore } from '@/stores'
 import AppControl from '@/views/apps/AppControl.vue'
 import AppsCard from '@/views/apps/AppsCard.vue'
-import HomeNav from '@/views/home/HomeNav.vue'
 import type { AppType } from '@gaio/shared/types'
 import { useDark } from '@vueuse/core'
 import { NPagination } from 'naive-ui'
@@ -298,7 +251,7 @@ const editApp = (app: AppType): void => {
 }
 
 const listType = ref(`${useAuthStore().user?.options?.appViewType || 'grid'}`)
-
+const user = computed(() => useAuthStore().user)
 onMounted(async () => {
 	await listApps('all')
 })

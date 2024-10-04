@@ -4,7 +4,7 @@
 			<img
 				:src="logoSrc"
 				alt="Company Profile Image"
-				class="g-base g-border w-full h-full object-contain object-center rounded-2xl !transition-all duration-600"
+				class="g-base w-full h-full object-contain object-center rounded-2xl !transition-all duration-600"
 			/>
 			<transition
 				enter-active-class="duration-300 ease-out"
@@ -18,7 +18,7 @@
 					v-if="user"
 					class="w-full absolute bottom-0 translate-y-[50%] flex justify-center !transition-all duration-600"
 				>
-					<div class="!transition-all g-base g-border duration-600 size-16 rounded-full overflow-hidden">
+					<div class="!transition-all g-base duration-600 size-16 rounded-full overflow-hidden">
 						<img
 							:src="profilePicture"
 							class="w-full h-full"
@@ -32,17 +32,19 @@
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error TODO: load company logo via API
 import logoDark from '@/assets/images/gaio-mini-dark.png'
+// @ts-expect-error TODO: load company logo via API
 import logo from '@/assets/images/gaio-mini-light.png'
 import { useAuthStore } from '@/stores'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
 
 const user = computed(() => useAuthStore().user)
-
 const isDark = useDark()
 
 // TODO: load company logo via API
 const logoSrc = computed(() => (isDark.value ? logoDark : logo))
+// @ts-expect-error TODO: fix type
 const profilePicture = import.meta.env.VITE_APP_API + `api/content/user/${user.value?.userId}.png`
 </script>

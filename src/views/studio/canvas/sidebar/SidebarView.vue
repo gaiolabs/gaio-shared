@@ -1,34 +1,63 @@
 <template>
 	<div
-		class="sidebar flex h-full w-[450px] max-w-[450px] items-center border-neutral-800 pt-[70px] text-black dark:text-white"
+		id="sidebar-view"
+		class="flex h-full w-[450px] max-w-[450px] items-center pt-[70px] pb-4"
 		:class="{ 'w-[500px]': modelValue }"
 	>
 		<!--SIDEBAR PANEL-->
-		<div
-			v-if="modelValue"
-			class="fade-in-left flex size-full flex-col ps-[35px]"
+		<Transition
+			enter-active-class="transition-all duration-150 ease-out"
+			enter-from-class="opacity-0 -translate-x-2"
+			enter-to-class="opacity-100"
+			leave-active-class="transition-all duration-150 ease-in"
+			leave-from-class="opacity-100 "
+			leave-to-class="opacity-0 -translate-x-2"
+			mode="out-in"
 		>
-			<div class="mb-2 h-full grow overflow-hidden rounded-[10px] border-elevation-2 bg-paper-100 dark:bg-carbon-200">
-				<template v-if="panel === 'flow'">
-					<sidebar-flow />
-				</template>
-				<template v-else-if="panel === 'database'">
-					<sidebar-source />
-				</template>
-				<template v-else-if="panel === 'params'">
-					<sidebar-param />
-				</template>
-				<template v-else-if="panel === 'tasks'">
-					<sidebar-task @choose="$emit('choose', $event)" />
-				</template>
-				<template v-else-if="panel === 'forms'">
-					<sidebar-form @choose="$emit('choose', $event)" />
-				</template>
-				<template v-else-if="panel === 'discovery'">
-					<sidebar-discovery @choose="$emit('choose', $event)" />
-				</template>
+			<div
+				v-if="modelValue"
+				class="flex size-full flex-col ps-[35px]"
+			>
+				<div class="mb-2 h-full grow overflow-hidden rounded-xl g-base">
+					<Transition
+						enter-active-class="transition-opacity absolute top-0 left-0 duration-300"
+						enter-from-class="opacity-0"
+						enter-to-class="opacity-100"
+						leave-active-class="transition-opacity absolute top-0 left-0 duration-300"
+						leave-from-class="opacity-100"
+						leave-to-class="opacity-0"
+					>
+						<template v-if="panel === 'flow'">
+							<sidebar-flow class="w-full" />
+						</template>
+						<template v-else-if="panel === 'database'">
+							<sidebar-source class="w-full" />
+						</template>
+						<template v-else-if="panel === 'params'">
+							<sidebar-param class="w-full" />
+						</template>
+						<template v-else-if="panel === 'tasks'">
+							<sidebar-task
+								class="w-full"
+								@choose="$emit('choose', $event)"
+							/>
+						</template>
+						<template v-else-if="panel === 'forms'">
+							<sidebar-form
+								class="w-full"
+								@choose="$emit('choose', $event)"
+							/>
+						</template>
+						<template v-else-if="panel === 'discovery'">
+							<sidebar-discovery
+								class="w-full"
+								@choose="$emit('choose', $event)"
+							/>
+						</template>
+					</Transition>
+				</div>
 			</div>
-		</div>
+		</Transition>
 	</div>
 </template>
 <script setup lang="ts">
@@ -41,33 +70,31 @@ import SidebarTask from '@/views/studio/canvas/sidebar/sidebar-task/SidebarTask.
 import { computed } from 'vue'
 
 defineEmits(['update:modelValue', 'choose'])
-const { modelValue = 'flow' } = defineProps<{ modelValue: string | undefined }>()
+const { modelValue } = defineProps<{ modelValue: string | undefined }>()
 
 const panel = computed(() => modelValue)
 </script>
 
 <style lang="scss">
-.sidebar {
-	background: transparent;
+// .sidebar {
+// 	.sidebar-nav {
+// 		//z-index: 1;
+// 		//border-right: 1px solid #2d2d2d;
+// 		//overflow: visible;
+// 		//background: #181818 !important;
 
-	.sidebar-nav {
-		//z-index: 1;
-		//border-right: 1px solid #2d2d2d;
-		//overflow: visible;
-		//background: #181818 !important;
+// 		.inactive-pane {
+// 			color: #fff;
+// 			border-right: 1px solid transparent;
+// 			margin-right: -1px;
+// 		}
 
-		.inactive-pane {
-			color: #fff;
-			border-right: 1px solid transparent;
-			margin-right: -1px;
-		}
-
-		.active-pane {
-			color: #f8ab71;
-			//background: #181818;
-			border-right: 1px solid #f8ab71;
-			margin-right: -1px;
-		}
-	}
-}
+// 		.active-pane {
+// 			color: #f8ab71;
+// 			//background: #181818;
+// 			border-right: 1px solid #f8ab71;
+// 			margin-right: -1px;
+// 		}
+// 	}
+// }
 </style>

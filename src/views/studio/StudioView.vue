@@ -1,18 +1,18 @@
 <template>
 	<div class="studio relative flex h-full grow dark:bg-gray-900 bg-gray-100">
 		<template v-if="!loading">
-			<sidebar
+			<Sidebar
 				v-model="sidebarPanel"
 				class="z-10"
 				@choose="selectElement"
 			/>
-			<sidebar-nav
+			<SidebarNav
 				v-model="sidebarPanel"
 				class="z-20"
 			/>
 			<VueDraggable
 				v-model="items"
-				class="drag-table h-full w-full"
+				class="drag-table absolute inset-0"
 				ghost-class="drag-hide"
 				:group="{ name: 'sources', pull: false, put: true }"
 				handle=".handle-board"
@@ -121,6 +121,9 @@ const currentTable = ref<string>()
 const items = ref([])
 const loading = ref(true)
 const sidebarPanel = ref()
+watch(sidebarPanel, (oldValue, newValue) => {
+	console.log(oldValue, newValue)
+})
 const showDrawer = ref('')
 const currentElement = shallowRef()
 
