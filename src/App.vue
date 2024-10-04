@@ -138,7 +138,13 @@ onMounted(() => {
 })
 
 const { k, p, i, a, t, shift, meta, tab, F2, F4 } = useMagicKeys({
-	passive: true,
+	passive: false,
+	onEventFired(e) {
+		if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') {
+			e.preventDefault()
+			useCommandKStore().show = true
+		}
+	},
 })
 
 watch(F2, (value) => {
@@ -174,9 +180,7 @@ watchEffect(() => {
 					break
 			}
 		}
-	}
-	if (meta.value && k.value) useCommandKStore().show = true
-	else {
+	} else {
 		if (meta.value && shift.value && p.value) {
 			useCommandKStore().tab = 'power'
 			useCommandKStore().show = true
