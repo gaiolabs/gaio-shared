@@ -128,6 +128,7 @@ const showDrawer = ref('')
 const currentElement = shallowRef()
 
 const addDrag = (ev: SortableEvent) => {
+	// @ts-expect-error TODO fix type
 	const element = cloneDeep<TableType>(ev.item[Object.getOwnPropertySymbols(ev.item)[0]])
 
 	useFlow(useAppStore().flow.workflow)
@@ -158,6 +159,7 @@ const isBucketTable = computed(() => {
 	return !!(useAppStore().task && useAppStore().task.type === 'table' && useAppStore().task.sourceType === 'bucket')
 })
 
+// @ts-expect-error TODO fix type
 const selectAndClose = (ev) => {
 	closeTask()
 	selectElement(ev)

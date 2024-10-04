@@ -1,8 +1,7 @@
 <template>
 	<div
 		id="sidebar-view"
-		class="flex h-full w-[450px] max-w-[450px] items-center pt-[70px] pb-4"
-		:class="{ 'w-[500px]': modelValue }"
+		class="flex h-full w-[450px] max-w-[450px] items-center p-4 pl-8 pr-0 pt-[74px]"
 	>
 		<!--SIDEBAR PANEL-->
 		<Transition
@@ -16,9 +15,10 @@
 		>
 			<div
 				v-if="modelValue"
-				class="flex size-full flex-col ps-[35px]"
+				id="sidebar-panel"
+				class="flex size-full flex-col"
 			>
-				<div class="mb-2 h-full grow overflow-hidden rounded-xl g-base">
+				<div class="h-full grow overflow-hidden rounded-xl g-base">
 					<Transition
 						enter-active-class="transition-opacity absolute top-0 left-0 duration-300"
 						enter-from-class="opacity-0"
