@@ -6,11 +6,14 @@
 		>
 			<div class="z-0 flex w-[40px] flex-col items-center justify-center rounded-2xl g-wrapper !pointer-events-auto">
 				<div
-					v-for="item of sidebarActions"
+					v-for="item in sidebarActions"
 					:key="item.name"
-					class="flex h-[50px] w-full items-center justify-center"
+					class="flex h-[50px] w-full items-center justify-center relative"
 				>
-					<button @click="workWithPanel(item.name)">
+					<button
+						class="relative"
+						@click="workWithPanel(item.name)"
+					>
 						<IconComponent
 							:name="item.icon"
 							class="text-lg text-gray-700 dark:text-gray-500 hover:dark:text-white hover:text-sepia-600 transition-colors duration-150"
@@ -24,10 +27,12 @@
 </template>
 
 <script setup lang="ts">
+import { useEventListener } from '@vueuse/core'
 import { onMounted, ref, watch } from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{ modelValue: string | undefined }>()
+
 const showPanel = ref(false)
 const panel = ref('')
 
@@ -68,12 +73,6 @@ const workWithPanel = (type: string) => {
 		return emit('update:modelValue', null)
 	}
 	emit('update:modelValue', type)
-	// if (panel.value === type) {
-	//     closePanel();
-	// } else {
-	//     showPanel.value = true;
-	//     panel.value = type;
-	// }
 }
 
 watch(
@@ -86,7 +85,25 @@ watch(
 onMounted(() => {
 	if (props.modelValue) {
 		showPanel.value = true
-		panel.value = 'flow'
+		panel.value = props.modelValue // Set to actual modelValue
+	}
+})
+
+useEventListener('keydown', (event: KeyboardEvent) => {
+	const activeElement = document.activeElement as HTMLElement | null
+	if (!activeElement) return
+
+	const isEditable =
+		activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable
+	if (isEditable) return
+
+	if (/^[1-7]$/.test(event.key)) {
+		const index = parseInt(event.key, 10) - 1
+		const action = sidebarActions[index]
+		if (action) {
+			event.preventDefault() // Prevent default action if necessary
+			workWithPanel(action.name)
+		}
 	}
 })
 </script>
