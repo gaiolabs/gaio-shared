@@ -90,8 +90,8 @@
 <script setup lang="ts">
 import useTree from '@/composables/useTree'
 import { useAppStore, useFormStore } from '@/stores'
-import SidebarFormLabel from '@/views/studio/canvas/sidebar/sidebar-form/SidebarFormLabel.vue'
-import SidebarFormMore from '@/views/studio/canvas/sidebar/sidebar-form/SidebarFormMore.vue'
+import SidebarFormLabel from '@/views/studio/tasks/sidebar/sidebar-form/SidebarFormLabel.vue'
+import SidebarFormMore from '@/views/studio/tasks/sidebar/sidebar-form/SidebarFormMore.vue'
 import type { FormType, ParamType } from '@gaio/shared/types'
 import { NButton, type TreeOption } from 'naive-ui'
 import { h, onMounted, ref } from 'vue'

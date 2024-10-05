@@ -52,7 +52,7 @@
 	</div>
 </template>
 <script setup lang="ts">
-import ColumnFrequency from '@/views/studio/canvas/column-view/ColumnFrequency.vue'
+import ColumnFrequency from '@/views/studio/tasks/column-view/ColumnFrequency.vue'
 import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
 import TableDataFilter from '@/views/studio/tasks/table-view/TableDataFilter.vue'
 import type { BuilderTaskType } from '@gaio/shared/types'
