@@ -120,7 +120,7 @@ const currentTable = ref<string>()
 
 const items = ref([])
 const loading = ref(true)
-const sidebarPanel = ref()
+const sidebarPanel = ref('flow')
 watch(sidebarPanel, (oldValue, newValue) => {
 	console.log(oldValue, newValue)
 })
