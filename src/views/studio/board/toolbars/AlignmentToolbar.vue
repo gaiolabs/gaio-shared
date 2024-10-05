@@ -1,4 +1,3 @@
-<!-- AlignmentToolbar.vue -->
 <template>
 	<Transition
 		enter-active-class="transition-all duration-500"
@@ -272,6 +271,7 @@ async function alignCenter() {
 		maxY,
 	})
 
+	// @ts-expect-error TODO fix type
 	const isEqual = Object.keys(before).every((key) => before[key] === after[key])
 	console.log(before, after, isEqual)
 	if (isEqual) distributeCenter()
