@@ -7,14 +7,14 @@
 	/>
 </template>
 <script setup lang="ts">
-import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
+import { generateBase } from '@/views/studio/board/BoardIcons'
 import type { TaskType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
 const { localTask = null } = defineProps<{ localTask: TaskType }>()
 
 const generateIcon = computed(() => {
-	const image = `../assets${generateBase(localTask).image}`
+	const image = `/studio/board/tasks/${generateBase(localTask).image}`
 	if (!image) {
 		return ''
 	}
