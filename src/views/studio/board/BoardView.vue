@@ -43,8 +43,10 @@
 			<div
 				id="board-safe-zone"
 				ref="safeZone"
-				class="border-4 border-dashed border-[#f00] w-full h-full"
-			/>
+				class="border border-dashed border-[#f00] w-full h-full flex items-start"
+			>
+				<div class="bg-[rgba(255,0,0,0.1)] text-[#f00] text-xs px-2 py-1 rounded-br-2xl">Safe Zone</div>
+			</div>
 		</div>
 
 		<BoardHeader
