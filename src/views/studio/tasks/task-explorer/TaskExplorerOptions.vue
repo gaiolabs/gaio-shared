@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 import { useReportStore } from '@/stores'
-import OptionsChart from '@/views/studio/canvas/task-explorer/task-explorer-options/options-chart/OptionsChart.vue'
-import OptionsField from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsField.vue'
-import OptionsTable from '@/views/studio/canvas/task-explorer/task-explorer-options/options-table/OptionsTable.vue'
+import OptionsChart from '@/views/studio/tasks/task-explorer/task-explorer-options/options-chart/OptionsChart.vue'
+import OptionsField from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsField.vue'
+import OptionsTable from '@/views/studio/tasks/task-explorer/task-explorer-options/options-table/OptionsTable.vue'
 import { computed } from 'vue'
 
 const task = computed(() => useReportStore().current)

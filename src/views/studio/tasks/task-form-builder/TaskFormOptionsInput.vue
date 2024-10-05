@@ -78,9 +78,9 @@
 
 <script setup lang="ts">
 import { useFormStore } from '@/stores'
-import TaskFormOptionsListBucket from '@/views/studio/canvas/task-form-builder/TaskFormOptionsListBucket.vue'
-import TaskFormOptionsListTable from '@/views/studio/canvas/task-form-builder/TaskFormOptionsListTable.vue'
-import TaskFormOptionsSlider from '@/views/studio/canvas/task-form-builder/TaskFormOptionsSlider.vue'
+import TaskFormOptionsListBucket from '@/views/studio/tasks/task-form-builder/TaskFormOptionsListBucket.vue'
+import TaskFormOptionsListTable from '@/views/studio/tasks/task-form-builder/TaskFormOptionsListTable.vue'
+import TaskFormOptionsSlider from '@/views/studio/tasks/task-form-builder/TaskFormOptionsSlider.vue'
 
 const isInput = ['lineText', 'lineNumber', 'date', 'date', 'datetime', 'time']
 const isList = ['radio', 'select', 'checkbox', 'slider']

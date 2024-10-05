@@ -64,8 +64,8 @@
 <script setup lang="ts">
 import GSelectParam from '@/components/GSelectParam.vue'
 import { useFormStore } from '@/stores'
-import TaskFormOptionsGeneral from '@/views/studio/canvas/task-form-builder/TaskFormOptionsGeneral.vue'
-import TaskFormOptionsInput from '@/views/studio/canvas/task-form-builder/TaskFormOptionsInput.vue'
+import TaskFormOptionsGeneral from '@/views/studio/tasks/task-form-builder/TaskFormOptionsGeneral.vue'
+import TaskFormOptionsInput from '@/views/studio/tasks/task-form-builder/TaskFormOptionsInput.vue'
 import { computed } from 'vue'
 
 const isInput = ['lineText', 'lineNumber', 'date', 'date', 'datetime', 'time']

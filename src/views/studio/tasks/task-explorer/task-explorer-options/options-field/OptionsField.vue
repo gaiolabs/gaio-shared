@@ -153,11 +153,11 @@
 
 <script setup lang="ts">
 import { useAppStore, useReportStore } from '@/stores'
-import OptionsFieldAgg from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldAgg.vue'
-import OptionsFieldCondition from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldCondition.vue'
-import OptionsFieldFormat from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldFormat.vue'
-import OptionsFieldLink from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldLink.vue'
-import OptionsFieldStyle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-field/OptionsFieldStyle.vue'
+import OptionsFieldAgg from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsFieldAgg.vue'
+import OptionsFieldCondition from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsFieldCondition.vue'
+import OptionsFieldFormat from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsFieldFormat.vue'
+import OptionsFieldLink from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsFieldLink.vue'
+import OptionsFieldStyle from '@/views/studio/tasks/task-explorer/task-explorer-options/options-field/OptionsFieldStyle.vue'
 import { NPageHeader } from 'naive-ui'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'

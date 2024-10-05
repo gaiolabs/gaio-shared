@@ -58,9 +58,9 @@ import 'splitpanes/dist/splitpanes.css'
 
 import useDefaultForm from '@/composables/useDefaultForm'
 import { useAppStore, useFormStore } from '@/stores'
-import TaskFormOptions from '@/views/studio/canvas/task-form-builder/TaskFormOptions.vue'
-import TaskFormPreview from '@/views/studio/canvas/task-form-builder/TaskFormPreview.vue'
-import TaskFormSetup from '@/views/studio/canvas/task-form-builder/TaskFormSetup.vue'
+import TaskFormOptions from '@/views/studio/tasks/task-form-builder/TaskFormOptions.vue'
+import TaskFormPreview from '@/views/studio/tasks/task-form-builder/TaskFormPreview.vue'
+import TaskFormSetup from '@/views/studio/tasks/task-form-builder/TaskFormSetup.vue'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onMounted } from 'vue'
 

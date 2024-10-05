@@ -32,7 +32,7 @@
 	</div>
 </template>
 <script setup lang="ts">
-import TaskBuilderDropTag from '@/views/studio/canvas/task-builder/task-builder-tags/TaskBuilderDropTag.vue'
+import TaskBuilderDropTag from '@/views/studio/tasks/task-builder/task-builder-tags/TaskBuilderDropTag.vue'
 import type { BuilderTaskType } from '@gaio/shared/types'
 import type { PropType } from 'vue'
 

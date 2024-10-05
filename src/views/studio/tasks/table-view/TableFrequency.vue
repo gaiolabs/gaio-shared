@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import ColumnFrequency from '@/views/studio/canvas/column-view/ColumnFrequency.vue'
 import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
-import TableDataFilter from '@/views/studio/canvas/table-view/TableDataFilter.vue'
+import TableDataFilter from '@/views/studio/tasks/table-view/TableDataFilter.vue'
 import type { BuilderTaskType } from '@gaio/shared/types'
 import type { FieldType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'

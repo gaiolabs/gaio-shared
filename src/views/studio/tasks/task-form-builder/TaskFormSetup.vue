@@ -23,6 +23,6 @@
 	</div>
 </template>
 <script setup lang="ts">
-import TaskFormSetupSetting from '@/views/studio/canvas/task-form-builder/TaskFormSetupSetting.vue'
-import TaskFormSetupType from '@/views/studio/canvas/task-form-builder/TaskFormSetupType.vue'
+import TaskFormSetupSetting from '@/views/studio/tasks/task-form-builder/TaskFormSetupSetting.vue'
+import TaskFormSetupType from '@/views/studio/tasks/task-form-builder/TaskFormSetupType.vue'
 </script>

@@ -99,8 +99,8 @@
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
-import TaskMetaFields from '@/views/studio/canvas/task-meta/TaskMetaFields.vue'
-import TaskMetaInsights from '@/views/studio/canvas/task-meta/TaskMetaInsights.vue'
+import TaskMetaFields from '@/views/studio/tasks/task-meta/TaskMetaFields.vue'
+import TaskMetaInsights from '@/views/studio/tasks/task-meta/TaskMetaInsights.vue'
 import type { MetaType } from '@gaio/shared/types/core/meta.type'
 import { onBeforeMount, ref } from 'vue'
 

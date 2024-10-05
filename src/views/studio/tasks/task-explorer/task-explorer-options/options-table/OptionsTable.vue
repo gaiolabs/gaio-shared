@@ -159,14 +159,14 @@
 /template>
 <script setup lang="ts">
 import { useReportStore } from '@/stores'
-import OptionsDownload from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsDownload.vue'
-import OptionsForms from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsForms.vue'
-import OptionsTitle from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
-import OptionsHeader from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
-import OptionsMessage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsMessage.vue'
-import OptionsRowsPerPage from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
-import OptionsTableFilters from '@/views/studio/canvas/task-explorer/task-explorer-options/options-table/OptionsTableFilters.vue'
-import OptionsTableGeneral from '@/views/studio/canvas/task-explorer/task-explorer-options/options-table/OptionsTableGeneral.vue'
+import OptionsDownload from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsDownload.vue'
+import OptionsForms from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsForms.vue'
+import OptionsTitle from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
+import OptionsHeader from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsHeader.vue'
+import OptionsMessage from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsMessage.vue'
+import OptionsRowsPerPage from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsRowsPerPage.vue'
+import OptionsTableFilters from '@/views/studio/tasks/task-explorer/task-explorer-options/options-table/OptionsTableFilters.vue'
+import OptionsTableGeneral from '@/views/studio/tasks/task-explorer/task-explorer-options/options-table/OptionsTableGeneral.vue'
 </script>
 
 <style lang="scss">

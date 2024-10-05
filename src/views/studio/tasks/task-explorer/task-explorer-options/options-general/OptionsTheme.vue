@@ -124,7 +124,7 @@
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import { useAppStore, useReportStore } from '@/stores'
-import OptionsThemePalette from '@/views/studio/canvas/task-explorer/task-explorer-options/options-general/OptionsThemePalette.vue'
+import OptionsThemePalette from '@/views/studio/tasks/task-explorer/task-explorer-options/options-general/OptionsThemePalette.vue'
 import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'

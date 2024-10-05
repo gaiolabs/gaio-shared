@@ -156,7 +156,7 @@
 </template>
 <script setup lang="ts">
 import { useAppStore } from '@/stores/useAppStore'
-import TaskBuilderJoinControl from '@/views/studio/canvas/task-builder/task-builder-join/TaskBuilderJoinControl.vue'
+import TaskBuilderJoinControl from '@/views/studio/tasks/task-builder/task-builder-join/TaskBuilderJoinControl.vue'
 import type { BuilderTaskType } from '@gaio/shared/types'
 import { getBucketNameFromAppId } from '@gaio/shared/utils'
 import { type PropType, ref } from 'vue'

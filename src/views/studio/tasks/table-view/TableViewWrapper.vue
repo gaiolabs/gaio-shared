@@ -12,7 +12,7 @@
 </template>
 <script setup lang="ts">
 import DrawerView from '@/components/drawer/DrawerView.vue'
-import TableView from '@/views/studio/canvas/table-view/TableView.vue'
+import TableView from '@/views/studio/tasks/table-view/TableView.vue'
 
 defineEmits(['close'])
 </script>

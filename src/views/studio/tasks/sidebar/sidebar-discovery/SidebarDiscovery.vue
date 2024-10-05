@@ -53,7 +53,7 @@
 import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
-import TaskMeta from '@/views/studio/canvas/task-meta/TaskMeta.vue'
+import TaskMeta from '@/views/studio/tasks/task-meta/TaskMeta.vue'
 import type { MetaType } from '@gaio/shared/types'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'

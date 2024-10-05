@@ -83,7 +83,7 @@
 import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'
 import { useAppStore, useAuthStore, useTableStore } from '@/stores'
-import TableDataFilter from '@/views/studio/canvas/table-view/TableDataFilter.vue'
+import TableDataFilter from '@/views/studio/tasks/table-view/TableDataFilter.vue'
 import type { BuilderTaskType, FieldType, GenericType } from '@gaio/shared/types'
 import { computed, onMounted, ref, watch } from 'vue'
 

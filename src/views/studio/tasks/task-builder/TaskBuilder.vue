@@ -189,7 +189,7 @@ import 'splitpanes/dist/splitpanes.css'
 
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
-import TableView from '@/views/studio/canvas/table-view/TableView.vue'
+import TableView from '@/views/studio/tasks/table-view/TableView.vue'
 import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, ref } from 'vue'

@@ -69,7 +69,7 @@
 </template>
 
 <script lang="ts" setup>
-import TaskBuilderDropTagFilter from '@/views/studio/canvas/task-builder/task-builder-tags/TaskBuilderDropTagFilter.vue'
+import TaskBuilderDropTagFilter from '@/views/studio/tasks/task-builder/task-builder-tags/TaskBuilderDropTagFilter.vue'
 import type { BuilderTaskType, SchemaFilterType } from '@gaio/shared/types'
 import { onMounted, type PropType, ref } from 'vue'
 
