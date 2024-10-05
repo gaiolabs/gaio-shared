@@ -21,7 +21,7 @@
 	</router-view>
 	<div
 		v-if="debugMode"
-		class="fixed inset-0 z-[9999] pointer-events-none selection:bg-[#f0f] selection:text-[#f0f]"
+		class="fixed inset-0 z-[9999] pointer-events-none selection:bg-[#f0f] selection:text-white"
 	>
 		<div class="absolute pointer-events-auto font-mono right-0 top-0 bg-black text-[#0f0] p-1 z-[9999]">
 			<h1 class="font-bold">DEBUG MODE</h1>
