@@ -19,27 +19,27 @@ export const generateBase = (item: TaskType) => {
 	if (type === 'table' && sourceType === 'source') {
 		if (client === 'mysql') {
 			return {
-				image: '/images/flow/bg-mysql.png'
+				image: 'bg-mysql.png',
 			}
 		} else if (client === 'oracle') {
 			return {
-				image: '/images/flow/bg-oracle.png'
+				image: 'bg-oracle.png',
 			}
 		} else if (client === 'redshift') {
 			return {
-				image: '/images/flow/bg-redshift.png'
+				image: 'bg-redshift.png',
 			}
 		} else if (client === 'mssql') {
 			return {
-				image: '/images/flow/bg-mssql.png'
+				image: 'bg-mssql.png',
 			}
 		} else if (client === 'postgres') {
 			return {
-				image: '/images/flow/bg-postgres.png'
+				image: 'bg-postgres.png',
 			}
 		} else if (client === 'clickhouse') {
 			return {
-				image: '/images/flow/bg-clickhouse.png'
+				image: 'bg-clickhouse.png',
 			}
 		}
 	} else if (
@@ -48,338 +48,338 @@ export const generateBase = (item: TaskType) => {
 			(type === 'table' && sourceType === 'bucket' && `${tableName}`.startsWith('tmp_')))
 	) {
 		return {
-			image: '/images/flow/bg-table-temporary.png'
+			image: 'bg-table-temporary.png',
 		}
 	} else if (
 		(type === 'table' && temporary && sourceType === 'bucket') ||
 		(type === 'table' && sourceType === 'bucket' && `${tableName}`.startsWith('tmp_'))
 	) {
 		return {
-			image: '/images/flow/bg-table-shared.png'
+			image: 'bg-table-shared.png',
 		}
 	} else if (type === 'table' && !temporary && sourceType === 'bucket') {
 		return {
-			image: '/images/flow/bg-table.png'
+			image: 'bg-table.png',
 		}
 	} else if (item.type === 'mysql') {
 		return {
-			image: '/images/flow/bg-mysql.png'
+			image: 'bg-mysql.png',
 		}
 	} else if (type === 'builder' && insertMode) {
 		return {
-			image: '/images/flow/bg-builder-insert.png'
+			image: 'bg-builder-insert.png',
 		}
 	} else if (type === 'staticContent') {
 		return {
-			image: '/images/flow/bg-report-static-content.png'
+			image: 'bg-report-static-content.png',
 		}
 	} else if (type === 'maps') {
 		return {
-			image: '/images/flow/bg-maps.png'
+			image: 'bg-maps.png',
 		}
 	} else if (type === 'api') {
 		return {
-			image: '/images/flow/bg-api.png'
+			image: 'bg-api.png',
 		}
 	} else if (type === 'sms') {
 		return {
-			image: '/images/flow/bg-sms.png'
+			image: 'bg-sms.png',
 		}
 	} else if (type === 'insights') {
 		return {
-			image: '/images/flow/bg-insights.png'
+			image: 'bg-insights.png',
 		}
 	} else if (item.type === 'builder') {
 		return {
-			image: '/images/flow/bg-builder.png'
+			image: 'bg-builder.png',
 		}
 	} else if (type === 'form') {
 		return {
-			image: '/images/flow/bg-report-form.png'
+			image: 'bg-report-form.png',
 		}
 	} else if (item.type === 'sql') {
 		return {
-			image: '/images/flow/bg-sql.png'
+			image: 'bg-sql.png',
 		}
 	} else if (item.type === 'pivot') {
 		return {
-			image: '/images/flow/bg-pivot.png'
+			image: 'bg-pivot.png',
 		}
 	} else if (item.type === 'unpivot') {
 		return {
-			image: '/images/flow/bg-unpivot.png'
+			image: 'bg-unpivot.png',
 		}
 	} else if (item.type === 'create') {
 		return {
-			image: '/images/flow/bg-create.png'
+			image: 'bg-create.png',
 		}
 	} else if (item.type === 'query') {
 		return {
-			image: '/images/flow/bg-query.png'
+			image: 'bg-query.png',
 		}
 	} else if (type === 'delete') {
 		return {
-			image: '/images/flow/bg-delete.png'
+			image: 'bg-delete.png',
 		}
 	} else if (type === 'insertRow') {
 		return {
-			image: '/images/flow/bg-insert-row.png'
+			image: 'bg-insert-row.png',
 		}
 	} else if (type === 'create') {
 		return {
-			image: '/images/flow/bg-create.png'
+			image: 'bg-create.png',
 		}
 	} else if (type === 'update') {
 		return {
-			image: '/images/flow/bg-update.png'
+			image: 'bg-update.png',
 		}
 	} else if (item.type === 'csvUrl') {
 		return {
-			image: '/images/flow/bg-csv-web.png'
+			image: 'bg-csv-web.png',
 		}
 	} else if (type === 'localCsv') {
 		return {
-			image: '/images/flow/bg-local-csv.png'
+			image: 'bg-local-csv.png',
 		}
 	} else if (type === 'cloudStorage') {
 		return {
-			image: '/images/flow/bg-cloudStorage.png'
+			image: 'bg-cloudStorage.png',
 		}
 	} else if (type === 'googleSpreadsheet') {
 		return {
-			image: '/images/flow/bg-googleSpreadsheet.png'
+			image: 'bg-googleSpreadsheet.png',
 		}
 	} else if (type === 'fileImport') {
 		return {
-			image: '/images/flow/bg-fileImport.png'
+			image: 'bg-fileImport.png',
 		}
 	} else if (type === 'userMirror') {
 		return {
-			image: '/images/flow/bg-user.png'
+			image: 'bg-user.png',
 		}
 	} else if (type === 'insert') {
 		return {
-			image: '/images/flow/bg-insert.png'
+			image: 'bg-insert.png',
 		}
 	} else if (type === 'basket') {
 		return {
-			image: '/images/flow/bg-basket.png'
+			image: 'bg-basket.png',
 		}
 	} else if (type === 'externalOutput') {
 		return {
-			image: '/images/flow/bg-external-output.png'
+			image: 'bg-external-output.png',
 		}
 	} else if (type === 'coxph') {
 		return {
-			image: '/images/flow/bg-coxph.png'
+			image: 'bg-coxph.png',
 		}
 	} else if (type === 'pca') {
 		return {
-			image: '/images/flow/bg-pca.png'
+			image: 'bg-pca.png',
 		}
 	} else if (type === 'powerSearch') {
 		return {
-			image: '/images/flow/bg-powerSearch.png'
+			image: 'bg-powerSearch.png',
 		}
 	} else if (type === 'cluster') {
 		return {
-			image: '/images/flow/bg-cluster.png'
+			image: 'bg-cluster.png',
 		}
 	} else if (type === 'timeseries') {
 		return {
-			image: '/images/flow/bg-timeseries.png'
+			image: 'bg-timeseries.png',
 		}
 	} else if (type === 'automl') {
 		return {
-			image: '/images/flow/bg-automl.png'
+			image: 'bg-automl.png',
 		}
 	} else if (type === 'automlReport') {
 		return {
-			image: '/images/flow/bg-automl-report.png'
+			image: 'bg-automl-report.png',
 		}
 	} else if (type === 'scorecard') {
 		return {
-			image: '/images/flow/bg-scorecard.png'
+			image: 'bg-scorecard.png',
 		}
 	} else if (type === 'nodeEdgeFilter') {
 		return {
-			image: '/images/flow/bg-external-output.png'
+			image: 'bg-external-output.png',
 		}
 	} else if (type === 'nodeEdge') {
 		return {
-			image: '/images/flow/bg-scorecard.png'
+			image: 'bg-scorecard.png',
 		}
 	} else if (type === 'sample') {
 		return {
-			image: '/images/flow/bg-sample.png'
+			image: 'bg-sample.png',
 		}
 	} else if (type === 'reportPreview') {
 		if (reportType === 'download') {
 			return {
-				image: '/images/flow/bg-export.png'
+				image: 'bg-export.png',
 			}
 		} else if (reportType === 'table') {
 			return {
-				image: '/images/flow/bg-explorer-table.png'
+				image: 'bg-explorer-table.png',
 			}
 		} else if (reportType === 'form') {
 			return {
-				image: '/images/flow/bg-report-form.png'
+				image: 'bg-report-form.png',
 			}
 		} else if (reportType === 'sunburst') {
 			return {
-				image: '/images/flow/bg-explorer-sunburst.png'
+				image: 'bg-explorer-sunburst.png',
 			}
 		} else if (reportType === 'pie') {
 			return {
-				image: '/images/flow/bg-explorer-pie.png'
+				image: 'bg-explorer-pie.png',
 			}
 		} else if (reportType === 'gauge') {
 			return {
-				image: '/images/flow/bg-explorer-gauge.png'
+				image: 'bg-explorer-gauge.png',
 			}
 		} else if (reportType === 'funnel') {
 			return {
-				image: '/images/flow/bg-explorer-funnel.png'
+				image: 'bg-explorer-funnel.png',
 			}
 		} else if (reportType === 'forecast') {
 			return {
-				image: '/images/flow/bg-explorer-forecast.png'
+				image: 'bg-explorer-forecast.png',
 			}
 		} else if (reportType === 'radar') {
 			return {
-				image: '/images/flow/bg-explorer-radar.png'
+				image: 'bg-explorer-radar.png',
 			}
 		} else if (reportType === 'column') {
 			return {
-				image: '/images/flow/bg-explorer-column.png'
+				image: 'bg-explorer-column.png',
 			}
 		} else if (reportType === 'bullet') {
 			return {
-				image: '/images/flow/bg-explorer-bullet.png'
+				image: 'bg-explorer-bullet.png',
 			}
 		} else if (reportType === 'liquid') {
 			return {
-				image: '/images/flow/bg-explorer-liquid.png'
+				image: 'bg-explorer-liquid.png',
 			}
 		} else if (reportType === 'histogram') {
 			return {
-				image: '/images/flow/bg-explorer-histogram.png'
+				image: 'bg-explorer-histogram.png',
 			}
 		} else if (reportType === 'line') {
 			return {
-				image: '/images/flow/bg-explorer-line.png'
+				image: 'bg-explorer-line.png',
 			}
 		} else if (reportType === 'stacked') {
 			return {
-				image: '/images/flow/bg-explorer-stacked.png'
+				image: 'bg-explorer-stacked.png',
 			}
 		} else if (reportType === 'card') {
 			return {
-				image: '/images/flow/bg-explorer-card.png'
+				image: 'bg-explorer-card.png',
 			}
 		} else if (reportType === 'area') {
 			return {
-				image: '/images/flow/bg-explorer-area.png'
+				image: 'bg-explorer-area.png',
 			}
 		} else if (reportType === 'maps') {
 			return {
-				image: '/images/flow/bg-explorer-maps.png'
+				image: 'bg-explorer-maps.png',
 			}
 		} else if (reportType === 'dual') {
 			return {
-				image: '/images/flow/bg-explorer-dual.png'
+				image: 'bg-explorer-dual.png',
 			}
 		} else if (reportType === 'treemap') {
 			return {
-				image: '/images/flow/bg-explorer-treemap.png'
+				image: 'bg-explorer-treemap.png',
 			}
 		} else if (reportType === 'combo') {
 			return {
-				image: '/images/flow/bg-explorer-combo.png'
+				image: 'bg-explorer-combo.png',
 			}
 		} else if (reportType === 'calendar') {
 			return {
-				image: '/images/flow/bg-explorer-calendar.png'
+				image: 'bg-explorer-calendar.png',
 			}
 		} else if (reportType === 'bubble') {
 			return {
-				image: '/images/flow/bg-explorer-bubble.png'
+				image: 'bg-explorer-bubble.png',
 			}
 		} else if (reportType === 'geojson') {
 			return {
-				image: '/images/flow/bg-explorer-geojson.png'
+				image: 'bg-explorer-geojson.png',
 			}
 		} else if (reportType === 'banner') {
 			return {
-				image: '/images/flow/bg-banner.png'
+				image: 'bg-banner.png',
 			}
 		}
 	} else if (type === 'report') {
 		if (reportType === 'insights') {
 			return {
-				image: '/images/flow/bg-insights.png'
+				image: 'bg-insights.png',
 			}
 		} else if (reportType === 'staticContent') {
 			return {
-				image: '/images/flow/bg-report-static-content.png'
+				image: 'bg-report-static-content.png',
 			}
 		}
 		return {
-			image: '/images/flow/bg-explorer.png'
+			image: 'bg-explorer.png',
 		}
 	} else if (type === 'mail') {
 		return {
-			image: '/images/flow/bg-mail.png'
+			image: 'bg-mail.png',
 		}
 	} else if (type === 'export') {
 		return {
-			image: '/images/flow/bg-export.png'
+			image: 'bg-export.png',
 		}
 	} else if (type === 'tableToParam') {
 		return {
-			image: '/images/flow/bg-tableToParam.png'
+			image: 'bg-tableToParam.png',
 		}
 	} else if (type === 'paramToTable') {
 		return {
-			image: '/images/flow/bg-paramToTable.png'
+			image: 'bg-paramToTable.png',
 		}
 	} else if (type === 'whatsapp') {
 		return {
-			image: '/images/flow/bg-whatsapp.png'
+			image: 'bg-whatsapp.png',
 		}
 	} else if (type === 'flow') {
 		return {
-			image: '/images/flow/bg-flow.png'
+			image: 'bg-flow.png',
 		}
 	} else if (type === 'scoring') {
 		return {
-			image: '/images/flow/bg-scoring.png'
+			image: 'bg-scoring.png',
 		}
 	} else if ((type === 'rest' && restType === 'sms') || type === 'restSms') {
 		return {
-			image: '/images/flow/bg-sms.png'
+			image: 'bg-sms.png',
 		}
 	} else if (type === 'rest') {
 		return {
-			image: '/images/flow/bg-rest.png'
+			image: 'bg-rest.png',
 		}
 	} else if (type === 'sourceRaw') {
 		return {
-			image: '/images/flow/bg-source-raw.png'
+			image: 'bg-source-raw.png',
 		}
 	} else if (type === 'quickTable') {
 		return {
-			image: '/images/flow/bg-explorer-table.png'
+			image: 'bg-explorer-table.png',
 		}
 	} else if (type === 'python') {
 		return {
-			image: '/images/flow/bg-python.png'
+			image: 'bg-python.png',
 		}
 	}
 
 	// end
 	return {
-		image: '/images/flow/bg-query.png'
+		image: 'bg-query.png',
 	}
 }

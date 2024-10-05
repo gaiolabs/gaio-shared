@@ -14,7 +14,7 @@ import { computed } from 'vue'
 const { localTask = null } = defineProps<{ localTask: TaskType }>()
 
 const generateIcon = computed(() => {
-	const image = `../assets${generateBase(localTask).image}`
+	const image = `/studio/board/tasks/${generateBase(localTask).image}`
 	if (!image) {
 		return ''
 	}

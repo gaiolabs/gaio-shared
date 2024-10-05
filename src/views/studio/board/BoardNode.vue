@@ -55,8 +55,7 @@ import { computed } from 'vue'
 const { data = null } = defineProps<{ data: NodeType }>()
 
 const generateIcon = (item: NodeType) => {
-	const image = `../../../../assets${generateBase(item).image}`
-	return new URL(image, import.meta.url).href
+	return `/studio/board/tasks/${generateBase(item).image}`
 }
 
 const getCurrentTaskId = computed(() => {

@@ -141,15 +141,14 @@ const getByCategory = (cat: string) =>
 			}
 		})
 
-const generateIcon = (item) => {
-	const image = `../../../../../assets${
+const generateIcon = (item: TreeOption) => {
+	return `/studio/board/tasks/${
 		generateBase({
 			...item,
 			client: 'clickhouse',
 			sourceType: 'bucket',
 		}).image
 	}`
-	return new URL(image, import.meta.url).href
 }
 
 const taskTree: TreeOption[] = [

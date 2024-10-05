@@ -13,7 +13,7 @@
 				>
 					<div
 						class="mb-1 flex h-[50px] cursor-pointer items-center justify-center rounded bg-paper-200 dark:bg-carbon-200"
-						@click="select(report)"
+						@click="select(report as ReportNodeType)"
 					>
 						<div>
 							<g-icon
@@ -24,7 +24,7 @@
 							/>
 							<img
 								v-else
-								:src="generateIcon(report)"
+								:src="generateIcon(report as ReportNodeType)"
 								:alt="report.label"
 								class="h-8 w-8"
 							/>
@@ -49,32 +49,31 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 
-const select = (item) => {
+const select = (item: ReportNodeType) => {
 	useReportStore().current.reportType = item.reportType
 
 	useReportStore().current = useDefaultReport({
 		type: useAppStore().cloneTask().type,
 		reportType: item.reportType,
-		base: useReportStore().current as ReportNodeType
+		base: useReportStore().current as ReportNodeType,
 	})
 
 	if (item.settings) {
 		useReportStore().current.settings = {
 			...useReportStore().current.settings,
-			...item.settings
+			...item.settings,
 		}
 	}
 }
 
-const generateIcon = (item) => {
-	const image = `../../../../assets${
+const generateIcon = (item: ReportNodeType) => {
+	return `/studio/board/tasks/${
 		generateBase({
 			...item,
 			client: 'clickhouse',
-			sourceType: 'bucket'
+			sourceType: 'bucket',
 		}).image
 	}`
-	return new URL(image, import.meta.url).href
 }
 const reportList = taskExplorerTypeList(t)
 </script>
