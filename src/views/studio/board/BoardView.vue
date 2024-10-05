@@ -32,6 +32,21 @@
 			/>
 		</VueFlow>
 
+		<div
+			id="board-safe-zone-wrapper"
+			class="absolute top-[74px] bottom-4 p-8 right-8 pointer-events-none"
+			:class="[
+				isSidebarOpen ? 'left-[464px]' : 'left-[72px]',
+				useDebugModeStore().isActive ? 'opacity-100' : 'opacity-0',
+			]"
+		>
+			<div
+				id="board-safe-zone"
+				ref="safeZone"
+				class="border-4 border-dashed border-[#f00] w-full h-full"
+			/>
+		</div>
+
 		<BoardHeader
 			v-if="elements"
 			:elements="elements"
@@ -39,45 +54,24 @@
 		/>
 		<aside class="z-1 absolute bottom-0 right-0 p-4 flex flex-col items-end gap-2">
 			<AlignmentToolbar :get-selected-nodes="getSelectedNodes" />
-
-			<GCard
-				type="wrapper"
-				class="flex rounded-xl px-1"
-			>
-				<GButton
-					size="tiny"
-					type="tertiary"
-					class="!p-2"
-					@click="organizeDagreLayout('LR')"
-				>
-					<IconComponent
-						class="rotate-[-90deg] size-5"
-						name="Studio"
-					/>
-				</GButton>
-				<GButton
-					size="tiny"
-					type="tertiary"
-					class="!p-2"
-					@click="fitView()"
-				>
-					<IconComponent name="AdjustToScreen" />
-				</GButton>
-			</GCard>
+			<MainToolbar
+				@organize-layout="organizeDagreLayout"
+				@fit-view="fitView"
+			/>
 		</aside>
 	</div>
 </template>
 
 <script setup lang="ts">
-import GCard from '@/components/GCard.vue'
-import GButton from '@/components/inputs/GButton.vue'
 import useApi from '@/composables/useApi'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
+import { useDebugModeStore } from '@/stores/useDebugModeStore'
 import { useJobStore } from '@/stores/useJobStore'
 import BoardHeader from '@/views/studio/board/BoardHeader.vue'
 import BoardNode from '@/views/studio/board/BoardNode.vue'
 import AlignmentToolbar from '@/views/studio/board/toolbars/AlignmentToolbar.vue'
+import MainToolbar from '@/views/studio/board/toolbars/MainToolbar.vue'
 import { Background } from '@vue-flow/background'
 import { isNode, Position, useVueFlow, VueFlow, getRectOfNodes } from '@vue-flow/core'
 import type { Elements } from '@vue-flow/core'
@@ -97,6 +91,19 @@ const localEdges = ref()
 const isDark = useDark()
 
 const selectMany = ref([])
+const graph = ref()
+const safeZone = ref()
+const pointer = usePointer()
+const isPressed = computed(() => {
+	return pointer.pressure.value > 0
+})
+
+const { isSidebarOpen } = defineProps({
+	isSidebarOpen: {
+		type: Boolean,
+		default: false,
+	},
+})
 
 const onOpenNode = (ev) => {
 	emit('open', ev.node.data)
@@ -158,95 +165,124 @@ const updateFlow = debounce(() => {
 }, 600)
 
 function fitView() {
-	const nodes = getNodes.value
+	const selectedNodes = getSelectedNodes.value
+	const nodesToFit = selectedNodes.length > 1 ? selectedNodes : getNodes.value
 
-	if (nodes.length === 0) return
+	if (nodesToFit.length === 0) return
 
-	// Get the bounding box of all nodes
-	const nodesBoundingBox = getRectOfNodes(nodes)
+	// Get the bounding box of the nodes to fit
+	const nodesBoundingBox = getRectOfNodes(nodesToFit)
 
-	// Define paddings (in pixels)
-	const paddingLeft = 350 // Adjust as needed
-	const paddingRight = 40 // Adjust as needed
-	const paddingTop = 75 // Adjust as needed
-	const paddingBottom = 40 // Adjust as needed
+	// Get the DOM elements
+	const graphEl = graph.value.$el
+	const safeZoneEl = safeZone.value
 
-	// Apply custom padding
-	nodesBoundingBox.x -= paddingLeft
-	nodesBoundingBox.y -= paddingTop
-	nodesBoundingBox.width += paddingLeft + paddingRight
-	nodesBoundingBox.height += paddingTop + paddingBottom
+	// Get their bounding rectangles
+	const graphRect = graphEl.getBoundingClientRect()
+	const safeZoneRect = safeZoneEl.getBoundingClientRect()
 
-	// Get the size of the VueFlow container
-	const viewportWidth = graph.value.$el.clientWidth
-	const viewportHeight = graph.value.$el.clientHeight
+	// Calculate the safeZone dimensions relative to the graph component
+	const safeArea = {
+		x: safeZoneRect.left - graphRect.left,
+		y: safeZoneRect.top - graphRect.top,
+		width: safeZoneRect.width,
+		height: safeZoneRect.height,
+	}
 
-	// Compute the zoom level needed to fit the bounding box into the viewport
-	const zoomX = viewportWidth / nodesBoundingBox.width
-	const zoomY = viewportHeight / nodesBoundingBox.height
+	// Compute the zoom factor needed to fit the nodes into the safeZone
+	const zoomX = safeArea.width / nodesBoundingBox.width
+	const zoomY = safeArea.height / nodesBoundingBox.height
 	let zoom = Math.min(zoomX, zoomY)
 
 	// Limit the zoom to the maximum zoom allowed
-	const maxZoom = 1 // Adjust maxZoom as needed
+	const maxZoom = 1.5 // Adjust maxZoom as needed
 	zoom = Math.min(zoom, maxZoom)
 
-	// Compute the pan (translation) needed to center the bounding box in the viewport
-	const x = -nodesBoundingBox.x * zoom + (viewportWidth - nodesBoundingBox.width * zoom) / 2
-	const y = -nodesBoundingBox.y * zoom + (viewportHeight - nodesBoundingBox.height * zoom) / 2
+	// Compute centers
+	const nodesCenterX = nodesBoundingBox.x + nodesBoundingBox.width / 2
+	const nodesCenterY = nodesBoundingBox.y + nodesBoundingBox.height / 2
+	const safeZoneCenterX = safeArea.x + safeArea.width / 2
+	const safeZoneCenterY = safeArea.y + safeArea.height / 2
+
+	// Compute the pan (translation) needed to center the nodes within the safeZone
+	const x = -nodesCenterX * zoom + safeZoneCenterX
+	const y = -nodesCenterY * zoom + safeZoneCenterY
 
 	// Apply the transformation to the VueFlow instance
 	setViewport({ x, y, zoom }, { duration: 600 })
 }
 
 const organizeDagreLayout = (direction: string) => {
-	const before = JSON.stringify(elements.value)
+	const selectedNodes = getSelectedNodes.value
+	const nodesToLayout = selectedNodes.length > 1 ? selectedNodes : nodes.value
+
+	if (nodesToLayout.length === 0) return
+
 	const isHorizontal = direction === 'LR'
 
-	// Clear existing nodes and edges from the dagre graph
+	// Reset the dagre graph
+	dagreGraph.setGraph({})
 	dagreGraph.nodes().forEach((node) => dagreGraph.removeNode(node))
-	dagreGraph.edges().forEach((edge) => dagreGraph.removeEdge(edge, edge.v, edge.w))
+	dagreGraph.edges().forEach((edge) => dagreGraph.removeEdge(edge))
 
 	// Set up the dagre graph with appropriate settings
 	dagreGraph.setGraph({
 		rankdir: direction,
 		align: 'UL',
-		marginx: 0,
-		marginy: 0,
+		marginx: 50,
+		marginy: 50,
 	})
 
-	// Add nodes and edges to the dagre graph
-	elements.value.forEach((el) => {
-		if (isNode(el)) {
-			// Set node dimensions; adjust width and height as needed
-			dagreGraph.setNode(el.id, { width: 180, height: 60 })
-		} else {
-			// Set edges between nodes
-			dagreGraph.setEdge(el.source, el.target)
-		}
+	// Add nodes to the dagre graph
+	nodesToLayout.forEach((node) => {
+		dagreGraph.setNode(node.id, { width: 180, height: 60 })
 	})
+
+	// Include edges that connect the nodes we're laying out
+	const edgesToLayout = edges.value.filter(
+		(edge) =>
+			nodesToLayout.some((node) => node.id === edge.source) && nodesToLayout.some((node) => node.id === edge.target),
+	)
+
+	edgesToLayout.forEach((edge) => {
+		dagreGraph.setEdge(edge.source, edge.target)
+	})
+
+	// Save the position of the first node before layout
+	const firstNode = nodesToLayout[0]
+	const originalPosition = { ...firstNode.position }
 
 	// Run the dagre layout algorithm
 	dagre.layout(dagreGraph)
 
-	// Update element positions based on layout
-	elements.value.forEach((el) => {
-		if (isNode(el)) {
-			const nodeWithPosition = dagreGraph.node(el.id)
+	// Get the new position of the first node after layout
+	const nodeWithPosition = dagreGraph.node(firstNode.id)
+	const newFirstNodePosition = {
+		x: nodeWithPosition.x,
+		y: nodeWithPosition.y,
+	}
 
-			// Set node handle positions based on layout direction
-			el.targetPosition = isHorizontal ? Position.Left : Position.Top
-			el.sourcePosition = isHorizontal ? Position.Right : Position.Bottom
+	// Calculate the offset between the original and new positions
+	const offsetX = originalPosition.x - newFirstNodePosition.x
+	const offsetY = originalPosition.y - newFirstNodePosition.y
 
-			// Snap positions to grid steps of 5
-			el.position = {
-				x: Math.round(nodeWithPosition.x / 5) * 5,
-				y: Math.round(nodeWithPosition.y / 5) * 5,
-			}
+	// Update node positions based on the layout, applying the offset
+	nodesToLayout.forEach((node) => {
+		const nodeData = dagreGraph.node(node.id)
+
+		// Set node handle positions based on layout direction
+		node.targetPosition = isHorizontal ? Position.Left : Position.Top
+		node.sourcePosition = isHorizontal ? Position.Right : Position.Bottom
+
+		// Apply the offset to keep the first node in place
+		node.position = {
+			x: Math.round((nodeData.x + offsetX) / 5) * 5,
+			y: Math.round((nodeData.y + offsetY) / 5) * 5,
 		}
 	})
 
-	// Adjust parent nodes to be vertically centered over their children
-	adjustParentPositions(isHorizontal)
+	// Ensure Vue reactivity by updating the nodes array
+	nodes.value = [...nodes.value]
 
 	// Wait for the next tick to render and fit the view
 	nextTick(() => {
@@ -382,12 +418,6 @@ const currentFlowId = computed(() => {
 })
 const useJob = useJobStore()
 
-const graph = ref()
-const pointer = usePointer()
-const isPressed = computed(() => {
-	return pointer.pressure.value > 0
-})
-
 const currentFlow = computed(() => useAppStore().flow)
 
 const buildBoard = () => {
@@ -399,7 +429,7 @@ const buildBoard = () => {
 	})
 }
 
-const processBoard = () => {
+const processBoard = async () => {
 	if (useAppStore().flowList) {
 		localEdges.value =
 			currentFlow.value?.workflow.edges.map((edge) => {
@@ -425,10 +455,10 @@ const processBoard = () => {
 
 		elements.value = [...localNodes.value, ...localEdges.value]
 		showBoard.value = true
+		await new Promise((resolve) => setTimeout(resolve, 150))
 		nextTick(() => {
 			fitView()
 		})
-
 		// const { token } = useAuthStore();
 		// // const a = new EventSource('/api/sse/sse?id=dfs');
 		// const localKey = new Date().getTime();

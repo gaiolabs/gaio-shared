@@ -20,6 +20,7 @@
 			>
 				<BoardView
 					:key="useAppStore().refreshKey"
+					:is-sidebar-open="!!sidebarPanel"
 					@choose="selectElement"
 					@open="selectElement"
 				/>
