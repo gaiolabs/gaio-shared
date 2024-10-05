@@ -92,15 +92,17 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-					<NButton
-						type="primary"
-						:loading="loading"
-						@click="save()"
-					>
-						{{ $t('save') }}
-					</NButton>
-				</div>
+			</div>
+		</template>
+		<template #footer>
+			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
+				<NButton
+					type="primary"
+					:loading="loading"
+					@click="save()"
+				>
+					{{ $t('save') }}
+				</NButton>
 			</div>
 		</template>
 	</g-dialog>
@@ -111,7 +113,7 @@ import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import type { AssociationRulesTaskType } from '@gaio/shared/types'
 import { getBucketNameFromAppId } from '@gaio/shared/utils'
-import { ref, onMounted } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 
 const emit = defineEmits(['close'])
 const loading = ref(false)
@@ -144,7 +146,7 @@ const save = () => {
 		.then(() => emit('close'))
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'basket',
 		base: {
@@ -152,6 +154,5 @@ onMounted(() => {
 			...useAppStore().cloneTask(),
 		},
 	})
-	console.log('mounted')
 })
 </script>
