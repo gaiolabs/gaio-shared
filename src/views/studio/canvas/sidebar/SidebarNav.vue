@@ -63,10 +63,6 @@ const sidebarActions = [
 	},
 ]
 
-const isPaneActive = (type: string) => {
-	return panel.value === type
-}
-
 const workWithPanel = (type: string) => {
 	if (props.modelValue === type) {
 		return emit('update:modelValue', null)
