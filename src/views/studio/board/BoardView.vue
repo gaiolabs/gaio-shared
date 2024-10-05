@@ -12,7 +12,7 @@
 			:max-zoom="4"
 			:snap-to-grid="true"
 			:snap-grid="[5, 5]"
-			selection-mode="partial"
+			:selection-mode="SelectionMode.Partial"
 			@selection-end="onSelectMany()"
 			@node-click="onSelectNode($event)"
 			@node-double-click="onOpenNode($event)"
@@ -57,6 +57,10 @@
 		<aside class="z-1 absolute bottom-0 right-0 p-4 flex flex-col items-end gap-2">
 			<AlignmentToolbar :get-selected-nodes="getSelectedNodes" />
 			<MainToolbar
+				:zoom-level="zoomLevel"
+				@zoom-in="zoomIn"
+				@zoom-out="zoomOut"
+				@set-zoom="handleSetZoom"
 				@organize-layout="organizeDagreLayout"
 				@fit-view="fitView"
 			/>
@@ -75,14 +79,14 @@ import BoardNode from '@/views/studio/board/BoardNode.vue'
 import AlignmentToolbar from '@/views/studio/board/toolbars/AlignmentToolbar.vue'
 import MainToolbar from '@/views/studio/board/toolbars/MainToolbar.vue'
 import { Background } from '@vue-flow/background'
-import { isNode, Position, useVueFlow, VueFlow, getRectOfNodes } from '@vue-flow/core'
-import type { Elements } from '@vue-flow/core'
+import { Position, useVueFlow, VueFlow, getRectOfNodes, SelectionMode } from '@vue-flow/core'
+import type { Elements, NodeMouseEvent } from '@vue-flow/core'
 import { useDark, usePointer } from '@vueuse/core'
 import dagre from 'dagre'
 import { debounce } from 'lodash-es'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
-const { onConnect, addEdges, nodes, edges, getSelectedNodes, setViewport, getNodes } = useVueFlow()
+const { onConnect, addEdges, nodes, edges, getSelectedNodes, viewport, setViewport, getNodes } = useVueFlow()
 const emit = defineEmits(['choose', 'open'])
 const showBoard = ref(true)
 const dagreGraph = new dagre.graphlib.Graph()
@@ -107,7 +111,7 @@ const { isSidebarOpen } = defineProps({
 	},
 })
 
-const onOpenNode = (ev) => {
+const onOpenNode = (ev: NodeMouseEvent) => {
 	emit('open', ev.node.data)
 }
 
@@ -117,7 +121,7 @@ const onSelectMany = () => {
 	selectMany.value = getSelectedNodes.value
 }
 
-const onSelectNode = (ev) => {
+const onSelectNode = (ev: NodeMouseEvent) => {
 	useAppStore().task = ev.node.data
 }
 
@@ -165,6 +169,72 @@ const updateFlow = debounce(() => {
 		},
 	})
 }, 600)
+
+// Zoom level state
+const zoomLevel = ref(1) // Initial zoom level is 1 (100%)
+const zoomStep = ref(0.25) // Zoom step value
+function roundToStep(value: number, step: number) {
+	const inv = 1.0 / step
+	return Math.round(value * inv) / inv
+}
+
+// Watch the viewport zoom level
+watch(
+	() => viewport.value.zoom,
+	(newZoom) => {
+		zoomLevel.value = newZoom
+	},
+)
+
+// Zoom methods
+function zoomIn() {
+	let currentZoom = zoomLevel.value
+	let newZoom = roundToStep(currentZoom, zoomStep.value) + zoomStep.value
+	newZoom = Math.min(newZoom, 4) // Max zoom level is 4
+	setZoom(newZoom)
+}
+
+function zoomOut() {
+	let currentZoom = zoomLevel.value
+	let newZoom = roundToStep(currentZoom, zoomStep.value) - zoomStep.value
+	newZoom = Math.max(newZoom, 0.2) // Min zoom level is 0.2
+	setZoom(newZoom)
+}
+
+function setZoom(newZoom: number) {
+	const { x: currentX, y: currentY, zoom: currentZoom } = viewport.value
+
+	// Ensure safeZone is available
+	if (!safeZone.value) return
+
+	// Get the bounding rectangles
+	const graphEl = graph.value.$el
+	const safeZoneEl = safeZone.value
+
+	const graphRect = graphEl.getBoundingClientRect()
+	const safeZoneRect = safeZoneEl.getBoundingClientRect()
+
+	// Calculate the center of the safeZone relative to the graph
+	const safeZoneCenterX = safeZoneRect.left + safeZoneRect.width / 2 - graphRect.left
+	const safeZoneCenterY = safeZoneRect.top + safeZoneRect.height / 2 - graphRect.top
+
+	// Convert screen coordinates to world coordinates
+	const worldCenterX = (safeZoneCenterX - currentX) / currentZoom
+	const worldCenterY = (safeZoneCenterY - currentY) / currentZoom
+
+	// Calculate new x and y to keep the safeZone center fixed
+	const newX = safeZoneCenterX - worldCenterX * newZoom
+	const newY = safeZoneCenterY - worldCenterY * newZoom
+
+	// Apply the new viewport settings
+	setViewport({ x: newX, y: newY, zoom: newZoom }, { duration: 150 })
+}
+
+// Handle 'set-zoom' event from toolbar
+function handleSetZoom(newZoom: number) {
+	newZoom = Math.max(0.2, Math.min(newZoom, 4)) // Ensure zoom is within bounds
+	setZoom(newZoom)
+}
 
 function fitView() {
 	const selectedNodes = getSelectedNodes.value
@@ -225,6 +295,7 @@ const organizeDagreLayout = (direction: string) => {
 	// Reset the dagre graph
 	dagreGraph.setGraph({})
 	dagreGraph.nodes().forEach((node) => dagreGraph.removeNode(node))
+	// @ts-expect-error TODO fix type
 	dagreGraph.edges().forEach((edge) => dagreGraph.removeEdge(edge))
 
 	// Set up the dagre graph with appropriate settings
@@ -293,127 +364,132 @@ const organizeDagreLayout = (direction: string) => {
 }
 
 // Helper function to adjust parent positions
-const adjustParentPositions = (isHorizontal) => {
-	// Build a mapping from parent nodes to their immediate children
-	const parentToChildrenMap = {}
+// const adjustParentPositions = (isHorizontal: any) => {
+// 	// Build a mapping from parent nodes to their immediate children
+// 	const parentToChildrenMap = {}
 
-	// Map each parent node to its children
-	elements.value.forEach((el) => {
-		if (!isNode(el)) {
-			const parent = el.source
-			const child = el.target
+// 	// Map each parent node to its children
+// 	elements.value.forEach((el) => {
+// 		if (!isNode(el)) {
+// 			const parent = el.source
+// 			const child = el.target
 
-			if (!parentToChildrenMap[parent]) {
-				parentToChildrenMap[parent] = []
-			}
-			parentToChildrenMap[parent].push(child)
-		}
-	})
+// 			if (!parentToChildrenMap[parent]) {
+// 				parentToChildrenMap[parent] = []
+// 			}
+// 			parentToChildrenMap[parent].push(child)
+// 		}
+// 	})
 
-	// Adjust each parent node's position based on its children's positions
-	Object.keys(parentToChildrenMap).forEach((parentId) => {
-		const childrenIds = parentToChildrenMap[parentId]
-		const childNodes = elements.value.filter((el) => isNode(el) && childrenIds.includes(el.id))
+// 	// Adjust each parent node's position based on its children's positions
+// 	Object.keys(parentToChildrenMap).forEach((parentId) => {
+// 		const childrenIds = parentToChildrenMap[parentId]
+// 		const childNodes = elements.value.filter((el) => isNode(el) && childrenIds.includes(el.id))
 
-		// Calculate the average position of the children
-		const avgPosition = childNodes.reduce(
-			(sum, child) => ({
-				x: sum.x + child.position.x,
-				y: sum.y + child.position.y,
-			}),
-			{ x: 0, y: 0 },
-		)
+// 		// Calculate the average position of the children
+// 		const avgPosition = childNodes.reduce(
+// 			(sum, child) => ({
+// 				x: sum.x + child.position.x,
+// 				y: sum.y + child.position.y,
+// 			}),
+// 			{ x: 0, y: 0 },
+// 		)
 
-		avgPosition.x /= childNodes.length
-		avgPosition.y /= childNodes.length
+// 		avgPosition.x /= childNodes.length
+// 		avgPosition.y /= childNodes.length
 
-		// Find the parent node
-		const parentNode = elements.value.find((el) => isNode(el) && el.id === parentId)
+// 		// Find the parent node
+// 		const parentNode = elements.value.find((el) => isNode(el) && el.id === parentId)
 
-		if (parentNode) {
-			// Adjust parent's position based on layout direction
-			if (isHorizontal) {
-				// For horizontal layout (LR), adjust y position to average y of children
-				parentNode.position.y = Math.round(avgPosition.y / 5) * 5
-			} else {
-				// For vertical layout (TB), adjust x position to average x of children
-				parentNode.position.x = Math.round(avgPosition.x / 5) * 5
-			}
+// 		if (parentNode) {
+// 			// Adjust parent's position based on layout direction
+// 			if (isHorizontal) {
+// 				// For horizontal layout (LR), adjust y position to average y of children
+// 				parentNode.position.y = Math.round(avgPosition.y / 5) * 5
+// 			} else {
+// 				// For vertical layout (TB), adjust x position to average x of children
+// 				parentNode.position.x = Math.round(avgPosition.x / 5) * 5
+// 			}
 
-			// Check for conflicts and resolve them
-			resolveConflicts(parentNode, isHorizontal)
-		}
-	})
-}
+// 			// Check for conflicts and resolve them
+// 			resolveConflicts(parentNode, isHorizontal)
+// 		}
+// 	})
+// }
 
 // Helper function to resolve conflicts
-const resolveConflicts = (movedNode, isHorizontal) => {
-	const maxSteps = 10 // Limit to 10 steps
-	const nodeSize = { width: 180, height: 60 }
-	const spacing = 20 // Minimum spacing between nodes
+// const resolveConflicts = (movedNode, isHorizontal: any) => {
+// 	const maxSteps = 10 // Limit to 10 steps
+// 	const nodeSize = { width: 180, height: 60 }
+// 	const spacing = 20 // Minimum spacing between nodes
 
-	let steps = 0
+// 	let steps = 0
 
-	while (steps < maxSteps) {
-		let conflictFound = false
+// 	while (steps < maxSteps) {
+// 		let conflictFound = false
 
-		// Check for conflicts with other nodes
-		for (let el of elements.value) {
-			if (isNode(el) && el.id !== movedNode.id) {
-				if (nodesOverlap(movedNode, el, nodeSize, spacing)) {
-					// Conflict found, move the conflicting node down or sideways
-					conflictFound = true
-					steps++
+// 		// Check for conflicts with other nodes
+// 		for (let el of elements.value) {
+// 			if (isNode(el) && el.id !== movedNode.id) {
+// 				if (nodesOverlap(movedNode, el, nodeSize, spacing)) {
+// 					// Conflict found, move the conflicting node down or sideways
+// 					conflictFound = true
+// 					steps++
 
-					if (isHorizontal) {
-						// Move down vertically
-						el.position.y += nodeSize.height + spacing
-					} else {
-						// Move sideways horizontally
-						el.position.x += nodeSize.width + spacing
-					}
+// 					if (isHorizontal) {
+// 						// Move down vertically
+// 						el.position.y += nodeSize.height + spacing
+// 					} else {
+// 						// Move sideways horizontally
+// 						el.position.x += nodeSize.width + spacing
+// 					}
 
-					// Snap to grid
-					el.position.x = Math.round(el.position.x / 5) * 5
-					el.position.y = Math.round(el.position.y / 5) * 5
+// 					// Snap to grid
+// 					el.position.x = Math.round(el.position.x / 5) * 5
+// 					el.position.y = Math.round(el.position.y / 5) * 5
 
-					// Break to re-check from the beginning
-					break
-				}
-			}
-		}
+// 					// Break to re-check from the beginning
+// 					break
+// 				}
+// 			}
+// 		}
 
-		// If no conflicts found, exit the loop
-		if (!conflictFound) {
-			break
-		}
-	}
-}
+// 		// If no conflicts found, exit the loop
+// 		if (!conflictFound) {
+// 			break
+// 		}
+// 	}
+// }
 
 // Helper function to check if two nodes overlap
-const nodesOverlap = (nodeA, nodeB, nodeSize, spacing) => {
-	const rectA = {
-		left: nodeA.position.x,
-		right: nodeA.position.x + nodeSize.width,
-		top: nodeA.position.y,
-		bottom: nodeA.position.y + nodeSize.height,
-	}
+// const nodesOverlap = (
+// 	nodeA: { position: { x: any; y: any } },
+// 	nodeB,
+// 	nodeSize: { width: any; height: any },
+// 	spacing: number,
+// ) => {
+// 	const rectA = {
+// 		left: nodeA.position.x,
+// 		right: nodeA.position.x + nodeSize.width,
+// 		top: nodeA.position.y,
+// 		bottom: nodeA.position.y + nodeSize.height,
+// 	}
 
-	const rectB = {
-		left: nodeB.position.x,
-		right: nodeB.position.x + nodeSize.width,
-		top: nodeB.position.y,
-		bottom: nodeB.position.y + nodeSize.height,
-	}
+// 	const rectB = {
+// 		left: nodeB.position.x,
+// 		right: nodeB.position.x + nodeSize.width,
+// 		top: nodeB.position.y,
+// 		bottom: nodeB.position.y + nodeSize.height,
+// 	}
 
-	// Check for overlap with spacing buffer
-	return !(
-		rectA.right + spacing <= rectB.left ||
-		rectA.left - spacing >= rectB.right ||
-		rectA.bottom + spacing <= rectB.top ||
-		rectA.top - spacing >= rectB.bottom
-	)
-}
+// 	// Check for overlap with spacing buffer
+// 	return !(
+// 		rectA.right + spacing <= rectB.left ||
+// 		rectA.left - spacing >= rectB.right ||
+// 		rectA.bottom + spacing <= rectB.top ||
+// 		rectA.top - spacing >= rectB.bottom
+// 	)
+// }
 
 const currentFlowId = computed(() => {
 	return useAppStore().flow?.flowId
