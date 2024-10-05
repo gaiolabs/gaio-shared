@@ -85,7 +85,7 @@
 import IconComponent from '@/components/icons/IconComponent.vue'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'
-import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
+import { generateBase } from '@/views/studio/board-view/BoardIcons'
 import { taskList } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
 import { NButton, type TreeOption, useMessage } from 'naive-ui'

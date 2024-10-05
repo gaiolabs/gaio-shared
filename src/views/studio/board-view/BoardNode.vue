@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
 import { useJobStore } from '@/stores/useJobStore'
-import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
+import { generateBase } from '@/views/studio/board-view/BoardIcons'
 import type { NodeType, TaskJobType } from '@gaio/shared/types'
 import { Handle, Position } from '@vue-flow/core'
 import { computed } from 'vue'

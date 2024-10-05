@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import useDefaultReport from '@/composables/useDefaultReport'
 import { useAppStore, useReportStore } from '@/stores'
-import { generateBase } from '@/views/studio/canvas/board-view/BoardIcons'
+import { generateBase } from '@/views/studio/board-view/BoardIcons'
 import { taskExplorerTypeList } from '@/views/studio/canvas/task-explorer/TaskExplorerTypeList'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { useI18n } from 'vue-i18n'
