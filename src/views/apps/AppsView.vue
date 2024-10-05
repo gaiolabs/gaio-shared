@@ -51,14 +51,14 @@
 					<nav class="g-wrapper flex p-2 rounded-2xl gap-2">
 						<span class="sr-only">{{ $t('toggleCurrentTab') }}</span>
 						<GButton
-							:type="currentTab === 'recent' ? 'primary' : 'tertiary'"
+							:type="currentTab === 'recent' ? 'primary' : 'secondary'"
 							class="rounded-lg"
 							@click="currentTab = 'recent'"
 						>
 							{{ $t('recent') }}
 						</GButton>
 						<GButton
-							:type="currentTab === 'favorites' ? 'primary' : 'tertiary'"
+							:type="currentTab === 'favorites' ? 'primary' : 'secondary'"
 							class="rounded-lg"
 							@click="currentTab = 'favorites'"
 						>
@@ -117,14 +117,14 @@
 						<nav class="g-wrapper flex p-2 rounded-2xl gap-2">
 							<span class="sr-only">{{ $t('toggleViewMode') }}</span>
 							<GButton
-								:type="listType === 'grid' ? 'primary' : 'tertiary'"
+								:type="listType === 'grid' ? 'primary' : 'secondary'"
 								class="rounded-lg size-8"
 								@click.prevent="changeUserViewType('grid')"
 							>
 								<IconComponent name="Grid" />
 							</GButton>
 							<GButton
-								:type="listType === 'list' ? 'primary' : 'tertiary'"
+								:type="listType === 'list' ? 'primary' : 'secondary'"
 								class="rounded-lg size-8"
 								@click.prevent="changeUserViewType('list')"
 							>

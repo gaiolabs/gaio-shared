@@ -122,11 +122,6 @@ body{
   @apply backdrop-blur;
 }
 
-.g-border {
-  /* Borders */
-  @apply border border-gray-250 dark:border-gray-300/10;
-}
-
 div:has(> .n-input-wrapper) {
   @apply backdrop-blur-[5px] ;
 }

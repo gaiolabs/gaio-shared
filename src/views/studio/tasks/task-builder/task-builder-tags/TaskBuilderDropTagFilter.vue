@@ -1,0 +1,53 @@
+<template>
+	<div
+		class="task-builder-drop-tag min-h-[30px] w-full rounded-[8px] border-elevation-2 bg-paper-100 p-2 dark:bg-carbon-200"
+	>
+		<drag
+			:list="fields"
+			class="flex flex-wrap gap-1"
+			:group="{ name: 'items', pull: 'clone' }"
+			pull="clone"
+			@change="updateFields"
+		>
+			<div
+				v-for="(field, i) in fields"
+				:key="i"
+				class="flex gap-1"
+			>
+				<NTag
+					v-if="field && i > 0"
+					@click="interchangeAndOr(field)"
+				>
+					{{ $t(field.andOr || 'and') }}
+				</NTag>
+				<v-tag
+					v-if="field"
+					:key="i"
+					:field="field"
+					@click="$emit('choose', field)"
+				/>
+			</div>
+		</drag>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { onDragMove } from '@/views/studio/tasks/task-builder/task-builder-tags/TasBuilderDragHelper'
+import type { FieldType, GenericType } from '@gaio/shared/types'
+import { cloneDeep } from 'lodash-es'
+import { VueDraggableNext as Drag } from 'vue-draggable-next'
+
+defineEmits(['choose'])
+const { fields = [] } = defineProps<{ fields: FieldType[] }>()
+
+const updateFields = (evt: GenericType) => {
+	if (evt.added) {
+		fields[evt.added.newIndex] = cloneDeep(evt.added.element)
+		onDragMove(fields[evt.added.newIndex], 'filter')
+	}
+}
+
+const interchangeAndOr = (field: GenericType) => {
+	field.andOr = field.andOr === 'and' ? 'or' : 'and'
+}
+</script>

@@ -32,7 +32,7 @@
 							class="w-full h-full"
 							/> -->
 						<img
-							src="/src/assets/images/avatar.png"
+							:src="user.options.profilePic || '/src/assets/images/gaio-default-profile.png'"
 							class="w-full h-full"
 							onerror="this.onerror=null; this.src='/src/assets/images/gaio-default-profile.png';"
 						/>

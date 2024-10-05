@@ -1,5 +1,5 @@
 <template>
-	<div class="studio relative flex h-full grow dark:bg-gray-900 bg-gray-100">
+	<div class="studio relative flex h-full grow dark:bg-gray-850/50 bg-gray-200/25">
 		<template v-if="!loading">
 			<Sidebar
 				v-model="sidebarPanel"
@@ -90,18 +90,18 @@ import useBus from '@/composables/useBus'
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore, useJobStore } from '@/stores'
-import BoardView from '@/views/studio/canvas/board-view/BoardView.vue'
-import SidebarNav from '@/views/studio/canvas/sidebar/SidebarNav.vue'
-import SidebarSubNav from '@/views/studio/canvas/sidebar/SidebarSubNav.vue'
-import Sidebar from '@/views/studio/canvas/sidebar/SidebarView.vue'
-import TableView from '@/views/studio/canvas/table-view/TableView.vue'
-import TaskBuilder from '@/views/studio/canvas/task-builder/TaskBuilder.vue'
-import TaskExplorerView from '@/views/studio/canvas/task-explorer/TaskExplorerView.vue'
-import TaskFormBuilder from '@/views/studio/canvas/task-form-builder/TaskFormBuilder.vue'
-import TaskLogView from '@/views/studio/canvas/task-log-view/TaskLogView.vue'
-import TaskQuery from '@/views/studio/canvas/task-query/TaskQuery.vue'
-import TaskStaticContent from '@/views/studio/canvas/task-static-content/TaskStaticContent.vue'
+import BoardView from '@/views/studio/board/BoardView.vue'
+import Sidebar from '@/views/studio/StudioSidebar.vue'
+import SidebarNav from '@/views/studio/StudioSidebarNav.vue'
 import { taskView } from '@/views/studio/StudioViewTask'
+import SidebarSubNav from '@/views/studio/tasks/sidebar/SidebarSubNav.vue'
+import TableView from '@/views/studio/tasks/table-view/TableView.vue'
+import TaskBuilder from '@/views/studio/tasks/task-builder/TaskBuilder.vue'
+import TaskExplorerView from '@/views/studio/tasks/task-explorer/TaskExplorerView.vue'
+import TaskFormBuilder from '@/views/studio/tasks/task-form-builder/TaskFormBuilder.vue'
+import TaskLogView from '@/views/studio/tasks/task-log-view/TaskLogView.vue'
+import TaskQuery from '@/views/studio/tasks/task-query/TaskQuery.vue'
+import TaskStaticContent from '@/views/studio/tasks/task-static-content/TaskStaticContent.vue'
 import type { TableType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
 import { cloneDeep } from 'lodash-es'
@@ -120,7 +120,7 @@ const currentTable = ref<string>()
 
 const items = ref([])
 const loading = ref(true)
-const sidebarPanel = ref()
+const sidebarPanel = ref('flow')
 watch(sidebarPanel, (oldValue, newValue) => {
 	console.log(oldValue, newValue)
 })

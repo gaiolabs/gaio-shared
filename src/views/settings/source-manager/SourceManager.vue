@@ -143,7 +143,7 @@ const list = async () => {
 }
 
 const sourceIcon = (tb: SourceType) => {
-	const image = `../../../assets//images/flow/bg-${tb.client}.png`
+	const image = `/studio/board/tasks/bg-${tb.client}.png`
 	return new URL(image, import.meta.url).href
 }
 
