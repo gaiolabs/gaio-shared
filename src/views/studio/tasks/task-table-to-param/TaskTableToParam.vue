@@ -103,7 +103,6 @@ import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import type { TableToParamTaskType } from '@gaio/shared/types'
-import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits(['close'])
@@ -116,7 +115,7 @@ const { dataTypeIcon } = useDataType()
 
 const paramOptions = computed(() => {
 	return [{ label: t('none'), value: '' }].concat(
-		useAppStore().params.map((item) => ({ value: item.paramName, label: item.paramName }))
+		useAppStore().params.map((item) => ({ value: item.paramName, label: item.paramName })),
 	)
 })
 
@@ -124,8 +123,8 @@ const loadColumnList = () => {
 	useApi()
 		.post('api/table/field', {
 			body: {
-				taskData: localTask.value
-			}
+				taskData: localTask.value,
+			},
 		})
 		.then((res) => {
 			localTask.value.fieldToParamList = res.data
@@ -138,8 +137,8 @@ const save = () => {
 		type: 'tableToParam',
 		base: {
 			...useAppStore().appInfo,
-			...localTask.value
-		}
+			...localTask.value,
+		},
 	})
 
 	useFlow(useAppStore().flow.workflow)
@@ -150,19 +149,19 @@ const save = () => {
 					type: 'table',
 					base: {
 						...useAppStore().appInfo,
-						...taskToBeSaved
-					}
-				})
-			]
+						...taskToBeSaved,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
 }
 
-onMounted(() => {
+onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'tableToParam',
-		base: useAppStore().cloneTask()
+		base: useAppStore().cloneTask(),
 	})
 	loadColumnList()
 })

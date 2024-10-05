@@ -1,4 +1,5 @@
 import type { ParamToTableTaskType } from '@gaio/shared/types'
+import { getBucketNameFromAppId } from '@gaio/shared/utils'
 
 export const defaultParamToTable = (base: ParamToTableTaskType) => {
 	return {
@@ -16,7 +17,7 @@ export const defaultParamToTable = (base: ParamToTableTaskType) => {
 		sourceType: base.sourceType || 'bucket',
 
 		resultTable: base.resultTable || null,
-		resultDatabase: base.resultDatabase || null,
-		params: base.params || null
+		resultDatabase: getBucketNameFromAppId(base.appId),
+		params: base.params || null,
 	}
 }
