@@ -43,7 +43,7 @@
 import useDefaultReport from '@/composables/useDefaultReport'
 import { useAppStore, useReportStore } from '@/stores'
 import { generateBase } from '@/views/studio/board/BoardIcons'
-import { taskExplorerTypeList } from '@/views/studio/canvas/task-explorer/TaskExplorerTypeList'
+import { taskExplorerTypeList } from '@/views/studio/tasks/task-explorer/TaskExplorerTypeList'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { useI18n } from 'vue-i18n'
 

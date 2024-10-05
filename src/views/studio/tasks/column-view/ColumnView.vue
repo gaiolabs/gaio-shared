@@ -71,7 +71,7 @@ import ColumnExtra from '@/views/studio/canvas/column-view/ColumnExtra.vue'
 import ColumnFrequency from '@/views/studio/canvas/column-view/ColumnFrequency.vue'
 import ColumnHistogram from '@/views/studio/canvas/column-view/ColumnHistogram.vue'
 import ColumnStats from '@/views/studio/canvas/column-view/ColumnStats.vue'
-import { useColumnView } from '@/views/studio/canvas/column-view/useColumnView'
+import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
 import { computed, onBeforeMount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

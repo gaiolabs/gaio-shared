@@ -38,7 +38,7 @@
 import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'
 import { useAppStore } from '@/stores'
-import { useColumnView } from '@/views/studio/canvas/column-view/useColumnView'
+import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
 import { onMounted, computed, ref } from 'vue'
 const { dataTypeIsDate, dataTypeIsDateTime } = useDataType()
 const { columnData, totalRows } = useColumnView().$state

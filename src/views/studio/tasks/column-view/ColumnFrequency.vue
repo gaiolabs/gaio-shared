@@ -36,7 +36,7 @@
 import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'
 import { useAppStore, useAuthStore, useTableStore } from '@/stores'
-import { useColumnView } from '@/views/studio/canvas/column-view/useColumnView'
+import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 

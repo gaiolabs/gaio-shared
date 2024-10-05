@@ -33,7 +33,7 @@
 import useApi from '@/composables/useApi'
 import useFormatValue from '@/composables/useFormatValue'
 import { useAppStore } from '@/stores'
-import { useColumnView } from '@/views/studio/canvas/column-view/useColumnView'
+import { useColumnView } from '@/views/studio/tasks/column-view/useColumnView'
 import { BarChart } from 'echarts/charts'
 import {
 	DatasetComponent,

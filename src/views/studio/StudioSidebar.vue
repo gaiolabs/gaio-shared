@@ -65,12 +65,12 @@
 </template>
 <script setup lang="ts">
 import GCard from '@/components/GCard.vue'
-import SidebarDiscovery from '@/views/studio/canvas/sidebar/sidebar-discovery/SidebarDiscovery.vue'
-import SidebarFlow from '@/views/studio/canvas/sidebar/sidebar-flow/SidebarFlow.vue'
-import SidebarForm from '@/views/studio/canvas/sidebar/sidebar-form/SidebarForm.vue'
-import SidebarParam from '@/views/studio/canvas/sidebar/sidebar-param/SidebarParam.vue'
-import SidebarSource from '@/views/studio/canvas/sidebar/sidebar-source/SidebarSource.vue'
-import SidebarTask from '@/views/studio/canvas/sidebar/sidebar-task/SidebarTask.vue'
+import SidebarDiscovery from '@/views/studio/tasks/sidebar/sidebar-discovery/SidebarDiscovery.vue'
+import SidebarFlow from '@/views/studio/tasks/sidebar/sidebar-flow/SidebarFlow.vue'
+import SidebarForm from '@/views/studio/tasks/sidebar/sidebar-form/SidebarForm.vue'
+import SidebarParam from '@/views/studio/tasks/sidebar/sidebar-param/SidebarParam.vue'
+import SidebarSource from '@/views/studio/tasks/sidebar/sidebar-source/SidebarSource.vue'
+import SidebarTask from '@/views/studio/tasks/sidebar/sidebar-task/SidebarTask.vue'
 import { computed } from 'vue'
 
 defineEmits(['update:modelValue', 'choose'])

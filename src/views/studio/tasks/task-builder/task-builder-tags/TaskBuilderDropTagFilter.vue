@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { onDragMove } from '@/views/studio/canvas/task-builder/task-builder-tags/TasBuilderDragHelper'
+import { onDragMove } from '@/views/studio/tasks/task-builder/task-builder-tags/TasBuilderDragHelper'
 import type { FieldType, GenericType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { VueDraggableNext as Drag } from 'vue-draggable-next'

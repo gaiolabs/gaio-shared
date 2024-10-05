@@ -74,7 +74,7 @@
 import GIcon from '@/components/GIcon.vue'
 import { useReportStore } from '@/stores/useReportStore'
 import ReportNode from '@/views/report/ReportNode.vue'
-import { taskExplorerTypeList } from '@/views/studio/canvas/task-explorer/TaskExplorerTypeList'
+import { taskExplorerTypeList } from '@/views/studio/tasks/task-explorer/TaskExplorerTypeList'
 import { NButton, NInputNumber, NTable } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
