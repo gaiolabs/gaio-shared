@@ -2,20 +2,16 @@
 	<article
 		v-if="data"
 		id="board-node-wrapper"
-		class="board-node"
-		:class="minW"
+		class="board-node-wrapper group cursor-pointer"
+		:class="[status, isSelected ? 'selected' : '']"
 	>
-		<div
-			class=""
-			:class="nodeStyle"
-		>
+		<div class="">
+			<!-- :class="nodeStyle" -->
 			<div
 				style="--tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.075), 0 2px 4px -2px rgb(0 0 0 / 0.075)"
-				class="flex items-center gap-3 rounded-lg p-1 bg-gray-100 dark:bg-gray-900 dar:bg-gray-800"
+				class="flex flex-col items-center justify-center gap-3 rounded-lg p-1"
 			>
-				<div
-					class="flex size-[45px] items-center justify-center gap-2 text-white rounded-md border border-white shadow dark:border-white/[7.5%] bg-white/50 backdrop-blur-[5px] dark:bg-gray-800/40 mb-px"
-				>
+				<div id="board-icon">
 					<img
 						class="size-[28px]"
 						:src="generateIcon(data)"
@@ -24,30 +20,30 @@
 				</div>
 				<div
 					v-if="data.type !== 'reportPreview'"
-					class="flex w-28 items-center"
+					class="flex items-center flex-col absolute bottom-0 translate-y-[90%] z-[-1]"
 				>
-					<div class="pe-3">
-						<small class="text-gray text-xs font-light">{{ data.type }}</small>
-						<div class="truncate text-sm">
-							{{ data.label || 'label' }}
-						</div>
+					<div
+						class="truncate w-full max-w-52 group-hover:max-w-full duration-150 ease-out px-1 rounded-md backdrop-blur-lg"
+					>
+						{{ data.label || 'label' }}
 					</div>
+					<small class="text-gray text-xs font-light">{{ data.type }}</small>
 				</div>
 			</div>
-			<Handle
-				v-if="!hideRightEdge"
-				id="a"
-				type="source"
-				:position="Position.Right"
-			/>
 			<Handle
 				id="b"
 				type="target"
 				:position="Position.Left"
 			/>
+			<Handle
+				id="a"
+				type="source"
+				:position="Position.Right"
+			/>
 		</div>
 	</article>
 </template>
+
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
 import { useJobStore } from '@/stores/useJobStore'
@@ -69,25 +65,12 @@ const getCurrentTaskId = computed(() => {
 
 const { lastJobTasks } = useJobStore()
 
-const nodeStyle = computed(() => {
-	if (getCurrentTaskId.value === data.id) {
-		return 'border border-zinc-500 !bg-[#f2ede7]'
-	}
-	const status = taskJobMeta.value.status
+const isSelected = computed(() => {
+	return getCurrentTaskId.value === data.id
+})
 
-	if (status === 'started') {
-		return 'border border-yellow-500 !bg-[#f2ede7]'
-	}
-	if (status === 'ended') {
-		return 'border  border-green-500 !bg-[#e6f1ecce]'
-	}
-	if (status === 'error') {
-		return 'border  border-red-500 !bg-[#f7efef]'
-	}
-	if (status === 'aborted') {
-		return 'border border-[#DEB6FF] !bg-[#F5E8FF]'
-	}
-	return 'border border-transparent'
+const status = computed(() => {
+	return taskJobMeta.value.status
 })
 
 const taskJobMeta = computed<TaskJobType>(() => {
@@ -96,20 +79,50 @@ const taskJobMeta = computed<TaskJobType>(() => {
 	}
 	return {}
 })
-
-const hideRightEdge = computed(() => {
-	return data.type === 'reportPreview'
-})
-
-const minW = computed(() => {
-	return data.type === 'reportPreview' ? '' : 'min-w-[120px]'
-})
 </script>
 
-<style lang="scss">
-.board-node {
-	.board-node.start {
-		background: #e32;
+<style lang="scss" scoped>
+.board-node-wrapper {
+	@apply rounded-lg ring-0 duration-150;
+	&.selected {
+		@apply ring-2 ring-offset-2 ring-offset-white/50 dark:ring-offset-black/50 ring-gray-300 dark:ring-gray-600;
+	}
+
+	#board-icon {
+		@apply flex size-[45px] items-center justify-center gap-2 rounded-md mb-px transition-all duration-150 ring-0;
+		@apply text-white border border-white shadow dark:border-white/[7.5%] bg-white/50 backdrop-blur-[5px] dark:bg-gray-800/40;
+
+		&:hover {
+			@apply shadow-lg;
+		}
+	}
+
+	&.started #board-icon {
+		@apply border-yellow-500 ring-2 ring-yellow-400/20 bg-yellow-50 shadow-yellow-900/20 dark:border-yellow-800 dark:ring-yellow-600/10 dark:bg-yellow-700/10 dark:shadow-yellow-600/20;
+	}
+
+	&.ended #board-icon {
+		@apply border-green-500 ring-2 ring-green-400/20 bg-green-50 shadow-green-900/20 dark:border-green-800 dark:ring-green-600/10 dark:bg-green-700/10 dark:shadow-green-600/20;
+	}
+
+	&.error #board-icon {
+		@apply border-red-500 ring-2 ring-red-400/20 bg-red-50 shadow-red-900/20 dark:border-red-800 dark:ring-red-600/10 dark:bg-red-700/10 dark:shadow-red-600/20;
+	}
+
+	&.aborted #board-icon {
+		@apply border-violet-500 ring-2 ring-violet-400/20 bg-violet-50 shadow-violet-900/20 dark:border-violet-800 dark:ring-violet-600/10 dark:bg-violet-700/10 dark:shadow-violet-600/20;
+	}
+}
+
+.isPressed {
+	.board-node-wrapper {
+		@apply cursor-grab;
+	}
+}
+
+.dragging {
+	.board-node-wrapper {
+		@apply cursor-grabbing;
 	}
 }
 </style>
