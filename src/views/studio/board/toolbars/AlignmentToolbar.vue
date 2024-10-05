@@ -273,7 +273,6 @@ async function alignCenter() {
 
 	// @ts-expect-error TODO fix type
 	const isEqual = Object.keys(before).every((key) => before[key] === after[key])
-	console.log(before, after, isEqual)
 	if (isEqual) distributeCenter()
 }
 
