@@ -8,7 +8,7 @@
 			<slot />
 		</div>
 		<span
-			v-if="showLine"
+			v-if="showLine && !noLine"
 			id="button-hover-line"
 			class="absolute left-0 right-0 bottom-[-2px] h-[2px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition duration-150 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 z-[-1]"
 		/>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-const { type, size, square } = defineProps({
+const { type, size, square, noLine } = defineProps({
 	type: {
 		type: String as PropType<'primary' | 'secondary' | 'tertiary' | 'text' | 'success' | 'warning' | 'danger' | 'info'>,
 		default: 'primary',
@@ -35,6 +35,10 @@ const { type, size, square } = defineProps({
 		default: 'medium',
 	},
 	square: {
+		type: Boolean,
+		default: false,
+	},
+	noLine: {
 		type: Boolean,
 		default: false,
 	},
@@ -52,11 +56,11 @@ const showLine = computed(
 }
 
 .secondary {
-	@apply text-gray-400 hover:text-sepia-700 hover:dark:text-ochre-500 hover:border-sepia-200 bg-white/25 backdrop-blur-[5px] dark:bg-white/[0.5%] dark:border-gray-300/10 border-gray-250 border hover:dark:bg-white/[0.5%];
+	@apply text-gray-500 hover:text-sepia-700 hover:dark:text-ochre-500 hover:border-sepia-200 bg-white/25 backdrop-blur-[5px] dark:bg-white/[0.5%] dark:border-gray-300/10 border-gray-250 border hover:dark:bg-white/[0.5%];
 }
 
 .tertiary {
-	@apply border-none text-gray-400 hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-400;
+	@apply border-none text-gray-500 hover:text-gray-700 dark:text-gray-600 dark:hover:text-gray-400;
 }
 
 .text {
