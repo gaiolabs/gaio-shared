@@ -9,16 +9,16 @@
 </template>
 
 <script setup lang="ts">
-const { type = 'base' } = defineProps({
+const { type } = defineProps({
 	type: {
 		type: String as PropType<'base' | 'wrapper'>,
-		default: 'card',
+		default: 'base',
 	},
 })
 </script>
 
 <style lang="scss" scoped>
-#g-card.base {
+.base {
 	/* Gradient Background */
 	@apply bg-gradient-to-tl;
 	@apply bg-white/75 from-white/30 via-gray-100/30 to-sepia-100/10;
@@ -37,7 +37,7 @@ const { type = 'base' } = defineProps({
 	@apply backdrop-blur;
 }
 
-#g-card.wrapper {
+.wrapper {
 	/* Background */
 	@apply bg-white/75 dark:bg-gray-850/10;
 	@apply bg-gradient-to-r from-sepia-100/30 dark:from-gray-700/25 via-gray-100/40 dark:via-gray-800/20 to-sepia-200/10 dark:to-ochre-950/[1%];
