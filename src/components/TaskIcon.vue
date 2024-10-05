@@ -7,7 +7,7 @@
 	/>
 </template>
 <script setup lang="ts">
-import { generateBase } from '@/views/studio/board-view/BoardIcons'
+import { generateBase } from '@/views/studio/board/BoardIcons'
 import type { TaskType } from '@gaio/shared/types'
 import { computed } from 'vue'
 
