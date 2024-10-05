@@ -1,6 +1,6 @@
 <template>
 	<header
-		id="board-header"
+		id="studio-header"
 		class="absolute left-0 right-0 top-0 z-30 w-full p-4 px-8 pointer-events-none"
 	>
 		<GCard

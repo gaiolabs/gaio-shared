@@ -1,7 +1,7 @@
 <template>
 	<div class="pt-[74px] p-4 absolute left-0 top-0 bottom-0 pointer-events-none">
 		<nav
-			id="sidebar-nav"
+			id="studio-sidebar-nav"
 			class="z-1 flex items-center h-full"
 		>
 			<div class="z-0 flex w-[40px] flex-col items-center justify-center rounded-2xl g-wrapper !pointer-events-auto">

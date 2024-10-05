@@ -1,6 +1,6 @@
 <template>
 	<div
-		id="sidebar-view"
+		id="studio-sidebar"
 		class="flex h-full w-[450px] max-w-[450px] items-center p-4 pl-8 pr-0 pt-[74px] pointer-events-none"
 	>
 		<!--SIDEBAR PANEL-->
