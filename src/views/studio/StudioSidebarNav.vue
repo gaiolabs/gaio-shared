@@ -1,25 +1,33 @@
 <template>
-	<div class="pt-[74px] p-4 absolute left-0 top-0 bottom-0 pointer-events-none">
+	<div class="pt-[74px] p-4 pl-3 absolute left-0 top-0 bottom-0 pointer-events-none">
 		<nav
 			id="studio-sidebar-nav"
-			class="z-1 flex items-center h-full"
+			class="z-1 flex items-center h-full py-1"
 		>
-			<div class="z-0 flex w-[40px] flex-col items-center justify-center rounded-2xl g-wrapper !pointer-events-auto">
+			<div
+				class="z-0 flex w-[40px] flex-col items-center justify-center rounded-2xl g-wrapper !pointer-events-auto gap-1"
+			>
 				<div
 					v-for="item in sidebarActions"
 					:key="item.name"
-					class="flex h-[50px] w-full items-center justify-center relative"
+					class="flex w-full items-center justify-center relative"
 				>
-					<button
-						class="relative"
+					<GButton
+						class="relative h-[40px] !rounded-2xl overflow-hidden group"
+						type="tertiary"
+						:is-active="item.name === modelValue"
+						no-line
 						@click="workWithPanel(item.name)"
 					>
 						<IconComponent
 							:name="item.icon"
-							class="text-lg text-gray-700 dark:text-gray-500 hover:dark:text-white hover:text-sepia-600 transition-colors duration-150"
-							:class="item.class"
+							class="text-lg group-hover:dark:text-white group-hover:text-sepia-800 transition-colors duration-150"
+							:class="[
+								item.class,
+								item.name === modelValue ? 'text-sepia-800 dark:text-white' : 'text-gray-500 dark:text-gray-500',
+							]"
 						/>
-					</button>
+					</GButton>
 				</div>
 			</div>
 		</nav>
@@ -27,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import GButton from '@/components/inputs/GButton.vue'
 import { useEventListener } from '@vueuse/core'
 import { onMounted, ref, watch } from 'vue'
 

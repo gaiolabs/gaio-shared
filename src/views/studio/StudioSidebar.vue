@@ -31,28 +31,34 @@
 						leave-to-class="opacity-0"
 					>
 						<template v-if="panel === 'flow'">
-							<sidebar-flow class="w-full" />
+							<SidebarFlow class="w-full" />
 						</template>
 						<template v-else-if="panel === 'database'">
-							<sidebar-source class="w-full" />
-						</template>
-						<template v-else-if="panel === 'params'">
-							<sidebar-param class="w-full" />
+							<SidebarSource class="w-full" />
 						</template>
 						<template v-else-if="panel === 'tasks'">
-							<sidebar-task
+							<SidebarTask
 								class="w-full"
 								@choose="$emit('choose', $event)"
 							/>
 						</template>
+						<template v-else-if="panel === 'params'">
+							<SidebarParam class="w-full" />
+						</template>
 						<template v-else-if="panel === 'forms'">
-							<sidebar-form
+							<SidebarForm
+								class="w-full"
+								@choose="$emit('choose', $event)"
+							/>
+						</template>
+						<template v-else-if="panel === 'files'">
+							<SideBarFiles
 								class="w-full"
 								@choose="$emit('choose', $event)"
 							/>
 						</template>
 						<template v-else-if="panel === 'discovery'">
-							<sidebar-discovery
+							<SidebarDiscovery
 								class="w-full"
 								@choose="$emit('choose', $event)"
 							/>
@@ -65,12 +71,13 @@
 </template>
 <script setup lang="ts">
 import GCard from '@/components/GCard.vue'
-import SidebarDiscovery from '@/views/studio/tasks/sidebar/sidebar-discovery/SidebarDiscovery.vue'
-import SidebarFlow from '@/views/studio/tasks/sidebar/sidebar-flow/SidebarFlow.vue'
-import SidebarForm from '@/views/studio/tasks/sidebar/sidebar-form/SidebarForm.vue'
-import SidebarParam from '@/views/studio/tasks/sidebar/sidebar-param/SidebarParam.vue'
-import SidebarSource from '@/views/studio/tasks/sidebar/sidebar-source/SidebarSource.vue'
-import SidebarTask from '@/views/studio/tasks/sidebar/sidebar-task/SidebarTask.vue'
+import SidebarDiscovery from '@/views/studio/sidebar/sidebar-discovery/SidebarDiscovery.vue'
+import SideBarFiles from '@/views/studio/sidebar/sidebar-files/SideBarFiles.vue'
+import SidebarFlow from '@/views/studio/sidebar/sidebar-flow/SidebarFlow.vue'
+import SidebarForm from '@/views/studio/sidebar/sidebar-form/SidebarForm.vue'
+import SidebarParam from '@/views/studio/sidebar/sidebar-param/SidebarParam.vue'
+import SidebarSource from '@/views/studio/sidebar/sidebar-source/SidebarSource.vue'
+import SidebarTask from '@/views/studio/sidebar/sidebar-task/SidebarTask.vue'
 import { computed } from 'vue'
 
 defineEmits(['update:modelValue', 'choose'])

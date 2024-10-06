@@ -22,7 +22,7 @@
 			<!-- Zoom Level Text -->
 			<div
 				v-if="!isHovering"
-				class="w-12"
+				class="w-12 text-gray-450 pl-1"
 			>
 				{{ Math.round(zoomLevel * 100) }}%
 			</div>
