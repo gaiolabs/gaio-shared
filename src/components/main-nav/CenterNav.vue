@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 
 const emit = defineEmits(['toggleAppControl'])

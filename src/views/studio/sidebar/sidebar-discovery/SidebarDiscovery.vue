@@ -1,37 +1,42 @@
 <template>
-	<div class="sidebar-discovery flex h-[100%] flex-col items-stretch pt-3">
-		<div class="flex w-full items-stretch justify-between px-4">
-			<h2 class="text-lg font-bold inline-flex gap-1 items-center">
-				<IconComponent name="Discovery" />
-				<span>
-					{{ $t('discovery') }}
-				</span>
-			</h2>
-			<div>
-				<NDropdown
-					trigger="hover"
-					:options="options"
-					@select="handleDropdownSelect"
-				>
-					<NButton
-						text
-						size="tiny"
+	<aside
+		id="sidebar-discovery"
+		class="flex h-full flex-col items-stretch p-3 gap-3"
+	>
+		<header class="flex flex-col gap-3">
+			<nav class="flex w-full items-stretch justify-between">
+				<h2 class="text-lg font-bold inline-flex gap-1 items-center">
+					<IconComponent name="Discovery" />
+					<span>
+						{{ $t('discovery') }}
+					</span>
+				</h2>
+				<div>
+					<NDropdown
+						trigger="hover"
+						:options="options"
+						@select="handleDropdownSelect"
 					>
-						<template #icon>
-							<IconComponent name="AddItem" />
-						</template>
-					</NButton>
-				</NDropdown>
-			</div>
-		</div>
-		<div>
-			<div class="sidebar-search mb-2 px-4 pt-1">
+						<NButton
+							text
+							size="tiny"
+						>
+							<template #icon>
+								<IconComponent name="AddItem" />
+							</template>
+						</NButton>
+					</NDropdown>
+				</div>
+			</nav>
+			<div id="sidebar-discovery-search">
 				<NInput
 					v-model:value="searchTerm"
 					size="small"
 					:placeholder="$t('search')"
 				/>
 			</div>
+		</header>
+		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
 			<div
 				v-for="item of $filterBy(discoveryList, 'label', searchTerm)"
 				:key="item.metaId"
@@ -41,15 +46,16 @@
 				<g-icon :name="item.type" />
 				{{ item.label }}
 			</div>
-		</div>
+		</GCard>
 		<task-meta
 			v-if="showPanel"
 			@save="getDiscoveryList"
 			@close="showPanel = false"
 		/>
-	</div>
+	</aside>
 </template>
 <script setup lang="ts">
+import GCard from '@/components/GCard.vue'
 import IconComponent from '@/components/icons/IconComponent.vue'
 import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'

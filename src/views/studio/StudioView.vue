@@ -20,6 +20,7 @@
 			>
 				<BoardView
 					:key="useAppStore().refreshKey"
+					:is-sidebar-open="!!sidebarPanel"
 					@choose="selectElement"
 					@open="selectElement"
 				/>
@@ -94,7 +95,7 @@ import BoardView from '@/views/studio/board/BoardView.vue'
 import Sidebar from '@/views/studio/StudioSidebar.vue'
 import SidebarNav from '@/views/studio/StudioSidebarNav.vue'
 import { taskView } from '@/views/studio/StudioViewTask'
-import SidebarSubNav from '@/views/studio/tasks/sidebar/SidebarSubNav.vue'
+import SidebarSubNav from '@/views/studio/sidebar/SidebarSubNav.vue'
 import TableView from '@/views/studio/tasks/table-view/TableView.vue'
 import TaskBuilder from '@/views/studio/tasks/task-builder/TaskBuilder.vue'
 import TaskExplorerView from '@/views/studio/tasks/task-explorer/TaskExplorerView.vue'

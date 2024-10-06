@@ -29,6 +29,11 @@
 					</div>
 					<small class="text-gray text-xs font-light">{{ data.type }}</small>
 				</div>
+				<pre
+					v-if="useDebugModeStore().isActive"
+					class="bg-black/80 text-[#0f0] p-2 text-[4px] p-1 absolute top-0 right-0 translate-x-[110%] backdrop-blur"
+					>{{ data }}</pre
+				>
 			</div>
 			<Handle
 				id="b"
@@ -46,12 +51,12 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
+import { useDebugModeStore } from '@/stores/useDebugModeStore'
 import { useJobStore } from '@/stores/useJobStore'
 import { generateBase } from '@/views/studio/board/BoardIcons'
 import type { NodeType, TaskJobType } from '@gaio/shared/types'
 import { Handle, Position } from '@vue-flow/core'
 import { computed } from 'vue'
-
 const { data = null } = defineProps<{ data: NodeType }>()
 
 const generateIcon = (item: NodeType) => {

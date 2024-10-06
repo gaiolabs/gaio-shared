@@ -21,70 +21,77 @@
 	</router-view>
 	<div
 		v-if="debugMode"
-		class="flex flex-col gap-1 fixed bottom-0 right-0 z-50"
+		class="fixed inset-0 z-[9999] pointer-events-none selection:bg-[#f0f] selection:text-white"
 	>
-		<pre class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1">
- Mode: {{ mode }} | Is Dark: {{ isDark }}</pre
-		>
-		<pre
-			v-if="user"
-			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
-		>
- Last login: {{ timeSinceLastLogin }} </pre
-		>
-		<pre
-			v-if="user"
-			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
-		>
- Session Start: {{ timeSinceSessionStart }} </pre
-		>
-		<pre
-			v-if="user"
-			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
-		>
- Sessions Count: {{ user.sessionCount }} </pre
-		>
-		<pre
-			v-if="user"
-			class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
-		>
-User: {{ user }}</pre
-		>
-	</div>
-	<div
-		v-if="debugMode"
-		class="fixed font-mono right-0 top-0 bg-black text-[#0f0] p-1"
-	>
-		<h1 class="font-bol">App.vue</h1>
-		<div class="flex gap-1">
-			<div
-				class="p-1"
-				:class="{ 'bg-[#0f0] text-black': F2 }"
+		<div class="absolute pointer-events-auto font-mono right-0 top-0 bg-black text-[#0f0] p-1 z-[9999]">
+			<h1 class="font-bold">DEBUG MODE</h1>
+			<button
+				class="bg-[#0f0] px-2 text-black"
+				@click="debugModeStore.toggleDebugMode()"
 			>
-				F2
+				Close Debug Mode
+			</button>
+
+			<div class="flex gap-1 mt-1">
+				<button
+					v-if="!isDark"
+					class="bg-[#0f0] px-2 text-black"
+					@click="toggleDark()"
+				>
+					Set Dark Mode
+				</button>
+				<button
+					v-else
+					class="bg-[#0f0] px-2 text-black"
+					@click="toggleDark()"
+				>
+					Set Light Mode
+				</button>
 			</div>
-			<div
-				class="p-1"
-				:class="{ 'bg-[#0f0] text-black': F4 }"
-			>
-				F4
+
+			<div class="flex gap-1">
+				<div
+					class="p-1"
+					:class="{ 'bg-[#0f0] text-black': F2 }"
+				>
+					F2
+				</div>
+				<div
+					class="p-1"
+					:class="{ 'bg-[#0f0] text-black': F4 }"
+				>
+					F4
+				</div>
 			</div>
 		</div>
-		<div class="flex gap-1">
-			<button
-				v-if="!isDark"
-				class="bg-[#0f0] px-2 text-black"
-				@click="toggleDark()"
+		<div class="flex pointer-events-auto flex-col gap-1 absolute bottom-0 right-0 z-[9999]">
+			<pre class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1">
+ Mode: {{ mode }} | Is Dark: {{ isDark }}</pre
 			>
-				Set Dark Mode
-			</button>
-			<button
-				v-else
-				class="bg-[#0f0] px-2 text-black"
-				@click="toggleDark()"
+			<pre
+				v-if="user"
+				class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
 			>
-				Set Light Mode
-			</button>
+ Last login: {{ timeSinceLastLogin }} </pre
+			>
+			<pre
+				v-if="user"
+				class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+			>
+ Session Start: {{ timeSinceSessionStart }} </pre
+			>
+			<pre
+				v-if="user"
+				class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+			>
+ Sessions Count: {{ user.sessionCount }} </pre
+			>
+			<pre
+				v-if="user"
+				class="bg-black w-96 max-h-[50vh] overflow-auto text-xs text-[#0f0] font-mono p-1"
+			>
+User: {{ user }}</pre
+			>
 		</div>
 	</div>
 	<command-k
@@ -97,10 +104,12 @@ User: {{ user }}</pre
 import bgDark from '@/assets/images/bg-dark.png'
 import bg from '@/assets/images/bg-light.png'
 import { useAuthStore, useCommandKStore } from '@/stores'
+import { useDebugModeStore } from '@/stores/useDebugModeStore'
 import BackgroundElements from '@/views/auth/BackgroundElements.vue'
 import CommandK from '@/views/commandK/CommandK.vue'
 import { useColorMode, useMagicKeys } from '@vueuse/core'
-import { useDark, useToggle } from '@vueuse/core'
+import { useDark, useToggle, createGlobalState } from '@vueuse/core'
+import { use } from 'echarts'
 import { darkTheme, NMessageProvider, NConfigProvider } from 'naive-ui'
 import { computed, nextTick, onMounted, watch, watchEffect } from 'vue'
 import { RouterView } from 'vue-router'
@@ -109,8 +118,8 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 // const mode = useColorMode()
 const user = computed(() => useAuthStore().user)
-const debugMode = ref(false)
-const toggleDebugMode = useToggle(debugMode)
+const debugModeStore = useDebugModeStore()
+const debugMode = computed(() => debugModeStore.isActive)
 // watch(
 // 	() => user.value,
 // 	() => {
@@ -155,7 +164,7 @@ watch(F2, (value) => {
 
 watch(F4, (value) => {
 	if (value) {
-		toggleDebugMode()
+		debugModeStore.toggleDebugMode()
 	}
 })
 

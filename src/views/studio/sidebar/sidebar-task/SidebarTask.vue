@@ -1,87 +1,87 @@
 <template>
 	<aside
 		id="sidebar-task"
-		class="flex h-full flex-col items-stretch"
+		class="flex h-full flex-col items-stretch p-3 gap-3"
 	>
-		<div class="flex w-full items-stretch justify-between px-4 pt-3">
-			<h2 class="text-lg font-bold inline-flex items-center gap-1">
-				<IconComponent name="Tasks" />
-				<span>
-					{{ $t('tasks') }}
-				</span>
-			</h2>
-			<div class="flex gap-1">
-				<NButton
-					size="tiny"
-					tertiary
-					:type="showAs === 'grid' ? 'primary' : 'default'"
-					@click="() => (showAs = showAs === 'grid' ? 'tree' : 'grid')"
-				>
-					<template #icon>
-						<IconComponent name="Grid" />
-					</template>
-				</NButton>
+		<header class="flex flex-col gap-3">
+			<nav class="flex w-full items-stretch justify-between">
+				<h2 class="text-lg font-bold inline-flex items-center gap-1">
+					<IconComponent name="Tasks" />
+					<span>
+						{{ $t('tasks') }}
+					</span>
+				</h2>
+				<div class="flex gap-1">
+					<NButton
+						size="tiny"
+						tertiary
+						:type="showAs === 'grid' ? 'primary' : 'default'"
+						@click="() => (showAs = showAs === 'grid' ? 'tree' : 'grid')"
+					>
+						<template #icon>
+							<IconComponent name="Grid" />
+						</template>
+					</NButton>
+				</div>
+			</nav>
+			<div id="sidebar-flow-search">
+				<NInput
+					v-model:value="searchTerm"
+					size="small"
+					:placeholder="$t('search')"
+				/>
 			</div>
-		</div>
-		<div class="sidebar-flow-search px-4 pt-1">
-			<NInput
-				v-model:value="searchTerm"
-				size="small"
-				:placeholder="$t('search')"
-			/>
-		</div>
-		<NScrollbar
-			style="calc(100% - 20px) overflow: auto"
-			outer-class="h-full overflow-auto"
-		>
-			<template v-if="showAs === 'grid'">
-				<div
-					v-for="tree of localTreeFiltered"
-					:key="tree.key"
-					class="mb-5 px-4"
-				>
-					<div class="mx-4 mt-2 font-bold">
-						{{ tree.label }}
-					</div>
-					<div class="grid grid-cols-3 gap-1">
-						<div
-							v-for="item of tree.children"
-							:key="item.key"
-							class="mb-2 flex h-[79px] flex-col items-center justify-start"
-						>
+		</header>
+		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
+			<NScrollbar outer-class="h-full overflow-auto">
+				<template v-if="showAs === 'grid'">
+					<div
+						v-for="tree of localTreeFiltered"
+						:key="tree.key"
+					>
+						<div class="mx-4 mt-2 font-bold">
+							{{ tree.label }}
+						</div>
+						<div class="grid grid-cols-3 gap-1">
 							<div
-								class="mb-1 flex size-[55px] cursor-pointer items-center justify-center rounded border-elevation-2 bg-elevation-1"
-								@click="select(item)"
+								v-for="item of tree.children"
+								:key="item.key"
+								class="mb-2 flex h-[79px] flex-col items-center justify-start"
 							>
-								<component :is="item.prefix()" />
-							</div>
-							<div
-								class="text-xs"
-								style="text-align: center; font-size: 10px; font-style: normal; font-weight: 400; line-height: 10px"
-							>
-								{{ item.label }}
+								<div
+									class="mb-1 flex size-[55px] cursor-pointer items-center justify-center rounded border-elevation-2 bg-elevation-1"
+									@click="select(item)"
+								>
+									<component :is="item.prefix()" />
+								</div>
+								<div
+									class="text-xs"
+									style="text-align: center; font-size: 10px; font-style: normal; font-weight: 400; line-height: 10px"
+								>
+									{{ item.label }}
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</template>
-			<NTree
-				v-else
-				class="mx-4 mb-5"
-				block-node
-				block-line
-				expand-on-click
-				:default-expanded-keys="['etl']"
-				:get-children="baseChildren"
-				:data="localTreeFiltered"
-				:default-expand-all="searchTerm.length > 0"
-				:node-props="nodeProps"
-				@select="select"
-			/>
-		</NScrollbar>
+				</template>
+				<NTree
+					v-else
+					block-node
+					block-line
+					expand-on-click
+					:default-expanded-keys="['etl']"
+					:get-children="baseChildren"
+					:data="localTreeFiltered"
+					:default-expand-all="searchTerm.length > 0"
+					:node-props="nodeProps"
+					@select="select"
+				/>
+			</NScrollbar>
+		</GCard>
 	</aside>
 </template>
 <script setup lang="ts">
+import GCard from '@/components/GCard.vue'
 import IconComponent from '@/components/icons/IconComponent.vue'
 import useTree from '@/composables/useTree'
 import { useAppStore } from '@/stores'

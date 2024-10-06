@@ -1,9 +1,12 @@
 <template>
-	<div class="sidebar-source flex h-[100%] flex-col items-stretch pt-3">
-		<div class="flex w-full items-stretch justify-between px-4">
+	<aside
+		id="sidebar-source"
+		class="flex h-full flex-col items-stretch p-3 gap-3"
+	>
+		<header class="flex w-full items-stretch justify-between px-4">
 			<div class="text-lg font-bold">{{ $t('sources') }}</div>
-		</div>
-		<div class="my-3 flex grow flex-col items-stretch overflow-hidden">
+		</header>
+		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
 			<div class="mx-3">
 				<NCollapse @item-header-click="loadMetadata">
 					<NCollapseItem
@@ -48,10 +51,11 @@
 					</NCollapseItem>
 				</NCollapse>
 			</div>
-		</div>
-	</div>
+		</GCard>
+	</aside>
 </template>
 <script setup lang="ts">
+import GCard from '@/components/GCard.vue'
 import useApi from '@/composables/useApi'
 import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
@@ -83,9 +87,9 @@ const loadMetadata = (item: SourceCollapseType) => {
 			body: {
 				taskData: {
 					...useAppStore().appInfo,
-					...sourceList.value[findSourceIndex]
-				}
-			}
+					...sourceList.value[findSourceIndex],
+				},
+			},
 		})
 		.then((res) => (sourceList.value[findSourceIndex].items = res.data))
 }
@@ -94,7 +98,7 @@ onMounted(() => {
 	sourceList.value = useAppStore().sourceList.map((source) => {
 		return {
 			...source,
-			sourceTitle: source.sourceName.split('_').join(' ')
+			sourceTitle: source.sourceName.split('_').join(' '),
 		} as SourceCollapseType
 	})
 })

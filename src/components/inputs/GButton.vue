@@ -15,17 +15,23 @@
 		<span
 			v-if="showLine"
 			id="button-hover-background"
-			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 opacity-0 scale-0 group-hover:opacity-30 group-hover:dark:opacity-15 group-hover:scale-100 z-[-1]"
+			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 group-hover:opacity-30 group-hover:dark:opacity-15 group-hover:scale-100 z-[-1]"
+			:class="isActive ? 'opacity-30 dark:opacity-20 scale-100' : 'opacity-0 scale-0'"
 		>
 			<span
-				class="absolute inset-2 bottom-0 bg-gradient-to-t dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0 blur rounded-t-full z-[-1]"
+				class="absolute inset-2 bottom-0 bg-gradient-to-t blur rounded-t-full z-[-1]"
+				:class="
+					isActive ?
+						'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
+					:	'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
+				"
 			/>
 		</span>
 	</button>
 </template>
 
 <script lang="ts" setup>
-const { type, size, square, noLine } = defineProps({
+const { type, size, square, noLine, isActive } = defineProps({
 	type: {
 		type: String as PropType<'primary' | 'secondary' | 'tertiary' | 'text' | 'success' | 'warning' | 'danger' | 'info'>,
 		default: 'primary',
@@ -39,6 +45,10 @@ const { type, size, square, noLine } = defineProps({
 		default: false,
 	},
 	noLine: {
+		type: Boolean,
+		default: false,
+	},
+	isActive: {
 		type: Boolean,
 		default: false,
 	},
