@@ -72,6 +72,22 @@
 		>
 			<IconComponent name="AdjustToScreen" />
 		</GButton>
+
+		<div class="bg-gray-200 dark:bg-white/10 w-px h-5"></div>
+
+		<!-- Lock/Unlock Button -->
+		<GButton
+			size="tiny"
+			type="tertiary"
+			:is-active="locked"
+			class="!p-2"
+			@click="$emit('toggle-lock')"
+		>
+			<IconComponent
+				:class="locked ? 'text-sepia-800' : ''"
+				:name="locked ? 'Lock' : 'Unlock'"
+			/>
+		</GButton>
 	</GCard>
 </template>
 
@@ -85,9 +101,13 @@ const props = defineProps({
 		type: Number,
 		default: 1,
 	},
+	locked: {
+		type: Boolean,
+		default: false,
+	},
 })
 
-const emit = defineEmits(['zoom-in', 'zoom-out', 'set-zoom', 'organize-layout', 'fit-view'])
+const emit = defineEmits(['zoom-in', 'zoom-out', 'set-zoom', 'organize-layout', 'fit-view', 'toggle-lock'])
 
 const zoomInput = ref(Math.round(props.zoomLevel * 100).toString())
 const isHovering = ref(false)
@@ -157,6 +177,11 @@ useEventListener('keydown', (event: KeyboardEvent) => {
 	if (event.key.toUpperCase() === 'O') {
 		event.preventDefault()
 		emit('organize-layout', 'LR') // Assuming 'LR' is a predefined layout type
+	}
+
+	if ((event.ctrlKey || event.metaKey) && event.key.toUpperCase() === 'L') {
+		event.preventDefault()
+		emit('toggle-lock')
 	}
 })
 </script>

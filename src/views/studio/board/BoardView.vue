@@ -13,6 +13,12 @@
 			:snap-to-grid="true"
 			:snap-grid="[5, 5]"
 			:selection-mode="SelectionMode.Partial"
+			:pan-on-scroll="!isLocked"
+			:zoom-on-scroll="!isLocked"
+			:zoom-on-pinch="!isLocked"
+			:nodes-draggable="!isLocked"
+			:nodes-connectable="!isLocked"
+			:elements-selectable="!isLocked"
 			@selection-end="onSelectMany()"
 			@node-click="onSelectNode($event)"
 			@node-double-click="onOpenNode($event)"
@@ -58,11 +64,13 @@
 			<AlignmentToolbar :get-selected-nodes="getSelectedNodes" />
 			<MainToolbar
 				:zoom-level="zoomLevel"
+				:locked="isLocked"
 				@zoom-in="zoomIn"
 				@zoom-out="zoomOut"
 				@set-zoom="handleSetZoom"
 				@organize-layout="organizeDagreLayout"
 				@fit-view="fitView"
+				@toggle-lock="toggleLock"
 			/>
 		</aside>
 	</div>
@@ -169,6 +177,13 @@ const updateFlow = debounce(() => {
 		},
 	})
 }, 600)
+
+const isLocked = ref(false)
+
+// Function to toggle lock state
+function toggleLock() {
+	isLocked.value = !isLocked.value
+}
 
 // Zoom level state
 const zoomLevel = ref(1) // Initial zoom level is 1 (100%)
@@ -285,6 +300,7 @@ function fitView() {
 }
 
 const organizeDagreLayout = (direction: string) => {
+	if (isLocked.value) return
 	const selectedNodes = getSelectedNodes.value
 	const nodesToLayout = selectedNodes.length > 1 ? selectedNodes : nodes.value
 
