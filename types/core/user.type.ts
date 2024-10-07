@@ -7,6 +7,7 @@ export type UserOptionsType = Partial<{
     appViewType: string
     userThemeMode: string
     studioDrawerFullscreen: boolean
+    profilePic?: string
 }>
 
 export type UserType = Partial<{
