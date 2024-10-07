@@ -70,6 +70,7 @@
 				</div>
 			</div>
 		</template>
+
 		<template #footer>
 			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
 				<NButton
@@ -82,6 +83,7 @@
 		</template>
 	</g-dialog>
 </template>
+
 <script setup lang="ts">
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
