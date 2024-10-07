@@ -5,10 +5,7 @@
 	>
 		<div class="mx-1 flex items-center justify-between gap-1">
 			<div class="flex items-center gap-1 font-bold">
-				<IconComponent
-					class="rotate-[-90deg]"
-					name="Studio"
-				/>
+				<IconComponent name="Studio" />
 				{{ $t('join') }}
 				<span v-if="localTask.schema.join.length">({{ localTask.schema.join.length }})</span>
 			</div>

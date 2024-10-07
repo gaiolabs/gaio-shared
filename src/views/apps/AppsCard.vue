@@ -100,7 +100,7 @@
 					>
 						<IconComponent
 							name="Studio"
-							class="rotate-[-90deg] size-5"
+							class="size-5"
 						/>
 					</GButton>
 				</footer>

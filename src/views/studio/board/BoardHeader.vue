@@ -33,10 +33,7 @@
 						/>
 					</div>
 					<GCard class="max-w-[150px] truncate flex gap-2 g-base p-1 px-2 rounded-lg">
-						<IconComponent
-							name="Studio"
-							class="rotate-[-90deg]"
-						/>
+						<IconComponent name="Studio" />
 
 						<div class="flex items-center text-[14px] font-bold">
 							{{ currentFlow?.flowName }}

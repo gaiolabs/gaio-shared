@@ -173,7 +173,6 @@ watch(() => useCommandKStore().searchTerm, debounce(processBreadcrumb, 300))
 watch(
 	() => useCommandKStore().tab,
 	() => {
-		console.log('casa')
 		processBreadcrumb()
 		nextTick(() => inputRef.value.focus())
 	},
