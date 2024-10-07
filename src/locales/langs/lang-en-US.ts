@@ -801,4 +801,6 @@ export default {
 	wordCloudCharMessage:
 		'Visual representation of text data where the size of each word reflects its frequency or importance',
 	wordCloud: 'Word Cloud',
+	heatmapChartMessage:
+		'A visualization that uses colors to represent the intensity of values in a data matrix, making it easier to identify patterns and trends',
 }

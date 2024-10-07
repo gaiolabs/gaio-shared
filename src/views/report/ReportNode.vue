@@ -62,25 +62,20 @@ import type { ReportNodeType } from '@gaio/shared/types/tasks/report.type'
 import { computed } from 'vue'
 
 defineEmits(['trigger'])
-const props = defineProps<{ task: ReportNodeType }>()
-
-watch(
-	() => props.task,
-	() => console.log('props.task', props.task),
-)
+const { task } = defineProps<{ task: ReportNodeType }>()
 
 const cardHeight = computed(() => {
-	return (props.task?.height || 300) + 'px'
+	return (task?.height || 300) + 'px'
 })
 
 const height = computed(() => {
-	if (props.task && props.task && props.task.settings) {
-		if (props.task && props.task.settings && props.task.settings.showHeader && props.task.settings.title) {
-			return (props.task.height || 300) - 100 + 'px'
-		} else if ((props.task && props.task.settings && props.task.settings.showHeader) || props.task.settings.title) {
-			return (props.task.height || 300) - 50 + 'px'
+	if (task && task && task.settings) {
+		if (task && task.settings && task.settings.showHeader && task.settings.title) {
+			return (task.height || 300) - 100 + 'px'
+		} else if ((task && task.settings && task.settings.showHeader) || task.settings.title) {
+			return (task.height || 300) - 50 + 'px'
 		}
-		return (props.task.height || 300) - 20 + 'px'
+		return (task.height || 300) - 20 + 'px'
 	}
 	return '90px'
 })

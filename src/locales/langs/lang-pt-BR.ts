@@ -221,4 +221,6 @@ export default {
 	wordCloudCharMessage:
 		'Representação visual de dados textuais onde o tamanho de cada palavra reflete sua frequência ou importância.',
 	wordCloud: 'Nuvem de palavras',
+	heatmapChartMessage:
+		'É uma visualização que usa cores para representar a intensidade dos valores em uma matriz de dados, facilitando a identificação de padrões e tendências',
 }

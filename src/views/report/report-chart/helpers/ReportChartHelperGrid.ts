@@ -1,5 +1,4 @@
 import type { ReportNodeType } from '@gaio/shared/types'
-import type { GridOption } from 'echarts/types/dist/shared'
 
 export default (task: ReportNodeType) => {
 	const settings = computed(() => task.settings || {})
@@ -24,7 +23,6 @@ export default (task: ReportNodeType) => {
 			right: `${(settings.value.appendPaddingRight ?? 0) + plusLegendRight + 3}%`,
 			containLabel: true,
 		}
-		// } as GridOption | GridOption[]
 	}
 
 	const gridWithoutAxis = () => {

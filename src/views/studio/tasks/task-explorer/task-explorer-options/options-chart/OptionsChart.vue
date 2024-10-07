@@ -24,9 +24,9 @@
 						<OptionsChartYAxis v-if="showShowAxisOptions" />
 						<OptionsChartGuideline v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
 						<OptionsChartQuadrant v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
-						<OptionsChartLink />
-						<OptionsChartMargin />
-						<OptionsChartLimitRows />
+						<OptionsChartLink v-if="useReportStore().showOnlyIf([''])" />
+						<OptionsChartMargin v-if="useReportStore().hideOnlyIf(['heatmap', 'calendar'])" />
+						<OptionsChartLimitRows v-if="useReportStore().showOnlyIf(['table'])" />
 						<OptionsRowsPerPage />
 						<OptionsMessage />
 					</NCollapse>
@@ -78,6 +78,7 @@ const showShowAxisOptions = computed(() =>
 		'bubble',
 		'histogram',
 		'dual',
+		'heatmap',
 	]),
 )
 </script>

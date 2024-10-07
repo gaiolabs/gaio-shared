@@ -77,7 +77,7 @@
 						class="control"
 					>
 						<NCheckbox
-							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst', 'treemap'])"
+							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst', 'treemap', 'heatmap'])"
 							v-model:checked="useReportStore().current.settings.showTotal"
 							class="w-full"
 							:label="$t('showTotal')"
@@ -110,7 +110,7 @@
 								]"
 							/>
 							<NSelect
-								v-if="!useReportStore().showOnlyIf(['pie', 'sunburst'])"
+								v-if="useReportStore().hideOnlyIf(['pie', 'sunburst'])"
 								v-model:value="useReportStore().current.settings.showLabelType"
 								class="w-full"
 								:options="[
@@ -155,7 +155,7 @@
 						</div>
 					</div>
 					<div
-						v-if="!useReportStore().showOnlyIf(['dual'])"
+						v-if="useReportStore().hideOnlyIf(['dual'])"
 						class="control"
 					>
 						<div class="control-label">{{ $t('fontSize') }}</div>
