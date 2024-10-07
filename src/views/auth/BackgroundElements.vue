@@ -28,7 +28,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import bgDark from '@/assets/images/bg-dark.png'
 import bg from '@/assets/images/bg-light.png'
 import pattern from '@/assets/images/pattern.png'
@@ -39,7 +39,7 @@ const isDark = useDark()
 const route = useRoute()
 const opacity = computed(() => {
 	return (
-		route.path.startsWith('/auth') ? 1
+		route.path.startsWith('/login') ? 1
 		: isDark.value ? 0.3
 		: 0.4
 	)

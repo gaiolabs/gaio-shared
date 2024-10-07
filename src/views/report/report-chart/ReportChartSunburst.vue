@@ -26,13 +26,19 @@ const { labelSunburst } = computed(() => useReportChartHelperLabel(task)).value
 
 use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
+type Datatype = {
+	name: string
+	value?: number
+	children?: Datatype[]
+}
+
 const data = () => {
-	const root = { name: 'root', children: [] }
+	const root: Datatype = { name: 'root', children: [] }
 
 	list.forEach((item) => {
 		let currentLevel = root
 		dimensions.value.dimensions.forEach((dim, index) => {
-			const dimensionValue = item[columnName(dim)]
+			const dimensionValue = item[columnName(dim)] as string
 			let existingDimension = currentLevel.children.find((child) => child.name === dimensionValue)
 
 			if (!existingDimension) {
@@ -44,7 +50,7 @@ const data = () => {
 				} else {
 					existingDimension = {
 						name: dimensionValue,
-						value: item[columnName(measures.value.first)],
+						value: item[columnName(measures.value.first)] as number,
 					}
 				}
 				currentLevel.children.push(existingDimension)
