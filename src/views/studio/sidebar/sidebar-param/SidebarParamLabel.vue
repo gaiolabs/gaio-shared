@@ -6,6 +6,7 @@
 		<div class="control-label text-sm">
 			{{ localParam.paramName }}
 		</div>
+
 		<NInput
 			v-model:value="localParam.paramValue"
 			size="tiny"
@@ -15,10 +16,12 @@
 				v-if="localParam.paramName !== 'userId'"
 				#suffix
 			>
-				<g-icon
-					name="pencil"
+				<IconComponent
+					name="Edit"
+					class="cursor-pointer hover:opacity-70"
 					@click="$emit('edit', localParam)"
 				/>
+
 				<NPopconfirm
 					:show-icon="false"
 					:positive-button-props="{ type: 'error' }"
@@ -26,13 +29,17 @@
 					@positive-click="remove()"
 				>
 					<template #trigger>
-						<IconComponent name="Delete" />
+						<IconComponent
+							name="Delete"
+							class="cursor-pointer hover:opacity-70"
+						/>
 					</template>
 					{{ $t('deletionConfirmation') }}
 				</NPopconfirm>
 			</template>
 		</NInput>
 	</div>
+
 	<div v-else>
 		{{ option.label }}
 	</div>
@@ -64,8 +71,8 @@ const remove = () => {
 	useApi().post('api/app/update-params', {
 		body: {
 			params: useAppStore().params,
-			appId: useAppStore().appInfo.appId
-		}
+			appId: useAppStore().appInfo.appId,
+		},
 	})
 }
 

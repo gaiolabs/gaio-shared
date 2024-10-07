@@ -10,6 +10,7 @@
 					{{ $t('parameters') }}
 				</span>
 			</h2>
+
 			<div class="flex">
 				<NPopover
 					placement="bottom"
@@ -25,6 +26,7 @@
 							</template>
 						</NButton>
 					</template>
+
 					<div>
 						{{ $t('folder') }}
 						<NInput
@@ -43,15 +45,23 @@
 						</NInput>
 					</div>
 				</NPopover>
+
 				<NButton
 					size="tiny"
 					quaternary
-					@click="current = {}"
+					@click="
+						current = {
+							paramName: '',
+							paramDescription: '',
+							paramValue: '',
+						}
+					"
 				>
 					<template #icon>
 						<IconComponent name="AddItem" />
 					</template>
 				</NButton>
+
 				<NButton
 					size="tiny"
 					quaternary
@@ -63,6 +73,7 @@
 				</NButton>
 			</div>
 		</header>
+
 		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
 			<NScrollbar
 				style="height: 100%; overflow: auto"
@@ -86,6 +97,7 @@
 				</div>
 			</NScrollbar>
 		</GCard>
+
 		<sidebar-param-control
 			v-if="current"
 			:param="current"
@@ -127,7 +139,7 @@ const addNewFolder = () => {
 }
 
 const searchTerm = ref('')
-const current = ref<ParamType>()
+const current = ref<ParamType>(null)
 const localTree = ref<TreeOption[]>([])
 const handleDropThenUpdate = (e) => {
 	localTree.value = handleDrop(e, localTree.value)
