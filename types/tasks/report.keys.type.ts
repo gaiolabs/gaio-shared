@@ -21,5 +21,6 @@ export type ReportTypeKeys =
 	| 'form'
 	| 'calendar'
 	| 'wordCloud'
+	| 'forecast'
 
 
