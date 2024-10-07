@@ -128,6 +128,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartForecast
+						v-else-if="task.reportType === 'forecast'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -151,6 +158,7 @@ import { computed, onMounted, ref } from 'vue'
 import ReportChartBubble from './ReportChartBubble.vue'
 import ReportChartCalendar from './ReportChartCalendar.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
+import ReportChartForecast from './ReportChartForecast.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartGauge from './ReportChartGauge.vue'
 import ReportChartHeatmap from './ReportChartHeatmap.vue'

@@ -31,6 +31,7 @@ export default (task: ReportNodeType) => {
 			first: measures[0],
 			second: measures[1],
 			third: measures[2],
+			fourth: measures[3],
 			isMultiple: measures.length > 1,
 		}
 	})

@@ -803,4 +803,5 @@ export default {
 	wordCloud: 'Word Cloud',
 	heatmapChartMessage:
 		'A visualization that uses colors to represent the intensity of values in a data matrix, making it easier to identify patterns and trends',
+	forecast: 'Forecast',
 }

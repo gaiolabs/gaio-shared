@@ -156,6 +156,12 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					reportType: 'wordCloud',
 					icon: 'wordCloud',
 				},
+				{
+					label: t('forecast'),
+					type: 'reportPreview',
+					reportType: 'forecast',
+					icon: 'forecast',
+				},
 				// {
 				//     label: t('parallel'),
 				//     type: 'reportPreview',

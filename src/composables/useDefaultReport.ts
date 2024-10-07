@@ -12,6 +12,7 @@ import { cloneDeep } from 'lodash-es'
 import { defaultReportChartBubble } from './default-reports/defaultReportChartBubble'
 import { defaultReportChartCalendar } from './default-reports/defaultReportChartCalendar'
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
+import { defaultReportChartForecast } from './default-reports/defaultReportChartForecast'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
 import { defaultReportChartHeatmap } from './default-reports/defaultReportChartHeatmap'
@@ -72,11 +73,11 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'heatmap':
-			result = defaultReportChartHeatmap(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartHeatmap(sourceProperties)
 			break
 
 		case 'calendar':
-			result = defaultReportChartCalendar(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartCalendar(sourceProperties)
 			break
 
 		case 'funnel':
@@ -88,7 +89,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'sunburst':
-			result = defaultReportChartSunburst(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartSunburst(sourceProperties)
 			break
 
 		case 'treemap':
@@ -105,6 +106,10 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 
 		case 'wordCloud':
 			result = defaultWordCloudReport(sourceProperties)
+			break
+
+		case 'forecast':
+			result = defaultReportChartForecast(sourceProperties)
 			break
 
 		default:
