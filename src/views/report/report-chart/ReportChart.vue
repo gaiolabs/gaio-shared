@@ -149,7 +149,6 @@ import ReportChartGauge from './ReportChartGauge.vue'
 import ReportChartRadar from './ReportChartRadar.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
 import ReportChartSunburst from './ReportChartSunburst.vue'
-import ReportChartwordCloud from './ReportChartwordCloud.vue'
 import ReportChartWordCloud from './ReportChartWordCloud.vue'
 
 defineEmits(['change'])

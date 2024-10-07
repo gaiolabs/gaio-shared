@@ -34,6 +34,7 @@
 					'sunburst',
 					'calendar',
 					'wordCloud',
+					'heatmap',
 				].includes(task.reportType)
 			"
 		>

@@ -14,6 +14,7 @@ import { defaultReportChartCalendar } from './default-reports/defaultReportChart
 import { defaultReportChartDonut } from './default-reports/defaultReportChartDonut'
 import { defaultReportChartFunnel } from './default-reports/defaultReportChartFunnel'
 import { defaultReportChartGauge } from './default-reports/defaultReportChartGauge'
+import { defaultReportChartHeatmap } from './default-reports/defaultReportChartHeatmap'
 import { defaultReportChartRadar } from './default-reports/defaultReportChartRadar'
 import { defaultReportChartScatter } from './default-reports/defaultReportChartScatter'
 import { defaultReportChartSunburst } from './default-reports/defaultReportChartSunburst'
@@ -71,7 +72,7 @@ export default ({ type, reportType, base }: { type: string; reportType: ReportTy
 			break
 
 		case 'heatmap':
-			result = defaultReportChartPie(sourceProperties) //TODO: Configurar o correto
+			result = defaultReportChartHeatmap(sourceProperties) //TODO: Configurar o correto
 			break
 
 		case 'calendar':

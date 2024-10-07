@@ -13,7 +13,7 @@ import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import 'echarts-wordcloud'
 import { CanvasRenderer } from 'echarts/renderers'
-import type { EChartsOption } from 'echarts/types/dist/shared'
+import type { EChartsOption, SeriesOption } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
 import useReportChartHelper from './helpers/ReportChartHelper'
@@ -49,7 +49,7 @@ const series = () => {
 		top: grid().top,
 		left: grid().left,
 		data: data(),
-	}
+	} as any as SeriesOption
 }
 
 const option = ref<EChartsOption>({
