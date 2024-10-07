@@ -8,14 +8,11 @@
 			ref="graph"
 			v-model="elements"
 			:class="[isPressed ? 'isPressed' : '']"
-			:min-zoom="0.2"
+			:min-zoom="0.25"
 			:max-zoom="4"
 			:snap-to-grid="true"
 			:snap-grid="[5, 5]"
 			:selection-mode="SelectionMode.Partial"
-			:pan-on-scroll="!isLocked"
-			:zoom-on-scroll="!isLocked"
-			:zoom-on-pinch="!isLocked"
 			:nodes-draggable="!isLocked"
 			:nodes-connectable="!isLocked"
 			:elements-selectable="!isLocked"
@@ -187,7 +184,7 @@ function toggleLock() {
 
 // Zoom level state
 const zoomLevel = ref(1) // Initial zoom level is 1 (100%)
-const zoomStep = ref(0.25) // Zoom step value
+const zoomStep = ref(0.1) // Zoom step value
 function roundToStep(value: number, step: number) {
 	const inv = 1.0 / step
 	return Math.round(value * inv) / inv
@@ -251,7 +248,7 @@ function handleSetZoom(newZoom: number) {
 	setZoom(newZoom)
 }
 
-function fitView() {
+function fitView(fixedZoom?: number, isCentered: boolean = false) {
 	const selectedNodes = getSelectedNodes.value
 	const nodesToFit = selectedNodes.length > 1 ? selectedNodes : getNodes.value
 
@@ -285,18 +282,27 @@ function fitView() {
 	const maxZoom = 1.5 // Adjust maxZoom as needed
 	zoom = Math.min(zoom, maxZoom)
 
-	// Compute centers
-	const nodesCenterX = nodesBoundingBox.x + nodesBoundingBox.width / 2
-	const nodesCenterY = nodesBoundingBox.y + nodesBoundingBox.height / 2
-	const safeZoneCenterX = safeArea.x + safeArea.width / 2
-	const safeZoneCenterY = safeArea.y + safeArea.height / 2
+	let x, y
 
-	// Compute the pan (translation) needed to center the nodes within the safeZone
-	const x = -nodesCenterX * zoom + safeZoneCenterX
-	const y = -nodesCenterY * zoom + safeZoneCenterY
+	if (selectedNodes.length > 1) isCentered = true
+	if (isCentered) {
+		// Compute centers
+		const nodesCenterX = nodesBoundingBox.x + nodesBoundingBox.width / 2
+		const nodesCenterY = nodesBoundingBox.y + nodesBoundingBox.height / 2
+		const safeZoneCenterX = safeArea.x + safeArea.width / 2
+		const safeZoneCenterY = safeArea.y + safeArea.height / 2
+
+		// Compute the pan (translation) needed to center the nodes within the safeZone
+		x = -nodesCenterX * zoom + safeZoneCenterX
+		y = -nodesCenterY * zoom + safeZoneCenterY
+	} else {
+		// Align the top-left of the nodesBoundingBox to the top-left of the safeZone
+		x = -nodesBoundingBox.x * zoom + safeArea.x
+		y = -nodesBoundingBox.y * zoom + safeArea.y
+	}
 
 	// Apply the transformation to the VueFlow instance
-	setViewport({ x, y, zoom }, { duration: 600 })
+	setViewport({ x, y, zoom: fixedZoom !== undefined ? fixedZoom : zoom }, { duration: 150 })
 }
 
 const organizeDagreLayout = (direction: string) => {
@@ -375,7 +381,7 @@ const organizeDagreLayout = (direction: string) => {
 
 	// Wait for the next tick to render and fit the view
 	nextTick(() => {
-		fitView()
+		// fitView()
 	})
 }
 
@@ -523,6 +529,8 @@ const buildBoard = () => {
 	})
 }
 
+const hasInitialized = ref(false)
+
 const processBoard = async () => {
 	if (useAppStore().flowList) {
 		localEdges.value =
@@ -551,7 +559,11 @@ const processBoard = async () => {
 		showBoard.value = true
 		await new Promise((resolve) => setTimeout(resolve, 150))
 		nextTick(() => {
-			fitView()
+			// TODO: Load the last camera position and zoom
+			if (!hasInitialized.value) {
+				hasInitialized.value = true
+				fitView(1)
+			}
 		})
 		// const { token } = useAuthStore();
 		// // const a = new EventSource('/api/sse/sse?id=dfs');
