@@ -166,7 +166,7 @@
 					class="w-full"
 					:options="[
 						{ value: 'active', label: $t('active') },
-						{ value: 'inactive', label: $t('inactive') }
+						{ value: 'inactive', label: $t('inactive') },
 					]"
 					@update:value="onChangeFrequency()"
 				/>
@@ -194,14 +194,14 @@ import {
 	hourValues as _hourValues,
 	dayOfMonthValues as _dayOfMonthValues,
 	dayValues as _dayValues,
-	monthValues as _monthValues
+	monthValues as _monthValues,
 } from './CronBaseHelper'
 
 const emit = defineEmits(['close', 'change'])
 const props = defineProps({
 	lang: {
 		type: String,
-		default: 'en'
+		default: 'en',
 	},
 	cronBase: {
 		type: Object as PropType<CronBaseType>,
@@ -213,9 +213,9 @@ const props = defineProps({
 			hourValues: [],
 			dayValues: [],
 			dayOfMonthValues: [],
-			monthValues: []
-		})
-	}
+			monthValues: [],
+		}),
+	},
 })
 
 const { t } = useI18n()
@@ -241,8 +241,8 @@ watch(
 		emit('change', newValue)
 	},
 	{
-		deep: true
-	}
+		deep: true,
+	},
 )
 
 const onChangeFrequency = () => {
@@ -261,17 +261,17 @@ const onChangeBaseReset = () => {
 			monthValues: [],
 			minuteValues: [],
 			dayOfMonthValues: [],
-			status: localCron.value.status || 'inactive'
+			status: localCron.value.status || 'inactive',
 		}
 		localCron.value = cloneDeep({
 			...localCron.value,
-			...initialState
+			...initialState,
 		})
 	} else {
 		localCron.value = {
 			current: undefined,
 			every: undefined,
-			status: localCron.value.status || 'inactive'
+			status: localCron.value.status || 'inactive',
 		}
 	}
 	onChangeFrequency()
@@ -282,7 +282,7 @@ const defineCronExpression = () => {
 		if (localCron.value.current && `${localCron.value.current}`?.length >= 9) {
 			localExpression.value = cronstrue.toString(`${localCron.value.current}`, {
 				locale: props.lang,
-				use24HourTimeFormat: true
+				use24HourTimeFormat: true,
 			})
 		}
 	} catch {
@@ -291,7 +291,7 @@ const defineCronExpression = () => {
 }
 
 const forEveryOptions = [{ value: undefined, label: t('none') }].concat(
-	frequency.map((item) => ({ value: item.value, label: t(item.label) }))
+	frequency.map((item) => ({ value: item.value, label: t(item.label) })),
 )
 
 onMounted(() => {

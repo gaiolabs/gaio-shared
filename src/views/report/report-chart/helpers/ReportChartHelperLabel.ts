@@ -12,8 +12,8 @@ export default (task: ReportNodeType) => {
 			color: settings.value.labelFontColor,
 			fontSize: settings.value.labelFontSize || 13,
 			rotate: settings.value.labelRotate ? 90 : undefined,
-			formatter: (v: Record<string, string | number | Date>) => {
-				return formatValue(v['data'], {
+			formatter: (params: Record<string, string | number | Date>) => {
+				return formatValue(params['data'], {
 					...measures,
 					compactNumber: settings.value.compactNumberLabel,
 				})
@@ -43,14 +43,28 @@ export default (task: ReportNodeType) => {
 		}
 	}
 
+	const labelHeatmap = () => {
+		return {
+			show: settings.value.showLabel,
+			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
+			color: settings.value.labelFontColor,
+			fontSize: settings.value.labelFontSize || 13,
+			formatter: (params: Record<string, any>) => {
+				const labelString = formatValue(params.data[2], {
+					compactNumber: settings.value.compactNumberLabel,
+				})
+				return labelString
+			},
+		}
+	}
+
 	const labelFunnel = () => {
 		return {
 			show: settings.value.showLabel,
 			position: 'inside',
 			color: settings.value.labelFontColor,
 			fontSize: settings.value.labelFontSize || 13,
-			formatter: (v: object | Array<object>) => {
-				const params = v as any
+			formatter: (params: Record<string, any>) => {
 				let labelString = ''
 				if (settings.value.showLabelMeasure) {
 					labelString = formatValue(params.data.value, {
@@ -75,8 +89,8 @@ export default (task: ReportNodeType) => {
 			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
 			color: settings.value.labelFontColor,
 			fontSize: settings.value.labelFontSize || 13,
-			formatter: (v: Record<string, string | number | Date>) => {
-				const formatedValue = formatValue(v.value, {
+			formatter: (params: Record<string, string | number | Date>) => {
+				const formatedValue = formatValue(params.value, {
 					compactNumber: settings.value.compactNumberLabel,
 				})
 				return formatedValue
@@ -91,8 +105,8 @@ export default (task: ReportNodeType) => {
 			color: settings.value.labelFontColor ?? '#000000FF',
 			distance: 40,
 			fontSize: settings.value.labelFontSize || 13,
-			formatter: (v: number) => {
-				const formatedValue = formatValue(v, {
+			formatter: (params: number) => {
+				const formatedValue = formatValue(params, {
 					compactNumber: settings.value.compactNumberLabel,
 				})
 				return formatedValue.toString()
@@ -117,8 +131,7 @@ export default (task: ReportNodeType) => {
 			position: settings.value.showLabelType.includes('top') ? 'outside' : settings.value.showLabelType,
 			color: settings.value.labelFontColor,
 			fontSize: settings.value.labelFontSize || 13,
-			formatter: (v: object | Array<object>) => {
-				const params = v as any
+			formatter: (params: Record<string, any>) => {
 				let labelString = ''
 				if (settings.value.showLabelMeasure) {
 					labelString = formatValue(params.data.value, {
@@ -130,7 +143,7 @@ export default (task: ReportNodeType) => {
 				}
 				if (settings.value.showPathTreemap) {
 					let path = ''
-					params.data.path.split('/').forEach((item) => (path += item + '\n'))
+					params.data.path.split('/').forEach((item: string) => (path += item + '\n'))
 					labelString = `${path}\n${labelString}`
 				}
 				return labelString
@@ -138,5 +151,5 @@ export default (task: ReportNodeType) => {
 		}
 		return label
 	}
-	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst, labelTreemap }
+	return { label, labelPie, labelRadar, labelFunnel, labelGauge, labelSunburst, labelTreemap, labelHeatmap }
 }

@@ -58,16 +58,14 @@ const range = () => {
 }
 
 const grid = () => {
-	const positions = settings.value.legendPosition.split('-')
-	const isTopOrBottom = positions.includes('top') || positions.includes('bottom')
-	const plusLegendBottom = settings.value.showLegend && positions.includes('bottom') ? 10 : 0
-	const plusLabelTop = settings.value.showLabel ? 10 : 0
-	const plusLabelLeft = settings.value.showLabel && positions.includes('left') && !isTopOrBottom ? 15 : 0
+	const plusLegendBottom = settings.value.showLegend ? 10 : 0
+	const plusLabelTop = settings.value.showLabel ? 7 : 0
+	const plusLabelLeft = settings.value.showLabel ? 2 : 0
 	return {
-		top: `${(settings.value.appendPaddingTop ?? 0) + plusLabelTop + 3}`,
-		bottom: `${(settings.value.appendPaddingBottom ?? 0) + plusLegendBottom + 3}`,
-		left: `${(settings.value.appendPaddingLeft ?? 0) + plusLabelLeft + 5}`,
-		right: `${(settings.value.appendPaddingRight ?? 0) + 3}`,
+		top: `${plusLabelTop + 3}`,
+		bottom: `${plusLegendBottom + 3}`,
+		left: `${plusLabelLeft + 3}`,
+		right: `${3}`,
 	}
 }
 
@@ -85,8 +83,8 @@ const visualMap = () => {
 		type: 'piecewise',
 		orient: 'horizontal',
 		calculable: true,
-		left: `${27 + Number(grid().left) - Number(grid().right)}%`,
-		top: `${105 - Number(grid().bottom)}%`,
+		left: 'center',
+		top: 'bottom',
 		align: 'auto',
 		inRange: {
 			color: [themeColors.value[0], themeColors.value[1]],
