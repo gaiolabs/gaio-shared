@@ -19,7 +19,7 @@ import type {
 	HeatmapSeriesOption,
 	VisualMapComponentOption,
 } from 'echarts/types/dist/shared'
-import { ref } from 'vue'
+import { ref } from 'vue'__
 import VChart from 'vue-echarts'
 import useReportChartHelper from './helpers/ReportChartHelper'
 import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'

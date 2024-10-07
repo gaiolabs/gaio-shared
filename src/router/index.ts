@@ -10,12 +10,12 @@ const router = createRouter({
 			name: 'base',
 			redirect: '/apps',
 		},
+		// {
+		// 	path: '/login',
+		// 	redirect: '/login',
+		// },
 		{
 			path: '/login',
-			redirect: '/auth/login',
-		},
-		{
-			path: '/auth/login',
 			name: 'login',
 			component: () => import('../views/auth/LoginView.vue'),
 		},

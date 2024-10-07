@@ -234,6 +234,7 @@ const list = {
 	action: 'hugeicons:touch-interaction-02',
 	guideline: 'jam:directions-f',
 	calendar: 'radix-icons:calendar',
+	wordCloud: 'lsicon:word-cloud-outline',
 }
 </script>
 

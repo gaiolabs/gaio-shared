@@ -16,7 +16,7 @@
 						@click="select(report as ReportNodeType)"
 					>
 						<div>
-							<g-icon
+							<GIcon
 								v-if="report?.icon"
 								class="h-8 w-8"
 								:height="26"

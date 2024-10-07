@@ -114,6 +114,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartWordCloud
+						v-else-if="task.reportType === 'wordCloud'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -142,6 +149,7 @@ import ReportChartGauge from './ReportChartGauge.vue'
 import ReportChartRadar from './ReportChartRadar.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
 import ReportChartSunburst from './ReportChartSunburst.vue'
+import ReportChartWordCloud from './ReportChartWordCloud.vue'
 
 defineEmits(['change'])
 const { task, height } = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()
