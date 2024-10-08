@@ -1,7 +1,7 @@
 <template>
 	<footer
 		id="login-footer"
-		class="w-full px-8 py-6 flex justify-between items-end"
+		class="w-full px-4 pb-4 lg:px-8 lg:py-6 flex justify-between items-end"
 	>
 		<GPoweredBy />
 		<RouterLink

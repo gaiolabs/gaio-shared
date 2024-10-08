@@ -1,8 +1,8 @@
 <template>
-	<header class="w-full px-8 py-6 justify-between flex">
+	<header class="w-full px-8 py-0 lg:py-6 justify-between flex">
 		<div>&nbsp;</div>
 		<div
-			class="cursor-default gap-1 duration-150 transition-opacity flex flex-col items-end opacity-70 dark:opacity-40 hover:dark:opacity-100 hover:opacity-100"
+			class="hidden lg:flex cursor-default gap-1 duration-150 transition-opacity flex-col items-end opacity-70 dark:opacity-40 hover:dark:opacity-100 hover:opacity-100"
 		>
 			<div class="flex items-center gap-1">
 				<IconComponent
