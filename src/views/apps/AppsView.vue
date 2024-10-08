@@ -42,7 +42,7 @@
 				</GButton> -->
 			</GPageHeader>
 
-			<article class="p-2 pb-[88px] flex flex-col gap-8 flex-1 overflow-auto w-full">
+			<article class="p-2 pb-[88px] flex flex-col gap-8 flex-1 overflow-hidden w-full">
 				<!--RECENT AND FAVORITES-->
 				<section
 					id="recent-and-favorites"

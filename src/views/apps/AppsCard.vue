@@ -15,7 +15,7 @@
 			></span>
 		</span>
 		<div
-			class="flex gap-5 p-2"
+			class="flex p-2"
 			:class="mode === 'card' ? 'flex-col' : 'flex-row'"
 		>
 			<header
@@ -27,8 +27,8 @@
 					:name="app.options.icon"
 					:color="app.options.color"
 				/>
-				<div class="flex flex-1 flex-col">
-					<h6 class="flex flex-1">{{ app.appName }}</h6>
+				<div class="flex flex-grow shrink-0 overflow-hidden flex-col">
+					<h6 class="flex flex-1 truncate w-full">{{ app.appName }}</h6>
 
 					<small class="dark:text-white/50 text-black/50 text-xs">
 						{{ app.options.creator }}
