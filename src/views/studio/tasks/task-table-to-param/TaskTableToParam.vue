@@ -4,16 +4,20 @@
 		@close="$emit('close')"
 	>
 		<template #title>{{ $t('taskTableToParam') }}</template>
+
 		<template #content>
 			<div class="table-to-param overflow-auto">
 				<div v-if="paramOptions.length > 1">
 					<div class="w-100 flex gap-2">
 						<div class="control grow">
 							<div class="control-label">{{ $t('taskLabel') }}</div>
+
 							<NInput v-model:value="localTask.label" />
 						</div>
+
 						<div class="control grow">
 							<div class="control-label">{{ $t('table') }}</div>
+
 							<NInput
 								v-model:value="localTask.tableName"
 								disabled
@@ -32,8 +36,10 @@
 									class="me-1"
 									size="small"
 								/>
+
 								{{ $t('saveAsDefault') }}
 							</div>
+
 							<div class="align-items-center flex">
 								<NSwitch
 									v-model:value="localTask.byReference"
@@ -41,10 +47,12 @@
 									size="small"
 									@update:value="loadColumnList()"
 								/>
+
 								{{ $t('referenceColumnNames') }}
 							</div>
 						</div>
 					</NCard>
+
 					<NCard
 						v-if="localTask.byReference && localTask.fieldToParamList.length"
 						content-style="padding: 10px"
@@ -53,9 +61,11 @@
 							<thead>
 								<tr class="vertical-mid text-left *:p-1">
 									<th class="text-right">{{ $t('column') }}</th>
+
 									<th>{{ $t('param') }}</th>
 								</tr>
 							</thead>
+
 							<tbody>
 								<tr
 									v-for="item of localTask.fieldToParamList"
@@ -66,6 +76,7 @@
 										<g-icon :name="dataTypeIcon(item.dataType)" />
 										{{ item.columnName }}
 									</td>
+
 									<td>
 										<NSelect
 											v-model:value="item.paramName"
@@ -77,6 +88,7 @@
 						</table>
 					</NCard>
 				</div>
+
 				<NCard
 					v-else
 					content-style="padding: 10px"
@@ -84,7 +96,10 @@
 					{{ $t('noParams') }}
 				</NCard>
 			</div>
-			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
+		</template>
+
+		<template #footer>
+			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
 				<NButton
 					:loading="loading"
 					type="primary"
