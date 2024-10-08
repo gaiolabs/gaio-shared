@@ -74,6 +74,7 @@
 								>
 									<td class="text-right">
 										<g-icon :name="dataTypeIcon(item.dataType)" />
+
 										{{ item.columnName }}
 									</td>
 
@@ -111,6 +112,7 @@
 		</template>
 	</g-dialog>
 </template>
+
 <script setup lang="ts">
 import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'

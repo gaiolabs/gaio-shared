@@ -3,7 +3,7 @@
 		id="sidebar-param"
 		class="flex h-full flex-col items-stretch p-3 gap-3"
 	>
-		<header class="flex w-full items-stretch justify-between">
+		<header class="flex w-full items-stretch justify-between px-2">
 			<h2 class="text-lg font-bold inline-flex gap-1 items-center">
 				<IconComponent name="Params" />
 				<span>
@@ -11,20 +11,42 @@
 				</span>
 			</h2>
 
-			<div class="flex">
+			<div class="flex gap-2">
+				<GButton
+					size="tiny"
+					type="secondary"
+					@click="
+						current = {
+							paramName: '',
+							paramDescription: '',
+							paramValue: '',
+						}
+					"
+				>
+					<template #icon>
+						<IconComponent
+							class="size-4"
+							name="Plus"
+						/>
+					</template>
+				</GButton>
+
 				<NPopover
 					placement="bottom"
 					trigger="click"
 				>
 					<template #trigger>
-						<NButton
+						<GButton
 							size="tiny"
-							quaternary
+							type="secondary"
 						>
 							<template #icon>
-								<IconComponent name="CreateFolder" />
+								<IconComponent
+									class="size-4"
+									name="CreateFolder"
+								/>
 							</template>
-						</NButton>
+						</GButton>
 					</template>
 
 					<div>
@@ -46,31 +68,31 @@
 					</div>
 				</NPopover>
 
-				<NButton
+				<GButton
 					size="tiny"
-					quaternary
-					@click="
-						current = {
-							paramName: '',
-							paramDescription: '',
-							paramValue: '',
-						}
-					"
+					type="secondary"
+					@click="() => {}"
 				>
 					<template #icon>
-						<IconComponent name="AddItem" />
+						<IconComponent
+							class="size-4"
+							name="Refresh"
+						/>
 					</template>
-				</NButton>
+				</GButton>
 
-				<NButton
+				<GButton
 					size="tiny"
-					quaternary
+					type="secondary"
 					@click="useAppStore().saveAppMetadata('params')"
 				>
 					<template #icon>
-						<IconComponent name="Save" />
+						<IconComponent
+							class="size-4"
+							name="Save"
+						/>
 					</template>
-				</NButton>
+				</GButton>
 			</div>
 		</header>
 
@@ -98,7 +120,7 @@
 			</NScrollbar>
 		</GCard>
 
-		<sidebar-param-control
+		<SidebarParamControl
 			v-if="current"
 			:param="current"
 			@close="closeParamControl()"
