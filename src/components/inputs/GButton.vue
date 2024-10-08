@@ -10,7 +10,8 @@
 		<span
 			v-if="showLine && !noLine"
 			id="button-hover-line"
-			class="absolute left-0 right-0 bottom-[-2px] h-[2px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition duration-150 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 z-[-1]"
+			class="absolute left-0 right-0 bottom-[-2px] h-[2px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition-all duration-300 z-[-1]"
+			:class="isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'"
 		/>
 		<span
 			v-if="showLine"
