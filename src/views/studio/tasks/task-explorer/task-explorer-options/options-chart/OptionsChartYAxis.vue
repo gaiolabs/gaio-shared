@@ -17,31 +17,31 @@
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="!useReportStore().showOnlyIf(['bullet', 'dual'])"
+					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap'])"
 					v-model:checked="useReportStore().current.settings.yAxisAutoHideLabel"
 					:label="$t('autoHideLabel')"
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="!useReportStore().showOnlyIf(['bullet', 'dual'])"
+					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap'])"
 					v-model:checked="useReportStore().current.settings.yAxisAutoRotateLabel"
 					:label="$t('autoRotateLabel')"
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="!useReportStore().showOnlyIf(['bullet'])"
+					v-if="useReportStore().hideOnlyIf(['bullet'])"
 					v-model:checked="useReportStore().current.settings.showYGrid"
 					:label="$t('showGrid')"
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="!useReportStore().showOnlyIf(['bullet'])"
+					v-if="useReportStore().hideOnlyIf(['bullet'])"
 					v-model:checked="useReportStore().current.settings.showYLine"
 					:label="$t('showBaseLine')"
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="!useReportStore().showOnlyIf(['bullet', 'forecast', 'dual'])"
+					v-if="useReportStore().hideOnlyIf(['bullet', 'forecast', 'dual'])"
 					v-model:checked="useReportStore().current.settings.showYTitle"
 					:label="$t('showTitle')"
 					class="w-full"
@@ -57,7 +57,7 @@
 						class="w-full"
 					/>
 				</div>
-				<div v-if="!useReportStore().showOnlyIf(['bullet', 'forecast'])">
+				<div v-if="useReportStore().hideOnlyIf(['bullet', 'forecast'])">
 					<NCheckbox
 						v-if="useReportStore().showOnlyIf(['combo']) && !useReportStore().isGrouped"
 						v-model:checked="useReportStore().current.settings.comboSyncAxis"
@@ -66,7 +66,7 @@
 					/>
 
 					<NCheckbox
-						v-if="useReportStore().showOnlyIf(['combo']) || !useReportStore().showOnlyIf(['combo', 'dual'])"
+						v-if="useReportStore().showOnlyIf(['combo']) || useReportStore().hideOnlyIf(['combo', 'dual'])"
 						v-model:checked="useReportStore().current.settings.yAxisChangeScale"
 						:label="$t('changeScale')"
 						class="w-full"
@@ -76,7 +76,7 @@
 							(useReportStore().showOnlyIf(['combo']) &&
 								useReportStore().current.settings.comboSyncAxis &&
 								useReportStore().current.settings.yAxisChangeScale) ||
-							(!useReportStore().showOnlyIf(['combo']) && useReportStore().current.settings.yAxisChangeScale)
+							(useReportStore().hideOnlyIf(['combo']) && useReportStore().current.settings.yAxisChangeScale)
 						"
 						class="control"
 					>

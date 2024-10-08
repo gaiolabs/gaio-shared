@@ -46,9 +46,7 @@
 								<NInputNumber
 									v-model:value="localTask.minSupport"
 									required
-									:min="0.2"
 									:max="1"
-									:step="0.01"
 								/>
 							</div>
 							<div class="flex w-full flex-col gap-1">
@@ -56,9 +54,7 @@
 								<NInputNumber
 									v-model:value="localTask.minThreshold"
 									required
-									:min="0.8"
 									:max="1"
-									:step="0.01"
 								/>
 							</div>
 						</div>

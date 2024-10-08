@@ -3,6 +3,7 @@
 		<template #title>
 			{{ $t('parameter') }}
 		</template>
+
 		<template #content>
 			<div class="sidebar-param-control">
 				<div class="control">
@@ -15,7 +16,9 @@
 						v-alpha
 					/>
 				</div>
+
 				{{ isFunction }}
+
 				<div class="control">
 					<div class="control-label">
 						{{ $t('description') }}
@@ -26,6 +29,7 @@
 						/>
 					</div>
 				</div>
+
 				<div class="control">
 					<div class="control-label">
 						{{ $t('value') }}
@@ -35,6 +39,7 @@
 						/>
 					</div>
 				</div>
+
 				<div
 					v-if="isFunction"
 					class="control"
@@ -54,7 +59,10 @@
 					</NInputGroup>
 				</div>
 			</div>
-			<div class="flex justify-end bg-paper-100 px-4 py-2 dark:bg-carbon-200">
+		</template>
+
+		<template #footer>
+			<div class="flex justify-end bg-paper-100 dark:bg-carbon-200">
 				<NButton
 					type="primary"
 					@click="save"
@@ -72,15 +80,18 @@ import { useAppStore } from '@/stores'
 import type { ParamType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { useMessage } from 'naive-ui'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const message = useMessage()
 const emit = defineEmits(['close', 'save'])
-const props = defineProps<{
-	param: ParamType
-}>()
+const { param } = defineProps({
+	param: {
+		type: Object as PropType<ParamType>,
+		required: true,
+	},
+})
 
-const localParam = ref<ParamType>()
+const localParam = ref(cloneDeep(param))
 const isFunction = computed(() => {
 	return localParam.value.paramValue?.includes('{{')
 })
@@ -92,8 +103,8 @@ const loadFunction = () => {
 	useApi()
 		.post('api/task/custom-param', {
 			body: {
-				params: [localParam.value]
-			}
+				params: [localParam.value],
+			},
 		})
 		.then((res) => {
 			testedValue.value = ''
@@ -123,15 +134,11 @@ const save = () => {
 	useApi().post('api/app/update-params', {
 		body: {
 			params: useAppStore().params,
-			appId: useAppStore().appInfo.appId
-		}
+			appId: useAppStore().appInfo.appId,
+		},
 	})
 
 	emit('save')
 	emit('close')
 }
-
-onMounted(() => {
-	localParam.value = cloneDeep(props.param)
-})
 </script>

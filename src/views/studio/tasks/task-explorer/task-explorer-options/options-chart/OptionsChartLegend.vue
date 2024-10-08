@@ -12,8 +12,8 @@
 				:label="$t('enable')"
 				class="w-full"
 			/>
-			<div v-if="useReportStore().current.settings.showLegend && !useReportStore().showOnlyIf(['liquid'])">
-				<div v-if="!useReportStore().showOnlyIf(['gauge', 'calendar'])">
+			<div v-if="useReportStore().current.settings.showLegend && useReportStore().hideOnlyIf(['liquid'])">
+				<div v-if="useReportStore().hideOnlyIf(['gauge', 'calendar', 'heatmap'])">
 					<div class="control">
 						<div class="control-label">
 							{{ $t('position') }}
@@ -39,7 +39,7 @@
 					</div>
 
 					<div
-						v-if="!useReportStore().showOnlyIf(['bullet', 'dual'])"
+						v-if="useReportStore().hideOnlyIf(['bullet', 'dual'])"
 						class="control"
 					>
 						<div class="control-label">{{ $t('color') }}</div>

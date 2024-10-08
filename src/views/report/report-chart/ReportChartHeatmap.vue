@@ -14,60 +14,31 @@ import { GridComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import type {
-	CalendarOption,
 	EChartsOption,
 	HeatmapSeriesOption,
 	VisualMapComponentOption,
+	XAXisOption,
+	YAXisOption,
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-expect-error
+	HeatmapDataItemOption,
 } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
 import useReportChartHelper from './helpers/ReportChartHelper'
+import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
+import useReportChartHelperLabel from './helpers/ReportChartHelperLabel'
 import useReportChartHelperTicks from './helpers/ReportChartHelperTicks'
 
 const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
 
 const { dimensions, measures, themeColors, settings, columnName } = computed(() => useReportChartHelper(task)).value
 const { getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+const { labelHeatmap } = computed(() => useReportChartHelperLabel(task)).value
+const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChartHelperAxis(task)).value
+const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
 
 use([CanvasRenderer, GridComponent, HeatmapChart, TitleComponent, TooltipComponent, LegendComponent])
-
-const data = () => {
-	const data = list.map((item) => {
-		return [item[columnName(dimensions.value.first)] as string, item[columnName(measures.value.first)] as number]
-	})
-	return data
-}
-
-const range = () => {
-	const sortedData = data().sort(
-		(a: (string | number)[], b: (string | number)[]) => new Date(a[0]).getTime() - new Date(b[0]).getTime(),
-	)
-
-	let oldest: string = sortedData[0][0].toString()
-	let newest: string = sortedData[sortedData.length - 1][0].toString()
-	let range: string | string[] = []
-
-	if (settings.value.showFullYear) {
-		oldest = oldest.split('-')[0]
-		newest = newest.split('-')[0]
-	}
-	if (oldest === newest) range = newest
-	else range = [oldest, newest]
-
-	return range
-}
-
-const grid = () => {
-	const plusLegendBottom = settings.value.showLegend ? 10 : 0
-	const plusLabelTop = settings.value.showLabel ? 7 : 0
-	const plusLabelLeft = settings.value.showLabel ? 2 : 0
-	return {
-		top: `${plusLabelTop + 3}`,
-		bottom: `${plusLegendBottom + 3}`,
-		left: `${plusLabelLeft + 3}`,
-		right: `${3}`,
-	}
-}
 
 const allMeasures = list.map((item) => {
 	return item[columnName(measures.value.first)]
@@ -93,50 +64,61 @@ const visualMap = () => {
 	return visualMap
 }
 
-const calendar = () => {
-	const calendar: CalendarOption = {
-		top: grid().top + '%',
-		bottom: grid().bottom + '%',
-		left: grid().left + '%',
-		right: grid().right + '%',
-		cellSize: ['auto'],
-		itemStyle: {
-			borderWidth: 0.5,
-		},
-		yearLabel: { show: false },
-		monthLabel: { show: settings.value.showLabel, fontSize: settings.value.labelFontSize },
-		dayLabel: { show: settings.value.showLabel, fontSize: settings.value.labelFontSize },
-		range: range(),
-	}
-	return calendar
-}
-
 const series = () => {
+	const data: HeatmapDataItemOption = list.map((item) => {
+		return [
+			item[columnName(dimensions.value.first)],
+			item[columnName(dimensions.value.second)],
+			item[columnName(measures.value.first)] as number,
+		]
+	})
+
 	const serie: HeatmapSeriesOption = {
 		type: 'heatmap',
-		coordinateSystem: 'calendar',
-		data: data(),
+		data: data,
 	}
 	return serie
+}
+
+const xAxis = () => {
+	const values = list.map((item) => item[columnName(dimensions.value.first)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.xAxisTickCount)
+	return {
+		type: 'category',
+		data: values,
+		...commonXAxisConfigs(ticksLabels, columnName(dimensions.value.first)),
+	} as XAXisOption | XAXisOption[]
+}
+
+const yAxis = () => {
+	const values = list.map((item) => item[columnName(dimensions.value.second)]) as Array<number | string | Date>
+	const ticksLabels = treatLabelsTicks(values, settings.value.yAxisTickCount)
+	return {
+		type: 'category',
+		data: values,
+		...commonYAxisConfigs(ticksLabels, columnName(dimensions.value.second)),
+	} as YAXisOption | YAXisOption[]
 }
 
 const option = ref<EChartsOption>({
 	tooltip: {
 		formatter: (params: Record<string, any>) => {
-			const date = params['value'][0]
-			const value = params['value'][1]
-
-			const dateObj = new Date(date)
-			const day = String(dateObj.getDate()).padStart(2, '0')
-			const month = String(dateObj.getMonth() + 1).padStart(2, '0')
-			const year = dateObj.getFullYear()
-
-			return day + '/' + month + '/' + year + `<br/>${value}`
+			const xValue = params['value'][0]
+			const yValue = params['value'][1]
+			const value = params['value'][2]
+			return `${xValue}` + `<br/>${yValue}` + `<br/>${value}`
 		},
 	},
 	visualMap: visualMap(),
-	calendar: calendar(),
 	series: series(),
+	xAxis: xAxis(),
+	yAxis: yAxis(),
+	grid: {
+		bottom: settings.value.showLegend ? '13%' : '10%',
+		right: '3%',
+		top: '3%',
+	},
+	label: labelHeatmap(),
 })
 
 watch(
@@ -145,8 +127,15 @@ watch(
 		option.value = {
 			...option.value,
 			visualMap: visualMap(),
-			calendar: calendar(),
 			series: series(),
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			grid: {
+				bottom: settings.value.showLegend ? '13%' : '10%',
+				right: '3%',
+				top: '3%',
+			},
+			label: labelHeatmap(),
 		}
 	},
 	{ deep: true },

@@ -3,7 +3,7 @@
 		width="600px"
 		@close="$emit('close')"
 	>
-		<template #title>{{ $t('taskTableToParam') }}</template>
+		<template #title>{{ $t('taskParamToTable') }}</template>
 		<template #content>
 			<div class="task-param-to-table overflow-auto">
 				<div class="control">

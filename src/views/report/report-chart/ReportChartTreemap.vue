@@ -26,8 +26,15 @@ const { labelTreemap } = computed(() => useReportChartHelperLabel(task)).value
 
 use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
+type Datatype = {
+	name: string
+	path?: string
+	value?: number
+	children?: Datatype[]
+}
+
 const data = () => {
-	const root = { name: 'root', children: [] }
+	const root: Datatype = { name: 'root', children: [] }
 
 	list.forEach((item) => {
 		let currentLevel = root
@@ -50,7 +57,7 @@ const data = () => {
 					existingDimension = {
 						name: dimensionValue,
 						path: previousDimensionValue,
-						value: item[columnName(measures.value.first)],
+						value: item[columnName(measures.value.first)] as number,
 					}
 				}
 				currentLevel.children.push(existingDimension)

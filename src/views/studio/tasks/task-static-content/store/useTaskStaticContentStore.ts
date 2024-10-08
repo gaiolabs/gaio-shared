@@ -35,7 +35,7 @@ export const useViewControlStore = defineStore('viewControl', () => {
 		showPreviewModal,
 		toggleShowSideBar,
 		toggleShowPreview,
-		toggleShowPreviewModal
+		toggleShowPreviewModal,
 	}
 })
 
@@ -51,9 +51,9 @@ export const useCodeDataStore = defineStore('codeData', () => {
 				base: {
 					...useAppStore().appInfo,
 					...useAppStore().cloneTask(),
-					id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id
-				} as ReportNodeType
-			})
+					id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id,
+				} as ReportNodeType,
+			}),
 		)
 	}
 
