@@ -26,8 +26,8 @@
 						<OptionsChartQuadrant v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
 						<OptionsChartLink v-if="useReportStore().showOnlyIf([''])" />
 						<OptionsChartMargin v-if="useReportStore().hideOnlyIf(['heatmap', 'calendar'])" />
-						<OptionsChartLimitRows v-if="useReportStore().showOnlyIf(['table'])" />
-						<OptionsRowsPerPage />
+						<OptionsChartLimitRows />
+						<OptionsRowsPerPage v-if="useReportStore().showOnlyIf(['table'])" />
 						<OptionsMessage />
 					</NCollapse>
 				</NScrollbar>
@@ -61,7 +61,7 @@ import OptionsChartGuideline from './OptionsChartGuideline.vue'
 import OptionsChartQuadrant from './OptionsChartQuadrant.vue'
 
 const showGeneralOptions = computed(() =>
-	useReportStore().showOnlyIf(['funnel', 'line', 'area', 'calendar', 'treemap']),
+	useReportStore().showOnlyIf(['funnel', 'line', 'area', 'calendar', 'forecast', 'treemap']),
 )
 
 const showShowAxisOptions = computed(() =>

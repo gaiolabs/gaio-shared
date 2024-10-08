@@ -123,6 +123,10 @@ const verifyRules = (dimensions: number | string, measures: number | string) => 
 	return false
 }
 
+const verifyForecastRules = () => {
+	return true
+}
+
 const reportState = computed(() => {
 	const reportType = task.value.reportType
 	if (['table', 'card', 'download'].includes(reportType)) {
@@ -272,6 +276,18 @@ const reportState = computed(() => {
 					dimensions: 'twoFieldOnly',
 					measures: 'oneFieldOnly',
 					message: 'heatmapChartMessage',
+				},
+			],
+		}
+	} else if (['forecast'].includes(reportType)) {
+		return {
+			status: verifyForecastRules(),
+			rules: [
+				{
+					name: 'forecast',
+					dimensions: 'oneFieldOnly',
+					measures: 'fourFieldOnly',
+					message: 'forecastChartMessage',
 				},
 			],
 		}

@@ -35,6 +35,7 @@
 					'calendar',
 					'wordCloud',
 					'heatmap',
+					'forecast',
 				].includes(task.reportType)
 			"
 		>

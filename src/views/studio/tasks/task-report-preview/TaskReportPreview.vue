@@ -5,7 +5,7 @@
 		</template>
 		<template #content>
 			<div class="overflow-auto">
-				<report-node :task="task" />
+				<ReportNode :task="task" />
 			</div>
 		</template>
 	</g-dialog>
@@ -18,7 +18,7 @@ import type { ReportNodeType } from '@gaio/shared/types'
 defineEmits(['close'])
 
 const task = useAppStore().flow.workflow.nodes.find(
-	(task) => task.id === useAppStore().cloneTask()['reportId']
+	(task) => task.id === useAppStore().cloneTask()['reportId'],
 ) as ReportNodeType
 
 useAppStore().task = task

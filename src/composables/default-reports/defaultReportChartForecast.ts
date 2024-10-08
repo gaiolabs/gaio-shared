@@ -5,10 +5,10 @@ import { defaultReportTheme } from '@/composables/default-reports/defaultReportT
 import { defaultSchema } from '@/composables/default-task/defaultSchema'
 import type { ReportNodeType } from '@gaio/shared/types'
 
-export const defaultReportChartFunnel = (base: ReportNodeType) => {
+export const defaultReportChartForecast = (base: ReportNodeType) => {
 	const { settings } = base
 	return {
-		reportType: 'funnel',
+		reportType: 'forecast',
 		schema: base.schema || defaultSchema,
 		settings: {
 			...settings,

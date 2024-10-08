@@ -128,6 +128,13 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartForecast
+						v-else-if="task.reportType === 'forecast'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -147,10 +154,12 @@ import ReportNodeHeader from '@/views/report/ReportNodeHeader.vue'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NSpin } from 'naive-ui'
+import { collapseTransitionRtl } from 'naive-ui/es/collapse-transition/styles'
 import { computed, onMounted, ref } from 'vue'
 import ReportChartBubble from './ReportChartBubble.vue'
 import ReportChartCalendar from './ReportChartCalendar.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
+import ReportChartForecast from './ReportChartForecast.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartGauge from './ReportChartGauge.vue'
 import ReportChartHeatmap from './ReportChartHeatmap.vue'
@@ -178,6 +187,8 @@ onMounted(() => {
 	} else {
 		taskData.schema.limit = taskData.settings && taskData.settings.limitRows ? taskData.settings.limitRows : 10
 	}
+
+	console.log('list', list)
 
 	useApi()
 		.post('api/table/report', {

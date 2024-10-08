@@ -235,6 +235,7 @@ const list = {
 	guideline: 'jam:directions-f',
 	calendar: 'radix-icons:calendar',
 	wordCloud: 'lsicon:word-cloud-outline',
+	forecast: 'game-icons:chart',
 }
 </script>
 

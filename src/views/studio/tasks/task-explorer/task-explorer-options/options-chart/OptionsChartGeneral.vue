@@ -41,7 +41,7 @@
 					class="w-full"
 				/>
 			</div>
-			<template v-if="useReportStore().showOnlyIf(['line', 'area'])">
+			<template v-if="useReportStore().showOnlyIf(['line', 'area', 'forecast'])">
 				<NCheckbox
 					v-model:checked="useReportStore().current.settings.showPoint"
 					:label="$t('showPoint')"
@@ -53,6 +53,12 @@
 					class="w-full"
 				/>
 			</template>
+			<NCheckbox
+				v-if="useReportStore().showOnlyIf(['forecast'])"
+				v-model:checked="useReportStore().current.settings.forecastRealAsLine"
+				:label="$t('forecastRealAsLine')"
+				class="w-full"
+			/>
 		</div>
 	</NCollapseItem>
 </template>
