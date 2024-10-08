@@ -1,12 +1,14 @@
 <template>
 	<div
 		v-if="option.isLeaf && localParam"
+		:key="`${isRefreshing}`"
 		class="sidebar-param-label py-1"
 	>
 		<div class="control-label text-sm">
 			{{ localParam.paramName }}
 		</div>
 
+		<!-- TODO: On input change, save button needs to turn into primary -->
 		<NInput
 			v-model:value="localParam.paramValue"
 			size="tiny"
@@ -34,6 +36,7 @@
 							class="cursor-pointer hover:opacity-70"
 						/>
 					</template>
+
 					{{ $t('deletionConfirmation') }}
 				</NPopconfirm>
 			</template>
@@ -53,9 +56,16 @@ import type { TreeOption } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
 defineEmits(['edit'])
-const props = defineProps<{ option: TreeOption }>()
+const { option, isRefreshing } = defineProps<{ isRefreshing: boolean; option: TreeOption }>()
 
 const localParam = ref<Partial<ParamType>>()
+
+watch(
+	() => isRefreshing,
+	() => {
+		setLocalParam()
+	},
+)
 
 const updateParamValue = () => {
 	useAppStore().params = useAppStore().params.map((o) => {
@@ -76,7 +86,9 @@ const remove = () => {
 	})
 }
 
+const setLocalParam = () => (localParam.value = useAppStore().params.find((o) => o.paramName === option.key))
+
 onMounted(() => {
-	localParam.value = useAppStore().params.find((o) => o.paramName === props.option.key)
+	setLocalParam()
 })
 </script>
