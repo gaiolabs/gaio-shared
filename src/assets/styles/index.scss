@@ -29,6 +29,9 @@
 .overflow-auto {  // applies a "padding" to the element that will have a scrollbar to avoid layout shift 
   scrollbar-gutter: stable both-edges; 
 }
+.overflow-scroll, .overflow-x-scroll, .overflow-y-scroll {
+  scrollbar-gutter: stable; 
+}
 
 .bg-g-first {
   background: var(--g-first);

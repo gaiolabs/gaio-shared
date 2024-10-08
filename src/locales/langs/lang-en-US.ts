@@ -789,7 +789,7 @@ export default {
 	threeMeasuresMinMaxTarget: 'The first measure is the minimum, the second is the maximum, and the third is the target',
 	sunburstMessage:
 		'Organize the dimensions in hierarchical data into concentric circular layers, where each level of the hierarchy is represented by slices proportional to its value.',
-  toggleCurrentTab: 'Toggle current tab',
+	toggleCurrentTab: 'Toggle current tab',
 	toggleViewMode: 'Toggle view mode',
 	calendar: 'Calendar',
 	calendarChartMessage:
@@ -798,5 +798,5 @@ export default {
 	path: 'Path',
 	enableZoom: 'Enable zoom',
 	leafDepth: 'Leaf depth',
-
+	iconPicker: 'Icon picker',
 }

@@ -1,30 +1,33 @@
 <template>
 	<button
 		:class="[type, size, square ? 'square' : '']"
-		class="transition-all border duration-150 flex items-center justify-center rounded group relative"
+		class="transition-all border duration-150 flex items-center justify-center rounded group relative z-[1]"
 	>
-		<slot name="icon" />
-		<div>
+		<slot
+			class="z-[3]"
+			name="icon"
+		/>
+		<div class="z-[3]">
 			<slot />
 		</div>
 		<span
 			v-if="showLine && !noLine"
 			id="button-hover-line"
-			class="absolute left-0 right-0 bottom-[-2px] h-[2px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition-all duration-300 z-[-1]"
+			class="absolute left-0 right-0 bottom-[-1px] h-[1px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition-all duration-300 z-[2]"
 			:class="isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100'"
 		/>
 		<span
 			v-if="showLine"
 			id="button-hover-background"
-			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 group-hover:opacity-30 group-hover:dark:opacity-15 group-hover:scale-100 z-[-1]"
+			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 group-hover:opacity-100 group-hover:dark:opacity-100 group-hover:scale-100 z-[2]"
 			:class="isActive ? 'opacity-30 dark:opacity-20 scale-100' : 'opacity-0 scale-0'"
 		>
 			<span
-				class="absolute inset-2 bottom-0 bg-gradient-to-t blur rounded-t-full z-[-1]"
+				class="absolute inset-2 bottom-0 bg-gradient-to-t blur rounded-t-full z-[2]"
 				:class="
-					isActive ?
-						'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
-					:	'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
+					isActive ? 'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
+					: type === 'primary' ? 'dark:from-ochre-400/100 from-sepia-300/100 to-sepia-100/0'
+					: 'dark:from-ochre-500/100 from-sepia-500/100 to-sepia-500/0'
 				"
 			/>
 		</span>
@@ -61,13 +64,40 @@ const showLine = computed(
 </script>
 
 <style lang="scss" scoped>
-// colors
 .primary {
-	@apply text-white dark:text-black bg-sepia-600 dark:bg-ochre-500 hover:bg-sepia-700 hover:dark:bg-ochre-600 border-transparent;
+	@apply text-white;
+
+	/* Gradient Background */
+	@apply bg-gradient-to-tl;
+	@apply from-sepia-800 via-sepia-700 to-sepia-500;
+	@apply dark:from-ochre-800 dark:via-ochre-700 dark:to-ochre-500;
+
+	/* Borders */
+	@apply border border-sepia-700 dark:border-ochre-700;
+
+	/* Shadows */
+	@apply shadow shadow-gray-950/5 hover:shadow-md;
+
+	/* Rings */
+	@apply ring-1 ring-gray-750/[.125];
 }
 
 .secondary {
-	@apply text-gray-500 hover:text-sepia-700 hover:dark:text-ochre-500 hover:border-sepia-200 bg-white/25 backdrop-blur-[5px] dark:bg-white/[0.5%] dark:border-gray-300/10 border-gray-250 border hover:dark:bg-white/[0.5%];
+	// @apply text-gray-500 hover:text-sepia-700 hover:dark:text-ochre-500 hover:border-sepia-200 bg-white/25 backdrop-blur-[5px] dark:bg-white/[0.5%] dark:border-gray-300/10 border-gray-250 border hover:dark:bg-white/[0.5%];
+
+	/* Gradient Background */
+	@apply bg-gradient-to-tl;
+	@apply bg-white/75 from-white/30 via-gray-100/30 to-sepia-100/10;
+	@apply dark:bg-gradient-to-br dark:bg-transparent dark:from-gray-750/20 dark:via-gray-800/20 dark:to-gray-700/[30%];
+
+	/* Borders */
+	@apply border border-white dark:border-white/10;
+
+	/* Shadows */
+	@apply shadow shadow-gray-950/5 hover:shadow-md;
+
+	/* Rings */
+	@apply ring-1 ring-gray-750/[.125];
 }
 
 .tertiary {

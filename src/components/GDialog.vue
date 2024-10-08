@@ -1,60 +1,70 @@
 <template>
 	<NModal
+		id="g-dialog"
 		ref="rootRef"
 		v-model:show="showModal"
-		class="g-modal"
 		destroy-on-close
 		:mask-closable="false"
+		class="!rounded-3xl"
 		@update:show="closeModal"
 	>
-		<div
-			class="g-modal-wrapper my-3 w-[98%] min-w-[380px] rounded-[8px] sm:w-[95%] md:w-[80%] lg:w-[70%] xl:w-[55%]"
+		<GCard
+			id="g-dialog-wrapper"
+			:type="isDark ? 'base' : 'wrapper'"
+			class="my-3 p-2 w-[98%] min-w-[380px] rounded-[8px] sm:w-[95%] md:w-[80%] lg:w-[70%] xl:w-[55%]"
 			:class="dialogSize"
 			:style="{ width: props.width }"
 		>
-			<div
-				class="flex min-h-[42px] items-center justify-between gap-2 rounded-t-[6px] bg-paper-100 px-4 py-2 dark:bg-carbon-100"
-			>
-				<div class="flex grow items-center">
+			<header class="flex min-h-[42px] items-center justify-between gap-2 rounded-t-[6px] p-2 pt-0">
+				<div class="flex grow items-center text-lg font-semibold">
 					<slot name="title"></slot>
 				</div>
 				<div class="flex items-end">
-					<NButton
-						secondary
-						size="tiny"
+					<GButton
+						type="secondary"
+						square
 						@click="closeModal()"
 					>
 						<template #icon>
-							<IconComponent name="Close" />
+							<IconComponent
+								class="size-5"
+								name="Close"
+							/>
 						</template>
-					</NButton>
+					</GButton>
 				</div>
-			</div>
-			<div class="overflow-hidden rounded-b-[6px]">
-				<div
-					v-if="$slots.content"
-					class="g-bg-300 p-4"
-				>
-					<slot name="content"></slot>
-				</div>
-				<div
-					v-if="$slots.tabs"
-					class="g-bg-1 mx-[-5px] mt-[-10px]"
-				>
-					<slot name="tabs"></slot>
-				</div>
-				<div
-					v-if="$slots.footer"
-					class="g-bg-100 border border-paper-300 px-4 py-2 dark:border-carbon-300"
-				>
-					<slot name="footer"></slot>
-				</div>
-			</div>
-		</div>
+			</header>
+
+			<GCard
+				v-if="$slots.content"
+				:type="isDark ? 'wrapper' : 'base'"
+				class="rounded-2xl"
+				opaque
+			>
+				<slot name="content"></slot>
+			</GCard>
+			<GCard
+				v-if="$slots.tabs"
+				:type="isDark ? 'wrapper' : 'base'"
+				class="rounded-2xl"
+				opaque
+			>
+				<slot name="tabs"></slot>
+			</GCard>
+			<footer
+				v-if="$slots.footer"
+				class="mt-2 px-2"
+			>
+				<slot name="footer"></slot>
+			</footer>
+		</GCard>
 	</NModal>
 </template>
 
 <script setup lang="ts">
+import GCard from '@/components/GCard.vue'
+import GButton from '@/components/inputs/GButton.vue'
+import { useDark } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])
@@ -73,6 +83,7 @@ const dialogSize = computed(() => {
 })
 
 const showModal = ref(true)
+const isDark = useDark()
 
 const closeModal = () => {
 	// showModal.value = false
@@ -85,8 +96,7 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
-.g-modal {
-	border-radius: 6px;
+#g-dialog {
 	max-height: calc(100vh - 100px) !important;
 
 	.n-tabs {
