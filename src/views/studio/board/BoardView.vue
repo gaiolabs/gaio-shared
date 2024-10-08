@@ -285,6 +285,7 @@ function fitView(fixedZoom?: number, isCentered: boolean = false) {
 	let x, y
 
 	if (selectedNodes.length > 1) isCentered = true
+	zoom = fixedZoom !== undefined ? fixedZoom : zoom
 	if (isCentered) {
 		// Compute centers
 		const nodesCenterX = nodesBoundingBox.x + nodesBoundingBox.width / 2
@@ -302,7 +303,7 @@ function fitView(fixedZoom?: number, isCentered: boolean = false) {
 	}
 
 	// Apply the transformation to the VueFlow instance
-	setViewport({ x, y, zoom: fixedZoom !== undefined ? fixedZoom : zoom }, { duration: 150 })
+	setViewport({ x, y, zoom }, { duration: 150 })
 }
 
 const organizeDagreLayout = (direction: string) => {

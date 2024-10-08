@@ -1,5 +1,5 @@
 <template>
-	<nav class="flex items-center gap-3 border-r border-gray-200 rounded-2xl p-2 pl-3 h-12 g-wrapper">
+	<nav class="flex items-center gap-3 border-r border-gray-200 rounded-2xl px-2 py-0 h-12 g-wrapper">
 		<img
 			:src="logoImage"
 			alt="'Gaio Data OS' logo"
@@ -7,35 +7,21 @@
 		/>
 
 		<button
-			class="g-base rounded-lg px-2 py-1 flex gap-4 items-center relative group"
+			class="g-base rounded-lg px-2 py-1 flex gap-2 items-center relative group min-w-32 lg:min-w-36 shadow-none group"
 			@click="useCommandKStore().show = true"
 		>
-			<IconComponent name="Search" />
-			<ul class="flex gap-1">
-				<kbd
-					v-if="os === 'mac'"
-					class="kbd-style"
-					:class="{ pressed: isMetaPressed }"
-				>
-					⌘ Cmd
-				</kbd>
-				<kbd
-					v-else
-					class="kbd-style"
-					:class="{ pressed: isCtrlPressed }"
-				>
-					Ctrl
-				</kbd>
-				<kbd
-					class="kbd-style"
-					:class="{ pressed: isKPressed }"
-				>
-					K
-				</kbd>
-			</ul>
+			<IconComponent
+				name="Search"
+				class="text-gray-500 dark:text-gray-500 group-hover:dark:text-gray-300 group-hover:text-gray-800 transition-colors duration-150"
+			/>
+			<div
+				class="text-gray-350 dark:text-gray-550 group-hover:text-gray-500 group-hover:dark:text-gray-400 relative top-px transition-colors text-sm duration-150 leading-none"
+			>
+				{{ $t('search') }}...
+			</div>
 
 			<span
-				class="absolute left-4 right-4 bottom-[-2px] h-[2px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition duration-150 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 z-[-1]"
+				class="absolute left-4 right-3 bottom-[-2px] h-[1px] dark:h-px bg-gradient-to-r from-sepia-500/0 via-sepia-400 to-sepia-500/0 dark:from-ochre-500/0 dark:via-ochre-400 dark:to-ochre-500/0 transition duration-150 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 z-[-1]"
 			></span>
 			<span
 				class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 opacity-1 scale-0 group-hover:opacity-100 group-hover:scale-100 z-[-1]"
@@ -50,25 +36,9 @@
 
 <script setup lang="ts">
 import { useCommandKStore } from '@/stores'
-import { useDark, useMagicKeys } from '@vueuse/core'
+import { useDark } from '@vueuse/core'
 const isDark = useDark()
 const logoImage = computed(() => (isDark.value ? '/gaio-mini-dark.png' : '/gaio-mini-light.png'))
-
-const os = computed(() => {
-	const platform = navigator.userAgent
-	if (/Mac|iPad|iPhone|iPod/.test(platform)) {
-		return 'mac'
-	} else if (/Win/.test(platform)) {
-		return 'windows'
-	} else {
-		return 'other'
-	}
-})
-
-const keys = useMagicKeys()
-const isMetaPressed = keys.meta
-const isCtrlPressed = keys.ctrl
-const isKPressed = keys.k
 </script>
 
 <style scoped>

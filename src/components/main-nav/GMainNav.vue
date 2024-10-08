@@ -1,15 +1,19 @@
 <template>
 	<div
 		id="home-nav-wrapper"
-		class="absolute bottom-0 m-0 flex w-full justify-center text-center"
+		class="absolute bottom-0 m-0 flex w-full justify-center text-center select-none print:hidden"
 	>
 		<div
 			id="home-nav-inner"
-			class="w-full max-w-[1440px] gap-16 flex flex-row justify-center p-4 items-center"
+			class="w-full flex flex-row justify-center p-0 overflow-hidden sm:p-4 items-center"
 		>
-			<LeftNav />
-			<CenterNav @toggle-app-control="toggleAppControl" />
-			<RightNav />
+			<div class="hidden md:flex w-1/4 flex justify-end">
+				<LeftNav />
+			</div>
+			<div class="w-full sm:flex md:max-w-sm sm:justify-center">
+				<CenterNav @toggle-app-control="toggleAppControl" />
+			</div>
+			<div class="hidden md:flex w-1/4 flex justify-start"><RightNav /></div>
 		</div>
 		<AppControl
 			v-if="showAppControl"

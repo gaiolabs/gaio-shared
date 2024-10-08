@@ -4,9 +4,10 @@
 			<div class="flex w-full items-center justify-between">
 				<div class="flex items-center gap-2">
 					<div v-if="localApp?.options?.icon">
-						<g-app-icon
+						<GAppIcon
 							:name="localApp.options.icon"
-							:size="18"
+							class="size-10 !font-normal"
+							:size="20"
 							:color="localApp.options.color"
 						/>
 					</div>
@@ -25,6 +26,7 @@
 				</div>
 			</div>
 		</template>
+
 		<template #tabs>
 			<NTabs
 				pane-class="bg-elevation-1"
@@ -63,21 +65,24 @@
 					display-directive="show:lazy"
 				></NTabPane>
 			</NTabs>
-			<div class="border-t px-2 py-2">
-				<div class="flex justify-end gap-2">
-					<NButton
-						type="primary"
-						@click="save()"
-					>
-						{{ $t('save') }}
-					</NButton>
-				</div>
+		</template>
+
+		<template #footer>
+			<div class="flex justify-end gap-2">
+				<GButton
+					type="primary"
+					@click="save()"
+				>
+					{{ $t('save') }}
+				</GButton>
 			</div>
 		</template>
 	</g-dialog>
 </template>
 
 <script setup lang="ts">
+import GAppIcon from '@/components/GAppIcon.vue'
+import GButton from '@/components/inputs/GButton.vue'
 import useApi from '@/composables/useApi'
 import AppControlFlow from '@/views/apps/AppControlFlow.vue'
 import AppControlGeneral from '@/views/apps/AppControlGeneral.vue'
@@ -93,8 +98,8 @@ const loading = ref(false)
 const props = defineProps({
 	app: {
 		type: Object as () => AppType,
-		default: null
-	}
+		default: null,
+	},
 })
 
 const localApp = ref<AppType>({
@@ -109,18 +114,18 @@ const localApp = ref<AppType>({
 		creator: `User Creator`,
 		group: '',
 		folderFlow: [],
-		studioFlowStart: ''
+		studioFlowStart: '',
 	},
 	params: [],
-	repoId: ''
+	repoId: '',
 })
 
 const save = () => {
 	loading.value = true
 	useApi().post('api/app/save', {
 		body: {
-			app: localApp.value
-		}
+			app: localApp.value,
+		},
 	})
 
 	emit('save', localApp.value)

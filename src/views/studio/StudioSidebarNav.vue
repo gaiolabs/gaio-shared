@@ -23,7 +23,6 @@
 							:name="item.icon"
 							class="text-lg group-hover:dark:text-white group-hover:text-sepia-800 transition-colors duration-150"
 							:class="[
-								item.class,
 								item.name === modelValue ? 'text-sepia-800 dark:text-white' : 'text-gray-500 dark:text-gray-500',
 							]"
 						/>
@@ -35,6 +34,7 @@
 </template>
 
 <script setup lang="ts">
+import IconComponent from '@/components/icons/IconComponent.vue'
 import GButton from '@/components/inputs/GButton.vue'
 import { useEventListener } from '@vueuse/core'
 import { onMounted, ref, watch } from 'vue'
@@ -49,7 +49,6 @@ const sidebarActions = [
 	{
 		name: 'flow',
 		icon: 'Studio',
-		class: 'rotate-[-90deg]',
 	},
 	{
 		name: 'database',

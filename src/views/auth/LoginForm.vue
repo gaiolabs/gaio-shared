@@ -2,7 +2,7 @@
 	<NCollapseTransition :show="mode === 'login'">
 		<form
 			id="login-form"
-			class="flex flex-col items-stretch gap-4"
+			class="flex flex-col items-stretch gap-4 w-full min-w-[300px]"
 			@submit.prevent="doLogin"
 		>
 			<!-- Email Input -->

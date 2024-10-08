@@ -14,10 +14,7 @@
 						{{ localFlow.flowName ? localFlow.flowName : $t('flow') }}
 					</div>
 					<div v-else>
-						<IconComponent
-							class="rotate-[-90deg]"
-							name="Studio"
-						/>
+						<IconComponent name="Studio" />
 						{{ $t('newFlow') }}
 					</div>
 				</div>

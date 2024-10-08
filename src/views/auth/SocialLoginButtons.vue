@@ -1,7 +1,7 @@
 <template>
 	<div
 		id="social-login-buttons"
-		class="flex gap-2 justify-center"
+		class="flex flex-col sm:flex-row gap-2 justify-center"
 	>
 		<!-- Google Login Button -->
 		<button

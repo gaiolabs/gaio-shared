@@ -2,6 +2,7 @@
 	<template v-if="iconComponent">
 		<component
 			:is="iconComponent"
+			class="icon"
 			v-bind="attrs"
 			:strokewidth="1.25"
 		/>
@@ -54,3 +55,9 @@ const iconComponent = computed(() => {
 	return component.default || component
 })
 </script>
+
+<style scoped>
+.icon {
+	@apply transition-all duration-300 ease-in-out;
+}
+</style>

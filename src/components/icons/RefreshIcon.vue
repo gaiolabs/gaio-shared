@@ -6,51 +6,35 @@
 		width="18"
 	>
 		<g :fill="fill">
+			<polyline
+				points="5.25 9.5 3 7.25 .75 9.5"
+				fill="none"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				:stroke-width="strokewidth"
+				:stroke="_secondaryfill"
+			></polyline>
 			<path
-				d="M12.25 3.25l-1.5 0a2 2 0 0 0-2 2l0 7.5a2 2 0 0 0 2 2l1.5 0"
+				d="M13.762,13.048c-1.146,1.347-2.855,2.202-4.762,2.202-3.452,0-6.25-2.798-6.25-6.25,0-.597,.084-1.175,.24-1.722"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				:stroke-width="strokewidth"
 				:stroke="_secondaryfill"
 			></path>
-			<path
+			<polyline
+				points="12.75 8.5 15 10.75 17.25 8.5"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				d="M5.25 9l7 0"
-				:stroke-width="strokewidth"
-				:stroke="_secondaryfill"
-			></path>
-			<path
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M1.75 9.75l0-1.5q0-1 1-1l1.5 0q1 0 1 1l0 1.5q0 1-1 1l-1.5 0q-1 0-1-1z"
 				:stroke-width="strokewidth"
 				:stroke="fill"
-			></path>
+			></polyline>
 			<path
+				d="M4.238,4.952c1.146-1.347,2.855-2.202,4.762-2.202,3.452,0,6.25,2.798,6.25,6.25,0,.579-.079,1.14-.226,1.672"
 				fill="none"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				d="M12.25 15.5l0-1.5q0-1 1-1l1.5 0q1 0 1 1l0 1.5q0 1-1 1l-1.5 0q-1 0-1-1z"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></path>
-			<path
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M12.25 9.75l0-1.5q0-1 1-1l1.5 0q1 0 1 1l0 1.5q0 1-1 1l-1.5 0q-1 0-1-1z"
-				:stroke-width="strokewidth"
-				:stroke="fill"
-			></path>
-			<path
-				fill="none"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M12.25 4l0-1.5q0-1 1-1l1.5 0q1 0 1 1l0 1.5q0 1-1 1l-1.5 0q-1 0-1-1z"
 				:stroke-width="strokewidth"
 				:stroke="fill"
 			></path>

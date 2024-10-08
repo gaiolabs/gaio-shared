@@ -2,17 +2,21 @@
 	<div
 		id="g-card"
 		class="pointer-events-auto"
-		:class="type"
+		:class="[type, opaque ? 'opaque' : 'translucide']"
 	>
 		<slot />
 	</div>
 </template>
 
 <script setup lang="ts">
-const { type } = defineProps({
+const { type, opaque } = defineProps({
 	type: {
 		type: String as PropType<'base' | 'wrapper'>,
 		default: 'base',
+	},
+	opaque: {
+		type: Boolean,
+		default: false,
 	},
 })
 </script>
@@ -35,13 +39,13 @@ const { type } = defineProps({
 
 	/* Backdrop Filter */
 	@apply backdrop-blur;
+
+	&.opaque {
+		@apply bg-white dark:bg-gray-850;
+	}
 }
 
 .wrapper {
-	/* Background */
-	@apply bg-white/75 dark:bg-gray-850/10;
-	@apply bg-gradient-to-r from-sepia-100/30 dark:from-gray-700/25 via-gray-100/40 dark:via-gray-800/20 to-sepia-200/10 dark:to-ochre-950/[1%];
-
 	/* Borders */
 	@apply border border-white/50 dark:border-white/[2.5%];
 
@@ -53,5 +57,14 @@ const { type } = defineProps({
 
 	/* Backdrop Filter */
 	@apply backdrop-blur-xl;
+
+	&.translucide {
+		@apply bg-white/75 dark:bg-gray-850/10;
+		@apply bg-gradient-to-r from-sepia-100/30 dark:from-gray-700/25 via-gray-100/40 dark:via-gray-800/20 to-sepia-200/10 dark:to-ochre-950/[1%];
+	}
+
+	&.opaque {
+		@apply bg-white dark:bg-gray-900;
+	}
 }
 </style>

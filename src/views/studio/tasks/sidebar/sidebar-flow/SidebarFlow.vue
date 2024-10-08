@@ -6,10 +6,7 @@
 		<header class="flex flex-col gap-3">
 			<nav class="flex w-full items-stretch justify-between">
 				<h2 class="text-lg font-bold inline-flex items-center gap-1">
-					<IconComponent
-						name="Studio"
-						class="rotate-[-90deg]"
-					/>
+					<IconComponent name="Studio" />
 					<span>
 						{{ $t('flow') }}
 					</span>

@@ -58,7 +58,7 @@
 			@click="$emit('organize-layout', 'LR')"
 		>
 			<IconComponent
-				class="rotate-[-90deg] size-5"
+				class="size-5"
 				name="Studio"
 			/>
 		</GButton>

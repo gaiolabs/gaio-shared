@@ -798,6 +798,7 @@ export default {
 	path: 'Path',
 	enableZoom: 'Enable zoom',
 	leafDepth: 'Leaf depth',
+	iconPicker: 'Icon picker',
 	wordCloudCharMessage:
 		'Visual representation of text data where the size of each word reflects its frequency or importance',
 	wordCloud: 'Word Cloud',
