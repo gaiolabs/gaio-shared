@@ -5,8 +5,8 @@
 				<options-field />
 			</div>
 			<div v-else>
-				<options-table v-if="task.reportType === 'table'" />
-				<options-chart v-if="task.reportType !== 'table'" />
+				<OptionsTable v-if="task.reportType === 'table'" />
+				<OptionsChart v-if="task.reportType !== 'table'" />
 			</div>
 		</div>
 	</div>

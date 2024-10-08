@@ -17,13 +17,13 @@
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap'])"
+					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap', 'forecast'])"
 					v-model:checked="useReportStore().current.settings.yAxisAutoHideLabel"
 					:label="$t('autoHideLabel')"
 					class="w-full"
 				/>
 				<NCheckbox
-					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap'])"
+					v-if="useReportStore().hideOnlyIf(['bullet', 'dual', 'heatmap', 'forecast'])"
 					v-model:checked="useReportStore().current.settings.yAxisAutoRotateLabel"
 					:label="$t('autoRotateLabel')"
 					class="w-full"

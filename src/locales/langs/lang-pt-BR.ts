@@ -224,4 +224,8 @@ export default {
 	heatmapChartMessage:
 		'É uma visualização que usa cores para representar a intensidade dos valores em uma matriz de dados, facilitando a identificação de padrões e tendências',
 	forecast: 'Previsão',
+	forecastRealAsLine: 'Previsão Real como linha',
+	real: 'Real',
+	lower: 'Inferior',
+	upper: 'Superior',
 }

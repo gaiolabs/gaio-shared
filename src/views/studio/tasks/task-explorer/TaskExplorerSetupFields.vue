@@ -109,6 +109,7 @@ import useDataType from '@/composables/useDataType'
 import { useReportStore } from '@/stores'
 import type { FieldType } from '@gaio/shared/types'
 import { getId } from '@gaio/shared/utils'
+import { NButton, NTooltip } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
@@ -135,17 +136,17 @@ const loadFields = () => {
 	useApi()
 		.post('api/table/field', {
 			body: {
-				taskData: current
-			}
+				taskData: current,
+			},
 		})
 		.then(
 			(res) =>
 				(columns.value = res.data.map((o: FieldType) => {
 					return {
 						...o,
-						id: getId()
+						id: getId(),
 					}
-				}))
+				})),
 		)
 }
 

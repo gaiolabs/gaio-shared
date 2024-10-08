@@ -77,7 +77,7 @@
 						class="control"
 					>
 						<NCheckbox
-							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst', 'treemap', 'heatmap'])"
+							v-if="useReportStore().hideOnlyIf(['pie', 'donut', 'sunburst', 'treemap', 'heatmap', 'forecast'])"
 							v-model:checked="useReportStore().current.settings.showTotal"
 							class="w-full"
 							:label="$t('showTotal')"

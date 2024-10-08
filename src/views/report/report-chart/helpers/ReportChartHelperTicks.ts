@@ -43,7 +43,9 @@ export default () => {
 
 	const getMinMaxValues = (arrayValues: Array<number | string | Date>) => {
 		let min = roundToNearest(Math.min(...(arrayValues as number[])))
+		const minNotZero = roundToNearest(Math.min(...(arrayValues as number[])))
 		let max = roundToNearest(Math.max(...(arrayValues as number[])))
+		const maxNotZero = roundToNearest(Math.max(...(arrayValues as number[])))
 
 		if (min >= 0 && max >= 0) min = 0
 		if (min < 0 && max >= 0)
@@ -52,7 +54,7 @@ export default () => {
 		if (min < 0 && max < 0) max = 0
 
 		const middle = (max - min) / 2
-		return { min, middle, max }
+		return { min, middle, max, minNotZero, maxNotZero }
 	}
 
 	const roundToNearest = (value: number) => {

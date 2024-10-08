@@ -16,6 +16,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption, XAXisOption, SeriesOption, YAXisOption } from 'echarts/types/dist/shared'
 import { ref } from 'vue'
 import VChart from 'vue-echarts'
+import { useI18n } from 'vue-i18n'
 import useReportChartHelper from './helpers/ReportChartHelper'
 import useReportChartHelperAxis from './helpers/ReportChartHelperAxis'
 import useReportChartHelperGrid from './helpers/ReportChartHelperGrid'
@@ -30,7 +31,8 @@ const { commonXAxisConfigs, commonYAxisConfigs } = computed(() => useReportChart
 const { grid } = computed(() => useReportChartHelperGrid(task)).value
 const { legend } = computed(() => useReportChartHelperLegend(task)).value
 const { label } = computed(() => useReportChartHelperLabel(task)).value
-const { treatLabelsTicks } = computed(() => useReportChartHelperTicks()).value
+const { treatLabelsTicks, getMinMaxValues } = computed(() => useReportChartHelperTicks()).value
+const { t } = useI18n()
 
 use([CanvasRenderer, GridComponent, BarChart, TitleComponent, TooltipComponent, LegendComponent])
 
@@ -40,184 +42,146 @@ const orderedList = list.sort(
 		new Date(b[columnName(dimensions.value.first)] as string).getTime(),
 )
 
-console.log('orderedList', JSON.stringify(orderedList))
+let dates: (string | null)[] = []
+let realData: (number | null)[] = []
+let forecastData: (number | null)[] = []
+let bound: {
+	lowerBound: number | null
+	upperBound: number | null
+}[] = []
 
-const dates = orderedList.map((item) => item[columnName(dimensions.value.first)]) as string[]
-const realData = orderedList.map((item) => item[columnName(measures.value.first)]) as number[]
-const forecastData = orderedList.map((item) => item[columnName(measures.value.second)]) as number[]
-const lowerBound = orderedList.map((item) => item[columnName(measures.value.third)] as number[])
-const upperBound = orderedList.map((item) => item[columnName(measures.value.fourth)] as number[])
+const treateData = () => {
+	dates = []
+	realData = []
+	forecastData = []
+	bound = []
 
-const option = ref<EChartsOption>({
-	title: {
-		text: 'Previsão de Dados',
-	},
-	tooltip: {
-		trigger: 'axis',
-	},
-	legend: {
-		data: ['Histórico', 'Previsão', 'Intervalo de Previsão'],
-	},
-	xAxis: {
+	orderedList.forEach((item) => {
+		dates.push((item[columnName(dimensions.value.first)] as string) ?? null)
+		realData.push((item[columnName(measures.value.first)] as number) ?? null)
+		forecastData.push((item[columnName(measures.value.second)] as number) ?? null)
+		if (item[columnName(measures.value.first)]) {
+			bound.push({
+				lowerBound: item[columnName(measures.value.second)] as number,
+				upperBound: item[columnName(measures.value.second)] as number,
+			})
+		} else {
+			bound.push({
+				lowerBound: item[columnName(measures.value.third)] as number,
+				upperBound: item[columnName(measures.value.fourth)] as number,
+			})
+		}
+	})
+}
+
+const xAxis = () => {
+	const ticksLabels = treatLabelsTicks(dates, settings.value.xAxisTickCount)
+	return {
 		type: 'category',
 		data: dates,
-	},
-	yAxis: {
+		...commonXAxisConfigs(ticksLabels, columnName(dimensions.value.first)),
+	} as XAXisOption | XAXisOption[]
+}
+
+const yAxis = () => {
+	const ticksLabels = treatLabelsTicks(realData, settings.value.yAxisTickCount)
+	const minMax = getMinMaxValues(
+		list.map((item) => item[columnName(measures.value.first)]).filter((item) => item !== null) as Array<
+			number | string | Date
+		>,
+	)
+	return {
 		type: 'value',
-	},
-	series: [
+		min: minMax.minNotZero,
+		max: minMax.maxNotZero,
+		...commonYAxisConfigs(ticksLabels, columnName(measures.value.first)),
+	} as YAXisOption | YAXisOption[]
+}
+
+// settings.value.forecastRealAsLine
+const series = () => {
+	return [
 		{
-			name: 'Real',
-			type: 'scatter',
+			name: t('real'),
+			type: 'line',
 			data: realData,
+			symbolSize: 6,
+			roam: 'zoom',
+			smooth: settings.value.lineSmooth,
+			symbol: 'circle',
+			lineStyle: {
+				width: settings.value.forecastRealAsLine ? 3 : 0,
+			},
 		},
 		{
-			name: 'Previsão',
+			name: t('forecast'),
 			type: 'line',
 			data: forecastData,
-			smooth: true,
+			symbolSize: 6,
+			smooth: settings.value.lineSmooth,
+			symbol: settings.value.showPoint ? 'circle' : 'none',
 			lineStyle: {
-				type: 'dashed',
-				color: '#91CC75',
+				type: 'none',
 				width: 3,
 			},
 		},
 		{
-			name: 'Intervalo de Previsão',
+			name: t('lower'),
 			type: 'line',
-			data: upperBound,
-			smooth: true,
+			data: bound.map((item) => {
+				return item.lowerBound
+			}),
 			lineStyle: {
 				opacity: 0,
 			},
-			areaStyle: {
-				color: 'rgba(144, 238, 144, 0.3)',
-			},
+			stack: 'area',
+			symbol: 'none',
 		},
 		{
-			name: 'Intervalo de Previsão',
+			name: t('upper'),
 			type: 'line',
-			data: lowerBound,
-			smooth: true,
+			data: bound.map((item) => {
+				return item.upperBound - item.lowerBound
+			}),
 			lineStyle: {
 				opacity: 0,
 			},
-			areaStyle: {
-				color: 'rgba(144, 238, 144, 0.3)',
-			},
+			areaStyle: {},
+			stack: 'area',
+			symbol: 'none',
 		},
-	],
-})
-
-// watch(
-// 	[() => task, () => list, dimensions, measures, themeColors],
-// 	() => {
-// 		option.value = {
-// 			...option.value,
-// 			color: themeColors.value,
-// 			xAxis: xAxis(),
-// 			yAxis: yAxis(),
-// 			series: series(),
-// 			legend: legend(),
-// 			label: label(measures.value.measures),
-// 			grid: grid(),
-// 		}
-// 	},
-// 	{ deep: true },
-// )
-</script>
-
-<!-- <template>
-	<div class="report-column">
-		<div
-			ref="id"
-			class="size-full"
-			:style="{ height }"
-		/>
-	</div>
-</template>
-
-<script setup lang="ts">
-import { Column, type ColumnOptions } from '@antv/g2plot'
-import type { ReportNodeType } from '@gaio/shared/types'
-import { sumBy } from 'lodash-es'
-import { computed, nextTick } from 'vue'
-import { onMounted, shallowRef, watch } from 'vue'
-import useReportChartHelper from './ReportChartHelper'
-
-defineEmits(['change'])
-const { task, list, height } = defineProps<{ task: ReportNodeType; list: Record<string, unknown>[]; height: string }>()
-
-const chartHelper = computed(() => useReportChartHelper(task, list))
-const {
-	dimensions,
-	measures,
-	settings,
-	foundation,
-	columnName,
-	processedList,
-	themeColors,
-	isGrouped,
-	isMultipleMeasure,
-	firstMeasure,
-	firstDimension,
-	secondDimension,
-	linearLabel,
-} = chartHelper.value
-
-const id = shallowRef()
-let chart = shallowRef<Column>()
-
-const total = computed(() => {
-	return sumBy(processedList('column'), (o) => {
-		return o[columnName(firstMeasure.value)] ? o[columnName(firstMeasure.value)] : 0
-	})
-})
-
-const getOptions = (): ColumnOptions => {
-	return {
-		data: processedList('column'),
-		xField: columnName(firstDimension.value),
-		yField: !isGrouped.value && isMultipleMeasure.value ? 'measure' : columnName(firstMeasure.value),
-		seriesField:
-			isGrouped.value && !isMultipleMeasure.value ? columnName(secondDimension.value)
-			: isMultipleMeasure.value ? 'category'
-			: settings.value.showLegend ? columnName(firstDimension.value)
-			: undefined,
-		...foundation.value,
-		isGroup: isGrouped.value || isMultipleMeasure.value,
-		appendPadding: [10, 10, 10, 10],
-		color:
-			isGrouped.value || isMultipleMeasure.value ? themeColors.value
-			: settings.value.showLegend ? themeColors.value
-			: themeColors.value[0],
-		label: linearLabel(total.value),
-		columnBackground:
-			settings.value.columnBackground ?
-				{
-					style: {
-						fill: 'rgba(0,0,0,0.08)',
-					},
-				}
-			:	undefined,
-	}
+	] as SeriesOption | SeriesOption[]
 }
 
-const loadChart = () => {
-	if (!id.value) return
-	chart.value = new Column(id.value as HTMLElement, getOptions())
-	chart.value.render()
-}
+treateData()
+const option = ref<EChartsOption>({
+	tooltip: {
+		trigger: 'axis',
+	},
+	color: themeColors.value,
+	legend: legend(),
+	xAxis: xAxis(),
+	yAxis: yAxis(),
+	grid: grid(),
+	series: series(),
+	label: label(measures.value.measures),
+})
 
 watch(
-	[() => task, () => list, dimensions, measures],
+	[() => task, () => list, dimensions, measures, themeColors],
 	() => {
-		chart.value.update(getOptions())
+		treateData()
+		option.value = {
+			...option.value,
+			color: themeColors.value,
+			legend: legend(),
+			xAxis: xAxis(),
+			yAxis: yAxis(),
+			grid: grid(),
+			series: series(),
+			label: label(measures.value.measures),
+		}
 	},
 	{ deep: true },
 )
-
-onMounted(() => {
-	nextTick(() => loadChart())
-})
-</script> -->
+</script>
