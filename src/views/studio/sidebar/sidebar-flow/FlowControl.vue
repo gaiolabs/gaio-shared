@@ -1,16 +1,16 @@
 <template>
-	<g-dialog
+	<GDialog
 		v-if="localFlow && localFlow.options"
+		icon="Studio"
 		@close="$emit('close')"
 	>
 		<template #title>
 			<div class="flex w-full items-center justify-between">
 				<div class="flex items-center gap-2">
-					<div v-if="localFlow.appId">
-						<IconComponent
-							class="rotate-[-90deg]"
-							name="Studio"
-						/>
+					<div
+						v-if="localFlow.appId"
+						class="flex items-center gap-2"
+					>
 						{{ localFlow.flowName ? localFlow.flowName : $t('flow') }}
 					</div>
 					<div v-else>
@@ -24,96 +24,85 @@
 			</div>
 		</template>
 		<template #tabs>
-			<div class="flow-control">
-				<NTabs
-					pane-class="bg-elevation-1"
-					size="small"
-					type="line"
-					:default-value="currentTab"
+			<GTabs v-model="currentTab">
+				<GTab
+					name="general"
+					:label="$t('general')"
 				>
-					<NTabPane
-						name="general"
-						:tab="$t('general')"
-						display-directive="show:lazy"
-					>
-						<flow-control-general
-							:local-flow="localFlow"
-							class="my-4"
-						/>
-					</NTabPane>
-					<NTabPane
-						v-if="localFlow && localFlow.flowId"
-						name="schedule"
-						:tab="$t('schedule')"
-						display-directive="show:lazy"
-					>
-						<flow-control-schedule
-							:local-flow="localFlow"
-							class="my-4"
-						/>
-					</NTabPane>
-				</NTabs>
-			</div>
-			<div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-				<div>
-					<NSpace
-						v-if="localFlow.flowId"
-						size="small"
-					>
-						<NPopconfirm
-							v-if="canDeleteFlow"
-							:show-icon="false"
-							:positive-button-props="{ type: 'error' }"
-							:positive-text="$t('delete')"
-							@positive-click="remove()"
-						>
-							<template #trigger>
+					<FlowControlGeneral :local-flow="localFlow" />
+				</GTab>
+				<GTab
+					v-if="localFlow && localFlow.flowId"
+					name="schedule"
+					:label="$t('schedule')"
+				>
+					<FlowControlSchedule :local-flow="localFlow" />
+				</GTab>
+				<template #footer>
+					<div class="flex justify-between">
+						<div>
+							<NSpace
+								v-if="localFlow.flowId"
+								size="small"
+							>
+								<NPopconfirm
+									v-if="canDeleteFlow"
+									:show-icon="false"
+									:positive-button-props="{ type: 'error' }"
+									:positive-text="$t('delete')"
+									@positive-click="remove()"
+								>
+									<template #trigger>
+										<NButton
+											size="tiny"
+											quaternary
+											type="error"
+										>
+											<template #icon>
+												<IconComponent name="Delete" />
+											</template>
+										</NButton>
+									</template>
+									{{ $t('deletionConfirmation') }}
+								</NPopconfirm>
 								<NButton
 									size="tiny"
 									quaternary
-									type="error"
+									type="primary"
+									@click="replicateFlow()"
 								>
 									<template #icon>
-										<IconComponent name="Delete" />
+										<g-icon name="clone" />
 									</template>
 								</NButton>
-							</template>
-							{{ $t('deletionConfirmation') }}
-						</NPopconfirm>
-						<NButton
-							size="tiny"
-							quaternary
-							type="primary"
-							@click="replicateFlow()"
-						>
-							<template #icon>
-								<g-icon name="clone" />
-							</template>
-						</NButton>
-					</NSpace>
-				</div>
-				<NSpace>
-					<NButton
-						secondary
-						@click="$emit('close')"
-					>
-						{{ $t('cancel') }}
-					</NButton>
-					<NButton
-						:loading="loading"
-						:disabled="validateFlow"
-						type="primary"
-						@click="save()"
-					>
-						{{ $t('save') }}
-					</NButton>
-				</NSpace>
-			</div>
+							</NSpace>
+						</div>
+						<NSpace>
+							<NButton
+								secondary
+								@click="$emit('close')"
+							>
+								{{ $t('cancel') }}
+							</NButton>
+							<NButton
+								:loading="loading"
+								:disabled="validateFlow"
+								type="primary"
+								@click="save()"
+							>
+								{{ $t('save') }}
+							</NButton>
+						</NSpace>
+					</div>
+				</template>
+			</GTabs>
 		</template>
-	</g-dialog>
+	</GDialog>
 </template>
 
 <script setup lang="ts">
+import GTab from '@/components/inputs/GTab.vue'
+import GTabs from '@/components/inputs/GTabs.vue'
 import useApi from '@/composables/useApi'
 import useScheduleControl from '@/composables/useScheduleControl'
 import { useAppStore } from '@/stores'

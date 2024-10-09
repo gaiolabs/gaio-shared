@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localFlow"
-		class="flow-control-general px-4"
+		id="flow-control-general"
 	>
 		<div class="control">
 			<div class="control-label">{{ $t('processName') }}</div>
@@ -148,8 +148,8 @@ const renewFlowKey = async () => {
 	const savedFlow = await useApi().post('api/flow/renew-flow-key', {
 		body: {
 			flowId: localFlow.flowId,
-			appId: localFlow.appId
-		}
+			appId: localFlow.appId,
+		},
 	})
 
 	loading.value = false
