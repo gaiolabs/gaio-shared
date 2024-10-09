@@ -78,16 +78,16 @@
 								:options="[
 									{
 										label: $t('none'),
-										value: ''
+										value: '',
 									},
 									{
 										label: $t('ascending'),
-										value: 'ASC'
+										value: 'ASC',
 									},
 									{
 										label: $t('descending'),
-										value: 'DESC'
-									}
+										value: 'DESC',
+									},
 								]"
 							/>
 						</div>
@@ -163,28 +163,28 @@
 								:options="[
 									{
 										label: $t('none'),
-										value: ''
+										value: '',
 									},
 									{
 										label: $t('sum'),
-										value: 'SUM'
+										value: 'SUM',
 									},
 									{
 										label: $t('count'),
-										value: 'count'
+										value: 'count',
 									},
 									{
 										label: $t('average'),
-										value: 'AVG'
+										value: 'AVG',
 									},
 									{
 										label: $t('min'),
-										value: 'MIN'
+										value: 'MIN',
 									},
 									{
 										label: $t('max'),
-										value: 'MAX'
-									}
+										value: 'MAX',
+									},
 								]"
 							/>
 						</div>
@@ -210,12 +210,12 @@
 								:options="[
 									{
 										label: $t('atStart'),
-										value: 'start'
+										value: 'start',
 									},
 									{
 										label: $t('atEnd'),
-										value: 'end'
-									}
+										value: 'end',
+									},
 								]"
 							/>
 						</div>
@@ -274,8 +274,8 @@ const loadColumns = () => {
 				tableName: localTask.value.tableName,
 				columnName: localTask.value.transposeColumn,
 				columnLength: null,
-				databaseName: localTask.value.databaseName
-			}
+				databaseName: localTask.value.databaseName,
+			},
 		],
 		sort: [
 			{
@@ -283,9 +283,9 @@ const loadColumns = () => {
 				type: 'value',
 				columnName: localTask.value.transposeColumn,
 				tableName: localTask.value.tableName,
-				databaseName: localTask.value.databaseName
-			} as SchemaSortType
-		]
+				databaseName: localTask.value.databaseName,
+			} as SchemaSortType,
+		],
 	}
 
 	useApi()
@@ -295,17 +295,18 @@ const loadColumns = () => {
 					...useAppStore().appInfo,
 					...localTask.value,
 					type: 'table',
-					schema
+					schema,
 				},
-				params: []
-			}
+				params: [],
+			},
 		})
 		.then((res) => {
 			localTask.value.columns = res.data.map((col: FieldType) => {
 				return {
 					id: getId(6),
+					[localTask.value.transposeColumn]: col.columnName,
 					columnName: col.columnName,
-					transposeName: useHelper().alpha(col.columnName)
+					transposeName: useHelper().alpha(col.columnName),
 				}
 			})
 		})
@@ -321,8 +322,8 @@ const save = () => {
 		type: 'pivot',
 		base: {
 			...useAppStore().appInfo,
-			...localTask.value
-		}
+			...localTask.value,
+		},
 	})
 
 	useFlow(useAppStore().flow.workflow)
@@ -335,9 +336,9 @@ const save = () => {
 						...useAppStore().appInfo,
 						...taskToBeSaved,
 						tableName: taskToBeSaved.tableName,
-						label: taskToBeSaved.tableName
-					}
-				})
+						label: taskToBeSaved.tableName,
+					},
+				}),
 			],
 			targets: [
 				useDefault({
@@ -345,10 +346,10 @@ const save = () => {
 					base: {
 						...taskToBeSaved,
 						label: taskToBeSaved.resultTable,
-						tableName: taskToBeSaved.resultTable
-					}
-				})
-			]
+						tableName: taskToBeSaved.resultTable,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
