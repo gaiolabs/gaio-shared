@@ -114,6 +114,20 @@
 						:height="height"
 						@change="$emit('change', $event)"
 					/>
+					<ReportChartWordCloud
+						v-else-if="task.reportType === 'wordCloud'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
+					<ReportChartHeatmap
+						v-else-if="task.reportType === 'heatmap'"
+						:task="task"
+						:list="list"
+						:height="height"
+						@change="$emit('change', $event)"
+					/>
 				</div>
 			</template>
 		</NSpin>
@@ -139,9 +153,11 @@ import ReportChartCalendar from './ReportChartCalendar.vue'
 import ReportChartDonut from './ReportChartDonut.vue'
 import ReportChartFunnel from './ReportChartFunnel.vue'
 import ReportChartGauge from './ReportChartGauge.vue'
+import ReportChartHeatmap from './ReportChartHeatmap.vue'
 import ReportChartRadar from './ReportChartRadar.vue'
 import ReportChartScatter from './ReportChartScatter.vue'
 import ReportChartSunburst from './ReportChartSunburst.vue'
+import ReportChartWordCloud from './ReportChartWordCloud.vue'
 
 defineEmits(['change'])
 const { task, height } = defineProps<{ task: ReportNodeType; height: string; cardHeight: string }>()

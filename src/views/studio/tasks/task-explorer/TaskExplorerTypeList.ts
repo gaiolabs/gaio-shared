@@ -150,6 +150,12 @@ export const taskExplorerTypeList = (t): TaskExplorerType[] => {
 					reportType: 'treemap',
 					icon: 'treemap',
 				},
+				{
+					label: t('wordCloud'),
+					type: 'reportPreview',
+					reportType: 'wordCloud',
+					icon: 'wordCloud',
+				},
 				// {
 				//     label: t('parallel'),
 				//     type: 'reportPreview',

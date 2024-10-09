@@ -18,15 +18,15 @@
 						<OptionsChartGeneral v-if="showGeneralOptions" />
 						<OptionsHeader />
 						<OptionsChartStatistic v-if="useReportStore().showOnlyIf(['pie'])" />
-						<OptionsChartLegend v-if="useReportStore().hideOnlyIf(['gauge', 'sunburst', 'treemap'])" />
-						<OptionsChartLabel />
+						<OptionsChartLegend v-if="useReportStore().hideOnlyIf(['gauge', 'sunburst', 'treemap', 'wordCloud'])" />
+						<OptionsChartLabel v-if="useReportStore().hideOnlyIf(['wordCloud'])" />
 						<OptionsChartXAxis v-if="showShowAxisOptions" />
 						<OptionsChartYAxis v-if="showShowAxisOptions" />
 						<OptionsChartGuideline v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
 						<OptionsChartQuadrant v-if="useReportStore().showOnlyIf(['scatter', 'bubble'])" />
-						<OptionsChartLink />
-						<OptionsChartMargin />
-						<OptionsChartLimitRows />
+						<OptionsChartLink v-if="useReportStore().showOnlyIf([''])" />
+						<OptionsChartMargin v-if="useReportStore().hideOnlyIf(['heatmap', 'calendar'])" />
+						<OptionsChartLimitRows v-if="useReportStore().showOnlyIf(['table'])" />
 						<OptionsRowsPerPage />
 						<OptionsMessage />
 					</NCollapse>
@@ -78,6 +78,7 @@ const showShowAxisOptions = computed(() =>
 		'bubble',
 		'histogram',
 		'dual',
+		'heatmap',
 	]),
 )
 </script>

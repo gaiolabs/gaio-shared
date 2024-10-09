@@ -59,7 +59,7 @@
 
 		<NButton
 			tertiary
-			@click="$router.push('/auth/login')"
+			@click="$router.push('/login')"
 		>
 			{{ $t('logout') }}
 		</NButton>
