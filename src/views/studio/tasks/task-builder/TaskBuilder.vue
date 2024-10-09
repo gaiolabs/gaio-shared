@@ -5,7 +5,7 @@
 			:table-name="viewTableData?.tableName"
 			@close="showTab = 'builder'"
 		/>
-		<drawer-view
+		<DrawerView
 			v-else
 			tag="task-builder"
 			class="task-builder"
@@ -40,7 +40,7 @@
 												@click="showTab = 'computed'"
 											>
 												<template #icon>
-													<g-icon name="computed" />
+													<GIcon name="computed" />
 												</template>
 											</NButton>
 											<NButton
@@ -49,7 +49,7 @@
 												class="border-elevation-2 bg-paper-100 dark:bg-carbon-200"
 											>
 												<template #icon>
-													<g-icon name="globalComputed" />
+													<GIcon name="globalComputed" />
 												</template>
 											</NButton>
 										</div>
@@ -181,16 +181,19 @@
 					</Splitpanes>
 				</div>
 			</template>
-		</drawer-view>
+		</DrawerView>
 	</div>
 </template>
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 
+import DrawerView from '@/components/drawer/DrawerView.vue'
+import GIcon from '@/components/GIcon.vue'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 import TableView from '@/views/studio/tasks/table-view/TableView.vue'
 import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
+import { NButton, NScrollbar } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, ref } from 'vue'
 import TaskBuilderDropFilter from './task-builder-drop/TaskBuilderDropFilter.vue'
@@ -212,7 +215,7 @@ const localTask = ref<BuilderTaskType>()
 
 const localField = ref<{ type: string; field: Partial<FieldType> }>({
 	type: '',
-	field: {} as FieldType
+	field: {} as FieldType,
 })
 
 const viewTableData = ref()
@@ -226,7 +229,7 @@ const editComputed = (field: FieldType) => {
 const defineLocalField = (type: string, field: FieldType) => {
 	localField.value = {
 		type,
-		field
+		field,
 	}
 }
 
@@ -238,7 +241,7 @@ const viewTable = (table) => {
 onBeforeMount(() => {
 	localTask.value = useDefault({
 		type: 'builder',
-		base: useAppStore().cloneTask()
+		base: useAppStore().cloneTask(),
 	})
 
 	console.log(localTask.value)

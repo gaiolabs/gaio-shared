@@ -15,7 +15,7 @@
 					:placeholder="$t('label')"
 				>
 					<template #prefix>
-						<g-icon name="write" />
+						<GIcon name="write" />
 					</template>
 				</NInput>
 				<NInput
@@ -25,7 +25,7 @@
 					:placeholder="$t('tableName')"
 				>
 					<template #prefix>
-						<g-icon
+						<GIcon
 							name="timer"
 							:color="(localTask.resultTable || '').startsWith('tmp_') ? 'e32' : '#ccc'"
 						/>
@@ -75,13 +75,17 @@
 		</div>
 	</div>
 </template>
+
 <script setup lang="ts">
+import GIcon from '@/components/GIcon.vue'
+import IconComponent from '@/components/icons/IconComponent.vue'
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import { type BuilderTaskType } from '@gaio/shared/types'
 import { getBucketNameFromAppId, getId } from '@gaio/shared/utils'
 import { flatMap, uniqBy } from 'lodash-es'
+import { NButton, NButtonGroup, NDivider, NInput } from 'naive-ui'
 import type { PropType } from 'vue'
 
 const props = defineProps({
@@ -98,11 +102,11 @@ const props = defineProps({
 const emit = defineEmits(['showTab', 'close'])
 
 const saveBuilder = (saveType: string) => {
-	console.log(saveType)
 	const task = props.localTask
 	if (task.id === undefined) task.id = getId()
 
 	const bucket = getBucketNameFromAppId(task.appId)
+
 	// FROM SOURCES. TAKE NOTE OF SOURCE TYPE
 	const baseSourceMetadata = {
 		...task,
@@ -113,12 +117,14 @@ const saveBuilder = (saveType: string) => {
 		databaseName: useAppStore().cloneTask().databaseName,
 		type: 'table',
 	}
+
 	const tableList = [
 		useDefault({
 			type: 'table',
 			base: baseSourceMetadata,
 		}),
 	]
+
 	const joinTables = flatMap(
 		task.schema.join.filter((o) => o.type !== 'raw'),
 		(o) => [`${o.toDatabaseName || bucket}.${o.to}`, `${o.byDatabaseName || bucket}.${o.by}`],
@@ -141,6 +147,7 @@ const saveBuilder = (saveType: string) => {
 			},
 		})
 	})
+
 	const joinListTables = task.schema.join.filter((o) => o.type === 'raw')
 
 	for (let joinList of joinListTables) {
