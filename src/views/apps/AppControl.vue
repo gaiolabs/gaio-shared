@@ -1,5 +1,5 @@
 <template>
-	<g-dialog @close="$emit('close')">
+	<GDialog @close="$emit('close')">
 		<template #title>
 			<div class="flex w-full items-center justify-between">
 				<div class="flex items-center gap-2">
@@ -28,61 +28,58 @@
 		</template>
 
 		<template #tabs>
-			<NTabs
-				pane-class="bg-elevation-1"
-				size="small"
-				type="line"
-				:default-value="currentTab"
-			>
-				<NTabPane
+			<GTabs v-model="currentTab">
+				<GTab
 					name="general"
-					:tab="$t('general')"
+					:label="$t('general')"
 					display-directive="show:lazy"
 				>
-					<app-control-general
+					<AppControlGeneral
 						v-if="localApp.options"
 						:local-app="localApp"
 					/>
-				</NTabPane>
-				<NTabPane
-					v-if="localApp.appId"
+				</GTab>
+				<GTab
 					name="process"
-					:tab="$t('process')"
+					:label="$t('process')"
 					display-directive="show:lazy"
 				>
-					<app-control-flow :local-app="localApp" />
-				</NTabPane>
-				<NTabPane
-					v-if="localApp.appId"
+					<AppControlFlow
+						v-if="localApp.appId"
+						:local-app="localApp"
+					/>
+				</GTab>
+				<GTab
 					name="portal"
-					:tab="$t('portal')"
+					:label="$t('portal')"
 					display-directive="show:lazy"
-				></NTabPane>
-				<NTabPane
-					v-if="localApp.appId"
+				></GTab>
+				<GTab
 					name="apiKeys"
-					:tab="$t('apiKeys')"
+					:label="$t('apiKeys')"
 					display-directive="show:lazy"
-				></NTabPane>
-			</NTabs>
-		</template>
+				></GTab>
 
-		<template #footer>
-			<div class="flex justify-end gap-2">
-				<GButton
-					type="primary"
-					@click="save()"
-				>
-					{{ $t('save') }}
-				</GButton>
-			</div>
+				<template #footer>
+					<div class="flex justify-end gap-2">
+						<GButton
+							type="primary"
+							@click="save()"
+						>
+							{{ $t('save') }}
+						</GButton>
+					</div>
+				</template>
+			</GTabs>
 		</template>
-	</g-dialog>
+	</GDialog>
 </template>
 
 <script setup lang="ts">
 import GAppIcon from '@/components/GAppIcon.vue'
 import GButton from '@/components/inputs/GButton.vue'
+import GTab from '@/components/inputs/GTab.vue'
+import GTabs from '@/components/inputs/GTabs.vue'
 import useApi from '@/composables/useApi'
 import AppControlFlow from '@/views/apps/AppControlFlow.vue'
 import AppControlGeneral from '@/views/apps/AppControlGeneral.vue'
