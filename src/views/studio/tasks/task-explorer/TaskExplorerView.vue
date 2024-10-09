@@ -3,7 +3,7 @@
 		v-if="useReportStore().current"
 		class="task-report-view h-full"
 	>
-		<drawer-view
+		<DrawerView
 			tag="task-report-view"
 			class="task-report-view"
 			@close="$emit('close')"
@@ -56,7 +56,7 @@
 					</splitpanes>
 				</div>
 			</template>
-		</drawer-view>
+		</DrawerView>
 	</div>
 </template>
 <script setup lang="ts">
@@ -100,19 +100,19 @@ const save = () => {
 					base: {
 						...useReportStore().current,
 						label: useReportStore().current.tableName,
-						tableName: useReportStore().current.tableName
-					}
-				})
+						tableName: useReportStore().current.tableName,
+					},
+				}),
 			],
 			targets: [
 				useDefault({
 					type: 'reportPreview',
 					base: {
 						...useReportStore().current,
-						reportId: useReportStore().current.id
-					}
-				})
-			]
+						reportId: useReportStore().current.id,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
@@ -126,8 +126,8 @@ onMounted(() => {
 		base: {
 			...useAppStore().appInfo,
 			...useAppStore().cloneTask(),
-			id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id
-		} as ReportNodeType
+			id: useAppStore().cloneTask().type !== 'report' ? getId() : useAppStore().cloneTask()?.id,
+		} as ReportNodeType,
 	})
 })
 </script>

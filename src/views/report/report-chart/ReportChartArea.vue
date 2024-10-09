@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartArea"
 		:style="{ height }"
 		:option="option"
 		autoresize

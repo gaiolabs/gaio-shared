@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartSunburst"
 		:style="{ height }"
 		:option="option"
 		autoresize

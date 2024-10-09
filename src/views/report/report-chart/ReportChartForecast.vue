@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartForecast"
 		:style="{ height }"
 		:option="option"
 		autoresize

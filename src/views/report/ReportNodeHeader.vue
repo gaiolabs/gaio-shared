@@ -1,6 +1,7 @@
 <template>
 	<div
 		v-if="task"
+		id="ReportChartHeader"
 		class="report-node-header p-1"
 	>
 		<div

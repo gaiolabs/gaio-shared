@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartTreemap"
 		:style="{ height }"
 		:option="option"
 		autoresize

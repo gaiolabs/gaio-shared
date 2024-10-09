@@ -74,8 +74,6 @@ import GIcon from '@/components/GIcon.vue'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
 import { NInput, NButton, NTooltip, NDivider } from 'naive-ui'
-import { useCodeDataStore, useViewControlStore } from '../store/useTaskStaticContentStore'
-import TaskStaticContentPreviewModal from './TaskStaticContentPreviewModal.vue'
 
 const emit = defineEmits(['close'])
 const viewControl = useViewControlStore()

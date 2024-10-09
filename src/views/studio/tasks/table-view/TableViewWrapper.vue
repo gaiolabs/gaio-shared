@@ -1,12 +1,12 @@
 <template>
-	<drawer-view @close="$emit('close')">
+	<DrawerView @close="$emit('close')">
 		<template #header>
 			<div id="table-view-header"></div>
 		</template>
 		<template #content>
 			<div id="table-view-content table-view-wrapper"></div>
 		</template>
-	</drawer-view>
+	</DrawerView>
 
 	<table-view />
 </template>

@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartWordcloud"
 		:style="{ height }"
 		:option="option"
 		autoresize

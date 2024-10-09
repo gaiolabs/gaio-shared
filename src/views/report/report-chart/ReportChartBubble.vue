@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartBubble"
 		:style="{ height }"
 		:option="option"
 		autoresize

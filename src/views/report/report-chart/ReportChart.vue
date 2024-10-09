@@ -1,5 +1,6 @@
 <template>
 	<div
+		id="ReportChart"
 		:key="localKey"
 		class="report-chart m-0 overflow-hidden rounded border bg-paper-100 p-0 dark:bg-carbon-100"
 	>
@@ -154,7 +155,6 @@ import ReportNodeHeader from '@/views/report/ReportNodeHeader.vue'
 import type { ReportNodeType } from '@gaio/shared/types'
 import { cloneDeep } from 'lodash-es'
 import { NSpin } from 'naive-ui'
-import { collapseTransitionRtl } from 'naive-ui/es/collapse-transition/styles'
 import { computed, onMounted, ref } from 'vue'
 import ReportChartBubble from './ReportChartBubble.vue'
 import ReportChartCalendar from './ReportChartCalendar.vue'
@@ -187,8 +187,6 @@ onMounted(() => {
 	} else {
 		taskData.schema.limit = taskData.settings && taskData.settings.limitRows ? taskData.settings.limitRows : 10
 	}
-
-	console.log('list', list)
 
 	useApi()
 		.post('api/table/report', {

@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartPie"
 		:style="{ height }"
 		:option="option"
 		autoresize

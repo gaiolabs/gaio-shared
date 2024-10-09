@@ -1,5 +1,5 @@
 <template>
-	<drawer-view
+	<DrawerView
 		tag="table-view"
 		data-tag="table-view"
 		@close="$emit('close')"
@@ -123,7 +123,7 @@
 				<column-view @close="showTableInfo = false" />
 			</template>
 		</template>
-	</drawer-view>
+	</DrawerView>
 </template>
 
 <script setup lang="ts">

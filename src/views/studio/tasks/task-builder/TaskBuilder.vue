@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<table-view
+		<TableView
 			v-if="showTab === 'table'"
 			:table-name="viewTableData?.tableName"
 			@close="showTab = 'builder'"
@@ -12,7 +12,7 @@
 			@close="$emit('close')"
 		>
 			<template #header>
-				<task-builder-menu
+				<TaskBuilderMenu
 					:show-tab="showTab"
 					:local-task="localTask"
 					@show-tab="showTab = $event"
@@ -25,7 +25,7 @@
 					class="task-builder-drops h-full w-full"
 				>
 					<Splitpanes class="h-full w-full">
-						<pane :size="22">
+						<Pane :size="22">
 							<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
 								<NScrollbar style="max-height: calc(100vh - 72px)">
 									<div class="flex items-center justify-between p-3 pb-0 pt-2 font-bold">
@@ -54,7 +54,7 @@
 											</NButton>
 										</div>
 									</div>
-									<task-builder-fields
+									<TaskBuilderFields
 										class="px-3"
 										:local-task="localTask"
 										@view-table="viewTable"
@@ -62,43 +62,43 @@
 									/>
 								</NScrollbar>
 							</div>
-						</pane>
-						<pane :size="78">
+						</Pane>
+						<Pane :size="78">
 							<!--BUILDER-->
-							<splitpanes
+							<Splitpanes
 								v-if="showTab === 'builder'"
 								class="h-full"
 							>
-								<pane :size="78">
+								<Pane :size="78">
 									<div class="my-2 h-full rounded bg-paper-200 dark:bg-carbon-100">
 										<NScrollbar style="max-height: calc(100vh - 72px)">
 											<div class="mt-3 pb-[60px]">
-												<task-builder-drop-select
+												<TaskBuilderDropSelect
 													class="p-3 pt-0"
 													:local-task="localTask"
 													@choose="defineLocalField('select', $event)"
 												/>
-												<task-builder-drop-filter
+												<TaskBuilderDropFilter
 													class="p-3"
 													type="filter"
 													:local-task="localTask"
 													@choose="defineLocalField('filter', $event)"
 												/>
-												<task-builder-join
+												<TaskBuilderJoin
 													class="p-3"
 													:local-task="localTask"
 												/>
-												<task-builder-drop-group
+												<TaskBuilderDropGroup
 													class="p-3"
 													:local-task="localTask"
 													@choose="defineLocalField('group', $event)"
 												/>
-												<task-builder-drop-sort
+												<TaskBuilderDropSort
 													class="p-3"
 													:local-task="localTask"
 													@choose="defineLocalField('sort', $event)"
 												/>
-												<task-builder-drop-filter
+												<TaskBuilderDropFilter
 													class="p-3"
 													type="having"
 													:local-task="localTask"
@@ -122,7 +122,7 @@
 														/>
 													</div>
 												</div>
-												<task-builder-drop-limit-by
+												<TaskBuilderDropLimitBy
 													v-if="localTask.client === 'clickhouse' && localTask.schema.limit > 0"
 													class="p-3"
 													:local-task="localTask"
@@ -131,69 +131,69 @@
 											</div>
 										</NScrollbar>
 									</div>
-								</pane>
-								<pane :size="22">
+								</Pane>
+								<Pane :size="22">
 									<div class="m-2 h-full rounded bg-paper-100 dark:bg-carbon-200">
 										<NScrollbar style="max-height: calc(100vh - 72px)">
 											<div class="flex justify-between px-2 pb-1 pt-2 text-lg font-bold">
 												{{ $t('options') }}
 											</div>
-											<task-builder-options
+											<TaskBuilderOptions
 												:local-task="localTask"
 												:local-field="localField"
 											/>
 										</NScrollbar>
 									</div>
-								</pane>
-							</splitpanes>
+								</Pane>
+							</Splitpanes>
 							<!--SQL-->
-							<splitpanes
+							<Splitpanes
 								v-else-if="showTab === 'sql'"
 								class="h-full"
 							>
-								<pane>
-									<task-builder-sql :local-task="localTask" />
-								</pane>
-							</splitpanes>
+								<Pane>
+									<TaskBuilderSql :local-task="localTask" />
+								</Pane>
+							</Splitpanes>
 							<!--PREVIEW-->
-							<splitpanes
+							<Splitpanes
 								v-else-if="showTab === 'preview'"
 								class="h-full"
 							>
-								<pane>
-									<task-builder-preview :local-task="localTask" />
-								</pane>
-							</splitpanes>
+								<Pane>
+									<TaskBuilderPreview :local-task="localTask" />
+								</Pane>
+							</Splitpanes>
 							<!--COMPUTED-->
-							<splitpanes v-else-if="showTab === 'computed'">
-								<pane>
+							<Splitpanes v-else-if="showTab === 'computed'">
+								<Pane>
 									<div class="my-2 h-full">
-										<task-builder-edit-computed
+										<TaskBuilderEditComputed
 											:key="localField?.field?.computedId"
 											:local-field="localField"
 											:local-task="localTask"
 											@close="showTab = 'builder'"
 										/>
 									</div>
-								</pane>
-							</splitpanes>
-						</pane>
+								</Pane>
+							</Splitpanes>
+						</Pane>
 					</Splitpanes>
 				</div>
 			</template>
 		</DrawerView>
 	</div>
 </template>
+
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
-
 import DrawerView from '@/components/drawer/DrawerView.vue'
 import GIcon from '@/components/GIcon.vue'
 import useDefault from '@/composables/useDefault'
 import { useAppStore } from '@/stores'
 import TableView from '@/views/studio/tasks/table-view/TableView.vue'
 import type { BuilderTaskType, FieldType } from '@gaio/shared/types'
-import { NButton, NScrollbar } from 'naive-ui'
+import { NButton, NInputNumber, NScrollbar } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { onBeforeMount, ref } from 'vue'
 import TaskBuilderDropFilter from './task-builder-drop/TaskBuilderDropFilter.vue'

@@ -3,7 +3,7 @@
 		v-if="useFormStore().current"
 		class="task-form-builder h-full"
 	>
-		<drawer-view
+		<DrawerView
 			tag="task-form-builder"
 			class="task-form-builder"
 			@close="$emit('close')"
@@ -50,7 +50,7 @@
 					</splitpanes>
 				</div>
 			</template>
-		</drawer-view>
+		</DrawerView>
 	</div>
 </template>
 <script setup lang="ts">

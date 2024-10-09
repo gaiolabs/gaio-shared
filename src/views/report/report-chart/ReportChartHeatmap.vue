@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartHeatmap"
 		:style="{ height }"
 		:option="option"
 		autoresize

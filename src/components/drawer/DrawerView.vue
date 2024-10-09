@@ -74,22 +74,13 @@ import { computed } from 'vue'
 import GIcon from '../GIcon.vue'
 
 defineEmits(['close'])
-const props = defineProps({
-	tag: {
-		type: String,
-		default: 'drawer-view'
-	},
-	onlyFullScreen: {
-		type: Boolean,
-		default: false
-	}
-})
+const { tag = 'drawer-view', onlyFullScreen = false } = defineProps<{ tag: string; onlyFullScreen?: boolean }>()
 
-const isFullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen || props.onlyFullScreen)
+const isFullscreen = computed(() => !!useAuthStore().user.options.studioDrawerFullscreen || onlyFullScreen)
 
 const changeFullscreen = () => {
 	useAuthStore().updateUserOptions({
-		studioDrawerFullscreen: !isFullscreen.value
+		studioDrawerFullscreen: !isFullscreen.value,
 	})
 }
 </script>

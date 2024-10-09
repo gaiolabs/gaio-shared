@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartDonut"
 		:style="{ height }"
 		:option="option"
 		autoresize

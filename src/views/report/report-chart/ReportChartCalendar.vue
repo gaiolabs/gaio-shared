@@ -1,5 +1,6 @@
 <template>
 	<VChart
+		id="ReportChartCalendar"
 		:style="{ height }"
 		:option="option"
 		autoresize

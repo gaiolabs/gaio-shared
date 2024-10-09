@@ -87,12 +87,12 @@ defineEmits(['close'])
 const props = defineProps({
 	tag: {
 		type: String,
-		default: 'drawer-view'
+		default: 'drawer-view',
 	},
 	onlyFullScreen: {
 		type: Boolean,
-		default: false
-	}
+		default: false,
+	},
 })
 
 const scrollStyle = computed(() => `height: ${scrollHeight.value} !important`)
@@ -108,7 +108,7 @@ const scrollHeight = computed(() => {
 
 const changeFullscreen = () => {
 	useAuthStore().updateUserOptions({
-		studioDrawerFullscreen: !fullscreen.value
+		studioDrawerFullscreen: !fullscreen.value,
 	})
 }
 
