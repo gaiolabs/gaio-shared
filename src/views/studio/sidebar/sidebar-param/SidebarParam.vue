@@ -99,12 +99,15 @@
 		</header>
 
 		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
+			{{ useAppStore().params }}
+
 			<NScrollbar
 				style="height: 100%; overflow: auto"
 				outer-class="h-full overflow-auto"
 			>
 				<div v-if="localTreeFiltered(localTree, searchTerm).length">
 					<NTree
+						:key="`${isParamsRefreshing}`"
 						block-node
 						block-line
 						draggable
