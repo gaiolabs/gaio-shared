@@ -19,6 +19,41 @@
 					v-if="currentTab === tab.name"
 					class="absolute bottom-0 left-0 w-full h-1 translate-y-[2px] bg-white dark:bg-gray-900 z-[3]"
 				></span>
+				<div
+					v-if="tab.name !== tabs[0].name"
+					class="-scale-x-100 absolute left-0 bottom-[-1px] z-[3] -translate-x-full"
+					:class="currentTab === tab.name ? 'text-white dark:text-gray-900' : 'text-transparent'"
+				>
+					<svg
+						class="h-2 w-2"
+						viewBox="0 0 10 10"
+						fill="currentColor"
+					>
+						<path
+							class="fil0"
+							d="M0 0l0 12 12 0c-6,0 -12,-6 -12,-12z"
+						/>
+					</svg>
+				</div>
+				<div
+					class="absolute right-0 bottom-[-1px] z-[3] translate-x-full"
+					:class="
+						currentTab === tab.name ?
+							'text-white dark:text-gray-900'
+						:	'text-transparent group-hover:text-white/50 group-hover:dark:text-gray-900'
+					"
+				>
+					<svg
+						class="h-2 w-2"
+						viewBox="0 0 10 10"
+						fill="currentColor"
+					>
+						<path
+							class="fil0"
+							d="M0 0l0 12 12 0c-6,0 -12,-6 -12,-12z"
+						/>
+					</svg>
+				</div>
 			</button>
 		</div>
 
