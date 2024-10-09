@@ -5,7 +5,7 @@
 	>
 		<div
 			v-if="localApp.options"
-			class="app-control bg-elevation-1 p-3 px-4"
+			class=""
 		>
 			<div class="grid grid-cols-2 gap-2">
 				<div>
@@ -100,7 +100,7 @@ const loadRepository = async () => {
 			return res.map((repo) => {
 				return {
 					label: repo.repoName,
-					value: repo.repoId
+					value: repo.repoId,
 				}
 			})
 		})

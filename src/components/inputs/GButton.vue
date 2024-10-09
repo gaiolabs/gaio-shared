@@ -1,6 +1,6 @@
 <template>
 	<button
-		:class="[type, size, square ? 'square' : '']"
+		:class="[type, size, square ? 'square' : '', isActive ? 'active' : '', noLine ? 'no-line' : '']"
 		class="transition-all border duration-150 flex items-center justify-center rounded group relative z-[1]"
 	>
 		<slot
@@ -19,7 +19,7 @@
 		<span
 			v-if="showLine"
 			id="button-hover-background"
-			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 group-hover:opacity-100 group-hover:dark:opacity-100 group-hover:scale-100 z-[2]"
+			class="overflow-hidden absolute inset-0 transition origin-bottom duration-150 group-hover:opacity-50 group-hover:dark:opacity-100 group-hover:scale-100 z-[2]"
 			:class="isActive ? 'opacity-30 dark:opacity-20 scale-100' : 'opacity-0 scale-0'"
 		>
 			<span
@@ -68,12 +68,12 @@ const showLine = computed(
 	@apply text-white;
 
 	/* Gradient Background */
-	@apply bg-gradient-to-tl;
-	@apply from-sepia-800 via-sepia-700 to-sepia-500;
-	@apply dark:from-ochre-800 dark:via-ochre-700 dark:to-ochre-500;
+	@apply bg-gradient-to-br;
+	@apply from-sepia-400 via-sepia-500 to-sepia-600;
+	@apply dark:from-ochre-500 dark:via-ochre-600 dark:to-ochre-700;
 
 	/* Borders */
-	@apply border border-sepia-700 dark:border-ochre-700;
+	@apply border border-sepia-500 dark:border-ochre-700;
 
 	/* Shadows */
 	@apply shadow shadow-gray-950/5 hover:shadow-md;

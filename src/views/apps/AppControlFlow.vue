@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localApp"
-		class="app-control-flow px-4"
+		id="app-control-flow"
 	>
 		<div class="my-2">
 			<div>{{ $t('firstFlowAtStudio') }}</div>
@@ -71,14 +71,14 @@ const loadFlow = async () => {
 	const { post } = useApi()
 	flowList.value = await post('api/flow/list', {
 		body: {
-			appId: props.localApp.appId
-		}
+			appId: props.localApp.appId,
+		},
 	}).then((res: FlowType[]) =>
 		res.map((item) => ({
 			label: item.flowName,
 			value: item.flowId,
-			flowType: item.flowType
-		}))
+			flowType: item.flowType,
+		})),
 	)
 	loading.value = false
 }
@@ -87,8 +87,8 @@ const updateFlowOrder = () => {
 	useApi().post('api/flow/update-order', {
 		body: {
 			appId: props.localApp.appId,
-			flowList: flowList.value.map((item) => item.value)
-		}
+			flowList: flowList.value.map((item) => item.value),
+		},
 	})
 }
 

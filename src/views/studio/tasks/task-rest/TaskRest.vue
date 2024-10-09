@@ -1,5 +1,5 @@
 <template>
-	<g-dialog @close="emit('close')">
+	<GDialog @close="emit('close')">
 		<template #title>
 			<task-icon :local-task="localTask" />
 			{{ $t('taskRest') }}
@@ -7,32 +7,63 @@
 		<template #content>
 			<div
 				v-if="localTask"
-				class="task-rest size-full flex-col items-center justify-center"
+				id="task-rest"
+				class="flex flex-col gap-4"
 			>
-				<div class="flex flex-col items-center justify-center gap-1 overflow-auto">
-					<div class="flex w-full items-center gap-2">
-						<div class="flex w-full flex-col gap-1">
-							<label
-								class="control-label"
-								for="task"
-							>
-								{{ $t('task') }}
-							</label>
-							<NInput v-model:value="localTask.label" />
-						</div>
-						<div class="flex w-full flex-col gap-1">
-							<label class="control-label">
-								{{ $t('table') }}
-							</label>
-							<NInput
-								v-model:value="localTask.tableName"
-								v-alpha
-								disabled
-							/>
-						</div>
-					</div>
+				<div class="grid gap-2 grid-cols-2">
+					<label>
+						<span>
+							{{ $t('task') }}
+						</span>
+						<NInput v-model:value="localTask.label" />
+					</label>
+
+					<label class="control-label">
+						<span>
+							{{ $t('table') }}
+						</span>
+						<NInput
+							v-model:value="localTask.tableName"
+							v-alpha
+							disabled
+						/>
+					</label>
 				</div>
-				<NTabs
+
+				<GTabs v-model="currentTab">
+					<GTab
+						name="general"
+						:label="$t('general')"
+					>
+						<TaskRestGeneral :local-task="localTask" />
+					</GTab>
+					<GTab
+						name="basicAuth"
+						:label="$t('basicAuth')"
+					>
+						<TaskRestBasicAuth :local-task="localTask" />
+					</GTab>
+					<GTab
+						name="headers"
+						:label="$t('headers')"
+					>
+						<TaskRestHeaders :local-task="localTask" />
+					</GTab>
+					<GTab
+						name="result"
+						:label="$t('result')"
+					>
+						<TaskRestResult :local-task="localTask" />
+					</GTab>
+					<GTab
+						name="errorLog"
+						:label="$t('errorLog')"
+					>
+						<TaskRestErrorLog :local-task="localTask" />
+					</GTab>
+				</GTabs>
+
+				<!-- <NTabs
 					pane-class="bg-elevation-1"
 					size="small"
 					type="line"
@@ -69,26 +100,30 @@
 					>
 						<task-rest-error-log :local-task="localTask" />
 					</NTabPane>
-				</NTabs>
+				</NTabs> -->
 			</div>
-			<div class="flex justify-between bg-paper-100 px-4 py-2 dark:bg-carbon-200">
-				<NButton
-					secondary
+		</template>
+		<template #footer>
+			<div class="flex justify-between">
+				<GButton
+					type="secondary"
 					@click="$emit('close')"
 				>
 					{{ $t('cancel') }}
-				</NButton>
-				<NButton
+				</GButton>
+				<GButton
 					type="primary"
 					@click="save()"
 				>
 					{{ $t('save') }}
-				</NButton>
+				</GButton>
 			</div>
 		</template>
-	</g-dialog>
+	</GDialog>
 </template>
 <script setup lang="ts">
+import GTab from '@/components/inputs/GTab.vue'
+import GTabs from '@/components/inputs/GTabs.vue'
 import useDefault from '@/composables/useDefault'
 import useFlow from '@/composables/useFlow'
 import { useAppStore } from '@/stores'
@@ -115,9 +150,9 @@ const save = () => {
 					type: 'table',
 					base: {
 						...useAppStore().appInfo,
-						...localTask.value
-					}
-				})
+						...localTask.value,
+					},
+				}),
 			],
 			targets: [
 				useDefault({
@@ -125,10 +160,10 @@ const save = () => {
 					base: {
 						...localTask.value,
 						label: localTask.value.resultTable,
-						tableName: localTask.value.resultTable
-					}
-				})
-			]
+						tableName: localTask.value.resultTable,
+					},
+				}),
+			],
 		})
 		.save()
 		.then(() => emit('close'))
@@ -139,8 +174,8 @@ onMounted(() => {
 		type: 'rest',
 		base: {
 			...useAppStore().appInfo,
-			...useAppStore().cloneTask()
-		}
+			...useAppStore().cloneTask(),
+		},
 	})
 	console.log(localTask.value)
 })

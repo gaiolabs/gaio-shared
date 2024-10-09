@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localTask"
-		class="task-rest-result flex size-full flex-col gap-6 p-6"
+		class="task-rest-result flex size-full flex-col"
 	>
 		<div class="control flex flex-col gap-1">
 			<label
@@ -36,7 +36,7 @@
 							columnName: '',
 							type: 'value',
 							dataType: 'Nullable(String)',
-							columnLength: undefined
+							columnLength: undefined,
 						})
 					"
 				/>
@@ -94,12 +94,12 @@ const structureId = ref('automatic')
 const structureOptions = ref([
 	{
 		label: 'Automatic',
-		value: 'automatic'
+		value: 'automatic',
 	},
 	{
 		label: 'Manual',
-		value: 'manual'
-	}
+		value: 'manual',
+	},
 ])
 const { localTask = null } = defineProps<{ localTask: RestTaskType }>()
 </script>

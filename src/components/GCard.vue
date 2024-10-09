@@ -1,7 +1,7 @@
 <template>
 	<div
 		id="g-card"
-		class="pointer-events-auto"
+		class="pointer-events-auto !transition-none !duration-0"
 		:class="[type, opaque ? 'opaque' : 'translucide']"
 	>
 		<slot />
