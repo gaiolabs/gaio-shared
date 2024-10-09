@@ -7,7 +7,7 @@
 			{{ $t('iconPicker') }}
 		</template>
 		<template #content>
-			<div class="h-[400px] max-w-[400px] relative overflow-y-scroll m-2 p-2">
+			<div class="h-[400px] max-w-[400px] relative overflow-y-scroll -m-2 p-2">
 				<span
 					class="bg-gradient-to-b rounded-t-2xl from-white dark:from-gray-900 via-white dark:via-gray-900 to-transparent fixed top-0 left-0 right-4 h-12 z-[9]"
 				></span>

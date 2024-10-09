@@ -13,10 +13,20 @@
 			:type="isDark ? 'base' : 'wrapper'"
 			class="my-3 p-2 w-[98%] min-w-[380px] rounded-[8px] sm:w-[95%] md:w-[80%] lg:w-[70%] xl:w-[55%]"
 			:class="dialogSize"
-			:style="{ width: props.width }"
+			:style="{ width: width }"
 		>
 			<header class="flex min-h-[42px] items-center justify-between gap-2 rounded-t-[6px] p-2 pt-0">
-				<div class="flex grow items-center text-lg font-semibold">
+				<div class="flex grow items-center text-lg text-gray-800 font-medium">
+					<GCard
+						v-if="icon"
+						class="size-9 mr-2 flex items-center justify-center font-normal leading-none rounded-md"
+					>
+						<IconComponent
+							:name="icon"
+							class="text-gray-700"
+						/>
+					</GCard>
+
 					<slot name="title"></slot>
 				</div>
 				<div class="flex items-end">
@@ -38,45 +48,46 @@
 			<GCard
 				v-if="$slots.content"
 				:type="isDark ? 'wrapper' : 'base'"
-				class="rounded-2xl"
+				class="rounded-2xl p-4"
 				opaque
 			>
 				<slot name="content"></slot>
+
+				<footer
+					v-if="$slots.footer"
+					class="mt-4 border-t border-gray-200 dark:border-white/10 pt-4"
+				>
+					<slot name="footer"></slot>
+				</footer>
 			</GCard>
-			<GCard
-				v-if="$slots.tabs"
-				:type="isDark ? 'wrapper' : 'base'"
-				class="rounded-2xl"
-				opaque
-			>
-				<slot name="tabs"></slot>
-			</GCard>
-			<footer
-				v-if="$slots.footer"
-				class="mt-2 px-2"
-			>
-				<slot name="footer"></slot>
-			</footer>
+			<template v-if="$slots.tabs">
+				<slot name="tabs" />
+			</template>
 		</GCard>
 	</NModal>
 </template>
 
 <script setup lang="ts">
 import GCard from '@/components/GCard.vue'
+import IconComponent from '@/components/icons/IconComponent.vue'
 import GButton from '@/components/inputs/GButton.vue'
 import { useDark } from '@vueuse/core'
 import { computed, onMounted, ref } from 'vue'
 
 const emit = defineEmits(['close'])
-const props = defineProps({
+const { width, icon } = defineProps({
 	width: {
 		type: String,
 		default: () => undefined,
 	},
+	icon: {
+		type: String,
+		default: undefined,
+	},
 })
 
 const dialogSize = computed(() => {
-	if (!props.width) {
+	if (!width) {
 		return ' w-[98%] min-w-[380px]  sm:w-[95%] md:w-[80%] lg:w-[70%] xl:w-[55%]'
 	}
 	return ''

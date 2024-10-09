@@ -1,11 +1,19 @@
 <template>
 	<div
 		v-if="option.isLeaf && localParam"
+		:key="`${isRefreshing}`"
 		class="sidebar-param-label py-1"
 	>
+		<pre>
+
+		{{ useAppStore().params[useAppStore().params.findIndex((o) => o.paramName === option.key)] }}
+    </pre>
 		<div class="control-label text-sm">
 			{{ localParam.paramName }}
 		</div>
+
+		<!-- TODO: On input change, save button needs to turn into primary -->
+		{{ localParam.paramValue }}
 
 		<NInput
 			v-model:value="localParam.paramValue"
@@ -34,6 +42,7 @@
 							class="cursor-pointer hover:opacity-70"
 						/>
 					</template>
+
 					{{ $t('deletionConfirmation') }}
 				</NPopconfirm>
 			</template>
@@ -50,24 +59,33 @@ import useApi from '@/composables/useApi'
 import { useAppStore } from '@/stores'
 import type { ParamType } from '@gaio/shared/types'
 import type { TreeOption } from 'naive-ui'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
 defineEmits(['edit'])
-const props = defineProps<{ option: TreeOption }>()
+const { option, isRefreshing } = defineProps<{ isRefreshing: boolean; option: TreeOption }>()
 
-const localParam = ref<Partial<ParamType>>()
+let localParam = reactive<Partial<ParamType>>(
+	useAppStore().params[useAppStore().params.findIndex((o) => o.paramName === option.key)],
+)
+
+watch(
+	() => isRefreshing,
+	() => {
+		setLocalParam()
+	},
+)
 
 const updateParamValue = () => {
 	useAppStore().params = useAppStore().params.map((o) => {
-		if (o.paramName === localParam.value.paramName) {
-			o.value = localParam.value.value
+		if (o.paramName === localParam.paramName) {
+			o.value = localParam.value
 		}
 		return o
 	})
 }
 
 const remove = () => {
-	useAppStore().params = useAppStore().params.filter((o) => o.paramName !== localParam.value.paramName)
+	useAppStore().params = useAppStore().params.filter((o) => o.paramName !== localParam.paramName)
 	useApi().post('api/app/update-params', {
 		body: {
 			params: useAppStore().params,
@@ -76,7 +94,11 @@ const remove = () => {
 	})
 }
 
-onMounted(() => {
-	localParam.value = useAppStore().params.find((o) => o.paramName === props.option.key)
-})
+const setLocalParam = () => {
+	console.log('fasfasdfasa')
+	// const findParamIndex = useAppStore().params.findIndex((o) => o.paramName === option.key)
+	// localParam = useAppStore().params[findParamIndex]
+}
+
+onMounted(() => setLocalParam())
 </script>

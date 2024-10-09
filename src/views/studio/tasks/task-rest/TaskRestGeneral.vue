@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localTask"
-		class="task-rest-general flex size-full flex-col gap-6 p-6"
+		class="task-rest-general flex size-full flex-col gap-6"
 	>
 		<div class="flex w-full gap-1">
 			<div class="w-full">
@@ -47,12 +47,14 @@
 				</NButton>
 			</div>
 		</div>
-		<p>{{ `You can use parameters in the URL. Ex.: https://restsite.com/?field={\{param}\}` }}</p>
+		<GAlert title="You can use parameters in the URL. Ex.: https://restsite.com/?field={\{param}\}" />
 	</div>
 </template>
 <script setup lang="ts">
+import GAlert from '@/components/GAlert.vue'
 import useApi from '@/composables/useApi'
 import type { RestTaskType } from '@gaio/shared/types'
+import { NAlert } from 'naive-ui'
 import { ref } from 'vue'
 
 // const times = ref(1)
@@ -64,28 +66,28 @@ async function runTest() {
 			url: localTask.url,
 			method: localTask.method,
 			data: localTask.body,
-			headers: Object.fromEntries(localTask.headers.map(({ prop, value }) => [prop, value]))
-		}
+			headers: Object.fromEntries(localTask.headers.map(({ prop, value }) => [prop, value])),
+		},
 	})
 }
 
 const restMethods = ref([
 	{
 		label: 'GET',
-		value: 'GET'
+		value: 'GET',
 	},
 	{
 		label: 'POST',
-		value: 'POST'
+		value: 'POST',
 	},
 	{
 		label: 'PUT',
-		value: 'PUT'
+		value: 'PUT',
 	},
 	{
 		label: 'DELETE',
-		value: 'DELETE'
-	}
+		value: 'DELETE',
+	},
 ])
 
 const { localTask = null } = defineProps<{ localTask: RestTaskType }>()

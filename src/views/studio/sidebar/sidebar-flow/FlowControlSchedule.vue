@@ -1,9 +1,9 @@
 <template>
 	<div
 		v-if="localFlow && localFlow.cronBase"
-		class="flow-control-schedule px-4"
+		class="flow-control-schedule"
 	>
-		<cron-base
+		<CronBase
 			:cron-base="localFlow.cronBase"
 			@change="updateFlow"
 		/>
@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import CronBase from '@/components/cron-base/CronBase.vue'
 import type { CronBaseType, FlowType } from '@gaio/shared/types'
 
 const { localFlow = null } = defineProps<{ localFlow: FlowType }>()

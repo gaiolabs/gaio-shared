@@ -68,7 +68,7 @@
 								</label>
 								<g-select-column
 									id="columnReference"
-									v-model:value="localTask.columnReference"
+									v-model:value="localTask.columnCategory"
 									:table-name="localTask.tableName"
 								/>
 							</div>
@@ -81,7 +81,7 @@
 								</label>
 								<g-select-column
 									id="columnReference"
-									v-model:value="localTask.columnCategory"
+									v-model:value="localTask.columnReference"
 									:table-name="localTask.tableName"
 								/>
 							</div>

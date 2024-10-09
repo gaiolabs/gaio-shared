@@ -173,6 +173,9 @@
 			</div>
 		</div>
 	</div>
+	<div v-else>
+		<GAlert :title="$t('loading')" />
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -196,6 +199,7 @@ import {
 	dayValues as _dayValues,
 	monthValues as _monthValues,
 } from './CronBaseHelper'
+import GAlert from '@/components/GAlert.vue'
 
 const emit = defineEmits(['close', 'change'])
 const props = defineProps({

@@ -71,11 +71,13 @@
 				<GButton
 					size="tiny"
 					type="secondary"
-					@click="() => {}"
+					@click="refreshAppParams"
 				>
 					<template #icon>
+						<!-- TODO: polish spin animation -->
 						<IconComponent
 							class="size-4"
+							:class="isParamsRefreshing ? 'animate-spin' : ''"
 							name="Refresh"
 						/>
 					</template>
@@ -97,12 +99,15 @@
 		</header>
 
 		<GCard class="flex grow flex-col overflow-hidden rounded-2xl p-2">
+			{{ useAppStore().params }}
+
 			<NScrollbar
 				style="height: 100%; overflow: auto"
 				outer-class="h-full overflow-auto"
 			>
 				<div v-if="localTreeFiltered(localTree, searchTerm).length">
 					<NTree
+						:key="`${isParamsRefreshing}`"
 						block-node
 						block-line
 						draggable
@@ -137,7 +142,7 @@ import { useAppStore } from '@/stores'
 import SidebarParamControl from '@/views/studio/sidebar/sidebar-param/SidebarParamControl.vue'
 import type { AppFolderOption, ParamType } from '@gaio/shared/types'
 import { NButton, type TreeOption } from 'naive-ui'
-import { computed, h, onMounted, ref } from 'vue'
+import { h, onMounted, ref } from 'vue'
 import SidebarParamItem from './SidebarParamLabel.vue'
 
 const {
@@ -163,6 +168,9 @@ const addNewFolder = () => {
 const searchTerm = ref('')
 const current = ref<ParamType>(null)
 const localTree = ref<TreeOption[]>([])
+
+const isParamsRefreshing = ref(false)
+
 const handleDropThenUpdate = (e) => {
 	localTree.value = handleDrop(e, localTree.value)
 	updateAppFolderOptions()
@@ -176,6 +184,7 @@ const closeParamControl = () => {
 const renderLabel = ({ option }) => {
 	return h(SidebarParamItem, {
 		option,
+		isRefreshing: isParamsRefreshing.value,
 		onEdit: (param) => {
 			current.value = param
 		},
@@ -211,14 +220,10 @@ const treeNodeActions = () => {
 	}
 }
 
-const params = computed(() => {
-	return useAppStore().params
-})
-
 const constructLocalTree = () => {
 	localTree.value = []
 
-	const flowItems = params.value.reduce((acc, flow) => {
+	const flowItems = useAppStore().params.reduce((acc, flow) => {
 		acc[flow.paramName] = flow
 		return acc
 	}, {})
@@ -259,6 +264,24 @@ const constructLocalTree = () => {
 	}
 }
 
+const refreshAppParams = () => {
+	isParamsRefreshing.value = true
+
+	useApi()
+		.post('api/app/list-params-from-app', {
+			body: {
+				appId: useAppStore().app.appId,
+			},
+		})
+		.then((data) => {
+			isParamsRefreshing.value = false
+
+			useAppStore().params = data
+
+			constructLocalTree()
+		})
+}
+
 const updateAppFolderOptions = () => {
 	const buildAppFolder = (tree: TreeOption[]): AppFolderOption[] => {
 		return tree.map((node) => {
@@ -286,7 +309,9 @@ const updateAppFolderOptions = () => {
 	})
 }
 
-onMounted(() => constructLocalTree())
+onMounted(() => {
+	constructLocalTree()
+})
 </script>
 
 <style lang="scss">

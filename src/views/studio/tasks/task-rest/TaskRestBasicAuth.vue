@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localTask"
-		class="task-rest-basic-auth flex size-full flex-col p-4"
+		class="task-rest-basic-auth flex size-full flex-col"
 	>
 		<div class="control">
 			<label

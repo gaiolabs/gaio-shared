@@ -21,49 +21,41 @@
 			</div>
 		</template>
 		<template #tabs>
-			<div class="column-view w-full">
-				<NTabs
-					pane-class="g-bg-0"
-					size="small"
-					type="line"
-					:default-value="currentTab"
+			<GTabs v-model="currentTab">
+				<GTab
+					name="frequency"
+					:label="$t('frequency')"
+					display-directive="show:lazy"
 				>
-					<NTabPane
-						name="frequency"
-						:tab="$t('frequency')"
-						display-directive="show:lazy"
-					>
-						<div class="w-full p-4">
-							<column-extra
-								v-if="isTextOrIsDate"
-								class="mb-2"
-							/>
-							<column-frequency :key="useAuthStore().user.options.tableFrequencyPageSize" />
-						</div>
-					</NTabPane>
-					<NTabPane
-						v-if="isNumeric"
-						display-directive="show:lazy"
-						name="stats"
-						:tab="$t('stats')"
-					>
-						<column-stats class="m-4" />
-					</NTabPane>
-					<NTabPane
-						v-if="isNumeric"
-						display-directive="show:lazy"
-						name="histogram"
-						:tab="$t('histogram')"
-					>
-						<column-histogram class="m-4" />
-					</NTabPane>
-				</NTabs>
-			</div>
+					<div class="w-full">
+						<column-extra v-if="isTextOrIsDate" />
+						<column-frequency :key="useAuthStore().user.options.tableFrequencyPageSize" />
+					</div>
+				</GTab>
+				<GTab
+					v-if="isNumeric"
+					name="stats"
+					:label="$t('stats')"
+					display-directive="show:lazy"
+				>
+					<column-stats />
+				</GTab>
+				<GTab
+					v-if="isNumeric"
+					name="histogram"
+					:label="$t('histogram')"
+					display-directive="show:lazy"
+				>
+					<column-histogram />
+				</GTab>
+			</GTabs>
 		</template>
 	</g-dialog>
 </template>
 
 <script setup lang="ts">
+import GTab from '@/components/inputs/GTab.vue'
+import GTabs from '@/components/inputs/GTabs.vue'
 import useApi from '@/composables/useApi'
 import useDataType from '@/composables/useDataType'
 import { useAppStore, useAuthStore } from '@/stores'
@@ -96,7 +88,7 @@ type FrequencyType = {
 const numberOfRows = [10, 20, 30, 50, 100, 200, 500, 1000].map((o) => {
 	return {
 		label: o + ` ${t('categories')}`,
-		value: o
+		value: o,
 	}
 })
 
@@ -131,9 +123,9 @@ const loadFrequencyData = async () => {
 			taskData: {
 				...task.value,
 				columnName: columnData.columnName,
-				totalRows: totalRows
-			}
-		}
+				totalRows: totalRows,
+			},
+		},
 	})
 
 	frequencyList.value = frequencyResult.data

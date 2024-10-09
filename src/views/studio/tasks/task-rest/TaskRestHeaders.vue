@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localTask"
-		class="task-rest-headers flex size-full flex-col gap-4 p-4"
+		class="task-rest-headers flex size-full flex-col gap-4"
 	>
 		<div class="flex flex-col gap-1">
 			<label

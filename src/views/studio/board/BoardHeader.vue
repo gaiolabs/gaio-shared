@@ -111,6 +111,7 @@ import useApi from '@/composables/useApi'
 // import useHelper from '@/composables/useHelper'
 import { useAppStore } from '@/stores'
 import type { AppType } from '@gaio/shared/types'
+import { cloneDeep } from 'lodash-es'
 import { computed } from 'vue'
 
 const app = computed<AppType>(() => useAppStore().app as AppType)
@@ -118,8 +119,8 @@ const currentFlow = computed(() => useAppStore().flow)
 defineEmits(['open'])
 // const { executablesNodes } = useHelper()
 
-const runAll = () => {
-	useApi().post(`api/task/run-all`, {
+const runAll = async () => {
+	const { params } = await useApi().post(`api/task/run-all`, {
 		body: {
 			from: 'studio',
 			appId: useAppStore().app.appId,
@@ -127,6 +128,8 @@ const runAll = () => {
 			params: useAppStore().app.params,
 		},
 	})
+	console.log(params)
+	useAppStore().params = cloneDeep(params)
 	console.log('run all')
 }
 

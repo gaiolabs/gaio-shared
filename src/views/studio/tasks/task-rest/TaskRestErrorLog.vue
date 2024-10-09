@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="localTask"
-		class="task-rest-error-log flex max-h-[526px] flex-col gap-6 p-6"
+		id="task-rest-error-log"
 	>
 		<div class="flex w-full items-center gap-2">
 			<div class="control w-full">
