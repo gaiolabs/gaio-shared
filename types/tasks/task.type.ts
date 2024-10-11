@@ -39,7 +39,7 @@ import type {
     GenericType,
     PcaTaskType,
     ReportPreviewTaskType,
-    FormCardType,
+    FormCardType
 } from '../'
 import { ReportTypeKeys } from './report.keys.type'
 
@@ -107,6 +107,5 @@ export type TaskType =
     | PcaTaskType
     | FormCardType
     | base
-    | MetaType
 
 export type CommonBuilderTaskType = base & TaskType
