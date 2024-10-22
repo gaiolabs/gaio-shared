@@ -1,3 +1,5 @@
 import { type CommonTaskType } from './common.task.type'
 
-export type AutoMLTaskType = Partial<{}> & CommonTaskType
+export type AutoMLTaskType = Partial<{
+  settings: unknown
+}> & CommonTaskType
