@@ -15,7 +15,7 @@ export type ProjectType = {
  export type StaticContentType = Partial<{
     id: string;
     type: string;
-    appId: number;
+    appId: string;
     label: string;
     limit: number;
     tables: Array<any>;
