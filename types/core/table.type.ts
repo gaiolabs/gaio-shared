@@ -10,7 +10,7 @@ export type TableType = Partial<{
     shared: boolean
     created: boolean | null
     position: PositionType | null
-    sourceId: number | null
+    sourceId: string | null
     tableName: string | null
     tableView: boolean
     temporary: boolean
