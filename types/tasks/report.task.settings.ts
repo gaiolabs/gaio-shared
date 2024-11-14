@@ -142,7 +142,7 @@ export type ReportTaskSettingsType = Partial<{
     cardPic: string
     condType: string
     condColumnName: string
-    condRules: object[]
+    condRules: any[]
     linkType: string
     linkValue: string
     linkValueColor: string
