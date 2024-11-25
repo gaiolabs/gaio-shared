@@ -1,6 +1,7 @@
 import type { ParamType } from './param.type'
 import type { FormType } from './form.type'
 import { CommonTableType } from './common-table.type'
+import { ComputedType } from './schema.type'
 
 export type AppFolderOption = {
     label: string
@@ -17,6 +18,7 @@ export type AppOptionsType = Partial<{
     folderParam: AppFolderOption[]
     folderFlow: AppFolderOption[]
     studioFlowStart: string
+    computed: ComputedType[]
     palette: Array<{
         backgroundColor: string
         colors: string[]
