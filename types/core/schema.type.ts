@@ -1,6 +1,6 @@
 import type { FieldType } from './field.type'
 
-export type SchemaComputedType = {
+export type ComputedType = {
     id?: string
     global?: boolean
     globalId?: string
@@ -60,7 +60,7 @@ export type SchemaSortType = Partial<{
     columnName: string
     databaseName: string
 }> &
-    SchemaComputedType
+    ComputedType
 
 export type SchemaGroupType = FieldType[]
 export type SchemaSelectType = Partial<{ targetColumn: string }> & FieldType[]
@@ -89,7 +89,7 @@ export type SchemaType = Partial<{
     sort: SchemaSortType[]
     filter: SchemaFilterType[]
     having: SchemaFilterType[]
-    computed: SchemaComputedType[]
+    computed: ComputedType[]
     limit: number | null
     offset: number | null
     limitBy: LimitByType
