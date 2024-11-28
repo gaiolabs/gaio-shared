@@ -31,6 +31,9 @@ export type SchemaJoinItemType = {
 
 export type SchemaListType = Partial<{
     id: string
+    global?: boolean
+    globalId?: string
+    computedId?: string
     type: string
     andOr: string
     value: string
