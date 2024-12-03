@@ -65,6 +65,7 @@ type base = Partial<{
     untilParamValue: string
     reportType: ReportTypeKeys
     restType: string
+    description: string
 }> &
     CommonTaskType
 
