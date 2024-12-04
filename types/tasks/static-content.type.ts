@@ -20,7 +20,8 @@ export type ProjectType = {
     limit: number;
     tables: Array<any>;
     content: string;
-    project: ProjectType;
+    scriptType: string;
+    project: Partial<ProjectType>;
     noSpeech: boolean;
     cardStyle: boolean;
     reportType: ReportTypeKeys;
