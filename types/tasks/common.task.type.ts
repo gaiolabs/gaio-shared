@@ -23,4 +23,5 @@ export type CommonTaskType = Partial<{
     created: boolean
     temporary: boolean
     admin?: unknown
+    description?: string
 }>
