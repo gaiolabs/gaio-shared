@@ -34,6 +34,7 @@ export * from './entities/tag.entity'
 export * from './entities/taskLog.entity'
 export * from './entities/user.entity'
 
+export * from './tasks/sourceRaw.task.type'
 export * from './tasks/builder.task.type'
 export * from './tasks/task.type'
 export * from './tasks/flow.task.type'
