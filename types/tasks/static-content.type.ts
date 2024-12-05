@@ -28,5 +28,6 @@ export type ProjectType = {
     assetsCoverWidth: boolean;
     position: PositionType;
     created: boolean;
+    codeSnippetId: string;
   }>;
 
