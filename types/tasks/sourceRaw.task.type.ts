@@ -1,3 +1,4 @@
+import { SchemaType } from '../core/schema.type'
 import { type CommonTaskType } from './common.task.type'
 
 export type SourceRawTaskType = Partial<{
@@ -7,5 +8,12 @@ export type SourceRawTaskType = Partial<{
 	schemaInference: boolean
 	fieldAsString: boolean
 	jsForceBulk: boolean
+	onErrorCreateTable: boolean
+	rawImport: boolean
+	query: string
+	autoFetch: boolean
+	maxFetch: number
+	schema: SchemaType
+	bucketClient: string
 }> &
     CommonTaskType
