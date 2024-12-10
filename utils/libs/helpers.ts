@@ -5,6 +5,10 @@ export const getId = (size = 8): string => {
     return customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', size)()
 }
 
+export function getAppNumberReference(appId: string) {
+		return appId.replace('app:', '')
+}
+
 export const getBucketNameFromAppId = (appId: string) => {
     return appId.replace('app:', 'bucket_')
 }
