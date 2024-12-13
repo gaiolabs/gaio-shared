@@ -11,6 +11,7 @@ export type FileImportTaskType = Partial<{
     id: string
     appId: string
     fileName: string
+    fullPath: string
     fieldsTerminatedBy: string
     columns: FieldType[]
     transformFirst: boolean
