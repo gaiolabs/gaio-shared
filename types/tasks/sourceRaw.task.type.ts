@@ -10,7 +10,7 @@ export type SourceRawTaskType = Partial<{
 	jsForceBulk: boolean
 	onErrorCreateTable: boolean
 	rawImport: boolean
-	query: string
+	codeSnippetId: string
 	autoFetch: boolean
 	maxFetch: number
 	schema: SchemaType
