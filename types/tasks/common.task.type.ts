@@ -7,6 +7,7 @@ export type CommonTaskType = Partial<{
     repoId: string | null
     sourceType: 'source' | 'bucket' | 'super'
     sourceId: string | null
+    codeSnippetId: string
     resultTable: string | null
     resultDatabase: string | null
     tableName: string | null
