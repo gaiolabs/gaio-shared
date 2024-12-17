@@ -1,3 +1,6 @@
 import { type CommonTaskType } from './common.task.type'
 
-export type ScoringTaskType = Partial<{}> & CommonTaskType
+export type ScoringTaskType = Partial<{
+  modelId: string
+  type: string
+}> & CommonTaskType
