@@ -278,7 +278,7 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskUnpivot')}`,
             type: 'unpivot',
-            onlyBucket: false,
+            onlyBucket: true,
             icon: 'g-unpivot',
             hidden: false,
             cat: 'DATAPREP',
