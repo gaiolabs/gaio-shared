@@ -8,7 +8,6 @@ export type AppFolderOption = {
     isLeaf: boolean
     children?: AppFolderOption[]
 
-    name: string;
     id?: string | number;
     checked?: boolean;
     selected?: boolean;
