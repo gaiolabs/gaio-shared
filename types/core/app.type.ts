@@ -7,6 +7,15 @@ export type AppFolderOption = {
     label: string
     isLeaf: boolean
     children?: AppFolderOption[]
+
+    name: string;
+    id?: string | number;
+    checked?: boolean;
+    selected?: boolean;
+    expanded?: boolean;
+    disableDragAndDrop?: boolean; 
+    disabled?: boolean;
+    meta?: any;
     [key: string]: any
 }
 
@@ -17,6 +26,7 @@ export type AppOptionsType = Partial<{
     icon: string
     folderParam: AppFolderOption[]
     folderFlow: AppFolderOption[]
+    newFolderFlow: AppFolderOption[]
     studioFlowStart: string
     computed: ComputedType[]
     palette: Array<{
