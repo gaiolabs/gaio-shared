@@ -3,19 +3,15 @@ import type { FormType } from './form.type'
 import { CommonTableType } from './common-table.type'
 import { ComputedType } from './schema.type'
 
+export type AppFolderType = 'folderParam' | 'folderFlow' | 'folderForm'
+
 export type AppFolderOption = {
+    id: string;
     label: string
     isLeaf: boolean
+    isOpen:boolean
     children?: AppFolderOption[]
-
-    id?: string | number;
-    checked?: boolean;
-    selected?: boolean;
-    expanded?: boolean;
-    disableDragAndDrop?: boolean; 
-    disabled?: boolean;
-    meta?: any;
-    [key: string]: any
+    metaData?: any;
 }
 
 export type AppOptionsType = Partial<{
@@ -25,7 +21,7 @@ export type AppOptionsType = Partial<{
     icon: string
     folderParam: AppFolderOption[]
     folderFlow: AppFolderOption[]
-    newFolderFlow: AppFolderOption[]
+    folderForm: AppFolderOption[]
     studioFlowStart: string
     computed: ComputedType[]
     palette: Array<{
