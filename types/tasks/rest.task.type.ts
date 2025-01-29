@@ -25,6 +25,6 @@ export type RestTaskType = Partial<{
     repoId: string
     appId: string
     id: string
-    type: string
+    type: 'rest'
 }> &
     CommonTaskType

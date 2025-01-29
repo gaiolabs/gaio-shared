@@ -14,6 +14,7 @@ export type AutoMLTaskTypeSettings = {
 }
 
 export type AutoMLTaskType = Partial<{
+    type: 'automl';
     settings: AutoMLTaskTypeSettings
     limitRows: number
 }> &

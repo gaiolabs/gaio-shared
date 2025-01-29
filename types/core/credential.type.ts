@@ -1,28 +1,42 @@
 import type { CommonTableType } from './common-table.type'
 
 export type CredentialsType = Partial<{
-    host: string
-    password: string
-    user: string
-    port: number
-    extraPort: number
-    ssl: boolean
-    database: string
-    schemaName: string
-    canExecuteRaw: boolean
-    client: string
-    accessKey: string
-    secretKey: string
-    bucketName: string
-    loginUrl: string
-    token: string
-    sid: string
-    schema: string
-    serviceName: string
-    oracleAlternativeDriver: boolean
-    oracleCaseSensitive: boolean
-    encrypt: boolean
-    encryptSource: boolean
+	user: string
+	password: string
+
+	host: string
+	port: number
+
+	extraPort: number
+	ssl: boolean
+
+	database: string
+	canExecuteRaw: boolean
+	client: string
+
+	accessKey: string
+	secretKey: string
+
+	bucketName: string
+	loginUrl: string
+	token: string
+	sid: string
+	serviceName: string
+
+	oracleAlternativeDriver: boolean
+	oracleCaseSensitive: boolean
+
+	schema: string
+	schemaName: string
+
+	httpPath?: string
+	encrypt?: boolean
+	encryptSource?: boolean
+	connectString?: string
+	account?: string
+	databricksConfigFile?: string
+	tcpPort?: number | string
+	secure?: boolean
 }>
 
 export type SourceType = Partial<{
@@ -33,6 +47,7 @@ export type SourceType = Partial<{
     sourceType: string
     client: string
     databaseName: string
+
     credentials: CredentialsType
 }> &
     CommonTableType

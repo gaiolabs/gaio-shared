@@ -1,4 +1,3 @@
-
 export type ReportTypeKeys =
 	| 'bar'
 	| 'column'
@@ -22,5 +21,3 @@ export type ReportTypeKeys =
 	| 'calendar'
 	| 'wordCloud'
 	| 'forecast'
-
-

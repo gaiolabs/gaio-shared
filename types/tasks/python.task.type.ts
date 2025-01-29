@@ -6,5 +6,6 @@ export type PythonTaskType = Partial<{
     codeSnippet: string
     envCodeSnippetId: string
     envCodeSnippet: string    
+    type: 'python'
 }> &
     CommonTaskType

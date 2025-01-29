@@ -2,6 +2,7 @@ import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
 export type LocalFileTaskType = Partial<{
+    type: 'localCsv'
     schemaInference: string
     client: string
     newOracle: boolean

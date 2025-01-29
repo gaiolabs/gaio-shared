@@ -11,6 +11,7 @@ type CloudStorageFileData = Partial<{
 }>
 
 export type CloudFileType = Partial<{
+    type: 'cloudStorage'
     fileFormatType: string
     schemaInference: string
     insertMode: boolean
