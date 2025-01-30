@@ -19,6 +19,7 @@ export type UserType = Partial<{
     tags: string[]
     sessionStart: Date
     lastLogin: Date
+    sessionCount: number
     userId: string
     name: string
     status: 'active' | 'inactive'
