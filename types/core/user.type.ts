@@ -18,6 +18,7 @@ export type UserOptionsType = Partial<{
 export type UserType = Partial<{
     tags: string[]
     sessionStart: Date
+    lastLogin: Date
     userId: string
     name: string
     status: 'active' | 'inactive'
