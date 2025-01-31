@@ -88,7 +88,6 @@ export type TaskType =
     | QueryTaskType
     | UserTaskType
     | CreateTableTaskType
-    | ExternalOutputTaskType
     | CsvUrlTaskType
     | FileImportTaskType
     | ForecastTaskType
@@ -105,9 +104,10 @@ export type TaskType =
     | AutoMLTaskType
     | ScoringTaskType
     | CloudFileType
-    | GenericType
-    | ReportPreviewTaskType
     | PcaTaskType
+    // | GenericType
+    | ExternalOutputTaskType
+    | ReportPreviewTaskType
     | FormCardType
     | base
 

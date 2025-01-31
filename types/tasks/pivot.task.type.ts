@@ -2,7 +2,7 @@ import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
 export type PivotTaskType = Partial<{
-    type: string
+    type: 'pivot'
     order: string
     columns: FieldType[]
     tableName: string

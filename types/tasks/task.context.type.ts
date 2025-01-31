@@ -1,4 +1,4 @@
-import ParamsType from '../core/param.type'
+import { ParamToTableTaskType } from './param-to-table.task.type'
 
 export type TaskContextType = Partial<{
     from: string
@@ -8,5 +8,5 @@ export type TaskContextType = Partial<{
     sessionid: string
     appId: string
     flowId: string
-    params: ParamsType[]
+    params: ParamToTableTaskType[]
 }>

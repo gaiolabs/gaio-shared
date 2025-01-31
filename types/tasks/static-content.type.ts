@@ -30,4 +30,3 @@ export type ProjectType = {
     created: boolean;
     codeSnippetId: string;
   }>;
-

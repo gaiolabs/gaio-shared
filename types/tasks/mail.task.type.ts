@@ -2,6 +2,7 @@ import { type CommonTaskType } from './common.task.type'
 import type { GenericType } from '../generic.type'
 
 export type MailTaskType = Partial<{
+    type: 'mail'
     extraData: string[]
     sleep: number
     toColumnName: string
