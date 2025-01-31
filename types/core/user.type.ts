@@ -1,6 +1,11 @@
 export type UserOptionsType = Partial<{
     appList: string[]
-    favorApps: string[]
+    favoriteMetaTypes: {
+        context: string[]
+        view: string[]
+        story: string[]
+    }
+    favoriteApps: string[]
     recentApps: string[]
     tableViewPageSize: number
     tableFrequencyPageSize: number
@@ -12,6 +17,9 @@ export type UserOptionsType = Partial<{
 
 export type UserType = Partial<{
     tags: string[]
+    sessionStart: Date
+    lastLogin: Date
+    sessionCount: number
     userId: string
     name: string
     status: 'active' | 'inactive'
@@ -29,6 +37,7 @@ export type UserAuthType = {
     token: string
     user: UserType
 }
+
 export type UserLoginType = {
     email: string
     password: string
