@@ -1,5 +1,6 @@
 import type { FieldType } from './field.type'
 import type { GenericType } from '../generic.type'
+import {TaskType} from "../tasks/task.type";
 
 export type MetaViewType = {
     metaViewId: string
@@ -8,7 +9,7 @@ export type MetaViewType = {
     repoId: string
     metaId: string
     label: string
-    task: string
+    task: TaskType
     tags: FieldType[]
     options: GenericType
     shared: boolean

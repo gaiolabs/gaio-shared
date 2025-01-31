@@ -1,6 +1,7 @@
 export type UserOptionsType = Partial<{
     appList: string[]
     favorApps: string[]
+    favoriteMetaTypes: string[]
     recentApps: string[]
     tableViewPageSize: number
     tableFrequencyPageSize: number
