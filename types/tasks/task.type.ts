@@ -1,4 +1,3 @@
-import type { MetaType } from '../core/meta.type'
 import type {
     SchemaType,
     BuilderTaskType,
@@ -85,7 +84,6 @@ export type TaskType =
     | SampleTaskType
     | InsertTableTaskType
     | ExportToFileType
-    | QueryTaskType
     | UserTaskType
     | CreateTableTaskType
     | CsvUrlTaskType
@@ -105,7 +103,7 @@ export type TaskType =
     | ScoringTaskType
     | CloudFileType
     | PcaTaskType
-    // | GenericType
+    | GenericType
     | ExternalOutputTaskType
     | ReportPreviewTaskType
     | FormCardType
