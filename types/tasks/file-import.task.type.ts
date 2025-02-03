@@ -20,6 +20,7 @@ export type FileImportTaskType = Partial<{
 	type: 'fileImport'
 	resultTable: string
 	from: string
+	transformType: string
 	append: boolean
 	splitFile: boolean
 	fixEncoding: boolean
