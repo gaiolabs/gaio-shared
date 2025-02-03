@@ -27,6 +27,7 @@ export type FileImportTaskType = Partial<{
 	appId: string
 	fileName: string
 	fieldsTerminatedBy: keyof FileImportSymbols
+	fieldsTerminatedByCustom: string
 	columns: FieldType[]
 	transformFirst: boolean
 	databaseName: string
