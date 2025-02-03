@@ -23,7 +23,8 @@ export type FileImportTaskType = Partial<{
 	transformType: string
 	append: boolean
 	splitFile: boolean
-	fixEncoding: boolean
+	fixEncoding: string
+	fullPath: string
 	localPreparation: boolean
 	id: string
 	appId: string
