@@ -13,6 +13,7 @@ export type FileImportSymbols = {
 	semicolon: string
 	singleQuotes: string
 	tab: string
+	custom: string
 }
 
 export type FileImportTaskType = Partial<{
