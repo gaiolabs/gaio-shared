@@ -1,5 +1,6 @@
 export type ParamType = Partial<{
     id: string
+    flowId: string
     paramName: string
     paramValue: string
     paramType: string
