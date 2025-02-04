@@ -40,6 +40,7 @@ export type FieldType = Partial<{
     dataType: string
     pureType: string
     tableName: string
+    fileColumnName: string
     columnName: string
     columnLength: any
     databaseName: string
