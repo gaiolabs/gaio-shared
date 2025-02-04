@@ -8,7 +8,7 @@ export type ComputedType = {
     alias?: string
     content?: string
     dataType?: string
-    columnLength?: string
+    columnLength?: number
     columnName?: string
     computedId?: string
 }
@@ -25,7 +25,7 @@ export type SchemaJoinItemType = {
     toDatabaseName: string
     columnBy: string
     columnTo: string
-    columnLength: any
+    columnLength: number
     columnType: string | null
 }
 
@@ -44,7 +44,7 @@ export type SchemaListType = Partial<{
     valueType: string
     columnName: string
     extraValue: string
-    columnLength: any
+    columnLength: number
     databaseName: string
     selected: boolean
     applied: boolean
