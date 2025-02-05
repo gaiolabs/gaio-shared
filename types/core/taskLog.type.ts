@@ -16,14 +16,15 @@ export type TaskJobType = Partial<{
     message: any
 }>
 
+
 export type TaskLogType = {
-    taskLogId: string
-    status: TaskStatus
-    aborted: boolean
-    startedAt: string
-    endedAt: string
+    taskLogId?: string
+    appId?: string
     flowId: string
-    appId: string
-    userId: string
+    userId?: string
+    startedAt?: string
+    endedAt?: string
+    aborted?: boolean
+    status?: 'started' | 'ended'
     tasks: Record<string, TaskJobType>
 }
