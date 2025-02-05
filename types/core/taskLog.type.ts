@@ -7,7 +7,8 @@ export type TaskJobType = Partial<{
     appId: string
     taskId: string
     taskType: string
-    taskResult: string
+    taskTarget: string
+    taskSource: string
     taskLabel: string
     status: TaskStatus
     startedAt: string
