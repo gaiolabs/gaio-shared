@@ -22,10 +22,11 @@ export type TaskLogType = Partial<{
     appId: string
     flowId: string
     userId: string
+    userName: string
     startedAt: string
     endedAt: string
     aborted: boolean
     status: 'started' | 'ended'
-    from: string
+    logFrom: string
     tasks: Record<string, TaskJobType>
 }>
