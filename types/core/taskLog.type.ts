@@ -13,6 +13,8 @@ export type TaskJobType = Partial<{
     status: TaskStatus
     startedAt: string
     endedAt: string
+    userName: string
+    logFrom: string
     message: any
 }>
 
