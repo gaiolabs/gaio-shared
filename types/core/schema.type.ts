@@ -83,6 +83,7 @@ export type SchemaJoinType = {
 export type LimitByType = FieldType[]
 
 export type SchemaType = Partial<{
+    selectAll: boolean
     delete: boolean
     insert: any[]
     update: any[]
