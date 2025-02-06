@@ -54,7 +54,7 @@ type base = Partial<{
     countDistinct: string
     columns: FieldType[]
     sourceImportTask: string
-    schemaInference: string
+    schemaInference: boolean
     newOracle: boolean
     runningFlowId: string
     flowId: string

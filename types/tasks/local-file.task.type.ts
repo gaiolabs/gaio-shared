@@ -3,7 +3,7 @@ import type { FieldType } from '../core/field.type'
 
 export type LocalFileTaskType = Partial<{
     type: 'localCsv'
-    schemaInference: string
+    schemaInference: boolean
     client: string
     newOracle: boolean
     truncateTables: string[]

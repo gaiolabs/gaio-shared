@@ -13,7 +13,7 @@ type CloudStorageFileData = Partial<{
 export type CloudFileType = Partial<{
     type: 'cloudStorage'
     fileFormatType: string
-    schemaInference: string
+    schemaInference: boolean
     insertMode: boolean
     columns: FieldType[]
     fileData: CloudStorageFileData

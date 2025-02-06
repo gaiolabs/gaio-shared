@@ -7,6 +7,6 @@ export type CsvUrlTaskType = Partial<{
     insertMode: boolean
     resultDatabase: string
     resultTable: string
-    schemaInference: string
+    schemaInference: boolean
 }> &
     CommonTaskType
