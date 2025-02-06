@@ -43,6 +43,45 @@ import type {
 } from '../'
 import { ReportTypeKeys } from './report.keys.type'
 
+export type TaskTypeKeys =
+    | 'sourceRaw'
+    | 'query'
+    | 'builder'
+    | 'flow'
+    | 'pivot'
+    | 'tableToParam'
+    | 'paramToTable'
+    | 'delete'
+    | 'quickTable'
+    | 'insertRow'
+    | 'updateRow'
+    | 'unpivot'
+    | 'sample'
+    | 'insertTable'
+    | 'export'
+    | 'user'
+    | 'createTable'
+    | 'csvUrl'
+    | 'fileImport'
+    | 'forecast'
+    | 'pythonHub'
+    | 'python'
+    | 'googleSpreadsheet'
+    | 'localCsv'
+    | 'associationRules'
+    | 'cluster'
+    | 'survivalAnalysis'
+    | 'mail'
+    | 'whatsapp'
+    | 'rest'
+    | 'automl'
+    | 'scoring'
+    | 'cloudStorage'
+    | 'pca'
+    | 'externalOutput'
+    | 'reportPreview'
+    | 'form'
+    
 type base = Partial<{
     dropTables: string[]
     withTotals: boolean
@@ -65,6 +104,7 @@ type base = Partial<{
     untilParamValue: string
     reportType: ReportTypeKeys
     restType: string
+    type: TaskTypeKeys 
 }> &
     CommonTaskType
 
