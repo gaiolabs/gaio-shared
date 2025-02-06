@@ -4,7 +4,6 @@ import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
 export type BuilderTaskType = Partial<{
-    label: string
     transformType: string
     repoId: string
     position: PositionType // assuming corresponding type for PositionZod
@@ -21,7 +20,7 @@ export type BuilderTaskType = Partial<{
     tableView: boolean
     temporary: boolean
 
-    schemaInference: string
+    schemaInference: boolean
     insertMode: boolean
     onErrorCreateTable: boolean
     resultTable: string
