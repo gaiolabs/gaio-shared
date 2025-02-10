@@ -6,6 +6,7 @@ import type {
     CommonTaskType,
     DeleteTaskType,
     TableToParamTaskType,
+    TableType,
     ParamToTableTaskType,
     QuickTableTaskType,
     FieldType,
@@ -40,7 +41,7 @@ import type {
     ReportPreviewTaskType,
     FormCardType,
 } from '../'
-import { ReportTypeKeys } from './report.keys.type'
+import {ReportTypeKeys} from './report.keys.type'
 
 
 // Make the base type use the discriminator
@@ -107,6 +108,7 @@ export type TaskType =
     | ExternalOutputTaskType
     | ReportPreviewTaskType
     | FormCardType
+    | TableType
     | base
 
 export type CommonBuilderTaskType = base & TaskType

@@ -14,7 +14,6 @@ export type CommonTaskType = Partial<{
     databaseName: string | null
     client: string
     position: PositionType
-    type: string
     truncateTables: string[]
     dropTables: string[]
     schemaName: string | null

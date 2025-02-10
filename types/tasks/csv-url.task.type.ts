@@ -10,3 +10,4 @@ export type CsvUrlTaskType = Partial<{
     schemaInference: boolean
 }> &
     CommonTaskType
+
