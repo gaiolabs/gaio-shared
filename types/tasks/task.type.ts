@@ -143,9 +143,9 @@ export type TaskType =
     | CloudFileType
     | PcaTaskType
     | GenericType
-    // | ExternalOutputTaskType
-    // | ReportPreviewTaskType
-    // | FormCardType
+    | ExternalOutputTaskType
+    | ReportPreviewTaskType
+    | FormCardType
     | base
 
 export type CommonBuilderTaskType = base & TaskType
