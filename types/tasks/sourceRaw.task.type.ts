@@ -15,5 +15,6 @@ export type SourceRawTaskType = Partial<{
 	maxFetch: number
 	schema: SchemaType
 	bucketClient: string
+	type: 'sourceRaw'
 }> &
     CommonTaskType
