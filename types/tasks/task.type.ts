@@ -105,7 +105,7 @@ export type TaskType =
     | PcaTaskType
     // | GenericType
     // | ExternalOutputTaskType
-    // | ReportPreviewTaskType
+    | ReportPreviewTaskType
     | FormCardType
     | base
 
