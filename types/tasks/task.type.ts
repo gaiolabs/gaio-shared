@@ -143,10 +143,10 @@ export type TaskType =
     | ScoringTaskType
     | CloudFileType
     | PcaTaskType
-    | GenericType
+    // | GenericType
     | ExternalOutputTaskType
     | ReportPreviewTaskType
     | FormCardType
-    | base
+    // | base
 
 export type CommonBuilderTaskType = base & TaskType

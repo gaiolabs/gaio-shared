@@ -8,6 +8,6 @@ export type ReportPreviewTaskType = Partial<{
     position: PositionType
     reportType: ReportTypeKeys
     reportId: string
-    type: string
+    type: 'reportPreview'
 }> &
     CommonTaskType

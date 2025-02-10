@@ -6,5 +6,6 @@ export type ExternalOutputTaskType = Partial<{
     operation: string
     separator: string
     excludeFields: string
+    type: 'externalOutput'
 }> &
     CommonTaskType

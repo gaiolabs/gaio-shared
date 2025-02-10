@@ -13,5 +13,6 @@ export type FormCardType = Partial<{
     removeCardStyle: boolean
     formFilterBehavior: boolean
     position: PositionType
+    type: 'formCard'
 }> &
     CommonTaskType
