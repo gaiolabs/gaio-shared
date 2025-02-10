@@ -66,7 +66,7 @@ type base = Partial<{
     untilParamValue: string
     reportType: ReportTypeKeys
     restType: string
-    type: 'base'
+    type: 'base' | 'pivot' | 'mail' | 'query' | 'builder' | 'flow' | 'tableToParam' | 'paramToTable' | 'delete' | 'quickTable' | 'insertRow' | 'updateRow' | 'unpivot' | 'sample' | 'insert' | 'exportToFile' | 'user' | 'create' | 'csvUrl' | 'fileImport' | 'forecast' | 'pythonHub' | 'python' | 'googleSpreadsheet' | 'localCsv' | 'associationRules' | 'cluster' | 'survivalAnalysis' | 'whatsapp' | 'rest' | 'autoML' | 'scoring' | 'cloudFile' | 'pca' | 'generic' | 'externalOutput' | 'reportPreview' | 'formCard'
 }> & CommonTaskType
 
 export type TaskType =
