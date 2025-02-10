@@ -1,7 +1,7 @@
 import { PositionType } from "../core/flow.type";
 import { ReportTypeKeys } from "./report.keys.type";
 
-export type ProjectType = {
+export type ProjectType = Partial<{
     html: string;
     libs: Array<{
       url: string;
@@ -10,7 +10,7 @@ export type ProjectType = {
     event: string;
     style: string;
     scriptCode: string;
-  };
+  }>;
   
  export type StaticContentType = Partial<{
     id: string;

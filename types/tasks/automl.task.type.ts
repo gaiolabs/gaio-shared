@@ -1,6 +1,6 @@
 import { type CommonTaskType } from './common.task.type'
 
-export type AutoMLTaskTypeSettings = {
+export type AutoMLTaskTypeSettings = Partial<{
     seed: number
     maxModels: number
     projectId: string
@@ -11,7 +11,7 @@ export type AutoMLTaskTypeSettings = {
     trainingFrame: string
     maxRuntimeSecs: number
     responseColumn: string
-}
+}>
 
 export type AutoMLTaskType = Partial<{
     type: 'automl';
