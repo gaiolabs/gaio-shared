@@ -138,7 +138,7 @@ export type ReportTaskSettingsType = Partial<{
     guideScatterType: string
     padding: { topBottom: number; leftRight: number }
     theme: { backgroundColor: string; colors: string[]; labelTextFill: string }
-    type: string
+    type: 'report'
     cardPic: string
     condType: string
     condColumnName: string
