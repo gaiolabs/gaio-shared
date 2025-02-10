@@ -69,6 +69,44 @@ type base = Partial<{
     type: 'base' | 'pivot' | 'mail' | 'query' | 'builder' | 'flow' | 'tableToParam' | 'paramToTable' | 'delete' | 'quickTable' | 'insertRow' | 'updateRow' | 'unpivot' | 'sample' | 'insert' | 'exportToFile' | 'user' | 'create' | 'csvUrl' | 'fileImport' | 'forecast' | 'pythonHub' | 'python' | 'googleSpreadsheet' | 'localCsv' | 'associationRules' | 'cluster' | 'survivalAnalysis' | 'whatsapp' | 'rest' | 'autoML' | 'scoring' | 'cloudFile' | 'pca' | 'generic' | 'externalOutput' | 'reportPreview' | 'formCard'
 }> & CommonTaskType
 
-export type TaskType = QueryTaskType | (Omit<BuilderTaskType, keyof QueryTaskType> & { type: 'builder' }) | FlowTaskType | PivotTaskType | TableToParamTaskType | ParamToTableTaskType | DeleteTaskType | QuickTableTaskType | InsertRowTaskType | UpdateRowTaskType | UnpivotTaskType | SampleTaskType | InsertTableTaskType | ExportToFileType | UserTaskType | CreateTableTaskType | CsvUrlTaskType | FileImportTaskType | ForecastTaskType | PythonHubTaskType | PythonTaskType | GoogleSpreadsheetTaskType | LocalFileTaskType | AssociationRulesTaskType | ClusterTaskType | SurvivalAnalysisTaskType | MailTaskType | WhatsappTaskType | RestTaskType | AutoMLTaskType | ScoringTaskType | CloudFileType | PcaTaskType | GenericType | ExternalOutputTaskType | ReportPreviewTaskType | FormCardType | base
+export type TaskType =
+    | QueryTaskType
+    | BuilderTaskType
+    | FlowTaskType
+    | PivotTaskType
+    | TableToParamTaskType
+    | ParamToTableTaskType
+    | DeleteTaskType
+    | QuickTableTaskType
+    | InsertRowTaskType
+    | UpdateRowTaskType
+    | UnpivotTaskType
+    | SampleTaskType
+    | InsertTableTaskType
+    | ExportToFileType
+    | UserTaskType
+    | CreateTableTaskType
+    | CsvUrlTaskType
+    | FileImportTaskType
+    | ForecastTaskType
+    | PythonHubTaskType
+    | PythonTaskType
+    | GoogleSpreadsheetTaskType
+    | LocalFileTaskType
+    | AssociationRulesTaskType
+    | ClusterTaskType
+    | SurvivalAnalysisTaskType
+    | MailTaskType
+    | WhatsappTaskType
+    | RestTaskType
+    | AutoMLTaskType
+    | ScoringTaskType
+    | CloudFileType
+    | PcaTaskType
+    // | GenericType
+    // | ExternalOutputTaskType
+    // | ReportPreviewTaskType
+    // | FormCardType
+    // | base
 
 export type CommonBuilderTaskType = base & TaskType
