@@ -143,7 +143,7 @@ export type TaskType =
     | ScoringTaskType
     | CloudFileType
     | PcaTaskType
-    // | GenericType
+    | GenericType
     // | ExternalOutputTaskType
     // | ReportPreviewTaskType
     // | FormCardType
