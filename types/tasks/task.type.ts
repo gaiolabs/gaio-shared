@@ -70,7 +70,7 @@ export type TaskTypeKeys =
     | 'localCsv'
     | 'associationRules'
     | 'cluster'
-    | 'survivalAnalysis'
+    | 'coxph'
     | 'mail'
     | 'whatsapp'
     | 'rest'
