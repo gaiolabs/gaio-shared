@@ -1,3 +1,4 @@
+import type {FieldType} from "../core/field.type";
 
 /**
  * @description Refers to the "meta" schema from database
@@ -8,7 +9,7 @@ export type MetaEntity = {
 	tableName: string
 	databaseName: string
 	options: string
-	fields: string
+	fields: FieldType[]
 	appId: string
 	description: string
 	status: string // 'active'
