@@ -109,7 +109,6 @@ type base = Partial<{
     CommonTaskType
 
 export type TaskType =
-    | SourceRawTaskType
     | QueryTaskType
     | BuilderTaskType
     | FlowTaskType
