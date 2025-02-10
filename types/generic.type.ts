@@ -1,4 +1,4 @@
 export type GenericType = {
     [k: string]: any | GenericType
-    type: 'generic'
+    type?: 'generic'
 }
