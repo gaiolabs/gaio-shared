@@ -15,4 +15,6 @@ export type TableType = Partial<{
     tableView: boolean
     temporary: boolean
     databaseName: string | null
+    schemaName: string | null
+    sourceType: string
 }>
