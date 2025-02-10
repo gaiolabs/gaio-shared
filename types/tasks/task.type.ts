@@ -106,7 +106,7 @@ export type TaskType =
     // | GenericType
     // | ExternalOutputTaskType
     // | ReportPreviewTaskType
-    // | FormCardType
+    | FormCardType
     // | base
 
 export type CommonBuilderTaskType = base & TaskType
