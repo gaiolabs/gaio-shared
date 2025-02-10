@@ -39,49 +39,11 @@ import type {
     PcaTaskType,
     ReportPreviewTaskType,
     FormCardType,
-    SourceRawTaskType
 } from '../'
 import { ReportTypeKeys } from './report.keys.type'
 
-export type TaskTypeKeys =
-    | 'query'
-    | 'sourceRaw'
-    | 'builder'
-    | 'flow'
-    | 'pivot'
-    | 'tableToParam'
-    | 'paramToTable'
-    | 'delete'
-    | 'quickTable'
-    | 'insertRow'
-    | 'updateRow'
-    | 'unpivot'
-    | 'sample'
-    | 'insertTable'
-    | 'export'
-    | 'user'
-    | 'createTable'
-    | 'csvUrl'
-    | 'fileImport'
-    | 'forecast'
-    | 'pythonHub'
-    | 'python'
-    | 'googleSpreadsheet'
-    | 'localCsv'
-    | 'associationRules'
-    | 'cluster'
-    | 'coxph'
-    | 'mail'
-    | 'whatsapp'
-    | 'rest'
-    | 'automl'
-    | 'scoring'
-    | 'cloudStorage'
-    | 'pca'
-    | 'externalOutput'
-    | 'reportPreview'
-    | 'form'
-    
+
+// Make the base type use the discriminator
 type base = Partial<{
     dropTables: string[]
     withTotals: boolean
@@ -104,9 +66,7 @@ type base = Partial<{
     untilParamValue: string
     reportType: ReportTypeKeys
     restType: string
-    type: TaskTypeKeys 
-}> &
-    CommonTaskType
+}> & CommonTaskType
 
 export type TaskType =
     | QueryTaskType
