@@ -44,8 +44,8 @@ import type {
 import { ReportTypeKeys } from './report.keys.type'
 
 export type TaskTypeKeys =
-    | 'sourceRaw'
     | 'query'
+    | 'sourceRaw'
     | 'builder'
     | 'flow'
     | 'pivot'
