@@ -27,7 +27,7 @@ export type BuilderTaskType = Partial<{
     appId: string
     id: string
     query: string
-    type: 'builder' | 'sourceRaw'
+    type: 'builder'
     sourceId: string
     client: string
     fieldAsString: boolean
