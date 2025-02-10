@@ -5,6 +5,7 @@ export type QueryTaskType = Partial<{
 	prepare: boolean
 	limit: number
 	codeSnippetId: string
+	type: 'query'
 }> &
 	CommonTaskType
 
