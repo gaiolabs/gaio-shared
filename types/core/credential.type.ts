@@ -44,7 +44,6 @@ export type SourceType = Partial<{
     repoId: string
     sourceName: string
     repoName: string
-    sourceType: string
     client: string
     databaseName: string
 

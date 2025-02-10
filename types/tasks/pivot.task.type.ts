@@ -6,7 +6,6 @@ export type PivotTaskType = Partial<{
     order: string
     columns: FieldType[]
     tableName: string
-    sourceType: string
     extraFields: FieldType[]
     resultTable: string
     databaseName: string
