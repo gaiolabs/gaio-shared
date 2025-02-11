@@ -129,18 +129,18 @@ export const taskList = (t: Function) => {
             contextOrder: 2,
             order: 3
         },
-        {
-            title: `${t('taskPowerSearch')}`,
-            type: 'powerSearch',
-            onlyBucket: true,
-            onlyRepo: false,
-            icon: 'g-power-search',
-            cat: 'DELIVERY',
-            catIcon: '',
-            showOnContextMenu: true,
-            contextOrder: 3,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskPowerSearch')}`,
+        //     type: 'powerSearch',
+        //     onlyBucket: true,
+        //     onlyRepo: false,
+        //     icon: 'g-power-search',
+        //     cat: 'DELIVERY',
+        //     catIcon: '',
+        //     showOnContextMenu: true,
+        //     contextOrder: 3,
+        //     order: 3
+        // },
         {
             title: `${t('taskNetworkExplorer')}`,
             type: 'network',
@@ -317,7 +317,7 @@ export const taskList = (t: Function) => {
             showOnContextMenu: true,
             cat: 'ANALYTICS',
             catIcon: '',
-            contextOrder: 100,
+            contextOrder: 3,
             order: 2
         },
         {
@@ -409,17 +409,17 @@ export const taskList = (t: Function) => {
             contextOrder: 100,
             order: 3
         },
-        {
-            title: `${t('taskInsights')}`,
-            type: 'insights',
-            onlyBucket: true,
-            icon: 'g-insights',
-            cat: 'DELIVERY',
-            showOnContextMenu: true,
-            catIcon: '',
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskInsights')}`,
+        //     type: 'insights',
+        //     onlyBucket: true,
+        //     icon: 'g-insights',
+        //     cat: 'DELIVERY',
+        //     showOnContextMenu: true,
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         {
             title: `${t('taskScoreCard')}`,
             type: 'scorecard',
