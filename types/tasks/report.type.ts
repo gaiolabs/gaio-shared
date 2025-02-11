@@ -7,7 +7,7 @@ import { ReportTypeKeys } from './report.keys.type'
 
 export type ReportNodeType = Partial<{
     label: string
-    type: string
+    type: 'report'
     reportType: ReportTypeKeys
     schema: SchemaType
     height: number

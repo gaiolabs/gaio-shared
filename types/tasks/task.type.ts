@@ -39,7 +39,7 @@ import type {
     GenericType,
     PcaTaskType,
     ReportPreviewTaskType,
-    FormCardType,
+    FormCardType, ReportNodeType,
 } from '../'
 import {ReportTypeKeys} from './report.keys.type'
 
@@ -72,6 +72,7 @@ type base = Partial<{
 
 export type TaskType =
     | QueryTaskType
+    | ReportNodeType
     | BuilderTaskType
     | FlowTaskType
     | PivotTaskType
