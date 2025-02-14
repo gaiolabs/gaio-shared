@@ -5,15 +5,15 @@
 export type AppEntity = {
 	appId: string
 	appName: string
-	appDescription: string | null
+	appDescription: string
 	appStatus: string // 'dev',
 	appToken: string
 	params: string //'[]',
 	forms: string // '[]',
 	options: string
 	repoId: string
-	createdBy: string | null
+	createdBy: string
 	createdAt: Date
-	modifiedBy: string | null
+	modifiedBy: string
 	updatedAt: Date
 }

@@ -19,14 +19,14 @@ export type SchemaJoinItemType = {
     operator: string
     tableBy: string
     tableTo: string
-    databaseName: string | null
-    tableName: string | null
+    databaseName: string
+    tableName: string
     byDatabaseName: string
     toDatabaseName: string
     columnBy: string
     columnTo: string
     columnLength: number
-    columnType: string | null
+    columnType: string
 }
 
 export type SchemaListType = Partial<{
@@ -72,12 +72,12 @@ export type SchemaJoinType = {
     id: string
     by: string
     to: string
-    raw: string | null
+    raw: string
     list: SchemaJoinItemType[]
     type: string
     byDatabaseName: string
     toDatabaseName: string
-    refs: SchemaJoinItemType[] | null
+    refs: SchemaJoinItemType[]
 }
 
 export type LimitByType = FieldType[]
@@ -94,8 +94,8 @@ export type SchemaType = Partial<{
     filter: SchemaFilterType[]
     having: SchemaFilterType[]
     computed: ComputedType[]
-    limit: number | null
-    offset: number | null
+    limit: number
+    offset: number
     limitBy: LimitByType
     with: unknown
 }>
