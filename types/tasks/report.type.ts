@@ -5,17 +5,29 @@ import type { FormCardType } from './form-card.type'
 import type { StaticContentType } from './static-content.type'
 import { ReportTypeKeys } from './report.keys.type'
 
+
+type RecordNodeLayoutItemType = Partial<{
+    x: number
+    y: number
+    w: number
+    h: number
+    i: string
+    hidden: boolean
+}>
+
+type RecordNodeLayoutType = Partial<{
+    lg:RecordNodeLayoutItemType
+    md: RecordNodeLayoutItemType
+    sm: RecordNodeLayoutItemType
+}>
+
 export type ReportNodeType = Partial<{
     label: string
     type: 'report'
     reportType: ReportTypeKeys
     schema: SchemaType
     height: number
-    layout: {
-        lg: Record<string, any>
-        md: Record<string, any>
-        sm: Record<string, any>
-    }
+    layout: RecordNodeLayoutType
     settings: ReportTaskSettingsType
 }> &
     TableType &
