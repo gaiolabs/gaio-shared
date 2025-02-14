@@ -1,22 +1,22 @@
 import type { PositionType } from '../core/flow.type'
 
 export type CommonTaskType = Partial<{
-    id: string | null
-    label: string | null
+    id: string
+    label: string
     appId: string
-    repoId: string | null
+    repoId: string
     sourceType: string // 'source' | 'bucket' | 'super'
-    sourceId: string | null
+    sourceId: string
     codeSnippetId: string
-    resultTable: string | null
-    resultDatabase: string | null
-    tableName: string | null
-    databaseName: string | null
+    resultTable: string
+    resultDatabase: string
+    tableName: string
+    databaseName: string
     client: string
     position: PositionType
     truncateTables: string[]
     dropTables: string[]
-    schemaName: string | null
+    schemaName: string
     clickhouse: boolean
     temporaryId: string
     shared: boolean
