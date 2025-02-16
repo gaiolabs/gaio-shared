@@ -15,6 +15,7 @@ export * from './core/table.type'
 export * from './core/tag.type'
 export * from './core/taskLog.type'
 export * from './core/user.type'
+export * from './core/ai.type'
 
 export * from './dtos/task'
 export * from './dtos/flow'
