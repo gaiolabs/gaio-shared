@@ -1,6 +1,6 @@
 import {GenericType} from "../generic.type";
 
-export type AiManager = {
+export type AiManagerType = {
     aiId: string;
     aiName: string;
     options: GenericType;
@@ -11,7 +11,7 @@ export type AiManager = {
 }
 
 
-export type SmartDashItem = {
+export type SmartDashItemType = {
     query: string;
     reportType: string; // table, bar, line, pie
     chartAxisX: string;
