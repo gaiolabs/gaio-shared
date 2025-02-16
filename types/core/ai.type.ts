@@ -1,16 +1,21 @@
 import {GenericType} from "../generic.type";
 
+export type AiManagerCredentialsType = {
+    baseURL: string,
+    apiKey: string,
+    model: string,
+} & GenericType
+
 export type AiManagerType = {
     aiManagerId: string;
     aiManagerName: string;
-    credentials: GenericType;
+    credentials: AiManagerCredentialsType;
     options: GenericType;
     createdBy: string;
     updatedBy: string;
     updatedAt: string;
     createdAt: string;
 }
-
 
 export type SmartDashItemType = {
     query: string;
