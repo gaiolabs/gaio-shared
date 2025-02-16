@@ -1,8 +1,9 @@
 import {GenericType} from "../generic.type";
 
 export type AiManagerType = {
-    aiId: string;
-    aiName: string;
+    aiManagerId: string;
+    aiManagerName: string;
+    credentials: GenericType;
     options: GenericType;
     createdBy: string;
     updatedBy: string;
