@@ -16,6 +16,7 @@ export type AiManagerType = {
     updatedAt: string;
     createdAt: string;
     supplier: string;
+    aIModel: string;
 }
 
 export type SmartDashItemType = {
