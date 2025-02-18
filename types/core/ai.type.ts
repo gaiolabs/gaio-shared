@@ -3,6 +3,7 @@ import {GenericType} from "../generic.type";
 export type AiManagerCredentialsType = {
     baseURL: string,
     apiKey: string,
+    supplier: string;
     model: string,
 } & GenericType
 
@@ -15,8 +16,6 @@ export type AiManagerType = {
     updatedBy: string;
     updatedAt: string;
     createdAt: string;
-    supplier: string;
-    aiModel: string;
 }
 
 export type SmartDashItemType = {
