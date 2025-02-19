@@ -40,6 +40,9 @@ export type MetaTypeOptions = Partial<{
     growthPercentage: number
 }> &
     GenericType
+    
+export const META_TYPE_VALUES = ['power', 'insights', 'smartDash'] as const
+export type MetaTypeTypes= (typeof META_TYPE_VALUES)[number]
 
 export type MetaType = Partial<{
     id: string
@@ -55,8 +58,12 @@ export type MetaType = Partial<{
     userFilter: string
     hits: number
     type: string
-    metaType: string[]
+    metaType: metaTypeValues[]
     options: GenericType & MetaTypeOptions
 }> &
     CommonTableType &
     CommonTaskType
+
+
+
+    
