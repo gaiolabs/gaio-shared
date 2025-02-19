@@ -58,7 +58,7 @@ export type MetaType = Partial<{
     userFilter: string
     hits: number
     type: string
-    metaType: metaTypeValues[]
+    metaType: MetaTypeTypes[]
     options: GenericType & MetaTypeOptions
 }> &
     CommonTableType &
