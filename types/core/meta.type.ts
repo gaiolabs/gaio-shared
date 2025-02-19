@@ -51,9 +51,11 @@ export type MetaType = Partial<{
     appId: string
     description: string
     status: string
+    aiManagerId: string
     userFilter: string
     hits: number
     type: string
+    metaType: string[]
     options: GenericType & MetaTypeOptions
 }> &
     CommonTableType &

@@ -20,5 +20,7 @@ export type MetaEntity = {
 	modifiedBy: string
 	createdBy: string
 	type: string // 'power'
+	metaType: string[]
+	aiManagerId: string
 	repoId: string
 }
