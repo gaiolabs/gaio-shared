@@ -41,7 +41,7 @@ export type MetaTypeOptions = Partial<{
 }> &
     GenericType
     
-export const META_TYPE_VALUES = ['power', 'insights', 'aiDashboard'] as const
+export const META_TYPE_VALUES = ['power', 'insights', 'smartDash'] as const
 export type MetaTypeTypes= (typeof META_TYPE_VALUES)[number]
 
 export type MetaType = Partial<{
