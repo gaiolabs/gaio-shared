@@ -1,6 +1,13 @@
 import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
+export type CronTaskType = Partial<{
+    cron: string;
+    cronBase: string;
+    cronStatus: 'active' | 'inactive';
+}>
+
+
 export type LocalFileTaskType = Partial<{
     type: 'localCsv'
     schemaInference: boolean
@@ -19,4 +26,4 @@ export type LocalFileTaskType = Partial<{
     deleteAfterImport: boolean
     columns: FieldType[]
 }> &
-    CommonTaskType
+    CommonTaskType & CronTaskType
