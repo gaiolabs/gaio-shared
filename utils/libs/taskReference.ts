@@ -289,6 +289,7 @@ export const taskList = (t: Function) => {
         },
         {
             title: `${t('taskBanner')}`,
+            hidden: true,
             type: 'banner',
             onlyBucket: false,
             icon: 'g-banner',
@@ -400,6 +401,7 @@ export const taskList = (t: Function) => {
         },
         {
             title: `${t('taskMaps')}`,
+            hidden: true,
             type: 'maps',
             onlyBucket: true,
             icon: 'g-map',
@@ -423,6 +425,7 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskScoreCard')}`,
             type: 'scorecard',
+            hidden: true,
             onlyBucket: true,
             icon: 'g-scorecard',
             cat: 'DELIVERY',
@@ -462,7 +465,8 @@ export const taskList = (t: Function) => {
             cat: 'DELIVERY',
             catIcon: '',
             contextOrder: 100,
-            order: 3
+            order: 3,
+            hidden: true,
         },
         {
             title: `${t('taskWhatsapp')}`,
@@ -473,11 +477,13 @@ export const taskList = (t: Function) => {
             showOnContextMenu: true,
             catIcon: '',
             contextOrder: 100,
-            order: 3
+            order: 3,
+            hidden: true,
         },
         {
             title: `${t('taskMail')}`,
             type: 'mail',
+            hidden: true,
             onlyBucket: true,
             icon: 'g-mail',
             showOnContextMenu: true,
