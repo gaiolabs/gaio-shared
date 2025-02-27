@@ -145,6 +145,7 @@ export const taskList = (t: Function) => {
             title: `${t('taskNetworkExplorer')}`,
             type: 'network',
             onlyBucket: false,
+            hidden: true,
             onlyRepo: false,
             icon: 'g-network',
             cat: 'DELIVERY',
