@@ -27,4 +27,9 @@ export type SmartDashItemType = {
     isPercentage: boolean;
 }
 
+export type AiMessageType = {
+    role: 'user' | 'assistant' | 'system'
+    content: string
+}
+
 
