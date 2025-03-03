@@ -161,4 +161,5 @@ export type ReportTaskSettingsType = Partial<{
     showPathTreemap: boolean
     enableTreemapZoom: boolean
     treemapLeafDepth: number
+    cardChartType: 'line' | 'bar' | 'area'
 }>
