@@ -32,4 +32,15 @@ export type AiMessageType = {
     content: string
 }
 
+export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
+
+export type AiFlowType = {
+    aiManagerId: string;
+    messages: AiMessageType[];
+    taskType: AiTaskType,
+    metaId: string;
+    tables: string[];
+    appId: string;
+}
+
 
