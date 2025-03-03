@@ -34,7 +34,7 @@ export type AiMessageType = {
 
 export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
 
-export type AiFlowType = {
+export type AiChatFlowType = {
     aiManagerId: string;
     messages: AiMessageType[];
     taskType: AiTaskType,
