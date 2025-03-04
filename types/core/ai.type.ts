@@ -43,4 +43,24 @@ export type AiChatFlowType = {
     appId: string;
 }
 
+export type AiProviderType = 'openai' | 'anthropic' | 'cohere' | 'google' | 'deepseek'
+
+export type AiCompletionResultType = {
+    content: string
+    tokens: {
+        prompt: number
+        completion: number
+        total: number
+    }
+    provider: AiProviderType
+}
+
+type AiClientConfigType = {
+    apiKey: string
+    model?: string
+    temperature?: number
+    maxTokens?: number
+    apiUrl?: string
+}
+
 
