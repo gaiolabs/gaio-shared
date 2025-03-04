@@ -37,6 +37,9 @@ export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
 
 
 export type AiChatFlowType = {
+    /** Unique identifier for the chat flow */
+    id: string;
+
     aiManagerId: string;
     taskType: AiTaskType;
     metaId: string;
@@ -48,6 +51,15 @@ export type AiChatFlowType = {
     availableTables?: TableType[];
     showTables?: boolean;
     canRemoveTables?: boolean;
+}
+
+export type AiChatEventType = {
+    /** The chat flow id */
+    id: string;
+    /** The message content, the user input */
+    message: string
+    /** If is to open the chat */
+	openChat: boolean
 }
 
 export type AiProviderType = 'openai' | 'anthropic' | 'cohere' | 'google' | 'deepseek'
