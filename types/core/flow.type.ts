@@ -44,16 +44,17 @@ export type FlowType = Partial<{
     status: 'active' | 'inactive' | string
     cronBase: CronBaseType
     cronStatus: 'active' | 'inactive'
-    options: {
+    options: Partial<{
         dashboardType: string
         flowTimeout: number
         flowReload: number
         dialogWidth: number
         dialogOnDestroy: 'none' | 'resetFlow' | 'resetParams' | 'resetParamsAndFlow'
-    }
+        metaId: string
+    }>
     flowOrder: number
     flowStart: number
-    flowType: string
+    flowType: string // 'infoPub', 'dataPrep', 'smart'
     flowKey: string
     flowDescription: string
     locked: boolean
