@@ -1,4 +1,5 @@
 import {GenericType} from "../generic.type";
+import { TableType } from "./table.type";
 
 export type AiManagerCredentialsType = {
     baseURL: string,
@@ -34,13 +35,19 @@ export type AiMessageType = {
 
 export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
 
+
 export type AiChatFlowType = {
     aiManagerId: string;
-    messages: AiMessageType[];
-    taskType: AiTaskType,
+    taskType: AiTaskType;
     metaId: string;
-    tables: string[];
-    appId: string;
+    appId?: string;
+    messages?: AiMessageType[];
+    
+    // Table-related properties
+    tables?: TableType[];
+    availableTables?: TableType[];
+    showTables?: boolean;
+    canRemoveTables?: boolean;
 }
 
 export type AiProviderType = 'openai' | 'anthropic' | 'cohere' | 'google' | 'deepseek'
