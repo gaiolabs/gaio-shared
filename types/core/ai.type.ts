@@ -1,4 +1,4 @@
-import {GenericType} from "../generic.type";
+import { GenericType } from "../generic.type";
 import { TableType } from "./table.type";
 
 export type AiManagerCredentialsType = {
