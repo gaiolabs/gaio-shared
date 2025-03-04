@@ -26,10 +26,10 @@ export type FieldRuleOptionsType = Partial<{
     extraReference?: string
     color: string
     icon: string
+    condType: 'tag' | 'fontColor' | 'background'
 }>
 
 export type FieldRuleType = Partial<{
-    condType: string
     condColumnName: string
     condRules: FieldRuleOptionsType[]
 }>
