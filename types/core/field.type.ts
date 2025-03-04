@@ -57,9 +57,9 @@ export type FieldType = Partial<{
     value: any
     extraValue: any
     groupDateBy: string
+    rules: FieldRuleType[]
 
     [k: string]: any
 }> &
     FieldFormatType &
     FieldStyleType &
-    FieldRuleType
