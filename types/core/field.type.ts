@@ -62,4 +62,4 @@ export type FieldType = Partial<{
     [k: string]: any
 }> &
     FieldFormatType &
-    FieldStyleType &
+    FieldStyleType 
