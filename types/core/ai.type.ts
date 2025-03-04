@@ -55,7 +55,7 @@ export type AiCompletionResultType = {
     provider: AiProviderType
 }
 
-type AiClientConfigType = {
+export type AiClientConfigType = {
     apiKey: string
     model?: string
     temperature?: number
