@@ -44,6 +44,10 @@ export type FlowType = Partial<{
     status: 'active' | 'inactive' | string
     cronBase: CronBaseType
     cronStatus: 'active' | 'inactive'
+    user: Partial<{
+        name: string,
+        userId: string
+    }>
     options: Partial<{
         dashboardType: string
         flowTimeout: number
