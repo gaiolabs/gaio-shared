@@ -1,5 +1,7 @@
-import { GenericType } from "../generic.type";
-import { TableType } from "./table.type";
+import {GenericType} from "../generic.type";
+import {TableType} from "./table.type";
+import {SchemaType} from "./schema.type";
+import {RecordNodeLayoutType} from "../tasks/report.type";
 
 export type AiManagerCredentialsType = {
     baseURL: string,
@@ -45,7 +47,7 @@ export type AiChatFlowType = {
     metaId: string;
     appId?: string;
     messages?: AiMessageType[];
-    
+
     // Table-related properties
     tables?: TableType[];
     availableTables?: TableType[];
@@ -59,7 +61,7 @@ export type AiChatEventType = {
     /** The message content, the user input */
     message: string
     /** If is to open the chat */
-	openChat: boolean
+    openChat: boolean
 }
 
 export type AiProviderType = 'openai' | 'anthropic' | 'cohere' | 'google' | 'deepseek'
@@ -80,6 +82,18 @@ export type AiClientConfigType = {
     temperature?: number
     maxTokens?: number
     apiUrl?: string
+}
+
+
+export type AiFoundationDashboardResultType = {
+    reports: Array<{
+        id: string;
+        message: string
+        reportType: string
+        reportTitle: string
+        layout: RecordNodeLayoutType
+        queryBuilder: SchemaType
+    }>
 }
 
 

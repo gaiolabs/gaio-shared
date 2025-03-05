@@ -15,7 +15,7 @@ type RecordNodeLayoutItemType = Partial<{
     hidden: boolean
 }>
 
-type RecordNodeLayoutType = Partial<{
+export type RecordNodeLayoutType = Partial<{
     lg:RecordNodeLayoutItemType
     md: RecordNodeLayoutItemType
     sm: RecordNodeLayoutItemType
