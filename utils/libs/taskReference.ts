@@ -574,3 +574,12 @@ export const taskList = (t: Function) => {
         }
     ]
 }
+
+export const getAllUniqueTaskTypes = () => {
+    return [...new Set([
+        ...executables,
+        ...reports,
+        ...typesOfOpenTask,
+        ...taskList(() => {}).map(item => item.type)
+    ])].sort();
+}
