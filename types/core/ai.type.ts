@@ -3,6 +3,7 @@ import {TableType} from "./table.type";
 import {SchemaType} from "./schema.type";
 import {RecordNodeLayoutType} from "../tasks/report.type";
 import {ReportTypeKeys} from "../tasks/report.keys.type";
+import {PositionType} from "./flow.type";
 
 export type AiManagerCredentialsType = {
     baseURL: string,
@@ -91,6 +92,7 @@ export type AiFoundationDashboardResultType = {
         id: string;
         message: string
         reportType: ReportTypeKeys
+        position: PositionType
         reportTitle: string
         layout: RecordNodeLayoutType
         queryBuilder: SchemaType
