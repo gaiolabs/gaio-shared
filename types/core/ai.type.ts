@@ -2,6 +2,7 @@ import {GenericType} from "../generic.type";
 import {TableType} from "./table.type";
 import {SchemaType} from "./schema.type";
 import {RecordNodeLayoutType} from "../tasks/report.type";
+import {ReportTypeKeys} from "../tasks/report.keys.type";
 
 export type AiManagerCredentialsType = {
     baseURL: string,
@@ -89,7 +90,7 @@ export type AiFoundationDashboardResultType = {
     reports: Array<{
         id: string;
         message: string
-        reportType: string
+        reportType: ReportTypeKeys
         reportTitle: string
         layout: RecordNodeLayoutType
         queryBuilder: SchemaType
