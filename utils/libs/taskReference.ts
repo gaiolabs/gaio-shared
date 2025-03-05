@@ -85,7 +85,7 @@ export const typesOfOpenTask = [
 export const taskList = (t: Function) => {
     return [
         {
-            title: `${t('taskBuilder')}`,
+            title: `${t('taskNames.builder')}`,
             type: 'builder',
             onlyBucket: true,
             icon: 'builder',
@@ -96,7 +96,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskSql')}`,
+            title: `${t('taskNames.query')}`,
             type: 'query',
             onlyBucket: false,
             icon: 'add',
@@ -107,7 +107,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskSourceSql')}`,
+            title: `${t('taskNames.sourceRaw')}`,
             type: 'sourceRaw',
             onlyBucket: false,
             icon: 'table',
@@ -118,7 +118,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskExplorer')}`,
+            title: `${t('taskNames.report')}`,
             type: 'report',
             onlyBucket: true,
             onlyRepo: true,
@@ -130,7 +130,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         // {
-        //     title: `${t('taskPowerSearch')}`,
+        //     title: `${t('taskNames.powerSearch')}`,
         //     type: 'powerSearch',
         //     onlyBucket: true,
         //     onlyRepo: false,
@@ -142,7 +142,7 @@ export const taskList = (t: Function) => {
         //     order: 3
         // },
         {
-            title: `${t('taskNetworkExplorer')}`,
+            title: `${t('taskNames.network')}`,
             type: 'network',
             onlyBucket: false,
             hidden: true,
@@ -155,7 +155,7 @@ export const taskList = (t: Function) => {
             order: 10
         },
         {
-            title: `${t('taskInsertTable')}`,
+            title: `${t('taskNames.insert')}`,
             type: 'insert',
             onlyBucket: true,
             icon: 'g-union-table',
@@ -166,7 +166,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskInsertRow')}`,
+            title: `${t('taskNames.insertRow')}`,
             type: 'insertRow',
             onlyBucket: false,
             icon: 'g-row-insert',
@@ -177,7 +177,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskUpdateTable')}`,
+            title: `${t('taskNames.update')}`,
             type: 'update',
             onlyBucket: false,
             icon: 'g-table-update',
@@ -188,7 +188,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskDeleteTable')}`,
+            title: `${t('taskNames.delete')}`,
             type: 'delete',
             onlyBucket: false,
             icon: 'g-row-exclude',
@@ -199,7 +199,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskCreateTable')}`,
+            title: `${t('taskNames.create')}`,
             type: 'create',
             onlyBucket: false,
             icon: 'g-create-table',
@@ -210,7 +210,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskQuickTable')}`,
+            title: `${t('taskNames.quickTable')}`,
             type: 'quickTable',
             onlyBucket: false,
             icon: 'g-quick-table',
@@ -221,7 +221,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskSample')}`,
+            title: `${t('taskNames.sample')}`,
             type: 'sample',
             onlyBucket: true,
             icon: 'g-sample',
@@ -232,7 +232,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskStaticContent')}`,
+            title: `${t('taskNames.staticContent')}`,
             type: 'staticContent',
             onlyBucket: false,
             icon: 'g-content',
@@ -244,7 +244,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskForms')}`,
+            title: `${t('taskNames.form')}`,
             type: 'form',
             onlyBucket: false,
             icon: 'g-forms',
@@ -255,7 +255,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskExternalOutput')}`,
+            title: `${t('taskNames.externalOutput')}`,
             type: 'externalOutput',
             onlyBucket: true,
             icon: 'g-external-output',
@@ -266,7 +266,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskPivot')}`,
+            title: `${t('taskNames.pivot')}`,
             type: 'pivot',
             onlyBucket: true,
             icon: 'g-pivot-table',
@@ -277,7 +277,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskUnpivot')}`,
+            title: `${t('taskNames.unpivot')}`,
             type: 'unpivot',
             onlyBucket: true,
             icon: 'g-unpivot',
@@ -289,7 +289,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskBanner')}`,
+            title: `${t('taskNames.banner')}`,
             hidden: true,
             type: 'banner',
             onlyBucket: false,
@@ -301,7 +301,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskExportFile')}`,
+            title: `${t('taskNames.export')}`,
             type: 'export',
             onlyBucket: true,
             icon: 'g-export-csv',
@@ -312,7 +312,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskAutoml')}`,
+            title: `${t('taskNames.automl')}`,
             type: 'automl',
             onlyBucket: false,
             icon: 'g-automl',
@@ -323,7 +323,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskScoring')}`,
+            title: `${t('taskNames.scoring')}`,
             type: 'scoring',
             onlyBucket: false,
             icon: 'g-scoring',
@@ -334,7 +334,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskSurvivorAnalytics')}`,
+            title: `${t('taskNames.coxph')}`,
             type: 'coxph',
             onlyBucket: true,
             icon: 'linechart-decline',
@@ -346,7 +346,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskCluster')}`,
+            title: `${t('taskNames.cluster')}`,
             type: 'cluster',
             onlyBucket: true,
             icon: 'g-cluster',
@@ -357,7 +357,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskPca')}`,
+            title: `${t('taskNames.pca')}`,
             type: 'pca',
             onlyBucket: true,
             icon: 'g-pca',
@@ -368,7 +368,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskBasket')}`,
+            title: `${t('taskNames.basket')}`,
             type: 'basket',
             onlyBucket: true,
             icon: 'g-association-rules',
@@ -379,7 +379,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskTimeSeries')}`,
+            title: `${t('taskNames.timeseries')}`,
             type: 'timeseries',
             onlyBucket: true,
             showOnContextMenu: true,
@@ -390,7 +390,7 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskRunFlow')}`,
+            title: `${t('taskNames.flow')}`,
             type: 'flow',
             onlyBucket: false,
             icon: 'g-run-flow',
@@ -401,7 +401,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskMaps')}`,
+            title: `${t('taskNames.maps')}`,
             hidden: true,
             type: 'maps',
             onlyBucket: true,
@@ -413,7 +413,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         // {
-        //     title: `${t('taskInsights')}`,
+        //     title: `${t('taskNames.insights')}`,
         //     type: 'insights',
         //     onlyBucket: true,
         //     icon: 'g-insights',
@@ -424,7 +424,7 @@ export const taskList = (t: Function) => {
         //     order: 3
         // },
         {
-            title: `${t('taskScoreCard')}`,
+            title: `${t('taskNames.scorecard')}`,
             type: 'scorecard',
             hidden: true,
             onlyBucket: true,
@@ -436,7 +436,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskApi')}`,
+            title: `${t('taskNames.api')}`,
             type: 'api',
             onlyBucket: true,
             icon: 'g-api',
@@ -447,7 +447,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskRest')}`,
+            title: `${t('taskNames.rest')}`,
             type: 'rest',
             onlyBucket: false,
             icon: 'g-rest',
@@ -458,7 +458,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskRestSms')}`,
+            title: `${t('taskNames.restSms')}`,
             type: 'restSms',
             onlyBucket: true,
             icon: 'g-sms',
@@ -470,7 +470,7 @@ export const taskList = (t: Function) => {
             hidden: true,
         },
         {
-            title: `${t('taskWhatsapp')}`,
+            title: `${t('taskNames.whatsapp')}`,
             type: 'whatsapp',
             onlyBucket: true,
             icon: 'g-whatsapp',
@@ -482,7 +482,7 @@ export const taskList = (t: Function) => {
             hidden: true,
         },
         {
-            title: `${t('taskMail')}`,
+            title: `${t('taskNames.mail')}`,
             type: 'mail',
             hidden: true,
             onlyBucket: true,
@@ -494,7 +494,7 @@ export const taskList = (t: Function) => {
             order: 3
         },
         {
-            title: `${t('taskParamToTable')}`,
+            title: `${t('taskNames.paramToTable')}`,
             type: 'paramToTable',
             onlyBucket: false,
             icon: 'g-param-to-table',
@@ -505,7 +505,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskTableToParam')}`,
+            title: `${t('taskNames.tableToParam')}`,
             type: 'tableToParam',
             onlyBucket: true,
             icon: 'g-table-to-param',
@@ -516,7 +516,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskUserMirror')}`,
+            title: `${t('taskNames.userMirror')}`,
             type: 'userMirror',
             onlyBucket: false,
             icon: 'g-users',
@@ -527,7 +527,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskCsvWeb')}`,
+            title: `${t('taskNames.csvUrl')}`,
             type: 'csvUrl',
             onlyBucket: false,
             icon: 'g-csv-web',
@@ -538,7 +538,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskLocalCsvFolder')}`,
+            title: `${t('taskNames.localCsv')}`,
             type: 'localCsv',
             onlyBucket: false,
             icon: 'g-csv-web',
@@ -549,7 +549,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskGoogleSpreadsheet')}`,
+            title: `${t('taskNames.googleSpreadsheet')}`,
             type: 'googleSpreadsheet',
             onlyBucket: false,
             icon: 'g-google-sheets',
@@ -560,7 +560,7 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
-            title: `${t('taskPython')}`,
+            title: `${t('taskNames.python')}`,
             type: 'python',
             onlyBucket: false,
             icon: 'python',
