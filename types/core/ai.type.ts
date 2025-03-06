@@ -40,7 +40,7 @@ export type AiMessageType = {
 export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
 
 
-export type AiChatFlowType = {
+export type AiChatFlowType = Partial<{
     /** Unique identifier for the chat flow */
     id: string;
 
@@ -55,7 +55,7 @@ export type AiChatFlowType = {
     availableTables?: TableType[];
     showTables?: boolean;
     canRemoveTables?: boolean;
-}
+}>
 
 export type AiChatEventType = {
     /** The chat flow id */
