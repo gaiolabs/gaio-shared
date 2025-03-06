@@ -112,4 +112,4 @@ export type TaskType =
     | TableType
     | base
 
-export type CommonBuilderTaskType = base & TaskType
+export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
