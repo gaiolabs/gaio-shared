@@ -15,6 +15,7 @@ export type AppFolderOption = {
 }
 
 export type AppOptionsType = Partial<{
+    aiDisabledOnDashboard: boolean
     aiManagerId: string
     color: string
     group: string
