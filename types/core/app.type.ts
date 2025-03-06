@@ -15,6 +15,7 @@ export type AppFolderOption = {
 }
 
 export type AppOptionsType = Partial<{
+    aiManagerId: string
     color: string
     group: string
     creator: string
