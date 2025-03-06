@@ -88,6 +88,15 @@ export type AiClientConfigType = {
 }
 
 
+export type AiFoundationReportResultType = {
+    id: string;
+    message: string
+    reportType: ReportTypeKeys
+    reportTitle: string
+    queryBuilder: SchemaType
+}
+
+
 export type AiFoundationDashboardResultType = {
     reports: Array<{
         id: string;
