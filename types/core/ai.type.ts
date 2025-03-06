@@ -43,6 +43,7 @@ export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
 export type AiChatFlowType = Partial<{
     /** Unique identifier for the chat flow */
     id: string;
+    title: string
 
     aiManagerId: string;
     taskType: AiTaskType;
