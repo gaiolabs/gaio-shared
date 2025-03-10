@@ -47,6 +47,7 @@ export type AiChatFlowType = Partial<{
 
     aiManagerId: string;
     taskType: AiTaskType;
+    taskCurrentType: string;
     metaId: string;
     appId?: string;
     messages?: AiMessageType[];
