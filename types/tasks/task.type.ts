@@ -39,7 +39,7 @@ import type {
     GenericType,
     PcaTaskType,
     ReportPreviewTaskType,
-    FormCardType, ReportNodeType,
+    FormCardType, ReportNodeType, SourceRawTaskType,
 } from '../'
 import {ReportTypeKeys} from './report.keys.type'
 
@@ -71,6 +71,7 @@ type base = Partial<{
 }> & CommonTaskType
 
 export type TaskType =
+    | SourceRawTaskType
     | QueryTaskType
     | ReportNodeType
     | BuilderTaskType
