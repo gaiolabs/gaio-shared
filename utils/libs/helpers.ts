@@ -21,8 +21,12 @@ export const definedOrDefault = (value: unknown | undefined, defaultValue: unkno
     return value === undefined ? defaultValue : value
 }
 
-export const withoutNullProperties = <T extends { [key: string]: unknown }>(obj: T) => {
-    Object.keys(obj).forEach((key) => obj[key] === null && delete obj[key])
+export const withoutNullProperties = <T>(obj: T) => {
+
+    if(typeof obj === 'object') {
+        Object.keys(obj).forEach((key) => obj[key] === null && delete obj[key])
+    }
+
     return obj
 }
 
