@@ -144,7 +144,7 @@ export type TaskBaseType = {
     python: PythonTaskType
     googleSpreadsheet: GoogleSpreadsheetTaskType
     localFile: LocalFileTaskType
-    associationRules: AssociationRulesTaskType
+    basket: AssociationRulesTaskType
     cluster: ClusterTaskType
     survivalAnalysis: SurvivalAnalysisTaskType
     mail: MailTaskType
