@@ -114,3 +114,44 @@ export type TaskType =
     | base
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
+
+export type TaskBaseType = {
+    automl: AutoMLTaskType
+    scoring: ScoringTaskType
+    reportPreview: ReportPreviewTaskType
+    formCard: FormCardType
+    table: TableType
+    sourceRaw: SourceRawTaskType
+    query: QueryTaskType
+    reportNode: ReportNodeType
+    builder: BuilderTaskType
+    flow: FlowTaskType
+    pivot: PivotTaskType
+    delete: DeleteTaskType
+    quickTable: QuickTableTaskType
+    insertRow: InsertRowTaskType
+    updateRow: UpdateRowTaskType
+    unpivot: UnpivotTaskType
+    sample: SampleTaskType
+    insertTable: InsertTableTaskType
+    exportToFile: ExportToFileType
+    user: UserTaskType
+    createTable: CreateTableTaskType
+    csvUrl: CsvUrlTaskType
+    fileImport: FileImportTaskType
+    forecast: ForecastTaskType
+    pythonHub: PythonHubTaskType
+    python: PythonTaskType
+    googleSpreadsheet: GoogleSpreadsheetTaskType
+    localFile: LocalFileTaskType
+    associationRules: AssociationRulesTaskType
+    cluster: ClusterTaskType
+    survivalAnalysis: SurvivalAnalysisTaskType
+    mail: MailTaskType
+    whatsapp: WhatsappTaskType
+    rest: RestTaskType
+    pca: PcaTaskType
+    generic: GenericType
+    externalOutput: ExternalOutputTaskType
+    cloudFile: CloudFileType
+}
