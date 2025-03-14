@@ -154,4 +154,6 @@ export type TaskBaseType = {
     generic: GenericType
     externalOutput: ExternalOutputTaskType
     cloudFile: CloudFileType
+    tableToParam: TableToParamTaskType
+    paramToTable: ParamToTableTaskType
 }
