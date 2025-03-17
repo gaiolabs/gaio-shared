@@ -22,3 +22,4 @@ export type ReportTypeKeys =
 	| 'wordCloud'
 	| 'forecast'
 	| 'formCard'
+	| 'content'
