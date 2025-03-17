@@ -1,4 +1,4 @@
-import { customAlphabet } from 'nanoid'
+import {customAlphabet} from 'nanoid'
 import dayjs from 'dayjs'
 
 export const getId = (size = 8): string => {
@@ -6,7 +6,7 @@ export const getId = (size = 8): string => {
 }
 
 export function getAppNumberReference(appId: string) {
-		return appId.replace('app:', '')
+    return appId.replace('app:', '')
 }
 
 export const getBucketNameFromAppId = (appId: string) => {
@@ -17,13 +17,13 @@ export const getRepositoryUserNameFromAppId = (appId: string) => {
     return appId.replace(':', '_')
 }
 
-export const definedOrDefault = (value: unknown | undefined, defaultValue: unknown) => {
+export const definedOrDefault = <T>(value: T, defaultValue: T) => {
     return value === undefined ? defaultValue : value
 }
 
 export const withoutNullProperties = <T>(obj: T) => {
 
-    if(typeof obj === 'object') {
+    if (typeof obj === 'object') {
         Object.keys(obj).forEach((key) => obj[key] === null && delete obj[key])
     }
 
