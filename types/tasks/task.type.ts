@@ -121,9 +121,9 @@ export type TaskBaseType = {
     reportPreview: ReportPreviewTaskType
     table: TableType
     sourceRaw: SourceRawTaskType
+    builder: BuilderTaskType
     query: QueryTaskType
     reportNode: ReportNodeType
-    builder: BuilderTaskType
     flow: FlowTaskType
     pivot: PivotTaskType
     delete: DeleteTaskType
