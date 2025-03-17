@@ -119,7 +119,6 @@ export type TaskBaseType = {
     automl: AutoMLTaskType
     scoring: ScoringTaskType
     reportPreview: ReportPreviewTaskType
-    formCard: FormCardType
     table: TableType
     sourceRaw: SourceRawTaskType
     query: QueryTaskType
