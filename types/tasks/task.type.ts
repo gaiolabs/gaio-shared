@@ -140,7 +140,6 @@ export type TaskBaseType = {
     csvUrl: CsvUrlTaskType
     fileImport: FileImportTaskType
     forecast: ForecastTaskType
-    pythonHub: PythonHubTaskType
     python: PythonTaskType
     googleSpreadsheet: GoogleSpreadsheetTaskType
     localFile: LocalFileTaskType
