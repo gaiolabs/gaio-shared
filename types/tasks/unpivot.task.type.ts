@@ -9,7 +9,7 @@ export type UnpivotTaskType = Partial<{
 	extraColumns?: string[]
 	extraColumnPosition?: 'start' | 'end'
 	orderBy?: string
-	orderByType?: 'ASC' | 'DESC'
+	orderByType?: 'asc' | 'desc'
 	unpivotColumns: string[]
 }> &
 	CommonTaskType
