@@ -33,6 +33,5 @@ export type BuilderTaskType = Partial<{
     fieldAsString: boolean
     bringData: boolean
     maxFetch: number
-    rawValue: string
 }> &
     CommonTaskType

@@ -15,6 +15,7 @@ export type SourceRawTaskType = Partial<{
 	maxFetch: number
 	schema: SchemaType
 	bucketClient: string
+	query: string // used by salesforce, need to remove this
 	type: 'sourceRaw'
 }> &
     CommonTaskType
