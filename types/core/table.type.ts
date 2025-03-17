@@ -1,4 +1,5 @@
 import type { PositionType } from './flow.type'
+import {CommonTaskType} from "../tasks/common.task.type";
 
 export type TableType = Partial<{
     id: string
@@ -17,4 +18,4 @@ export type TableType = Partial<{
     databaseName: string
     schemaName: string
     sourceType: string
-}>
+}> & CommonTaskType
