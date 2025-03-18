@@ -135,7 +135,7 @@ export type TaskBaseType = {
     insertTable: InsertTableTaskType
     exportToFile: ExportToFileType
     user: UserTaskType
-    createTable: CreateTableTaskType
+    create: CreateTableTaskType
     csvUrl: CsvUrlTaskType
     fileImport: FileImportTaskType
     forecast: ForecastTaskType
