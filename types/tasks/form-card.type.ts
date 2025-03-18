@@ -14,6 +14,6 @@ export type FormCardType = Partial<{
     formFilterBehavior: boolean
     position: PositionType
     type: 'report'
-    reportType: 'formCard'
+    reportType: string
 }> &
     CommonTaskType
