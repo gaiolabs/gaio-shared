@@ -245,7 +245,7 @@ export const taskList = (t: Function) => {
         },
         {
             title: `${t('taskNames.form')}`,
-            type: 'form',
+            type: 'formCard',
             onlyBucket: false,
             icon: 'g-forms',
             cat: 'DELIVERY',
@@ -573,13 +573,4 @@ export const taskList = (t: Function) => {
             order: 2
         }
     ]
-}
-
-export const getAllUniqueTaskTypes = () => {
-    return [...new Set([
-        ...executables,
-        ...reports,
-        ...typesOfOpenTask,
-        ...taskList(() => {}).map(item => item.type)
-    ])].sort();
 }
