@@ -1,7 +1,7 @@
 import { type CommonTaskType } from './common.task.type'
 
 export type ForecastTaskType = Partial<{
-	type: 'timeseries'
+	type: 'forecast'
 	appId: string
 	id: string
 	columnGrouped?: string

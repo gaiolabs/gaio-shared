@@ -21,7 +21,7 @@ export const executables = [
     'delete',
     'insertRow',
     'create',
-    'timeseries',
+    'forecast',
     'sourceRaw',
     'basket',
     'cluster',
@@ -46,7 +46,7 @@ export const typesOfOpenTask = [
     'pca',
     'coxph',
     'sourceRaw',
-    'timeseries',
+    'forecast',
     'basket',
     'cluster',
     'castData',
@@ -379,8 +379,8 @@ export const taskList = (t: Function) => {
             order: 2
         },
         {
-            title: `${t('taskNames.timeseries')}`,
-            type: 'timeseries',
+            title: `${t('taskNames.forecast')}`,
+            type: 'forecast',
             onlyBucket: true,
             showOnContextMenu: true,
             icon: 'g-time-series',
