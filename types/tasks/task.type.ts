@@ -39,11 +39,8 @@ import type {
     GenericType,
     PcaTaskType,
     ReportPreviewTaskType,
-    FormCardType, ReportNodeType, SourceRawTaskType,
+    FormCardType, ReportNodeType, SourceRawTaskType, QuickUploadTaskType, ReportTypeKeys
 } from '../'
-import {ReportTypeKeys} from './report.keys.type'
-import {QuickUploadTaskType} from "./quick-upload.task.type";
-
 
 // Make the base type use the discriminator
 type base = Partial<{
