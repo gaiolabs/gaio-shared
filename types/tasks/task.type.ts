@@ -42,6 +42,7 @@ import type {
     FormCardType, ReportNodeType, SourceRawTaskType,
 } from '../'
 import {ReportTypeKeys} from './report.keys.type'
+import {QuickUploadTaskType} from "./quick-upload.task.type";
 
 
 // Make the base type use the discriminator
@@ -81,6 +82,7 @@ export type TaskType =
     | ParamToTableTaskType
     | DeleteTaskType
     | QuickTableTaskType
+    | QuickUploadTaskType
     | InsertRowTaskType
     | UpdateRowTaskType
     | UnpivotTaskType
@@ -128,6 +130,7 @@ export type TaskBaseType = {
     pivot: PivotTaskType
     delete: DeleteTaskType
     quickTable: QuickTableTaskType
+    quickUpload: QuickUploadTaskType,
     insertRow: InsertRowTaskType
     updateRow: UpdateRowTaskType
     unpivot: UnpivotTaskType

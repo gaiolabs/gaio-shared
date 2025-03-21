@@ -221,6 +221,17 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
+            title: `${t('taskNames.quickUpload')}`,
+            type: 'quickUpload',
+            onlyBucket: false,
+            icon: 'g-quick-table',
+            cat: 'DATAPREP',
+            catIcon: '',
+            contextOrder: 100,
+            showOnContextMenu: true,
+            order: 1
+        },
+        {
             title: `${t('taskNames.sample')}`,
             type: 'sample',
             onlyBucket: true,
