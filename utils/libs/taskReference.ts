@@ -325,7 +325,7 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskNames.automl')}`,
             type: 'automl',
-            onlyBucket: false,
+            onlyBucket: true,
             icon: 'g-automl',
             showOnContextMenu: true,
             cat: 'ANALYTICS',
