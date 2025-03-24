@@ -5,6 +5,7 @@ export type QuickUploadTaskType = Partial<{
     type: 'quickUpload'
     saveReference: boolean
     dropTable: boolean
+    transformData: boolean
     columns: FieldType[]
     data: { [key: string]: any }[]
 }> &

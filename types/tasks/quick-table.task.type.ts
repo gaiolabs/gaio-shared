@@ -5,6 +5,7 @@ export type QuickTableTaskType = Partial<{
     type: 'quickTable'
     saveReference: boolean
     dropTable: boolean
+    transformData: boolean
     columns: FieldType[]
     data: { [key: string]: any }[]
 }> &
