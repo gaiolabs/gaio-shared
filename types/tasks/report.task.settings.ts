@@ -68,6 +68,7 @@ export type ReportTaskSettingsType = Partial<{
     quadrantX: number
     quadrantY: number
     quadrantContent: string
+    titleFontWeight: boolean
     titleFontSize: number
     titleFontColor: string
     titleBold: boolean
