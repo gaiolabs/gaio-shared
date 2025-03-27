@@ -50,6 +50,7 @@ export type AiChatFlowType = Partial<{
     taskCurrentType: string;
     metaId: string;
     appId?: string;
+    aiPrompt?: string
     messages?: AiMessageType[];
 
     // Table-related properties
