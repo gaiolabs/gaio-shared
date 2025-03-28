@@ -82,8 +82,8 @@ export type AiCompletionResultType = {
 }
 
 export type AiClientConfigType = {
-    assistantId: string
-    apiKey: string
+    assistantId?: string
+    apiKey?: string
     model?: string
     temperature?: number
     maxTokens?: number
