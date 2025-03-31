@@ -168,7 +168,7 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskNames.insertRow')}`,
             type: 'insertRow',
-            onlyBucket: false,
+            onlyBucket: true,
             icon: 'g-row-insert',
             cat: 'DATAPREP',
             catIcon: '',
