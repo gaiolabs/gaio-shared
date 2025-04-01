@@ -336,7 +336,7 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskNames.scoring')}`,
             type: 'scoring',
-            onlyBucket: false,
+            onlyBucket: true,
             icon: 'g-scoring',
             cat: 'ANALYTICS',
             catIcon: '',
