@@ -49,7 +49,7 @@ export type FlowType = Partial<{
         userId: string
     }>
     options: Partial<{
-        showDashboardHeader: string
+        showDashboardHeader: boolean
         icon: string
         color: string
         dashboardType: string
