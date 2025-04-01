@@ -49,6 +49,9 @@ export type FlowType = Partial<{
         userId: string
     }>
     options: Partial<{
+        showDashboardHeader: string
+        icon: string
+        color: string
         dashboardType: string
         flowTimeout: number
         flowReload: number
