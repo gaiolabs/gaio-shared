@@ -11,6 +11,7 @@ export type AutoMLTaskTypeSettings = Partial<{
     trainingFrame: string
     maxRuntimeSecs: number
     responseColumn: string
+    limitRows: number
 }>
 
 export type AutoMLTaskType = Partial<{
