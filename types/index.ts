@@ -17,6 +17,7 @@ export * from './core/taskLog.type'
 export * from './core/user.type'
 export * from './core/ai.type'
 export * from './core/map.type'
+export * from './core/api.type'
 
 export * from './dtos/task'
 export * from './dtos/flow'
