@@ -141,19 +141,19 @@ export const taskList = (t: Function) => {
         //     contextOrder: 3,
         //     order: 3
         // },
-        {
-            title: `${t('taskNames.network')}`,
-            type: 'network',
-            onlyBucket: false,
-            hidden: true,
-            onlyRepo: false,
-            icon: 'g-network',
-            cat: 'DELIVERY',
-            catIcon: '',
-            showOnContextMenu: true,
-            contextOrder: 10,
-            order: 10
-        },
+        // {
+        //     title: `${t('taskNames.network')}`,
+        //     type: 'network',
+        //     onlyBucket: false,
+        //     hidden: true,
+        //     onlyRepo: false,
+        //     icon: 'g-network',
+        //     cat: 'DELIVERY',
+        //     catIcon: '',
+        //     showOnContextMenu: true,
+        //     contextOrder: 10,
+        //     order: 10
+        // },
         {
             title: `${t('taskNames.insert')}`,
             type: 'insert',
@@ -299,18 +299,18 @@ export const taskList = (t: Function) => {
             contextOrder: 100,
             order: 1
         },
-        {
-            title: `${t('taskNames.banner')}`,
-            hidden: true,
-            type: 'banner',
-            onlyBucket: false,
-            icon: 'g-banner',
-            cat: 'DELIVERY',
-            catIcon: '',
-            contextOrder: 100,
-            showOnContextMenu: true,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.banner')}`,
+        //     hidden: true,
+        //     type: 'banner',
+        //     onlyBucket: false,
+        //     icon: 'g-banner',
+        //     cat: 'DELIVERY',
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     showOnContextMenu: true,
+        //     order: 3
+        // },
         {
             title: `${t('taskNames.export')}`,
             type: 'exportToFile',
@@ -344,18 +344,18 @@ export const taskList = (t: Function) => {
             contextOrder: 100,
             order: 2
         },
-        {
-            title: `${t('taskNames.coxph')}`,
-            type: 'coxph',
-            onlyBucket: true,
-            icon: 'linechart-decline',
-            hidden: true,
-            cat: 'DELIVERY',
-            showOnContextMenu: true,
-            catIcon: '',
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.coxph')}`,
+        //     type: 'coxph',
+        //     onlyBucket: true,
+        //     icon: 'linechart-decline',
+        //     hidden: true,
+        //     cat: 'DELIVERY',
+        //     showOnContextMenu: true,
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         {
             title: `${t('taskNames.cluster')}`,
             type: 'cluster',
@@ -411,18 +411,18 @@ export const taskList = (t: Function) => {
             showOnContextMenu: true,
             order: 1
         },
-        {
-            title: `${t('taskNames.maps')}`,
-            hidden: true,
-            type: 'maps',
-            onlyBucket: true,
-            icon: 'g-map',
-            cat: 'DELIVERY',
-            showOnContextMenu: true,
-            catIcon: '',
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.maps')}`,
+        //     hidden: true,
+        //     type: 'maps',
+        //     onlyBucket: true,
+        //     icon: 'g-map',
+        //     cat: 'DELIVERY',
+        //     showOnContextMenu: true,
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         // {
         //     title: `${t('taskNames.insights')}`,
         //     type: 'insights',
@@ -434,18 +434,18 @@ export const taskList = (t: Function) => {
         //     contextOrder: 100,
         //     order: 3
         // },
-        {
-            title: `${t('taskNames.scorecard')}`,
-            type: 'scorecard',
-            hidden: true,
-            onlyBucket: true,
-            icon: 'g-scorecard',
-            cat: 'DELIVERY',
-            showOnContextMenu: true,
-            catIcon: '',
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.scorecard')}`,
+        //     type: 'scorecard',
+        //     hidden: true,
+        //     onlyBucket: true,
+        //     icon: 'g-scorecard',
+        //     cat: 'DELIVERY',
+        //     showOnContextMenu: true,
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         {
             title: `${t('taskNames.api')}`,
             type: 'api',
@@ -492,18 +492,18 @@ export const taskList = (t: Function) => {
             order: 3,
             hidden: true,
         },
-        {
-            title: `${t('taskNames.mail')}`,
-            type: 'mail',
-            hidden: true,
-            onlyBucket: true,
-            icon: 'g-mail',
-            showOnContextMenu: true,
-            cat: 'DELIVERY',
-            catIcon: '',
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.mail')}`,
+        //     type: 'mail',
+        //     hidden: true,
+        //     onlyBucket: true,
+        //     icon: 'g-mail',
+        //     showOnContextMenu: true,
+        //     cat: 'DELIVERY',
+        //     catIcon: '',
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         {
             title: `${t('taskNames.paramToTable')}`,
             type: 'paramToTable',
