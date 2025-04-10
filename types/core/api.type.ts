@@ -1,6 +1,7 @@
 import {GenericType} from "../generic.type";
 
-export type ApiType = {
+export type ApiType = Partial<{
+    apiId: string
     apiName: string
     description: string
     token: string
@@ -13,4 +14,4 @@ export type ApiType = {
     createdAt: string
     updateAt: string
     updatedBy: string
-}
+}>
