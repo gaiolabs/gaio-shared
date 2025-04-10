@@ -2,8 +2,9 @@ export type ApiType = {
     apiName: string
     description: string
     token: string
-    flowList: string[]
+    flowId: string
     appId: string
+    tableName: string
     options: string
     status: string
     createdBy: string
