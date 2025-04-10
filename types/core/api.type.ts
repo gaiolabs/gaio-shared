@@ -15,6 +15,7 @@ export type ApiKeyType = Partial<{
 export type ApiType = Partial<{
     apiId: string
     apiName: string
+    endpoint: string
     description: string
     apiKeyId: string[]
     flowId: string
