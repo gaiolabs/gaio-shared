@@ -1,3 +1,5 @@
+import {GenericType} from "../generic.type";
+
 export type ApiType = {
     apiName: string
     description: string
@@ -5,8 +7,8 @@ export type ApiType = {
     flowId: string
     appId: string
     tableName: string
-    options: string
-    status: string
+    options: GenericType
+    status: 'active' | 'inactive'
     createdBy: string
     createdAt: string
     updateAt: string
