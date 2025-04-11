@@ -17,7 +17,7 @@ export type ApiType = Partial<{
     apiName: string
     endpoint: string
     description: string
-    apiKeyId: string[]
+    assigned_keys: string[]
     flowId: string
     appId: string
     tableName: string
