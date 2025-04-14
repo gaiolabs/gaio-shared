@@ -48,6 +48,7 @@ export type SchemaListType = Partial<{
     databaseName: string
     selected: boolean
     applied: boolean
+    isFromTaskExplorer: boolean
 }>
 
 export type SchemaFilterType = Partial<{
