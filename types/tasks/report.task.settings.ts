@@ -163,4 +163,7 @@ export type ReportTaskSettingsType = Partial<{
     enableTreemapZoom: boolean
     treemapLeafDepth: number
     cardChartType: 'line' | 'bar' | 'area'
+    totalFontColor: string
+    totalFontSize: string
+    totalFontBold: boolean
 }>
