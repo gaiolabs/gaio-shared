@@ -86,6 +86,9 @@ export type ReportTaskSettingsType = Partial<{
     showLabelMeasure: boolean
     showLabelPercent: boolean
     labelPositionAlign: string
+    labelLengthFirstSegment: number
+    labelLengthSecondSegment: number
+    labelEdgeDistance: number
     showLegend: boolean
     showStatistic: boolean
     legendPosition: string
