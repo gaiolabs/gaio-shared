@@ -413,7 +413,6 @@ export const taskList = (t: Function) => {
         },
         {
             title: `${t('taskNames.maps')}`,
-            hidden: false,
             type: 'maps',
             onlyBucket: true,
             icon: 'g-map',
