@@ -411,18 +411,18 @@ export const taskList = (t: Function) => {
             showOnContextMenu: true,
             order: 1
         },
-        // {
-        //     title: `${t('taskNames.maps')}`,
-        //     hidden: true,
-        //     type: 'maps',
-        //     onlyBucket: true,
-        //     icon: 'g-map',
-        //     cat: 'DELIVERY',
-        //     showOnContextMenu: true,
-        //     catIcon: '',
-        //     contextOrder: 100,
-        //     order: 3
-        // },
+        {
+            title: `${t('taskNames.maps')}`,
+            hidden: false,
+            type: 'maps',
+            onlyBucket: true,
+            icon: 'g-map',
+            cat: 'DELIVERY',
+            showOnContextMenu: true,
+            catIcon: '',
+            contextOrder: 100,
+            order: 3
+        },
         // {
         //     title: `${t('taskNames.insights')}`,
         //     type: 'insights',
