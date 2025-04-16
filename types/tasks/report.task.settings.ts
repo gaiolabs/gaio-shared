@@ -170,4 +170,22 @@ export type ReportTaskSettingsType = Partial<{
     totalFontColor: string
     totalFontSize: string
     totalFontBold: boolean
+    card:{
+        title:{
+            fontWeight: string
+            fontSize: string
+            fontColor: string
+        },
+        subTitle:{
+            fontWeight: string
+            fontSize: string
+            fontColor: string
+        },
+        measure:{
+            fontWeight: string
+            fontSize: string
+            fontColor: string
+        },
+
+    }
 }>
