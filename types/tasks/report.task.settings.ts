@@ -173,17 +173,17 @@ export type ReportTaskSettingsType = Partial<{
     card:{
         title:{
             fontWeight: string
-            fontSize: string
+            fontSize: number
             fontColor: string
         },
         subTitle:{
             fontWeight: string
-            fontSize: string
+            fontSize: number
             fontColor: string
         },
         measure:{
             fontWeight: string
-            fontSize: string
+            fontSize: number
             fontColor: string
         },
 
