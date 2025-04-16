@@ -176,7 +176,7 @@ export type ReportTaskSettingsType = Partial<{
             fontSize: number
             fontColor: string
         },
-        subTitle:{
+        subtitle:{
             fontWeight: string
             fontSize: number
             fontColor: string
