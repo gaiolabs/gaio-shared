@@ -528,10 +528,10 @@ export const taskList = (t: Function) => {
         {
             title: `${t('taskNames.defineParam')}`,
             type: 'defineParam',
-            onlyBucket: true,
+            onlyBucket: false,
             icon: 'g-table-to-param',
             cat: 'DATAPREP',
-            showOnContextMenu: true,
+            showOnContextMenu: false,
             catIcon: '',
             contextOrder: 100,
             order: 1
