@@ -167,9 +167,7 @@ export type ReportTaskSettingsType = Partial<{
     enableTreemapZoom: boolean
     treemapLeafDepth: number
     cardChartType: 'line' | 'bar' | 'area'
-    totalFontColor: string
-    totalFontSize: string
-    totalFontBold: boolean
+  
     card:{
         title:{
             fontWeight: string
@@ -187,5 +185,14 @@ export type ReportTaskSettingsType = Partial<{
             fontColor: string
         },
 
+    }
+    pieDonutTotal: {
+        fontColor: string
+        fontSize: string
+        fontBold: boolean
+        top: number
+        bottom: number
+        left: number
+        right: number
     }
 }>
