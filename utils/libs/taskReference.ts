@@ -1,5 +1,6 @@
 export const executables = [
     'builder',
+    'defineParam',
     'pca',
     'insert',
     'pivot',
