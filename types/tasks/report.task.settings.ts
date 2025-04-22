@@ -186,6 +186,7 @@ export type ReportTaskSettingsType = Partial<{
 
     }
     pieDonutTotal: {
+        show: boolean
         fontColor: string
         fontSize: number
         fontBold: boolean
