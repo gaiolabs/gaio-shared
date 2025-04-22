@@ -526,6 +526,17 @@ export const taskList = (t: Function) => {
             order: 1
         },
         {
+            title: `${t('taskNames.defineParam')}`,
+            type: 'defineParam',
+            onlyBucket: true,
+            icon: 'g-table-to-param',
+            cat: 'DATAPREP',
+            showOnContextMenu: true,
+            catIcon: '',
+            contextOrder: 100,
+            order: 1
+        },
+        {
             title: `${t('taskNames.userMirror')}`,
             type: 'userMirror',
             onlyBucket: false,
