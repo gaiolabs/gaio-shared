@@ -1,6 +1,6 @@
 import {ParamType} from "../core/param.type";
 import {CommonTaskType} from "./common.task.type";
 
-export type DefineParamType = {
+export type DefineParamTaskType = {
     params: ParamType[]
 } & CommonTaskType

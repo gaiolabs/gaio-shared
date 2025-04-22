@@ -43,7 +43,7 @@ import {
     ReportNodeType,
     SourceRawTaskType,
     QuickUploadTaskType,
-    ReportTypeKeys, DefineParamType
+    ReportTypeKeys, DefineParamTaskType
 } from '../'
 
 // Make the base type use the discriminator
@@ -114,7 +114,7 @@ export type TaskType =
     | ReportPreviewTaskType
     | FormCardType
     | TableType
-    | DefineParamType
+    | DefineParamTaskType
     | base
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
@@ -156,7 +156,7 @@ export type TaskBaseType = {
     pca: PcaTaskType
     generic: GenericType
     externalOutput: ExternalOutputTaskType
-    defineParam: DefineParamType
+    defineParam: DefineParamTaskType
     cloudFile: CloudFileType
     tableToParam: TableToParamTaskType
     paramToTable: ParamToTableTaskType
