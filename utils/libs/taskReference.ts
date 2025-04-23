@@ -593,6 +593,16 @@ export const taskList = (t: Function) => {
             contextOrder: 100,
             showOnContextMenu: true,
             order: 2
-        }
+        },
+        {
+            title: `${t('taskNames.crosstable')}`,
+            type: 'crosstable',
+            onlyBucket: true,
+            cat: 'DELIVERY',
+            showOnContextMenu: true,
+            catIcon: '',
+            contextOrder: 100,
+            order: 3
+        },
     ]
 }
