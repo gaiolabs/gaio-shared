@@ -23,4 +23,5 @@ export type ReportTypeKeys =
     | 'forecast'
     | 'formCard'
     | 'content'
+    | 'crosstable'
     | string
