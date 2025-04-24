@@ -195,4 +195,12 @@ export type ReportTaskSettingsType = Partial<{
         left: number
         right: number
     }
+    tooltip:{
+        show: boolean
+        fontColor: string
+        fontSize: number
+        hideNullValues: boolean
+        hideZeroValues: boolean
+    }
+
 }>
