@@ -198,6 +198,7 @@ export type ReportTaskSettingsType = Partial<{
     tooltip:{
         show: boolean
         fontColor: string
+        trigger: 'none' | 'item' | 'axis' 
         fontSize: number
         hideNullValues: boolean
         hideZeroValues: boolean
