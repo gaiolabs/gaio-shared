@@ -82,7 +82,7 @@ export type AiCompletionResultType = {
 }
 
 export type AiClientConfigType = {
-    conversationId?: string
+    threadId?: string
     assistantId?: string
     apiKey?: string
     model?: string
