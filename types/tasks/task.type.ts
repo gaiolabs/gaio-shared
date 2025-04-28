@@ -43,6 +43,7 @@ import {
     ReportNodeType,
     SourceRawTaskType,
     QuickUploadTaskType,
+    CrosstableTaskType,
     ReportTypeKeys, DefineParamTaskType
 } from '../'
 
@@ -115,6 +116,7 @@ export type TaskType =
     | FormCardType
     | TableType
     | DefineParamTaskType
+    | CrosstableTaskType
     | base
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
@@ -160,4 +162,5 @@ export type TaskBaseType = {
     cloudFile: CloudFileType
     tableToParam: TableToParamTaskType
     paramToTable: ParamToTableTaskType
+    crosstable: CrosstableTaskType
 }
