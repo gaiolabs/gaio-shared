@@ -169,16 +169,19 @@ export type ReportTaskSettingsType = Partial<{
     cardChartType: 'line' | 'bar' | 'area'
     card:{
         title:{
+            showColumnName:boolean
             fontWeight: string
             fontSize: number
             fontColor: string
         },
         subtitle:{
+            showColumnName:boolean
             fontWeight: string
             fontSize: number
             fontColor: string
         },
         measure:{
+            showColumnName:boolean
             fontWeight: string
             fontSize: number
             fontColor: string
