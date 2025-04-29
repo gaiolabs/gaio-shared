@@ -130,6 +130,7 @@ export type TalkData = Partial<{
 
 export type AiThreadType = {
     threadId: string;
+    threadName: string;
     appId: string;
     options: TalkData;
     createdBy: string;
