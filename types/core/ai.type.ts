@@ -82,7 +82,7 @@ export type AiCompletionResultType = {
 }
 
 export type AiClientConfigType = {
-    conversationId?: string
+    threadId?: string
     assistantId?: string
     apiKey?: string
     model?: string
@@ -111,6 +111,33 @@ export type AiFoundationDashboardResultType = {
         layout: RecordNodeLayoutType
         queryBuilder: SchemaType
     }>
+}
+
+
+
+// new ai rules
+export type TalkData = Partial<{
+    aiManagerId: string;
+    threadId: string;
+    userMessage: string;
+    threadName: string;
+    tables: string[];
+    shareDeepData: boolean;
+    sharedData: {
+        tables: string[];
+    };
+    appId: string;
+}>;
+
+export type AiThreadType = {
+    threadId: string;
+    threadName: string;
+    appId: string;
+    options: TalkData;
+    createdBy: string;
+    updatedBy: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 

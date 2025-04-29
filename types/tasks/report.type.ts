@@ -26,6 +26,7 @@ export type ReportNodeType = Partial<{
     type: 'report'
     reportType: ReportTypeKeys
     schema: SchemaType
+    query: string
     height: number
     layout: RecordNodeLayoutType
     settings: ReportTaskSettingsType
