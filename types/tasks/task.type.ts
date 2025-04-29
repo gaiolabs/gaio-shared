@@ -139,7 +139,7 @@ export type TaskBaseType = {
     sample: SampleTaskType
     insertTable: InsertTableTaskType
     exportToFile: ExportToFileType
-    user: UserTaskType
+    userMirror: UserTaskType
     create: CreateTableTaskType
     csvUrl: CsvUrlTaskType
     fileImport: FileImportTaskType
