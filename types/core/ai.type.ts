@@ -120,6 +120,7 @@ export type TalkData = Partial<{
     aiManagerId: string;
     threadId: string;
     userMessage: string;
+    threadName: string;
     tables: string[];
     shareDeepData: boolean;
     sharedData: {
