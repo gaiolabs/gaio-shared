@@ -88,6 +88,7 @@ export * from './tasks/report-preview.task.type'
 export * from './tasks/form-card.type'
 export * from './tasks/define-param-task.type'
 export * from './tasks/crosstable.task.type'
+export * from './tasks/static-content.type'
 
 export * from './token'
 export * from './insight-card-type'
