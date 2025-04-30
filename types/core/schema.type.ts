@@ -49,6 +49,7 @@ export type SchemaListType = Partial<{
     selected: boolean
     applied: boolean
     isFromTaskExplorer: boolean
+    appliedFromPowerSearchTree: boolean
 }>
 
 export type SchemaFilterType = Partial<{
