@@ -127,6 +127,8 @@ export type ReportTaskSettingsType = Partial<{
     meterGauge: boolean
     cardBackgroundField: string
     compactNumberAxis: boolean
+    compactNumberXAxis: boolean
+    compactNumberYAxis: boolean
     compactNumberStatistic: boolean
     compactNumberLabel: boolean
     colorFieldType: string
