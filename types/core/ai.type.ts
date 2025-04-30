@@ -33,8 +33,9 @@ export type SmartDashItemType = {
 }
 
 export type AiMessageType = {
-    role: 'user' | 'assistant' | 'system'
+    role: 'user' | 'assistant'
     content: string
+    metadata: Record<string, any>
 }
 
 export type AiTaskType = 'dashboard' | 'builder' | 'powerSearch' | 'report'
