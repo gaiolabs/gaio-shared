@@ -139,7 +139,7 @@ export type TaskBaseType = {
     update: UpdateRowTaskType
     unpivot: UnpivotTaskType
     sample: SampleTaskType
-    insertTable: InsertTableTaskType
+    insert: InsertTableTaskType
     exportToFile: ExportToFileType
     userMirror: UserTaskType
     create: CreateTableTaskType
