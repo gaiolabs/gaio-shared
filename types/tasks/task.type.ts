@@ -136,7 +136,7 @@ export type TaskBaseType = {
     quickTable: QuickTableTaskType
     quickUpload: QuickUploadTaskType,
     insertRow: InsertRowTaskType
-    updateRow: UpdateRowTaskType
+    update: UpdateRowTaskType
     unpivot: UnpivotTaskType
     sample: SampleTaskType
     insertTable: InsertTableTaskType
