@@ -19,6 +19,9 @@ export * from './core/ai.type'
 export * from './core/map.type'
 export * from './core/api.type'
 
+export * from './utils/task-type-checker'
+export * from './utils/type-conflicts'
+
 export * from './dtos/task'
 export * from './dtos/flow'
 
@@ -85,6 +88,7 @@ export * from './tasks/report-preview.task.type'
 export * from './tasks/form-card.type'
 export * from './tasks/define-param-task.type'
 export * from './tasks/crosstable.task.type'
+export * from './tasks/static-content.type'
 
 export * from './token'
 export * from './insight-card-type'
