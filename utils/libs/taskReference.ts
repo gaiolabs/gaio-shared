@@ -455,7 +455,8 @@ export const taskList = (t: Function) => {
             catIcon: '',
             showOnContextMenu: true,
             contextOrder: 100,
-            order: 3
+            order: 3,
+            hidden: true
         },
         {
             title: `${t('taskNames.rest')}`,
