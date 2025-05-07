@@ -200,21 +200,21 @@ export type ReportTaskSettingsType = Partial<{
         left: number
         right: number
     }
-    tooltip:{
+    tooltip: {
         show: boolean
         fontColor: string
         trigger:  'item' | 'axis' 
         fontSize: number
         hideNullValues: boolean
         hideZeroValues: boolean
-    },
-    yDataZoom:{
+    }
+    yDataZoom: {
         show: boolean
         type: 'slider' | 'inside' 
         start: number
         end: number
-    },
-    xDataZoom:{
+    }
+    xDataZoom: {
         show: boolean
         type: 'slider' | 'inside' 
         start: number
