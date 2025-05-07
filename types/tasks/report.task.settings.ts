@@ -207,6 +207,17 @@ export type ReportTaskSettingsType = Partial<{
         fontSize: number
         hideNullValues: boolean
         hideZeroValues: boolean
+    },
+    yDataZoom:{
+        show: boolean
+        type: 'slider' | 'inside' 
+        start: number
+        end: number
+    },
+    xDataZoom:{
+        show: boolean
+        type: 'slider' | 'inside' 
+        start: number
+        end: number
     }
-
 }>
