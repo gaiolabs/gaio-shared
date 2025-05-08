@@ -7,6 +7,7 @@ export type QuickUploadTaskType = Partial<{
     dropTable: boolean
     transformData: boolean
     columns: FieldType[]
+    lastItems: boolean
     data: { [key: string]: any }[]
 }> &
     CommonTaskType
