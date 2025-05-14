@@ -4,6 +4,7 @@ import type { ReportTaskSettingsType } from './report.task.settings'
 import type { FormCardType } from './form-card.type'
 import type { StaticContentType } from './static-content.type'
 import { ReportTypeKeys } from './report.keys.type'
+import { MapsType } from '../reports/maps.type'
 
 
 type RecordNodeLayoutItemType = Partial<{
@@ -35,5 +36,6 @@ export type ReportNodeType = Partial<{
 }> &
     TableType &
     FormCardType &
-    StaticContentType
+    StaticContentType &
+    MapsType
 
