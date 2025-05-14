@@ -15,7 +15,6 @@ export type ReportTypeKeys =
     | 'treemap'
     | 'table'
     | 'download'
-    | 'staticContent'
     | 'card'
     | 'form'
     | 'calendar'
@@ -24,4 +23,6 @@ export type ReportTypeKeys =
     | 'formCard'
     | 'content'
     | 'crosstable'
+    | 'staticContent'
+    | 'maps'
     | string
