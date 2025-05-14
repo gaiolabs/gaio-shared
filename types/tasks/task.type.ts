@@ -46,7 +46,6 @@ import {
     CrosstableTaskType,
     ReportTypeKeys, DefineParamTaskType
 } from '../'
-import { MapsTaskType } from '../reports/maps.type'
 
 // Make the base type use the discriminator
 type base = Partial<{
