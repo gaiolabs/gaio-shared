@@ -1,6 +1,6 @@
 export type MapsType = Partial<{
     mapId: string
-    geoJSONPropertie: string
+    geoJSONProperty: string
     tableLinkColumnName: string
     tableValueColumnName: string
 }> 
