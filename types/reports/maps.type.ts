@@ -4,3 +4,5 @@ export type MapsType = Partial<{
     tableLinkColumnName: string
     tableValueColumnName: string
 }> 
+
+
