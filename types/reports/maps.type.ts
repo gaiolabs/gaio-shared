@@ -1,5 +1,5 @@
 export type MapsType = Partial<{
-    mapReport:{
+    reportMap:{
         type: string
         id: string
         geoJSONProperty: string
