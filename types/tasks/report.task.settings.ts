@@ -232,6 +232,7 @@ export type ReportTaskSettingsType = Partial<{
             fifth: string
         }
         colorsRange:{
+            id: string
             from: number
             to: number
             color: string
