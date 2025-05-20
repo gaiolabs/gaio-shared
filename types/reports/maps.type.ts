@@ -7,7 +7,6 @@ export type MapsType = Partial<{
         tableValueColumnName: string
         isRange: boolean
     }
-
 }> 
 
 
