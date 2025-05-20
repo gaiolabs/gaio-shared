@@ -231,5 +231,10 @@ export type ReportTaskSettingsType = Partial<{
             fourth: string
             fifth: string
         }
+        colorsRange:{
+            from: number
+            to: number
+            color: string
+        }[]
     }
 }>
