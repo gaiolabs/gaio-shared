@@ -5,6 +5,7 @@ export type MapsType = Partial<{
         geoJSONProperty: string
         tableLinkColumnName: string
         tableValueColumnName: string
+        isRange: boolean
     }
 
 }> 
