@@ -236,6 +236,7 @@ export type ReportTaskSettingsType = Partial<{
             from: number
             to: number
             color: string
+            operator: string
         }[]
     }
 }>
