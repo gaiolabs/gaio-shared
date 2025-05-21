@@ -1,3 +1,12 @@
 export type MapsType = Partial<{
-    mapId: string
+    reportMap:{
+        type: string
+        id: string
+        geoJSONProperty: string
+        tableLinkColumnName: string
+        tableValueColumnName: string
+        modeType: 'distribuition' | 'range'
+    }
 }> 
+
+
