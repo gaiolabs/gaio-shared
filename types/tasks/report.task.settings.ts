@@ -224,6 +224,7 @@ export type ReportTaskSettingsType = Partial<{
         latitude: number
         longitude: number
         zoom: number
+        opacity: number
         colors:{
             first: string
             second: string
