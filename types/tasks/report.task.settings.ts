@@ -1,5 +1,6 @@
 export type ReportTaskSettingsType = Partial<{
     forms: string[]
+    conversionTag: boolean
     noDataSentence: string
     columnBackground: boolean
     downloadLabel: string
