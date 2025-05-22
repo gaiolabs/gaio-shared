@@ -11,6 +11,8 @@ export type ReportTaskSettingsType = Partial<{
     showTotal: boolean
     showScrollbar: boolean
     showSlider: boolean
+    sliderStart: number
+    sliderEnd: number
     groupEqualCategory: boolean
     horizontalTotalLabel: string
     horizontalTotalFormatType: string
