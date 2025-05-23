@@ -1,20 +1,21 @@
 import type { ParamType } from './param.type'
 import type { FormType } from './form.type'
-import { CommonTableType } from './common-table.type'
-import { ComputedType } from './schema.type'
+import type { CommonTableType } from './common-table.type'
+import type { ComputedType } from './schema.type'
 
 export type AppFolderType = 'folderParam' | 'folderFlow' | 'folderForm'
 
 export type AppFolderOption = {
-    id: string;
+    id: string
     label: string
     isLeaf: boolean
-    isOpen:boolean
+    isOpen: boolean
     children?: AppFolderOption[]
-    metaData?: any;
+    metaData?: any
 }
 
 export type AppOptionsType = Partial<{
+    hideMenuAtDashboard: boolean
     aiDisabledOnDashboard: boolean
     aiManagerId: string
     color: string
