@@ -2,6 +2,7 @@ import type { PositionType } from '../core/flow.type'
 
 export type CommonTaskType = Partial<{
     id: string
+    sharedId: string
     label: string
     appId: string
     repoId: string
