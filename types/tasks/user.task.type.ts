@@ -3,7 +3,7 @@ import {FieldType} from "../core/field.type";
 
 export type UserTaskType = Partial<{
 	type: 'userMirror'
-	fields: FieldType[]
+	userMirrorFields: string[]
 	userType: string
 }> &
 	CommonTaskType
