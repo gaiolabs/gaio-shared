@@ -1,4 +1,5 @@
 import { type CommonTaskType } from './common.task.type'
+import type {FieldType} from "../core/field.type";
 
 export type SurvivalAnalysisTaskType = Partial<{
     columns: FieldType[]
