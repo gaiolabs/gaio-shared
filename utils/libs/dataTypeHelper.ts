@@ -171,6 +171,7 @@ export const bridgeColumnLength = (field) => {
 }
 
 export const bridgeDataType = (field, pureDecimal = false) => {
+    console.log('bridgeDataType', field)
     if (field.dataType.includes('Array')) {
         if (field.arrayDataType === 'Numeric') {
             // field.dataType = `Array(Nullable(Float64))`;
@@ -180,6 +181,7 @@ export const bridgeDataType = (field, pureDecimal = false) => {
     } else if (!field.dataType) {
         field.dataType = 'Nullable(String)'
     } else if (field.dataType.includes('Decimal')) {
+        console.log('bridgeDataType', field)
         bridgeColumnLength(field)
         field.dataType = `Nullable(Decimal64)`
     } else {
