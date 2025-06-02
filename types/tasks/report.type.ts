@@ -34,6 +34,7 @@ export type ReportNodeType = Partial<{
     height: number
     layout: RecordNodeLayoutType
     settings: ReportTaskSettingsType
+    withTotals: boolean
 }> &
     TableType &
     FormCardType &
