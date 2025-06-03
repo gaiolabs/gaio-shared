@@ -25,6 +25,7 @@ export type RecordNodeLayoutType = Partial<{
 export type ReportNodeType = Partial<{
     id: string
     sharedId: string
+    aiSampleSent: boolean
     threadId: string
     label: string
     type: 'report'
