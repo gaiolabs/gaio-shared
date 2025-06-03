@@ -128,6 +128,7 @@ export type TalkData = Partial<{
         tables: string[];
     };
     appId: string;
+    repoId: string
 }>;
 
 export type AiThreadType = {
