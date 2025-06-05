@@ -266,17 +266,17 @@ export const taskList = (t: Function) => {
             showOnContextMenu: true,
             order: 3
         },
-        {
-            title: `${t('taskNames.externalOutput')}`,
-            type: 'externalOutput',
-            onlyBucket: true,
-            icon: 'g-external-output',
-            cat: 'DELIVERY',
-            catIcon: '',
-            showOnContextMenu: true,
-            contextOrder: 100,
-            order: 3
-        },
+        // {
+        //     title: `${t('taskNames.externalOutput')}`,
+        //     type: 'externalOutput',
+        //     onlyBucket: true,
+        //     icon: 'g-external-output',
+        //     cat: 'DELIVERY',
+        //     catIcon: '',
+        //     showOnContextMenu: true,
+        //     contextOrder: 100,
+        //     order: 3
+        // },
         {
             title: `${t('taskNames.pivot')}`,
             type: 'pivot',
