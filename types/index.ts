@@ -19,6 +19,7 @@ export * from './core/ai.type'
 export * from './core/map.type'
 export * from './core/api.type'
 export * from './core/config.type'
+export * from './core/runner.type'
 
 export * from './utils/task-type-checker'
 export * from './utils/type-conflicts'
