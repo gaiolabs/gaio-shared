@@ -8,7 +8,7 @@ export type CommonTaskType = Partial<{
     repoId: string
     sourceType: string // 'source' | 'bucket' | 'super'
     sourceId: string
-    pause: boolean
+    paused: boolean
     stopped: boolean
     codeSnippetId: string
     resultTable: string
