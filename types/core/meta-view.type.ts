@@ -4,6 +4,7 @@ import {TaskType} from "../tasks/task.type";
 
 export type MetaViewType = {
 	powerType: string
+	tableName: string
     metaViewId: string
     userId: string
     appId: string

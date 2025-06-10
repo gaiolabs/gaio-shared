@@ -5,6 +5,7 @@
 export type MetaStoriesEntity = {
 	metaStoryId: string
 	label: string
+	tableName: string
 	content: string // '[]'
 	options: string // '{}'
 	userId: string
