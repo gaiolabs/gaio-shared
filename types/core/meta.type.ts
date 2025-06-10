@@ -45,6 +45,7 @@ export const META_TYPE_VALUES = ['power', 'insights', 'smartDash'] as const
 export type MetaTypeTypes= (typeof META_TYPE_VALUES)[number]
 
 export type MetaType = Partial<{
+	powerType: string
     id: string
     metaId: string
     label: string
