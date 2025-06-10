@@ -3,6 +3,7 @@ import type { GenericType } from '../generic.type'
 import {TaskType} from "../tasks/task.type";
 
 export type MetaViewType = {
+	powerType: string
     metaViewId: string
     userId: string
     appId: string
