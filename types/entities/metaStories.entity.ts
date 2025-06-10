@@ -8,6 +8,7 @@ export type MetaStoriesEntity = {
 	content: string // '[]'
 	options: string // '{}'
 	userId: string
+	powerType: string
 	shared: string // 'n'
 	hits: number // 1
 }
