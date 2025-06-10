@@ -4,6 +4,7 @@
  */
 export type MetaStoriesEntity = {
 	metaStoryId: string
+	description: string
 	label: string
 	tableName: string
 	content: string // '[]'
