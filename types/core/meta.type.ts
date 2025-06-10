@@ -48,6 +48,8 @@ export type MetaType = Partial<{
 	powerType: string
     id: string
     metaId: string
+    metaStoryId: string
+    metaViewId: string
     label: string
     tableName: string
     databaseName: string
