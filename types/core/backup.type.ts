@@ -1,6 +1,6 @@
 import type {GenericType} from "../generic.type";
 
-export type BackupType = {
+export type BackupExportType = {
     options: GenericType,
     foundation: {
         flow: string[]
