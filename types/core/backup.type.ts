@@ -6,7 +6,7 @@ export type BackupExportType = {
         flow: string[]
         params: string[]
         forms: string[]
-        discovery: string[]
+        meta: string[]
         api: string[]
         maps: string[]
     }
