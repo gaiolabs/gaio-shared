@@ -180,18 +180,21 @@ export type ReportTaskSettingsType = Partial<{
             fontWeight: string
             fontSize: number
             fontColor: string
+            align: 'left' | 'right' | 'center'
         },
         subtitle:{
             showColumnName:boolean
             fontWeight: string
             fontSize: number
             fontColor: string
+            align: 'left' | 'right' | 'center'
         },
         measure:{
             showColumnName:boolean
             fontWeight: string
             fontSize: number
             fontColor: string
+            align: 'left' | 'right' | 'center'
         },
 
     }
