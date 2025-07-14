@@ -8,6 +8,7 @@ export type ReportTaskSettingsType = Partial<{
     downloadSize: number
     downloadColor: string
     downloadData: boolean
+    downloadFullTable: boolean
     showTotal: boolean
     showScrollbar: boolean
     showSlider: boolean
