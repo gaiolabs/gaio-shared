@@ -11,6 +11,7 @@ export type ReportTaskSettingsType = Partial<{
     downloadFullTable: boolean
     showTotal: boolean
     showScrollbar: boolean
+    colorByColumn: string
     showSlider: boolean
     sliderStart: number
     sliderEnd: number
