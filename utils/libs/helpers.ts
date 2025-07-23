@@ -55,3 +55,11 @@ export const toDateString = (date = new Date()) => {
     }
     return dayjs(date).format('YYYY-MM-DD')
 }
+
+export function safeBase64Encode(str: string) {
+    // Encode to base64
+    let encoded = btoa(str);
+    // Replace special characters
+    encoded = encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return encoded;
+}
