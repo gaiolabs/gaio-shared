@@ -1,3 +1,5 @@
+import {GenericType} from "../generic.type";
+
 export type UserOptionsType = Partial<{
     appList: string[]
     favoriteMetaTypes: {
@@ -42,3 +44,11 @@ export type UserLoginType = {
     email: string
     password: string
 }
+
+export type PortalType = {
+    userId: string;
+    token: string;
+    options: GenericType;
+    name: string;
+};
+
