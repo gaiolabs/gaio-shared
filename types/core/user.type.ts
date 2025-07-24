@@ -15,6 +15,9 @@ export type UserOptionsType = Partial<{
     userThemeMode: string
     studioDrawerFullscreen: boolean
     profilePic?: string
+    portalTabs?: string[]
+    portalHiddenHeader: boolean,
+    portalAppId: string,
 }>
 
 export type UserType = Partial<{
