@@ -56,6 +56,7 @@ export type FlowType = Partial<{
         flowTimeout: number
         flowReload: number
         dialogWidth: number
+        dialogHeight: number
         dialogOnDestroy: 'none' | 'resetFlow' | 'resetParams' | 'resetParamsAndFlow'
         metaId: string
     }>
