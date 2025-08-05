@@ -493,18 +493,18 @@ export const taskList = (t: Function) => {
             order: 3,
             hidden: true,
         },
-        // {
-        //     title: `${t('taskNames.mail')}`,
-        //     type: 'mail',
-        //     hidden: true,
-        //     onlyBucket: true,
-        //     icon: 'g-mail',
-        //     showOnContextMenu: true,
-        //     cat: 'DELIVERY',
-        //     catIcon: '',
-        //     contextOrder: 100,
-        //     order: 3
-        // },
+        {
+            title: `${t('taskNames.mail')}`,
+            type: 'mail',
+            hidden: false,
+            onlyBucket: true,
+            icon: 'g-mail',
+            showOnContextMenu: true,
+            cat: 'DELIVERY',
+            catIcon: '',
+            contextOrder: 100,
+            order: 3
+        },
         {
             title: `${t('taskNames.paramToTable')}`,
             type: 'paramToTable',

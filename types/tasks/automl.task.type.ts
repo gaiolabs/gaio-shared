@@ -12,6 +12,7 @@ export type AutoMLTaskTypeSettings = Partial<{
     maxRuntimeSecs: number
     responseColumn: string
     limitRows: number
+    dropVariableTable: boolean
 }>
 
 export type AutoMLTaskType = Partial<{

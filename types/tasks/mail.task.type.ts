@@ -4,6 +4,7 @@ import type { GenericType } from '../generic.type'
 export type MailTaskType = Partial<{
     type: 'mail'
     extraData: string[]
+    resultTableReferenceId: string
     sleep: number
     toColumnName: string
     testMail: string
@@ -16,6 +17,7 @@ export type MailTaskType = Partial<{
     password: string
     options: GenericType
     from: string
+    fromName: string
     tableName: string
     resultTable: string
     resultTableTruncate: boolean
