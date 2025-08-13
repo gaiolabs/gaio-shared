@@ -6,6 +6,7 @@ export type MapsType = Partial<{
         tableLinkColumnName: string
         tableValueColumnName: string
         modeType: 'distribuition' | 'range'
+        paramName: string | null
     }
 }> 
 
