@@ -205,6 +205,7 @@ export type ReportTaskSettingsType = Partial<{
         fontColor: string
         fontSize: number
         fontBold: boolean
+        compactNumberLabel: boolean
         top: number
         bottom: number
         left: number
