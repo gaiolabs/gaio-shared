@@ -1,3 +1,5 @@
+import {FieldType} from "../../types";
+
 export const dataTypeList = [
     'Nullable(String)',
     'Nullable(Int64)',
@@ -170,13 +172,16 @@ export const bridgeColumnLength = (field) => {
     }
 }
 
-export const bridgeDataType = (field, pureDecimal = false) => {
+export const bridgeDataType = (field: FieldType, pureDecimal = false) => {
     if (field.dataType.includes('Array')) {
         if (field.arrayDataType === 'Numeric') {
             // field.dataType = `Array(Nullable(Float64))`;
         } else if (field.arrayDataType === 'String') {
             // field.dataType = `Array(Nullable(String))`;
         }
+    } else if (field.dataType.toLowerCase().includes('json')){
+        field.dataType = 'Nullable(JSON)'
+        field.columnLength = null
     } else if (!field.dataType) {
         field.dataType = 'Nullable(String)'
     } else if (field.dataType.includes('Decimal')) {
