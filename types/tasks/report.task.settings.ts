@@ -251,4 +251,15 @@ export type ReportTaskSettingsType = Partial<{
             operator: string
         }[]
     }
+    table: {
+        total :{
+          show: boolean
+          fields?: string[]
+          label?: string
+          align?: 'left' | 'middle' | 'right'
+          format?: 'none' | 'decimal'
+          separators?: 'none' | 'dotComma' | 'noneComma' | 'commaDot' | 'noneDot'
+          decimalSize?: number
+        }
+    }
 }>
