@@ -13,16 +13,6 @@ export type AutoMLTaskTypeSettings = Partial<{
     responseColumn: string
     limitRows: number
     metadataTableResults: boolean
-    results: {
-        confusionMatrix: boolean,
-        confusionMatrixMetrics: boolean,
-        variableImportance: boolean
-        variableImportanceFrequency: boolean
-        variableImportanceCover: boolean
-        models: boolean
-        crossValidation: boolean
-
-    }
 }>
 
 export type AutoMLTaskType = Partial<{
