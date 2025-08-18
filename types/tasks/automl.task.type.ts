@@ -12,7 +12,7 @@ export type AutoMLTaskTypeSettings = Partial<{
     maxRuntimeSecs: number
     responseColumn: string
     limitRows: number
-    dropVariableTable: boolean
+    metadataTableResults: boolean
     results: {
         confusionMatrix: boolean,
         confusionMatrixMetrics: boolean,
