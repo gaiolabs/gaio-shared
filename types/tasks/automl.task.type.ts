@@ -46,7 +46,7 @@ interface ColumnSpec {
     description: string
 }
 
-interface TwoDimTable {
+export interface TwoDimTable {
     __meta: H2OMetaSchema
     name: string
     description: string
@@ -55,7 +55,7 @@ interface TwoDimTable {
     data: (string | number | boolean | null)[][]
 }
 
-interface ConfusionMatrix {
+export interface ConfusionMatrix {
     __meta: H2OMetaSchema
     table: TwoDimTable
 }
