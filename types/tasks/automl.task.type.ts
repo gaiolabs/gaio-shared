@@ -116,6 +116,8 @@ interface ModelOutput {
     default_threshold: number
     help?: Record<string, string>
     variable_importances?: TwoDimTable
+    variable_importances_frequency: TwoDimTable
+    variable_importances_cover?: TwoDimTable
     init_f?: number
 }
 
