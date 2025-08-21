@@ -38,6 +38,7 @@ export const executables = [
 	'nodeEdgeFilter',
 	'localCsv',
 	'python',
+	'ftpIngest',
 ]
 
 export const reports = ['form', 'report', 'maps', 'network', 'powerSearch', 'scorecard']
@@ -81,6 +82,7 @@ export const typesOfOpenTask = [
 	'nodeEdge',
 	'nodeEdgeFilter',
 	'python',
+	'ftpIngest',
 ]
 
 export const taskList = (t: Function) => {
