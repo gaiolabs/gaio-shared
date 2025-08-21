@@ -44,8 +44,10 @@ import type {
     SourceRawTaskType,
     QuickUploadTaskType,
     CrosstableTaskType,
-    ReportTypeKeys, DefineParamTaskType
+    ReportTypeKeys,
+    DefineParamTaskType
 } from '../'
+import { FtpIngestTaskType } from './ftp-ingest.task.type'
 
 // Make the base type use the discriminator
 type base = Partial<{
@@ -71,7 +73,8 @@ type base = Partial<{
     reportType: ReportTypeKeys
     restType: string
     type: 'base'
-}> & CommonTaskType
+}> &
+    CommonTaskType
 
 export type TaskType =
     | SourceRawTaskType
@@ -134,7 +137,7 @@ export type TaskBaseType = {
     pivot: PivotTaskType
     delete: DeleteTaskType
     quickTable: QuickTableTaskType
-    quickUpload: QuickUploadTaskType,
+    quickUpload: QuickUploadTaskType
     insertRow: InsertRowTaskType
     update: UpdateRowTaskType
     unpivot: UnpivotTaskType
@@ -163,4 +166,5 @@ export type TaskBaseType = {
     tableToParam: TableToParamTaskType
     paramToTable: ParamToTableTaskType
     crosstable: CrosstableTaskType
+    ftpIngest: FtpIngestTaskType
 }
