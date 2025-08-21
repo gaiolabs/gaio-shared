@@ -27,7 +27,7 @@ export type RestTaskType = Partial<{
     id: string
     isBatch: boolean
     isBatchSchema: boolean
-    batchSize: boolean
+    batchSize: number
     bodySchema: string
     type: 'rest'
 }> &
