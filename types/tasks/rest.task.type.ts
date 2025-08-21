@@ -25,6 +25,10 @@ export type RestTaskType = Partial<{
     repoId: string
     appId: string
     id: string
+    isBatch: boolean
+    isBatchSchema: boolean
+    batchSize: boolean
+    bodySchema: string
     type: 'rest'
 }> &
     CommonTaskType
