@@ -3,10 +3,10 @@ import { type CommonTaskType } from './common.task.type'
 export type FtpIngestTaskType = Partial<{
     type: 'ftpIngest'
     connection: {
-        protocolType: 'ftp' | 'sftp'
+        protocolType: 'ftp' | 'sftp' | 'cifs'
         host: string
         port: number
-        logonType: 'anonymous' | 'normal' | 'keyFile' | 'cifs'
+        logonType: 'anonymous' | 'normal' | 'keyFile'
         user: string
         password: string
         keyFilePath: string
