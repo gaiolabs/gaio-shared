@@ -6,7 +6,7 @@ export type FtpIngestTaskType = Partial<{
         protocolType: 'ftp' | 'sftp'
         host: string
         port: number
-        logonType: 'anonymous' | 'normal' | 'keyFile'
+        logonType: 'anonymous' | 'normal' | 'keyFile' | 'cifs'
         user: string
         password: string
         keyFilePath: string
