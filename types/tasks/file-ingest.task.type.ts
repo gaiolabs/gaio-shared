@@ -1,7 +1,7 @@
 import { type CommonTaskType } from './common.task.type'
 
-export type FtpIngestTaskType = Partial<{
-    type: 'ftpIngest'
+export type FileIngestTaskType = Partial<{
+    type: 'fileIngest'
     connection: {
         protocolType: 'ftp' | 'sftp' | 'cifs'
         host: string

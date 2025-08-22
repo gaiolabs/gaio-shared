@@ -38,7 +38,7 @@ export const executables = [
 	'nodeEdgeFilter',
 	'localCsv',
 	'python',
-	'ftpIngest',
+	'fileIngest',
 ]
 
 export const reports = ['form', 'report', 'maps', 'network', 'powerSearch', 'scorecard']
@@ -82,7 +82,7 @@ export const typesOfOpenTask = [
 	'nodeEdge',
 	'nodeEdgeFilter',
 	'python',
-	'ftpIngest',
+	'fileIngest',
 ]
 
 export const taskList = (t: Function) => {
@@ -99,10 +99,10 @@ export const taskList = (t: Function) => {
 			order: 1,
 		},
 		{
-			title: `${t('taskNames.ftpIngest')}`,
-			type: 'ftpIngest',
+			title: `${t('taskNames.fileIngest')}`,
+			type: 'fileIngest',
 			onlyBucket: false,
-			icon: 'ftpIngest',
+			icon: 'fileIngest',
 			cat: 'DATAPREP',
 			catIcon: '',
 			contextOrder: 100,
