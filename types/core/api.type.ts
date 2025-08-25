@@ -23,6 +23,7 @@ export type ApiType = Partial<{
 	tableName: string
 	tableInput: string
 	inputPosition: string
+	dropTableInput: boolean
 	options: GenericType
 	status: 'active' | 'inactive'
 	createdBy: string
