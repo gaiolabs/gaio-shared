@@ -12,8 +12,9 @@ export type FileIngestTaskType = Partial<{
         keyFilePath: string
     }
     storage: {
-        fromPath: string
-        toPath: string
+        fileName: string
+        remotePath: string
+        localPath: string
     }
 }> &
     CommonTaskType
