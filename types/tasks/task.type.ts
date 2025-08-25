@@ -47,7 +47,7 @@ import type {
     ReportTypeKeys,
     DefineParamTaskType
 } from '../'
-import { FtpIngestTaskType } from './ftp-ingest.task.type'
+import { FileIngestTaskType } from './file-ingest.task.type'
 
 // Make the base type use the discriminator
 type base = Partial<{
@@ -166,5 +166,5 @@ export type TaskBaseType = {
     tableToParam: TableToParamTaskType
     paramToTable: ParamToTableTaskType
     crosstable: CrosstableTaskType
-    ftpIngest: FtpIngestTaskType
+    fileIngest: FileIngestTaskType
 }
