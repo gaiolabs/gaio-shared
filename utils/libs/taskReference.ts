@@ -102,7 +102,7 @@ export const taskList = (t: Function) => {
 			title: `${t('taskNames.fileIngest')}`,
 			type: 'fileIngest',
 			onlyBucket: false,
-			icon: 'fileIngest',
+			icon: 'file-ingest',
 			cat: 'DATAPREP',
 			catIcon: '',
 			contextOrder: 100,
