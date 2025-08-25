@@ -121,6 +121,7 @@ export type TaskType =
     | DefineParamTaskType
     | CrosstableTaskType
     | base
+    | FileIngestTaskType
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
 
