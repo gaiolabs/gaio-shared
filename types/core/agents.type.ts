@@ -1,4 +1,4 @@
-export type AgentType = {
+export type AgentType = Partial<{
 	agentId: string
 	avatar: string
 	name: string
@@ -13,4 +13,4 @@ export type AgentType = {
 	updatedAt: string // ISO string or Date object
 	createdBy: string
 	updatedBy: string
-}
+}>
