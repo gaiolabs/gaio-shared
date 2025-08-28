@@ -9,7 +9,8 @@ export type FileIngestTaskType = Partial<{
         logonType: 'anonymous' | 'normal' | 'keyFile'
         user: string
         password: string
-        keyFilePath: string
+        privateKeyPath: string
+        passphrase: string
     }
     storage: {
         remoteFileName: string
