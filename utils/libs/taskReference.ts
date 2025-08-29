@@ -161,7 +161,7 @@ export const taskList = (t: Function) => {
 			title: `${t('taskNames.aiAgent')}`,
 			type: 'aiAgent',
 			onlyBucket: false,
-			hidden: true,
+			hidden: false,
 			onlyRepo: false,
 			icon: 'g-network',
 			cat: 'DATAPREP',
