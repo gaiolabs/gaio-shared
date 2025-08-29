@@ -45,9 +45,9 @@ import type {
 	QuickUploadTaskType,
 	CrosstableTaskType,
 	ReportTypeKeys,
-	DefineParamTaskType
+	DefineParamTaskType,
+	AiAgentTaskTask
 } from '../'
-import { AiAgentTask } from './ai-agent.task.type'
 import { FileIngestTaskType } from './file-ingest.task.type'
 
 // Make the base type use the discriminator
@@ -123,7 +123,7 @@ export type TaskType =
 	| CrosstableTaskType
 	| base
 	| FileIngestTaskType
-	| AiAgentTask
+	| AiAgentTaskTask
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
 
@@ -170,5 +170,5 @@ export type TaskBaseType = {
 	paramToTable: ParamToTableTaskType
 	crosstable: CrosstableTaskType
 	fileIngest: FileIngestTaskType
-	aiAgent: AiAgentTask
+	aiAgent: AiAgentTaskTask
 }
