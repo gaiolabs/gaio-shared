@@ -9,6 +9,8 @@ export type CommonTaskType = Partial<{
     sourceType: string // 'source' | 'bucket' | 'super'
     sourceId: string
     paused: boolean
+    toolOf: string
+    parentOf: string
     stopped: boolean
     codeSnippetId: string
     resultTable: string
