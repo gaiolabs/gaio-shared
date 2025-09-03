@@ -1,12 +1,17 @@
-import { ParamToTableTaskType } from './param-to-table.task.type'
+import type { NodeType } from '../core/flow.type'
+import type { ParamToTableTaskType } from './param-to-table.task.type'
+import type { GenericType } from '../generic.type'
 
 export type TaskContextType = Partial<{
-    userId: string
-    userStatus: 'inactive' | 'active'
-    userRole: 'user' | 'admin' | 'dev'
-    sessionid: string
-    appId: string
-    flowId: string
-    logFrom: string
-    params: ParamToTableTaskType[]
+	userId: string
+	userStatus: 'inactive' | 'active'
+	userRole: 'user' | 'admin' | 'dev'
+	sessionid: string
+	appId: string
+	flowId: string
+	logFrom: string
+	params: ParamToTableTaskType[]
+	loops: GenericType
+	tools: NodeType[]
+	taskLogId: string
 }>
