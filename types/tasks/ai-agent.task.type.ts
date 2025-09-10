@@ -1,7 +1,20 @@
 import type { CommonTaskType } from './common.task.type'
 
 export type AiAgentTaskType = {
-	type: 'aiAgent'
+    type: 'aiAgent'
+    prompt: string
+    outputFormat: string
+    systemPrompt: string
+    agentId: string
+    retryOnFail: boolean
+    retryMaxTries: number
+    retryWaitBetweenTries: number
+    memoryType: string
+    memorySize: number
+    memorySessionId: string
+    memoryExpiration: number
+    toolOf: string
+    aiManagerId: string
+    resultType: 'param' | 'table'
+    resultReference: string
 } & CommonTaskType
-
-// need to remove GenericType, defined here while the task is being build
