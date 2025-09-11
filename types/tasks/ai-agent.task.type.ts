@@ -14,7 +14,7 @@ export type AiAgentTaskType = {
     memorySessionId: string
     memoryExpiration: number
     toolOf: string
-    insertMode: string
+    insertMode: boolean
     aiManagerId: string
     resultType: 'param' | 'table'
     resultReference: string
