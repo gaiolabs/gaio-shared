@@ -22,6 +22,7 @@ type EdgeType = {
 
 export type WorkflowType = {
     nodes: NodeType[]
+    tools: NodeType[]
     edges: EdgeType[]
 }
 

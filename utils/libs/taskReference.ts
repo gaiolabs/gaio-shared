@@ -39,6 +39,7 @@ export const executables = [
 	'localCsv',
 	'python',
 	'fileIngest',
+	'aiAgent',
 ]
 
 export const reports = ['form', 'report', 'maps', 'network', 'powerSearch', 'scorecard']
@@ -83,6 +84,7 @@ export const typesOfOpenTask = [
 	'nodeEdgeFilter',
 	'python',
 	'fileIngest',
+	'aiAgent',
 ]
 
 export const taskList = (t: Function) => {
@@ -155,19 +157,19 @@ export const taskList = (t: Function) => {
 		//     contextOrder: 3,
 		//     order: 3
 		// },
-		// {
-		//     title: `${t('taskNames.network')}`,
-		//     type: 'network',
-		//     onlyBucket: false,
-		//     hidden: true,
-		//     onlyRepo: false,
-		//     icon: 'g-network',
-		//     cat: 'DELIVERY',
-		//     catIcon: '',
-		//     showOnContextMenu: true,
-		//     contextOrder: 10,
-		//     order: 10
-		// },
+		{
+			title: `${t('taskNames.aiAgent')}`,
+			type: 'aiAgent',
+			onlyBucket: false,
+			hidden: false,
+			onlyRepo: false,
+			icon: 'g-network',
+			cat: 'DATAPREP',
+			catIcon: '',
+			showOnContextMenu: true,
+			contextOrder: 10,
+			order: 10,
+		},
 		{
 			title: `${t('taskNames.insert')}`,
 			type: 'insert',

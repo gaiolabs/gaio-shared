@@ -1,4 +1,6 @@
-import { ParamToTableTaskType } from './param-to-table.task.type'
+import type { NodeType } from '../core/flow.type'
+import { ParamType } from '../core/param.type'
+import { GenericType } from '../generic.type'
 
 export type TaskContextType = Partial<{
     userId: string
@@ -8,5 +10,8 @@ export type TaskContextType = Partial<{
     appId: string
     flowId: string
     logFrom: string
-    params: ParamToTableTaskType[]
+    params: ParamType[]
+    loops: GenericType
+    tools: NodeType[]
+    taskLogId: string
 }>

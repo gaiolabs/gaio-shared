@@ -4,6 +4,7 @@ import type { FieldType } from '../core/field.type'
 export type RestTaskType = Partial<{
 	resultTableTruncate: boolean
 	tableName: string
+	sleep: number
 	url: string
 	method: string
 	timeout: number

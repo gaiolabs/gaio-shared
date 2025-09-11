@@ -93,6 +93,7 @@ export * from './tasks/form-card.type'
 export * from './tasks/define-param-task.type'
 export * from './tasks/crosstable.task.type'
 export * from './tasks/static-content.type'
+export * from './tasks/ai-agent.task.type'
 export * from './reports/maps.type'
 
 export * from './token'
