@@ -89,6 +89,7 @@ export type ReportTaskSettingsType = Partial<{
     yAxisAutoRotateLabel: boolean
     strokeItems: boolean
     showLabelType: string
+    colsRowsMode: string
     showLabelDimension: boolean
     showLabelMeasure: boolean
     showLabelPercent: boolean
@@ -176,29 +177,28 @@ export type ReportTaskSettingsType = Partial<{
     enableTreemapZoom: boolean
     treemapLeafDepth: number
     cardChartType: 'line' | 'bar' | 'area'
-    card:{
-        title:{
-            showColumnName:boolean
+    card: {
+        title: {
+            showColumnName: boolean
             fontWeight: string
             fontSize: number
             fontColor: string
             align: 'left' | 'right' | 'center'
-        },
-        subtitle:{
-            showColumnName:boolean
+        }
+        subtitle: {
+            showColumnName: boolean
             fontWeight: string
             fontSize: number
             fontColor: string
             align: 'left' | 'right' | 'center'
-        },
-        measure:{
-            showColumnName:boolean
+        }
+        measure: {
+            showColumnName: boolean
             fontWeight: string
             fontSize: number
             fontColor: string
             align: 'left' | 'right' | 'center'
-        },
-
+        }
     }
     pieDonutTotal: {
         show: boolean
@@ -214,20 +214,20 @@ export type ReportTaskSettingsType = Partial<{
     tooltip: {
         show: boolean
         fontColor: string
-        trigger:  'item' | 'axis' 
+        trigger: 'item' | 'axis'
         fontSize: number
         hideNullValues: boolean
         hideZeroValues: boolean
     }
     yDataZoom: {
         show: boolean
-        type: 'slider' | 'inside' 
+        type: 'slider' | 'inside'
         start: number
         end: number
     }
     xDataZoom: {
         show: boolean
-        type: 'slider' | 'inside' 
+        type: 'slider' | 'inside'
         start: number
         end: number
     }
@@ -236,14 +236,14 @@ export type ReportTaskSettingsType = Partial<{
         longitude: number
         zoom: number
         opacity: number
-        colors:{
+        colors: {
             first: string
             second: string
             third: string
             fourth: string
             fifth: string
         }
-        colorsRange:{
+        colorsRange: {
             id: string
             from: number
             to: number
@@ -252,14 +252,14 @@ export type ReportTaskSettingsType = Partial<{
         }[]
     }
     table: {
-        total :{
-          show: boolean
-          fields?: string[]
-          label?: string
-          align?: 'left' | 'middle' | 'right'
-          format?: 'none' | 'decimal'
-          separators?: 'none' | 'dotComma' | 'noneComma' | 'commaDot' | 'noneDot'
-          decimalSize?: number
+        total: {
+            show: boolean
+            fields?: string[]
+            label?: string
+            align?: 'left' | 'middle' | 'right'
+            format?: 'none' | 'decimal'
+            separators?: 'none' | 'dotComma' | 'noneComma' | 'commaDot' | 'noneDot'
+            decimalSize?: number
         }
     }
 }>
