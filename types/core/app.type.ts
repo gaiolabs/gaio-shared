@@ -3,7 +3,7 @@ import type { FormType } from './form.type'
 import type { CommonTableType } from './common-table.type'
 import type { ComputedType } from './schema.type'
 
-export type AppFolderType = 'folderParam' | 'folderFlow' | 'folderForm'
+export type AppFolderType = 'folderParam' | 'folderFlow' | 'folderForm' | 'folderFile'
 
 export type AppFolderOption = {
     id: string
