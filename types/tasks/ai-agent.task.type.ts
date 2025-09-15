@@ -4,6 +4,7 @@ export type AiAgentTaskType = {
     type: 'aiAgent'
     prompt: string
     outputFormat: string
+    outputFormatEnabled: boolean
     systemPrompt: string
     agentId: string
     retryOnFail: boolean
