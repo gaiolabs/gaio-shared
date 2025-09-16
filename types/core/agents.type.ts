@@ -31,6 +31,8 @@ export type AiResourceType = Partial<{
 	options: GenericType
 	settings: AiResourceSettingsType
 	appId: string
+	shared: boolean
+	type: string
 	createdAt: string // ISO string or Date object
 	updatedAt: string // ISO string or Date object
 	createdBy: string
