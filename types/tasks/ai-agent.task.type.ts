@@ -18,6 +18,6 @@ export type AiAgentTaskType = {
     insertMode: boolean
     aiManagerId: string
     resultType: 'param' | 'table'
-    resultDatType: 'String', 'JSON'
+    resultDatType: 'String' | 'JSON'
     resultReference: string
 } & CommonTaskType
