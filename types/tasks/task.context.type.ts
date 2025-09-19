@@ -14,4 +14,5 @@ export type TaskContextType = Partial<{
     loops: GenericType
     tools: NodeType[]
     taskLogId: string
+    context: GenericType
 }>
