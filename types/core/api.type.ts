@@ -3,7 +3,7 @@ import { GenericType } from '../generic.type'
 export type ApiKeyType = Partial<{
 	apiKeyId: string
 	apiKeyName: string
-	appId: string
+	appId: string[]
 	secret: string
 	status: 'active' | 'inactive'
 	createdBy: string
