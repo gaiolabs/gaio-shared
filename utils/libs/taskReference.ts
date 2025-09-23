@@ -164,7 +164,7 @@ export const taskList = (t: Function) => {
 			hidden: false,
 			onlyRepo: false,
 			icon: 'g-network',
-			cat: 'ANALYSIS',
+			cat: 'ANALYTICS',
 			catIcon: '',
 			showOnContextMenu: true,
 			contextOrder: 10,
