@@ -5,6 +5,7 @@ export type ApiKeyType = Partial<{
 	apiKeyName: string
 	appId: string[]
 	secret: string
+	type: 'mcp' | 'app'
 	status: 'active' | 'inactive'
 	createdBy: string
 	createdAt: string
