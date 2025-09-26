@@ -7,6 +7,8 @@ export type CredentialsType = {
     host?: string
     port?: number | string // kept union to allow tcpPort-style usage if needed
 
+    warehouse?: string
+
     extraPort?: number
     ssl?: boolean
 
