@@ -175,6 +175,8 @@ export type ReportTaskSettingsType = Partial<{
     showFullYear: boolean
     showPathTreemap: boolean
     enableTreemapZoom: boolean
+    showAreaBetweenMinMax: boolean
+    lineDashed: boolean
     treemapLeafDepth: number
     cardChartType: 'line' | 'bar' | 'area'
     card: {
