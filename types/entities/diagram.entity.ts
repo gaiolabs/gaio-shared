@@ -1,4 +1,5 @@
 import type { FieldType } from '../core/field.type'
+import type { GenericType } from '../generic.type'
 
 export type DiagramNodeType = Partial<{
     id: string
@@ -30,9 +31,11 @@ export type DiagramWorkflowType = { nodes: DiagramNodeType[]; edges: DiagramEdge
 
 export type DiagramType = Partial<{
     diagramId: string
+    appId: string
     name: string
     type: string
     description: string
+    options: GenericType
     workflow: DiagramWorkflowType
     createdAt: string
     updatedAt: string
