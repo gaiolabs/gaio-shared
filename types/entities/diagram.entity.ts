@@ -1,0 +1,41 @@
+import type { FieldType } from '../core/field.type'
+
+export type DiagramNodeType = Partial<{
+    id: string
+    position: {
+        x: number
+        y: number
+    }
+    data: {
+        label: string
+        tableName: string
+        databaseName: string
+        color: string
+        fields: FieldType[]
+    }
+    type: string
+}>
+
+export type DiagramEdgeType = Partial<{
+    id: string
+    source: string
+    target: string
+    type: string
+    targetHandle: string
+    sourceHandle: string
+    animated: boolean
+}>
+
+export type DiagramWorkflowType = { nodes: DiagramNodeType[]; edges: DiagramEdgeType[] }
+
+export type DiagramType = Partial<{
+    diagramId: string
+    name: string
+    type: string
+    description: string
+    workflow: DiagramWorkflowType
+    createdAt: string
+    updatedAt: string
+    modifiedBy: string
+    createdBy: string
+}>
