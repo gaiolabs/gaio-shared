@@ -29,6 +29,7 @@ export * from './utils/type-conflicts'
 export * from './dtos/task'
 export * from './dtos/flow'
 
+export * from './entities/diagram.entity'
 export * from './entities/app.entity'
 export * from './entities/flow.entity'
 export * from './entities/mapsGeometry.entity'
