@@ -3,6 +3,7 @@ import type { CommonTaskType } from './common.task.type'
 export type AiAgentTaskType = {
     type: 'aiAgent'
     prompt: string
+    toolOutputFormat: string
     outputFormat: string
     outputFormatEnabled: boolean
     systemPrompt: string
