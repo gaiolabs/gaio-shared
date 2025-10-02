@@ -39,7 +39,7 @@ export type CredentialsType = {
     databricksConfigFile?: string
     tcpPort?: number | string
     secure?: boolean
-    tdsVersion?: '7_1' | '7_2' | '7_3' | '7_4' | null
+    tdsVersion?: { label: string; value: '7_1' | '7_2' | '7_3' | '7_4' | null };
 }
 
 export type SourceType = Partial<{
