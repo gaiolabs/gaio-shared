@@ -25,6 +25,10 @@ export type DiagramEdgeType = Partial<{
     targetHandle: string
     sourceHandle: string
     animated: boolean
+    data: {
+        joinType: 'INNER' | 'LEFT' | 'RIGHT' | 'FULL'
+        relationType: '1:1' | '1:N' | 'N:N'
+    }
 }>
 
 export type DiagramWorkflowType = { nodes: DiagramNodeType[]; edges: DiagramEdgeType[] }
