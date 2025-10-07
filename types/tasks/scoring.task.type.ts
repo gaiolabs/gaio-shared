@@ -1,9 +1,8 @@
-import {type CommonTaskType} from './common.task.type'
+import { type CommonTaskType } from './common.task.type'
 
 export type ScoringTaskType = Partial<{
-    type: 'scoring'
-    limitRows: number,
-    modelId: string
+	type: 'scoring'
+	limitRows: number
+	modelId: string
 }> &
-    CommonTaskType
-
+	CommonTaskType

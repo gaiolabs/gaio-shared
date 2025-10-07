@@ -1,55 +1,55 @@
 import type { CommonTableType } from './common-table.type'
 
 export type CredentialsType = {
-    user?: string
-    password?: string
+	user?: string
+	password?: string
 
-    host?: string
-    port?: number | string // kept union to allow tcpPort-style usage if needed
+	host?: string
+	port?: number | string // kept union to allow tcpPort-style usage if needed
 
-    warehouse?: string
+	warehouse?: string
 
-    extraPort?: number
-    ssl?: boolean
+	extraPort?: number
+	ssl?: boolean
 
-    database?: string
-    canExecuteRaw?: boolean
-    client?: string
+	database?: string
+	canExecuteRaw?: boolean
+	client?: string
 
-    accessKey?: string
-    secretKey?: string
+	accessKey?: string
+	secretKey?: string
 
-    bucketName?: string
-    loginUrl?: string
-    token?: string
-    sid?: string
-    serviceName?: string
+	bucketName?: string
+	loginUrl?: string
+	token?: string
+	sid?: string
+	serviceName?: string
 
-    oracleAlternativeDriver?: boolean
-    oracleCaseSensitive?: boolean
+	oracleAlternativeDriver?: boolean
+	oracleCaseSensitive?: boolean
 
-    schema?: string
-    schemaName?: string
+	schema?: string
+	schemaName?: string
 
-    httpPath?: string
-    encrypt?: boolean
-    encryptSource?: boolean
-    connectString?: string
-    account?: string
-    databricksConfigFile?: string
-    tcpPort?: number | string
-    secure?: boolean
-    tdsVersion?: { label: string; value: '7_1' | '7_2' | '7_3' | '7_4' | null };
+	httpPath?: string
+	encrypt?: boolean
+	encryptSource?: boolean
+	connectString?: string
+	account?: string
+	databricksConfigFile?: string
+	tcpPort?: number | string
+	secure?: boolean
+	tdsVersion?: { label: string; value: '7_1' | '7_2' | '7_3' | '7_4' | null }
 }
 
 export type SourceType = Partial<{
-    sourceId: string
-    repoId: string
-    sourceName: string
-    repoName: string
-    client: string
-    databaseName: string
+	sourceId: string
+	repoId: string
+	sourceName: string
+	repoName: string
+	client: string
+	databaseName: string
 
-    credentials: CredentialsType
+	credentials: CredentialsType
 }> &
-    CommonTableType
+	CommonTableType

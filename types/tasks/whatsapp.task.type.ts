@@ -9,4 +9,3 @@ export type WhatsappTaskType = Partial<{
 	templates: GenericType[]
 }> &
 	CommonTaskType
-

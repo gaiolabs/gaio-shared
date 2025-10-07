@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "flow" schema from database
  */

@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "app" schema from database
  */

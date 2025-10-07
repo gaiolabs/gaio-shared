@@ -18,4 +18,4 @@ export type SourceRawTaskType = Partial<{
 	query: string // used by salesforce, need to remove this
 	type: 'sourceRaw'
 }> &
-    CommonTaskType
+	CommonTaskType

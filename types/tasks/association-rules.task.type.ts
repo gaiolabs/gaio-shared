@@ -11,4 +11,3 @@ export type AssociationRulesTaskType = Partial<{
 	associationType: 'fpgrowth' | 'apriori'
 }> &
 	CommonTaskType
-

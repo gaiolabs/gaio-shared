@@ -16,24 +16,24 @@ type Aggregator =
 	| 'distinct'
 
 type Column = {
-    columnLength: string
-    columnName: string
-    dataType: string
-    databaseName: string
-    tableName: string
-    type: string
-    addedTimestamp?: string
+	columnLength: string
+	columnName: string
+	dataType: string
+	databaseName: string
+	tableName: string
+	type: string
+	addedTimestamp?: string
 }
 
 type AggregatedColumn = Column & {
-    aggregator?: Aggregator
+	aggregator?: Aggregator
 }
 
 export type CrosstableTaskType = Partial<{
-    type: 'crosstable'
-    description: string
-    columns: Column[]
-    rows: Column[]
-    values: AggregatedColumn[]
+	type: 'crosstable'
+	description: string
+	columns: Column[]
+	rows: Column[]
+	values: AggregatedColumn[]
 }> &
-    CommonTaskType
+	CommonTaskType

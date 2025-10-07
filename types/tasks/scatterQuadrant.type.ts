@@ -1,8 +1,8 @@
-export type Point = { x: number; y: number };
+export type Point = { x: number; y: number }
 
 export type ScatterQuadrant = {
-    fill: string;
-    start: Point;
-    end: Point;
-    content: string;
-};
+	fill: string
+	start: Point
+	end: Point
+	content: string
+}

@@ -1,4 +1,4 @@
-import type {FieldType} from "../core/field.type";
+import type { FieldType } from '../core/field.type'
 
 /**
  * @description Refers to the "meta" schema from database

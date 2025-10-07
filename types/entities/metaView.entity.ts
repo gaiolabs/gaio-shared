@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "metaView" schema from database
  */

@@ -7,4 +7,3 @@ export type UpdateRowTaskType = Partial<{
 	clearMutation: boolean
 }> &
 	CommonTaskType
-

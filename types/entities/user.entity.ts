@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "user" schema from database
  */

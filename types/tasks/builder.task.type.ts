@@ -4,34 +4,34 @@ import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
 export type BuilderTaskType = Partial<{
-    transformType: string
-    repoId: string
-    position: PositionType // assuming corresponding type for PositionZod
-    columns: FieldType[]
+	transformType: string
+	repoId: string
+	position: PositionType // assuming corresponding type for PositionZod
+	columns: FieldType[]
 
-    bucketClient: string
-    databaseName: string
-    optimize: boolean
-    rawImport: boolean
-    resultDatabase: string
-    schema: SchemaType // assuming corresponding type for SchemaModelZod
-    schemaName: string
-    tableName: string
-    tableView: boolean
-    temporary: boolean
+	bucketClient: string
+	databaseName: string
+	optimize: boolean
+	rawImport: boolean
+	resultDatabase: string
+	schema: SchemaType // assuming corresponding type for SchemaModelZod
+	schemaName: string
+	tableName: string
+	tableView: boolean
+	temporary: boolean
 
-    schemaInference: boolean
-    insertMode: boolean
-    onErrorCreateTable: boolean
-    resultTable: string
-    appId: string
-    id: string
-    query: string
-    type: 'builder'
-    sourceId: string
-    client: string
-    fieldAsString: boolean
-    bringData: boolean
-    maxFetch: number
+	schemaInference: boolean
+	insertMode: boolean
+	onErrorCreateTable: boolean
+	resultTable: string
+	appId: string
+	id: string
+	query: string
+	type: 'builder'
+	sourceId: string
+	client: string
+	fieldAsString: boolean
+	bringData: boolean
+	maxFetch: number
 }> &
-    CommonTaskType
+	CommonTaskType

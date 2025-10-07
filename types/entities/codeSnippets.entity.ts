@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "code snippets" schema from database
  */
@@ -12,4 +11,3 @@ export type CodeSnippetsEntity = {
 	updatedBy: string
 	updatedAt: string
 }
-

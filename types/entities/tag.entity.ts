@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "tag" schema from database
  */

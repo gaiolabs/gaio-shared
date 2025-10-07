@@ -1,4 +1,4 @@
-import type{ CommonTaskType } from './common.task.type'
+import type { CommonTaskType } from './common.task.type'
 
 export type UserTaskType = Partial<{
 	type: 'userMirror'
@@ -6,4 +6,3 @@ export type UserTaskType = Partial<{
 	userType: string
 }> &
 	CommonTaskType
-

@@ -9,4 +9,3 @@ export type SampleTaskType = Partial<{
 	resultTable: string
 }> &
 	CommonTaskType
-

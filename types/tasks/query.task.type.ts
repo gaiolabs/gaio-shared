@@ -8,4 +8,3 @@ export type QueryTaskType = Partial<{
 	type: 'query'
 }> &
 	CommonTaskType
-

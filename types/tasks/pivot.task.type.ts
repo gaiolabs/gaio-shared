@@ -1,5 +1,5 @@
-import { type CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
+import type { CommonTaskType } from './common.task.type'
 
 export type PivotTaskType = Partial<{
     type: 'pivot'

@@ -1,4 +1,4 @@
-import {GenericType} from "../generic.type";
+import { GenericType } from '../generic.type'
 
 export type AgentType = Partial<{
 	agentId: string
@@ -22,7 +22,8 @@ export type AiResourceSettingsType = Partial<{
 	goal: string
 	backstory: string
 	avatar: string
-}> & GenericType
+}> &
+	GenericType
 
 export type AiResourceType = Partial<{
 	aiResourceId: string

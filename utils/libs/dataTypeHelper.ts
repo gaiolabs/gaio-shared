@@ -191,10 +191,11 @@ export const bridgeDataType = (field: FieldType, pureDecimal = false) => {
 		bridgeColumnLength(field)
 		field.dataType = `Nullable(Decimal64)`
 	} else {
-		field.dataType =
-			replacement[field.dataType] ? replacement[field.dataType]
-			: replacement[lowerType(field.dataType)] ? replacement[lowerType(field.dataType)]
-			: 'Nullable(String)'
+		field.dataType = replacement[field.dataType]
+			? replacement[field.dataType]
+			: replacement[lowerType(field.dataType)]
+				? replacement[lowerType(field.dataType)]
+				: 'Nullable(String)'
 
 		if (field.dataType.toLowerCase().includes('decimal')) {
 			field.dataType = `Nullable(Decimal64)`

@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "pass" schema from database
  */

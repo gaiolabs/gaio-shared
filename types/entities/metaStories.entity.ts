@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "metaStories" schema from database
  */

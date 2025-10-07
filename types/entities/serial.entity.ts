@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "serial" schema from database
  */

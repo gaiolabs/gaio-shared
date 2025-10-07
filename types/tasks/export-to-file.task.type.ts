@@ -1,8 +1,8 @@
 import { type CommonTaskType } from './common.task.type'
 
 export type ExportToFileType = Partial<{
-    type: 'exportToFile'
-    separator: string
-    compress: boolean
+	type: 'exportToFile'
+	separator: string
+	compress: boolean
 }> &
-    CommonTaskType
+	CommonTaskType

@@ -13,4 +13,3 @@ export type UnpivotTaskType = Partial<{
 	unpivotColumns: string[]
 }> &
 	CommonTaskType
-

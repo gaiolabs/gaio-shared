@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "taskLog" schema from database
  */

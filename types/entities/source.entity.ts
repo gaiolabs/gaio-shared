@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "source" schema from database
  */

@@ -6,39 +6,37 @@ import type { StaticContentType } from './static-content.type'
 import { ReportTypeKeys } from './report.keys.type'
 import { MapsType } from '../reports/maps.type'
 
-
 type RecordNodeLayoutItemType = Partial<{
-    x: number
-    y: number
-    w: number
-    h: number
-    i: string
-    hidden: boolean
+	x: number
+	y: number
+	w: number
+	h: number
+	i: string
+	hidden: boolean
 }>
 
 export type RecordNodeLayoutType = Partial<{
-    lg:RecordNodeLayoutItemType
-    md: RecordNodeLayoutItemType
-    sm: RecordNodeLayoutItemType
+	lg: RecordNodeLayoutItemType
+	md: RecordNodeLayoutItemType
+	sm: RecordNodeLayoutItemType
 }>
 
 export type ReportNodeType = Partial<{
-    id: string
-    sharedId: string
-    aiSampleSent: boolean
-    threadId: string
-    label: string
-    type: 'report'
-    reportType: ReportTypeKeys
-    schema: SchemaType
-    query: string
-    height: number
-    layout: RecordNodeLayoutType
-    settings: ReportTaskSettingsType
-    withTotals: boolean
+	id: string
+	sharedId: string
+	aiSampleSent: boolean
+	threadId: string
+	label: string
+	type: 'report'
+	reportType: ReportTypeKeys
+	schema: SchemaType
+	query: string
+	height: number
+	layout: RecordNodeLayoutType
+	settings: ReportTaskSettingsType
+	withTotals: boolean
 }> &
-    TableType &
-    FormCardType &
-    StaticContentType &
-    MapsType
-
+	TableType &
+	FormCardType &
+	StaticContentType &
+	MapsType

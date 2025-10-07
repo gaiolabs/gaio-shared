@@ -1,4 +1,3 @@
-
 /**
  * @description Refers to the "setting" schema from database
  */
