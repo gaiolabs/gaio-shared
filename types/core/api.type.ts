@@ -27,6 +27,8 @@ export type ApiType = Partial<{
 	dropTableInput: boolean
 	options: GenericType
 	status: 'active' | 'inactive'
+	isTool: boolean
+	toolMetadata: string
 	createdBy: string
 	createdAt: string
 	updateAt: string
