@@ -28,7 +28,7 @@ export type ApiType = Partial<{
 	options: GenericType
 	status: 'active' | 'inactive'
 	isTool: boolean
-	toolMetadata: string
+	toolMetadata: GenericType
 	createdBy: string
 	createdAt: string
 	updateAt: string
