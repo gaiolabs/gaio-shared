@@ -96,6 +96,7 @@ export * from './tasks/crosstable.task.type'
 export * from './tasks/static-content.type'
 export * from './tasks/ai-agent.task.type'
 export * from './reports/maps.type'
+export * from './tasks/diagram-query.task.type'
 
 export * from './token'
 export * from './insight-card-type'
