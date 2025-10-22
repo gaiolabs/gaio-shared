@@ -25,7 +25,7 @@ export type AiResourceSettingsType = Partial<{
 }> &
 	GenericType
 
-export type McpToolType {
+export type McpToolType = {
 		id: string
 		title: string
 		description: string
