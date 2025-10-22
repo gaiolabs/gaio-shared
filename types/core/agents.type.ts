@@ -1,4 +1,4 @@
-import { GenericType } from '../generic.type'
+import type { GenericType } from '../generic.type'
 
 export type AgentType = Partial<{
 	agentId: string
@@ -25,11 +25,23 @@ export type AiResourceSettingsType = Partial<{
 }> &
 	GenericType
 
+export type McpToolType {
+		id: string
+		title: string
+		description: string
+		url: string
+		headers: Array<{ prop: string; value: string }>
+}
+
 export type AiResourceType = Partial<{
 	aiResourceId: string
 	name: string
 	description: string
-	options: GenericType
+	options: Partial<{
+	    diagram: string[]
+			discovery: string[]
+			mcpList: McpToolType[]
+	} & GenericType>
 	settings: AiResourceSettingsType
 	appId: string
 	shared: boolean
