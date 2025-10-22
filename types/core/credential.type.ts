@@ -49,6 +49,7 @@ export type SourceType = Partial<{
 	repoName: string
 	client: string
 	databaseName: string
+	shared?: boolean
 
 	credentials: CredentialsType
 }> &
