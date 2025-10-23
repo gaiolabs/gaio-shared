@@ -86,9 +86,11 @@ export interface QueryParam {
 }
 
 export interface ContextEntry {
+    type: string
     prop: string
     description: string
-    required: boolean
+    required?: boolean
+    nullable?: boolean
 }
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
