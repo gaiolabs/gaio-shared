@@ -43,6 +43,7 @@ export type AiResourceType = Partial<{
             discovery: string[]
             mcpList: McpToolType[]
             mcpWikipedia: boolean
+            httpRequestList: HttpRequestToolType[]
         } & GenericType
     >
     settings: AiResourceSettingsType
@@ -54,3 +55,33 @@ export type AiResourceType = Partial<{
     createdBy: string
     updatedBy: string
 }>
+
+export interface HttpRequestToolType {
+    id: string
+    name: string
+    description: string
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+    url: string
+    headers: HeaderEntry[]
+    queryParams: QueryParam[]
+    body?: {
+        type: 'json' | 'text'
+        content: string
+    }
+    auth?: {
+        username: string
+        password: string
+    }
+}
+
+export interface HeaderEntry {
+    prop: string
+    value: string
+}
+
+export interface QueryParam {
+    prop: string
+    value: string
+}
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
