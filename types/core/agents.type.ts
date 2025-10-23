@@ -64,6 +64,7 @@ export interface HttpRequestToolType {
     url: string
     headers: HeaderEntry[]
     queryParams: QueryParam[]
+    contextEntries: ContextEntry[]
     body?: {
         type: 'json' | 'text'
         content: string
@@ -82,6 +83,12 @@ export interface HeaderEntry {
 export interface QueryParam {
     prop: string
     value: string
+}
+
+export interface ContextEntry {
+    prop: string
+    description: string
+    required: boolean
 }
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
