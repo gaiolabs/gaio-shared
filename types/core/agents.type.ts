@@ -31,6 +31,7 @@ export type McpToolType = {
     description: string
     url: string
     headers: Array<{ prop: string; value: string }>
+    type: string
 }
 
 export type AiResourceType = Partial<{
@@ -42,8 +43,8 @@ export type AiResourceType = Partial<{
             diagram: string[]
             discovery: string[]
             mcpList: McpToolType[]
-            mcpWikipedia: boolean
             httpRequestList: HttpRequestToolType[]
+            mcpWikipedia: boolean
         } & GenericType
     >
     settings: AiResourceSettingsType
@@ -73,6 +74,7 @@ export interface HttpRequestToolType {
         username: string
         password: string
     }
+    type: string
 }
 
 export interface HeaderEntry {
