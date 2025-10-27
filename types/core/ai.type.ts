@@ -138,7 +138,7 @@ export type AiThreadType = {
     updatedAt: string
 }
 
-export type ChatData = {
+export type ChatDataType = {
     aiResourceId: string
     thread: string // used to agent memory;
     resource: string // used to agent memory;
