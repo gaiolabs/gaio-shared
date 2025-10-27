@@ -137,3 +137,12 @@ export type AiThreadType = {
     createdAt: string
     updatedAt: string
 }
+
+export type ChatData = {
+    aiResourceId: string
+    thread: string // used to agent memory;
+    resource: string // used to agent memory;
+    prompt: string
+    appId: string
+    newThread: boolean
+}
