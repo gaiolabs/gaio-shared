@@ -54,6 +54,7 @@ export type ReportTaskSettingsType = Partial<{
 	showLabelDualExtra: boolean
 	showXAxis: boolean
 	showYAxis: boolean
+	yAxisTitle: string
 	forecastRealAsLine: boolean
 	axisFontColor: string
 	axisFontSize: number
