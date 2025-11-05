@@ -25,14 +25,14 @@ export type AiResourceSettingsType = Partial<{
 }> &
     GenericType
 
-export type McpToolType = {
+export type McpToolType = Partial<{
     id: string
     title: string
     description: string
     url: string
     headers: Array<{ prop: string; value: string }>
     type: string
-}
+}>
 
 export type AiResourceType = Partial<{
     aiResourceId: string
