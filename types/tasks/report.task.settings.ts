@@ -51,6 +51,7 @@ export type ReportTaskSettingsType = Partial<{
 	pageSize: number
 	showTable: boolean
 	showLabel: boolean
+	showFullLabel: boolean
 	showLabelDualExtra: boolean
 	showXAxis: boolean
 	showYAxis: boolean
@@ -101,6 +102,7 @@ export type ReportTaskSettingsType = Partial<{
 	showLegend: boolean
 	showStatistic: boolean
 	legendPosition: string
+	legendOrder: boolean
 	xAxisMinScale: number
 	innerRadius: number
 	lineWidth: number
