@@ -103,6 +103,7 @@ export type ReportTaskSettingsType = Partial<{
 	showStatistic: boolean
 	legendPosition: string
 	legendOrder: boolean
+	legendOrderType: 'az' | 'za' | 'asc' | 'desc' | 'none' | null
 	xAxisMinScale: number
 	innerRadius: number
 	lineWidth: number
