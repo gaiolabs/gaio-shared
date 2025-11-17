@@ -57,7 +57,7 @@ export type AiResourceType = Partial<{
     updatedBy: string
 }>
 
-export interface HttpRequestToolType {
+export type HttpRequestToolType = Partial<{
     id: string
     name: string
     description: string
@@ -75,24 +75,24 @@ export interface HttpRequestToolType {
         password: string
     }
     type: string
-}
+}>
 
-export interface HeaderEntry {
+export type HeaderEntry = Partial<{
     prop: string
     value: string
-}
+}>
 
-export interface QueryParam {
+export type QueryParam = Partial<{
     prop: string
     value: string
-}
+}>
 
-export interface ContextEntry {
+export type ContextEntry = Partial<{
     type: string
     prop: string
     description: string
     required?: boolean
     nullable?: boolean
-}
+}>
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
