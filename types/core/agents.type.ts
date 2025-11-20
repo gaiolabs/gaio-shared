@@ -32,6 +32,7 @@ export type McpToolType = Partial<{
     url: string
     headers: Array<{ prop: string; value: string }>
     type: string
+    shared: boolean
 }>
 
 export type AiResourceType = Partial<{
@@ -75,6 +76,7 @@ export type HttpRequestToolType = Partial<{
         password: string
     }
     type: string
+    shared: boolean
 }>
 
 export type HeaderEntry = Partial<{
