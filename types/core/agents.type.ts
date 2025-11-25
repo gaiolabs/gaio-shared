@@ -46,6 +46,7 @@ export type AiResourceType = Partial<{
             mcpList: McpToolType[]
             httpRequestList: string[] // HttpRequestToolType[]
             mcpWikipedia: boolean
+            type: string
         } & GenericType
     >
     settings: AiResourceSettingsType

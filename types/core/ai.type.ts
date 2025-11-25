@@ -1,9 +1,9 @@
-import { GenericType } from '../generic.type'
-import { TableType } from './table.type'
-import { SchemaType } from './schema.type'
-import { RecordNodeLayoutType } from '../tasks/report.type'
-import { ReportTypeKeys } from '../tasks/report.keys.type'
-import { PositionType } from './flow.type'
+import type { GenericType } from '../generic.type'
+import type { ReportTypeKeys } from '../tasks/report.keys.type'
+import type { RecordNodeLayoutType } from '../tasks/report.type'
+import type { PositionType } from './flow.type'
+import type { SchemaType } from './schema.type'
+import type { TableType } from './table.type'
 
 export type AiManagerCredentialsType = {
     baseURL: string

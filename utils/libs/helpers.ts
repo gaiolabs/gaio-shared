@@ -24,9 +24,15 @@ export const definedOrDefault = <T>(value: T, defaultValue: T) => {
   return value === undefined ? defaultValue : value;
 };
 
-export const withoutNullProperties = <T>(obj: T) => {
-  if (typeof obj === "object") {
-    Object.keys(obj).forEach((key) => obj[key] === null && delete obj[key]);
+export const withoutNullProperties = <T extends Record<string, unknown>>(
+  obj: T,
+): T => {
+  if (obj && typeof obj === "object") {
+    Object.keys(obj).forEach((key) => {
+      if (obj[key] === null) {
+        delete obj[key];
+      }
+    });
   }
 
   return obj;
