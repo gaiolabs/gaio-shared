@@ -43,7 +43,7 @@ export type AiResourceType = Partial<{
         {
             diagram: string[]
             discovery: string[]
-            mcpList: McpToolType[]
+            mcpList: string[]
             httpRequestList: string[] // HttpRequestToolType[]
             mcpWikipedia: boolean
             type: string
