@@ -35,6 +35,15 @@ export type McpToolType = Partial<{
     shared: boolean
 }>
 
+export type VerifiedQueryToolType = Partial<{
+    id: string
+    title: string
+    description: string
+    query: string
+    type: string
+    shared: boolean
+}>
+
 export type AiResourceType = Partial<{
     aiResourceId: string
     name: string
@@ -43,8 +52,9 @@ export type AiResourceType = Partial<{
         {
             diagram: string[]
             discovery: string[]
-            mcpList: string[]
+            mcpList: string[] // McpToolType[]
             httpRequestList: string[] // HttpRequestToolType[]
+            verifiedQueryList: string[] // VerifiedQueryToolType[]
             mcpWikipedia: boolean
             type: string
         } & GenericType
