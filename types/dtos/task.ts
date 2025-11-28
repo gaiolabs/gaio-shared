@@ -1,5 +1,5 @@
-import { NodeType } from '../core/flow.type'
-import { ParamType } from '../core/param.type'
+import type { NodeType } from '../core/flow.type'
+import type { ParamType } from '../core/param.type'
 
 /**
  * @description Request Data Transfer Object for Task routes
@@ -13,13 +13,13 @@ import { ParamType } from '../core/param.type'
 // type RunFromHereRequestDTO = {}
 // type TestRestRequestDTO = {}
 export type TaskRunAllRequestDTO = {
-	from: string
-	meta: {
-		appId: string
-		flowId: string
-	}
-	params: Array<ParamType>
-	tasks: Array<NodeType>
+    from: string
+    meta: {
+        appId: string
+        flowId: string
+    }
+    params: Array<ParamType>
+    tasks: Array<NodeType>
 }
 export type TaskLogsRequestDTO = { appId: string }
 export type TaskAbortRequestDTO = { id: string }
