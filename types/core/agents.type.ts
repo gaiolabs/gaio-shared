@@ -63,6 +63,7 @@ export type AiResourceType = Partial<{
             discovery: string[]
             mcpList: string[] // McpToolType[]
             httpRequestList: string[] // HttpRequestToolType[]
+            mediaFileList: string[] // MediaFileToolType[]
             verifiedQueryList: string[] // VerifiedQueryToolType[]
             mcpWikipedia: boolean
             type: string
