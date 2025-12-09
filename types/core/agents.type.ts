@@ -44,6 +44,14 @@ export type VerifiedQueryToolType = Partial<{
     shared: boolean
 }>
 
+export type MediaFileToolType = Partial<{
+    id: string
+    title: string
+    description: string
+    type: string
+    shared: boolean
+}>
+
 export type AiResourceType = Partial<{
     aiResourceId: string
     name: string
