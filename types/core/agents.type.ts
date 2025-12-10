@@ -50,6 +50,7 @@ export type MediaFileToolType = Partial<{
     description: string
     type: string
     file: string
+    whenToTrigger: string
     shared: boolean
 }>
 
