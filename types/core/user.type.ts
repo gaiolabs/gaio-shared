@@ -28,6 +28,7 @@ export type UserType = Partial<{
 	userId: string
 	name: string
 	status: 'active' | 'inactive'
+	hasTwoFA?: boolean
 	twoFactorStatus: 'invalid' | 'pending' | 'valid' | ''
 	twoFactorKey: string | null
 	twoFactorSigned: 'no' | 'yes' | null
