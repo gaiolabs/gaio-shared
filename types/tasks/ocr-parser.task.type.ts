@@ -1,6 +1,6 @@
 import type { CommonTaskType } from './common.task.type'
 
-export type ocrParserTaskType = {
+export type OcrParserTaskType = {
     type: 'ocrParser'
     dropTable: boolean
     filePath: string
