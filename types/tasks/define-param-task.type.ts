@@ -1,7 +1,8 @@
-import { ParamType } from '../core/param.type'
-import { CommonTaskType } from './common.task.type'
+import type { ParamType } from '../core/param.type'
+import type { CommonTaskType } from './common.task.type'
 
-export type DefineParamTaskType = {
-	params: ParamType[]
-	type: 'defineParam'
-} & CommonTaskType
+export type DefineParamTaskType = Partial<{
+    params: ParamType[]
+    type: 'defineParam'
+}> &
+    CommonTaskType
