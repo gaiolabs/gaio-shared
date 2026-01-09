@@ -126,6 +126,8 @@ export type TaskType =
     | base
     | FileIngestTaskType
     | AiAgentTaskType
+    | OcrParserTaskType
+    | DiagramQueryTaskType
 
 export type CommonBuilderTaskType = Partial<base> & Partial<TaskType>
 
