@@ -25,6 +25,7 @@ import type {
     InsertTableTaskType,
     LocalFileTaskType,
     MailTaskType,
+    OcrParserTaskType,
     ParamToTableTaskType,
     PcaTaskType,
     PivotTaskType,
@@ -173,4 +174,5 @@ export type TaskBaseType = {
     fileIngest: FileIngestTaskType
     aiAgent: AiAgentTaskType
     diagramQuery: DiagramQueryTaskType
+    ocrParser: OcrParserTaskType
 }
