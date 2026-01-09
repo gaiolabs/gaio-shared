@@ -180,7 +180,7 @@ export const taskList = (t: Function) => {
       order: 10,
     },
     {
-      title: `${t("taskNames.orcParser")}`,
+      title: `${t("taskNames.ocrParser")}`,
       type: "ocrParser",
       onlyBucket: false,
       hidden: false,
