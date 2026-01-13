@@ -16,5 +16,7 @@ export type PivotTaskType = Partial<{
     transposeAggregator: string
     transposeColumnValue: string
     dynamicTransposeSnakeCase: boolean
+    aggregatorDataType: 'decimal' | 'float' | 'integer'
+    aggregatorDecimalSize: number
 }> &
     CommonTaskType
