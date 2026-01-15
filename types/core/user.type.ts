@@ -18,14 +18,7 @@ export type UserOptionsType = Partial<{
 	portalTabs?: string[]
 	portalHiddenHeader: boolean
 	portalAppId: string
-	oauthProviders?: {
-		google?: {
-			id: string
-		}
-		microsoftEntraId?: {
-			id: string
-		}
-	}
+	oauthProviders?: 'google' | 'microsoft'
 }>
 
 export type UserType = Partial<{
