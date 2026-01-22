@@ -11,7 +11,7 @@ import type { ParamType } from '../core/param.type'
 
 // type RunRequestDTO = {}
 // type RunFromHereRequestDTO = {}
-// type TestRestRequestDTO = {}
+// type TestHttpRequestRequestDTO = {}
 export type TaskRunAllRequestDTO = {
     from: string
     meta: {
@@ -28,7 +28,7 @@ export type TaskStatusRequestDTO = { appId: string }
 
 // type RunResponseDTO = {}
 // type RunFromHereResponseDTO = {}
-// type TestRestResponseDTO = {}
+// type TestHttpRequestResponseDTO = {}
 // type RunAllResponseDTO = {}
 // type LogsResponseDTO = {}
 // type AbortResponseDTO = {}

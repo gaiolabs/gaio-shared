@@ -37,7 +37,7 @@ import type {
     ReportNodeType,
     ReportPreviewTaskType,
     ReportTypeKeys,
-    RestTaskType,
+    HttpRequestTaskType,
     SampleTaskType,
     SchemaType,
     ScoringTaskType,
@@ -111,7 +111,7 @@ export type TaskType =
     | SurvivalAnalysisTaskType
     | MailTaskType
     | WhatsappTaskType
-    | RestTaskType
+    | HttpRequestTaskType
     | AutoMLTaskType
     | ScoringTaskType
     | CloudFileType
@@ -164,7 +164,7 @@ export type TaskBaseType = {
     survivalAnalysis: SurvivalAnalysisTaskType
     mail: MailTaskType
     whatsapp: WhatsappTaskType
-    rest: RestTaskType
+    rest: HttpRequestTaskType
     pca: PcaTaskType
     generic: GenericType
     externalOutput: ExternalOutputTaskType

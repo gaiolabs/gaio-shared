@@ -1,7 +1,7 @@
 import type { CommonTaskType } from './common.task.type'
 import type { FieldType } from '../core/field.type'
 
-export type RestTaskType = Partial<{
+export type HttpRequestTaskType = Partial<{
 	resultTableTruncate: boolean
 	tableName: string
 	sleep: number
