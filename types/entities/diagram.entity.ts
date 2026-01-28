@@ -41,6 +41,7 @@ export type DiagramType = Partial<{
 	description: string
 	options: GenericType
 	workflow: DiagramWorkflowType
+	metadata?: string
 	createdAt: string
 	updatedAt: string
 	modifiedBy: string
