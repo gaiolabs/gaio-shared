@@ -169,7 +169,7 @@ export type TaskBaseType = {
     generic: GenericType
     externalOutput: ExternalOutputTaskType
     defineParam: DefineParamTaskType
-    cloudFile: CloudFileType
+    cloudStorage: CloudFileType
     tableToParam: TableToParamTaskType
     paramToTable: ParamToTableTaskType
     crosstable: CrosstableTaskType
