@@ -166,7 +166,7 @@ export type TaskBaseType = {
     whatsapp: WhatsappTaskType
     rest: HttpRequestTaskType
     pca: PcaTaskType
-    generic: GenericType
+    // generic: GenericType
     externalOutput: ExternalOutputTaskType
     defineParam: DefineParamTaskType
     cloudStorage: CloudFileType
