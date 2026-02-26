@@ -34,5 +34,6 @@ export type FileImportTaskType = Partial<{
 	columns: FieldType[]
 	transformFirst: boolean
 	databaseName: string
+	slowImport: boolean
 }> &
 	CommonTaskType
