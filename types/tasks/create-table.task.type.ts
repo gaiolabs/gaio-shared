@@ -4,6 +4,7 @@ import { type CommonTaskType } from './common.task.type'
 export type CreateTableTaskType = Partial<{
 	type: 'create'
 	columns: FieldType[]
-	dropTable: boolean
+	dropTable: boolean,
+	initRows: FieldType[]
 }> &
 	CommonTaskType
